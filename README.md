@@ -14,14 +14,14 @@ Untuk menjalankan aplikasi ini diperlukan web server yang terkoneksi ke internet
 5. Impor database yang Anda peroleh ke MySQL.
 6. Temukan file .env dan ubah parameter sebagai berikut:
 
-DB_CONNECTION=mysql // Tidak Perlu Dirubah
-DB_HOST=localhost	// sesuaikan dengan host MySQL Anda. default adalah localhost.
-DB_PORT=3306 // sesuaikan dengan port MySQL Anda. default adalah 3306.
-DB_DATABASE=namadatabase // sesuaikan dengan nama database Simda Perencanaan Anda.
-DB_USERNAME=usernamemysql // sesuaikan dengan username MySQL Anda.
-DB_PASSWORD=passwordmysql // sesuaikan dengan password MySQL Anda.
+	1. DB_CONNECTION=mysql // Tidak Perlu Dirubah
+	2. DB_HOST=localhost	// sesuaikan dengan host MySQL Anda. default adalah localhost.
+	3. DB_PORT=3306 // sesuaikan dengan port MySQL Anda. default adalah 3306.
+	4. DB_DATABASE=namadatabase // sesuaikan dengan nama database Simda Perencanaan Anda.
+	5. DB_USERNAME=usernamemysql // sesuaikan dengan username MySQL Anda.
+	6. DB_PASSWORD=passwordmysql // sesuaikan dengan password MySQL Anda.
 
-7. Arahkan browser Anda ke folder aplikasi SIMDA Perencanaan, lalu login dengan username/password default Anda.
+Arahkan browser Anda ke folder aplikasi SIMDA Perencanaan, lalu login dengan username/password default Anda.
 
 ### Problem Instalasi
 

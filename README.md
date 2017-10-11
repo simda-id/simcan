@@ -26,9 +26,9 @@ Arahkan browser Anda ke folder aplikasi SIMDA Perencanaan, lalu login dengan use
 ### Problem Instalasi
 
 Jika ada kesulitan ketika instalasi, pastikan beberapa hal berikut ini:
-a. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP lain, dan tidak dirancang untuk PHP 7.
-b. Ioncube loader telah terinstalasi. Cek melalui phpinfo untuk memastikan.
-c. Struktur folder /config telah benar dan isi file .env telah sesuai.
+1. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP lain, dan tidak dirancang untuk PHP 7.
+2. Ioncube loader telah terinstalasi. Cek melalui phpinfo untuk memastikan.
+3. Struktur folder /config telah benar dan isi file .env telah sesuai.
 
 ### Lisensi
 Aplikasi SIMDA Perencanaan dapat dipergunakan tanpa biaya, dengan tetap menyebutkan hak cipta pada [BPKP](http://www.simda-online.com)

@@ -1,0 +1,19 @@
+{
+    "name": "hoaaah/laravel-helpers-html",
+    "description": "An html helpers for laravel.",
+    "authors": [
+        {
+            "name": "Heru Arief Wijaya",
+            "email": "heru@belajararief.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "hoaaah\\LaravelHtmlHelpers\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+        <script src="{{ asset('/js/jquery.min.js')}}"></script>
+        <script src="{{ asset('/js/jquery-ui.js')}}"></script>
+        <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('/js/jquery.number.js')}}"></script>
+        <script src="{{ asset('/js/jquery.number.min.js')}}"></script>
+        <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
+        <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

@@ -1,6 +1,12 @@
 # change log
 
-Last version: 1.0.0-rc01
+[Releases](https://github.com/simda-id/simcan/releases)
+
+## versi 1.0.0-rc01-u
+
+Release Candidate 01-update
+
+1. Include /resources dan .env
 
 ## versi 1.0.0-rc01
 

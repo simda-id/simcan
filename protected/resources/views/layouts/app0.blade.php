@@ -46,31 +46,18 @@ use hoaaah\LaravelMenu\Menu;
                         <span class="icon-bar"></span>
                     </button> 
                   <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x"></i>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?> <i class="fa fa-caret-down"></i>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <?php 
-                                    $rpjmdDokumen = \App\models\RefSetting::where('status_setting','=','1')->get();
-                                    $tahun = [];
-                                    foreach($rpjmdDokumen as $data){
-                                        $tahun[$data->tahun_rencana] = $data->tahun_rencana;
-                                    }
-                                    foreach($tahun as $tahun):
-                                ?>
-                                <li>
-                                    <a href="{{ url('/ta/'.$tahun) }}">
-                                        <span class="text-muted small">{{ $tahun }}</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <?php endforeach;?>
-                            </ul>
                         </li>
 
                         <!-- Authentication Links -->
@@ -99,8 +86,8 @@ use hoaaah\LaravelMenu\Menu;
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                                     document.getElementById('logout-form').submit();">                                          
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -121,7 +108,7 @@ use hoaaah\LaravelMenu\Menu;
                                     'ulId' => 'side-menu'
                                 ],
                                 'items' => [
-                                    // ['label' => 'Dashboard', 'icon' => 'fa fa-home', 'url' => '/modul0'],
+                                    ['label' => 'Modul SSH dan ASB','icon'=>'fa fa-database fa-fw fa-lg' , 'url' => '#'],
                                     [
                                         'label' => 'Standard Satuan Harga', 
                                         'visible' => $akses->get(801)||$akses->get(802)||$akses->get(803)||$akses->get(807),
@@ -141,22 +128,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Perhitungan ASB','url' => '/asb/hitungasb','visible' => $akses->get(806)],
                                             // ['label' => 'Pencetakan ASB','visible' => $akses->get(808)],
                                         ]
-                                    ],                                     
-                                    // [
-                                    //     'label' => 'Parameter',
-                                    //     'items' => [
-                                    //         ['label' => 'Pemda', 'url' => '/','visible' => $akses->get(101)],
-                                    //         ['label' => 'Kecamatan-Desa', 'url' => '/','visible' => $akses->get(102)],
-                                    //         ['label' => 'Unit Organisasi', 'url' => '/','visible' => $akses->get(103)],
-                                    //         ['label' => 'Urusan Bidang', 'url' => '/','visible' => $akses->get(104)],
-                                    //         ['label' => 'Rekening Anggaran', 'url' => '/','visible' => $akses->get(105)],
-                                    //         ['label' => 'Program Kegiatan SKPD', 'url' => '/','visible' => $akses->get(106)],
-                                    //         ['label' => 'Lokasi Non-Wilayah', 'url' => '/','visible' => $akses->get(107)],
-                                    //         ['label' => 'Satuan Indikator', 'url' => '/','visible' => $akses->get(108)],
-                                    //         ['label' => 'Setting Aplikasi', 'url' => '/','visible' => $akses->get(109)],
-                                    //         ['label' => 'User dan Group', 'url' => '/admin/parameter/user','visible' => $akses->get(110)],
-                                    //     ]
-                                    // ],
+                                    ],
                                 ]
                             ]);
                         ?>

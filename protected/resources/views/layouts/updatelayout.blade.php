@@ -44,8 +44,8 @@ use hoaaah\LaravelMenu\Menu;
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    Logout
+                                                document.getElementById('logout-form').submit();">                                          
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

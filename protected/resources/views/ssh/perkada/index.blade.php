@@ -5,26 +5,28 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app0')
 
 @section('content')
-  <div class="container row col-sm-12">        
-        <div class="row">
+  <div class="container-fluid">        
+      <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = 'Perkada SSH';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul0';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'SSH']);
+                $breadcrumb->add(['url' => '/modul0','label' => 'SSH dan ASB']);
+                $breadcrumb->add(['url' => '/modul0','label' => 'SSH']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
         </div>
-        </div>
+      </div>
         <div id="pesan"></div>
-        <div class="row">
+        
+      <div class="row">
             <div class="col-md-12">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h2 class="panel-title">Perkada Standar Satuan Harga</h2>
+            <p><h2 class="panel-title">Perkada Standar Satuan Harga</h2></p>
           </div>
 
           <div class="panel-body">
@@ -39,12 +41,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane active" id="perkada">
               <br>
               <div class="add">
-                  <p><a id="btnPerkada" type="button" class="add-perkada btn btn-labeled btn-sm btn-success">
-                        <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Perkada</a>
-                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-sm btn-primary" href="{{ url('/printPerkadaSsh')}}">
-                            <span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Perkada SSH</a>
+                  <p><a id="btnPerkada" type="button" class="add-perkada btn btn-labeled btn-success">
+                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a>
+                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-primary" href="{{ url('/printPerkadaSsh')}}">
+                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Perkada SSH</a>
                   </p>
               </div>
+              <div class="table-responsive">
               <table id='tblPerkada' class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -60,12 +63,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </tbody>
             </table>
             </div>
+          </div>
 
             <div role="tabpanel" class="tab-pane" id="detailzona">
             <br>
             <div class="add">
-                <p><a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-sm btn-success">
-                        <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Zona SSH</a></p>
+                <p><a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-success">
+                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a></p>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
               <div class="table-responsive">
@@ -80,6 +84,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id=divDetailZona>
+              <div class="table-responsive">
               <table id="tblDetailZona" class="table table-striped table-bordered"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -94,13 +99,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </table>
               </div>
             </div>
+            </div>
             <div role="tabpanel" class="tab-pane" id="detailtarif">
             <br>
             <div class="add">
               <p><span id="btnAddTarif">
-              <a class="add-tarif btn btn-sm btn-success btn-labeled" data-toggle="popover" data-html="true" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Menambahkan satu per satu tarif per item SSH yang ada di struktur SSH.<br>Berguna untuk penyusunan tarif item pertama kali, atau jika ada penambahan struktur SSH dari Perkada sebelumnya">
-              <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Tarif Item</a></span>
-              <span id="btnCopyTarif"><a class="copy-tarif btn btn-sm btn-primary btn-labeled" data-toggle="popover" data-html="true" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Menduplikasi keseluruhan tarif item SSH dari Perkada sebelumnya, atau dari struktur SSH yang tersedia.<br>Hati-hati ! Data tarif item SSH yang sudah terinput untuk Perkada ini akan ditambahkan dibawahnya."><span class="btn-label"><i class="glyphicon glyphicon-import"></i></span> Isi Data Item SSH</a></span>
+              <a class="add-tarif btn btn-success btn-labeled" data-toggle="popover" data-html="true" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Menambahkan satu per satu tarif per item SSH yang ada di struktur SSH.<br>Berguna untuk penyusunan tarif item pertama kali, atau jika ada penambahan struktur SSH dari Perkada sebelumnya">
+              <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Tarif Item</a></span>
+              <span id="btnCopyTarif"><a class="copy-tarif btn btn-primary btn-labeled" data-toggle="popover" data-html="true" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Menduplikasi keseluruhan tarif item SSH dari Perkada sebelumnya, atau dari struktur SSH yang tersedia.<br>Hati-hati ! Data tarif item SSH yang sudah terinput untuk Perkada ini akan ditambahkan dibawahnya."><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Isi Data Item SSH</a></span>
               </p>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -120,6 +126,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divDetailTarif">
+                <div class="table-responsive">
             <table id="tblDetailTarif" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -134,6 +141,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <tbody>
                   </tbody>
             </table>
+          </div>
             </div>
             </div>
           </div>
@@ -149,7 +157,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
       <!-- <form class="form-horizontal" role="form"> -->
@@ -167,21 +174,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group has-feedback">
                 <label for="tgl_perkada" class="col-sm-3 control-label" align='left'>Tanggal Perkada :</label>
-                <div class="col-sm-3">
-                {{-- <div class="input-group"> --}}
+                {{-- <div class="col-sm-3">
                   <input type="text" class="form-control" id="tgl_perkada" name="tgl_perkada" required="required" ><input type="text" class="form-control hide" id="tgl_perkada1">
-                  {{-- <span class="input-group-addon primary"><i class="glyphicon glyphicon-user"></i></span>
                 </div> --}}
-                </div>
+                <input type="hidden" name="tgl_perkada1" id="tgl_perkada1">
+                  <div class="col-sm-4">
+                      <input type="text" class="form-control datepicker" id="tgl_perkada" name="tgl_perkada" style="text-align: center;">
+                      <i class="fa fa-calendar fa-fw fa-lg text-primary form-control-feedback"></i>              
+                  </div>
                 <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Diisi tanggal Perkada SSH. Jika masih draft, diisi tanggal penyusunan draft"><i class="glyphicon glyphicon-question-sign"></i></a>
               </div>
               <div class="form-group">
                 <label for="thn_perkada" class="col-sm-3 control-label" align='left'>Tahun Berlaku Perkada :</label>
                 <div class="col-sm-2">
                   <div class="input-group">
-                    <input type="text" class="form-control number" id="thn_perkada" name="thn_perkada" required="required" >
+                    <input type="text" class="form-control number" maxlength="4" id="thn_perkada" name="thn_perkada" required="required" >
                     <span class="input-group-addon">
                       <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Diisi tahun berlakunya SSH"><i class="glyphicon glyphicon-question-sign"></i></a>
                     </span>
@@ -198,18 +207,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn1 btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn1 btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button1" class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -218,14 +226,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Edit Perkada -->
   <div id="EditPerkada" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -243,18 +249,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group has-feedback">
                 <label for="tgl_perkada_edit" class="col-sm-3 control-label" align='left'>Tanggal Perkada :</label>
-                <div class="col-sm-3">
+                {{-- <div class="col-sm-3">
                     <input type="text" class="form-control" id="tgl_perkada_edit" name="tgl_perkada_edit" required="required" ><input type="text" class="form-control hide" id="tgl_perkada1_edit">                    
-                </div>
+                </div> --}}
+                <input type="hidden" name="tgl_perkada1_edit" id="tgl_perkada1_edit">
+                  <div class="col-sm-4">
+                      <input type="text" class="form-control datepicker" id="tgl_perkada_edit" name="tgl_perkada_edit" style="text-align: center;">
+                      <i class="fa fa-calendar fa-fw fa-lg text-primary form-control-feedback"></i>              
+                  </div>
                 <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Diisi tanggal Perkada SSH. Jika masih draft, diisi tanggal penyusunan draft"><i class="glyphicon glyphicon-question-sign"></i></a>
               </div>
               <div class="form-group">                
                 <label for="thn_perkada_edit" class="col-sm-3 control-label" align='left'>Tahun Berlaku Perkada :</label>
                 <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="text" class="form-control number" id="thn_perkada_edit" name="thn_perkada_edit" required="required" >
+                      <input type="text" class="form-control number" maxlength="4" id="thn_perkada_edit" name="thn_perkada_edit" required="required" >
                       <span class="input-group-addon">
                       <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Diisi tahun berlakunya SSH"><i class="glyphicon glyphicon-question-sign"></i></a>
                     </span>
@@ -270,18 +281,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Diisi nomenklatur Perkada SSH. Jika masih draft, diisi usulan nomenklatur Perkada SSH"><i class="glyphicon glyphicon-question-sign"></i></a>
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-save"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -290,14 +300,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Perkada Hapus -->
   <div id="HapusPerkada" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -305,18 +313,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 Yakin akan menghapus Perkada SSH Nomor : <strong><span class="uraian"></span></strong> ?
             <span class="hidden id_perkada_hapus"></span>
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-danger actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-danger actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>Hapus</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -325,36 +332,33 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Status Perkada -->
   <div id="StatusPerkada" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-            <div class="alert alert-info deleteContent">
+            <div class="alert alert-info deleteContent" role="alert">
                 Yakin memposting Data Perkada SSH Nomor : <strong><span class="uraian"></span></strong> ?
                 Proses posting ini akan merubah status Perkada terpilih menjadi Aktif, 
                 dan mengubah status Perkada aktif sebelumnya menjadi Non-Aktif
             <span class="hidden id_perkada"></span>
             <span class="hidden flag_perkada"></span>
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-check"></i></span>Posting</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -363,7 +367,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Zona Perkada -->
   <div id="TambahZonaPerkada" class="modal fade" role="dialog" data-backdrop="static">
@@ -371,7 +374,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
       <!-- <form class="form-horizontal" role="form"> -->
@@ -405,6 +407,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Pilih zona yang dimaksud dalam Perkada SSH"><i class="glyphicon glyphicon-question-sign"></i></a>
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -413,10 +416,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn1 btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn1 btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button1" class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -425,7 +428,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Edit Zona Perkada -->
   <div id="EditZonaPerkada" class="modal fade" role="dialog" data-backdrop="static">
@@ -433,7 +435,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
       <!-- <form class="form-horizontal" role="form"> -->
@@ -467,6 +468,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-trigger="hover" data-content="Pilih zona yang dimaksud dalam Perkada SSH"><i class="glyphicon glyphicon-question-sign"></i></a>
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -475,10 +477,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-save"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -487,14 +489,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Zona Perkada Hapus -->
   <div id="HapusZonaPerkada" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -502,6 +502,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 Yakin akan menghapus Zona ini <strong><span class="uraian"></span></strong> dalam Perkada SSH Nomor : <strong><span class="uraian1"></span></strong> ?
             <span class="hidden id_zona_perkada_hapus"></span>
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -510,10 +511,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-save"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -522,7 +523,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal Tarif Perkada -->
   <div id="ModalTarifPerkada" class="modal fade" role="dialog" data-backdrop="static">
@@ -530,7 +530,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
       <!-- <form class="form-horizontal" role="form"> -->
@@ -580,6 +579,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -588,10 +588,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnTarif btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success btnTarif btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="nmbtnTarif" class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -600,14 +600,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <!--Modal CopyDataTarif -->
   <div id="CopyDataTarif" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"> Copy Data Item SSH</h4>
         </div>
 
@@ -646,7 +644,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </select>
                 </div>
                   <a href="#" data-toggle="popover" data-container="body" title="Perkada SSH" data-html="true" data-trigger="hover" data-content="Pilih zona yang akan di-copy struktur/tarif SSH-nya."><i class="glyphicon glyphicon-question-sign"></i></a>
-              </div>
+              </div>            
+            </form>
+          </div>
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -655,18 +655,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnTransfer btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-success btnTransfer btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="nmTransfer" class="glyphicon glyphicon-import"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
-              </div>
-            </form>
-
-          
+              </div>          
         </div>
       </div>
     </div>
@@ -677,7 +674,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -685,6 +681,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 Yakin akan menghapus Item Tarif : <strong><span class="uraian"></span></strong> dalam Zona : <strong><span class="uraian1"></span></strong> ?
             <span class="hidden id_tarif_perkada_hapus"></span>
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
@@ -693,10 +690,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-danger actionBtn btn-labeled" data-dismiss="modal">
+                        <button type="button" class="btn btn-danger actionBtn btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
                       </div>
                     </div>
@@ -705,25 +702,35 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   {{-- Cari Item Tarif SSH --}}
   <div id="cariItemSSH" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
   <div class="modal-dialog modal-lg"  >
   <div class="modal-content">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>Daftar Item yang terdapat di SSH</h3>
   </div>
   <div class="modal-body">
-  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+  <div class="form-group">
+      <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
+        <div class="col-sm-5">
+          <div class="input-group">
+            <input type="text" class="form-control" id="param_cari" name="param_cari">
+            <div class="input-group-btn">
+              <button class="btn btn-primary" id="btnparam_cari" name="btnparam_cari"><i class="fa fa-search fa-fw fa-lg"></i></button>
+            </div>
+          </div>
+        </div>
+    </div>
    <div class="form-group">
    <div class="col-sm-12">
       <table id='tblItemSSH' class="table display table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Item SSH</th>
+                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
                 </tr>
           </thead>
@@ -732,8 +739,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </table>
     </div>
     </div>
-  </form> 
-  </div>
+  </form>
+</div>
+  <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div>  
   </div>
   </div>
   </div>
@@ -745,6 +762,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+  function createPesan(message, type) {
+    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+    // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
+    html += message;
+    html += '</div>';    
+    $(html).hide().prependTo('#pesan').slideDown();
+  };
+
+  $('.page-alert .close').click(function(e) {
+        e.preventDefault();
+        $(this).closest('.page-alert').slideUp();
+    });
 
   $('[data-toggle="popover"]').popover();
 
@@ -767,23 +798,51 @@ $(document).ready(function() {
   $('#thn_perkada_edit').number(true,0,'', '');
   $('#rupiah_tarif').number(true,2,',', '.');
 
+  $('#tgl_perkada').datepicker({
+    altField: "#tgl_perkada1",
+    altFormat: "yy-mm-dd", 
+    dateFormat: "dd MM yy"
+  });
+
+  $('#tgl_perkada_edit').datepicker({
+    altField: "#tgl_perkada1_edit",
+    altFormat: "yy-mm-dd", 
+    dateFormat: "dd MM yy"
+  });
+
+  function formatTgl(val_tanggal){
+    var formattedDate = new Date(val_tanggal);
+    var d = formattedDate.getDate();
+    var m = formattedDate.getMonth();
+    var y = formattedDate.getFullYear();
+    var m_names = new Array("Januari", "Februari", "Maret", 
+      "April", "Mei", "Juni", "Juli", "Agustus", "September", 
+      "Oktober", "November", "Desember")
+
+    var tgl= d + " " + m_names[m] + " " + y;
+    return tgl;
+  }
+
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
       serverSide: true,
       dom: 'BFrtip',
         "ajax":  {"url": "./getPerkada"},
         "columns": [
-            { data: 'nomor_perkada'},
-            { data: 'tanggal_perkada',
+            { data: 'nomor_perkada', sClass: "dt-center"},
+            { data: 'tanggal_perkada', sClass: "dt-center",
               render: function (data) {
               var date = new Date(data);
               return date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
             }},
             { data: 'uraian_perkada'},
-            { data: 'tahun_berlaku'},
-            { data: 'status_perkada'},
-            { data: 'action', 'searchable': false, 'orderable':false }
-            ]
+            { data: 'tahun_berlaku', sClass: "dt-center"},
+            { data: 'status_perkada', sClass: "dt-center"},
+            { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
   } );
 
   var detailzona = $('#tblDetailZona').DataTable( {
@@ -793,44 +852,71 @@ $(document).ready(function() {
         dom: 'Bfrtip',
         "ajax": {"url": "./getZona/0"},
         "columns": [
-              { data: 'no_urut'},
-              { data: 'id_zona'},
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'id_zona', sClass: "dt-center"},
               { data: 'ur_zona'},
-              { data: 'action', 'searchable': false, 'orderable':false }
-              ]
+              { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
+              ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
   });
 
+function LoadItemSSH(id_zona){
   var detailtarif = $('#tblDetailTarif').DataTable( {
-        deferRender: true,
         processing: true,
         serverSide: true,
+        deferRender: true,
+        scrollCollapse: true,
         dom: 'Bfrtip',
-        "ajax": {"url": "./getTarifPerkada/0"},
+        "ajax": {"url": "./getTarifPerkada/"+id_zona},
         "language": {
               "decimal": ",",
               "thousands": "."},
         "columns": [
-              { data: 'no_urut'},
-              { data: 'no_tarif'},
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'no_tarif', sClass: "dt-center"},
               { data: 'ur_tarif'},
-              { data: 'uraian_satuan'},
-              { data: 'jml_rupiah',
+              { data: 'uraian_satuan', sClass: "dt-center"},
+              { data: 'jml_rupiah', sClass: "dt-right",
                 render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
-              { data: 'action', 'searchable': false, 'orderable':false }
-        ]
-  });
+              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+        ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
+  });}
 
-  var itemSSH = $('#tblItemSSH').DataTable( {
+var itemSSH
+function LoadCariItem(param){
+  itemSSH = $('#tblItemSSH').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'BfrtIp',
-        "ajax": {"url": "./cariItemSSH"},
+        dom: 'BFrtIp',
+        "ajax": {"url": "./cariItemSSH/"+param},
         "columns": [
-              { data: 'no_urut'},
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
-              { data: 'uraian_satuan'}
-            ]
-  });
+              { data: 'uraian_satuan', sClass: "dt-center"}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
+  });}
+
+
+
+$(document).on('click', '#btnparam_cari', function() {
+  if($('#param_cari').val()==""){
+    param="a"
+  } else {
+    param=$('#param_cari').val();
+  }
+
+  LoadCariItem(param.toLowerCase());
+
+});
 
   $('#tblItemSSH tbody').on( 'dblclick', 'tr', function () {
 
@@ -923,8 +1009,8 @@ $(document).ready(function() {
       document.getElementById("nm_zona").innerHTML = nm_zona;
 
       $('.nav-tabs a[href="#detailtarif"]').tab('show');
-      $('#tblDetailTarif').DataTable().ajax.url("./getTarifPerkada/"+id_zonassh).load();
-
+      // $('#tblDetailTarif').DataTable().ajax.url("./getTarifPerkada/"+id_zonassh).load();
+      LoadItemSSH(id_zonassh);
 
     } );
 
@@ -989,7 +1075,7 @@ $(document).ready(function() {
     $('.modal-title').text('Edit Data Peraturan Kepala Daerah tentang SSH');
     $('.form-horizontal').show();
     $('#no_perkada_edit').val($(this).data('no_perkada'));
-    $('#tgl_perkada_edit').val($(this).data('tgl_perkada'));
+    $('#tgl_perkada_edit').val(formatTgl($(this).data('tgl_perkada')));
     $('#tgl_perkada1_edit').val($(this).data('tgl_perkada'));
     $('#thn_perkada_edit').val($(this).data('thn_perkada'));
     $('#ur_perkada_edit').val($(this).data('ur_perkada'));
@@ -1032,7 +1118,6 @@ $(document).ready(function() {
     $('.actionBtn').removeClass('btn-danger');
     $('.actionBtn').addClass('editStatus');
     $('.modal-title').text('Posting Data Peraturan Kepala Daerah tentang SSH');
-    // $('.form-horizontal').hide();
     $('.uraian').html($(this).data('no_perkada'));
     $('.id_perkada').text($(this).data('id_perkada'));
     $('.flag_perkada').text($(this).data('flag_perkada')+1);
@@ -1055,9 +1140,9 @@ $(document).ready(function() {
           success: function(data) {
               $('#tblPerkada').DataTable().ajax.reload();
               if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                createPesan(data.pesan,"success");
               } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                createPesan(data.pesan,"alert"); 
               } 
           }
       });

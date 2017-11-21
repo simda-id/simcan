@@ -6,7 +6,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 {{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -33,6 +33,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button class="add-satuan btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Tahun Setting</button>
             </div>
             <br>
+            <div class="table-responsive">
             <table id="tblSetting" class="table compact display table-striped table-bordered table-responsive" width="100%">
                   <thead>
                       <tr>
@@ -45,6 +46,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <tbody>
                   </tbody>
             </table>
+          </div>
           </div>
         </div>
     </div>
@@ -154,9 +156,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </tbody>
                     </table>
             </div>
-          </div>
-        
+          </div>        
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusLokasi">
@@ -176,7 +178,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
   </div>
-</div>
 
 <!--Modal Hapus -->
 <div id="HapusModal" class="modal fade" role="dialog" data-backdrop="static">
@@ -194,6 +195,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled actionBtn" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -204,7 +206,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 
   <div id="StatusSetting" class="modal fade" role="dialog" data-backdrop="static">
@@ -229,6 +230,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>                  
             </div>
+          </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
@@ -247,7 +249,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 @endsection
 
 @section('scripts')

@@ -5,13 +5,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = ' Data Pokok-Pokok Pikiran DPRD ';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
@@ -21,42 +21,43 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div id="pesan"></div>
     <div class="row">
       <div class="col-md-12">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-            <h2 class="panel-title">Detail Data Pokok-Pokok Pikiran DPRD</h2>
+            <p><h2 class="panel-title">Detail Data Pokok-Pokok Pikiran DPRD</h2></p>
           </div>
 
           <div class='panel-body'>
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                <ul id="myTab-19" class="nav nav-tabs" role="tablist">
-                    <li id="tab-pokir" class="active"><a id="link-pokir" href="#pokir" role="tab" data-toggle="tab">Identitas Pengusul</a></li>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li id="tab-pokir" class="active"><a href="#pokir" role="tab" data-toggle="tab">Identitas Pengusul</a></li>
                     <li id="tab-uraian"><a href="#uraian" role="tab-kv" data-toggle="tab">Uraian Pokok-pokok Pemikiran</a></li>
                     <li id="tab-lokasi"><a href="#lokasi" role="tab-kv" data-toggle="tab">Lokasi Usulan</a></li>
                 </ul>
-            <div id="myTabContent-19" class="tab-content">
+            <div class="tab-content">
                 <div class="tab-pane fade in active" id="pokir">
                 <br>          
-                  <p><a class="btn-sm btn btn-labeled btn-primary addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span></i> Tambah Pokok-Pokok Pemikiran</a></p>
-                {{-- <br> --}}
-                    <table id="tblPokir" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+                  <p><a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok-Pokok Pemikiran</a></p>
+                    <div class="table-responsive">
+                    <table id="tblPokir" class="table display table-striped table-bordered table-responsive"  width="100%">
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                                 <th width="5%" style="text-align: center; vertical-align:middle">Tahun Usulan</th>
-                                <th style="text-align: center; vertical-align:middle">Asal Pengusul</th>
+                                <th width="35%" style="text-align: center; vertical-align:middle">Asal Pengusul</th>
                                 <th style="text-align: center; vertical-align:middle">Nama Pengusul</th>
-                                <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
+                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                               </tr>
                           </thead>
                           <tbody>
                           </tbody>
                     </table>
+                  </div>
                 </div>
                 <div class="tab-pane fade in" id="uraian">
                 <br>          
-                  <p><a class="btn-sm btn btn-labeled btn-primary" data-toggle="modal" id="addUraian"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span></i> Tambah Uraian Pemikiran</a></p>
-                {{-- <br> --}}
-                    <table id="tblUraian" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+                  <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="addUraian"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Uraian Pemikiran</a></p>
+                    <div class="table-responsive">
+                    <table id="tblUraian" class="table table-striped display compact table-bordered table-responsive"  width="100%">
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -69,12 +70,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>
                           </tbody>
                     </table>
+                  </div>
                 </div>
                 <div class="tab-pane fade in" id="lokasi">
                 <br>          
-                  <p><a class="btn-sm btn btn-labeled btn-primary" data-toggle="modal" id="btnAddLokasi"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span></i> Tambah Lokasi</a></p>
-                {{-- <br> --}}
-                    <table id="tblLokasi" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+                  <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="btnAddLokasi"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Lokasi</a></p>
+                    <div class="table-responsive">
+                    <table id="tblLokasi" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -86,6 +88,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>
                           </tbody>
                     </table>
+                  </div>
                 </div>
             </div>          
         </div>
@@ -112,12 +115,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="col-sm-2">
               <input type="text" class="form-control number" id="txt_tahun" name="txt_tahun" required="required" disabled="">
             </div>            
-              <input type="hidden" class="form-control" name="txt_tgl_usul1" id="txt_tgl_usul1">
-              <div class="input-append"> 
-                <div class="col-sm-4">
-                  <input type="text" class="form-control date-picker" id="txt_tgl_usul" name="txt_tgl_usul" required="required" >
-                </div>
-                <label for="txt_tgl_usul" class="add-on"><i class="fa fa-calendar fa-fw fa-lg" style="color:blue;"></i></label>
+            <input type="hidden" class="form-control" name="txt_tgl_usul1" id="txt_tgl_usul1">
+            <div class="form-group has-feedback">
+              <div class="col-sm-4">
+                <input type="text" class="form-control date-picker" id="txt_tgl_usul" name="txt_tgl_usul" required="required" >
+                <span>
+                  <i class="fa fa-calendar fa-fw fa-lg form-control-feedback" style="color:blue;"></i>
+                </span>
+                
+              </div>
             </div>
           </div>                              
           <div class="form-group">
@@ -145,10 +151,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </select>
             </div>
           </div>  
-          <div class="form-group">
+          <div class="form-group has-feedback">
             <label for="txt_nama_pengusul" class="col-sm-4 control-label" align='left'>Nama Pengusul :</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" id="txt_nama_pengusul" name="txt_nama_pengusul" required="required">
+              {{-- <span class="form-control-feedback">
+                <i id="btnTest" class="fa fa-search fa-fw fa-lg form-control-feedback" style="color:blue;"></i>
+              </span> --}}
             </div>
           </div>
           
@@ -173,6 +182,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>         
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
@@ -180,10 +190,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" class="btn btn-sm btn-success btn-labeled btnPokir" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -191,7 +201,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>      
     </div>
   </div>
-</div>
 
   <!--Modal Status Perkada -->
   <div id="HapusPokir" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
@@ -209,6 +218,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <strong>Proses Posting Tidak dapat diulangi, Cek lagi sebelum memposting ! </strong> 
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
@@ -216,10 +226,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" class="btn btn-sm btn-danger btnHapusPokir btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -227,7 +237,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="ModalUsulan" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -245,6 +254,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="col-sm-3">
                           <input type="text" class="form-control number" id="no_urut_usulan" name="no_urut_usulan">
                     </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3 text-left" for="id_unit">Unit Pelaksana :</label>
+                  <div class="col-sm-8">
+                      <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
+                  </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="judul_usulan">Judul Usulan :</label>
@@ -274,19 +289,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                   </div>
               </form>
+            </div>
                   <div class="modal-footer">
                     <div class="row">
                         <div class="col-sm-2 text-left idbtnHapusUsulan">
                             <button id="btnHapusUsulan" type="button" class="btn btn-sm btn-danger btn-labeled">
-                                <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                                <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         </div>
                         <div class="col-sm-10 text-right">
                           <div class="ui-group-buttons">
                             <button id="btnUsulan" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                                <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                             <div class="or"></div>
                             <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                                <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                           </div>
                         </div>
                     </div>
@@ -294,7 +310,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
 <div id="HapusUsulan" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -311,6 +326,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">
@@ -318,10 +334,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button  id="btnDelUsulan" type="button" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -329,7 +345,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="ModalLokasi" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -370,19 +385,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
             </div>
           </form>
+        </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusLokasi">
                         <button id="btnHapusLokasi" type="button" class="btn btn-sm btn-danger btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button id="btnLokasi" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -390,7 +406,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="HapusLokasi" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -407,6 +422,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">
@@ -414,10 +430,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" id="btnDelLokasi" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -425,7 +441,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 @endsection
 
@@ -457,11 +472,15 @@ $(document).ready(function() {
   $('.number').number(true,0,',', '.');
 
   function createPesan(message, type) {
-      var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-      html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-      html += message;
-      html += '</div>';    
-      $(html).hide().prependTo('#pesan').slideDown();
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
+    html += '</div>';    
+    $(html).hide().prependTo('#pesan').slideDown();
+
+    setTimeout(function() {
+        $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
 
@@ -478,7 +497,7 @@ $(document).ready(function() {
 
 $.ajax({
     type: "GET",
-    url: './renja/blang/getKecamatan',
+    url: './admin/parameter/getKecamatan',
     dataType: "json",
 
     success: function(data) {
@@ -494,7 +513,27 @@ $.ajax({
             $('select[name="id_kecamatan"]').append('<option value="'+ post.id_kecamatan +'">'+ post.nama_kecamatan +'</option>');
           }
           }
-  }); 
+  });
+
+$.ajax({
+    type: "GET",
+    url: './admin/parameter/getUnit',
+    dataType: "json",
+
+    success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_unit"]').empty();
+          $('select[name="id_unit"]').append('<option value="-1">---Pilih Unit---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="id_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
+          }
+          }
+}); 
 
 $.ajax({
     type: "GET",
@@ -575,11 +614,11 @@ $.ajax({
             "decimal": ",",
             "thousands": "."},
     "columns": [
-          { data: 'no_urut'},
-          { data: 'id_tahun'},
+          { data: 'no_urut', sClass: "dt-center"},
+          { data: 'id_tahun', sClass: "dt-center"},
           { data: 'display_pengusul'},
           { data: 'nama_pengusul'},
-          { data: 'action', 'searchable': false, 'orderable':false }
+          { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
         ],
     bDestroy: true
   });
@@ -607,13 +646,13 @@ function LoadTblRincian(id_pokir){
             "decimal": ",",
             "thousands": "."},
     "columns": [
-          { data: 'no_urut'},
+          { data: 'no_urut', sClass: "dt-center"},
           { data: 'diskripsi_usulan'},
           { data: 'jml_anggaran', sClass: "dt-right",
               render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
           { data: 'volume', sClass: "dt-center",width:"15px",
               render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
-          { data: 'action', 'searchable': false, 'orderable':false }
+          { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
         ],
     bDestroy: true
   } );
@@ -672,10 +711,10 @@ function LoadTblLokasi(id_usulan){
             "decimal": ",",
             "thousands": "."},
     "columns": [
-          { data: 'no_urut'},
+          { data: 'no_urut', sClass: "dt-center"},
           { data: 'nama_kecamatan'},
           { data: 'nama_desa'},
-          { data: 'action', 'searchable': false, 'orderable':false }
+          { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
         ],
     bDestroy: true
   } );
@@ -824,6 +863,8 @@ $('#addUraian').click(function(){
   $('#volume_usulan').val(0);
   $('#id_satuan_usulan').val(0);
   $('#pagu_usulan').val(0);
+  $('#id_unit').val(0);
+
 
   $('#btnHapusUsulan').hide();
   $('#ModalUsulan').modal('show');
@@ -841,7 +882,7 @@ $('.modal-footer').on('click', '.addUsulan', function(){
           data: {
               '_token': $('input[name=_token]').val(),
               'id_pokir' : $('#id_pokir_rincian').val(),
-              // 'id_pokir_usulan' : $('#id_pokir_usulan').val(),
+              'id_unit' : $('#id_unit').val(),
               'no_urut' : $('#no_urut_usulan').val(),
               'id_judul_usulan' : $('#judul_usulan').val(),
               'diskripsi_usulan' : $('#uraian_usulan').val(),
@@ -875,7 +916,8 @@ $(document).on('click', '#btnEditUsulanPokir', function(){
   $('#uraian_usulan').val(data.diskripsi_usulan);
   $('#volume_usulan').val(data.volume);
   $('#id_satuan_usulan').val(data.id_satuan);
-  $('#pagu_usulan').val(data.jml_anggaran);
+  $('#pagu_usulan').val(data.jml_anggaran);  
+  $('#id_unit').val(data.id_unit);
 
   $('#btnHapusUsulan').show();
   $('#ModalUsulan').modal('show');
@@ -895,6 +937,7 @@ $('.modal-footer').on('click', '.editUsulan', function(){
               'id_pokir' : $('#id_pokir_rincian').val(),
               'id_pokir_usulan' : $('#id_pokir_usulan').val(),
               'no_urut' : $('#no_urut_usulan').val(),
+              'id_unit' : $('#id_unit').val(),
               'id_judul_usulan' : $('#judul_usulan').val(),
               'diskripsi_usulan' : $('#uraian_usulan').val(),
               'volume' : $('#volume_usulan').val(),
@@ -1096,6 +1139,11 @@ $(document).on('click', '#btnDelLokasi', function() {
       }
     });
 });
+
+$("#btnTest").click(function () {
+    alert(test);
+});
+
 
 
 });

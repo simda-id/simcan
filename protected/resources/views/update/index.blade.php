@@ -4,7 +4,7 @@ use \hoaaah\LaravelHtmlHelpers\Html;
 @extends('layouts.updatelayout')
 
 @section('content')
-<div class="col-sm-12 col-md-12 col-lg-12">	
+<div class="container-fluid col-sm-12 col-md-12 col-lg-12">	
     <!-- /.panel -->
     <div class="panel panel-primary">
         <div class="panel-heading">

@@ -6,7 +6,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 <div class="ta-rkas-kegiatan-index">      
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <?php
                 $this->title = 'Rancangan Awal RKPD';
                 $breadcrumb = new Breadcrumb();

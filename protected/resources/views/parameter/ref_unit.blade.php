@@ -5,7 +5,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.parameterlayout')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -37,6 +37,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="urusan">
                   <div class="col-md-12">
+                  <div class="table-responsive">
                   <table id="tblUrusan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -48,9 +49,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <tbody>                                        
                         </tbody>
                     </table>  
+                  </div>
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="unit">
+                  <br>
                   <div class="col-md-12">
                       <div class="add">
                       <button id="btnTambahUnit" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
@@ -71,7 +74,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           </tbody>
                         </table>
                       </div>
-                      </form>
+                      </form>                      
+                      <div class="table-responsive">
                       <table id="tblUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -84,9 +88,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="subunit">
+                <br>
                   <div class="col-md-12">
                       <div class="add">
                       <button id="btnTambahSub" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
@@ -111,7 +117,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           </tbody>
                         </table>
                       </div>
-                      </form>
+                      </form>                      
+                      <div class="table-responsive">
                       <table id="tblSubUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -124,9 +131,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="dataunit">
+                <br>
                   <div class="col-md-12">
                       <div class="add">
                       <button id="btnTambahDataUnit" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
@@ -156,6 +165,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                       <table id="tblDataUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -169,6 +179,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
             </div>
@@ -474,6 +485,10 @@ $('.page-alert .close').click(function(e) {
         $(this).closest('.page-alert').slideUp();
     });
 
+document.getElementById("btnTambahUnit").style.visibility='hidden';
+document.getElementById("btnTambahSub").style.visibility='hidden';
+document.getElementById("btnTambahDataUnit").style.visibility='hidden';
+
 $("input[name='nipDisplay']").on("keyup", function(){
     $("input[name='nip_pimpinan_skpd']").val(nilaiNip(this.value));
     this.value = buatNip($("input[name='nip_pimpinan_skpd']").val());
@@ -551,6 +566,7 @@ function initTableBidang(tableId, data) {
         var data = bidang_tbl.row(this).data();
 
         id_bidang_temp = data.id_bidang;
+        document.getElementById("btnTambahUnit").style.visibility='visible';
 
         $('#ur_urusan').text(data.nm_urusan);
         $('#ur_bidang').text(data.nm_bidang);
@@ -649,6 +665,7 @@ $('#tblUnit tbody').on( 'dblclick', 'tr', function () {
 
   id_unit_temp = data.id_unit;
 
+  document.getElementById("btnTambahSub").style.visibility='visible';
   $('#ur_urusan_sub').text(data.nm_urusan);
   $('#ur_bidang_sub').text(data.nm_bidang);
   $('#ur_unit').text(data.nm_unit);
@@ -663,6 +680,8 @@ $('#tblSubUnit tbody').on( 'dblclick', 'tr', function () {
   var data = subunit_tbl.row(this).data();
 
   id_sub_unit_temp = data.id_sub_unit;
+
+  document.getElementById("btnTambahDataUnit").style.visibility='visible';
 
   $('#ur_urusan_rinc').text($('#ur_urusan_sub').text());
   $('#ur_bidang_rinc').text($('#ur_bidang_sub').text());

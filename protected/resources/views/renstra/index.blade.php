@@ -4,7 +4,7 @@
   @if (Auth::guest())
   {{-- <li><a href="{{ url('/')}}">Dashboard</a></li> --}}
   @else
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="">
         <ul class="breadcrumb">
@@ -41,6 +41,7 @@
               </div>
               <br>
               <br>
+              <div class="table-responsive">
               <table id='tblVisi' class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -53,9 +54,10 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="misi">
               <br>
+              <div class="table-responsive">
               <table id="tblMisi" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -69,9 +71,10 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="tujuan">
             <br>
+            <div class="table-responsive">
             <table id="tblTujuan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -85,7 +88,7 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="sasaran">
             <br>
             <ul class="nav nav-tabs" role="tablist">
@@ -93,10 +96,10 @@
                 <li><a href="#kebijakan" aria-controls="tujuan" role="tab" data-toggle="tab">Kebijakan</a></li>
                 <li><a href="#strategi" aria-controls="sasaran" role="tab" data-toggle="tab">Strategi</a></li>
             </ul>
-
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="sasaran1">
               <br>
+              <div class="table-responsive">
                 <table id="tblSasaran" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -110,9 +113,10 @@
                       </tbody>
                 </table>
               </div>
-
+              </div>
               <div role="tabpanel" class="tab-pane" id="kebijakan">
               <br>
+              <div class="table-responsive">
                 <table id="tblKebijakan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -125,8 +129,10 @@
                       </tbody>
                 </table>
               </div>
+              </div>
               <div role="tabpanel" class="tab-pane" id="strategi">
               <br>
+              <div class="table-responsive">
                 <table id="tblStrategi" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -139,9 +145,9 @@
                       </tbody>
                 </table>
               </div>
+              </div>
             </div>
             </div>
-
             <div role="tabpanel" class="tab-pane" id="program">
             <br>
             <ul class="nav nav-tabs" role="tablist">
@@ -151,6 +157,7 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="program1">
               <br>
+              <div class="table-responsive">
                 <table id="tblProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -172,10 +179,12 @@
                   </thead>
                   <tbody>
                   </tbody>
-            </table>
+                </table>
+              </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="indikatorprogram">
               <br>
+              <div class="table-responsive">
                 <table id="tblIndikatorProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -194,14 +203,13 @@
                       @endforeach
                       </tr>
                       </thead>
-
                       <tbody>
                       </tbody>
                 </table>
               </div>
+              </div>
             </div>
             </div>
-
             <div role="tabpanel" class="tab-pane" id="kegiatan">
             <br>
             <ul class="nav nav-tabs" role="tablist">
@@ -209,10 +217,10 @@
                 <li><a href="#indikatorkegiatan" aria-controls="kegiatan" role="tab" data-toggle="tab">Indikator Kegiatan</a></li>
                 <li><a href="#pelaksana" aria-controls="kegiatan" role="tab" data-toggle="tab">Sub Unit Pelaksana</a></li>
             </ul>
-
            <div class="tab-content">
               <br>
               <div role="tabpanel" class="tab-pane active" id="kegiatan1">
+              <div class="table-responsive">
               <table id="tblKegiatan" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
@@ -236,9 +244,10 @@
                   </tbody>
               </table>
               </div>
-
+              </div>
               <div role="tabpanel" class="tab-pane" id="indikatorkegiatan">
               <br>
+              <div class="table-responsive">
                 <table id="tblIndikatorkegiatan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                       <tr>
@@ -257,14 +266,14 @@
                       @endforeach
                       </tr>
                       </thead>
-
                       <tbody>
                       </tbody>
                   </table>
                 </div>
-
+              </div>
               <div role="tabpanel" class="tab-pane" id="pelaksana">
                 <br>
+                <div class="table-responsive">
                   <table id="tblPelaksana" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
@@ -277,11 +286,11 @@
                         </tbody>
                   </table>
                 </div>
+              </div>
             </div>
             </div>
           </div>
           </div>
-
           </div>
         </div>
       </div>

@@ -1,111 +1,125 @@
-<?php //0046b
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo('Site error: the file <b>'.__FILE__.'</b> requires the ionCube PHP Loader '.basename($__ln).' to be installed by the website operator. If you are the website operator please use the <a href="http://www.ioncube.com/lw/">ionCube Loader Wizard</a> to assist with installation.');exit(199);
+<?php
 
-?>
-HR+cPzo+sKiW429iFNvCQEesT3j0Jl8b44Zt99suzfNkFQl9WlezfTaBrzNUcdoWVytoxZdx2fn3
-r0dfrOj0rWoyp6Pj0gsma0zOu+vJNLb3U1Z/9Q4jaqjQS1GUnXv5nQZIFJ/Z4ew+P66jqXAbN0rJ
-tSIGyFYDcPw41l+szwkseyuGNa6VkhwDZaXD2XIB9tqcMG6ch3QHuBjio+r3owrz4MIAht+J5S2c
-aH4LYgYgJI0KMe21RQxvQMFz6vKkADo+S5/GmDDcSI4gfnv3XXr9RA2FDF5dIzZFgJPwg1oZ3Jmd
-6izvbwgqwLPyy7rD8Z1FblflchWZfBfJA99hOhszwGAeGWPC9RYitEnCIqQLVZti7D0QTrFBSVi6
-1f1SMvz3cDQdEQGJnzTSHu08bIO/gLko1go9DZYqjUIXVjKB//OS7ivxzCTB3N7SvZUMTaSIJll1
-uRgB2XhpGu8OG+JFH0eNd5IDcw+YZgX5kGrHvtwX1hL4a3YBhZw8zYAPBqDdJhPPuS6MkI8pBMaq
-HcUwyU7nGERRtAAfIxRwEWASXuSStI78OelXN4QB0P3cyjkXMc2qLeAtGf4hmTgcqkGzXzJ3wxkg
-7xdlkP7a+ft4U9VRvUiJJa5YMBbcbxBSxmkU9rj2fMT1rpyzCL1eQ4KviSBT2wPH7WouILZq/FTp
-kR+g7IXKmRkJ3aROga0esi6i0hdtJukYFlZMlM0/j3gHfsy4JG7offz/7aDOcpDBbHMOF+dp2hvv
-OdI4HDLqNIroVdiqPnwF7qH3WfNFk9neAFTFdGQYyXAOIHAaud3csLGsYuaKA/zkeOvJsW1WdiXr
-IrSmnWvhvfxkGFQevhB3hHdRm47Js6u53HL4gh861gqJFc2+WV0OzaEY9c/BcPNy+gdkuTzAKwlQ
-JcN8SOA9Z7I48Hf9t2gFBSrXAfMzDZ6AEVZu3J5ZJ15i2Rw18ZCr1SKP1g+noVsM9PqMRqlKBKrf
-f0FQGj484RY1SgcVsSj24V+PMxeHV9HgmZ+PLkx94H/lob82ebHNyZxZxLwB6LC7Tg52rirU+o6+
-xm5y4nhf5MZfHqINc+ECGhHbWo7IVlpwIjp0t8GmLGfMCqp+ujru7gBtYnYvhv0SHkuo801fhEpI
-LA83SBYdDNCC+oRn8fqMkzG9FHzX42km7eV+TwiwiJGVrYNxjdGcTTN8xpfOHNFj/12uI3TcHHCD
-7L2rvem34OlWMdiGHiwo15COeSXndPANSrMMI/20ufrKFtt9Q0SlPdRbNen71JhgeWw0IYtAUbuI
-fEffN02bfX7aRUGW78F+juknARfrUf8+X7vKGays+jUZgxGSmIxoDvo6GFsSD4t+0RD4hG8sJg4I
-MDfO3K8ID5pwTDPBBW5BEwEFOG30rAIwpt+bKFvQB/Z4S4tl8KMX37xhMUHXcfjlzL87YWeYwsRr
-CeiAysmHQVD6BzjVL5uO+h+uBfITmJKQ8Bq/DQjL94WhD4lxT5raw7GWiTriw3lNOaFp0jDZZx8i
-xXqTLd14hvCBPRBu/0jwzU9Ut2SAYqiEdrn6+Y14H1RC2iN7TaSZHdV9dz3X+/3DAPjxmf5rO0M7
-vEXvMplQEBRcsy+UMzF0FcA5zZKQD0eI7a4SeTShtojG4U6ngkaDHlLW5cHtVyLzLlYRl0stlqzy
-FL4nPdFYaN6bQ3JFJ7qxJMrT46ya3OhhrCfdi2xOeYiPtCATRWFkocsHRRbwONllK/8P4SbQGbDu
-kiqlYs4fIx8YFZGr4raTMJ46UVdcNmNLeglHib6PW6IVIieFxaRx4GyMoQtdMB2f6bPZgpHtaWgT
-m8pmq9LMA5uettYzAFiIsmpTlI7U5YZZAEZD03DveQ2oAV3zMVd/GcX9f9ggZ03msOAz54xHye2N
-jITlEq9YIC1DzXR3jF3+kosOQ3WYgw650iALKwkaSCextNzXpZBjoAOWRExylD2/v9vnhSCgLynx
-SQXrYDRtnP2tuc076hjw7J3ZqmvHK8x/MgRJWDDhyfU3WMkN0kumEXG/WQLPHsrT9dmASGonRZ0G
-MZT0V9nJUFHJgOn2zx4UdlvWXq/5p7GvEPV2f+10uMoEvA4mPUQJ59B3jo9H31lhh09VIgfPkM68
-RPFz2NT6hEVsxByoV3icSjuM4FucoKD1fBVSmt3oj2FDimUpvYMsPF7QXT5vVaTHVczNSlYRQvEz
-806s+0sN5+oBo74Vnph/SpNDB0OFmyA3J4eY0QAPcMgNVXSWwzN3u/PxOZVQDYxmLw23KGHtsLMk
-r6gz4oxjTjPLktd54ezW68/aPcszycRIoRF3kH7wx4crA/IBwVyVnneBj2jtRqwoEZWVtQsr/NAu
-b7Vtja1xDMK3srzriIDxCbZDRLN/hghaT/yFgOdEy/tmQkyHxZk0b0bUhUP97JZP6mly2YIA4toR
-wxn2iuMppwn5s0jVjihgP2d+4VcK6NPcSPtJ4e+YemB/SZCt3g0UGVYW6Al1yhbmcKlh67tNTXwT
-w+0DCSUSXkbs6s1HOjn8icTpm0rzvuiN3lCc0uGjyR2fS8jYedINn30zaqte0PCvZSNpZ2R+4Vcc
-8XWs9hamkQtCbIclVz+q7oXWWTA7sCO4hArvWZR5GdnQOr8qA69RNzlErlHSH8N7cDcfmBxrD/lT
-uYQ75cAb5HOwNQGen1Q8OEJBEdkR7fM272S1w4edH3rAorGspcV+tEggwlEvHMo53cw/vCCK9aCC
-21gZeOiXyrD+b1+Sv/Nk+OzLYg1mtgOt88r9M6lNqJQ7IiEHb0yvGgRVwIAJC9LVYdKCyd28iZei
-Y90ze0thqLBvBtenm7AYQk3mh+cmQN62XmRBG1FcQ8WO5LR8WxvtECQD9mc+Gafl79aWGrVn42T6
-tsridrB+yqnqQoaeeY6jAXe/3bC6azusZ0XOta7+Pesutnahzc12+u0BzvA5g1l6xoLgc888LoAD
-zEOzk+mHk8bKp8rbAFTcnb1Mke4NH7rbnho3eYGuQKqpVJW3cngsTVWdxtuvnIv0bCEv5cCtgN2z
-PxPayQfpoxLfLuSRoDDlxy7z4Z7DWCESfxXcTZE48JO47SIZxr7/adtea6EU6dK5rnmOwFeonUaF
-ZUUnpsJRzBuam5PeXygG3uaZJeiOAsh0RrSJu+/zeO7bmRRiC8RIpA3Oe/hll2o32LXLMj1wfKX2
-WhK6l/+ld882myDYBfW6G3Cb3b7P2ibJNw/GMHKl1Ur5bJeRvYjEZzCO5ucoGldyJj3LDzmbgJ9m
-UZ2DsOc886CaZTGRTYGF9BFeMTU79VVx3bJ1Dtvy10uosaSzTVPtQuXTo69+T51ZemJ60Nzm7pfl
-OSpBlxwPUF/MUT+gsAYcoZr064xANKfrtJOqzgCH1MnMNWcgShPeHDiXuJqJklUYwoxnCApFpdf8
-IC2QZZa3FnOACK8Yw21iPi8E6xP7hv89EVftwV+JPmxzmmzNunFa+Lw2VV6TOW7lAoj9OrMgVax2
-IXJ8WcUx2Gin2x28AU1vckc7sUwH5MQyx9APfJ02RRpfMq/x8l8HXpiaGkpBq+AHsYX1o4Ol8SX8
-rb1JJZJY6PhUkq1bh0rrzKE782jYbTy7wCNWYQ3p1eG+iXGf2HE6oBQM9MZPKLUwth16IadBFKjt
-ka2fCigNNoqquga0ws3MB1qMq0Y2t3/rcZzWttYESyOkM6ZGGuUzl1wEFkAn0JKR7HzIaTzkBYBk
-CVArCqKr3RY7Pctti+G9g0frea8pVXOpJ3EBoYO88G8xtwEslQSOmHTQNyfwqlnMM64vnwPdnHvm
-zOTdvCQJPHlXTtxrxY2V5tm7X67ONWY6269VW9ZSWGutDWStIPW0d4YJ98dM0TYqY3g/HWyrPN/0
-cmoUUnC3r18UdkK4LiGBZuDGWsWHH0qYcgWWCuJNfzVrvwtZ8YDhVOglrUky6ZdXsNn2eUbQJ9dR
-1XjYRpAdLseDu5fDaBB5utJNtCxsVe0nO6bRc6kLg/2C04r3sJu+8WJJsLQRFaW/KVl5it2SlDYw
-iP2ILGZ5x5y9q7FYoGxQoZBbRaKk+VFX1jtzUyrX4TsxmA/DJx26rzLK8xWDInHNBt3hg9FLUzDM
-X5bpao9Lt/X1Y8LAgZ50c6A0yo41c3Z/H2+nKwb4kT++L+vQj23+6aTJUGWoFczc+QY2KCFhLRku
-uzQ4ND5DuFusbjKKZGEXNg9/0Qmad7Io4ejTUE5uWD95wNmXw3T2W5QvZ27Byxxi93yq/GaWt5Sr
-RX7o+sIipiKY2jSli0Q6MYP9HcB6HFZpq8YIfSPa2Kr1PRBN9i+s2yYKYeaGenvAbQCU3o97K/Ph
-jw1OiASbbbmS8lybjki8HKr/Sql5BqQn7htQE1mYj62/R/538OjH87Myqj2PwQq4LBAZhpPqfZEV
-EWeYK+e3mmzexKdVY+TD55ade/JI2VN2pavx7X7R8yyS/xAP3CM1XznV5Fgb+J5Bpra31Hm99hCh
-7jRFVo9f5C5Bc+P4Tobr5CDd+/M2bMJaXUnsetTy7Vet6VwLgDW9p9oniO52WadA5SrON2DtNuDS
-YJvdU8vzc7ktQqqvLDDgp6YMVWE+bofAK8B/Rz5ZcU4RQn4sBbVP0s/QPH8AyGhRMgG5gM9WNgNJ
-KEsrMDe+ANG6661WoNTqZGCCWO1STiORSznmqbe2KthNWOOuPgqx2rv0ifiEa9R3TmY7GAHzMk8E
-KsEkNGdiMLiwSkMK0w4akDy2G2cMT5mWAiS8ICvuIDk64mrET9gettURS6fD77ksmLpTDonSJgUS
-tcmTl6o+f54rx/E4P9jpb6I3Oj6VOA+dL8OgqAi2G6oH/2/++CQCHFbkhS0NuUuq6DuSP3uwKM0r
-bSro69zuE8dETSkEfUznOLFDUoUEh5MjiIw3a+yOwaCTJP+Zu1nwgSnQT4qsmc2gzs45TTsJ4eBY
-CdfP9r+IffFlFQVeWtCJl5CtNPBidyhXV3yvXEGQiAuOEo0QiZTkpvZJ+aE3x6DU2vLURn9Fukk7
-ushncOF+1IJbkZsU7H0Cb/h0zSHiESzXg5BPHnqSPa/17Y24h/Nd5q7ldqnmsDF9bibkzQ8rJ3JF
-RnfNSHrAz9nicRQGJY6535r6M8nTalTnm7iCw9lfMQAfBZ5LsjBtTUYqmHwEIwktD7V0M4psdtjf
-wt2sjreN/nSvKli8UnTmDeG1vKiX4xYllNaDkvr/1weefiNXRFZS3ov9xPbTk/12ECOqwXfxWypD
-xRLyxoh5C5DVWzNasvULlzG5z/SZBBpQxV/izGV28WLITgO9NrNP1ANSfwowRTEe9eS7ijbTt12o
-R+WzGB5DqMmJKEruvO/mg1gwDKy4+ngq8JxT+M/vb/dKW1G0QKx7MkYb0sEdjR0TIt8KRjhCzKvJ
-Cw5FAawvEJ21fh4ccLWEvhXEWLQ28OeOdH019Q0wVpPi4TcTyDIscpzSl+MQlUhQVnuTB5N7U7Tz
-MD3+/RpHq4aoqjkeRP33JXo8wiQeLXJKIpgDOU2iVa73Zo10rljL91QyjXLbNFRe3vZH0FTB6Cl2
-/MwSvnIeg4e1l24ac/Ln144h2CULKh15TTB45yj5rV+0eFMEdzYgCAK4Bu2kHRua1lqS1mWTkGwn
-BP1yab5MBL1yNptOb5k2myXkl6PFhiFsSRNM0Ol+Qi0W+pgu1mEGeiCN/wNwPIfDteW+uj3A+fdD
-6/CGAPs9XwL1zB5cDcFtjeDb6aZ7mz1RDXcxOVOGIE9mAeK11EFUnPKFICOF6FvERkyi4Vd8RzlU
-OnOXn7PwJSJV63R23sGQCUeLpqERznD1PI5y/VYpwsir3YJag/6dYeRn8HT/nzGCmI0GdKS6+Y+o
-m32DRK4hWwNnECZNUJIdQyNS6dx57nNndx3Zkiky24ptvOuTWqd3NtiMJc8OuTb9FQt1ac30zJEB
-RIt2yU5Ar/Q9BydEQVBsHH1oaG7XKyT8OCbvUBRrWPi6z6DX7IK3c/t6v1VWvHSDZ7eexf4KkaTl
-Qn2/W9jF0GxeZRZEP3FnCP95r6gYN3diFjg8Y6iVMHDS7l7rKOj6W/0pfzqJBzDU1DdQcW7jlSY/
-1ek6eQC7e9r5B/JJkeef9cY54GeZdkhMo703b5clSMBY5jqN3FCXb9XgM2JxQCVY5DdrDg4xxCg6
-/vyDSvrNb9+lxSDT/JTpLEeGzHX4TYMO0sWHH2Fn4X9qV332k/rEWVzNkyjQ2gJHkzq+vn52fwMQ
-y6KAjmdpnjBFX1ym48LH64P7nwHwX2I8m0QZfwU5QZkneyi9moR2frOxj0Gu2w77ykLVTg5ZwqyD
-OyCbWrB9nADKx6iDpfz667EdnE2xiv/D43uMFoLIc0m50eP5XU0pSzSkwxE7PBNjpagwRJgRH7jt
-uPaBwazHC1WK4Bii2/AmDZ20+KnP7N0AnGkRAftn3X+lnWa2xmQECE1BUlNc83QS2+1f/sF+I0zH
-d6Q1s9YRP8lSJcBwQRT5sZ1MXDRpLiKj9Yakz1LKcxITNcne2jTLk2QJmo0hCfMUrIU25yXlDZ8c
-Dt1G4c++7NN9iDRWuk+0w756NQcgXJ8rTnPWQamAONv3YtCsDWHu4M11MR14l/ok7j3cZrwmJBE3
-bxhWEMRoQhKnrpD77bKnXmfZsYamg6XqXj+YkkkosBpBzzuGT9GALE/e89wU9Bila4pmW9m+z5mX
-KlZor7QNUJzQ+BJV0+wBRyjOR65XKrQlzzSrS+OMv7/WGyeCyFGzAR1GQFG2AptII1yUvNuttzdS
-p3fA0AF2Gtf+k7byabdwfVxAxBAyIGAh/pfyocT1k/0cOYZMvaI4GWtJvx7znak1DxkUQFoNOasO
-+tfFds/f+8yX07eSIsGAhvPfzsM9ml0wi7YBTZPH48ETCiNhGNCT8K8HnyTh6tI+nlXlq15YURGU
-/Q1KuWSNInWIDWN/vtfWyYJInoiLLeo5YuhnV5XFMNYBVsPMrKjWz/WYn9JAOebb4G4W843LkLky
-KOi1W96Vz7SxeKVbM4QCeHwZsP+dDNszDLZunTygtaI2bLfPTjhbgmcZZUJ3omUAK3ubqfNLc43W
-ZrLg7lhOV5g6dXcF1Sw5MdICrhk8eJByxEPCKMSpKauQ1AM11JX3RzFG3IMJ/LEfz5BfRe0dxZsh
-qFIl/LKo8t7PPDXwTaaKZ8bYVrd4Y5zsZu2rQF5xicKUW8AFNRfJjmutdVF7uac/DBLb1Gmdl8Bu
-NGSUDzqt3C5xc2L+HbnOWguDpo8ESVuKIYZMyq1EDG1a1XLlfj6+ybGC8Sd2EWmkOlCXobnAg8IR
-vXT2RTAy8beK6Vi2qn7bvYnkJ8mdFN0ijfwz/YPP4TFtHCWfOCSVqh2nakWbvJSxyzVb2tsBCPmJ
-k7rmBsyAevYBKPTN4Dij1AObzB1ZEXY1EV1rTzpOHrw5abxwVZXEhoOjljUdpIo4jwhvv/zhxDet
-xjZL8cBKQfO5Belu2fQbChiu8aopdU5AR2CU6RxTuudnjADs5eJXtVPnjLqaveW2r1eVhcHeHNtr
-abzVfsasiZD/y7zRi2ZCRnVdDRlz42Vq6jtWRv2E5gHg/lsA8+/xs/HLLxWwi9sqEMzkh4mtFd/c
-uJ7NiZRoi+W7I/J/3jJQaE95O0tfStwjoURGgAG1mgPPtUFpxHKTTHRKAHm7BbQbkN/N0r9SVshe
-vhjw1sERx/uLRK2QciYQFta8Em/+nqxqi9xV4+eZ+7iZTJLGkj2CXvkfK0kyDDLvNyXEMEtgBcys
-aANiMLTTqmdiTKYPYhIQow2NtxpT0YrRB1zzwsZ5FUXZMmNNPEVIgCk2MmNmihq5gqDcnSkiSm9Z
-U9LyrQ1mTfwPOIg/6eoDq1/QRIGjk+/GNJsL4yKhdaH4Pd2GHcW/w6a5EoH8gsOJyZc4icM58mgn
-QWnDRFM4Nwh0DCXtPiNOqgW3RB5wsOmhWcQDFtuL3E/B/upIEP/a9z7ta6jCHEbPk4r5RaqEe3id
-xGcUlgxmzRSBiLH5Xpdll7Az2Gpso9r+in06GI/rqsOAoGPcv3zLLOXjdafa9ozAW6JdTyp2+Au5
-jpOVzQv2ZDQ0BghcXTNLOhJmE/AT
+namespace App\Http\Controllers\Laporan;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests;
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Yajra\Datatables\Datatables;
+use Response;
+use Session;
+use PDF;
+use App\Models\RefSshGolongan;
+use App\Models\RefSshKelompok;
+use App\Models\RefSshSubKelompok;
+use App\Models\RefSshTarif;
+use App\Models\RefSshRekening;
+use App\Models\RefSshPerkada;
+use App\Models\RefRek5;
+use Yajra\Datatables\Html\Builder;
+use Yajra\Datatables\Services\DataTable;
+
+
+class CetakSshPerkadaController extends Controller
+{
+	
+	public function printSshPerkada()
+	{
+		$sshperkada = RefSshPerkada::select('id_perkada','nomor_perkada','tanggal_perkada','tahun_berlaku','uraian_perkada','flag')
+		->get();
+		
+		// set document information
+		PDF::SetCreator('BPKP');
+		PDF::SetAuthor('BPKP');
+		PDF::SetTitle('Simd@Perencanaan');
+		PDF::SetSubject('SSH Perkada');
+		
+		// set default header data
+		PDF::SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 011', PDF_HEADER_STRING);
+		
+		// set header and footer fonts
+		PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+		
+		// set default monospaced font
+		PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+		
+		// set margins
+		PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
+		PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
+		
+		// set auto page breaks
+		PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+		
+		// set image scale factor
+		// PDF::setImageScale(PDF_IMAGE_SCALE_RATIO);
+		
+		// set some language-dependent strings (optional)
+		// if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+		//     require_once(dirname(__FILE__).'/lang/eng.php');
+		//     $pdf->setLanguageArray($l);
+		// }
+		
+		// ---------------------------------------------------------
+		
+		// set font
+		PDF::SetFont('helvetica', '', 6);
+		
+		// add a page
+		PDF::AddPage();
+		
+		// column titles
+		$header = array('No.','Nomor Perkada','Tanggal Perkada','Berlaku', 'Status');
+		
+		// Colors, line width and bold font
+		PDF::SetFillColor(200, 200, 200);
+		PDF::SetTextColor(0);
+		PDF::SetDrawColor(255, 255, 255);
+		PDF::SetLineWidth(0.1);
+		PDF::SetFont('helvetica', 'B', 10);
+		
+		//Header
+		PDF::Cell('150', 5, 'PEMERINTAH DAERAH SIMULASI', 1, 0, 'C', 0);
+		PDF::Ln();
+		PDF::Cell('150', 5, 'STANDAR SATUAN HARGA PERKADA', 1, 0, 'C', 0);
+		PDF::Ln();
+		PDF::SetFont('', 'B');
+		PDF::SetFont('helvetica', 'B', 6);
+		PDF::SetDrawColor(0, 0, 0);
+		PDF::SetLineStyle(array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => 1, 'color' => array(0, 0, 0)));
+		// Header Column
+		$w = array(10,30,50,20,50);
+		$num_headers = count($header);
+		for($i = 0; $i < $num_headers; ++$i) {
+			PDF::Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
+		}
+		PDF::Ln();
+		// Color and font restoration
+		
+		PDF::SetFillColor(224, 235, 255);
+		PDF::SetTextColor(0);
+		PDF::SetFont('helvetica', '', 6);
+		// Data
+		$fill = 0;
+		foreach($sshperkada as $row) {
+			PDF::Cell($w[0], 6, $row->id_perkada, 1, 0, 'C', $fill);
+			PDF::Cell($w[1], 6, $row->nomor_perkada, 1, 0, 'L', $fill);
+			PDF::Cell($w[2], 6, $row->tanggal_perkada, 1, 0, 'L', $fill);
+			PDF::Cell($w[3], 6, $row->tahun_berlaku, 1, 0, 'L', $fill);
+			PDF::Cell($w[4], 6, $row->uraian_perkada, 1, 0, 'L', $fill);
+			PDF::Ln();
+			
+		}
+		PDF::Cell(array_sum($w), 0, '', 'T');
+		
+		// ---------------------------------------------------------
+		
+		// close and output PDF document
+		PDF::Output('PerkadaSSH.pdf', 'I');
+	}
+	
+}

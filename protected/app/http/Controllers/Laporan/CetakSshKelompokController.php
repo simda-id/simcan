@@ -1,115 +1,135 @@
-<?php //0046b
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo('Site error: the file <b>'.__FILE__.'</b> requires the ionCube PHP Loader '.basename($__ln).' to be installed by the website operator. If you are the website operator please use the <a href="http://www.ioncube.com/lw/">ionCube Loader Wizard</a> to assist with installation.');exit(199);
+<?php
 
-?>
-HR+cPwiQSQOkjqcADzlaXGhLocpKTCufO/cstQwu4XGjvUgnICASc5oQB9dPtHC9RllrBj6hbHK/
-4GZho5k31KmlmD2A7dGUdyQ8XYzMqFHDlKArvckrnKfu8VopKieAl8JY0f4vKIEP6qvt+1LKFJwA
-Ni4MWMFDyY8a5Km0K1u5pxkYOlSER5aoqwCxGUZOASOjeXG8j0FzTlAP9B8N3+ONVb3sXSFp+rGp
-X0ZtOPfUQ5wBVj5aJO8UTJx+rcRaNVG8fGxEmDDcSI4gfnv3XXr9RA2FDFHaSiBgISLYpfCPkZnx
-5TzeRwxfA1ZRq/NkNelB2yn4Wob4YGFUknRXZTMD+5cNmgkUFpETwQd6U8ckjfJTn/FyodF1I316
-PW7gMAgfCHsvDtj8M1NukvzcHihrU4bcWWL3prvlaOSXqNAciM/+ir9tuYHoRXM5gHKog47cdgi0
-/eX2H3WhPVaSWCua9hG5RN4N0OpNte+/UkLnZndBBYApMGuUjLF1AVZLH9cMlO6xXaoeLLXrM//A
-+XbYweIP7bQO3m6DwRulp16/zTfbJb21oaLO4D7GNM4f3XhYrlhl3ulKpbWqJGPcqds3hbDtaF4w
-Rob3HzxJ/g+N736mq0ABtEznygXgbIwSvTrC4wieCgoNiw1vd2V/gX4oYJwCkwbLoJfCLMSHMdVL
-Yk10kVOmOsxwNzno7F+tkxHjm5Ny3seMA5XwYNmh9qXv/hduE/aGKq8Szgy9Ci/Siatn1rIocQ0K
-mm2uj0Ex9vZtnvsIx9RJ1kUWFy+x5HLeJ+VqhKK6NgUo9tMJreSZ7/jXz/6SVT2VLCiPJ+baeLE3
-peWEJStue7I0MCLMnkyDEM6KQ8ys4v4/lqJyHqB/u2VUs49ZQJUVQMcj/0t5FpZyCVgHPEOBYzz+
-H3b9OsOHTGCHTvlbgSFKg44TioEC3/8JqE56s1yrPPEz2MAh83tpAhfGBOOAysgLRKGZgnUngpi7
-ljsB877mmEDh6xMEhRfEWccSPlUPY9w/GrJGqCo03wekpgtguoTGJOWx+WPOwQNY7XUCDQJlYxGx
-/J2ee9IcdKuNHnvFgPi0j07X+GV5lGlJiHRMb6qsHiSarMbcOdDW3ZrXpMOaR9q1JLppHWqsMvCa
-3J4OsX3MlPbFadZT1g97sArd1GYmKDhWkWVEnC28bWDys6aKSepe5tMBsq0vvImrNDKkSE1W/t51
-igvkGt3P+/M8pVjJwGPKGATuXjdecvqHIPsz1Lz62cCJxhXXz/6im822XSJ0ioX778HjrW8kzCU5
-VpgtrUDeR0jBsQoepI9iFGyfr4fM5xLlwc4d++kjcELCKuTBfC66jnzS//BKZgB+HIxZFg//q+j7
-P3+63bWkwfB0H2dPNZ7BmxYr6jqa1v04YaUZpGaeeV7y+gVOVZAvWICdac6eHqT9C6t585GH4eZl
-eLQgPoxDIcRLl8kHNPLtYtgv+boXps1dt9P3uyKiJm+T8fNL8a8PoSKBpwlT9lAXRlO7oXUAp4Tk
-Bd9X5IbeMAQb/G5UH9oZ5zKWVPvEzpNQZRPy3apgQN6voZMz7FzRKbg08ud6INTF/diZS1xdvtQM
-6UhcVpBPIyxBPb1KQxpOg7sygP17+B+WbdxhPcqC/fCWSDdCVzugoJ/6Yzt39Zzc4GEQYQLGr1bD
-6lPQAfQYowOo7cGhdJt/ITWo1gx4d1NESvKhJtAN8bZrBIKJXHzThPt81ZANOl3whjP/XFAVRo0g
-yGuQLghoRs7QodcGm94diPvoKxFxy+nTjkeXzQf8TFEY26M3/IJuQEe5MgQIWFMEgFIjuI4rTFhd
-asbXOs/7cM3oVI9rFsX+4xl8QxI/vA0H3AiqqD+aWP/U6whaE/kLoFMk6lhynW959Ht4ucHwhmO4
-waVD/wMSt5CbxPW8TLq0zQqh+s3a3RqqqBytTGTK2r2pM2HqUNiTfhiMAlvDAUULm1jvn8jqSDMv
-UvQifXIPtvll+cMMEU1PZA4iAIOB2lh2ZrqBOPomNqAHC6Um8BjA8maPAOYBLrGYKFM7tAVD8qkb
-TSGzh4mRfKqA4nIVf9wNOjFyN/wrVtDBPnijWJTZcShdL741GlNcLVLC7d7A2avrSWAV8orfsdwu
-+DtmibXA0iIz/WxikaXVvHImGnv9831pE2uzP8odndzV4QXP+1UgpV0bj8w5A4e7uTvIbVJqI9jR
-ulPCjvpVPSwUYQuGMue2Dwb6AwmjkV/66iSxWzohPA92KiBZ9bDZ8C2F0r47QxKU3oOl6nGOv3Xc
-pNnO9YBfZ2JixwKL8Vbvy3cDGlXHt1stiL68muznpQxMBaJm8BeOUGH/E+HdJ/IGbK4Q40kLp+2C
-1ZPEPE8cMAUc0M4U5x2GCPQ5V1LNH7eHIzdTP7TvgKAGGsOtiPhRs0S11gHLQy9GEtntqkRLeiiU
-g/NJiN+RFiUcB8VKlAKWbrmKTN5JOgDxzlppfN3aGIWBbo0eKDf8o8VbU2XpqZxFUNANLfnua8KH
-BpMHsrL21YgjHiDmKF+aam8779qWgwfivxOL9w14ytfceND2EOoYzJQ+TllsNC+x6mmYWfjMuzrw
-z0B2YAn8QL5IjWsCdsr5qtk29huZT2aFQOdxTGaWyOTd4EcLM6ScUQbLagpJy/8nD9MPlhgCOiRN
-mIzKOdNj6BNJuTEonfRG3WUeDS+95jQ8W70psR8h5Rqv3edFb36N6AB9LN15J5B1KuLPMxKuXoLm
-XCY9kjJZ84cMyST0BoCHoZSTs7HuDUaKvvjSNLIum+JvA6QUprXN5RcZpXbnnuYAvXhaKus3/dPq
-zfvPK06MRyfoeMdY3cC8U0PoIfms6MpOVXfB15/S4mCFg/yz4oCYw0pmlJlS+iLAUKk8rnLQ/uN1
-OIL+hnUkXTw9OCe5FgWOeaopeFWtmKO0G0stS9CCFfPxuP15/tnpWH5DQ0VuvR0VdYRv5oYCa/MM
-SpEN0ULU8xP7Qu9Ta89Uz/ufXVp/h2u0wsMbBRokAb0bnODBe41DALPKWuuBjbe2xm1T8I5TtQTp
-OI2SPKPluh+Q2zEgZ0mX32o55x0i6Gl+ntNfO9+OYLa16NCuYSI3Y7rlLT//xi/i/SLOOyU7ds5q
-QSmQ7kimtwNQrJBmoFfob4vzFdLHNifQ9F9r56UFxq5FfhvkGYbJ3SofGVRjs5nHmojSvGKNdYZU
-wy9KVnJ96gG11QtsKrIR/Lvvrl1cE9xd23gPigEfkVOXls2jcMHXSbjEUDvHGvZrTx2Y3il9aXyl
-hleszgNUXOa5nyYmNBy/9MLvcPmB7DVyBTQrs3hAqx39Ney9odV0wafgi1LAgydNJMn77RdWcODK
-FOCLLCfBlTAjHhKt0fZBlyd5rxZ+Mz1BArhKo2pYCVZ9uNX+B+4VkO61TXWjpdAF/v9TKo6k/zNh
-sNVc/H5FZCOrNoyjKA0jhsXUwyWmZdHpSq9EFmLx96Y58DduILpq2iS0JYgNAEZnARr+kMFZ7hP8
-l3WWWUE9Xu+RkLy0C6Hi8kz+mJyVefS9ASW5YzdtDSaFUowrZMK0hYle15KWDKpc8CEGw6esQEPl
-MHNAbvl7hvVE4iXdOPzdAAaiaR31KfVvxkxJNDQwhN2SrsqgKT51WlaclvlmLuI4jm3MXHlSwg4o
-PraX8w5Z42IS8uncSOAUxFVGng+Y30aJxaTuoo2MPYD2Oyx1aeLLpXGXGab3UsF7anHJ9RNKmX/0
-KENXsvd14qXRqFQQe91EF+Tt2t70/mBmywSa7br0iJd7cFdOB+HF4pAOSJSxm2hEtLEImV86Lks7
-3NIfQpBVCugIR76FkgKCK7kD/KlxzGOftYtJv4b/biGo80y4bs6ubSFXNV4X+dum0TwGG0uHfuB9
-uxlQUFmL3Ko9VxKldl6EjpC/ue/vtuvauj4Ysl07lNwxsc6rAxRSaFrs3yqCH1h2r8sWhNJrSdYb
-FYRQKV0YL6LNXbBXZVtFwX5vHhyICHboaxngSAYM/sZ5A5Vvk53ffgKxNxybvsUn8Z+8h23VRKab
-h5lXaakx+5lisSydeFlphge3P/GfUysh+ydd7csTS9IuyYAjggrorDG6nmfy7Jum/14xlYokIUqv
-Pzg+qaIvzeBKf3zzy8k7qD2ZeZy+mtMpERXtCrPOwggeqUL22/4wT49BFngLHg3vMRVMIpVQjCck
-MnNd2rNS8u1nAITO3ErmqoAnVDLb1PTmEyibnr3XQShMfg7f9TEh7DOFprBJfkeGqWgBub22V82i
-8DNaLZEQxXOCk28+S2v9nyeWk6k/pxae/BxdLk/eosfHa14WEN/ASp+n+FVjTn0T+F5U1av4HMFl
-anGEUKLCgz5mRLAQt36tlTRYcKR9yqilGQxnn21Wr3Df0IMgud2m9a2/d4xzzth0NXRVSQntt6hp
-OsQUCzuRupbpgHcaScS2lJ8b2s3LkzvJeLxW6b+eTer7Jdhz3fRdPG095D2yivxdnssq0eh6JprY
-V3h/zd1MZi8n6AWIjxjvhowqXK/ciNqhTam2x8GtzVZnHvLVHNKAEr7EESOD7ZhJs9J/tqdExY7b
-kiq/FY4E+uS+Mgc1OiyQqbcHor1dIFw0rLNDtAapeT+XT6KxagSOhWP5fksK6xxAZZHilAezeOMl
-xfPFdI2imk6ooMF70Pui6nkaB0a0KwlmWi5VkYZBHYr2aoXgfOLFZTpnLM3Eqvz30mniKDDtoSzi
-ZcDtFOodH0YrjO8WVR54KoyYRA7ETcP2zrCid7TmLkfpS5xqaU91ERWRHly94TXMnV+7SZTZJU24
-crUy8Fs0edJQg491BEIdO8RITYD7fDXW9kcFd6xJKFyNmQUTj3qZA6kpsVDVZUBNo5GQq/1e2LmS
-5GxLUf5Ew/KTBk23VHUStNPEIEKWotnoUiV3/6uLxEtXEQEZ6Oz/zERO73i60bGoyYux34zX8dVb
-OU5d1TI9FZYiiG34GiI0RLD2M8q5g7sJ/DpE5HGr1x7csxvRn1gVs4JsBq5pP6HcMi7deuZv8rC9
-yg3raUKP5nHxZOfka9d2cS9CrSYIyVBuwgSwGxcweyn9VZS1963GUGWFnZldBlhNqapExPiUYayY
-d4gDlOQwl95jws0gYsoz1CyviGFIzHFK8iAP2raEiboM0rTXN/SgcnBTFV0bGSajch+RKFsomIkL
-YvC//mUbeb5Y59ULgTx4THp+4Jd42dgY8CtakcgoJaO3+KkzT9ap/jXwfoBv6dZ62e0ghAuRDnX5
-N2alM/Etmprg0gTYec3ZGXtMxHPnEab1kfgQVPyQgmpAai5eqB8RL/VdZ6BKQs2ZMweFKbKbyMYg
-id19LpWKLBFdMu95a8FXsXz+di13AI8mXV2ho6OYKn3ddtn5rYr6P26A0ijBGsr8qa2s/7vjNWN6
-KDNzy7Zlbm736Nj7skkVqJLP0QGmzU7j6CgS8vlUAdNAqfnix0wpLiXAtjEe0vShcrGnUebPkYvk
-d8wSXsW7nXqolXo3nVanL+1s0q9Sg+S0pisVBp3C7pl/slRvbCejNFFUpnUhyCXpaSrPLAM7ZzYk
-Ik669L2Pjf25YUyPRK2Pk/PKgQs+POkn4ZIPDM0qawzVQc1NnfOO0c278oa6DwulGry/G2v864PY
-t/HOFr83D9uTj4PSaEhzhji1bTOFRc3/IIMIEFkCZt6B6Z7b8w6WzS/WGN6T2+DNvW1xsUgKpC6w
-6x9eTv4RPG8/TX1Or9YtcHuQbwieZCt57kpAfHvOaH015VkgZYpoXPJqJHqMOU/Z20dQAxCSRoOG
-guMSdPMgIfWKqvzS2+b7E/1BRY85hKEUjrQYbn6syzMCcK9qMnERrNBQdaUOw9J1PCdqmvcS9K5K
-/0o+Fl+t3pBg4KkS53ua/VlVH2yk8n1cIcmAQSUpqBLC0KjrqL0g5hZEUg7K0ifN0aDrArPifhx1
-LlSLNF4ugauTHZ+ZgI32tutIqaq8KDf4SYDQcUSneE9+zOJ+HPFGmmH9yxTdhUIf7Jam6Zq3eF5g
-5c8pn0rlMeUwz2SnxrL9yloLk+94vvf2/MZQ/C4YhIxcyYRXhJhB7/Abz7HS1OXvmI2gTZ4V7R3Z
-TxeU+Ggns1foXh44b8uoJNeetHxJHdc7o4J/s9IMMzrhPlm3cFadXTVWMnKMDTrnA+DxFU8ptQJk
-vfdZA7zCN17+anJJcabLevO74/KUJDMlmM3NROQV2dWM/xkHph7g7k/DDH6PQH1Foq97UqY4P9uF
-WkqHJQi7C4nklxP94DcoKQEBEDwGvH/qI4vAB/kE0TKnSsKdtSt1OxY21rQXmgk2hGtxaTA+7how
-XcfQ6bQj4M3VPn/ZEvU2rrdG19IBQJAC7y+rS1rCR72l7jJodaq0zZ5PDSUeimWrAqzGaXo38ggI
-VMmwwY78YiBB41F9mUXKOwZqW6iaYVYv5MWGT5RWnChoUes98+9O9hbVHv/ZIMnfNS7OHopb7Zy1
-QmDsk1e04dBop+V4eiXzOY3puq1MM7cI1E1gkjWBb62z2CoDeFO+nOy9QlQxGz1ilTozqDAu+pwB
-62LBkH7RIaW4S7NxiKU6MTC9zmDVQoHC7Pcr6sRBv/SoMPTUg1CSSpfJ1CCELehAYic6s/UnJzZd
-Xr7H/32A80pGvdzgTF+7+R/6mNrlqTOrf8Fzmg2nkrzhBlo6dPUXbWjlhGmN74aVXl+9Urf2RQMh
-xH/fG0GtGFKQm2iauhfiRTUX/HZJqH2tlrViJ1Nq/sat5RwuUKV67HmPxDVMmkJ4NrMSp+nfTjvL
-ZxgTjivPal1AfD2WtpU9FM2SkLKkydO08prfS8rmoEE5Te9kSYyGxrvoFO6e/N5A3H+l5zKHaRma
-8nNFV3G8xY/cNWnYxM8LuxyNuWkh67jD77JKUop1O5wB8lFLDe3TlsTdOi4IjIbtBgt6hg8kyWxD
-Xyz/Q1qQe1FbZG1ESvnmSVM7e6dKxfpndNAZOYf9HSDOB9XGw1Vg1Iqa8ayujVi8lv+Zr83GU/hp
-tAYqFin7V4J/YIjEinxGky6qrRejnUpYaxEm9Nmwba3xbIJdtN1EsireSjs8YXtQRayNZvP85nb4
-C7XN2+g9nfMgTz651/Tq+y8r8DWRZg1Kb+jIP8yt3+9l/o1S3lsiznxuo0nRFSzIrP8hom1u0HNM
-5aYKcSNS7oxhi59XYnLdOIF7d9fszYpxvaURdQySGmUqU+7vS1KKxzhIODyaqg48n0jycOIkHNZh
-j2dS92bpPuPg5WhNUEKW/v4UmtqMbt9wUW82aQ2W0gOobxOT5VCAjvnNRlrN46SucJcP846+/Eu3
-gBmL+BJnoCD2uSJmrOJoM+pYn5VU1WM+b/DzL7PSnC7WfF47iaI9XQUsCKapFydw2kKenJUh6H01
-+jKwCF/QRs80nd3HhP1kPF5oH9bgsFBeMtKG3vJuD5MnPvEamcpoAfdiL7FUVvE3ySKj9ysKDQWn
-4isxahvhdFE1M+Djuf+K8WQnUaj/NY5CsZ6kUqWiKN1oRH631zUL5zCfyVEtMao5/kst7rWeqenB
-OnOcrYeWfEJimR3opwmsqRmaPkFVrAcE2ViSaMr7I2NmZOcnRdWB5CoCV3rho3+FbofBb+qRejbT
-LjML7sAQp7wUaqBAOy4SlsVlm8sEh96xI15j7Z+9mnpTaqrmN65NWsVrVat2zqvBiCOqKOGsxewI
-5sTA/934t5bnDWssPAneA/bD169+ONaDMSKAa4016skH3B7llNUT+dPZXwJhbNb+bFpX+d9hNbQP
-53T3NWzvYkKTOhQ8fyEgFRi/f1e/nkLV/V3sbBhSaGMS9irqsoU5kTPy2MIzZgo+vmaklyi0h/JX
-CFBWDkYjTSESlcbKk7P2DNj+OPrFrIQ16Rmxbdn+Bx8IC+HGf/QyeB/pdrii2TEaQ3qHxHhF7xU3
-8h07np6E8pkSlfdLXklB/8Os1axt4//BnNE25R5zvFMFhkBCh526mupV5Sj43FBE9/MoQr/2UDCE
-1I3AIRRR8mNYHosP58q8wXeas24ngSU3ND6uk31thUXVnshp3pwrj1vsA58WGvHFxwi/FHkdyEWa
-61Nd3BAirEQ1d58UFiQ1ahSm1AncU0cHU7SJfXZHu7HIx0GKMd1kMpJYK70ZxwR4di1jNrS6S1+m
-CI3/26GXBubKq0IMXvTy2IP+eCJAT6n3NtdqxHZKjFc8cjbz68rZpQHcsBcrhSW8pNM5cORZnYFY
-MQsfiB9nlQYCtjEqkcJ87RrSsaM5tU6uXPoPMTBw4tCkgfIXb+j5AzRAir8Luprf+UyzRTk/UU1r
-OGuaIEdCLNtamqdd9RUPW+DvwN+fqGYf7vtzCko7ZGLouEqgj977WRye0mWCDkneO46k2iZzGStM
-E0Fai/QGSmPXuuAYhlsHegyfZA7MfCAAw0swq25+geWYwd/lCvLf12y1E9tIi0Ipvk+ZYm==
+namespace App\Http\Controllers\Laporan;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests;
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Yajra\Datatables\Datatables;
+use Response;
+use Session;
+use PDF;
+use App\Models\RefSshGolongan;
+use App\Models\RefSshKelompok;
+use App\Models\RefSshSubKelompok;
+use App\Models\RefSshTarif;
+use App\Models\RefSshRekening;
+use App\Models\RefRek5;
+use Yajra\Datatables\Html\Builder;
+use Yajra\Datatables\Services\DataTable;
+
+
+class CetakSshKelompokController extends Controller
+{
+
+  public function printSshKelompok()
+  {
+  	$sshGolongan = RefSshGolongan::select('id_golongan_ssh','uraian_golongan_ssh')
+                    ->get();
+
+    // set document information
+    PDF::SetCreator('BPKP');
+    PDF::SetAuthor('BPKP');
+    PDF::SetTitle('Simd@Perencanaan');
+    PDF::SetSubject('SSH Kelompok');
+
+    // set default header data
+    PDF::SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 011', PDF_HEADER_STRING);
+
+    // set header and footer fonts
+    PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+    // set default monospaced font
+    PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    // set margins
+    PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
+    PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // set auto page breaks
+    PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    // set image scale factor
+    // PDF::setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    // set some language-dependent strings (optional)
+    // if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+    //     require_once(dirname(__FILE__).'/lang/eng.php');
+    //     $pdf->setLanguageArray($l);
+    // }
+
+    // ---------------------------------------------------------
+
+    // set font
+    PDF::SetFont('helvetica', '', 6);
+
+    // add a page
+    PDF::AddPage();
+
+    // column titles
+    $header = array('Kode','Uraian');
+
+    // Colors, line width and bold font
+    PDF::SetFillColor(200, 200, 200);
+    PDF::SetTextColor(0);
+    PDF::SetDrawColor(255, 255, 255);
+    PDF::SetLineWidth(0);
+    PDF::SetFont('helvetica', 'B', 10);
+
+    //Header
+    PDF::Cell('150', 5, 'PEMERINTAH DAERAH SIMULASI', 1, 0, 'C', 0);
+    PDF::Ln();
+    PDF::Cell('150', 5, 'STANDAR SATUAN HARGA KELOMPOK', 1, 0, 'C', 0);
+    PDF::Ln();
+    PDF::SetFont('', 'B');
+    PDF::SetFont('helvetica', 'B', 6);
+    
+    // Header Column
+    $w = array(10,10,10,60);
+    $wh = array(20,70);
+    $num_headers = count($header);
+    for($i = 0; $i < $num_headers; ++$i) {
+            PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
+    }
+    PDF::Ln();
+        // Color and font restoration
+
+    PDF::SetFillColor(224, 235, 255);
+    PDF::SetTextColor(0);
+    PDF::SetFont('helvetica', '', 6);
+        // Data
+    $fill = 0;
+    foreach($sshGolongan as $row) {
+    	PDF::Cell($w[0], 6, $row->id_golongan_ssh, 'LR', 0, 'C', $fill);
+    	PDF::Cell($w[1], 6, '', 'L', 0, 'L', $fill);
+    	PDF::Cell($w[2], 6, $row->uraian_golongan_ssh, 'L', 0, 'L', $fill);
+    	PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
+    	PDF::Ln();
+    	//$fill=!$fill;
+    	$sshKelompok = RefSshKelompok::select('id_golongan_ssh','id_kelompok_ssh','uraian_kelompok_ssh')
+    	->where('id_golongan_ssh','=',$row->id_golongan_ssh)
+    	->get();
+    	foreach($sshKelompok as $row2) {
+    		PDF::Cell($w[0], 6, $row2->id_golongan_ssh, 'LR', 0, 'C', $fill);
+    		PDF::Cell($w[1], 6, $row2->id_kelompok_ssh, 'L', 0, 'L', $fill);
+    		PDF::Cell($w[2], 6, '', 'L', 0, 'L', $fill);
+    		PDF::Cell($w[3], 6, $row2->uraian_kelompok_ssh, 'L', 0, 'L', $fill);
+    		PDF::Ln();
+    		//$fill=!$fill;
+    	}
+        }
+    PDF::Cell(array_sum($w), 0, '', 'T');
+
+    // ---------------------------------------------------------
+
+    // close and output PDF document
+    PDF::Output('KelompokSSH.pdf', 'I');
+  }
+
+}
+

@@ -1,160 +1,172 @@
-<?php //0046b
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo('Site error: the file <b>'.__FILE__.'</b> requires the ionCube PHP Loader '.basename($__ln).' to be installed by the website operator. If you are the website operator please use the <a href="http://www.ioncube.com/lw/">ionCube Loader Wizard</a> to assist with installation.');exit(199);
+<?php
 
-?>
-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
+namespace App\Http\Controllers\Laporan;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests;
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Yajra\Datatables\Datatables;
+use Response;
+use Session;
+use PDF;
+use App\Models\RefSshGolongan;
+use App\Models\RefSshKelompok;
+use App\Models\RefSshSubKelompok;
+use App\Models\RefSshPerkadaTarif;
+use App\Models\RefSshRekening;
+use App\Models\RefRek5;
+use Yajra\Datatables\Html\Builder;
+use Yajra\Datatables\Services\DataTable;
+
+
+class CetakSshPerkadaTarifSubKelController extends Controller
+{
+
+	public function printSshPerkadaTarif($id_sub_kel)
+  {
+  	$sshGolongan = RefSshGolongan::select('ref_ssh_golongan.id_golongan_ssh','ref_ssh_golongan.uraian_golongan_ssh','ref_ssh_kelompok.id_kelompok_ssh','ref_ssh_kelompok.uraian_kelompok_ssh','ref_ssh_sub_kelompok.id_sub_kelompok_ssh','ref_ssh_sub_kelompok.uraian_sub_kelompok_ssh')
+  					->join('ref_ssh_kelompok','ref_ssh_golongan.id_golongan_ssh','=','ref_ssh_kelompok.id_golongan_ssh')
+  					->join('ref_ssh_sub_kelompok','ref_ssh_kelompok.id_kelompok_ssh','=','ref_ssh_sub_kelompok.id_kelompok_ssh')
+  					->where('ref_ssh_sub_kelompok.id_sub_kelompok_ssh','=',$id_sub_kel)
+                    ->get();
+
+    // set document information
+    PDF::SetCreator('BPKP');
+    PDF::SetAuthor('BPKP');
+    PDF::SetTitle('Simd@Perencanaan');
+    PDF::SetSubject('SSH Kelompok');
+
+    // set default header data
+    PDF::SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 011', PDF_HEADER_STRING);
+
+    // set header and footer fonts
+    PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+    // set default monospaced font
+    PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    // set margins
+    PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
+    PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // set auto page breaks
+    //PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    // set image scale factor
+    // PDF::setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    // set some language-dependent strings (optional)
+    // if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+    //     require_once(dirname(__FILE__).'/lang/eng.php');
+    //     $pdf->setLanguageArray($l);
+    // }
+
+    // ---------------------------------------------------------
+
+    // set font
+    PDF::SetFont('helvetica', '', 6);
+
+    // add a page
+    PDF::AddPage('P');
+
+    // column titles
+    $header = array('Kode','Uraian','Satuan','Harga','KD Belanja');
+
+    // Colors, line width and bold font
+    PDF::SetFillColor(200, 200, 200);
+    PDF::SetTextColor(0);
+    PDF::SetDrawColor(255, 255, 255);
+    PDF::SetLineWidth(0);
+    PDF::SetFont('helvetica', 'B', 10);
+
+    //Header
+    PDF::Cell('150', 5, 'PEMERINTAH DAERAH SIMULASI', 1, 0, 'C', 0);
+    PDF::Ln();
+    PDF::Cell('150', 5, 'STANDAR SATUAN HARGA TARIF', 1, 0, 'C', 0);
+    PDF::Ln();
+    PDF::SetFont('', 'B');
+    PDF::SetFont('helvetica', 'B', 6);
+    
+    // Header Column
+    $wh = array(34,58,30,30,30,30);
+    $w = array(7,7,10,10,58,30,30,30,30);
+  
+        // Color and font restoration
+
+    PDF::SetFillColor(224, 235, 255);
+    PDF::SetTextColor(0);
+    PDF::SetFont('helvetica', '', 6);
+        // Data
+    $fill = 0;
+    $count=0;
+    foreach($sshGolongan as $row) {
+    	PDF::Cell('40', '5', 'Golongan SSH', 0, 0, 'L', 0);
+    	PDF::Cell('5', '5', ':', 0, 0, 'L', 0);
+    	PDF::Cell('100', '5', $row->uraian_golongan_ssh, 0, 0, 'L', 0);
+    	PDF::Ln();
+    	$count++;
+    	PDF::Cell('40', '5', 'Kelompok SSH', 0, 0, 'L', 0);
+    	PDF::Cell('5', '5', ':', 0, 0, 'L', 0);
+    	PDF::Cell('100', '5', $row->uraian_kelompok_ssh, 0, 0, 'L', 0);
+    	PDF::Ln();
+    	$count++;
+    	PDF::Cell('40', '5', 'Sub Kelompok SSH', 0, 0, 'L', 0);
+    	PDF::Cell('5', '5', ':', 0, 0, 'L', 0);
+    	PDF::Cell('100', '5', $row->uraian_sub_kelompok_ssh, 0, 0, 'L', 0);
+    	PDF::Ln();
+    	$count++;
+    	$num_headers = count($header);
+    	for($i = 0; $i < $num_headers; ++$i) {
+    		PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
+    	}
+    	PDF::Ln();
+    	$count++;
+    	//$fill=!$fill;
+    	$SshPerkadaTarif = RefSshPerkadaTarif::select('ref_ssh_perkada_tarif.id_tarif_perkada','ref_ssh_tarif.id_sub_kelompok_ssh','ref_ssh_tarif.id_tarif_ssh','ref_ssh_tarif.uraian_tarif_ssh','ref_ssh_rekening.id_rekening','ref_rek_5.kd_rek_1','ref_rek_5.kd_rek_2','ref_rek_5.kd_rek_3','ref_rek_5.kd_rek_4','ref_rek_5.kd_rek_5','ref_rek_5.nama_kd_rek_5','ref_satuan.uraian_satuan','ref_ssh_perkada_tarif.jml_rupiah')
+    			->leftjoin('ref_ssh_tarif','ref_ssh_perkada_tarif.id_tarif_ssh','=','ref_ssh_tarif.id_tarif_ssh')
+    			->leftjoin('ref_ssh_rekening','ref_ssh_tarif.id_tarif_ssh','=','ref_ssh_rekening.id_tarif_ssh')
+    			->leftjoin('ref_rek_5','ref_ssh_rekening.id_rekening','=','ref_rek_5.id_rekening')
+    			->leftjoin('ref_satuan','ref_ssh_tarif.id_satuan','=','ref_satuan.id_satuan')
+    			->distinct()
+    			->where('ref_ssh_tarif.id_sub_kelompok_ssh','=',$row->id_sub_kelompok_ssh)
+    			->get();
+    			foreach($SshPerkadaTarif as $row2) {
+    				PDF::MultiCell($w[0], 6, $row->id_golongan_ssh, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[1], 6, $row->id_kelompok_ssh, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[2], 6, $row->id_sub_kelompok_ssh, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[3], 6, $row2->id_tarif_ssh, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[4], 6, $row2->uraian_tarif_ssh, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[5], 6, $row2->uraian_satuan, 0, 'L', 0, 0);
+    				PDF::MultiCell($w[6], 6, number_format($row2->jml_rupiah, 2, ',', '.'), 0, 'R', 0, 0);
+    				PDF::MultiCell($w[7], 6, $row2->kd_rek_1 . '.' . $row2->kd_rek_2. '.' . $row2->kd_rek_3. '.' . $row2->kd_rek_4. '.' . $row2->kd_rek_5, 0, 'L', 0, 0);
+    				PDF::Ln();
+    				$count++;
+    				if($count>39)
+    				{
+    					$count=0;
+    					PDF::AddPage('P');
+    					$num_headers = count($header);
+    					for($i = 0; $i < $num_headers; ++$i) {
+    						PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
+    					}
+    					PDF::Ln();
+    					$count++;
+    					
+    				}
+    			}
+        }
+    
+
+    // ---------------------------------------------------------
+
+    // close and output PDF document
+    PDF::Output('PerkadaTarifSSH.pdf', 'I');
+  }
+
+}
+

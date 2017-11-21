@@ -4,7 +4,7 @@
 <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script> --}}
 
 @section('content')
-  <div class="container col-sm-12 row">
+  <div class="container-fluid col-sm-12 row">
 
         <ul class="breadcrumb">
           <li><a href="{{ url('/') }}">RPJMD - RENSTRA</a></li>
@@ -29,7 +29,6 @@
             <div role="tabpanel" class="tab-pane active" id="visi">
               <br>
 
-              {{-- static --}}
               <form class="form-horizontal" autocomplete='off' method="post">
               @foreach($dataperdarpjmd as $datas)
                 <div class="form-group">
@@ -37,12 +36,11 @@
                   <div class="col-sm-7">
                     <p class="form-control-static">{{$datas->no_perda}}</p>
                   </div>
-                  {{-- <p><a class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#DokumenModal" href="#"><i class="glyphicon glyphicon-plus"></i>Tambah Dokumen</a></p> --}}
                 </div>
                 <div class="form-group">
                   <label for="txt_tgl_perda" class="col-sm-2 control-label" align='left'>Tanggal Perda :</label>
                   <div class="col-sm-10">
-                    <p class="form-control-static"><?php echo date_format(date_create($datas->tgl_perda),'d-F-Y');?></p>
+                    <p class="form-control-static"><?php echo date_format(date_create($datas->tgl_perda),'d F Y');?></p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -53,17 +51,50 @@
                 </div>
                 <div class="form-group">
                   <label for="txt_periode" class="col-sm-2 control-label" align='left'>Status Dokumen :</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-2">
                     <p class="form-control-static">{{$datas->id_status_dokumen}}</p>
                   </div>
+                  <div>
+                    <div class="btn-group">
+                  <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RPJMD <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item btnPrintRPJMDTSK" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak RPJMD </a> 
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintProgPrio" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Program Prioritas</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintProyeksiPendapatan" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Proyeksi Pendapatan RKPD</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintKompilasiProgramdanPagu" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Kompilasi Program dan Pagu RPJMD</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintReviewRanwalRKPD" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Review Ranwal RKPD</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintRumusanReviewRanwalRKPD" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Rumusan Review Ranwal RKPD</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintKompilasiProgramdanPaguRenstra" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Kompilasi Program dan Pagu Renstra</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintPokir" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Pokok Pikiran</a>
+                            </li>                     
+                        </ul>
                 </div>
-
+                  </div>  
+                  
+                </div>
               @endforeach
+              
               </form>
 
 
               <br>
-              <table id='tblVisi' class="table table-striped table-bordered compact table-responsive" cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id='tblVisi' class="table table-striped table-bordered compact" cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Visi</th>
@@ -75,9 +106,10 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="misi">
               <br>
+              <div class="table-responsive">
               <table id="tblMisi" class="table table-striped table-bordered compact table-responsive" cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -92,9 +124,10 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="tujuan">
             <br>
+            <div class="table-responsive">
             <table id="tblTujuan" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -109,7 +142,7 @@
                   </tbody>
             </table>
             </div>
-
+            </div>
             <div role="tabpanel" class="tab-pane" id="sasaran">
             <br>
             <ul class="nav nav-tabs" role="tablist">
@@ -117,10 +150,10 @@
                 <li><a href="#kebijakan" aria-controls="tujuan" role="tab" data-toggle="tab">Kebijakan</a></li>
                 <li><a href="#strategi" aria-controls="sasaran" role="tab" data-toggle="tab">Strategi</a></li>
             </ul>
-
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="sasaran1">
               <br>
+              <div class="table-responsive">
                 <table id="tblSasaran" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -136,8 +169,10 @@
                       </tbody>
                 </table>
               </div>
+              </div>
               <div role="tabpanel" class="tab-pane" id="kebijakan">
               <br>
+              <div class="table-responsive">
                 <table id="tblKebijakan" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -153,8 +188,10 @@
                       </tbody>
                 </table>
               </div>
+              </div>
               <div role="tabpanel" class="tab-pane" id="strategi">
               <br>
+              <div class="table-responsive">
                 <table id="tblStrategi" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -170,6 +207,7 @@
                       </tbody>
                 </table>
               </div>
+              </div>
             </div>
             </div>
 
@@ -184,6 +222,7 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="program1">
               <br>
+              <div class="table-responsive">
                 <table id="tblProgram" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -206,10 +245,12 @@
                   </thead>
                   <tbody>
                   </tbody>
-            </table>
+                </table>
+              </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="indikatorprogram">
               <br>
+              <div class="table-responsive">
                 <table id="tblIndikatorProgram" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -233,8 +274,10 @@
                       </tbody>
                 </table>
               </div>
+              </div>
               <div role="tabpanel" class="tab-pane" id="urusan">
               <br>
+              <div class="table-responsive">
                 <table id="tblUrusan" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -249,8 +292,10 @@
                       </tbody>
                 </table>
               </div>
+              </div>
               <div role="tabpanel" class="tab-pane" id="pelaksana">
               <br>
+              <div class="table-responsive">
                 <table id="tblPelaksana" class="table table-striped table-bordered compact table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -262,6 +307,7 @@
                       <tbody>
                       </tbody>
                 </table>
+              </div>
               </div>
             </div>
             </div>
@@ -681,12 +727,45 @@ $('#tblUrusan tbody').on( 'dblclick', 'tr', function () {
 
 });
 
-  $(document).on('click', '.view-rpjmdpelaksana', function() {
+$(document).on('click', '.view-rpjmdpelaksana', function() {
       id_urusan_program =  $(this).data('id_urusan');
       $('.nav-tabs a[href="#pelaksana"]').tab('show');
       $('#tblPelaksana').DataTable().ajax.url("./rpjmd/programpelaksana/"+id_urusan_program).load();
     });
 
-  } );
+$(document).on('click', '.btnPrintRPJMDTSK', function() {  
+ location.replace('./printRPJMDTSK');  
+});
+
+$(document).on('click', '.printProgPrio', function() {    
+  location.replace('./printProgPrio');    
+});
+
+$(document).on('click', '.btnPrintProyeksiPendapatan', function() {      
+  location.replace('./PrintProyeksiPendapatan');      
+});
+
+$(document).on('click', '.btnPrintKompilasiProgramdanPagu', function() {
+  location.replace('./PrintKompilasiProgramdanPagu');
+});
+
+$(document).on('click', '.btnPrintReviewRanwalRKPD', function() {
+  location.replace('./PrintReviewRanwalRKPD');
+});
+
+$(document).on('click', '.btnPrintRumusanReviewRanwalRKPD', function() {
+  location.replace('./PrintRumusanReviewRanwal');
+});
+
+$(document).on('click', '.btnPrintKompilasiProgramdanPaguRenstra', function() {
+  location.replace('./PrintProgPaguRenstra');
+});
+
+$(document).on('click', '.btnPrintPokir', function() {
+  location.replace('./printPokir');
+});
+
+
+});
 </script>
 @endsection

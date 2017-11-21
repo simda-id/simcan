@@ -5,14 +5,16 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app0')
 
 @section('content')
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
             <?php
                 $this->title = ' Perkada tentang Analiasa Standar Belanja ';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul0';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
+                $breadcrumb->add(['url' => '/modul0','label' => 'SSH dan ASB']);
+                $breadcrumb->add(['url' => '/modul0','label' => 'ASB']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -21,9 +23,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div id="pesan"></div>
 <div class="row">
       <div class="col-md-12">
-      <div class="panel panel-default">
+      <div class="panel panel-success">
           <div class="panel-heading">
-            <h2 class="panel-title">Perhitungan Analisa Standard Belanja per Tahun</h2>
+          <p><h2 class="panel-title">Perhitungan Analisa Standard Belanja per Tahun</h2></p>
           </div>
 
           <div class="panel-body">
@@ -32,7 +34,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <li class="active"><a href="#perkada" aria-controls="perkada" role="tab" data-toggle="tab">Tahun Perhitungan</a></li>
             <li><a href="#kelompok" role="tab" data-toggle="tab">Kelompok</a></li>
             <li><a href="#subkelompok" role="tab" data-toggle="tab">Sub Kelompok</a></li>
-            <li><a href="#subsubkelompok" role="tab" data-toggle="tab">Sub Sub Kelompok</a></li>
+            <li><a href="#subsubkelompok" role="tab" data-toggle="tab">Sub Sub Kelompok</a></li>            
+            <li><a href="#detailzona" role="tab" data-toggle="tab">Zona Wilayah SSH</a></li>
             <li><a href="#detailaktivitas" role="tab" data-toggle="tab">Aktivitas</a></li>
             <li><a href="#detailkomponen" role="tab" data-toggle="tab">Komponen</a></li>
             <li><a href="#detailrincian" role="tab" data-toggle="tab">Rincian Komponen</a></li>
@@ -41,31 +44,27 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="perkada">
               <br>
-              {{-- <div class="add">
-                  <p><a class="add-hitungasb btn btn-sm btn-success"><i class="glyphicon glyphicon-ruble"></i> Proses Perhitungan ASB</a>
-                  <span class="test-hitung btn btn-sm btn-primary"><i class="glyphicon glyphicon-equalizer"></i> Pencetakan Perhitungan ASB</span></p>
-              </div> --}}
               <div class="ui-group-buttons">
-                  <a class="test-hitung btn btn-labeled btn-sm btn-primary" role="button"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span>Pencetakan Perhitungan ASB</a>
+                  <a class="test-hitung btn btn-labeled btn-primary" role="button"><span class="btn-label"><i class="fa fa-file-text-o fa-fw fa-lg"></i></span>Pencetakan Perhitungan ASB</a>
                   <div class="or"></div>
-                  <a class="add-hitungasb btn btn-labeled btn-sm btn-success" role="button"><span class="btn-label"><i class="fa fa-calculator" aria-hidden="true"></i></span>Proses Perhitungan ASB </a>
+                  <a class="add-hitungasb btn btn-labeled btn-success" role="button"><span class="btn-label"><i class="fa fa-calculator fa-fw fa-lg" aria-hidden="true"></i></span>Proses Perhitungan ASB </a>
               </div>
-
-              <table id='tblPerkada' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id='tblPerkada' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="10px" style="text-align: center; vertical-align:middle">Tahun Perhitungan</th>
+                          <th width="105%" style="text-align: center; vertical-align:middle">Tahun Perhitungan</th>
                           <th style="text-align: center; vertical-align:middle">No Perkada ASB</th>
-                          <th width="50px" style="text-align: center; vertical-align:middle">Tgl Perkada</th>
-                          <th width="10px" style="text-align: center; vertical-align:middle">Status</th>
-                          <th width="10%px" style="text-align: center; vertical-align:middle">Aksi</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Tgl Perkada</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Status</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
                   <tbody>
                   </tbody>
             </table>
-            </div>
-            
+          </div>
+            </div>            
             <div role="tabpanel" class="tab-pane" id="kelompok">
             <br>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -81,17 +80,19 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divKelompok">
-              <table id="tblKelompok" class="table table-striped table-bordered"  cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Kelompok Aktivitas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-              </table>
-              </div>
+                <div class="table-responsive">
+                <table id="tblKelompok" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                              <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                              <th style="text-align: center; vertical-align:middle">Uraian Kelompok Aktivitas</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                </table>
+                </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="subkelompok">
             <br>
@@ -111,11 +112,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <div id=divSubKelompok>
-              <table id="tblSubKelompok" class="table table-striped table-bordered"  cellspacing="0" width="100%">
+              <div id="divSubKelompok">
+                <div class="table-responsive">
+                <table id="tblSubKelompok" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
                             <th style="text-align: center; vertical-align:middle">Uraian Sub Kelompok Aktivitas</th>
                         </tr>
                     </thead>
@@ -123,6 +125,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </tbody>
               </table>
               </div>
+            </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="subsubkelompok">
             <br>
@@ -146,17 +149,60 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <div id=divSubSubKel>
-              <table id="tblSubSubKelompok" class="table table-striped table-bordered"  cellspacing="0" width="100%">
+              <div id="divSubSubKel">
+                <div class="table-responsive">
+                <table id="tblSubSubKelompok" class="table display compact table-striped"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
                             <th style="text-align: center; vertical-align:middle">Uraian Sub Sub Kelompok Aktivitas</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
-              </table>
+                </table>
+              </div>
+            </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="detailzona">
+            <br>
+              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <tbody>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
+                      <td id="" name="" style="text-align: left; vertical-align:top;"><label id="no_perkada_zona" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Kelompok</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_kel_zona" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Sub Kelompok</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_subkel_zona" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Sub Kelompok</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_subsubkel_zona" align='left'></label></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </form>
+              <div id="divZona">
+                <div class="table-responsive">
+                <table id="tblZona" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle">Uraian Zona Wilayah SSH</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                </div>
               </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="detailaktivitas">
@@ -181,25 +227,31 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <td width="15%" style="text-align: left; vertical-align:top;">Nama Sub Sub Kelompok</td>
                       <td style="text-align: left; vertical-align:top;"><label id="nm_subsubkel_aktiv" align='left'></label></td>
                     </tr>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Zona Wilayah</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona_aktiv" align='left'></label></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               </form>
-              <div id=divAktivitas>
-              <table id="tblAktivitas" class="table table-striped table-bordered"  cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Aktivitas</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Pemicu Biaya 1</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Pemicu Biaya 2</th>
-                            <th width="5%" style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
-                            <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-              </table>
+              <div id="divAktivitas">
+                <div class="table-responsive">
+                  <table id="tblAktivitas" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                              <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                              <th style="text-align: center; vertical-align:middle">Uraian Aktivitas</th>
+                              <th width="10%" style="text-align: center; vertical-align:middle">Pemicu Biaya 1</th>
+                              <th width="10%" style="text-align: center; vertical-align:middle">Pemicu Biaya 2</th>
+                              <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
+                              <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                </table>
+              </div>
               </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="detailkomponen">
@@ -225,6 +277,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <td style="text-align: left; vertical-align:top;"><label id="nm_subsubkel_komp" align='left'></label></td>
                     </tr>
                     <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Zona Wilayah</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona_komp" align='left'></label></td>
+                    </tr>
+                    <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">Nama Aktivitas</td>
                       <td style="text-align: left; vertical-align:top;"><label id="nm_aktiv_komp" align='left'></label></td>
                     </tr>
@@ -232,18 +288,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <table id="tblKomponen" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id="tblKomponen" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th style="text-align: center; vertical-align:middle">Nama Komponen</th>
-                          <th style="text-align: center; vertical-align:middle">Kode Rekening</th>
-                          <th width="5%" style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Kode Rekening</th>
+                          <th style="text-align: center; vertical-align:middle">Nama Rekening</th>
+                          <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
                       </tr>
                   </thead>
                   <tbody>
                   </tbody>
             </table>
+          </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="detailrincian">
             <br>
@@ -268,6 +327,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <td style="text-align: left; vertical-align:top;"><label id="nm_subsubkel_rinc" align='left'></label></td>
                     </tr>
                     <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nama Zona Wilayah</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona_rinc" align='left'></label></td>
+                    </tr>
+                    <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">Nama Aktivitas</td>
                       <td style="text-align: left; vertical-align:top;"><label id="nm_aktiv_rinc" align='left'></label></td>
                     </tr>
@@ -279,8 +342,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <div id=divRincian>
-              <table id="tblRincian" class="table table-striped table-bordered"  cellspacing="0" width="100%">
+              <div id="divRincian">
+              <div class="table-responsive">
+              <table id="tblRincian" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -297,15 +361,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </tbody>
               </table>
               </div>
-            </div>
-            
+              </div>
+            </div>            
           </div>
           </div>
           </div>
         </div>
   </div>
   </div>
-  </div>
+</div>
 
   <div id="ProsesHitung" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -348,17 +412,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnProses btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-th-list"></i></span>Proses Hitung</button>
+                        <button type="button" class="btn btn-success btnProses btn-labeled">
+                            <span class="btn-label"><i class="fa fa-calculator fa-fw fa-lg"></i></span>Proses Hitung</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -366,7 +431,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
   <div id="SimulasiHitung" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -424,19 +488,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div> --}}
               </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                    <button type="button" class="btn btn-sm btn-success btnCetakAktivitas  btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Rumus Aktivitas</button>
+                    <button type="button" class="btn  btn-default btnCetakAktivitas  btn-labeled">
+                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Rumus Aktivitas</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-primary btnSimulasi btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooSimulasi" class="glyphicon glyphicon-equalizer"></i></span>Proses Simulasi</button>
+                        <button type="button" class="btn  btn-success btnSimulasi btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-calculator fa-fw fa-lg"></i></span>Proses Simulasi</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -445,7 +510,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
       <!--Modal Komponen Hapus -->
   <div id="UbahStatus" class="modal fade" role="dialog" data-backdrop="static">
@@ -483,17 +547,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </tbody>
               </table>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-primary btnUbahStatus btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooSimulasi" class="glyphicon glyphicon-save"></i></span>Update</button>
+                        <button type="button" class="btn  btn-primary btnUbahStatus btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-floppy-o fa-fw fa-lg"></i></span>Update</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn  btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -501,7 +566,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
     <div id="HapusHitung" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -531,17 +595,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </tbody>
               </table>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusHitung btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooSimulasi" class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn  btn-danger btnHapusHitung btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn  btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -549,16 +614,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-        {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
         <div class="text-center">
           <h4><strong>Sedang proses...</strong></h4>
-          <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:grey;"></i>
+          <i class="fa fa-spinner fa-pulse fa-5x fa-fw text-info"></i>
         </div>
         </div>
       </div>
@@ -587,6 +650,8 @@ $(document).ready(function() {
   var nm_komp_asb;
   var nm_rinci_asb;
   var flag_perkada;
+  var id_zona_asb;
+  var nm_zona_asb;
 
   $('[data-toggle="popover"]').popover();
 
@@ -603,6 +668,14 @@ $('.page-alert .close').click(function(e) {
         e.preventDefault();
         $(this).closest('.page-alert').slideUp();
     });
+
+
+$('.display').DataTable({
+    dom : 'BfrtIp',
+    autoWidth : false,
+    "bDestroy": true
+});
+
 
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
@@ -645,12 +718,13 @@ $('.page-alert .close').click(function(e) {
       processing: true,
       serverSide: true,
       dom: 'BFrtip',
+    autoWidth : false,
       "ajax": {"url":"./hitungasb/datakelompok/0"},
       "language": {
           "decimal": ",",
           "thousands": "."},
       "columns": [
-            { data: 'no_urut'},
+            { data: 'no_urut', sClass: "dt-center" },
             { data: 'uraian_kelompok_asb'},
             // { data: 'jml_pagu',
             //   render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
@@ -684,12 +758,13 @@ $('.page-alert .close').click(function(e) {
       processing: true,
       serverSide: true,
       dom: 'BFrtip',
+    autoWidth : false,
       "ajax": {"url":"./hitungasb/datasubkelompok/0/0"},
       "language": {
           "decimal": ",",
           "thousands": "."},
       "columns": [
-            { data: 'no_urut'},
+            { data: 'no_urut', sClass: "dt-center" },
             { data: 'uraian_sub_kelompok_asb'},
             // { data: 'jml_pagu',
             //   render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
@@ -723,12 +798,13 @@ $('.page-alert .close').click(function(e) {
       processing: true,
       serverSide: true,
       dom: 'BFrtip',
+    autoWidth : false,
       "ajax": {"url":"./hitungasb/datasubsubkelompok/0/0"},
       "language": {
           "decimal": ",",
           "thousands": "."},
       "columns": [
-            { data: 'no_urut'},
+            { data: 'no_urut', sClass: "dt-center" },
             { data: 'uraian_sub_sub_kelompok_asb'},
             // { data: 'jml_pagu',
             //   render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
@@ -751,13 +827,59 @@ $('.page-alert .close').click(function(e) {
     id_subsubkel_asb = data.id_asb_sub_sub_kelompok;
     nm_subsubkel_asb = data.uraian_sub_sub_kelompok_asb;
 
+    document.getElementById("no_perkada_zona").innerHTML =data.nomor_perkada;
+    document.getElementById("nm_kel_zona").innerHTML =data.uraian_kelompok_asb;
+    document.getElementById("nm_subkel_zona").innerHTML =data.uraian_sub_kelompok_asb;
+    document.getElementById("nm_subsubkel_zona").innerHTML =data.uraian_sub_sub_kelompok_asb;
+
+    $('.nav-tabs a[href="#detailzona"]').tab('show');
+    $('#tblZona').DataTable().ajax.url("./hitungasb/datazona/"+id_subsubkel_asb+"/"+id_hitung_asb).load();
+
+  } );
+
+
+    var zona_tbl = $('#tblZona').DataTable( {
+        processing: true,
+        serverSide: true,
+        deferRender: true,
+        dom: 'BFrtip',
+    autoWidth : false,
+        "ajax": {"url": "./hitungasb/datazona/0/0"},
+        "language": {
+                "decimal": ",",
+                "thousands": "."},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center" },
+              { data: 'keterangan_zona'}
+              ],
+                  "order": [[0, 'asc']],
+                  "bDestroy": true
+  });
+
+  $('#tblZona tbody').on( 'dblclick', 'tr', function () {
+
+    var data = zona_tbl.row(this).data();
+
+    id_sk_asb =  data.id_asb_perkada;
+    nm_sk_asb =  data.nomor_perkada;
+    flag_perkada = data.flag;
+    id_kel_asb = data.id_asb_kelompok;
+    nm_kel_asb = data.uraian_kelompok_asb;
+    id_subkel_asb = data.id_asb_sub_kelompok;
+    nm_subkel_asb = data.uraian_sub_kelompok_asb;
+    id_subsubkel_asb = data.id_asb_sub_sub_kelompok;
+    nm_subsubkel_asb = data.uraian_sub_sub_kelompok_asb;
+    id_zona_asb = data.id_zona;
+    nm_zona_asb = data.keterangan_zona;
+
     document.getElementById("no_perkada_aktiv").innerHTML =data.nomor_perkada;
     document.getElementById("nm_kel_aktiv").innerHTML =data.uraian_kelompok_asb;
     document.getElementById("nm_subkel_aktiv").innerHTML =data.uraian_sub_kelompok_asb;
     document.getElementById("nm_subsubkel_aktiv").innerHTML =data.uraian_sub_sub_kelompok_asb;
+    document.getElementById("nm_zona_aktiv").innerHTML =data.keterangan_zona;
 
     $('.nav-tabs a[href="#detailaktivitas"]').tab('show');
-    $('#tblAktivitas').DataTable().ajax.url("./hitungasb/dataaktivitas/"+id_subsubkel_asb+"/"+id_hitung_asb).load();
+    $('#tblAktivitas').DataTable().ajax.url("./hitungasb/dataaktivitas/"+id_subsubkel_asb+"/"+id_hitung_asb+"/"+id_zona_asb).load();
 
   } );
 
@@ -766,17 +888,18 @@ $('.page-alert .close').click(function(e) {
         serverSide: true,
         deferRender: true,
         dom: 'BFrtip',
-        "ajax": {"url": "./hitungasb/dataaktivitas/0/0"},
+    autoWidth : false,
+        "ajax": {"url": "./hitungasb/dataaktivitas/0/0/0"},
         "language": {
                 "decimal": ",",
                 "thousands": "."},
         "columns": [
-              { data: 'no_urut'},
+              { data: 'no_urut', sClass: "dt-center" },
               { data: 'nm_aktivitas_asb'},
-              { data: 'satuan1'},
-              { data: 'satuan2'},
+              { data: 'satuan1', sClass: "dt-center" },
+              { data: 'satuan2', sClass: "dt-center" },
               { data: 'jml_pagu',
-                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )},
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
               { data: 'action', 'searchable': false, 'orderable':false}
               ],
                   "order": [[0, 'asc']],
@@ -804,9 +927,10 @@ $('.page-alert .close').click(function(e) {
     document.getElementById("nm_subkel_komp").innerHTML =data.uraian_sub_kelompok_asb;
     document.getElementById("nm_subsubkel_komp").innerHTML =data.uraian_sub_sub_kelompok_asb;
     document.getElementById("nm_aktiv_komp").innerHTML =data.nm_aktivitas_asb;
+    document.getElementById("nm_zona_komp").innerHTML =nm_zona_asb;
 
     $('.nav-tabs a[href="#detailkomponen"]').tab('show');
-    $('#tblKomponen').DataTable().ajax.url("./hitungasb/datakomponen/"+id_aktiv_asb+"/"+id_hitung_asb).load();
+    $('#tblKomponen').DataTable().ajax.url("./hitungasb/datakomponen/"+id_aktiv_asb+"/"+id_hitung_asb+"/"+id_zona_asb).load();
 
   } );  
 
@@ -815,17 +939,19 @@ $('.page-alert .close').click(function(e) {
         processing: true,
         serverSide: true,
         deferRender: true,
+    autoWidth : false,
         dom: 'BFrtip',
-        "ajax": {"url": "./hitungasb/datakomponen/0/0"},
+        "ajax": {"url": "./hitungasb/datakomponen/0/0/0"},
         "language": {
                 "decimal": ",",
                 "thousands": "."},
         "columns": [
-              { data: 'no_urut'},
+              { data: 'no_urut', sClass: "dt-center" },
               { data: 'nm_komponen_asb'},
+              { data: 'kd_rekening', sClass: "dt-center" },
               { data: 'nm_rekening'},
               { data: 'jml_pagu',
-                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" }
             ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -856,9 +982,10 @@ $('.page-alert .close').click(function(e) {
     document.getElementById("nm_subsubkel_rinc").innerHTML =data.uraian_sub_sub_kelompok_asb;
     document.getElementById("nm_aktiv_rinc").innerHTML =data.nm_aktivitas_asb;
     document.getElementById("nm_komp_rinc").innerHTML =data.nm_komponen_asb;
+    document.getElementById("nm_zona_rinc").innerHTML =nm_zona_asb;
 
     $('.nav-tabs a[href="#detailrincian"]').tab('show');
-    $('#tblRincian').DataTable().ajax.url("./hitungasb/datarinci/"+id_komp_asb+"/"+id_hitung_asb).load();
+    $('#tblRincian').DataTable().ajax.url("./hitungasb/datarinci/"+id_komp_asb+"/"+id_hitung_asb+"/"+id_zona_asb).load();
 
   });
 
@@ -866,25 +993,26 @@ $('.page-alert .close').click(function(e) {
         processing: true,
         serverSide: true,
         deferRender: true,
+    autoWidth : false,
         dom: 'Bfrtip',
-        "ajax": {"url": "./hitungasb/datarinci/0/0"},
+        "ajax": {"url": "./hitungasb/datarinci/0/0/0"},
         "language": {
                 "decimal": ",",
                 "thousands": "."},
         "columns": [
-          { data: 'no_urut'},
+          { data: 'no_urut', sClass: "dt-center" },
           { data: 'uraian_tarif_ssh'},
-          { data: 'jenis_display'},
+          { data: 'jenis_display', sClass: "dt-center" },
           { data: 'harga_satuan',
-            render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp' )},
+            render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
           { data: 'koefisien1',
-            render: $.fn.dataTable.render.number( '.', ',', 4, '' )},
+            render: $.fn.dataTable.render.number( '.', ',', 4, '' ), sClass: "dt-right" },
           { data: 'koefisien2',
-            render: $.fn.dataTable.render.number( '.', ',', 4, '' )},
+            render: $.fn.dataTable.render.number( '.', ',', 4, '' ), sClass: "dt-right" },
           { data: 'koefisien3',
-            render: $.fn.dataTable.render.number( '.', ',', 4, '' )},
+            render: $.fn.dataTable.render.number( '.', ',', 4, '' ), sClass: "dt-right" },
           { data: 'jml_pagu',
-            render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp' )},
+            render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
               ],
                   "order": [[0, 'asc']],
                   "bDestroy": true

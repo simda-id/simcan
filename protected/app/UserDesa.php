@@ -10,7 +10,7 @@ class UserDesa extends Model
 
     public $timestamps = false;
 
-    public $fillable = [
+    public $fillable = ['id_user_wil',
     	'user_id',
     	'kd_kecamatan',
         'kd_desa'

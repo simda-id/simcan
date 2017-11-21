@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'group_id','email', 'password',
+        'name', 'group_id','email', 'password','status_user',
     ];
 
     /**
@@ -24,10 +24,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'email','password', 'remember_token',
     ];
 
     public function getUserSubUnit() {
-        return $this->hasMany('App\UserSubUnit', 'user_id', 'id');
-    }    
+        return $this->hasMany('App\Models\UserSubUnit', 'user_id', 'id');
+    }
+
+    public function getUserDesa() {
+        return $this->hasMany('App\Models\UserDesa', 'user_id', 'id');
+    }     
 }

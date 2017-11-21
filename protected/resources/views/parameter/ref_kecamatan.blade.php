@@ -5,7 +5,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.parameterlayout')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -39,6 +39,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="add">
                       <button id="btnAddKecamatan" type="button" class="btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Kecamatan</button>
                   </div>
+                  <div class="table-responsive">
                   <table id="tblKecamatan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -50,7 +51,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </thead>
                         <tbody>                                        
                         </tbody>
-                    </table>  
+                    </table> 
+                    </div> 
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="desa">
@@ -71,6 +73,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                       <table id="tblDesa" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -84,6 +87,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
             </div>
@@ -106,6 +110,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_pemda" id="id_pemda">
             <input type="hidden" name="id_kecamatan" id="id_kecamatan">
+            <div class="row">
+            <div class="col-sm-2" style="text-align: center;">
+              <i class="fa fa-map-marker fa-fw" style="font-size: 100px;color: #357EBD;"></i>
+            </div>
+            <div class="col-sm-10">
             <div class="form-group">
               <label for="kd_kecamatan" class="col-sm-3" align='left'>Kode Kecamatan</label>
               <div class="col-sm-2">
@@ -117,8 +126,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="nama_kecamatan" name="nama_kecamatan" required="required">
               </div>
+            </div>
+            </div>
             </div> 
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -150,6 +162,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_desa" id="id_desa">
             <input type="hidden" name="id_kecamatan_desa" id="id_kecamatan_desa">
+            <div class="row">
+            <div class="col-sm-2" style="text-align: center;">
+              <i class="fa fa-thumb-tack fa-fw" style="font-size: 100px;color: #357EBD;"></i>
+            </div>
+            <div class="col-sm-10">
             <div class="form-group">
               <label for="kd_desa" class="col-sm-3">Kode Desa</label>
               <div class="col-sm-2">
@@ -178,7 +195,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </select>
                 </div>
             </div>
+          </div>
+        </div>
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -214,6 +234,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled actionBtn" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>

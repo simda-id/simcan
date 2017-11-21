@@ -5,7 +5,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.parameterlayout')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -70,6 +70,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                   <table id="tblProgram" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -81,7 +82,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </thead>
                         <tbody>                                        
                         </tbody>
-                    </table>  
+                    </table>
+                    </div>  
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="kegiatan">
@@ -110,6 +112,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                       <table id="tblKegiatan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -122,6 +125,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
             </div>

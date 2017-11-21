@@ -6,7 +6,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 {{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -131,6 +131,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusLokasi">
@@ -150,7 +151,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
   </div>
-</div>
 
 <!--Modal Hapus -->
 <div id="HapusModal" class="modal fade" role="dialog" data-backdrop="static">
@@ -165,6 +165,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 Yakin akan menghapus <strong><span class="title"></span></strong> ?
           <span class="hidden id_satuan_hapus"></span>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled actionBtn" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -175,7 +176,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 @endsection
 
 @section('scripts')

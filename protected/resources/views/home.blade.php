@@ -40,42 +40,26 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 
 <body>
-
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                   {{--  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>   --}}                  
+                <div class="navbar-header">          
                     <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0</a>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                   {{--  <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x text-info"></i>
+                    </span>  --}}
+                    simd@<strong>Perencanaan</strong> ver <strong>1.0</a>
                 </div>
                     <ul class="nav navbar-top-links navbar-right">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?> <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <?php 
-                                    $rpjmdDokumen = \App\models\RefSetting::where('status_setting','=','1')->get();
-                                    $tahun = [];
-                                    foreach($rpjmdDokumen as $data){
-                                        $tahun[$data->tahun_rencana] = $data->tahun_rencana;
-                                    }
-                                    foreach($tahun as $tahun):
-                                ?>
-                                    <li>
-                                        <a href="{{ url('/ta/'.$tahun) }}">
-                                            <span class="text-muted small">{{ $tahun }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                <?php endforeach;?>
-                            </ul>
+                        <li class="form-group">
+                            <label for="id_tahun">Tahun Anggaran :</label>
                         </li>
+                        <li class="form-group">
+                            <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
+                        </li>
+
+
                         <!-- /.dropdown -->
 
                         <!-- Authentication Links -->
@@ -102,15 +86,16 @@ use hoaaah\LaravelMenu\Menu;
 
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-key fa-fw text-info"> Ganti Password</i>
                                         </a>
-
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
+                                        </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+
                                     </li>
                                 </ul>
                             </li>
@@ -150,7 +135,7 @@ use hoaaah\LaravelMenu\Menu;
                     <p>
                         Merupakan perencanaan lima tahunan (<strong>RPJMD</strong> dan <strong>Renstra</strong>) sebagai penjabaran <strong>visi-misi Kepala Daerah</strong>.</p>
                     <p>
-                        <a class="btn btn-warning" href="{{ url('/modul1') }}" role="button"><strong>RPJMD dan Renstra</strong> &raquo;</a></p>
+                        <a class="btn btn-warning" href="{{ url('/rpjmd/dash') }}" role="button"><strong>RPJMD dan Renstra</strong> &raquo;</a></p>
                 </div>
             </div>
             <!-- End Item -->
@@ -181,30 +166,14 @@ use hoaaah\LaravelMenu\Menu;
         <!-- End Carousel Inner -->
         <ul class="nav nav-pills nav-justified">
             <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">simd@<strong>Perencanaan</strong><small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="1"><a href="#">ASB dan SSH<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="2"><a href="#">RPJMD dan Renstra<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="3"><a href="#">RKPD dan Renja<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="4"><a href="#">PPAS<small></small></a></li>
+            <li data-target="#myCarousel" data-slide-to="1"><a class="btn" role="button" href="{{ url('/modul0') }}">ASB dan SSH<small></small></a></li>
+            <li data-target="#myCarousel" data-slide-to="2"><a class="btn" role="button" href="{{ url('/modul1') }}">RPJMD dan Renstra<small></small></a></li>
+            <li data-target="#myCarousel" data-slide-to="3"><a class="btn" role="button" href="{{ url('/modul2') }}">RKPD dan Renja<small></small></a></li>
+            <li data-target="#myCarousel" data-slide-to="4"><a class="btn" role="button" href="{{ url('/modul3') }}">PPAS<small></small></a></li>
         </ul>
-        {{-- <br>
-        <div class="row">
-        <div class="col-md-3 text-center ">
-          <i class="fa fa-exclamation-triangle faa-flash animated-hover" ></i>
-        </div>
-        <div class="col-md-3 text-center">
-          <i class="fa fa-exclamation-triangle fa-3x fa-fw mbr-iconfont"  style="color:red;" aria-hidden="true"></i>
-       </div>
-        <div class="col-md-3 text-center">
-          <i class="fa fa-exclamation-triangle fa-3x fa-fw mbr-iconfont"  style="color:red;" aria-hidden="true"></i>
-        </div>
-        <div class="col-md-3 text-center">
-          <i class="fa fa-exclamation-triangle fa-3x fa-fw mbr-iconfont"  style="color:red;" aria-hidden="true"></i>  
-        </div>
-    </div> --}}
     <!-- End Carousel -->
       <hr>
   </div>
-
       <footer>
           <?php 
               $akses = new \App\CekAkses(); 
@@ -222,6 +191,85 @@ use hoaaah\LaravelMenu\Menu;
       </footer>
     </div> <!-- /container -->
 
+<div id="ModalUser" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
+  <div class="modal-dialog modal-lg"  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ganti Password</h4>
+      </div>
+      <div class="modal-body"  style="background-color: #eee;">        
+        <form name="frmModalUser" class="form-horizontal" role="form" autocomplete='off' action="{{ Request::url() }}" method="post">
+          <div class="row">
+          <div class="col-sm-2" style="text-align: center;">
+            <i class="fa fa-user-circle-o" style="font-size: 120px;color: #357EBD;"></i>
+          </div>
+          <div class="col-sm-10">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id_user" id="id_user">
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name" class="col-md-3 control-label">Nama User</label>
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control" name="name" required autofocus data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Nama untuk ditampilkan di header setelah login">
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="email" class="col-md-3 control-label">Alamat e-Mail</label>
+                    <div class="col-md-6">
+                        <input id="email" type="email" class="form-control" name="email" disabled>
+                    </div>
+            </div>
+
+            <div id="divPassword" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <label for="password" class="col-md-3 control-label">Password</label>
+                    <div class="col-md-4">
+                        <input id="password" type="password" class="form-control" name="password" required>
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="col-md-4">
+                      <div class="input-group">
+                        <input id="password_confirmation" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' has-error' : '' }}" name="password_confirmation" required>
+                          <div class="input-group-btn">
+                                <button type="button" id="showPass" name="showPass" data-val="1" class="btn btn-md btn-success" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk menampilkan Password yang diketik"><span id="eye" class="fa fa-eye fa-fw fa-lg"></span></button>
+                          </div>
+                        </div>
+                        @if ($errors->has('password_confirmation'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+            </div>
+        </div>
+        </form>
+      </div>
+        <div class="modal-footer" style="background-color: #357EBD;">
+            <div class="row">
+                <div class="col-sm-2 text-left">                        
+                </div>
+                <div class="col-sm-10 text-right">
+                  <div class="ui-group-buttons">
+                       <button type="submit" class="btn btn-success btnUser btn-labeled" data-dismiss="modal">
+                        <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Simpan</button>
+                    <div class="or"></div>
+                    <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                        <span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span>Tutup</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 <script>
@@ -236,7 +284,9 @@ $(document).ready( function() {
             clickEvent = true;
             $('.nav li').removeClass('active');
             $(this).parent().addClass('active');        
-    }).on('slid.bs.carousel', function(e) {
+    });
+    
+    $('#myCarousel').on('slid.bs.carousel', function(e) {
         if(!clickEvent) {
             var count = $('.nav').children().length -1;
             var current = $('.nav li.active');
@@ -248,7 +298,31 @@ $(document).ready( function() {
         }
         clickEvent = false;
     });
+
+$.ajax({
+          type: "GET",
+          url: './getTahunSetting',
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+          // alert({{Session::get('tahun')}});
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+          }
+          }
+      });
+
 });
+
+$( "#id_tahun" ).change(function() {
+
+  sessionStorage.setItem("tahun",$('#id_tahun').val());
+
+});
+
 </script>
 
   </body>

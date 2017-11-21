@@ -15,6 +15,8 @@ class TrxForumSkpdLokasi extends Model
 				'id_pelaksana_forum',
 				'id_lokasi_forum',
 				'id_lokasi',
+				'id_lokasi_teknis',
+				'id_lokasi_renja',
 				'jenis_lokasi',
 				'id_desa',
 				'id_kecamatan',
@@ -29,6 +31,8 @@ class TrxForumSkpdLokasi extends Model
 				'sumber_data',
 	            'volume_1',
 	            'volume_2',
+	            'volume_usulan_1',
+	            'volume_usulan_2',
 	            'id_satuan_1',
 	            'id_satuan_2'
 				];

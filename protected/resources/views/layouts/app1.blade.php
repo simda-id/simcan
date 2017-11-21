@@ -44,32 +44,19 @@ use hoaaah\LaravelMenu\Menu;
                         <span class="icon-bar"></span>
                     </button> 
                     <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x"></i>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
                 </div>
 
                     <ul class="nav navbar-top-links navbar-right">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?> <i class="fa fa-caret-down"></i>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <?php 
-                                    $rpjmdDokumen = \App\models\RefSetting::where('status_setting','=','1')->get();
-                                    $tahun = [];
-                                    foreach($rpjmdDokumen as $data){
-                                        $tahun[$data->tahun_rencana] = $data->tahun_rencana;
-                                    }
-                                    foreach($tahun as $tahun):
-                                ?>
-                                <li>
-                                    <a href="{{ url('/ta/'.$tahun) }}">
-                                        <span class="text-muted small">{{ $tahun }}</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <?php endforeach;?>
-                            </ul>
                         </li>
 
                         <!-- Authentication Links -->
@@ -98,8 +85,8 @@ use hoaaah\LaravelMenu\Menu;
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                                     document.getElementById('logout-form').submit();">                                          
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -120,7 +107,7 @@ use hoaaah\LaravelMenu\Menu;
                                     'ulId' => 'side-menu'
                                 ],
                                 'items' => [
-                                    ['label' => 'Dashboard', 'icon' => 'fa fa-home', 'url' => '/modul1'],
+                                    ['label' => 'Modul RPJMD dan Renstra', 'icon'=>'fa fa-newspaper-o fa-fw fa-lg','url' => '/rpjmd/dash'],
                                     [
                                         'label' => 'RPJMD',
                                         'visible' => $akses->get(20),

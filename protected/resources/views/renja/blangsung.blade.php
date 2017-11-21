@@ -5,27 +5,27 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = 'Penyusunan Rancangan Renja';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'Renja']);
-                $breadcrumb->add(['label' => $this->title]);
+                $breadcrumb->add(['url' => '/modul2','label' => 'Renja Perangkat Daerah']);
+                $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja']);
+                $breadcrumb->add(['label' => 'Belanja Langsung']);
                 $breadcrumb->end();
             ?>          
         </div>
     </div>
-    <div id="pesan"></div>
+    <div id="pesan" class="notify"></div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h2 id="judul" class="panel-title"> {{ $this->title }}</h2>
-                    {{-- <i class="fa fa-spinner fa-pulse" style="font-size:16px;color:green;"></i> --}}
+                    <p><h2 id="judul" class="panel-title"> {{ $this->title }}</h2></p>
                 </div>
             <div class="panel-body">
                 <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
@@ -44,29 +44,34 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
                 </form>
                 <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs nav-justified" role="tablist">
                       <li class="active"><a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program Renja</a></li>
-                      <li><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan Renja</a></li>
-                      <li><a href="#aktivitas" aria-controls="aktivitas" role="tab-kv" data-toggle="tab">Aktivitas</a></li>
-                      <li><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana Aktivitas</a></li>
-                      <li><a href="#lokasi" aria-controls="lokasi" role="tab-kv" data-toggle="tab">Lokasi</a></li>
-                      <li><a href="#belanja" aria-controls="belanja" role="tab-kv" data-toggle="tab">Rincian Belanja</a></li>
+                      <li class="disabled"><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan Renja</a></li>
+                      <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana Aktivitas</a></li>
+                      <li class="disabled"><a href="#aktivitas" aria-controls="aktivitas" role="tab-kv" data-toggle="tab">Aktivitas</a></li>
+                      <li class="disabled"><a href="#lokasi" aria-controls="lokasi" role="tab-kv" data-toggle="tab">Lokasi</a></li>
+                      <li class="disabled"><a href="#belanja" aria-controls="belanja" role="tab-kv" data-toggle="tab">Rincian Belanja</a></li>
                     </ul>
                     
                     <div class="tab-content">
                     <br>
                             <div role="tabpanel" class="tab-pane fade in active" id="program">
                                 <div class="col-md-12">
-                                    <table id="tblProgram" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblProgram" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th style="text-align: center; vertical-align:middle">Nama Program Renja</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Jumlah Kegiatan</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Pagu Musrenbang</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Jumlah Aktivitas</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
+                                                <th colspan="3" width='15%' style="text-align: center; vertical-align:middle">Jumlah Kegiatan</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
+                                                <th width="50px" style="text-align: center; vertical-align:middle">Reviu</th>
+                                                <th width='150px' style="text-align: center; vertical-align:middle">Pagu</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                        
@@ -79,7 +84,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgram">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_kegrenja" align='left'></label></td>
                                         </tr>
@@ -87,7 +92,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblKegiatanRenja" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblKegiatanRenja" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
@@ -101,7 +106,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th width='10%' style="text-align: center; vertical-align:middle">Jumlah</th>
                                                 <th width='10%' style="text-align: center; vertical-align:middle">Musrenbang</th>
                                                 <th width='5%' style="text-align: center; vertical-align:middle">Jumlah</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu AKtivitas</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
                                                 <th width='10%' style="text-align: center; vertical-align:middle">Pagu Musrenbang</th>
                                             </tr>
                                         </thead>
@@ -109,82 +114,90 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         </tbody>
                                     </table>   
                                 </div>
-                            <div role="tabpanel" class="tab-pane fade in" id="aktivitas">
-                                  <div class="add">
-                                    <button id="btnTambahAktivitas" type="button" class="add-aktivitas btn btn-labeled btn-sm btn-success">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Aktivitas</button>
-                                  </div>            
+                              <div role="tabpanel" class="tab-pane fade in" id="pelaksana">
+                                  <div id="divTambahPelaksana">
+                                    <button id="btnTambahPelaksana" type="button" class="add-pelaksana btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Pelaksana</button>
+                                  </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgram">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_aktivitas" align='left'></label></td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_pelaksana" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_aktivitas" align='left'></label></td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_pelaksana" align='left'></label></td>
                                         </tr>
                                       </tbody>
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblAktivitas" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblPelaksana" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Ativitas</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Pelaksana</th>
-                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Musrenbang</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
+                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Persentase</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 1</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 2</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                        
                                         </tbody>
                                     </table>   
                                 </div>
-                              <div role="tabpanel" class="tab-pane fade in" id="pelaksana">
-                                  <div class="add">
-                                    <button id="btnTambahPelaksana" type="button" class="add-pelaksana btn btn-labeled btn-sm btn-success">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Pelaksana</button>
-                                  </div>
+                                <div role="tabpanel" class="tab-pane fade in" id="aktivitas">
+                                  <div id="divTambahAktivitas">
+                                    <button id="btnTambahAktivitas" type="button" class="add-aktivitas btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Aktivitas</button>
+                                  </div>            
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgram">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_pelaksana" align='left'></label></td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_aktivitas" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_pelaksana" align='left'></label></td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_aktivitas" align='left'></label></td>
                                         </tr>
-                                        <tr>
-                                          <td width="15%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
+                                        <tr class="backPelaksana">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_aktivitas_pelaksana" align='left'></label></td>
                                         </tr>
                                       </tbody>
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblPelaksana" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblAktivitas" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
-                                                <th width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Status</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Ativitas</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Pelaksana</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Musrenbang</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 1</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 2</th>
+                                                <th width='3%' style="text-align: center; vertical-align:middle">%</th>
+                                                <th width='7%' style="text-align: center; vertical-align:middle">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                        
@@ -192,41 +205,46 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>   
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade in" id="lokasi">
-                                  <div class="add">
-                                    <button id="btnTambahLokasi" type="button" class="add-lokasi btn btn-labeled btn-sm btn-success">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Lokasi</button>
+                                  <div id="divTambahLokasi">
+                                    <button id="btnTambahLokasi" type="button" class="add-lokasi btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Lokasi</button>
                                   </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgram">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_lokasi" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_lokasi" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backPelaksana">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_lokasi" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backAktivitas">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_aktivitas_lokasi" align='left'></label></td>
-                                        </tr>
-                                        <tr>
-                                          <td width="15%" style="text-align: left; vertical-align:top;">Sub Unit Pelaksana</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_lokasi" align='left'></label></td>
                                         </tr>
                                       </tbody>
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblLokasi" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblLokasi" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th style="text-align: center; vertical-align:middle">Nama Lokasi</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Lokasi</th>
+                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 1</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 2</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                        
@@ -234,34 +252,39 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>   
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="belanja">
-                                  {{-- <div class="ui-group-buttons"> --}}
-                                    <a id="btnTambahBelanja" type="button" class="add-belanja btn btn-labeled btn-sm btn-success">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah dari SSH</a>
-                                    {{-- <div class="or"></div> --}}
-                                    <a id="btnTambahBelanjaASB" type="button" class="add-belanjaASB btn btn-labeled btn-sm btn-info">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah dari ASB</a>
-                                  {{-- </div> --}}
+                                  <div id="divAddSSH">
+                                    <a id="btnTambahBelanja" type="button" class="add-belanja btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah dari SSH</a>
+                                     <a id="btnCopyBelanja" type="button" class="btn btn-labeled btn-primary">
+                                      <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Import dari Lokasi Lain</a>
+                                  </div>
+                                  <div id="divImportASB">
+                                    <a id="btnTambahBelanjaASB" type="button" class="add-belanjaASB btn btn-labeled btn-info">
+                                      <span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span>Tambah dari ASB</a>
+                                    <a id="btnUnLoadAsb" type="button" class="btnUnLoadAsb btn btn-labeled btn-danger">
+                                      <span class="btn-label"><i class="fa fa-stack-overflow fa-fw fa-lg"></i></span>Unload Belanja</a>
+                                  </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgram">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backPelaksana">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_belanja" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backAktivitas">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_aktivitas_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
-                                          <td width="15%" style="text-align: left; vertical-align:top;">Sub Unit Pelaksana</td>
-                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_belanja" align='left'></label></td>
-                                        </tr>
-                                        <tr>
+                                        <tr class="backLokasi">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Lokasi</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_lokasi_belanja" align='left'></label></td>
                                         </tr>
@@ -269,13 +292,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblBelanja" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <table id="tblBelanja" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Item Belanja</th>
-                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Kode Rekening</th>
-                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Output</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Kode Rekening</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
                                                 <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Jumlah Belanja</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
@@ -299,11 +322,44 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
 </div>
 
+
+<script id="details-inProg" type="text/x-handlebars-template">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProg-@{{id_renja_program}}">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
+                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+</script>
+
+<script id="details-inKeg" type="text/x-handlebars-template">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKeg-@{{id_renja}}">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
+                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+</script>
+
 <div id="ModalKegiatan" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"></h4>
+                <p><h4 class="modal-title" style="text-align: center;"></h4></p>
             </div>
             <div class="modal-body">
               <form name="frmModalKegiatan" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
@@ -313,6 +369,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="hidden" id="id_renja_program_kegiatan" name="id_renja_program_kegiatan">
                 <input type="hidden" id="tahun_renja_kegiatan" name="tahun_renja_kegiatan">
                 <input type="hidden" id="id_unit_kegiatan" name="id_unit_kegiatan">
+                <input type="hidden" id="status_pelaksanaan_kegiatan" name="status_pelaksanaan_kegiatan">
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="id">No Urut :</label>
                   <div class="col-sm-2">
@@ -353,7 +410,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <input type="text" class="form-control number" id="pagu_renja_kegiatan" name="pagu_renja_kegiatan" disabled >
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hidden">
                   <label for="pagu_musren" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
                   <div class="col-sm-2">
                     <div class="input-group">
@@ -366,17 +423,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnKegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnKegiatan btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Proses Posting</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -384,14 +442,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
 <div id="ModalAktivitas" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
-                <h4 class="modal-title"></h4>
+                <p><h4 class="modal-title" style="text-align: center;"></h4></p>
             </div>
             <div class="modal-body">
               <form name="frmModalAktivitas" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
@@ -426,7 +482,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3"></textarea>
                     </div>
                     <input type="hidden" id="id_aktivitas_asb" name="id_aktivitas_asb">
-                    <span class="btn btn-sm btn-primary btnCariASB" id="btnCariASB" name="btnCariASB"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="btn btn-primary btnCariASB" id="btnCariASB" name="btnCariASB"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>
                 <div class="form-group rbJenisAktivitas"> 
                   <label for="jenis_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Aktivitas :</label>                 
@@ -441,7 +497,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="title">Sumber Dana :</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <select type="text" class="form-control sumber_dana" id="sumber_dana" name="sumber_dana"></select>
                     </div>
                 </div>
@@ -475,25 +531,26 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Satuan Output Musrenbang :</label>
+                    <label class="control-label col-sm-3" for="title">Satuan Musrenbang :</label>
                     <div class="col-sm-4">
                         <select type="text" class="form-control" id="id_satuan_publik" name="id_satuan_publik"></select>
                     </div>
                 </div>
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idHapusAktivitas">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusAktivitas btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusAktivitas btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnAktivitas btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnAktivitas btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -501,13 +558,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
 <div id="ModalPelaksana" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -534,37 +589,38 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="hidden" id="id_subunit_pelaksana" name="id_subunit_pelaksana">
                 <input type="name" class="form-control" id="subunit_pelaksana" rows="2" disabled>
                 <div class="input-group-btn">
-                <btn class="btn btn-primary btnCariSubUnit" id="btnCariSubUnit" name="btnCariSubUnit"><i class="glyphicon glyphicon-search"></i></btn>
+                <btn class="btn btn-primary btnCariSubUnit" id="btnCariSubUnit" name="btnCariSubUnit"><i class="fa fa-search fa-fw fa-lg"></i></btn>
                 </div>
               </div>
               </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Lokasi Penyelenggaraan :</label>
+                <label class="control-label col-sm-3" for="title">Lokasi Penyelenggaraan:</label>
                 <div class="col-sm-8">
                   <div class="input-group">
                     <input type="hidden" id="id_lokasi_pelaksana" name="id_lokasi_pelaksana">
-                    <input type="name" class="form-control" id="nm_lokasi_pelaksana" rows="2" disabled>
+                    <input type="name" class="form-control" id="nm_lokasi_penyelenggara" rows="2" disabled>
                     <div class="input-group-btn">
-                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="glyphicon glyphicon-search"></i></btn>
+                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="fa fa-search fa-fw fa-lg"></i></btn>
                     </div>
                   </div>
                 </div>
             </div>
           </form>
+        </div>
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idHapusPelaksana">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusPelaksana btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn  btn-danger btnHapusPelaksana btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnPelaksana btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn  btn-success btnPelaksana btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -573,13 +629,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="ModalLokasi" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -602,7 +656,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <input type="hidden" id="jenis_lokasi" name="jenis_lokasi">
                     <input type="name" class="form-control" id="nm_lokasi" rows="2" disabled>
                     <div class="input-group-btn">
-                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="glyphicon glyphicon-search"></i></btn>
+                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="fa fa-search fa-fw fa-lg"></i></btn>
                     </div>
                   </div>
                 </div>
@@ -632,19 +686,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
           </form>
+        </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusLokasi">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusLokasi btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusLokasi btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnLokasi btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnLokasi btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -652,7 +707,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 <div id="ModalBelanja" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog modal-lg">
@@ -671,7 +725,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="col-sm-2">
                     <input type="text" class="form-control number" name="no_urut_belanja" id="no_urut_belanja">
                   </div>
-                  <div class="col-sm-3 chkBelanja">
+                  <div class="col-sm-3 chkBelanja hidden">
                     <label class="checkbox-inline">
                     <input class="checkBelanja" type="checkbox" name="checkBelanja" id="checkBelanja" value="1"> Telah Direviu</label>
                   </div>
@@ -698,7 +752,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div class="input-group">
                     <input type="text" class="form-control" id="ur_item_ssh" name="ur_item_ssh" disabled="">
                      <div class="input-group-btn">
-                      <button class="btn btn-primary btnCariSSH" id="btnCariSSH" name="btnCariSSH" data-toggle="modal" href="#"><i class="glyphicon glyphicon-search"></i></button>
+                      <button class="btn btn-primary btnCariSSH" id="btnCariSSH" name="btnCariSSH" data-toggle="modal" href="#"><i class="fa fa-search fa-fw fa-lg"></i></button>
                     </div>
                   </div>
                   </div>
@@ -706,29 +760,29 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group"> 
                   <label for="id_rekening" class="col-sm-3 control-label" align='left'>Kode Rekening :</label>                 
                   <div class="col-sm-8">
-                    <input type="hidden" class="form-control" id="id_rekening" name="id_rekening" disabled=""></td>
+                    <input type="hidden" class="form-control" id="id_rekening" name="id_rekening" disabled="">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="ur_rekening" name="ur_rekening" disabled=""></td>
+                      <input type="text" class="form-control" id="ur_rekening" name="ur_rekening" disabled="">
                       <div class="input-group-btn">
-                      <button class="btn btn-primary btnCariRekening" id="btnCariRekening" name="btnCariRekening" data-toggle="modal" href="#"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
+                        <button class="btn btn-primary btnCariRekening" id="btnCariRekening" name="btnCariRekening" data-toggle="modal" href="#"><i class="fa fa-search fa-fw fa-lg"></i></button>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                 <div class="col-sm-12">
-                    <table class="table table-striped table-bordered table-responsive">
+                    <table class="table table-striped compact table-bordered table-responsive">
                         <thead>
                           <tr>
-                            <td width="30%">Volume 1</td>
-                            <td width="10%">Koefisien</td>
-                            <td width="25%">Harga Satuan</td>
-                            <td width="35%">Jumlah Total</td>
+                            <td width="25%" style="text-align: center; vertical-align:top;">Volume 1</td>
+                            <td width="25%" style="text-align: center; vertical-align:top;">Volume 2</td>
+                            <td width="20%" style="text-align: center; vertical-align:top;">Harga Satuan</td>
+                            <td width="30%" style="text-align: center; vertical-align:top;">Jumlah Total</td>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                              <td width="30%" style="text-align: left; vertical-align:top;">
+                              <td width="25%" style="text-align: left; vertical-align:top;">
                               <div class="input-group">
                                 <input type="text" class="form-control number" id="volume1" name="volume1">
                                 <input type="hidden" class="form-control" id="id_satuan1" name="id_satuan1">
@@ -736,7 +790,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                               </div>
                               </td>
                           
-                              <td width="10%" style="text-align: left; vertical-align:top;">
+                              <td width="25%" style="text-align: left; vertical-align:top;">
                               <div class="input-group">
                                 <input type="text" class="form-control number" id="volume2" name="volume2">
                                 <input type="hidden" class="form-control" id="id_satuan2" name="id_satuan2">
@@ -744,9 +798,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                               </div>
                               </td>
                           
-                              <td width="25%" style="text-align: left; vertical-align:top;"><input type="text" class="form-control number" id="harga_satuan" name="harga_satuan" disabled></td>
+                              <td width="20%" style="text-align: right; vertical-align:top;"><input type="text" class="form-control number" id="harga_satuan" name="harga_satuan" style="text-align: right; vertical-align:top;" disabled></td>
 
-                              <td width="35%" style="text-align: left; vertical-align:top;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" disabled></td>
+                              <td width="30%" style="text-align: right; vertical-align:top;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" style="text-align: right; vertical-align:top;" disabled></td>
 
                           </tr>
                         </tbody>
@@ -760,19 +814,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div> 
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusBelanja btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnBelanja btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnBelanja btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -780,20 +835,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
 <div id="CariSubUnit" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
           <h4>Daftar Sub Unit</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
            <div class="form-group">
              <div class="col-sm-12">
-                <table id='tblCariSubUnit' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                <table id='tblCariSubUnit' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -806,33 +859,32 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div>  
         </div>
       </div>
     </div>
-</div>
  
 <div id="cariAktivitasASB" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
           <h4>Daftar Aktivitas dalam ASB</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
            <div class="form-group">
              <div class="col-sm-12">
-                <table id='tblCariAktivitasASB' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                <table id='tblCariAktivitasASB' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -845,26 +897,25 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div>  
         </div>
       </div>
     </div>
-</div>
 
 <div id="cariLokasiModal" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
           <h4>Daftar Referensi Lokasi</h4>
         </div>
         <div class="modal-body">
@@ -875,7 +926,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#wilayah" aria-controls="wilayah" role="tab" data-toggle="tab">Lokasi Kewilayahan</a></li>
                       <li><a href="#teknis" aria-controls="teknis" role="tab-kv" data-toggle="tab">Lokasi Teknis</a></li>
-                      <li><a href="#luardaerah" aria-controls="luar" role="tab-kv" data-toggle="tab">Lokasi Luar Daerah</a></li>
+                      <li><a href="#luardaerah" aria-controls="luar" role="tab-kv" data-toggle="tab">Lokasi Lainnya</a></li>
                     </ul>
                     
                     <div class="tab-content">
@@ -887,7 +938,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                 <select type="text" class="form-control kecamatan" id="kecamatan" name="kecamatan"></select>
                             </div>
                         </div>
-                        <table id='tblLokasiWilayah' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id='tblLokasiWilayah' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                   <tr>
                                     <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -900,7 +951,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </div>
                         <div role="tabpanel" class="tab-pane fade in" id="teknis">
                         <br>
-                        <table id='tblLokasiTeknis' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id='tblLokasiTeknis' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                   <tr>
                                     <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -913,7 +964,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </div>
                         <div role="tabpanel" class="tab-pane fade in" id="luardaerah">
                         <br>
-                        <table id='tblLokasiLuar' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id='tblLokasiLuar' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                   <tr>
                                     <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -929,33 +980,32 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div>  
         </div>
       </div>
     </div>
-</div>
 
 <div id="cariRekening" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
   <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
     <div class="modal-header">
-        {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
         <h4>Daftar Rekening</h4>
     </div>
     <div class="modal-body">
       <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
         <div class="form-group">
           <div class="col-sm-12">
-            <table id='tblRekening' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+            <table id='tblRekening' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -969,20 +1019,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </form>
+    </div>
       <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div> 
       </div>
     </div>
     </div>
-  </div>
 
   <div id="cariItemSSH" class="modal fade" role="dialog" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
   <div class="modal-dialog modal-lg"  >
@@ -1005,11 +1055,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
    <div class="form-group">
    <div class="col-sm-12">
-      <table id='tblItemSSH' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+      <table id='tblItemSSH' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Item SSH</th>
+                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
                 </tr>
           </thead>
@@ -1019,17 +1070,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
     </div>
   </form>
-  <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
   </div>
+  <div class="modal-footer">
+    <div class="row">
+        <div class="col-sm-2 text-left idbtnHapusKeg">
+        </div>
+        <div class="col-sm-10 text-right">
+            <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+        </div>
+    </div>
+  </div>  
   </div>
   </div>
   </div>
@@ -1050,6 +1101,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <textarea type="name" class="form-control" id="uraian_aktivitas_asb_load" name="uraian_aktivitas_asb_load" rows="3" disabled=""></textarea>
                     </div>
                 </div>
+              <div class="form-group rbSumberAktivitas"> 
+                  <label for="sumber_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Biaya :</label>
+                  <div class="col-sm-6">
+                    <label>
+                      <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="0"> Biaya Tetap (Fix) 
+                    </label>
+                    <label>
+                      <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="1"> Tanpa Biaya Tetap (Non Fix)
+                    </label>
+                    <label>
+                      <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="2"> Semua Biaya
+                    </label>
+                  </div>
+                </div>
               <div class="form-group">
                     <label class="control-label col-sm-3" for="">Zona Wilayah SSH :</label>
                     <div class="col-sm-8">
@@ -1060,7 +1125,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
                 <div class="col-sm-4">
                   <div class="input-group">
-                      <input type="text" class="form-control number" id="v1_load" name="v1_load">
+                      <input type="text" class="form-control number" id="v1_load" name="v1_load" disabled>
                       <span class="input-group-addon" id="satuan1_load"></span>
                   </div>
                 </div>
@@ -1069,26 +1134,24 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
                 <div class="col-sm-4">
                   <div class="input-group">
-                      <input type="text" class="form-control number" id="v2_load" name="v2_load">
+                      <input type="text" class="form-control number" id="v2_load" name="v2_load" disabled>
                       <span class="input-group-addon" id="satuan2_load"></span>
                   </div>
                 </div>
               </div>
-          </form>
-          </div>
+        </form>
+      </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                    <button type="button" class="btn btn-sm btn-success btnUnLoadAsb btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooUnLoadAsb" class="fa fa-stack-overflow"></i></span>Reload Belanja</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-primary btnLoadAsb btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooLoadAsb" class="fa fa-calculator"></i></span>Proses Load Belanja</button>
+                        <button type="button" class="btn btn-success btnLoadAsb btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooLoadAsb" class="fa fa-calculator fa-fw fa-lg"></i></span>Proses Load Belanja</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -1096,7 +1159,60 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
         </div>
       </div>
+
+  <!--Modal CopyDataASB -->
+  <div id="ModalCopyBelanja" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"> Copy Data Belanja dari Lokasi Lain</h4>
+        </div>
+      <div class="modal-body">
+          <form name="frmModalCopyBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+              <div class="form-group">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="col-sm-12">
+                <table id='tblCopyBelanja' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                          <tr>
+                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle">Nama Aktivitas</th>
+                            <th style="text-align: center; vertical-align:middle">Uraian Lokasi Pelaksanaan</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+              </div>
+              </div>
+            </form>          
+      </div>
+      <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left"></div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div>
+      </div>
     </div>
+  </div>
+
+<div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <h4><strong>Sedang proses...</strong></h4>
+            <i class="fa fa-spinner fa-pulse fa-5x fa-fw text-primary"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @endsection
 
@@ -1104,13 +1220,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 <script>
 $(document).ready(function(){
 
+var detInProg = Handlebars.compile($("#details-inProg").html());
+var detInKeg = Handlebars.compile($("#details-inKeg").html());
+
 function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
-    html += message;
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
+
+    setTimeout(function() {
+        $('#pesanx').removeClass('in');
+         }, 3500);
+
   };
 
 $('.page-alert .close').click(function(e) {
@@ -1119,6 +1242,17 @@ $('.page-alert .close').click(function(e) {
     });
 
 $('[data-toggle="popover"]').popover();
+
+$('.display').DataTable({
+      dom : 'BfRtip',
+      autoWidth : false,
+      bDestroy: true,
+  });
+
+$(".disabled").click(function (e) {
+        e.preventDefault();
+        return false;
+});
 
 var prog_rpjmd,prog_rkpd;
 var prog_renja,prog_renstra;
@@ -1155,6 +1289,13 @@ $('#v2_load').number(true,2,',', '.');
 $('#volume_1').number(true,2,',', '.');
 $('#volume_2').number(true,2,',', '.');
 
+$('#divTambahAktivitas').hide();
+$('#divTambahPelaksana').hide();
+$('#divTambahLokasi').hide();
+$('#divImportASB').hide();
+$('#divAddSSH').hide();
+$('#divImportASB').hide();
+
 function LoadSatuanPublik(id_asb){
 var x
       if(id_asb==null || id_asb==undefined || id_asb == ""){
@@ -1185,9 +1326,7 @@ $.ajax({
 }
 
 
-
 $.ajax({
-
     type: "GET",
     url: './blang/getUnitRenja',
     dataType: "json",
@@ -1206,6 +1345,7 @@ $.ajax({
           }
           }
 });
+
 
 $.ajax({
           type: "GET",
@@ -1251,8 +1391,6 @@ $.ajax({
           dataType: "json",
           success: function(data) {
 
-          // console.log(data)  
-
           var j = data.length;
           var post, i;
 
@@ -1276,40 +1414,9 @@ $.ajax({
           }
       });
 
-  var rekening = $('#tblRekening').DataTable( {
-        processing: true,
-        serverSide: true,
-        dom: 'BfrtIp',
-        "ajax": {"url": "blang/getRekening/0/0"},
-        "columns": [
-              { data: 'no_urut'},
-              { data: 'kd_rekening'},
-              { data: 'nm_rekening'}
-            ],
-        "order": [[0, 'asc']],
-        "bDestroy": true
-  });
-
-  // var itemSSH = $('#tblItemSSH').DataTable( {
-  //       processing: true,
-  //       serverSide: true,
-  //       dom: 'BfrtIp',
-  //       "ajax": {"url": "blang/getItemSSH/0"},
-  //       "columns": [
-  //             { data: 'no_urut'},
-  //             { data: 'uraian_tarif_ssh'},
-  //             { data: 'uraian_satuan'}
-  //           ],
-  //       "order": [[0, 'asc']],
-  //       "bDestroy": true
-  // });
-
-var itemSSH
-
+var itemSSH,rekening;
 $(document).on('click', '#btnparam_cari', function() {
-
   param=$('#param_cari').val();
-
   itemSSH = $('#tblItemSSH').DataTable( {
         // retrieve: true,
         processing: true,
@@ -1319,6 +1426,7 @@ $(document).on('click', '#btnparam_cari', function() {
         "ajax": {"url": "blang/getItemSSH/"+zona_temp+"/"+param.toLowerCase()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
+              { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
               { data: 'uraian_satuan', sClass: "dt-center",width:"100px"}
             ],
@@ -1356,39 +1464,99 @@ $(document).on('click', '#btnparam_cari', function() {
 
   } );
 
-var prog_renja_tbl
+var prog_renja_tbl;
 function loadTblProgRenja(tahun,unit){
    prog_renja_tbl=$('#tblProgram').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getProgramRenja/"+tahun+"/"+unit},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
                   "columns": [
+                        {
+                            "className":      'details-control',
+                            "orderable":      false,
+                            "searchable":      false,
+                            "data":           null,
+                            "defaultContent": '',
+                            "width" : "5px"
+                        },
                         { data: 'urut', sClass: "dt-center"},
                         { data: 'uraian_program_renja'},
+                        { data: 'jml_indikator', sClass: "dt-center"},
+                        // { data: 'jml_0i', sClass: "dt-center"},
                         { data: 'jml_kegiatan', sClass: "dt-center"},
+                        { data: 'jml_0k', sClass: "dt-center"},
                         { data: 'jml_pagu', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'jml_musren', sClass: "dt-right",
-                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},                        
-                        { data: 'jml_aktivitas', sClass: "dt-center"},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'icon','searchable': false, 'orderable':false,sClass: "dt-center",
+                            render: function(data, type, row,meta) {
+                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
+                          }},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var keg_renja_tbl
-function loadTblKegiatanRenja(id_program){
+var tblInProg;
+function initInProg(tableId, data) {
+    tblInProg=$('#' + tableId).DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: data.details_url,
+            dom : 'BfRtIP',
+            autoWidth: false,
+            "language": {
+                      "decimal": ",",
+                      "thousands": "."},
+            "columns": [
+                        { data: 'urut', sClass: "dt-center"},
+                        { data: 'uraian_indikator_program_renja'},
+                        { data: 'target_renstra', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'target_renja', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",
+                            render: function(data, type, row,meta) {
+                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
+                          }},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                      ],
+            "order": [[0, 'asc']],
+            "bDestroy": true
+        })
 
+}
+
+$('#tblProgram tbody').on('click', 'td.details-control', function () {
+
+        var tr = $(this).closest('tr');
+        var row = prog_renja_tbl.row( tr );
+        var tableId = 'inProg-' + row.data().id_renja_program;
+
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            row.child(detInProg(row.data())).show();
+            initInProg(tableId, row.data());
+            tr.addClass('shown');
+            tr.next().find('td').addClass('no-padding bg-gray');
+        }    
+  });
+
+var keg_renja_tbl;
+function loadTblKegiatanRenja(id_program){
     keg_renja_tbl=$('#tblKegiatanRenja').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getKegiatanRenja/"+id_program},
                   "language": {
                       "decimal": ",",
@@ -1409,19 +1577,20 @@ function loadTblKegiatanRenja(id_program){
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var aktivitas_tbl
+var aktivitas_tbl;
 function loadTblAktivitas(id_renja){
     aktivitas_tbl=$('#tblAktivitas').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getAktivitas/"+id_renja},
                   "language": {
                       "decimal": ",",
@@ -1437,6 +1606,10 @@ function loadTblAktivitas(id_renja){
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_pagu_pelaksana', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_vol1', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_vol2', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'persen_musren', sClass: "dt-center",
                             render: function(data, type, row,meta) {
                             return row.pagu_musren+'%';}},
@@ -1446,19 +1619,20 @@ function loadTblAktivitas(id_renja){
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var pelaksana_tbl
+var pelaksana_tbl;
 function loadTblPelaksana(id_aktivitas){
     pelaksana_tbl=$('#tblPelaksana').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getPelaksanaAktivitas/"+id_aktivitas},
                   "language": {
                       "decimal": ",",
@@ -1471,23 +1645,29 @@ function loadTblPelaksana(id_aktivitas){
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_lokasi', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_vol1', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_vol2', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var lokasi_tbl
+var lokasi_tbl,vol1_temp,vol2_temp,id_sat_asb1,id_sat_asb2;
+var id_sat_lok1,id_sat_lok2,nm_sat_lok1,nm_sat_lok2;
 function loadTblLokasi(id_pelaksana){
     lokasi_tbl=$('#tblLokasi').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getLokasiAktivitas/"+id_pelaksana},
                   "language": {
                       "decimal": ",",
@@ -1497,19 +1677,24 @@ function loadTblLokasi(id_pelaksana){
                         { data: 'nama_lokasi'},
                         { data: 'jml_pagu', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'volume_1', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'volume_2', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var belanja_renja_tbl
+var belanja_renja_tbl;
 function loadTblBelanja(lokasi){
    belanja_renja_tbl=$('#tblBelanja').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BFRtIp',
+                  autoWidth : false,
                   "ajax": {"url": "./blang/getBelanja/"+lokasi},
                   "language": {
                       "decimal": ",",
@@ -1526,20 +1711,70 @@ function loadTblBelanja(lokasi){
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_belanja', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 }
 
-var cariAktivitasASB
-$(document).on('click', '.btnCariASB', function() {
-  $('#cariAktivitasASB').modal('show'); 
+var CopyBelanjaTbl;
+$(document).on('click', '#btnCopyBelanja', function() {
+  $('#ModalCopyBelanja').modal('show'); 
 
+  CopyBelanjaTbl = $('#tblCopyBelanja').DataTable( {
+        processing: true,
+        serverSide: true,
+        autoWidth : false,
+        dom: 'bfrtIp',
+        "ajax": {"url": "./blang/getLokasiCopy/"+id_aktivitas_temp+"/"+id_pelaksana_temp+"/"+id_lokasi_temp},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_aktivitas_kegiatan'},
+              { data: 'nama_lokasi'},
+              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    });
+});
+
+$(document).on('click', '#btnProsesCopyBelanja', function() {
+
+    var data = CopyBelanjaTbl.row( $(this).parents('tr') ).data();
+
+    $('#ModalCopyBelanja').modal('hide');
+    $('#ModalProgress').modal('show');
+
+    $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './blang/getBelanjaCopy',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_lokasi': data.id_lokasi_renja,
+        'id_lokasi_new': id_lokasi_temp,
+      },    
+      success: function(data) {
+        $('#tblBelanja').DataTable().ajax.reload();
+        $('#tblLokasi').DataTable().ajax.reload();
+        $('#tblPelaksana').DataTable().ajax.reload();
+        createPesan(data.pesan,"success");
+        $('#ModalProgress').modal('hide');
+      }
+    });
+});
+
+var cariAktivitasASB;
+$(document).on('click', '.btnCariASB', function() {   
   cariAktivitasASB = $('#tblCariAktivitasASB').DataTable( {
         processing: true,
         serverSide: true,
+        autoWidth : false,
         dom: 'bfrtIp',
         "ajax": {"url": "./blang/getAktivitasASB/"+tahun_temp},
         "columns": [
@@ -1549,15 +1784,17 @@ $(document).on('click', '.btnCariASB', function() {
         "order": [[0, 'asc']],
         "bDestroy": true
     });
+  $('#cariAktivitasASB').modal('show');
 });
 
-var CariSubUnit
+var CariSubUnit;
 $(document).on('click', '.btnCariSubUnit', function() {
   $('#CariSubUnit').modal('show'); 
 
   CariSubUnit = $('#tblCariSubUnit').DataTable( {
         processing: true,
         serverSide: true,
+        autoWidth : false,
         dom: 'bfrtIp',
         "ajax": {"url": "./blang/getSubUnit/"+unit_temp},
         "columns": [
@@ -1569,35 +1806,15 @@ $(document).on('click', '.btnCariSubUnit', function() {
     });
 });
 
-var cariLokasiDesa
-var cariLokasiTeknis
-var cariLokasiLuar
-
-$.ajax({
-    type: "GET",
-    url: './blang/getKecamatan',
-    dataType: "json",
-
-    success: function(data) {
-
-          var j = data.length;
-          var post, i;
-
-          $('select[name="kecamatan"]').empty();
-          $('select[name="kecamatan"]').append('<option value="0">---Pilih Kecamatan---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="kecamatan"]').append('<option value="'+ post.id_kecamatan +'">'+ post.nama_kecamatan +'</option>');
-          }
-          }
-  }); 
+var cariLokasiDesa,cariLokasiTeknis,cariLokasiLuar;
+var sbr_aktivitas;
 
 $( "#kecamatan" ).change(function() {
 
     cariLokasiDesa = $('#tblLokasiWilayah').DataTable( {
         processing: true,
         serverSide: true,
+        autoWidth : false,
         dom: 'bfrtIp',
         "ajax": {"url": "./blang/getLokasiDesa/"+$('#kecamatan').val()},
         "columns": [
@@ -1610,12 +1827,34 @@ $( "#kecamatan" ).change(function() {
 
 });
 
-$(document).on('click', '.btnCariLokasi', function() {
-  
+$(document).on('click', '.btnCariLokasi', function() { 
+
+  $.ajax({
+    type: "GET",
+    url: './blang/getKecamatan',
+    dataType: "json",
+
+    success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="kecamatan"]').empty();
+          $('select[name="kecamatan"]').append('<option value="0">---Pilih Kecamatan---</option>');
+          $('select[name="kecamatan"]').append('<option value="9999">---Wilayah Kecamatan---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="kecamatan"]').append('<option value="'+ post.id_kecamatan +'">'+ post.nama_kecamatan +'</option>');
+          }
+          }
+  }); 
+
   cariLokasiDesa = $('#tblLokasiWilayah').DataTable( {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
+        autoWidth : false,
         "ajax": {"url": "./blang/getLokasiDesa/0"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
@@ -1629,6 +1868,7 @@ $(document).on('click', '.btnCariLokasi', function() {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
+        autoWidth : false,
         "ajax": {"url": "./blang/getLokasiTeknis"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
@@ -1642,6 +1882,7 @@ $(document).on('click', '.btnCariLokasi', function() {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
+        autoWidth : false,
         "ajax": {"url": "./blang/getLokasiLuarDaerah"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
@@ -1664,7 +1905,7 @@ $('#tblLokasiWilayah').on( 'dblclick', 'tr', function () {
 
 
     document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_pelaksana").value = data.nama_lokasi;
+    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
 
     $('#cariLokasiModal').modal('hide');    
@@ -1679,7 +1920,7 @@ $('#tblLokasiTeknis').on( 'dblclick', 'tr', function () {
     document.getElementById("nm_lokasi").value = data.nama_lokasi;
 
     document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_pelaksana").value = data.nama_lokasi;
+    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
     $('#cariLokasiModal').modal('hide');    
 
@@ -1693,7 +1934,7 @@ $('#tblLokasiLuar').on( 'dblclick', 'tr', function () {
     document.getElementById("nm_lokasi").value = data.nama_lokasi;
 
     document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_pelaksana").value = data.nama_lokasi;
+    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
     $('#cariLokasiModal').modal('hide');    
 
@@ -1719,6 +1960,86 @@ $('#tblCariSubUnit').on( 'dblclick', 'tr', function () {
 
   });
 
+function back2program(){
+  $('#divTambahAktivitas').hide();
+  $('#divTambahPelaksana').hide();
+  $('#divTambahLokasi').hide();
+  $('#divImportASB').hide();
+  $('#divAddSSH').hide();
+  $('#divImportASB').hide();
+
+  $('.nav-tabs a[href="#program"]').tab('show');
+  loadTblProgRenja(tahun_temp,unit_temp);
+}
+
+$(document).on('click', '.backProgram', function() {
+  back2program();
+});
+
+function back2kegiatan(){
+  $('#divTambahAktivitas').hide();
+  $('#divTambahPelaksana').hide();
+  $('#divTambahLokasi').hide();
+  $('#divImportASB').hide();
+  $('#divAddSSH').hide();
+  $('#divImportASB').hide();
+
+  $('.nav-tabs a[href="#kegiatan"]').tab('show');
+  loadTblKegiatanRenja(id_renja_program_temp);
+}
+
+$(document).on('click', '.backKegiatan', function() {
+  back2kegiatan();
+});
+
+function back2aktivitas(){
+  $('#divTambahAktivitas').show();
+  $('#divTambahPelaksana').hide();
+  $('#divTambahLokasi').hide();
+  $('#divImportASB').hide();
+  $('#divAddSSH').hide();
+  $('#divImportASB').hide();
+
+  $('.nav-tabs a[href="#aktivitas"]').tab('show');
+  loadTblAktivitas(id_pelaksana_temp);
+}
+
+$(document).on('click', '.backAktivitas', function() {
+  back2aktivitas();
+});
+
+function back2pelaksana(){
+  $('#divTambahAktivitas').hide();
+  $('#divTambahPelaksana').show();
+  $('#divTambahLokasi').hide();
+  $('#divImportASB').hide();
+  $('#divAddSSH').hide();
+  $('#divImportASB').hide();
+
+  $('.nav-tabs a[href="#pelaksana"]').tab('show');
+  loadTblPelaksana(id_renja_temp);
+}
+
+$(document).on('click', '.backPelaksana', function() {
+  back2pelaksana();
+});
+
+function back2lokasi(){
+  $('#divTambahAktivitas').hide();
+  $('#divTambahPelaksana').hide();
+  $('#divTambahLokasi').show();
+  $('#divImportASB').hide();
+  $('#divAddSSH').hide();
+  $('#divImportASB').hide();
+
+  $('.nav-tabs a[href="#lokasi"]').tab('show');
+  loadTblLokasi(id_aktivitas_temp);
+}
+
+$(document).on('click', '.backLokasi', function() {
+  back2lokasi();
+});
+
 $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
 
     var data = prog_renja_tbl.row(this).data();
@@ -1730,8 +2051,10 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
 
     document.getElementById("nm_program_kegrenja").innerHTML =prog_renja;
 
-    $('.nav-tabs a[href="#kegiatan"]').tab('show');
-    loadTblKegiatanRenja(id_renja_program_temp);
+    // $('.nav-tabs a[href="#kegiatan"]').tab('show');
+    // loadTblKegiatanRenja(id_renja_program_temp);
+
+    back2kegiatan();
 
 });
 
@@ -1744,11 +2067,10 @@ $('#tblKegiatanRenja tbody').on( 'dblclick', 'tr', function () {
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
-    document.getElementById("nm_program_aktivitas").innerHTML =prog_renja;
-    document.getElementById("nm_kegiatan_aktivitas").innerHTML =keg_renja;
+    document.getElementById("nm_program_pelaksana").innerHTML =prog_renja;
+    document.getElementById("nm_kegiatan_pelaksana").innerHTML =keg_renja;
 
-    $('.nav-tabs a[href="#aktivitas"]').tab('show');
-    loadTblAktivitas(id_renja_temp);
+    back2pelaksana();
 
 });
 
@@ -1761,8 +2083,7 @@ $(document).on('click', '.view-kegiatan', function() {
 
     document.getElementById("nm_program_kegrenja").innerHTML =prog_renja;
 
-    $('.nav-tabs a[href="#kegiatan"]').tab('show');
-    loadTblKegiatanRenja(id_renja_program_temp);
+    back2kegiatan();
 });
 
 $('#tblAktivitas tbody').on( 'dblclick', 'tr', function () {
@@ -1770,31 +2091,37 @@ $('#tblAktivitas tbody').on( 'dblclick', 'tr', function () {
     var data = aktivitas_tbl.row(this).data();
 
     aktivitas_renja = data.uraian_aktivitas_kegiatan;
-    id_aktivitas_temp = data.id_aktivitas_renja;    
+    id_aktivitas_temp = data.id_aktivitas_renja;
+    id_sat_asb1 = data.id_satuan_1;
+    id_sat_asb2 = data.id_satuan_2;
+    sbr_aktivitas=data.sumber_aktivitas;  
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
-    document.getElementById("nm_program_pelaksana").innerHTML =prog_renja;
-    document.getElementById("nm_kegiatan_pelaksana").innerHTML =keg_renja;
-    document.getElementById("nm_aktivitas_pelaksana").innerHTML =aktivitas_renja;
+    
+    document.getElementById("nm_program_lokasi").innerHTML =prog_renja;
+    document.getElementById("nm_kegiatan_lokasi").innerHTML =keg_renja;
+    document.getElementById("nm_aktivitas_lokasi").innerHTML =aktivitas_renja;
+    document.getElementById("nm_sub_lokasi").innerHTML =nm_sub_temp;
 
-    $('.nav-tabs a[href="#pelaksana"]').tab('show');
-    loadTblPelaksana(id_aktivitas_temp);
+    back2lokasi();
 
 });
 
 $(document).on('click', '.view-aktivitas', function() {
 
-    keg_renja = $(this).data('uraian_kegiatan_renja');
-    id_renja_temp = $(this).data('id_renja');
+    var data = pelaksana_tbl.row( $(this).parents('tr') ).data();
+
+    nm_sub_temp = data.nm_sub;
+    id_pelaksana_temp = data.id_pelaksana_renja;
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
     document.getElementById("nm_program_aktivitas").innerHTML =prog_renja;
     document.getElementById("nm_kegiatan_aktivitas").innerHTML =keg_renja;
+    document.getElementById("nm_aktivitas_pelaksana").innerHTML =nm_sub_temp;
 
-    $('.nav-tabs a[href="#aktivitas"]').tab('show');
-    loadTblAktivitas(id_renja_temp);
+    back2aktivitas();
 });
 
 $('#tblPelaksana tbody').on( 'dblclick', 'tr', function () {
@@ -1804,37 +2131,40 @@ $('#tblPelaksana tbody').on( 'dblclick', 'tr', function () {
     nm_sub_temp = data.nm_sub;
     id_pelaksana_temp = data.id_pelaksana_renja;
     tahun_temp = $('#tahun_rkpd').val();
-    unit_temp = $('#id_unit').val();
+    unit_temp = $('#id_unit').val();    
 
-    document.getElementById("nm_program_lokasi").innerHTML =prog_renja;
-    document.getElementById("nm_kegiatan_lokasi").innerHTML =keg_renja;
-    document.getElementById("nm_aktivitas_lokasi").innerHTML =aktivitas_renja;
-    document.getElementById("nm_sub_lokasi").innerHTML =nm_sub_temp;
+    document.getElementById("nm_program_aktivitas").innerHTML =prog_renja;
+    document.getElementById("nm_kegiatan_aktivitas").innerHTML =keg_renja;
+    document.getElementById("nm_aktivitas_pelaksana").innerHTML =nm_sub_temp;
 
-    $('.nav-tabs a[href="#lokasi"]').tab('show');
-    loadTblLokasi(id_pelaksana_temp);
+    back2aktivitas();
 
 });
 
 $(document).on('click', '.view-pelaksana', function() {
 
-    aktivitas_renja = $(this).data('uraian_aktivitas_kegiatan');
-    id_aktivitas_temp = $(this).data('id_aktivitas_renja');    
+  var data = keg_renja_tbl.row( $(this).parents('tr') ).data(); 
+
+    keg_renja = data.uraian_kegiatan_renja;
+    id_renja_temp = data.id_renja;  
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
     document.getElementById("nm_program_pelaksana").innerHTML =prog_renja;
     document.getElementById("nm_kegiatan_pelaksana").innerHTML =keg_renja;
-    document.getElementById("nm_aktivitas_pelaksana").innerHTML =aktivitas_renja;
 
-    $('.nav-tabs a[href="#pelaksana"]').tab('show');
-    loadTblPelaksana(id_aktivitas_temp);
+    back2pelaksana();
 });
 
 $(document).on('click', '.view-lokasi', function() {
 
-    nm_sub_temp = $(this).data('nm_sub');
-    id_pelaksana_temp = $(this).data('id_pelaksana_renja');
+  var data = aktivitas_tbl.row( $(this).parents('tr') ).data();   
+
+    aktivitas_renja = data.uraian_aktivitas_kegiatan;
+    id_aktivitas_temp = data.id_aktivitas_renja; 
+    id_sat_asb1 = data.id_satuan_1;
+    id_sat_asb2 = data.id_satuan_2; 
+    sbr_aktivitas=data.sumber_aktivitas; 
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
@@ -1843,8 +2173,7 @@ $(document).on('click', '.view-lokasi', function() {
     document.getElementById("nm_aktivitas_lokasi").innerHTML =aktivitas_renja;
     document.getElementById("nm_sub_lokasi").innerHTML =nm_sub_temp;
 
-    $('.nav-tabs a[href="#lokasi"]').tab('show');
-    loadTblLokasi(id_pelaksana_temp);
+    back2lokasi();
 });
 
 $('#tblLokasi tbody').on( 'dblclick', 'tr', function () {
@@ -1855,10 +2184,14 @@ $('#tblLokasi tbody').on( 'dblclick', 'tr', function () {
     id_lokasi_temp = data.id_lokasi_renja;
     id_asb_temp = data.id_aktivitas_asb;
     ur_asb_temp = data.uraian_aktivitas_kegiatan;
+    vol1_temp=data.volume_1;
+    vol2_temp=data.volume_2;
+    id_sat_lok1=data.id_satuan_1;
+    id_sat_lok2=data.id_satuan_2;
+    nm_sat_lok1=data.sat1_display;
+    nm_sat_lok2=data.sat2_display;
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
-
-    // alert(data.sumber_aktivitas);
 
     document.getElementById("nm_program_belanja").innerHTML =prog_renja;
     document.getElementById("nm_kegiatan_belanja").innerHTML =keg_renja;
@@ -1866,15 +2199,17 @@ $('#tblLokasi tbody').on( 'dblclick', 'tr', function () {
     document.getElementById("nm_sub_belanja").innerHTML =nm_sub_temp;
     document.getElementById("nm_lokasi_belanja").innerHTML =nm_lokasi_temp;
 
-    if(data.sumber_aktivitas == 0){
-      $('#btnTambahBelanja').hide();
-      $('#btnTambahBelanjaASB').show();
-    } else {
-      $('#btnTambahBelanja').show();
-      $('#btnTambahBelanjaASB').hide();
-    }
+    $('#divTambahAktivitas').hide();
+    $('#divTambahPelaksana').hide();
+    $('#divTambahLokasi').hide();
 
-    
+    if(data.sumber_aktivitas == 0){
+      $('#divAddSSH').hide();
+      $('#divImportASB').show();
+    } else {
+      $('#divAddSSH').show();
+      $('#divImportASB').hide();
+    }    
 
     $('.nav-tabs a[href="#belanja"]').tab('show');
     loadTblBelanja(id_lokasi_temp);
@@ -1883,10 +2218,18 @@ $('#tblLokasi tbody').on( 'dblclick', 'tr', function () {
 
 $(document).on('click', '.view-belanja', function() {
 
-    nm_lokasi_temp = $(this).data('nama_lokasi');
-    id_lokasi_temp = $(this).data('id_lokasi_renja');
-    id_asb_temp = $(this).data('id_aktivitas_asb');
-    ur_asb_temp = $(this).data('uraian_aktivitas_kegiatan');
+  var data = lokasi_tbl.row( $(this).parents('tr') ).data();
+
+    nm_lokasi_temp = data.nama_lokasi;
+    id_lokasi_temp = data.id_lokasi_renja;
+    id_asb_temp = data.id_aktivitas_asb;
+    ur_asb_temp = data.uraian_aktivitas_kegiatan;
+    vol1_temp=data.volume_1;
+    vol2_temp=data.volume_2;
+    id_sat_lok1=data.id_satuan_1;
+    id_sat_lok2=data.id_satuan_2;
+    nm_sat_lok1=data.sat1_display;
+    nm_sat_lok2=data.sat2_display;
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
@@ -1896,14 +2239,16 @@ $(document).on('click', '.view-belanja', function() {
     document.getElementById("nm_sub_belanja").innerHTML =nm_sub_temp;
     document.getElementById("nm_lokasi_belanja").innerHTML =nm_lokasi_temp;
 
-    // alert($(this).data('sumber_aktivitas'));
+    $('#divTambahAktivitas').hide();
+    $('#divTambahPelaksana').hide();
+    $('#divTambahLokasi').hide();
 
-    if($(this).data('sumber_aktivitas') == 0){
-      $('#btnTambahBelanja').hide();
-      $('#btnTambahBelanjaASB').show();
+    if(data.sumber_aktivitas == 0){
+      $('#divAddSSH').hide();
+      $('#divImportASB').show();
     } else {
-      $('#btnTambahBelanja').show();
-      $('#btnTambahBelanjaASB').hide();
+      $('#divAddSSH').show();
+      $('#divImportASB').hide();
     }
 
     $('.nav-tabs a[href="#belanja"]').tab('show');
@@ -1943,27 +2288,30 @@ $( "#pagu_renja_kegiatan" ).change(function() {
 });
 
   $(document).on('click', '.edit-kegiatan', function() {
+
+    var data = keg_renja_tbl.row( $(this).parents('tr') ).data();    
         
       $('.btnKegiatan').removeClass('addKegiatanRenja');
       $('.btnKegiatan').addClass('editKegiatanRenja');      
       $('.form-horizontal').show();
-      $('.modal-title').text('Edit dan Reviu Kegiatan Renja pada '+$(this).data('nm_unit'));
-      $('#id_renja_kegiatan').val($(this).data('id_renja'));
-      $('#id_rkpd_ranwal_kegiatan').val($(this).data('id_rkpd_ranwal'));
-      $('#tahun_renja_kegiatan').val($(this).data('tahun_renja'));
-      $('#id_renja_program_kegiatan').val($(this).data('id_renja_program'));
-      $('#id_unit_kegiatan').val($(this).data('id_unit'));
-      $('#ur_kegiatan_renstra').val($(this).data('uraian_kegiatan_renstra'));
-      $('#ur_kegiatan_renja').val($(this).data('uraian_kegiatan_renja'));
-      $('#ur_kegiatan_ref').val($(this).data('kd_kegiatan') +" -" +$(this).data('nm_kegiatan'));
-      $('#no_urut_kegiatan').val($(this).data('no_urut'));
-      $('#pagu_renja_kegiatan').val($(this).data('pagu_tahun_kegiatan'));
-      $('#persen_musren').val($(this).data('persen_musren'));
-      $('#pagu_musren').val($(this).data('pagu_musrenbang'));
-      $('#keterangan_status_kegiatan').val($(this).data('ket_usulan'));
+      $('.modal-title').text('Edit dan Reviu Kegiatan Renja pada '+data.nm_unit);
+      $('#id_renja_kegiatan').val(data.id_renja);
+      $('#id_rkpd_ranwal_kegiatan').val(data.id_rkpd_ranwal);
+      $('#tahun_renja_kegiatan').val(data.tahun_renja);
+      $('#id_renja_program_kegiatan').val(data.id_renja_program);
+      $('#id_unit_kegiatan').val(data.id_unit);
+      $('#ur_kegiatan_renstra').val(data.uraian_kegiatan_renstra);
+      $('#ur_kegiatan_renja').val(data.uraian_kegiatan_renja);
+      $('#ur_kegiatan_ref').val(data.kd_kegiatan +" -" +data.nm_kegiatan);
+      $('#no_urut_kegiatan').val(data.no_urut);
+      $('#pagu_renja_kegiatan').val(data.pagu_tahun_kegiatan);
+      $('#persen_musren').val(data.persen_musren);
+      $('#pagu_musren').val(data.pagu_musrenbang);
+      $('#keterangan_status_kegiatan').val(data.ket_usulan);
+      $('#status_pelaksanaan_kegiatan').val(data.status_pelaksanaan_kegiatan);
 
       $('.chkKegiatan').show();
-      if($(this).data('status_rancangan')==1){
+      if(data.status_rancangan==1){
         $('.checkKegiatan').prop('checked',true);
       } else {
         $('.checkKegiatan').prop('checked',false);
@@ -1979,7 +2327,7 @@ $('.modal-footer').on('click', '.editKegiatanRenja', function() {
       } else {
         check_data = 0
       }
-      
+
                     $.ajaxSetup({
                        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
                     });
@@ -1995,9 +2343,11 @@ $('.modal-footer').on('click', '.editKegiatanRenja', function() {
                           'pagu_musrenbang' : $('#persen_musren').val(),
                           'pagu_musren' : $('#pagu_musren').val(),
                           'ket_usulan': $('#keterangan_status_kegiatan').val(),
+                          'status_pelaksanaan_kegiatan': $('#status_pelaksanaan_kegiatan').val(),
                           'status_rancangan' : check_data,
                       },
                       success: function(data) {
+                          console.log(data);
                           $('#tblKegiatanRenja').DataTable().ajax.reload();
                           $('#tblProgram').DataTable().ajax.reload();
                           if(data.status_pesan==1){
@@ -2011,15 +2361,21 @@ $('.modal-footer').on('click', '.editKegiatanRenja', function() {
 
 $( ".sumber_aktivitas" ).change(function() {
   if(document.frmModalAktivitas.sumber_aktivitas.value==0){
-      // document.getElementById("ur_aktivitas_kegiatan").setAttribute("disabled","disabled");
+      document.getElementById("ur_aktivitas_kegiatan").setAttribute("disabled","disabled");
       $('.btnCariASB').show();
+      $('#jenis_pembahasan').removeAttr("disabled");
+      $('#persen_musren_aktivitas').removeAttr("disabled");
       $('#id_satuan_publik').removeAttr("disabled");
+      $('#id_satuan_publik').val(0);
     } else {
-      // document.getElementById("ur_aktivitas_kegiatan").removeAttribute("disabled");
+      document.getElementById("ur_aktivitas_kegiatan").removeAttribute("disabled");
       $('.btnCariASB').hide();
+      $('#jenis_pembahasan').attr("disabled","disabled");
+      $('#persen_musren_aktivitas').attr("disabled","disabled");
       $('#id_satuan_publik').attr("disabled","disabled");
     }
 });
+
 
 $( "#pagu_aktivitas" ).change(function() {
   var x = $('#pagu_aktivitas').val();
@@ -2044,10 +2400,13 @@ $( ".jenis_pembahasan" ).change(function() {
     $('#persen_musren_aktivitas').val(0);
     $('#pagu_musren_aktivitas').val(0);
     document.getElementById("persen_musren_aktivitas").setAttribute("disabled","disabled");
+    $('#id_satuan_publik').attr("disabled","disabled");
+    $('#id_satuan_publik').val(0);
   } else {
     $('#persen_musren_aktivitas').val(0);
     $('#pagu_musren_aktivitas').val(0);
     document.getElementById("persen_musren_aktivitas").removeAttribute("disabled");
+    $('#id_satuan_publik').removeAttr("disabled");
   }
 });
 
@@ -2090,8 +2449,7 @@ $(document).on('click', '.add-aktivitas', function() {
       $('#id_renja_aktivitas').val(id_renja_temp);
       $('#id_aktivitas').val(null);
       $('#tahun_renja_aktivitas').val(tahun_temp);
-      $('#no_urut_aktivitas').val(0);
-      document.frmModalAktivitas.sumber_aktivitas[0].checked=true;
+      $('#no_urut_aktivitas').val(1);
       $('#ur_aktivitas_kegiatan').val(null);
       $('#id_aktivitas_asb').val(null);
       document.frmModalAktivitas.jenis_aktivitas[0].checked=true;
@@ -2101,10 +2459,14 @@ $(document).on('click', '.add-aktivitas', function() {
       $('#persen_musren_aktivitas').val(0);
       $('#pagu_musren_aktivitas').val(0);
 
+      document.frmModalAktivitas.sumber_aktivitas[0].checked=true;
+      document.getElementById("ur_aktivitas_kegiatan").setAttribute("disabled","disabled");
+      $('.btnCariASB').show();
+
       $('#id_satuan_publik').val(-1);
 
       $('#persen_musren_aktivitas').attr("disabled","disabled");
-      $('#id_satuan_publik').removeAttr("disabled");
+      $('#id_satuan_publik').attr("disabled","disabled");
 
       $('#ModalAktivitas').modal('show');
 
@@ -2178,47 +2540,55 @@ $('#ModalAktivitas').on('shown.bs.modal', function () {
 
 
 $(document).on('click', '.edit-aktivitas', function() {
+  
+    var data = aktivitas_tbl.row( $(this).parents('tr') ).data(); 
 
-    var nilai_musren = $(this).data('pagu_aktivitas')*($(this).data('pagu_musren')/100);
+    var nilai_musren = data.pagu_aktivitas*($(this).data('pagu_musren')/100);
     // LoadSatuanPublik($(this).data('id_aktivitas_asb'));
         
       $('.btnAktivitas').removeClass('addAktivitas');
       $('.btnAktivitas').addClass('editAktivitas');      
       $('.form-horizontal').show();
       $('.modal-title').text('Edit Aktivitas untuk kegiatan '+keg_renja);
-      $('#id_renja_aktivitas').val($(this).data('id_renja'));
-      $('#id_aktivitas').val($(this).data('id_aktivitas_renja'));
-      $('#tahun_renja_aktivitas').val($(this).data('tahun_renja'));
-      $('#no_urut_aktivitas').val($(this).data('no_urut'));
-      document.frmModalAktivitas.sumber_aktivitas[$(this).data('sumber_aktivitas')].checked=true;
-      $('#ur_aktivitas_kegiatan').val($(this).data('uraian_aktivitas_kegiatan'));
-      $('#id_aktivitas_asb').val($(this).data('id_aktivitas_asb'));
-      document.frmModalAktivitas.jenis_aktivitas[$(this).data('jenis_kegiatan')].checked=true;
-      $('#sumber_dana').val($(this).data('sumber_dana'));
-      $('#pagu_aktivitas').val($(this).data('pagu_aktivitas'));      
-      document.frmModalAktivitas.jenis_pembahasan[$(this).data('status_musren')].checked=true;
-      $('#persen_musren_aktivitas').val($(this).data('pagu_musren'));
+      $('#id_renja_aktivitas').val(data.id_renja);
+      $('#id_aktivitas').val(data.id_aktivitas_renja);
+      $('#tahun_renja_aktivitas').val(data.tahun_renja);
+      $('#no_urut_aktivitas').val(data.nomor);
+      document.frmModalAktivitas.sumber_aktivitas[data.sumber_aktivitas].checked=true;
+      $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);
+      $('#id_aktivitas_asb').val(data.id_aktivitas_asb);
+      document.frmModalAktivitas.jenis_aktivitas[data.jenis_kegiatan].checked=true;
+      $('#sumber_dana').val(data.sumber_dana);
+      $('#pagu_aktivitas').val(data.pagu_aktivitas);      
+      document.frmModalAktivitas.jenis_pembahasan[data.status_musren].checked=true;
+      $('#persen_musren_aktivitas').val(data.pagu_musren);
       $('#pagu_musren_aktivitas').val(nilai_musren);      
 
-      $('#id_satuan_publik').val($(this).data('id_satuan_publik'));
+      $('#id_satuan_publik').val(data.id_satuan_publik);
 
       $('.chkAktivitas').show();
-      if($(this).data('status_data')==1){
+      if(data.status_data==1){
         $('.checkAktivitas').prop('checked',true);
       } else {
         $('.checkAktivitas').prop('checked',false);
       }
 
-      if($(this).data('status_musren') == 1){
+      if(data.status_musren == 1){
         $('#persen_musren_aktivitas').removeAttr("disabled");
+        $('#id_satuan_publik').removeAttr("disabled");
       } else {
         $('#persen_musren_aktivitas').attr("disabled","disabled");
+        $('#id_satuan_publik').attr("disabled","disabled");
       }
       
 
-      if($(this).data('sumber_aktivitas')==0){
+      if(data.sumber_aktivitas==0){
+        $('#jenis_pembahasan').removeAttr("disabled");
+        $('#persen_musren_aktivitas').removeAttr("disabled");
         $('#id_satuan_publik').removeAttr("disabled");
       } else {
+        $('#jenis_pembahasan').attr("disabled","disabled");
+        $('#persen_musren_aktivitas').attr("disabled","disabled");
         $('#id_satuan_publik').attr("disabled","disabled");
       }
       
@@ -2236,18 +2606,6 @@ $(document).on('click', '.edit-aktivitas', function() {
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
-
-      // $.ajax({
-
-      //   type: "GET",
-      //   url: './blang/getPaguPelaksana/'+$('#tahun_renja_aktivitas').val()+"/"+$('#id_aktivitas').val(),
-      //   // dataType: "json",
-
-      //   success: function(data) {
-      //     console.log(data);
-      //     alert(data[0].jml_pagu);
-          // var pagu;
-          // pagu = data[0];
           $.ajax({
               type: 'post',
               url: 'blang/editAktivitas',
@@ -2280,8 +2638,6 @@ $(document).on('click', '.edit-aktivitas', function() {
                   }
               }
           });
-      //   }
-      // });
   });
 
 $(document).on('click', '.btnHapusAktivitas', function() {
@@ -2328,7 +2684,7 @@ $(document).on('click', '.add-pelaksana', function() {
       $('#id_aktivitas_pelaksana').val(id_aktivitas_temp);
       $('#id_subunit_pelaksana').val(null);
       $('#id_lokasi_pelaksana').val(null);
-      $('#nm_lokasi_pelaksana').val(null);
+      $('#nm_lokasi_penyelenggara').val(null);
       $('#subunit_pelaksana').val(null);
 
       $('.idbtnHapusPelaksana').hide();
@@ -2366,26 +2722,30 @@ $(document).on('click', '.add-pelaksana', function() {
   });
 
 $(document).on('click', '.edit-pelaksana', function() {
+
+  var data = pelaksana_tbl.row( $(this).parents('tr') ).data();
+
+    // alert(data.nama_lokasi);
         
       $('.btnPelaksana').addClass('editPelaksana');
       $('.btnPelaksana').removeClass('addPelaksana');      
       $('.form-horizontal').show();
       $('.modal-title').text('Ubah Pelaksana aktivitas '+keg_renja);
-      $('#id_renja_pelaksana').val($(this).data('id_renja'));
-      $('#id_pelaksana_renja').val($(this).data('id_pelaksana_renja'));
-      $('#tahun_renja_pelaksana').val($(this).data('tahun_renja'));
-      $('#no_urut_pelaksana').val($(this).data('no_urut'));
-      $('#id_aktivitas_pelaksana').val($(this).data('id_aktivitas_renja'));
-      $('#id_subunit_pelaksana').val($(this).data('id_sub_unit'));
-      $('#id_lokasi_pelaksana').val($(this).data('id_lokasi'));
-      $('#nm_lokasi_pelaksana').val($(this).data('nm_lokasi'));
-      $('#subunit_pelaksana').val($(this).data('nm_sub'));
+      $('#id_renja_pelaksana').val(data.id_renja);
+      $('#id_pelaksana_renja').val(data.id_pelaksana_renja);
+      $('#tahun_renja_pelaksana').val(data.tahun_renja);
+      $('#no_urut_pelaksana').val(data.no_urut);
+      $('#id_aktivitas_pelaksana').val(data.id_aktivitas_renja);
+      $('#id_subunit_pelaksana').val(data.id_sub_unit);
+      $('#id_lokasi_pelaksana').val(data.id_lokasi);
+      $('#nm_lokasi_penyelenggara').val(data.nama_lokasi);
+      $('#subunit_pelaksana').val(data.nm_sub);
 
       $('.idbtnHapusPelaksana').show();
 
       $('.chkPelaksana').show();
 
-      if($(this).data('status_data')==1){
+      if(data.status_data==1){
         $('.checkPelaksana').prop('checked',true);
       } else {
         $('.checkPelaksana').prop('checked',false);
@@ -2462,6 +2822,18 @@ $(document).on('click', '.btnHapusPelaksana', function() {
   });
 
 $(document).on('click', '.add-lokasi', function() {
+
+  if(id_sat_asb1==null){
+    id_sat_asb1=-1
+  } else {
+    id_sat_asb1
+  };
+
+  if(id_sat_asb2==null){
+    id_sat_asb2=0
+  } else {
+    id_sat_asb2
+  };
         
       $('.btnLokasi').addClass('addLokasi');
       $('.btnLokasi').removeClass('editLokasi');      
@@ -2474,11 +2846,19 @@ $(document).on('click', '.add-lokasi', function() {
       $('#id_lokasi').val(null);
       $('#jenis_lokasi').val(null);
       $('#uraian_lokasi').val(null);
-      $('#volume_1').val(0);
-      $('#volume_2').val(0);
-      $('#id_satuan_1').val(-1);
-      $('#id_satuan_2').val(0);
+      $('#volume_1').val(1);
+      $('#volume_2').val(1);
+      $('#id_satuan_1').val(id_sat_asb1);
+      $('#id_satuan_2').val(id_sat_asb2);
       $('#nm_lokasi').val(null);
+
+      if(sbr_aktivitas==0){
+        $('#id_satuan_1').attr("disabled","disabled");
+        $('#id_satuan_2').attr("disabled","disabled");
+      } else {
+        $('#id_satuan_1').removeAttr("disabled");
+        $('#id_satuan_2').removeAttr("disabled");
+      }
 
       $('#ModalLokasi').modal('show');
 
@@ -2489,6 +2869,7 @@ $('.modal-footer').on('click', '.addLokasi', function() {
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
 
+      if($('#volume_2').val()>0){
       $.ajax({
           type: 'post',
           url: 'blang/addLokasi',
@@ -2516,26 +2897,41 @@ $('.modal-footer').on('click', '.addLokasi', function() {
               } 
           }
       });
+      } else {
+        createPesan("Volume 2 harus lebih besar dari 0, jika tidak digunakan isi dengan angka 1 dan satuan N/A","warning"); 
+      }
+
+      
   });
 
 $(document).on('click', '.edit-lokasi', function() {
+
+  var data = lokasi_tbl.row( $(this).parents('tr') ).data();
         
       $('.btnLokasi').addClass('editLokasi');
       $('.btnLokasi').removeClass('addLokasi');      
       $('.form-horizontal').show();
       $('.modal-title').text('Ubah Data Lokasi Pelaksanaan Aktivitas : '+aktivitas_renja);
-      $('#id_pelaksana_lokasi').val($(this).data('id_pelaksana_renja'));
-      $('#id_lokasi_renja').val($(this).data('id_lokasi_renja'));
-      $('#tahun_renja_lokasi').val($(this).data('tahun_renja'));
-      $('#no_urut_lokasi').val($(this).data('no_urut'));
-      $('#id_lokasi').val($(this).data('id_lokasi'));
-      $('#jenis_lokasi').val($(this).data('jenis_lokasi'));
-      $('#uraian_lokasi').val($(this).data('uraian_lokasi'));
-      $('#nm_lokasi').val($(this).data('nama_lokasi'));
-      $('#volume_1').val($(this).data('volume_1'));
-      $('#volume_2').val($(this).data('volume_2'));
-      $('#id_satuan_1').val($(this).data('id_satuan_1'));
-      $('#id_satuan_2').val($(this).data('id_satuan_2'));
+      $('#id_pelaksana_lokasi').val(data.id_pelaksana_renja);
+      $('#id_lokasi_renja').val(data.id_lokasi_renja);
+      $('#tahun_renja_lokasi').val(data.tahun_renja);
+      $('#no_urut_lokasi').val(data.no_urut);
+      $('#id_lokasi').val(data.id_lokasi);
+      $('#jenis_lokasi').val(data.jenis_lokasi);
+      $('#uraian_lokasi').val(data.uraian_lokasi);
+      $('#nm_lokasi').val(data.nama_lokasi);
+      $('#volume_1').val(data.volume_1);
+      $('#volume_2').val(data.volume_2);
+      $('#id_satuan_1').val(data.id_satuan_1);
+      $('#id_satuan_2').val(data.id_satuan_2);
+
+      if(sbr_aktivitas==0){
+        $('#id_satuan_1').attr("disabled","disabled");
+        $('#id_satuan_2').attr("disabled","disabled");
+      } else {
+        $('#id_satuan_1').removeAttr("disabled");
+        $('#id_satuan_2').removeAttr("disabled");
+      }
 
       $('#ModalLokasi').modal('show');
 
@@ -2546,6 +2942,7 @@ $('.modal-footer').on('click', '.editLokasi', function() {
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
 
+      if($('#volume_2').val()>0){
       $.ajax({
           type: 'post',
           url: 'blang/editLokasi',
@@ -2567,13 +2964,18 @@ $('.modal-footer').on('click', '.editLokasi', function() {
           success: function(data) {
               $('#tblLokasi').DataTable().ajax.reload();
               $('#tblPelaksana').DataTable().ajax.reload();
+              $('#ModalLokasi').modal('hide');
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
               createPesan(data.pesan,"danger"); 
-              } 
+              }
+               
           }
       });
+      } else {
+        createPesan("Volume 2 harus lebih besar dari 0, jika tidak digunakan isi dengan angka 1 dan satuan N/A","warning"); 
+      }
   });
 
 $(document).on('click', '.btnHapusLokasi', function() {
@@ -2615,6 +3017,23 @@ $(document).on('click', '.btnCariSSH', function() {
 
   });
 
+function LoadTblRekening(x,y){  
+      rekening = $('#tblRekening').DataTable( {
+        processing: true,
+        serverSide: true,
+        dom: 'BfrtIp',
+        autoWidth : false,
+        "ajax": {"url": "blang/getRekening/"+ x +"/"+y},
+        "columns": [
+              { data: 'no_urut'},
+              { data: 'kd_rekening'},
+              { data: 'nm_rekening'}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+      });
+};
+
 $(document).on('click', '.btnCariRekening', function() {
 
   var x
@@ -2627,8 +3046,9 @@ $(document).on('click', '.btnCariRekening', function() {
           x = $('#rekening_ssh').val()
       }
 
+      LoadTblRekening(x,$('#id_item_ssh').val());
       $('#cariRekening').modal('show');
-      $('#tblRekening').DataTable().ajax.url("blang/getRekening/"+ x +"/"+$('#id_item_ssh').val()).load();
+      // $('#tblRekening').DataTable().ajax.url("blang/getRekening/"+ x +"/"+$('#id_item_ssh').val()).load();
 
   });
 
@@ -2701,18 +3121,18 @@ $(document).on('click', '.add-belanja', function() {
       $('#ur_item_ssh').val(null);
       $('#id_rekening').val(null);
       $('#ur_rekening').val(null);
-      $('#volume1').val(1);
-      $('#id_satuan1').val(null);
-      $('#satuan1').text(null);
-      $('#volume2').val(1);
+      $('#volume1').val(vol1_temp);
+      $('#id_satuan1').val(id_sat_lok1);
+      $('#satuan1').text(nm_sat_lok1);
+      $('#volume2').val(vol2_temp);
       $('#harga_satuan').val(1);
       $('#jumlah_belanja').val(1);
       $('#uraian_belanja').val(null);
       $('#uraian_aktivitas_asb').val(null);
       $('#id_aktivitas_asb_belanja').val(0);
       $('#sumber_belanja').val(1);
-      $('#id_satuan2').val(0);
-      $('#satuan2').val(null);
+      $('#id_satuan2').val(id_sat_lok2);
+      $('#satuan2').text(nm_sat_lok2);
 
       checkAsalbelanja(1);
 
@@ -2762,40 +3182,42 @@ $('.modal-footer').on('click', '.addBelanja', function() {
   });
 
 $(document).on('click', '.edit-belanja', function() {
+  
+  var data = belanja_renja_tbl.row( $(this).parents('tr') ).data();
         
       $('.btnBelanja').addClass('editBelanja');
       $('.btnBelanja').removeClass('addBelanja');      
       $('.form-horizontal').show();
       $('.modal-title').text('Tambah Uraian Belanja : '+aktivitas_renja);
-      $('#id_lokasi_belanja').val($(this).data('id_lokasi_renja'));
-      $('#id_belanja').val($(this).data('id_belanja_renja'));
-      $('#tahun_renja_belanja').val($(this).data('tahun_renja'));
-      $('#no_urut_belanja').val($(this).data('no_urut'));
-      $('#zona_ssh').val($(this).data('id_zona_ssh'));
-      $('#id_item_ssh').val($(this).data('id_tarif_ssh'));
+      $('#id_lokasi_belanja').val(data.id_lokasi_renja);
+      $('#id_belanja').val(data.id_belanja_renja);
+      $('#tahun_renja_belanja').val(data.tahun_renja);
+      $('#no_urut_belanja').val(data.no_urut);
+      $('#zona_ssh').val(data.id_zona_ssh);
+      $('#id_item_ssh').val(data.id_tarif_ssh);
       $('#rekening_ssh').val();
-      $('#ur_item_ssh').val($(this).data('uraian_tarif_ssh'));
-      $('#id_rekening').val($(this).data('id_rekening_ssh'));
-      $('#ur_rekening').val($(this).data('kd_rekening') +' - '+$(this).data('nm_rekening'));
-      $('#volume1').val($(this).data('volume_1'));
-      $('#id_satuan1').val($(this).data('id_satuan_1'));
-      $('#satuan1').text($(this).data('satuan_1'));
-      $('#volume2').val($(this).data('volume_2'));
-      $('#harga_satuan').val($(this).data('harga_satuan'));
-      $('#jumlah_belanja').val($(this).data('jml_belanja'));
-      $('#uraian_belanja').val($(this).data('uraian_belanja'));
-      $('#uraian_aktivitas_asb').val($(this).data('nm_aktivitas_asb'));
-      $('#id_aktivitas_asb_belanja').val($(this).data('id_aktivitas_asb'));
-      $('#sumber_belanja').val($(this).data('sumber_aktivitas'));
-      $('#id_satuan2').val($(this).data('id_satuan_2'));
-      $('#satuan2').val($(this).data('satuan_2'));
+      $('#ur_item_ssh').val(data.uraian_tarif_ssh);
+      $('#id_rekening').val(data.id_rekening_ssh);
+      $('#ur_rekening').val(data.kd_rekening +' - '+data.nm_rekening);
+      $('#volume1').val(data.volume_1);
+      $('#id_satuan1').val(data.id_satuan_1);
+      $('#satuan1').text(data.satuan_1);
+      $('#volume2').val(data.volume_2);
+      $('#harga_satuan').val(data.harga_satuan);
+      $('#jumlah_belanja').val(data.jml_belanja);
+      $('#uraian_belanja').val(data.uraian_belanja);
+      $('#uraian_aktivitas_asb').val(data.nm_aktivitas_asb);
+      $('#id_aktivitas_asb_belanja').val(data.id_aktivitas_asb);
+      $('#sumber_belanja').val(data.sumber_aktivitas);
+      $('#id_satuan2').val(data.id_satuan_2);
+      $('#satuan2').text(data.satuan_2);
 
       // alert($(this).data('nm_aktivitas_asb'));
       // alert($(this).data('uraian_belanja'))
-      checkAsalbelanja($(this).data('sumber_aktivitas'));
+      checkAsalbelanja(data.sumber_aktivitas);
 
       $('.chkBelanja').show();
-      if($(this).data('status_data')==1){
+      if(data.status_data==1){
         $('.checkBelanja').prop('checked',true);
       } else {
         $('.checkBelanja').prop('checked',false);
@@ -2877,7 +3299,11 @@ $(document).on('click', '.btnHapusBelanja', function() {
         $('#tblLokasi').DataTable().ajax.reload();
         $('#tblPelaksana').DataTable().ajax.reload();
         $('#ModalBelanja').modal('hide');
-        createPesan(data.pesan,"success");
+        if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              } 
       }
     });
    } 
@@ -2900,9 +3326,10 @@ $(document).on('click', '.add-belanjaASB', function() {
 
       $('#id_aktivitas_asb_load').val(id_asb_temp);
       $('#uraian_aktivitas_asb_load').val(ur_asb_temp);
-      // zona_ssh_load
-
-      $('#loadBelanjaASB').modal('show');
+      $('#v1_load').val(vol1_temp);
+      $('#v2_load').val(vol2_temp);
+      $('#satuan1_load').text(nm_sat_lok1);
+      $('#satuan2_load').text(nm_sat_lok2);
 
       $.ajax({
           type: "GET",
@@ -2922,51 +3349,9 @@ $(document).on('click', '.add-belanjaASB', function() {
           }
           }
       });
+      $('#loadBelanjaASB').modal('show');
 
 });
-
-function hitungASB(jns_biaya,hub_driver,vol1,vol2,r1,r2,m1,m2,k1,k2,k3,harga){
-
-var hargax, kmax, rx1, rx2, hargas
-var koef = (k1*k2*k3)
-
-if (m2 != 0 && m1 != 0) {
-  if(m1<m2){
-    kmax = Math.ceil(vol1/m1)
-  } else {
-    kmax = Math.ceil(vol2/m2)
-  }
-} else {
-
-  if(m1>m2){
-    kmax = Math.ceil(vol1/m1)
-  } else {
-    kmax = Math.ceil(vol2/m2)
-  }
-};
-
-if(r1 < 1) {rx1=Math.ceil(vol1/vol1)} else {rx1 = Math.ceil(vol1/r1)}
-if(r2 < 1) {rx2=Math.ceil(vol2/vol2)} else {rx2 = Math.ceil(vol2/r2)}
-
-if (jns_biaya==1) { hargax = koef*kmax*harga };
-if (jns_biaya==2 && hub_driver==1) { hargax = (vol1*koef*rx1*harga)};
-if (jns_biaya==2 && hub_driver==2) { hargax = (vol2*koef*rx2*harga)};
-if (jns_biaya==3 && hub_driver==1) { hargax = (vol1*koef*harga)};
-if (jns_biaya==3 && hub_driver==2) { hargax = (vol2*koef*harga)};
-if (jns_biaya==3 && hub_driver==3) { hargax = (vol1*vol2*koef*harga)};
-
-if (jns_biaya==1) { hargas = koef*kmax*harga };
-if (jns_biaya==2 && hub_driver==1) { hargas = (koef*rx1*harga)};
-if (jns_biaya==2 && hub_driver==2) { hargas = (koef*rx2*harga)};
-if (jns_biaya==3 && hub_driver==1) { hargas = (koef*harga)};
-if (jns_biaya==3 && hub_driver==2) { hargas = (koef*harga)};
-if (jns_biaya==3 && hub_driver==3) { hargas = (koef*harga)};
-
-hargaxy = [hargax,hargas]
-
-return hargaxy;
-
-}
 
 $(document).on('click', '.btnUnLoadAsb', function() {
 
@@ -2982,69 +3367,60 @@ $(document).on('click', '.btnUnLoadAsb', function() {
             $('#tblBelanja').DataTable().ajax.reload();
             $('#tblLokasi').DataTable().ajax.reload();
             $('#tblPelaksana').DataTable().ajax.reload();
-            createPesan(data.pesan,"success");
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              } 
           }
-
         });
-
-
 });
+
+function getJnsBiaya(){
+
+    var xCheck = document.querySelectorAll('input[name="jns_biaya_asb"]:checked');
+    var xyz = [];
+    for(var x = 0, l = xCheck.length; x < l;  x++)
+      { xyz.push(xCheck[x].value); }
+    var xvalues = xyz.join('');
+    return xvalues;
+  }
 
 $(document).on('click', '.btnLoadAsb', function() {
    var vol1=$('#v1_load').val()
    var vol2=$('#v2_load').val()
 
-  $.ajax({
-          type: "GET",
-          url: './blang/getHitungASB/'+id_asb_temp+'/'+$('#zona_ssh_load').val(),
-          dataType: "json",
-          success: function(data) {
-
-          var j = data.length;
-          var post, i;
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            var nilai_belanja=hitungASB(post.jenis_biaya,post.hub_driver,vol1,vol2,post.r1,post.r2,post.km1,post.km2,post.kf1,post.kf2,post.kf3,post.harga_satuan);
             $.ajax({
                   type: 'post',
-                  url: 'blang/addBelanja',
+                  url: 'blang/getHitungASB',
                   data: {
                       '_token': $('input[name=_token]').val(),
                       'tahun_renja' : tahun_temp,
-                      'no_urut' : i+1,
                       'id_lokasi_renja' : id_lokasi_temp,
-                      'id_zona_ssh' : post.id_zona,
+                      'id_zona_ssh' : $('#zona_ssh_load').val(),
                       'sumber_aktivitas' : 0,
-                      'id_aktivitas_asb' : post.id_aktivitas_asb,
-                      'id_tarif_ssh' : post.id_tarif_ssh,
-                      'id_rekening_ssh' : post.id_rekening,
-                      'uraian_belanja' : post.nm_aktivitas_asb,
                       'volume_1' : vol1,
-                      'id_satuan_1' : post.id_satuan_1,
                       'volume_2' : vol2,
-                      'id_satuan_2' : post.id_satuan_2,
-                      'harga_satuan' : nilai_belanja[1],
-                      'jml_belanja' : nilai_belanja[0],
-                      'status_data' : 0,
+                      'jns_biaya': getJnsBiaya(),
+                      'id_asb': id_asb_temp,
 
                   },
-              });
-            }
+                  success: function(data) {
+                    $('#tblBelanja').DataTable().ajax.reload();
+                    $('#tblLokasi').DataTable().ajax.reload();
+                    $('#tblPelaksana').DataTable().ajax.reload();
+                    if(data.status_pesan==1){
+                      createPesan(data.pesan,"success");
+                      } else {
+                      createPesan(data.pesan,"danger"); 
+                      } 
 
-            $('#tblBelanja').DataTable().ajax.reload();
-            $('#tblLokasi').DataTable().ajax.reload();
-            $('#tblPelaksana').DataTable().ajax.reload();
-            createPesan(data.pesan,"success");
-          }
+                  }
+              });
       });
 
 
-           
 
-  
-
-});
 
 
 });

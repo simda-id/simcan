@@ -14,7 +14,8 @@ class RefIndikator extends Model
 				'nm_indikator',
 				'flag_iku',
 				'asal_indikator',
-				'sumber_data_indikator'];
+				'sumber_data_indikator',
+				'type_indikator'];
 
     public $timestamps = false;
 }

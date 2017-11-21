@@ -2,7 +2,7 @@
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-4 control-label">Name</label>
+            <label for="name" class="col-md-4 control-label">Nama</label>
 
             <div class="col-md-6">
                 <input id="name" type="text" class="form-control" name="name" value="{{ $model['name'] }}" required autofocus>
@@ -18,7 +18,7 @@
         <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
             <label for="email" class="col-md-4 control-label">Group User</label>
             <?php
-            $groups = \App\RefGroup::get();
+            $groups = \App\Models\RefGroup::get();
             $groupsDropdown = [];
             foreach($groups as $group){
                 $groupsDropdown[$group->id] = $group->name;
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        @if($model == NULL)
+        {{-- @if($model == NULL) --}}
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
             <label for="password" class="col-md-4 control-label">Password</label>
@@ -73,15 +73,15 @@
             </div>
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary">
                     Register
                 </button>
             </div>
-        </div>
+        </div> --}}
 
-        @else
+        {{-- @else --}}
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary">
@@ -90,6 +90,6 @@
             </div>
         </div>
 
-        @endif
+        {{-- @endif --}}
         
         </form>

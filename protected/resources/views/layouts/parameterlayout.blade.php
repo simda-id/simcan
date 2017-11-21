@@ -15,7 +15,11 @@ use hoaaah\LaravelMenu\Menu;
                     <span class="icon-bar"></span>
                 </button>                    
                 <!-- Branding Image -->
-                <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong></a>
+                <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                 <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x text-info"></i>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong></a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- Authentication Links -->
@@ -44,8 +48,8 @@ use hoaaah\LaravelMenu\Menu;
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    Logout
+                                                document.getElementById('logout-form').submit();">                                          
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -84,10 +88,13 @@ use hoaaah\LaravelMenu\Menu;
                                     // ['label' => 'Urusan Bidang', 'url' => '/','visible' => $akses->get(104)],
                                     ['label' => 'Rekening Anggaran', 'url' => '/admin/parameter/rekening','visible' => $akses->get(105)],
                                     ['label' => 'Program Kegiatan', 'url' => '/admin/parameter/program','visible' => $akses->get(106)],
+                                    // ['label' => 'Prioritas & Program Nasional', 'url' => '/admin/parameter/prognas','visible' => $akses->get(106)],
+                                    // ['label' => 'Prioritas & Program Provinsi', 'url' => '/admin/parameter/progprov','visible' => $akses->get(106)],
                                     ['label' => 'Lokasi', 'url' => '/admin/parameter/lokasi','visible' => $akses->get(107)],
                                     ['label' => 'Indikator', 'url' => '/admin/parameter/indikator','visible' => $akses->get(108)],
                                     ['label' => 'Satuan', 'url' => '/satuan','visible' => $akses->get(111)],
                                     ['label' => 'Setting Aplikasi', 'url' => '/setting','visible' => $akses->get(109)],
+                                    ['label' => 'Parameter Lainnya', 'url' => '/admin/parameter/others','visible' => $akses->get(109)],
                                 ]
                             ],
                         ]

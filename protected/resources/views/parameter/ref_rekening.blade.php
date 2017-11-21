@@ -5,7 +5,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.parameterlayout')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -39,6 +39,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div role="tabpanel" class="tab-pane fade in active" id="akun">
                   <br>
                   <div class="col-md-12">
+                  <div class="table-responsive">
                   <table id="tblAkun" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -49,7 +50,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </thead>
                         <tbody>                                        
                         </tbody>
-                    </table>  
+                    </table>
+                  </div>  
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="golongan">
@@ -67,7 +69,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
-                  <table id="tblGolongan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
+                      <div class="table-responsive">
+                      <table id="tblGolongan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -78,7 +81,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </thead>
                         <tbody>                                        
                         </tbody>
-                    </table>  
+                      </table>
+                      </div>  
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="jenis">
@@ -100,6 +104,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                       <table id="tblJenis" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -113,6 +118,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="obyek">
@@ -142,6 +148,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                    <div class="table-responsive">
                       <table id="tblObyek" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -157,8 +164,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
+                  </div>
                   </div> 
-              </div>
               <div role="tabpanel" class="tab-pane fade in" id="rincian">
                   <br>
                   <div class="col-md-12">
@@ -190,6 +198,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </table>
                       </div>
                       </form>
+                      <div class="table-responsive">
                       <table id="tblRincian" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -206,6 +215,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
+                    </div>
                   </div> 
               </div>
             </div>

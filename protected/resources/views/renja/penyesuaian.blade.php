@@ -5,35 +5,46 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = 'Penyesuaian Data Renstra';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'Renja']);
+                $breadcrumb->add(['url' => '/modul2','label' => 'Renja Perangkat Daerah']);
+                $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Awal Renja']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
         </div>
-    </div>
-    <div id="pesan"></div>
+    </div> 
+      <div id="pesan" class="notify"></div> 
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h2 id="judul" class="panel-title">{{ $this->title }}</h2>
-                      {{-- <i class="fa fa-spinner fa-pulse" style="font-size:16px;color:green;"></i> {{ $this->title }}</h2> --}}
+                    <p><h2 id="judul" class="panel-title">{{ $this->title }}</h2></p>
                 </div>
             <div class="panel-body">
                 <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
-                        <div class="col-sm-2">                            
+                        <div class="col-sm-1">                            
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
+                        </div>
+                        <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Pencetakan Penyesuaian Renja <span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a class="dropdown-item btnPrintKompilasiProgramdanPagu"><i class="fa fa-bullseye fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Program dan Pagu</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btnPrintKompilasiKegiatandanPaguRenja"><i class="fa fa-male fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Kegiatan dan Pagu</a>
+                                    </li>                       
+                                </ul>
                         </div>
                 </div>
                 <div class="form-group">
@@ -48,23 +59,24 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <li class="active">
                         <a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program RKPD</a>
                       </li>
-                      <li>
+                      <li class="disabled">
                         <a href="#programrenja" aria-controls="programrenja" role="tab-kv" data-toggle="tab">Program Renja</a>
                       </li>
-                      <li>
+                      <li class="disabled">
                         <a href="#kegiatanrenja" aria-controls="kegiatanrenja" role="tab-kv" data-toggle="tab">Kegiatan Renja</a>
                       </li>
                     </ul>
                     
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="program">
-                                <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive" width="100%">
+                          <div class="table-responsive">
+                                <table id="tblProgramRKPD" class="table display table-striped table-bordered table-responsive" width="100%">
                                     <thead>
                                         <tr>
-                                            <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                            <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle">No Urut</th>
                                             <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program</th>
                                             <th colspan="4" style="text-align: center; vertical-align:middle">Rincian Data</th>
-                                            <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
                                         </tr>
                                         <tr>
                                             <th width='10%' style="text-align: center; vertical-align:middle">Program</th>   
@@ -75,22 +87,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </thead>
                                     <tbody>                                        
                                     </tbody>
-                                </table>   
+                                </table>
+                              </div>   
                             </div>
                             <div role="tabpanel" class="tab-pane fade in" id="programrenja">
                                     <br>
-                                      <div class="add">
-                                        <p><a id="btnTambahProg" class="add-programrenja btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Program</a></p>
+                                      <div id="divTambahProg">
+                                        <p><a id="btnTambahProg" class="add-programrenja btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a></p>
                                       </div>
                                     <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                       <div class="table-responsive">
                                         <table class="table table-striped table-bordered" width="100%">
                                           <tbody>
-                                            <tr>
+                                            <tr class="backRkpd">
                                               <td width="15%" style="text-align: left; vertical-align:top;">Program RPJMD</td>
                                               <td style="text-align: left; vertical-align:top;"><label id="nm_program_rpjmd_progrenja" align='left'></label></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="backRenja">
                                               <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD</td>
                                               <td style="text-align: left; vertical-align:top;"><label id="nm_program_rkpd_progrenja" align='left'></label></td>
                                             </tr>
@@ -99,16 +112,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                       </div>
                                     </form>
                                     <div class="col-md-12">
-                                    <table id="tblProgramRenja" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <div class="table-responsive">
+                                    <table id="tblProgramRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle"></th>
-                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
                                                 <th colspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
                                                 <th colspan="3" width='15%' style="text-align: center; vertical-align:middle">Jumlah Kegiatan</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
-                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
                                                 <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
@@ -121,26 +135,27 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tbody>                                        
                                         </tbody>
                                     </table> 
+                                    </div>
                                     </div>  
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="kegiatanrenja">
                                 <br>
-                                  <div class="add">
-                                    <p><a id="btnTambahKegiatan" class="add-kegiatan btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Kegiatan</a></p>
+                                  <div id="divTambahKegiatan">
+                                    <p><a id="btnTambahKegiatan" class="add-kegiatan btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kegiatan</a></p>
                                   </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backRkpd">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_rkpd_kegrenja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renstra</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_renstra_kegrenja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_renja_kegrenja" align='left'></label></td>
                                         </tr>
@@ -148,16 +163,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                    <table id="tblKegiatanRenja" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <div class="table-responsive">
+                                    <table id="tblKegiatanRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle"></th>
-                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Kegiatan Renja</th>
                                                 <th colspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
                                                 <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Jumlah Pagu Kegiatan</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
-                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
                                                 <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
@@ -168,6 +184,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         </tbody>
                                     </table>   
                                 </div>
+                              </div>
                         </div>
                     </div>
                 </div> 
@@ -175,10 +192,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
         </div>
     </div>
-</div>
 
 <script id="details-inProg" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="inProg-@{{id_renja_program}}">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProg-@{{id_renja_program}}">
             <thead>
               <tr>
                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -194,7 +210,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 <script id="details-inKeg" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="inKeg-@{{id_renja}}">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKeg-@{{id_renja}}">
             <thead>
               <tr>
                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -249,7 +265,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <input type="hidden" id="id_tujuan_renstra" name="id_tujuan_renstra">
                     <input type="hidden" id="id_sasaran_renstra" name="id_sasaran_renstra">
                     <input type="hidden" id="id_program_renstra" name="id_program_renstra">
-                    <span class="btn btn-sm btn-primary btnCariProgramRenstra" id="btnCariProgramRenstra" name="btnCariProgramRenstra"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="btn btn-primary btnCariProgramRenstra" id="btnCariProgramRenstra" name="btnCariProgramRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span>
                   </div>
                   <div class="form-group urProgramRef">
                     <label class="control-label col-sm-3" for="title">Uraian Program Referensi:</label>
@@ -257,7 +273,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <textarea type="name" class="form-control" id="ur_program_ref" rows="3" disabled></textarea>
                     </div>                    
                     <input type="hidden" id="id_program_ref" name="id_program_ref">
-                    <span class="btn btn-sm btn-primary btnCariProgramRef" id="btnCariProgramRef" name="btnCariProgramRef"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="btn btn-primary btnCariProgramRef" id="btnCariProgramRef" name="btnCariProgramRef"><i class="fa fa-search fa-fw fa-lg"></i></span>
                   </div>
                   <div class="form-group">
                   <label class="control-label col-sm-3" for="title">Uraian Program Renja:</label>
@@ -291,7 +307,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <textarea type="text" class="form-control keterangan_status_program" name="keterangan_status_program" id="keterangan_status_program" rows="3" disabled></textarea>
                   </div>
                 </div>
-                <div class="form-group idStatusUsulan"> 
+                <div class="form-group idStatusUsulan hidden"> 
                   <label for="status_data_program" class="col-sm-3 control-label" align='left'>Status Usulan :</label>                 
                   <div class="col-sm-6">
                     <label class="radio-inline">
@@ -303,19 +319,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapus">
-                        <button type="button" class="btn btn-sm btn-danger btnHapus btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapus btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnProgram btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnProgram btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -323,7 +340,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
 
   <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
@@ -354,7 +370,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <textarea type="name" class="form-control" id="ur_indikator_renja" rows="3" disabled></textarea>
                 </div>
                 <input type="hidden" id="kd_indikator_renja" name="kd_indikator_renja">
-                <span class="btn btn-sm btn-primary btnCariIndi" id="btnCariIndi" name="btnCariIndi"><i class="glyphicon glyphicon-search"></i></span>
+                <span class="btn btn-primary btnCariIndi" id="btnCariIndi" name="btnCariIndi"><i class="fa fa-search fa-fw fa-lg"></i></span>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Program Renja:</label>
@@ -373,19 +389,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
             </form>
+          </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusIndikator">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusIndikator btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusIndikator btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnIndikator btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnIndikator btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -393,7 +410,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </div>
-    </div>
 
 <div id="ModalKegiatan" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog modal-lg">
@@ -431,7 +447,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <input type="hidden" id="id_sasaran_renstra_keg" name="id_sasaran_renstra_keg">
                     <input type="hidden" id="id_program_renstra_keg" name="id_program_renstra_keg">
                     <input type="hidden" id="id_kegiatan_renstra" name="id_kegiatan_renstra">
-                    <span class="btn btn-sm btn-primary btnCariKegiatanRenstra" id="btnCariKegiatanRenstra" name="btnCariKegiatanRenstra"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="btn btn-primary btnCariKegiatanRenstra" id="btnCariKegiatanRenstra" name="btnCariKegiatanRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span>
                   </div>
                   <div class="form-group urKegiatanRef">
                     <label class="control-label col-sm-3" for="title">Uraian Kegiatan Referensi:</label>
@@ -439,7 +455,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <textarea type="name" class="form-control" id="ur_kegiatan_ref" rows="3" disabled></textarea>
                     </div>                    
                     <input type="hidden" id="id_kegiatan_ref" name="id_kegiatan_ref">
-                    <span class="btn btn-sm btn-primary btnCariKegiatanRef" id="btnCariKegiatanRef" name="btnCariKegiatanRef"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="btn btn-primary btnCariKegiatanRef" id="btnCariKegiatanRef" name="btnCariKegiatanRef"><i class="fa fa-search fa-fw fa-lg"></i></span>
                   </div>
                   <div class="form-group">
                   <label class="control-label col-sm-3" for="title">Uraian Kegiatan Renja:</label>
@@ -502,19 +518,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusKeg btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusKeg btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnKegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnKegiatan btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -522,13 +539,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
  <div id="ModalIndikatorKeg" class="modal fade" role="dialog" data-backdrop="static">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
               <h4 class="modal-title"></h4>
           </div>
           <div class="modal-body">
@@ -552,7 +567,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <textarea type="name" class="form-control" id="ur_indikatorKeg_renja" rows="3" disabled></textarea>
                 </div>
                 <input type="hidden" id="kd_indikatorKeg_renja" name="kd_indikatorKeg_renja">
-                <span class="btn btn-sm btn-primary btnCariIndiKeg" id="btnCariIndiKeg" name="btnCariIndiKeg"><i class="glyphicon glyphicon-search"></i></span>
+                <span class="btn btn-primary btnCariIndiKeg" id="btnCariIndiKeg" name="btnCariIndiKeg"><i class="fa fa-search fa-fw fa-lg"></i></span>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Kegiatan Renja:</label>
@@ -571,19 +586,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
             </form>
+          </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusIndikatorKeg">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusIndikatorKeg btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button>
+                        <button type="button" class="btn btn-danger btnHapusIndikatorKeg btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnIndikatorKeg btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                        <button type="button" class="btn btn-success btnIndikatorKeg btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -591,14 +607,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </div>
-    </div>
-
 
 <div id="cariProgramRenstra" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
@@ -619,20 +632,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form> 
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div> 
         </div>
       </div>
     </div>
-  </div>
 
 
 <div id="cariKegiatanRenstra" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
@@ -658,20 +671,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div>  
         </div>
       </div>
     </div>
-  </div>
 
 <div id="cariKegiatanRef" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -698,20 +711,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusKeg">
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                     </div>
                 </div>
               </div>  
         </div>
       </div>
     </div>
-  </div>
 
 <div id="cariProgramRef" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static" >
     <div class="modal-dialog modal-lg"  >
@@ -743,11 +756,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
             </div>
-          </form> 
+          </form>
+          </div>          
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div> 
         </div>
       </div>
     </div>
-  </div>
 
   <div id="cariIndikator" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -776,9 +799,101 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </form> 
         </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div>
       </div>
     </div>
   </div>
+
+<div id="StatusProgram" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Program Renja</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_program_renja_posting" name="id_program_renja_posting">
+            <input type="hidden" id="status_program_renja_posting" name="status_program_renja_posting">
+            <input type="hidden" id="status_pelaksanaan_renja_posting" name="status_pelaksanaan_renja_posting">
+            <input type="hidden" id="tahun_renja_posting" name="tahun_renja_posting">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_status_posting"></span></i></strong> pada program : <strong><span id="ur_program_renja_posting"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnPostProgram" class="btn btn-success btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+<div id="StatusKegiatan" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Kegiatan Renja</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_kegiatan_renja_posting" name="id_kegiatan_renja_posting">
+            <input type="hidden" id="status_kegiatan_renja_posting" name="status_kegiatan_renja_posting">
+            <input type="hidden" id="status_pelaksanaan_kegiatan_posting" name="status_pelaksanaan_kegiatan_posting">
+            <input type="hidden" id="tahun_kegiatan_renja_posting" name="tahun_renja_posting">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_kegiatan_status_posting"></span></i></strong> pada kegiatan : <strong><span id="ur_kegiatan_renja_posting"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnPostKegiatan" class="btn btn-success btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
 
 @endsection
 
@@ -790,12 +905,18 @@ var detInProg = Handlebars.compile($("#details-inProg").html());
 var detInKeg = Handlebars.compile($("#details-inKeg").html());
 
   function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
     html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
     // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
     html += message;
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
+    
+
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
+
   };
 
 $('.page-alert .close').click(function(e) {
@@ -831,6 +952,12 @@ $('#no_urut_indikator').number(true,0,',', '.');
 $('#no_urut_kegiatan').number(true,0,',', '.');
 $('#no_urut_indikatorKeg').number(true,0,',', '.');
 
+$('.display').DataTable({
+      dom : 'BfRtip',
+      autoWidth : false,
+      bDestroy: true
+  });
+
 $.ajax({
 
     type: "GET",
@@ -852,10 +979,42 @@ $.ajax({
           }
 });
 
+$('#divTambahProg').hide();
+$('#divTambahKegiatan').hide();
+
+$(".disabled").click(function (e) {
+        e.preventDefault();
+        return false;
+});
+
+function back2rkpd(){
+  $('#divTambahProg').hide();
+  $('#divTambahKegiatan').hide();
+
+  $('.nav-tabs a[href="#program"]').tab('show');
+  $('#tblProgramRKPD').DataTable().ajax.url("./sesuai/getProgramRkpd/"+$('#tahun_rkpd').val()+"/"+$('#id_unit').val()).load();
+}
+
+$(document).on('click', '.backRkpd', function() {
+  back2rkpd();
+});
+
+function back2renja(){
+  $('#divTambahProg').show();
+  $('#divTambahKegiatan').hide();
+
+  $('.nav-tabs a[href="#programrenja"]').tab('show');
+  loadTblRekap(tahun_temp,unit_temp,id_ranwal_temp);
+}
+
+$(document).on('click', '.backRenja', function() {
+  back2renja();
+});
     
 var programrkpd = $('#tblProgramRKPD').DataTable({
                   processing: true,
                   serverSide: true,
+                  autoWidth : false,
                   dom : 'BFRtIp',
                   "ajax": {"url": "./sesuai/getProgramRkpd/0/0"},
                   "language": {
@@ -878,8 +1037,10 @@ var programrkpd = $('#tblProgramRKPD').DataTable({
 $( "#id_unit" ).change(function() {
 
   $('.nav-tabs a[href="#program"]').tab('show');
-  $('#tblProgramRKPD').DataTable().ajax.url("./sesuai/getProgramRkpd/"+$('#tahun_rkpd').val()+"/"+$('#id_unit').val()).load();
-  $('#judul').html('<b>Penyesuaian Data Renstra yang dilaksanakan oleh '+$('#id_unit option:selected').text()+'</b>'); 
+  // $('#tblProgramRKPD').DataTable().ajax.url("./sesuai/getProgramRkpd/"+$('#tahun_rkpd').val()+"/"+$('#id_unit').val()).load();
+  $('#judul').html('<b>Penyesuaian Data Renstra yang dilaksanakan oleh '+$('#id_unit option:selected').text()+'</b>');
+
+  back2rkpd(); 
 
 });
 
@@ -896,8 +1057,10 @@ $('#tblProgramRKPD tbody').on( 'dblclick', 'tr', function () {
     document.getElementById("nm_program_rpjmd_progrenja").innerHTML =prog_rpjmd;
     document.getElementById("nm_program_rkpd_progrenja").innerHTML =prog_rkpd;
 
-    $('.nav-tabs a[href="#programrenja"]').tab('show');
-    loadTblRekap($('#tahun_rkpd').val(),$('#id_unit').val(),data.id_rkpd_ranwal);
+    // $('.nav-tabs a[href="#programrenja"]').tab('show');
+    // loadTblRekap($('#tahun_rkpd').val(),$('#id_unit').val(),data.id_rkpd_ranwal);
+
+    back2renja();
 
 });
 
@@ -912,8 +1075,10 @@ $(document).on('click', '.view-rekap', function() {
     document.getElementById("nm_program_rpjmd_progrenja").innerHTML =prog_rpjmd;
     document.getElementById("nm_program_rkpd_progrenja").innerHTML =prog_rkpd;
 
-    $('.nav-tabs a[href="#programrenja"]').tab('show');
-    loadTblRekap($('#tahun_rkpd').val(),$('#id_unit').val(),$(this).data('id_rkpd_ranwal'));
+    // $('.nav-tabs a[href="#programrenja"]').tab('show');
+    // loadTblRekap($('#tahun_rkpd').val(),$('#id_unit').val(),$(this).data('id_rkpd_ranwal'));
+
+    back2renja();
 });
 
 var tblProgRenja;
@@ -921,6 +1086,7 @@ function loadTblRekap(tahun,unit,ranwal){
    tblProgRenja=$('#tblProgramRenja').DataTable({
                   processing: true,
                   serverSide: true,
+                  autoWidth : false,
                   dom : 'BFRtIp',
                   "ajax": {"url": "./sesuai/getProgramRenja/"+tahun+"/"+unit+"/"+ranwal},
                   "language": {
@@ -947,7 +1113,7 @@ function loadTblRekap(tahun,unit,ranwal){
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -976,7 +1142,7 @@ function initInProg(tableId, data) {
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
             "order": [[0, 'asc']],
             "bDestroy": true
@@ -1015,6 +1181,9 @@ $('#tblProgramRenja tbody').on('dblclick', 'tr', function () {
     document.getElementById("nm_program_rkpd_kegrenja").innerHTML =prog_rkpd;
     document.getElementById("nm_program_renja_kegrenja").innerHTML =prog_renja;
 
+    $('#divTambahProg').hide();
+    $('#divTambahKegiatan').show();
+
     $('.nav-tabs a[href="#kegiatanrenja"]').tab('show');
     loadTblKegiatanRenja(data.id_renja_program); 
 
@@ -1023,18 +1192,23 @@ $('#tblProgramRenja tbody').on('dblclick', 'tr', function () {
 
 $(document).on('click', '.view-kegiatan', function() {
 
-    prog_renja=$(this).data('uraian_program_renja');
-    prog_renstra=$(this).data('uraian_program_renstra');
-    id_renja_program_temp=$(this).data('id_renja_program');
-    id_program_ref_temp=$(this).data('id_program_ref');
-    id_program_renstra_temp=$(this).data('id_program_renstra')
+    var data = tblKegRenja.row( $(this).parents('tr') ).data(); 
+
+    prog_renja=data.uraian_program_renja;
+    prog_renstra=data.uraian_program_renstra;
+    id_renja_program_temp=data.id_renja_program;
+    id_program_ref_temp=data.id_program_ref;
+    id_program_renstra_temp=data.id_program_renstra
 
     document.getElementById("nm_program_renstra_kegrenja").innerHTML =prog_renstra;
     document.getElementById("nm_program_rkpd_kegrenja").innerHTML =prog_rkpd;
     document.getElementById("nm_program_renja_kegrenja").innerHTML =prog_renja;
 
+    $('#divTambahProg').hide();
+    $('#divTambahKegiatan').show();
+
     $('.nav-tabs a[href="#kegiatanrenja"]').tab('show');
-    loadTblKegiatanRenja($(this).data('id_renja_program'));
+    loadTblKegiatanRenja(data.id_renja_program);
 });
 
 var tblKegRenja;
@@ -1042,6 +1216,7 @@ function loadTblKegiatanRenja(id_program){
     tblKegRenja=$('#tblKegiatanRenja').DataTable({
                   processing: true,
                   serverSide: true,
+                  autoWidth : false,
                   dom : 'BFRtIp',
                   "ajax": {"url": "./sesuai/getKegiatanRenja/"+id_program},
                   "language": {
@@ -1066,7 +1241,7 @@ function loadTblKegiatanRenja(id_program){
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -1095,7 +1270,7 @@ function initInKeg(tableId, data) {
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false }
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -1481,7 +1656,7 @@ $(document).on('click', '.add-programrenja', function() {
       $('.btnProgram').removeClass('addProgramRenstra');
       $('.btnProgram').addClass('editProgramRenstra');
       $('.modal-title').text('Edit dan Reviu Program Renja pada '+$(this).data('nm_unit'));
-      $('.idStatusUsulan').show();
+      $('.idStatusUsulan').hide();
       $('.form-horizontal').show();
       $('#id_rkpd_ranwal_program').val($(this).data('id_rkpd_ranwal'));
       $('#id_renja_program').val($(this).data('id_renja_program'));
@@ -1657,6 +1832,7 @@ $('.modal-footer').on('click', '.addIndikator', function() {
               // $('#tblIndikatorRenja').DataTable().ajax.reload();
               // $('#tblProgramRenja').DataTable().ajax.reload();
               tblInProg.ajax.reload();
+              tblProgRenja.ajax.reload();
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -1730,9 +1906,8 @@ $('.modal-footer').on('click', '.addIndikator', function() {
               'status_data': check_data,
           },
           success: function(data) {
-              // $('#tblIndikatorRenja').DataTable().ajax.reload();
               tblInProg.ajax.reload();
-              // $('#tblProgramRenja').DataTable().ajax.reload();
+              tblProgRenja.ajax.reload();
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -1761,8 +1936,8 @@ $(document).on('click', '.btnHapusIndikator', function() {
       },
       success: function(data) {
         $('#ModalIndikator').modal('hide');
-        tblInProg.ajax.reload(); 
-        // $('#tblProgramRenja').DataTable().ajax.reload();
+        tblInProg.ajax.reload();
+        tblProgRenja.ajax.reload();
         createPesan(data.pesan,"success");
       }
     });
@@ -2104,7 +2279,7 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
           },
           success: function(data) {
               tblInKeg.ajax.reload();
-              // $('#tblKegiatanRenja').DataTable().ajax.reload();
+              tblKegRenja.ajax.reload();
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -2148,6 +2323,8 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
       } else {
         $('.checkKegiatan').prop('checked',false);
       };
+
+      $('.chkIndikatorKeg').show();
     
       $('#ModalIndikatorKeg').modal('show');
     });
@@ -2176,11 +2353,12 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
               'uraian_indikator_kegiatan_renja': $('#ur_indikatorKeg_renja').val(),
               'tolok_ukur_indikator': $('#ur_tolokukur_keg').val(),
               'angka_tahun': $('#target_indikatorKeg_renja').val(),
+              'id_renja_program': id_renja_program_temp,
               'status_data': check_data,
           },
           success: function(data) {
               tblInKeg.ajax.reload();
-              // $('#tblKegiatanRenja').DataTable().ajax.reload();
+              tblKegRenja.ajax.reload();              
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -2210,7 +2388,7 @@ $(document).on('click', '.btnHapusIndikatorKeg', function() {
       success: function(data) {
         $('#ModalIndikatorKeg').modal('hide');
         tblInKeg.ajax.reload();
-        // $('#tblKegiatanRenja').DataTable().ajax.reload();
+        tblKegRenja.ajax.reload();
         createPesan(data.pesan,"success");
       }
     });
@@ -2219,6 +2397,126 @@ $(document).on('click', '.btnHapusIndikatorKeg', function() {
     return false;
   }
 });
+
+$(document).on('click', '#btnUnProgram', function() {
+
+  var data = tblProgRenja.row( $(this).parents('tr') ).data();
+
+    $('#id_program_renja_posting').val(data.id_renja_program);
+    $('#status_program_renja_posting').val(data.status_data);
+    $('#status_pelaksanaan_renja_posting').val(data.status_pelaksanaan);
+    $('#tahun_renja_posting').val(data.tahun_renja);
+
+    document.getElementById("ur_program_renja_posting").innerHTML = data.uraian_program_renja;
+
+    if(data.status_data==0){
+        document.getElementById("ur_status_posting").innerHTML = "Posting";
+    } else {
+        document.getElementById("ur_status_posting").innerHTML = "Un-Posting";
+    }
+
+    $('#StatusProgram').modal('show');
+});
+
+$('.modal-footer').on('click', '#btnPostProgram', function() {
+      var status_post;
+      if($('#status_program_renja_posting').val()==0){
+          status_post = 1
+      } else {
+          status_post = 0
+      };
+
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: 'sesuai/postProgram',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_renja': $('#tahun_renja_posting').val(),
+              'id_renja_program': $('#id_program_renja_posting').val(),
+              'status_pelaksanaan':$('#status_pelaksanaan_renja_posting').val(),
+              'status_data': status_post,
+          },
+          success: function(data) {
+              tblProgRenja.ajax.reload();
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+              $('#StatusProgram').modal('hide');
+          }
+      });
+    });
+
+$(document).on('click', '#btnUnKegiatan', function() {
+
+  var data = tblKegRenja.row( $(this).parents('tr') ).data();
+
+    $('#id_kegiatan_renja_posting').val(data.id_renja);
+    $('#status_kegiatan_renja_posting').val(data.status_data);
+    $('#status_pelaksanaan_kegiatan_posting').val(data.status_pelaksanaan_kegiatan);
+    $('#tahun_kegiatan_renja_posting').val(data.tahun_renja);
+
+    document.getElementById("ur_kegiatan_renja_posting").innerHTML = data.uraian_kegiatan_renja;
+
+    if(data.status_data==0){
+        document.getElementById("ur_kegiatan_status_posting").innerHTML = "Posting";
+    } else {
+        document.getElementById("ur_kegiatan_status_posting").innerHTML = "Un-Posting";
+    }
+
+    $('#StatusKegiatan').modal('show');
+});
+
+$('.modal-footer').on('click', '#btnPostKegiatan', function() {
+      var status_post;
+      if($('#status_kegiatan_renja_posting').val()==0){
+          status_post = 1
+      } else {
+          status_post = 0
+      };
+
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: 'sesuai/postKegiatanRenja',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_renja': $('#tahun_kegiatan_renja_posting').val(),
+              'id_renja': $('#id_kegiatan_renja_posting').val(),
+              'status_pelaksanaan_kegiatan': $('#status_pelaksanaan_kegiatan_posting').val(),
+              'status_data': status_post,
+          },
+          success: function(data) {
+              tblKegRenja.ajax.reload();
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+              $('#StatusKegiatan').modal('hide');
+          }
+      });
+    });
+
+$(document).on('click', '.btnPrintKompilasiProgramdanPagu', function() {
+
+    location.replace('../PrintKompilasiProgramdanPaguRenja/'+ $('#id_unit').val());
+    
+  });
+$(document).on('click', '.btnPrintKompilasiKegiatandanPaguRenja', function() {
+
+    location.replace('../PrintKompilasiKegiatandanPaguRenja/'+ $('#id_unit').val());
+    
+  });
+
     
 });
 </script>

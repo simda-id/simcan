@@ -5,7 +5,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -56,7 +56,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <thead>
                                         <tr>
                                             <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">No Urut</th>
-                                            <th rowspan="3" style="text-align: center; vertical-align:middle">Nama Program</th>
+                                            <th rowspan="3" style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
                                             <th colspan="5" style="text-align: center; vertical-align:middle">Rincian Data</th>
                                             <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Status</th>
                                             <th width="50px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th>
@@ -145,11 +145,15 @@ $('[data-toggle="popover"]').popover();
 
 
 function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += message;
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
+
+    setTimeout(function() {
+        $('#pesanx').removeClass('in');
+         }, 3500);
 };
 
 
@@ -223,11 +227,11 @@ $( "#id_unit" ).change(function() {
           var post, i;
 
           $('select[name="id_rkpd_ranwal"]').empty();
-          $('select[name="id_rkpd_ranwal"]').append('<option value="0">---Pilih Semua Program---</option>');
+          $('select[name="id_rkpd_ranwal"]').append('<option value="0">---Pilih Program---</option>');
 
           for (i = 0; i < j; i++) {
             post = data[i];
-            $('select[name="id_rkpd_ranwal"]').append('<option value="'+ post.id_rkpd_ranwal +'">'+ post.uraian_program_renstra +'</option>');
+            $('select[name="id_rkpd_ranwal"]').append('<option value="'+ post.id_rkpd_ranwal +'">'+ post.uraian_program_rpjmd +'</option>');
           }
           }
     }); 
@@ -239,7 +243,7 @@ $.ajaxSetup({
 });
 
 $('#ModalProgress').modal('show');
-$.ajax({
+    $.ajax({
         type: 'POST',
         url: './loadData/insertProgramRkpd',
         data: {
@@ -249,100 +253,16 @@ $.ajax({
             'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
         },
         success: function(data) {
-            $.ajax({
-              type: 'POST',
-              url: './loadData/insertProgramRenja',
-              data: {
-                '_token': $('input[name=_token]').val(),
-                'tahun_renja' : $('#tahun_rkpd').val(),
-                'id_unit' : $('#id_unit').val(),
-                'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-              },
-              success: function(data) {
-                    $.ajax({
-                    type: 'POST',
-                    url: './loadData/insertKegiatanRenja',
-                    data: {
-                        '_token': $('input[name=_token]').val(),
-                        'tahun_renja' : $('#tahun_rkpd').val(),
-                        'id_unit' : $('#id_unit').val(),
-                        'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                    },
-                    success: function(data) {
-                        $.ajax({
-                          type: 'POST',
-                          url: './loadData/insertAktivitasRenja',
-                          data: {
-                            '_token': $('input[name=_token]').val(),
-                            'tahun_renja' : $('#tahun_rkpd').val(),
-                            'id_unit' : $('#id_unit').val(),
-                            'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                          },
-                          success: function(data) {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: './loadData/insertPelaksanaRenja',
-                                    data: {
-                                        '_token': $('input[name=_token]').val(),
-                                        'tahun_renja' : $('#tahun_rkpd').val(),
-                                        'id_unit' : $('#id_unit').val(),
-                                        'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                                    },
-                                    success: function(data) {
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: './loadData/insertLokasiRenja',
-                                            data: {
-                                                '_token': $('input[name=_token]').val(),
-                                                'tahun_renja' : $('#tahun_rkpd').val(),
-                                                'id_unit' : $('#id_unit').val(),
-                                                'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                                            },
-                                            success: function(data) {
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: './loadData/insertUsulanRenja',
-                                                    data: {
-                                                        '_token': $('input[name=_token]').val(),
-                                                        'tahun_renja' : $('#tahun_rkpd').val(),
-                                                        'id_unit' : $('#id_unit').val(),
-                                                        'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                                                    },
-                                                    success: function(data) {                                                      
-                                                      $.ajax({
-                                                        type: 'POST',
-                                                        url: './loadData/insertBelanjaRenja',
-                                                        data: {
-                                                          '_token': $('input[name=_token]').val(),
-                                                          'tahun_renja' : $('#tahun_rkpd').val(),
-                                                          'id_unit' : $('#id_unit').val(),
-                                                          'id_rkpd_ranwal' : $('#id_rkpd_ranwal').val(),
-                                                        },
-                                                        success: function(data) {
-                                                          createPesan(data.pesan,"success");
-                                                          $('#tblProgramRKPD').DataTable().ajax.reload();
-                                                          $('#ModalProgress').modal('hide');
-                                                        },
-                                                        error: function(data){
-                                                          createPesan(data.pesan,"danger");
-                                                          $('#tblProgramRKPD').DataTable().ajax.reload();
-                                                          $('#ModalProgress').modal('hide');
-                                                        }
-                                                      });
-                                                    },
-                                                });
-                                            },
-                                        });
-                                    },
-                                });
-                            },                    
-                        });
-                    },
-                });
-            },
-        });
-    },
-});
+          createPesan(data.pesan,"success");
+          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#ModalProgress').modal('hide');
+        },
+        error: function(data){
+          createPesan(data.pesan,"danger");
+          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#ModalProgress').modal('hide');
+        }
+    });
 
 });
 
@@ -370,8 +290,8 @@ $(document).on('click', '#btnUnloadRenja', function() {
             $('#tblProgramRKPD').DataTable().ajax.reload();
             $('#ModalProgress').modal('hide');
         },
-        error: function(data){
-            createPesan(data.pesan,"danger");
+        error: function(err){
+            createPesan(err,"danger");
             $('#tblProgramRKPD').DataTable().ajax.reload();
             $('#ModalProgress').modal('hide');
         }

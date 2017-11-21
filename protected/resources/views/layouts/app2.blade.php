@@ -1,3 +1,9 @@
+<?php
+use App\CekAkses;
+use hoaaah\LaravelMenu\Menu;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,32 +45,19 @@
                         <span class="icon-bar"></span>
                     </button> 
                                     <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x"></i>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
                 </div>
 
                     <ul class="nav navbar-top-links navbar-right">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?> <i class="fa fa-caret-down"></i>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <?php 
-                                    $rpjmdDokumen = \App\models\RefSetting::where('status_setting','=','1')->get();
-                                    $tahun = [];
-                                    foreach($rpjmdDokumen as $data){
-                                        $tahun[$data->tahun_rencana] = $data->tahun_rencana;
-                                    }
-                                    foreach($tahun as $tahun):
-                                ?>
-                                <li>
-                                    <a href="{{ url('/ta/'.$tahun) }}">
-                                        <span class="text-muted small">{{ $tahun }}</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <?php endforeach;?>
-                            </ul>
                         </li>
 
                         <!-- Authentication Links -->
@@ -93,8 +86,8 @@
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                                     document.getElementById('logout-form').submit();">                                          
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -107,31 +100,27 @@
                     </ul>
 
                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
+                        <?php
+                            $akses = new CekAkses();
+                            $menu = new Menu();
+                            $menu->render([
+                                'options' => [
+                                    'ulId' => 'side-menu'
+                                ],
+                                'items' => [
+                                    ['label' => 'Modul PPAS', 'icon'=>'fa fa-list-alt fa-fw fa-lg' ,'url' => '#'],
+                                    ['label' => 'Load Data RKPD', 'url' => '/ppas/loadData', 'visible' => $akses->get(701)],
+                                    ['label' => 'Penyusunan PPAS', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                ]
+                            ]);
+                        ?>
+                        {{-- <div class="sidebar-nav navbar-collapse">
                             <ul class="nav" id="side-menu">
-                                @if (Auth::guest())
-                                {{-- <li><a href="{{ url('/')}}">Dashboard</a></li> --}}
-                                @else
                                 <li><a href="{{ url('/ppas/loadData')}}"> Load Data RKPD</a></li>
                                 <li><a href="{{ url('/ppas')}}"> Penyusunan PPAS</a></li>
-                                {{-- <li>
-                                    <a href="#">Parameter </a>
-                                    <ul class="nav nav-second-level">
-                                        <li><a href="{{ url('/') }}">Pemda</a></li>
-                                        <li><a href="{{ url('/admin/parameter/user') }}">User dan Group</a></li>
-                                        <li><a href="{{ url('/') }}">Kecamatan-Desa</a></li>
-                                        <li><a href="{{ url('/') }}">Unit Organisasi</a></li>
-                                        <li><a href="{{ url('/') }}">Urasan Bidang Pemerintahan</a></li>
-                                        <li><a href="{{ url('/') }}">Rekening Anggaran</a></li>
-                                        <li><a href="{{ url('/') }}">Program Kegiatan SKPD</a></li>
-                                        <li><a href="{{ url('/') }}">Lokasi Non Kewilayahan</a></li>
-                                        <li><a href="{{ url('/') }}">Satuan Indikator</a></li>
-                                        <li><a href="{{ url('/') }}">Setting Aplikasi</a></li>
-                                    </ul>
-                                </li> --}}
                                 @endif
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
         </nav>
 

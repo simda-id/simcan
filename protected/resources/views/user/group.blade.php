@@ -5,56 +5,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 @section('content')
 
-<!-- Modal Group -->
-{{-- <div class="modal fade" id="myModalUbah" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Ubah User</h4>
-      </div>
-      <div class="modal-body">
-            ....
-      </div>
-    </div>
-  </div>
-</div> --}}
-
-
-<!-- Modal Group -->
-{{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Tambah Grup</h4>
-      </div>
-      <div class="modal-body">
-		    {{ Form::open(['url' => Request::url(), 'id' => 'pelaksana-form']) }}
-
-		        <div class="form-group">
-		            {{ Form::label('name', 'Nama Grup') }}
-		            {{ Form::text('name', NULL, ['class' => 'form-control col-md-6']) }}
-		        </div>
-
-                <div class="form-group">
-		            {{ Form::label('keterangan', 'Keterangan') }}
-		            {{ Form::text('keterangan', NULL, ['class' => 'form-control col-md-6']) }}
-		        </div>
-
-		        {{ Form::submit('Simpan', ['class' => 'btn btn-primary']) }}
-
-		    {{ Form::close() }}
-      </div>
-    </div>
-  </div>
-</div> --}}
-
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'User dan Group';
+                $this->title = 'Group';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => 'Parameter']);
@@ -76,10 +31,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <button id="btnTambahGroup" type="button" class="btn btn-labeled btn-sm btn-success">
                     <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Grup User
                 </button>     
-                <table class="table table-bordered table-striped table-responsive compact" id="group-table">
+                <table class="table table-bordered compact table-striped table-responsive compact" id="group-table">
                     <thead>
                         <tr>
-                            <th width='5%' style="text-align: center; vertical-align:middle">Id</th>
+                            <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
                             <th width='20%' style="text-align: center; vertical-align:middle">Nama</th>
                             <th style="text-align: center; vertical-align:middle">Keterangan</th>
                             <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
@@ -98,10 +53,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="modal-header">
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="background-color: #eee;">
         <form name="frmModalGroup" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_group" id="id_group">
+            <div class="row">
+            <div class="col-sm-2" style="text-align: center;">
+              <i class="fa fa-users fa-fw" style="font-size: 100px;color: #357EBD;"></i>
+            </div>
+            <div class="col-sm-10">
             <div class="form-group">
               <label for="name_proup" class="col-sm-3" align='left'>Nama Group User</label>
               <div class="col-sm-5">
@@ -113,9 +73,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="keterangan" name="keterangan" required="required">
               </div>
+            </div>
+            </div>
             </div> 
         </form>
-        <div class="modal-footer">
+      </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
                     </div>
@@ -129,7 +92,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       </div>
                     </div>
                 </div>
-              </div>
       </div>
     </div>
   </div>
@@ -141,7 +103,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="modal-header">
             <h4 class="modal-title"></h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="background-color: #eee;">
           <input type="hidden" id="id_group_hapus" name="id_group_hapus">
           <div class="alert alert-danger deleteContent">
               <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
@@ -150,7 +112,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
-          <div class="modal-footer">
+        </div>
+          <div class="modal-footer" style="background-color: #357EBD;">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled actionBtn" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
               <div class="or"></div>
@@ -160,7 +123,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 @endsection
  
@@ -189,7 +151,7 @@ var group_tbl=$('#group-table').DataTable({
                 autoWidth : false,
                 ajax: '{{ url('/admin/parameter/user/group/') }}',
                 columns: [
-                    { data: 'id', name: 'id', sClass: "dt-center" },
+                    { data: 'no_urut', name: 'no_urut', sClass: "dt-center" },
                     { data: 'name', name: 'name' },
                     { data: 'keterangan', name: 'keterangan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false, sClass: "dt-center" }
@@ -221,7 +183,7 @@ $('.modal-footer').on('click', '.add', function() {
         data: {
             '_token': $('input[name=_token]').val(),
             // 'id_pemda' : $('#id_pemda').val(),
-            'name_group' : $('#name_proup').val(),
+            'nama_group' : $('#name_proup').val(),
             'keterangan' : $('#keterangan').val(),
         },
         success: function(data) {

@@ -3,18 +3,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
 @extends('layouts.app0')
-{{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
-
 @section('content')
-  <div class="container row col-sm-12">
+  <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = 'Zona SSH';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul0';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'SSH']);
+                $breadcrumb->add(['url' => '/modul0','label' => 'SSH dan ASB']);
+                $breadcrumb->add(['url' => '/modul0','label' => 'SSH']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -24,20 +23,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="row">
             <div class="col-md-12">
 
-        <div class="panel panel-default">
+        <div class="panel panel-success">
           <div class="panel-heading">
-            <p class=""><h2 class="panel-title">Zona Pemberlakuan SSH  
-              <sup><a href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Untuk mengakomodir perbedaan harga antar lokasi. Misal: harga semen di kota dengan pegunungan berbeda"><i class="glyphicon glyphicon-question-sign"></i></a></sup></h2>
+            <p class=""><h2 class="panel-title"><span href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Untuk mengakomodir perbedaan harga antar lokasi. Misal: harga semen di kota dengan pegunungan berbeda">Zona Pemberlakuan SSH  
+            </span></h2>
             </p>
           </div>
 
           <div class="panel-body">
             <div class="add">
               <p><a type="button" class="add-modal btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah</a></p>
+              <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah</a></p>
             </div>
             <br>
-
+            <div class="table-responsive">
             <table id="tblzona" class="table display table-striped table-bordered table-responsive" width="100%">
                   <thead>
                       <tr>
@@ -47,11 +46,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
-                  <tbody>
-
-                  </tbody>
+                  <tbody></tbody>
             </table>
-
+            </div>
           </div>
         </div>
       </div>
@@ -75,39 +72,38 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label for="keterangan_zona" class="col-sm-3 control-label" align='left'>Nama Zona SSH :</label>
               <div class="col-sm-8">
-                <div class="input-group">
-                <textarea type="text" class="form-control" rows="2" id="ket_zona" name="ket_zona" required="required" ></textarea>
-                <span class="input-group-addon">
+                {{-- <div class="input-group"> --}}
+                <textarea type="text" class="form-control" rows="2" id="ket_zona" name="ket_zona" required="required" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan nama akan dibaca di sepanjang aplikasi"></textarea>
+                {{-- <span class="input-group-addon">
                     <a href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan nama akan dibaca di sepanjang aplikasi"><i class="glyphicon glyphicon-question-sign"></i></a>
                 </span>
-                </div>
+                </div> --}}
               </div>
             </div>
             <div class="form-group">
               <label for="diskripsi_zona" class="col-sm-3 control-label" align='left'>Deskripsi Zona SSH :</label>
               <div class="col-sm-8">
-                <div class="input-group">
-                <textarea type="text" class="form-control" rows="5" id="diskripsi_zona" name="diskripsi_zona" required="required" ></textarea>
-                <span class="input-group-addon">
+                {{-- <div class="input-group"> --}}
+                <textarea type="text" class="form-control" rows="5" id="diskripsi_zona" name="diskripsi_zona" required="required" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan penjelasan cakupan zona yang dimaksud: lokasi, jarak, dsb"></textarea>
+                {{-- <span class="input-group-addon">
                     <a href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan penjelasan cakupan zona yang dimaksud: lokasi, jarak, dsb"><i class="glyphicon glyphicon-question-sign"></i></a>
                 </span>
-                </div>
+                </div> --}}
               </div>
             </div>
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" class="btn btn-success btnAddZona btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i id="nmAddZona" class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                            <span class="btn-label"><i id="nmAddZona" class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -115,7 +111,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
   </div>
-</div>
 
   <!--Modal Hapus -->
 <div id="HapusModal" class="modal fade" role="dialog" data-backdrop="static">
@@ -130,19 +125,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 Yakin akan menghapus <strong><span class="title"></span></strong> ?
             <span class="hidden id_zona"></span>
           </div>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        {{-- <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Hapus</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" class="btn btn-danger actionBtn btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-save"></i></span>Hapus</button>
+                            <span class="btn-label"><i id="footer_action_button" class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -150,7 +144,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
-  </div>
 
 
 @endsection

@@ -7,7 +7,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -20,133 +20,143 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             ?>          
         </div>
     </div>
+    <div id="pesan" class="notify"></div>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h2 class="panel-title"> Identitas Pemerintah Daerah </h2>
+            <p><h2 class="panel-title"> Identitas Pemerintah Daerah </h2></p>
           </div>
 
           <div class="panel-body">
-            <form action="{{url('/pemda/edit')}}" method="post" role="form" autocomplete='off' enctype="multipart/form-data" onsubmit="return false;">
+            <form class="form-horizontal" action="#" method="post" role="form" autocomplete='off' enctype="multipart/form-data" onsubmit="return false;">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="hidden" name="id_pemda" id="id_pemda">
-              {{-- <div class="col-sm-12"> --}}
-              <table class="table table-bordered">
-                <tr>
-                  <td colspan="2" rowspan="4">
-                    <img src="{{ asset('vendor/default.png') }}" class="img-thumbnail" alt="Cinque Terre" width="300" height="230">
-                  </td>
-                  <td colspan="2">
-                        <label for="kode_pemda" class="" align='left' placeholder="Kode Pemda Sesuai dengan Permendagri">Kode Pemerintah Daerah </label></td>
-                  <td colspan="2">
-                          <input type="text" class="form-control" id="kode_pemda" name="kode_pemda" readonly></td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                        <label for="nama_pemda" class="" align='left'>Nama Pemerintah Daerah </label></td>
-                  <td colspan="2">
-                          <input type="text" class="form-control" id="nama_pemda" name="nama_pemda" placeholder="Nama Resmi Pemda misal : Pemerintah Kota XXX" readonly></td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                        <label for="ibukota" class="" align='left'>Ibukota Pemerintah Daerah </label></td>
-                  <td colspan="2">
-                          <input type="text" class="form-control" id="ibukota" name="ibukota" placeholder="Ibukota Pemerintah Daerah"></td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                        <label for="jabatan_kada" class="" align='left'>Jabatan Kepala Daerah </label></td>
-                  <td colspan="2">
-                          <input type="text" class="form-control" id="jabatan_kada" name="jabatan_kada" placeholder="Bupati/Walikota"></td>
-                </tr>
-                <tr>
-                  <td colspan="2" rowspan="2">
-                      <div class="form-group">
-                        <label for="logo_pemda" class="control-label" align='left'>File Logo Daerah :
-                          <input type="file" id="logo_pemda" name="logo_pemda" class="opacity:0;">
-                        </label>
+              <div class="row">
+                <div class="col-sm-3" style="text-align: center;">
+                  <img src="{{ asset('vendor/default.png') }}" class="img-thumbnail" alt="Cinque Terre" width="260" height="300" >
+                </div>
+                <div class="col-sm-9">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                      <label for="name" class="col-sm-4 control-label">Kode Pemerintah Daerah</label>
+                      <div class="col-sm-3">
+                          <input type="text" class="form-control" id="kode_pemda" name="kode_pemda" readonly style="text-align: center;">
                       </div>
-                  </td>
-                  <td colspan="2">
-                    <label for="nama_kada" class="" align='left'>Nama Kepala Daerah </label></td>
-                  <td colspan="2">
-                    <input type="text" class="form-control" id="nama_kada" name="nama_kada" placeholder="Nama Lengkap Bupati/Walikota"></td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="unit_perencanaan" class="" align='left'>Unit Perencanaan :</label>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                      <label for="name" class="col-sm-4 control-label">Nama Pemerintah Daerah</label>
+                      <div class="col-sm-5">
+                          <input type="text" class="form-control" id="nama_pemda" name="nama_pemda" placeholder="Nama Resmi Pemda misal : Pemerintah Kota XXX" readonly>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                      <label for="name" class="col-sm-4 control-label">Ibukota Pemerintah Daerah</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="ibukota" name="ibukota" placeholder="Ibukota Pemerintah Daerah">
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">Jabatan Kepala Daerah</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="jabatan_kada" name="jabatan_kada" placeholder="Bupati/Walikota">
+                    </div>
+                  </div>
+                </div> 
+              <div class="col-sm-12">
+                  <div class="form-group">
+                      <label for="name" class="col-sm-4 control-label">Nama Kepala Daerah</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="nama_kada" name="nama_kada" placeholder="Nama Lengkap Bupati/Walikota">
+                      </div>
+                  </div>
+                </div> 
+              <div class="col-sm-12">
+                <div class="form-group">
+                        <label for="nama_sekda" class="col-sm-4 control-label" align='left'>Nama Sekretaris Daerah :</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="col-sm-8 form-control" id="nama_sekda" name="nama_sekda" placeholder="Nama Lengkap Sekretaris Daerah">
+                        </div>
+                      </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                        <label for="nama_sekda" class="col-sm-4 control-label" align='left'>NIP Sekretaris Daerah :</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control nip" id="nip_sekda_display" name="nip_sekda_display" maxlength="18">
+                          <input type="hidden" class="form-control" id="nip_sekda" name="nip_sekda">
+                        </div>
+                      </div>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                      <label for="name" class="control-label">Unit Perencanaan</label>
+                    </div>
+                      <div class="col-sm-12">
                           <div class="input-group">
                             <input type="hidden" class="" id="id_unit_perencanaan" name="id_unit_perencanaan" >
                             <input type="text" class="form-control" id="nm_unit_perencanaan" name="nm_unit_perencanaan" readonly>
                             <span class="input-group-btn">
-                              <button class="btn btn-primary" data-toggle="modal" href="#" id="btnCariPerencana" name="btnCariPerencana"><i class="fa fa-search fa-fw"></i></button>
+                              <button class="btn btn-primary" data-toggle="modal" id="btnCariPerencana" name="btnCariPerencana"><i class="fa fa-search fa-fw"></i></button>
                             </span>
-                          </div>
+                          </div>    
                       </div>
-                  </td>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="id_unit_keuangan" class="control-label" align='left'>Unit Pengelola Keuangan :</label>
-                          <div class="input-group">
-                            <input type="hidden" class="form-control" id="id_unit_keuangan" name="id_unit_keuangan" >
-                            <input type="text" class="form-control" id="nm_unit_keuangan" name="nm_unit_keuangan" readonly>
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary" data-toggle="modal" href="#" id="btnCariKeuangan" name="btnCariKeuangan"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                          </div>
-                      </div>
-
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nama_sekda" class="" align='left'>Nama Sekretaris Daerah :</label>
-                          <input type="text" class="form-control" id="nama_sekda" name="nama_sekda" placeholder="Nama Lengkap Sekretaris Daerah">
-                      </div>
-                  </td>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nama_kabappeda" class="" align='left'>Nama Kepala Unit Perencanaan :</label>
+                    <div class="col-sm-12">
+                      <label for="nama_kabappeda" class="control-label" align='left'>Nama Kepala Unit Perencanaan :</label>
+                    </div>
+                    <div class="col-sm-12">                        
                           <input type="text" class="form-control" id="nama_kabappeda" name="nama_kabappeda" placeholder="Nama Lengkap Kepala Badan yang berfungsi perencanaan">
-                      </div>
-                  </td>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nama_kabpkad" class="" align='left'>Nama Kepala Unit Pengelola Keuangan :</label>
+                    </div>
+                    <div class="col-sm-12">
+                          <label for="nip_kabappeda" class="" align='left'>NIP Kepala Unit Perencanaan :</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control nip" id="nip_kabappeda_display" name="nip_kabappeda_display" maxlength="18">
+                      <input type="hidden" class="form-control" id="nip_kabappeda" name="nip_kabappeda">
+                    </div>
+                </div>
+                {{-- <div class="col-sm-1">                    
+                </div> --}}
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <label for="id_unit_keuangan" class=" control-label" align='left'>Unit Pengelola Keuangan</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                          <input type="hidden" class="form-control" id="id_unit_keuangan" name="id_unit_keuangan" >
+                          <input type="text" class="form-control" id="nm_unit_keuangan" name="nm_unit_keuangan" readonly>
+                          <div class="input-group-btn">
+                              <button class="btn btn-primary" data-toggle="modal" id="btnCariKeuangan" name="btnCariKeuangan"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                          <label for="nama_kabpkad" class="control-label" align='left'>Nama Kepala Unit Pengelola Keuangan :</label>
+                    </div>
+                    <div class="col-sm-12">
                           <input type="text" class="form-control" id="nama_kabpkad" name="nama_kabpkad" placeholder="Nama Lengkap Kepala Badan yang mengelola keuangan daerah">
-                      </div>
-
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nip_sekda" class="" align='left'>NIP Sekretaris Daerah :</label>
-                          <input type="text" class="form-control nip" id="nip_sekda_display" name="nip_sekda_display" maxlength="18">
-                          <input type="hidden" class="form-control" id="nip_sekda" name="nip_sekda">
-                      </div>
-                  </td>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nip_kabappeda" class="" align='left'>NIP Kepala Unit Perencanaan :</label>
-                          <input type="text" class="form-control nip" id="nip_kabappeda_display" name="nip_kabappeda_display" maxlength="18">
-                          <input type="hidden" class="form-control" id="nip_kabappeda" name="nip_kabappeda">
-                      </div>
-                  </td>
-                  <td colspan="2">
-                      <div class="form-group">
-                        <label for="nip_kabpkad" class="" align='left'>NIP Kepala Unit Pengelola Keuangan :</label>
-                          <input type="text" class="form-control nip" id="nip_kabpkad_display" name="nip_kabpkad_display" maxlength="18">
-                          <input type="hidden" class="form-control" id="nip_kabpkad" name="nip_kabpkad">
-                      </div>
-                  </td>
-                </tr>
-              </table>
-              {{-- </div> --}}
+                    </div>
+                    <div class="col-sm-12">
+                      <label for="nip_kabpkad" class="" align='left'>NIP Kepala Unit Pengelola Keuangan :</label>
+                    </div>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control nip" id="nip_kabpkad_display" name="nip_kabpkad_display" maxlength="18">
+                      <input type="hidden" class="form-control" id="nip_kabpkad" name="nip_kabpkad">
+                    </div>
+                </div>
+              </div>
             </form>
+          </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">
@@ -196,6 +206,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </form>
+    </div>
       <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">
@@ -209,16 +220,29 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
     </div>
-  </div>
-
-
-
 @endsection
 
 @section('scripts')
 <script  type="text/javascript" language="javascript" class="init">
 
 $(document).ready(function() {
+
+function createPesan(message, type) {
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';    
+    html += '<p><strong>'+message+'</strong></p>';
+    html += '</div>';    
+    $(html).hide().prependTo('#pesan').slideDown();
+    
+    // setTimeout(function() {
+    //         $('#pesanx').removeClass('in');
+    //      }, 3500);
+  };
+
+$('.page-alert .close').click(function(e) {
+        e.preventDefault();
+        $(this).closest('.page-alert').slideUp();
+    });
 
 $('[data-toggle="popover"]').popover();
 
@@ -259,10 +283,11 @@ function LoadPemda() {
           type: "GET",
           url: 'pemda/getPemda',
           dataType: "json",
-
           success: function(data) {
+            $('#id_pemda').val(data[0].id_pemda);
             $('#kode_pemda').val(data[0].kode_pemda);
             $('#nama_pemda').val(data[0].nm_kabkota);
+            $('#ibukota').val(data[0].ibu_kota);
             $('#jabatan_kada').val(data[0].nama_jabatan_kepala_daerah);
             $('#nama_kada').val(data[0].nama_kepala_daerah);
             $('#nip_sekda').val(data[0].nip_sekretariat_daerah);
@@ -271,9 +296,27 @@ function LoadPemda() {
             $('#nama_kabappeda').val(data[0].nama_kepala_bappeda);
             $('#nip_kabpkad').val(data[0].nip_kepala_bpkad);
             $('#nama_kabpkad').val(data[0].nama_kepala_bpkad);
-            $('#nip_sekda_display').val(buatNip(data[0].nip_sekretariat_daerah));
-            $('#nip_kabappeda_display').val(buatNip(data[0].nip_kepala_bappeda));
-            $('#nip_kabpkad_display').val(buatNip(data[0].nip_kepala_bpkad));              
+            if (data[0].nip_sekretariat_daerah==null) {
+              $('#nip_sekda_display').val(null);
+            } else {
+              $('#nip_sekda_display').val(buatNip(data[0].nip_sekretariat_daerah));
+            };
+
+            if(data[0].nip_kepala_bappeda==null){
+              $('#nip_kabappeda_display').val(null);
+            } else {
+              $('#nip_kabappeda_display').val(buatNip(data[0].nip_kepala_bappeda));
+            };
+            
+            if(data[0].nip_kepala_bpkad==null){
+              $('#nip_kabpkad_display').val(null);
+            } else {
+              $('#nip_kabpkad_display').val(buatNip(data[0].nip_kepala_bpkad));
+            };
+            $('#id_unit_perencanaan').val(data[0].unit_perencanaan);
+            $('#id_unit_keuangan').val(data[0].unit_keuangan);
+            $('#nm_unit_perencanaan').val(data[0].nm_perencana);
+            $('#nm_unit_keuangan').val(data[0].nm_keuangan);
           }
         });
 
@@ -336,16 +379,78 @@ $(document).on('click', "#btnEditPemda" , function() {
   $('#btnEditPemda').hide();
   $('.idbtnSimpanPemda').show();
   // alert($_FILES['logo_pemda']['name'])
-   
-   $.ajax({
-                type: "GET",
-                url: 'pemda/getPemdaX',
-                dataType: "json",
-                success: function(data) {
-                  console.log(data);                 
-                }
-            });   
 
+  // $.ajaxSetup({
+  //   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  // });  
+
+  // $.ajax({
+  //     type: "GET",
+  //     url: 'pemda/getPemdaX1',
+  //     dataType: "json",
+  //     success: function(data) {
+  //       var j = data.length;
+  //       var post, i;
+  //       for (i = 0; i < j; i++) {
+  //         post = data[i];
+          // $.ajax({
+          //   type: 'POST',
+          //   url: 'pemda/getPemdaX',
+          //   data: {
+          //       '_token': $('input[name=_token]').val(),
+          //       'nama_kab' :'SIMULASI',
+                // 'id_kab' :post.id_kab,
+          //   },
+          //   success: function(data) {
+          //     console.log(data);
+          //   }
+          // }); 
+  //       }           
+  //     }
+  // }); 
+
+});
+
+$(document).on('click', "#btnSimpanPemda" , function() {
+  $.ajaxSetup({
+    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
+
+  $.ajax({
+          type: 'post',
+          url: 'pemda/editPemda',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_pemda': $('#id_pemda').val(),
+              'ibu_kota': $('#ibukota').val(),
+              'jabatan_kada': $('#jabatan_kada').val(),
+              'nama_kada': $('#nama_kada').val(),
+              'nama_sekda': $('#nama_sekda').val(),
+              'nip_sekda': $('#nip_sekda').val(),
+              'unit_perencana': $('#id_unit_perencanaan').val(),
+              'nama_kabappeda': $('#nama_kabappeda').val(),
+              'nip_kabappeda': $('#nip_kabappeda').val(),
+              'unit_keuangan': $('#id_unit_keuangan').val(),
+              'nama_kabpkad': $('#nama_kabpkad').val(),
+              'nip_kabpkad': $('#nip_kabpkad').val(),
+          },
+          success: function(data) {
+              $('.idbtnSimpanPemda').hide();
+              $('#btnEditPemda').show();
+              LoadPemda(); 
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          },
+          error: function(data) {
+              $('.idbtnSimpanPemda').hide();
+              $('#btnEditPemda').show();
+              LoadPemda(); 
+              createPesan('Gagal Simpan Edit Pemda',"danger");
+          }
+      });  
 });
 
 $(document).on('click', "#btnBatalPemda" , function() {   

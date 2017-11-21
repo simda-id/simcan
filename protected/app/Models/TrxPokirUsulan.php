@@ -17,7 +17,8 @@ class TrxPokirUsulan extends Model
 						'diskripsi_usulan',
 						'volume',
 						'id_satuan',
-						'jml_anggaran'];
+						'jml_anggaran',
+						'id_unit'];
 
 
 }

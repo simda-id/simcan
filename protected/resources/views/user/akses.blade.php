@@ -43,7 +43,8 @@
                                         <li data-value="105"> Rekening</li>
                                         <li data-value="106"> Program-Kegiatan</li>
                                         <li data-value="107"> Lokasi</li>
-                                        <li data-value="108"> Satuan Indikator</li>
+                                        <li data-value="108"> Indikator</li>
+                                        <li data-value="111"> Satuan</li>
                                         <li data-value="109"> Setting Aplikasi</li>
                                     </ul>
                                 </li>

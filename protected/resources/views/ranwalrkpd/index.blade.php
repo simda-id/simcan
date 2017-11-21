@@ -6,71 +6,73 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 
 @section('content')
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
                 $this->title = 'Rancangan Awal RKPD ';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'RKPD']);
-                $breadcrumb->add(['label' => $this->title]);
+                $breadcrumb->add(['url' => '/modul2','label' => 'RKPD']);
+                $breadcrumb->add(['url' => '/ranwalrkpd', 'label' => $this->title]);
+                $breadcrumb->add(['label' => 'Belanja Langsung']);
                 $breadcrumb->end();
-            ?>          
+            ?>        
         </div>
     </div>
-    <div id="pesan"></div>
+      <div id="pesan" class="notify"></div> 
+    
     <div class="row">
       <div class="col-md-12">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
           <div class="panel-heading">
-            <h2 class="panel-title">Daftar Usulan Program Rancangan Awal RKPD</h2>
-            {{-- <i class="icon-camera" style="font-size:60px;color:red;"></i> --}}
+            <h2 class="panel-title">Daftar Usulan Program Belanja Langsung Rancangan Awal RKPD</h2>
           </div>
           <div class="panel-body">
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
             <ul class="nav nav-tabs" role="tablist">
               <li class="active"><a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program RKPD</a></li>
-              <li><a href="#indikator" aria-controls="indikator" role="tab-kv" data-toggle="tab">Indikator Program RKPD</a></li>
-              <li><a href="#urusan" aria-controls="urusan" role="tab-kv" data-toggle="tab">Urusan Pemerintahan RKPD</a></li>
-              <li><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana Program RKPD</a></li>
+              <li class="disabled"><a href="#indikator" aria-controls="indikator" role="tab-kv" data-toggle="tab">Indikator Program RKPD</a></li>
+              <li class="disabled"><a href="#urusan" aria-controls="urusan" role="tab-kv" data-toggle="tab">Urusan Pemerintahan RKPD</a></li>
+              <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana Program RKPD</a></li>
             </ul>
 
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="program">
               <br>
-              <div class="add">
-                <p><a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Program</a></p>
+              <div>
+                <a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Program baru yang belum ada di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a>
               </div>
-              <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id="tblProgramRKPD" class="table display table-responsive table-striped compact table-bordered"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th rowspan="2" width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Asal Data</th>
-                                <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
+                                <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                                <th rowspan="2" width="45%" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
                                 <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RPJMD</th>
                                 <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RKPD</th>
                                 <th colspan="2" width="5%" style="text-align: center; vertical-align:middle">Indikator</th>
                                 <th colspan="2" width="5%" style="text-align: center; vertical-align:middle">Pelaksana</th>
                                 <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Status Usulan</th>
-                                <th rowspan="2" width="50px" style="text-align: center; vertical-align:middle">Aksi</th>
+                                <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
                             </tr>
                             <tr>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Reviu</th>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Reviu</th>
+                                <th style="text-align: center; vertical-align:middle">Jml</th>
+                                <th style="text-align: center; vertical-align:middle">Reviu</th>
+                                <th style="text-align: center; vertical-align:middle">Jml</th>
+                                <th style="text-align: center; vertical-align:middle">Reviu</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
-                </table>
+              </table>
               </div>
-              <div role="tabpanel" class="tab-pane fade in" id="indikator">
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="indikator" >
               <br>
-              <div class="add">
-                <p><a id="btnTambahIndikator" class="add-indikator btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Indikator</a></p>
+              <div class="divAddIndikator">
+                <p><a id="btnTambahIndikator" class="add-indikator btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Indikator baru yang belum ada di RPJMD, namun menjadi indikator program pada RKPD tahun berjalan"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Indikator</a></p>
               </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
               <div class="table-responsive">
@@ -88,7 +90,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <table id="tblIndikatorRKPD" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id="tblIndikatorRKPD" class="table display table-striped compact table-bordered table-responsive"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -102,12 +105,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </thead>
                         <tbody>
                         </tbody>
-                </table>
+              </table>
               </div>
-              <div role="tabpanel" class="tab-pane fade in" id="urusan">
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="urusan" >
               <br>
-              <div class="add">
-                <p><a id="btnTambahUrusan" class="add-urusan btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Urusan</a></p>
+              <div class="divAddUrusan">
+                <p><a id="btnTambahUrusan" class="add-urusan btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Urusan Pelaksana selain yang telah ditetapkan di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Urusan</a></p>
               </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
               <div class="table-responsive">
@@ -125,29 +129,32 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <table id="tblUrusanRKPD" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id="tblUrusanRKPD" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 {{-- <th></th> --}}
                                 <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Urusan</th>
+                                <th rowspan="2" width="35%" style="text-align: center; vertical-align:middle">Uraian Urusan</th>
                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Bidang</th>
-                                <th colspan="2" style="text-align: center; vertical-align:middle">Pelaksana</th>
+                                <th colspan="2" width="10%" style="text-align: center; vertical-align:middle">Pelaksana</th>
                                 <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                             </tr>
                             <tr>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Reviu</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Jml</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Reviu</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                 </table>
               </div>
-              <div role="tabpanel" class="tab-pane fade in" id="pelaksana">
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="pelaksana" >
               <br>
-              <div class="add">
-                <p><a id="btnTambahPelaksana" class="add-pelaksana btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Tambah Pelaksana</a></p>
+              <div class="divAddPelaksana">
+                <p><a id="btnBackUrusan" class="btn btn-warning" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Kembali ke Tabel Urusan"><i class="fa fa-arrow-left fa-fw fa-lg"></i></a>
+                  <a id="btnTambahPelaksana" class="add-pelaksana btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Perangkat Daerah Pelaksana selain yang telah ditetapkan di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pelaksana</a></p>
               </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
               <div class="table-responsive">
@@ -173,20 +180,22 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </form>
-              <table id="tblPelaksanaRKPD" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+              <div class="table-responsive">
+              <table id="tblPelaksanaRKPD" class="table display table-striped compact table-bordered table-responsive"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 {{-- <th></th> --}}
-                                <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th style="text-align: center; vertical-align:middle">Kode Unit</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Kode Unit</th>
                                 <th style="text-align: center; vertical-align:middle">Nama Unit Pelaksana</th>
-                                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                                <th width="10px"style="text-align: center; vertical-align:middle">Aksi</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Status</th>
+                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
-                </table>
+              </table>
+              </div>
               </div>
           </div>
         </div>
@@ -227,13 +236,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <input type="hidden" id="id_unit_rkpd" name="id_unit_rkpd">
               <span class="btn btn-sm btn-primary btnCariUnit" id="btnCariUnit" name="btnCariUnit"><i class="glyphicon glyphicon-search"></i></span>
             </div>
-            <div class="form-group">
+            <div class="form-group hidden" >
               <label for="ophak_akses" class="col-sm-3 control-label" align='left'>Penambahan Program/Kegiatan :</label>
-              <div class="col-sm-8">
-                <label class="radio-inline">
+              <div class="col-sm-8"">
+                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="SKPD tidak dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
                   <input type="radio" name="ophak_akses" id="ophak_akses" value="0">Tidak Diperbolehkan
                 </label>
-                <label class="radio-inline">
+                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="SKPD dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
                   <input type="radio" name="ophak_akses" id="ophak_akses" value="1">Diperbolehkan 
                 </label>
               </div>
@@ -244,7 +253,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="0">Tepat Waktu
                       </label>
-                      <label class="radio-inline">
+                      <label class="radio-inline hidden">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="1">Dimajukan
                       </label>
                       <label class="radio-inline">
@@ -253,7 +262,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="3">Dibatalkan
                       </label>
-                      <label class="radio-inline" id="status_pelaksanaan_unit4">
+                      <label class="radio-inline hidden">
+                        <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="5">Tanpa Anggaran
+                      </label>
+                      <label class="radio-inline hidden" id="status_pelaksanaan_unit4">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="4">Baru
                       </label>
                   </div>
@@ -265,6 +277,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusPelaksana">
@@ -272,9 +285,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                         <div class="ui-group-buttons">
-                         <button type="submit" class="btn btn-sm btn-labeled btn-primary btnAddPelaksana" data-dismiss="modal"><span class="btn-label"><i class="glyphicon glyphicon-save"></i></span> Simpan</button>
+                         <button type="button" class="btn btn-labeled btn-success btnAddPelaksana" data-dismiss="modal"><span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span> Simpan</button>
                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+                        <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
                         </div>
                     </div>
                 </div>
@@ -282,7 +295,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </div>
-    </div>
 
   <div id="HapusPelaksana" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -293,21 +305,22 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_pelaksana_rkpd_hapus" name="id_pelaksana_rkpd_hapus">
-            <div class="deleteContent">
+            <div class="alert alert-danger">
+              <i class="fa fa-exclamation-triangle fa-2x fa-pull-left text-danger"  aria-hidden="true"></i>
                 Yakin akan menghapus Unit : <strong><span class="ur_unit_del"></span></strong> ini ?
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
-            <button type="button" class="btn btn-sm btn-labeled btn-danger btnDelUnit" data-dismiss="modal" ><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span> Hapus</button>
+            <button type="button" class="btn btn-labeled btn-danger btnDelUnit" data-dismiss="modal" ><span class="btn-label"><i class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
             <div class="or"></div>
-            <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+            <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
             <div class="ui-group-buttons">
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
   <div id="ModalUrusan" class="modal fade" role="dialog" data-backdrop="static">
@@ -334,13 +347,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-12 text-right">
                       <div class="ui-group-buttons">
-                         <button type="submit" class="btn btn-sm btn-labeled btn-primary btnUrusan" data-dismiss="modal"><span class="btn-label"><i class="glyphicon glyphicon-save"></i></span> Simpan</button>
+                         <button type="button" class="btn btn-labeled btn-success btnUrusan" data-dismiss="modal"><span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span> Simpan</button>
                          <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+                        <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -348,7 +362,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </div>
-    </div>
 
   <div id="HapusUrusan" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -359,20 +372,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_urusan_rkpd_hapus" name="id_urusan_rkpd_hapus">
-            <div class="deleteContent">
+            <div class="alert alert-danger">
+              <i class="fa fa-exclamation-triangle fa-2x fa-pull-left text-danger"  aria-hidden="true"></i>
                 Yakin akan menghapus Bidang : <strong><span class="ur_bidang_del"></span></strong> dalam urusan <strong><span class="ur_urusan_del"></span></strong> ?
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
-              <button type="button" class="btn btn-sm btn-labeled btn-danger btnDelUrusan" data-dismiss="modal" ><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span> Hapus</button>
+              <button type="button" class="btn btn-labeled btn-danger btnDelUrusan" data-dismiss="modal" ><span class="btn-label"><i class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
               <div class="or"></div>
-              <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+              <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
   <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
       <div class="modal-dialog modal-lg">
@@ -421,6 +435,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
             </form>
+          </div>
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusIndikator">
@@ -428,9 +443,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-9 text-right">
                         <div class="ui-group-buttons">
-                         <button type="submit" class="btn btn-sm btn-labeled btn-primary btnIndikator" data-dismiss="modal"><span class="btn-label"><i class="glyphicon glyphicon-save"></i></span> Simpan</button>
+                         <button type="button" class="btn btn-labeled btn-success btnIndikator" data-dismiss="modal"><span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span> Simpan</button>
                          <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+                        <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
                         </div>
                     </div>
                 </div>
@@ -438,7 +453,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
       </div>
-    </div>
 
   <div id="HapusIndikator" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -449,23 +463,24 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_indikator_hapus" name="id_indikator_hapus">
-            <div class="deleteContent">
+            <div class="alert alert-danger">
+              <i class="fa fa-exclamation-triangle fa-2x fa-pull-left text-danger"  aria-hidden="true"></i>
                 Yakin akan menghapus Indikator : <strong><span class="ur_indikator_rkpd_del"></span></strong> yang merupakan penambahan program baru ?
                 {{-- <br>
                 <br>
                 <strong>Catatan : Penghapusan data ini mempengaruhi terhadap data turunannya yang ada ikut terhapus.....!!!!</strong> --}}
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
-            <button type="button" class="btn btn-sm btn-labeled btn-danger btnDelIndikator" data-dismiss="modal" ><span class="btn-labeled"><i class="glyphicon glyphicon-trash"></i></span> Hapus</button>
+            <button type="button" class="btn btn-labeled btn-danger btnDelIndikator" data-dismiss="modal" ><span class="btn-labeled"><i class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
             <div class="or"></div>
-            <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-labeled"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+            <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-labeled"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div id="EditProgram" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -485,7 +500,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                   </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">Jenis Belanja :</label>
+                  <label class="control-label col-sm-3" for="id">Jenis Program RKPD:</label>
                   <div class="col-sm-5">
                     <select class="form-control" name="jns_belanja" id="jns_belanja" disabled>
                       <option value="0">Belanja Langsung</option>
@@ -505,7 +520,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <input type="hidden" id="id_tujuan_rpjmd" name="id_tujuan_rpjmd">
                     <input type="hidden" id="id_sasaran_rpjmd" name="id_sasaran_rpjmd">
                     <input type="hidden" id="id_program_rpjmd" name="id_program_rpjmd">
-                    <span class="btn btn-sm btn-primary btnCariProgram" id="btnCariProgram" name="btnCariProgram"><i class="glyphicon glyphicon-search"></i></span>
+                    <a class="btn btn-primary btnCariProgram" id="btnCariProgram" name="btnCariProgram" data-placement="left" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Daftar Indikator yang telah terdapat dalam referensi indikator"><i class="fa fa-search fa-fw fa-lg"></i></a>
                   </div>
                   <div class="form-group">
                   <label class="control-label col-sm-3" for="title">Uraian Program RKPD:</label>
@@ -520,32 +535,31 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                   <label for="pagu_rkpd_program" class="col-sm-2 control-label" align='left'>Pagu RKPD :</label>
                   <div class="col-sm-3">
-                    <div class="input-group">
-                      <input type="text" class="form-control number" id="pagu_rkpd_program" name="pagu_rkpd_program" required="required" >
-                      <span class="input-group-addon">
-                        <a href="#" data-toggle="popover" data-container="body" title="Pagu RKPD" data-trigger="hover" data-content="Diisi dengan jumlah pagu yang akan dianggarkan pada tahun berjalan, jumlahnya bisa lebih besar maupun lebih kecil dari pagu di RPJMD"><i class="glyphicon glyphicon-question-sign"></i></a>
-                      </span>
-                    </div>                    
+                      <input type="text" class="form-control number" id="pagu_rkpd_program" name="pagu_rkpd_program" required="required" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Diisi dengan jumlah pagu yang akan dianggarkan pada tahun berjalan, jumlahnya bisa lebih besar maupun lebih kecil dari pagu di RPJMD">
                   </div>
                 </div>
                 <div class="form-group idStatusPelaksanaan" id="idStatus">
                   <label for="status_pelaksanaan_program" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
                   <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
+                      <label class="radio-inline" data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Tepat Waktu: dilaksanakan pada tahun sesuai RPJMD;">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="0">Tepat Waktu
                       </label>
-                      <label class="radio-inline">
+                      <label class="radio-inline" data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Dimajukan: dilaksanakan lebih cepat dari rencana RPJMD;">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="1">Dimajukan
                       </label>
-                      <label class="radio-inline">
+                      <label class="radio-inline" data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Ditunda: dilaksanakan mundur dari tahun rencana RPJMD;">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="2">Ditunda
                       </label>
-                      <label class="radio-inline">
+                      <label class="radio-inline" data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Dibatalkan: Tidak akan dilaksanakan dalam siklus RKPD berjalan;">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="3">Dibatalkan
+                      </label>
+                      <label class="radio-inline" data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Tanpa Anggaran: pada tahun berjalan memang tidak dianggarkan dalam RPJMD;">
+                        <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="5">Tanpa Anggaran
                       </label>
                       <label class="radio-inline" id="status_pelaksanaan4">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="4">Baru
                       </label>
+                      
                   </div>
                 </div>
                 <div class="form-group KetPelaksanaan">
@@ -554,7 +568,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <textarea type="text" class="form-control keterangan_status_program" name="keterangan_status_program" id="keterangan_status_program" rows="3" disabled></textarea>
                   </div>
                 </div>
-                <div class="form-group idStatusUsulan"> 
+                <div class="form-group idStatusUsulan hidden"> 
                   <label for="status_data_program" class="col-sm-3 control-label" align='left'>Status Usulan :</label>                 
                   <div class="col-sm-6">
                     <label class="radio-inline">
@@ -566,6 +580,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
               </form>
+            </div>
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapus">
@@ -573,9 +588,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                         <button type="submit" class="btn btn-sm btn-labeled btn-primary btnProgram" data-dismiss="modal"><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-save"></i></span> Simpan</button>
+                         <button type="button" class="btn btn-labeled btn-success btnProgram" data-dismiss="modal"><span class="btn-label"><i id="footer_action_button" class="fa fa-floppy-o fa-lg fa-fw"></i></span> Simpan</button>
                          <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+                        <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
                       </div>
                     </div>
                 </div>
@@ -583,7 +598,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
           </div>
         </div>
-      </div>
 
         <!--Modal Aktivitas-->
   <div id="HapusProgram" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
@@ -595,23 +609,24 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_program_hapus" name="id_program_hapus">
-            <div class="deleteContent">
+            <div class="alert alert-danger">
+              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-danger"  aria-hidden="true"></i>
                 Yakin akan menghapus Program RKPD : <strong><span class="ur_program_del"></span></strong> yang merupakan penambahan program baru ?
                 <br>
                 <br>
                 <strong>Catatan : Penghapusan data ini mempengaruhi terhadap data turunannya yang ada ikut terhapus.....!!!!</strong>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
-            <button type="button" class="btn btn-sm btn-labeled btn-danger btnDelProgram" data-dismiss="modal" ><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span> Hapus</button>
+            <button type="button" class="btn btn-labeled btn-danger btnDelProgram" data-dismiss="modal" ><span class="btn-label"><i class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
             <div class="or"></div>
-            <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+            <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
   <div id="cariIndikator" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -639,13 +654,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">             
-              <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+              <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
           </div> 
         </div>
       </div>
     </div>
-  </div>
 
   <div id="cariProgramRPJMD" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -672,13 +687,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">             
-              <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+              <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
           </div> 
         </div>
       </div>
     </div>
-  </div>
 
 <div id="cariRefUnit" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
     <div class="modal-dialog modal-lg"  >
@@ -705,13 +720,53 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
+        </div>
           <div class="modal-footer">             
-              <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
+              <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
           </div> 
         </div>
       </div>
     </div>
-  </div>
+
+<div id="StatusProgram" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Program Ranwal RKPD</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_program_ranwal_posting" name="id_program_ranwal_posting">
+            <input type="hidden" id="status_program_ranwal_posting" name="status_program_rranwalposting">
+            <input type="hidden" id="tahun_ranwal_posting" name="tahun_ranwal_posting">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_status_ranwal_posting"></span></i></strong> pada program : <strong><span id="ur_program_ranwal_posting"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnPostProgram" class="btn btn-success btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
 
 @endsection
 
@@ -722,12 +777,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
   
   function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
-    html += message;
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';    
+    html += '<p><strong>'+message+'</strong></p>';
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
+    
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
 $('.page-alert .close').click(function(e) {
@@ -736,6 +794,17 @@ $('.page-alert .close').click(function(e) {
     });
 
 $('[data-toggle="popover"]').popover();
+
+$('.display').DataTable({
+    dom : 'BfrtIp',
+    autoWidth : false,
+    "bDestroy": true
+});
+
+$(".disabled").click(function (e) {
+        e.preventDefault();
+        return false;
+});
 
   var temp_rkpd_ranwal;
   var temp_ur_program_rpjmd;
@@ -746,12 +815,15 @@ $('[data-toggle="popover"]').popover();
 
   var check_data;
 
-  document.getElementById("btnTambahUrusan").style.visibility='hidden';
-  document.getElementById("btnTambahIndikator").style.visibility='hidden';
-  document.getElementById("btnTambahPelaksana").style.visibility='hidden';
+  $('#divAddIndikator').hide();
+  $('#divAddUrusan').hide();
+  $('#divAddPelaksana').hide();
 
-// 
-// $('.number').number(true,2,',', '.');
+  $('.display').DataTable({
+      dom : 'BfRtip',
+      autoWidth : false,
+      bDestroy: true
+  });
 
 
 $('#pagu_rpjmd_program').number(true,2,',', '.');
@@ -766,25 +838,26 @@ $('#no_urut_program').number(true,0,',', '.');
   var progrkpd = $('#tblProgramRKPD').DataTable( {
         processing: true,
         serverSide: true,
+          deferRender: true,
         "autoWidth": false,
         "ajax": {"url": "blangsung/getData"},
         "language": {
                 "decimal": ",",
                 "thousands": "."},
         "columns": [
-              { data: 'urut'},
-              { data: 'sumber_display'},
+              { data: 'urut', sClass: "dt-center"},
+              // { data: 'sumber_display', sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
               { data: 'pagu_rpjmd',
-                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' ),
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
               { data: 'pagu_ranwal',
-                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' ),
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
-              { data: 'jml_indikator'},
-              { data: 'indikator_0'},
-              { data: 'jml_unit'},
-              { data: 'unit_0'},
+              { data: 'jml_indikator', sClass: "dt-center"},
+              { data: 'indikator_0', sClass: "dt-center"},
+              { data: 'jml_unit', sClass: "dt-center"},
+              { data: 'unit_0', sClass: "dt-center"},
               // { data: 'ur_usulan'},
               { data: 'icon','searchable': false, 'orderable':false,
                   render: function(data, type, row,meta) {
@@ -794,7 +867,7 @@ $('#no_urut_program').number(true,0,',', '.');
                     // return data
                   }, 
                   sClass: "dt-center"},
-              { data: 'action', 'searchable': false, 'orderable':false }
+              { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
             ],
         "order": [[0, 'asc']],
                   "bDestroy": true
@@ -804,22 +877,26 @@ $('#no_urut_program').number(true,0,',', '.');
       // EditProgram();
   });
 
+var indiProg_tbl
+
+function LoadIndikatorProg(id_program){
   $('#tblIndikatorRKPD').DataTable( {
     processing: true,
     serverSide: true,
+          deferRender: true,
         "autoWidth": false,
-    "ajax": {"url": "blangsung/getIndikatorRKPD/0"},
+    "ajax": {"url": "blangsung/getIndikatorRKPD/"+id_program},
     "language": {
             "decimal": ",",
             "thousands": "."},
     "columns": [
-          { data: 'urut'},
+          { data: 'urut', sClass: "dt-center"},
           { data: 'uraian_indikator_program_rkpd'},
           { data: 'tolok_ukur_indikator'},
           { data: 'target_rpjmd',
-            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+            render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-center"},
           { data: 'target_rkpd',
-            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+            render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-center"},
           { data: 'status_reviu','searchable': false, 'orderable':false,
                   render: function(data, type, row,meta) {
                     if ( type === 'display' ) {
@@ -830,102 +907,148 @@ $('#no_urut_program').number(true,0,',', '.');
           { data: 'action', 'searchable': false, 'orderable':false,
             sClass: "dt-center" }
         ],
+        "order": [[0, 'asc']],
         "bDestroy": true
-  } );
+  } );}
 
-  var UrusanTable = $('#tblUrusanRKPD').DataTable( {
-          processing: true,
-          serverSide: true,
-        "autoWidth": false,
-          "ajax": {"url": "blangsung/getUrusanRKPD/0"},
-          "language": {
-                  "decimal": ",",
-                  "thousands": "."},
-          "columns": [
-                { data: 'urut'},
-                { data: 'nm_urusan'},
-                { data: 'nm_bidang'},
-                { data: 'jml_data'},
-                { data: 'jml_0'},
-                { data: 'action', 'searchable': false, 'orderable':false }
-              ],
-          "order": [[0, 'asc']],
-                  "bDestroy": true
-  } );
+  var UrusanTable 
+  function LoadUrusan(id_program){ 
+    UrusanTable = $('#tblUrusanRKPD').DataTable( {
+            processing: true,
+            serverSide: true,
+            deferRender: true,
+          "autoWidth": false,
+            "ajax": {"url": "blangsung/getUrusanRKPD/"+id_program},
+            "language": {
+                    "decimal": ",",
+                    "thousands": "."},
+            "columns": [
+                  { data: 'urut', sClass: "dt-center"},
+                  { data: 'nm_urusan'},
+                  { data: 'nm_bidang'},
+                  { data: 'jml_data', sClass: "dt-center"},
+                  { data: 'jml_0', sClass: "dt-center"},
+                  { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                ],
+            "order": [[0, 'asc']],
+                    "bDestroy": true
+    } );}
 
-  var PelaksanaTable = $('#tblPelaksanaRKPD').DataTable( {
-          processing: true,
-          serverSide: true,
-        "autoWidth": false,
-          "ajax": {"url": "blangsung/getPelaksanaRKPD/0/0"},
-          "language": {
-                  "decimal": ",",
-                  "thousands": "."},
-          "columns": [
-                { data: 'urut'},
-                { data: 'kd_unit'},
-                { data: 'nm_unit'},
-                { data: 'status_reviu','searchable': false, 'orderable':false,
-                  render: function(data, type, row,meta) {
-                    if ( type === 'display' ) {
-                      return '<i class="'+row.status_reviu+'" style="font-size:16px;color:'+row.warna+';"/> ';
-                    }
-                    return data},
-                    sClass: "dt-center"},
-                { data: 'action', 'searchable': false, 'orderable':false,
-                  sClass: "dt-center" }
+  $('#tblUrusanRKPD tbody').on( 'dblclick', 'tr', function () {
+    var data = UrusanTable.row(this).data();
+
+    temp_rkpd_ranwal =  data.id_rkpd_ranwal;
+      temp_urusan_rkpd = data.id_urusan_rkpd;
+
+      if (data.status_data_program ==0){
+        if(data.status_program==2 || data.status_program==3 ){
+          document.getElementById("btnTambahPelaksana").style.visibility='hidden';
+        } else {
+          document.getElementById("btnTambahPelaksana").style.visibility='visible';
+        }
+      };
+
+      document.getElementById("nm_program_rkpd_pelaksana").innerHTML = temp_ur_program_rkpd;
+      document.getElementById("nm_program_rpjmd_pelaksana").innerHTML = temp_ur_program_rpjmd;
+      document.getElementById("nm_bidang_pelaksana").innerHTML = data.nm_bidang;
+      document.getElementById("nm_urusan_pelaksana").innerHTML = data.nm_urusan;
+
+      $('.nav-tabs a[href="#pelaksana"]').tab('show');
+      LoadPelaksana(temp_rkpd_ranwal,temp_urusan_rkpd);
+
+  });
+
+
+  var PelaksanaTable
+  function LoadPelaksana(id_ranwal,id_urusan){
+    PelaksanaTable = $('#tblPelaksanaRKPD').DataTable( {
+            processing: true,
+            serverSide: true,
+            deferRender: true,
+          "autoWidth": false,
+            "ajax": {"url": "blangsung/getPelaksanaRKPD/"+id_ranwal+"/"+id_urusan},
+            "language": {
+                    "decimal": ",",
+                    "thousands": "."},
+            "columns": [
+                  { data: 'urut', sClass: "dt-center"},
+                  { data: 'kd_unit', sClass: "dt-center"},
+                  { data: 'nm_unit'},
+                  { data: 'status_reviu','searchable': false, 'orderable':false,
+                    render: function(data, type, row,meta) {
+                      if ( type === 'display' ) {
+                        return '<i class="'+row.status_reviu+'" style="font-size:16px;color:'+row.warna+';"/> ';
+                      }
+                      return data},
+                      sClass: "dt-center"},
+                  { data: 'action', 'searchable': false, 'orderable':false,
+                    sClass: "dt-center" }
+                ],
+            "columnDefs": [
+                { "width": "30px", "targets": 0 },
+                { "width": "50px", "targets": 3 },
+                { "width": "10%", "targets": 3 }
               ],
-          "columnDefs": [
-              { "width": "30px", "targets": 0 },
-              { "width": "50px", "targets": 3 },
-              { "width": "10%", "targets": 3 }
-            ],
-          "order": [[0, 'asc']],
-                  "bDestroy": true
-  } );
+            "order": [[0, 'asc']],
+              "bDestroy": true
+    } );}
 
 
   $(document).on('click', '.view-indikator', function() {
-      temp_rkpd_ranwal =  $(this).data('id_rkpd_ranwal');
+      var data = progrkpd.row( $(this).parents('tr') ).data();
 
-      if ($(this).data('status_data') ==0){
-        if($(this).data('status_pelaksanaan')==2 || $(this).data('status_pelaksanaan')==3 ){
+      temp_rkpd_ranwal =  data.id_rkpd_ranwal;
+      $('#divAddIndikator').show();
+
+      if (data.status_data ==0){
+        if(data.status_pelaksanaan==2 || data.status_pelaksanaan==3 ){
           document.getElementById("btnTambahIndikator").style.visibility='hidden';
         } else {
           document.getElementById("btnTambahIndikator").style.visibility='visible';
         }
       };
 
-      document.getElementById("nm_program_rkpd_indikator").innerHTML = $(this).data('uraian_program_rpjmd');
-      document.getElementById("nm_program_rpjmd_indikator").innerHTML = $(this).data('program_pemda');
+      document.getElementById("nm_program_rkpd_indikator").innerHTML = data.uraian_program_rpjmd;
+      document.getElementById("nm_program_rpjmd_indikator").innerHTML = data.program_pemda;
 
       $('.nav-tabs a[href="#indikator"]').tab('show');
-      $('#tblIndikatorRKPD').DataTable().ajax.url("./blangsung/getIndikatorRKPD/"+temp_rkpd_ranwal).load();
+      LoadIndikatorProg(temp_rkpd_ranwal);
     });
 
   $(document).on('click', '.view-pelaksana', function() {
-      temp_rkpd_ranwal =  $(this).data('id_rkpd_ranwal');
+      var data = progrkpd.row( $(this).parents('tr') ).data();
 
-      if ($(this).data('status_data')==0){
-        if($(this).data('status_pelaksanaan')==2 || $(this).data('status_pelaksanaan')==3 ){
+      temp_rkpd_ranwal =  data.id_rkpd_ranwal;
+      $('#divAddUrusan').show();
+
+      if (data.status_data==0){
+        if(data.status_pelaksanaan==2 || data.status_pelaksanaan==3 ){
             document.getElementById("btnTambahUrusan").style.visibility='hidden';
         } else {
             document.getElementById("btnTambahUrusan").style.visibility='visible';
         }
       };
 
-      document.getElementById("nm_program_rkpd_urusan").innerHTML = $(this).data('uraian_program_rpjmd');
-      temp_ur_program_rkpd = $(this).data('uraian_program_rpjmd')
-      document.getElementById("nm_program_rpjmd_urusan").innerHTML = $(this).data('program_pemda');
-      temp_ur_program_rpjmd = $(this).data('program_pemda')
+      document.getElementById("nm_program_rkpd_urusan").innerHTML = data.uraian_program_rpjmd;
+      temp_ur_program_rkpd = data.uraian_program_rpjmd
+      document.getElementById("nm_program_rpjmd_urusan").innerHTML = data.program_pemda;
+      temp_ur_program_rpjmd = data.program_pemda
 
       $('.nav-tabs a[href="#urusan"]').tab('show');
-      $('#tblUrusanRKPD').DataTable().ajax.url("./blangsung/getUrusanRKPD/"+temp_rkpd_ranwal).load();
+      LoadUrusan(temp_rkpd_ranwal);
+    });
+
+  $(document).on('click', '#btnBackUrusan', function() {
+      $('#divAddUrusan').show();
+      $('.nav-tabs a[href="#urusan"]').tab('show');
+      LoadUrusan(temp_rkpd_ranwal);
     });
 
   $(document).on('click', '.view-unit', function() {
       temp_rkpd_ranwal =  $(this).data('id_rkpd_ranwal');
       temp_urusan_rkpd = $(this).data('id_urusan_rkpd')
+
+      $('#divAddPelaksana').show();
 
       if ($(this).data('status_data_program') ==0){
         if($(this).data('status_program')==2 || $(this).data('status_program')==3 ){
@@ -941,7 +1064,8 @@ $('#no_urut_program').number(true,0,',', '.');
       document.getElementById("nm_urusan_pelaksana").innerHTML = $(this).data('nm_urusan');
 
       $('.nav-tabs a[href="#pelaksana"]').tab('show');
-      $('#tblPelaksanaRKPD').DataTable().ajax.url("./blangsung/getPelaksanaRKPD/"+temp_rkpd_ranwal+"/"+temp_urusan_rkpd).load();
+      LoadPelaksana(temp_rkpd_ranwal,temp_urusan_rkpd);
+      // $('#tblPelaksanaRKPD').DataTable().ajax.url("./blangsung/getPelaksanaRKPD/"+temp_rkpd_ranwal+"/"+temp_urusan_rkpd).load();
     });
 
   $(document).on('click', '.add-pelaksana', function() {
@@ -961,8 +1085,8 @@ $('#no_urut_program').number(true,0,',', '.');
       document.getElementById("no_urut_pelaksana").removeAttribute("disabled");
       document.getElementById("keterangan_status_unit").removeAttribute("disabled");
       $('.KetPelaksanaanUnit').show();
-      document.frmEditPelaksana.status_pelaksanaan_unit[4].checked=true;
-      document.frmEditPelaksana.status_pelaksanaan_unit[4].style.visibility='hidden';        
+      document.frmEditPelaksana.status_pelaksanaan_unit[5].checked=true;
+      document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
       document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
       $('.idStatusPelaksanaUnit').hide();
 
@@ -1042,15 +1166,15 @@ $('#no_urut_program').number(true,0,',', '.');
       document.frmEditPelaksana.ophak_akses[$(this).data('hak_akses')].checked=true;
 
       if($(this).data('status_pelaksanaan')==4 || $(this).data('sumber_data')==1){
-          document.frmEditPelaksana.status_pelaksanaan_unit[4].checked=true;
-          document.frmEditPelaksana.status_pelaksanaan_unit[4].style.visibility='hidden';        
+          document.frmEditPelaksana.status_pelaksanaan_unit[5].checked=true;
+          document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
           document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
           $('.idStatusPelaksanaUnit').hide();
           $('.btnCariUnit').show();          
         } else {
             $('.idStatusPelaksanaanUnit').show();
             document.frmEditPelaksana.status_pelaksanaan_unit[$(this).data('status_pelaksanaan')].checked=true;
-            document.frmEditPelaksana.status_pelaksanaan_unit[4].style.visibility='hidden';        
+            document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
             document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
             $('.idStatusPelaksanaUnit').show();
             $('.btnCariUnit').hide();
@@ -1343,6 +1467,7 @@ $('#no_urut_program').number(true,0,',', '.');
         check_data = 0
       }
 
+
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
@@ -1362,6 +1487,7 @@ $('#no_urut_program').number(true,0,',', '.');
               'status_data': check_data,
           },
           success: function(data) {
+              console.log(data);
               $('#tblIndikatorRKPD').DataTable().ajax.reload();
               $('#tblProgramRKPD').DataTable().ajax.reload();
               if(data.status_pesan==1){
@@ -1432,13 +1558,13 @@ $('#no_urut_program').number(true,0,',', '.');
       document.getElementById("keterangan_status_program").removeAttribute("disabled");
       document.getElementById("no_urut_program").removeAttribute("disabled");
       document.getElementById("ur_program_rkpd").removeAttribute("disabled");
-      document.getElementById("jns_belanja").removeAttribute("disabled");
+      // document.getElementById("jns_belanja").removeAttribute("disabled");
 
       $(".skegiatan").attr('disabled', true);
       $(".usulan").attr('disabled', true);
 
       document.frmEditProgram.status_usulan_program[0].checked=true;
-      document.frmEditProgram.status_pelaksanaan_program[4].checked=true;
+      document.frmEditProgram.status_pelaksanaan_program[5].checked=true;
 
       $('#EditProgram').modal('show');
 
@@ -1479,56 +1605,58 @@ $('#no_urut_program').number(true,0,',', '.');
 
   $(document).on('click', '.edit-program', function() {
         
+    var data = progrkpd.row( $(this).parents('tr') ).data();
+        
       $('.btnProgram').removeClass('addProgramRkpd');
       $('.btnProgram').addClass('editProgramRKPD');
       $('.modal-title').text('Edit dan Reviu Program RKPD');
-      $('.idStatusUsulan').show();
+      $('.idStatusUsulan').hide();
       $('.form-horizontal').show();
-      $('#id_rkpd_ranwal_program').val($(this).data('id_rkpd_ranwal'));
-      $('#jns_belanja').val($(this).data('jenis_belanja'));
-      $('#thn_id_rpjmd').val($(this).data('thn_id_rpjmd'));
-      $('#id_visi_rpjmd').val($(this).data('id_visi_rpjmd'));
-      $('#id_misi_rpjmd').val($(this).data('id_misi_rpjmd'));
-      $('#id_tujuan_rpjmd').val($(this).data('id_tujuan_rpjmd'));
-      $('#id_sasaran_rpjmd').val($(this).data('id_sasaran_rpjmd'));
-      $('#id_program_rpjmd').val($(this).data('id_program_rpjmd'));
-      $('#ur_program_rpjmd').val($(this).data('program_pemda'));
+      $('#id_rkpd_ranwal_program').val(data.id_rkpd_ranwal);
+      $('#jns_belanja').val(data.jenis_belanja);
+      $('#thn_id_rpjmd').val(data.thn_id_rpjmd);
+      $('#id_visi_rpjmd').val(data.id_visi_rpjmd);
+      $('#id_misi_rpjmd').val(data.id_misi_rpjmd);
+      $('#id_tujuan_rpjmd').val(data.id_tujuan_rpjmd);
+      $('#id_sasaran_rpjmd').val(data.id_sasaran_rpjmd);
+      $('#id_program_rpjmd').val(data.id_program_rpjmd);
+      $('#ur_program_rpjmd').val(data.program_pemda);
       
-      if($(this).data('sumber_data')==1){        
+      if(data.sumber_data==1){        
         document.getElementById("no_urut_program").removeAttribute("disabled");
         document.getElementById("ur_program_rkpd").removeAttribute("disabled");
-        document.getElementById("jns_belanja").removeAttribute("disabled");
+        // document.getElementById("jns_belanja").removeAttribute("disabled");
       } else {
         document.getElementById("no_urut_program").setAttribute("disabled","disabled");
         document.getElementById("ur_program_rkpd").setAttribute("disabled","disabled");
-        document.getElementById("jns_belanja").setAttribute("disabled","disabled");
+        // document.getElementById("jns_belanja").setAttribute("disabled","disabled");
       }
 
-      $('#no_urut_program').val($(this).data('no_urut'));
-      $('#ur_program_rkpd').val($(this).data('uraian_program_rpjmd'));
-      $('#pagu_rpjmd_program').val($(this).data('pagu_rpjmd'));
-      $('#pagu_rkpd_program').val($(this).data('pagu_ranwal'));
-      $('#keterangan_status_program').val($(this).data('ket_usulan'));
+       $('#no_urut_program').val(data.urut);
+      $('#ur_program_rkpd').val(data.uraian_program_rpjmd);
+      $('#pagu_rpjmd_program').val(data.pagu_rpjmd);
+      $('#pagu_rkpd_program').val(data.pagu_ranwal);
+      $('#keterangan_status_program').val(data.ket_usulan);
 
-      document.frmEditProgram.status_usulan_program[$(this).data('status_data')].checked=true;
+      document.frmEditProgram.status_usulan_program[data.status_data].checked=true;
 
-      if($(this).data('status_pelaksanaan')==4){
-          document.frmEditProgram.status_pelaksanaan_program[4].checked=true;
-          document.frmEditProgram.status_pelaksanaan_program[4].style.visibility='hidden';        
+      if($(this).data('status_pelaksanaan')==5){
+          document.frmEditProgram.status_pelaksanaan_program[5].checked=true;
+          document.frmEditProgram.status_pelaksanaan_program[5].style.visibility='hidden';        
           document.getElementById("status_pelaksanaan4").style.visibility='hidden';
           $('.idStatusPelaksanaan').hide();        
           $('.btnHapus').show();
           $('.btnCariProgram').show();          
         } else {
             $('.idStatusPelaksanaan').show();
-            document.frmEditProgram.status_pelaksanaan_program[$(this).data('status_pelaksanaan')].checked=true;
-            document.frmEditProgram.status_pelaksanaan_program[4].style.visibility='hidden';        
+            document.frmEditProgram.status_pelaksanaan_program[data.status_pelaksanaan].checked=true;
+            document.frmEditProgram.status_pelaksanaan_program[5].style.visibility='hidden';        
             document.getElementById("status_pelaksanaan4").style.visibility='hidden';
             $('.btnHapus').hide();
             $('.btnCariProgram').hide();
         }      
 
-      if($(this).data('status_pelaksanaan')==0){
+      if(data.status_pelaksanaan==0){
           document.getElementById("keterangan_status_program").setAttribute("disabled","disabled");
           $('.KetPelaksanaan').hide();
         } else {
@@ -1542,105 +1670,44 @@ $('#no_urut_program').number(true,0,',', '.');
       $('#EditProgram').modal('show');
   });
 
-    $('.modal-footer').on('click', '.editProgramRKPD', function() {
+    $('.modal-footer').on('click', '.editProgramRKPD', function(){
       
-      if (getStatusUsul()==1){
-        
-        $.ajax({
-            type: "GET",
-            url: './getCheck/'+$('#id_rkpd_ranwal_program').val(),
-            dataType: "json",
-            success: function(data) {
-              var j = data.length;
-              var post, i;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
 
-              if(data[0].jml_unit > 0 && data[0].jml_indikator > 0){
-
-                if(data[0].unit_0 == 0 && data[0].indikator_0 == 0){
-                    $.ajaxSetup({
-                       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-                    });
-
-                    $.ajax({
-                        type: 'post',
-                        url: 'blangsung/editProgramRKPD',
-                        data: {
-                            '_token': $('input[name=_token]').val(),
-                            'no_urut': $('#no_urut_program').val(),                            
-                            'jenis_belanja': $('#jns_belanja').val(),
-                            'id_rkpd_ranwal': $('#id_rkpd_ranwal_program').val(),
-                            'uraian_program_rpjmd': $('#ur_program_rkpd').val(),
-                            'pagu_rpjmd' : $('#pagu_rpjmd_program').val(),
-                            'pagu_ranwal': $('#pagu_rkpd_program').val(),
-                            'ket_usulan': $('#keterangan_status_program').val(),
-                            'status_data' : 1,
-                            'status_pelaksanaan' : getStatusData(),
-                            'thn_id_rpjmd':$('#thn_id_rpjmd').val(),
-                            'id_visi_rpjmd':$('#id_visi_rpjmd').val(),
-                            'id_misi_rpjmd':$('#id_misi_rpjmd').val(),
-                            'id_tujuan_rpjmd':$('#id_tujuan_rpjmd').val(),
-                            'id_sasaran_rpjmd':$('#id_sasaran_rpjmd').val(),
-                            'id_program_rpjmd':$('#id_program_rpjmd').val(),
-                        },
-                        success: function(data) {
-                            $('#tblProgramRKPD').DataTable().ajax.reload();
-                            if(data.status_pesan==1){
-                              createPesan(data.pesan,"success");
-                              } else {
-                              createPesan(data.pesan,"danger"); 
-                              }
-                        }
-                    });
-                } else {
-                  createPesan('Maaf Indikator/Unit Pelaksana masih ada yang belum direviu','danger');
-                }
-
+    $.ajax({
+        type: 'post',
+        url: 'blangsung/editProgramRKPD',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'no_urut': $('#no_urut_program').val(),                          
+            'jenis_belanja': $('#jns_belanja').val(),
+            'id_rkpd_ranwal': $('#id_rkpd_ranwal_program').val(),
+            'uraian_program_rpjmd': $('#ur_program_rkpd').val(),
+            'pagu_rpjmd' : $('#pagu_rpjmd_program').val(),
+            'pagu_ranwal': $('#pagu_rkpd_program').val(),
+            'ket_usulan': $('#keterangan_status_program').val(),
+            'status_data' : getStatusUsul(),
+            'status_pelaksanaan' : getStatusData(),
+            'thn_id_rpjmd':$('#thn_id_rpjmd').val(),
+            'id_visi_rpjmd':$('#id_visi_rpjmd').val(),
+            'id_misi_rpjmd':$('#id_misi_rpjmd').val(),
+            'id_tujuan_rpjmd':$('#id_tujuan_rpjmd').val(),
+            'id_sasaran_rpjmd':$('#id_sasaran_rpjmd').val(),
+            'id_program_rpjmd':$('#id_program_rpjmd').val(),
+        },
+        success: function(data) {
+            $('#tblProgramRKPD').DataTable().ajax.reload();
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
               }
-              else {
-                  createPesan('Maaf Indikator/Unit Pelaksana masih belum ada data','danger');
-              }
-            }
-        });
-
-    } else {
-
-      $.ajaxSetup({
-                     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-                  });
-
-                  $.ajax({
-                      type: 'post',
-                      url: 'blangsung/editProgramRKPD',
-                      data: {
-                          '_token': $('input[name=_token]').val(),
-                          'no_urut': $('#no_urut_program').val(),                          
-                          'jenis_belanja': $('#jns_belanja').val(),
-                          'id_rkpd_ranwal': $('#id_rkpd_ranwal_program').val(),
-                          'uraian_program_rpjmd': $('#ur_program_rkpd').val(),
-                          'pagu_rpjmd' : $('#pagu_rpjmd_program').val(),
-                          'pagu_ranwal': $('#pagu_rkpd_program').val(),
-                          'ket_usulan': $('#keterangan_status_program').val(),
-                          'status_data' : 0,
-                          'status_pelaksanaan' : getStatusData(),
-                          'thn_id_rpjmd':$('#thn_id_rpjmd').val(),
-                          'id_visi_rpjmd':$('#id_visi_rpjmd').val(),
-                          'id_misi_rpjmd':$('#id_misi_rpjmd').val(),
-                          'id_tujuan_rpjmd':$('#id_tujuan_rpjmd').val(),
-                          'id_sasaran_rpjmd':$('#id_sasaran_rpjmd').val(),
-                          'id_program_rpjmd':$('#id_program_rpjmd').val(),
-                      },
-                      success: function(data) {
-                          $('#tblProgramRKPD').DataTable().ajax.reload();
-                          if(data.status_pesan==1){
-                            createPesan(data.pesan,"success");
-                            } else {
-                            createPesan(data.pesan,"danger"); 
-                            }
-                      }
-                  });
-    }
-
+        }
       
+  });
+
   });
 
   $(document).on('click', '.btnHapus', function() {
@@ -1674,6 +1741,7 @@ $('#no_urut_program').number(true,0,',', '.');
   $('.skegiatan').change(function() {
     if(document.frmEditProgram.status_pelaksanaan_program.value==0){
       document.getElementById("keterangan_status_program").setAttribute("disabled","disabled");
+      document.getElementById("pagu_rkpd_program").removeAttribute("disabled");
       $('.KetPelaksanaan').hide();
     } else {
       document.getElementById("keterangan_status_program").removeAttribute("disabled");
@@ -1719,23 +1787,29 @@ $('#no_urut_program').number(true,0,',', '.');
     return xvalues;
   }
 
-  $(document).on('click', '.btnCariUnit', function() {    
+  $(document).on('click', '.btnCariUnit', function() { 
+    LoadCariUnit();   
     $('#cariRefUnit').modal('show');
 
-    $('#tblCariUnit').DataTable().ajax.reload();
+    // $('#tblCariUnit').DataTable().ajax.reload();
   });
 
-  var cariunit = $('#tblCariUnit').DataTable( {
+var cariunit;
+function LoadCariUnit(){
+  cariunit = $('#tblCariUnit').DataTable( {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
         "ajax": {"url": "./getRefUnit"},
         "columns": [
-              { data: 'no_urut'},
-              { data: 'kd_unit'},
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'kd_unit', sClass: "dt-center"},
               { data: 'nm_unit'}
-            ]
+            ],
+      "order": [[0, 'asc']],
+      "bDestroy": true
     });
+};
 
   $('#tblCariUnit tbody').on( 'dblclick', 'tr', function () {
 
@@ -1748,23 +1822,30 @@ $('#no_urut_program').number(true,0,',', '.');
   } );
 
   $(document).on('click', '.btnCariIndi', function() {    
+    
+    LoadCariIndikator();
     $('#cariIndikator').modal('show');
 
-    $('#tblCariIndikator').DataTable().ajax.reload();
+    // $('#tblCariIndikator').DataTable().ajax.reload();
   });
 
-  var cariindikator = $('#tblCariIndikator').DataTable( {
+var cariindikator;
+function LoadCariIndikator(){
+  cariindikator = $('#tblCariIndikator').DataTable( {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
         "ajax": {"url": "./getRefIndikator"},
         "columns": [
-              { data: 'no_urut'},
+              { data: 'no_urut', sClass: "dt-center"},
               { data: 'nm_indikator'},
-              { data: 'jenis_display'},
-              { data: 'sifat_display'}
-            ]
+              { data: 'jenis_display', sClass: "dt-center"},
+              { data: 'sifat_display', sClass: "dt-center"}
+            ],
+      "order": [[0, 'asc']],
+      "bDestroy": true
     });
+};
 
   $('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
 
@@ -1777,22 +1858,29 @@ $('#no_urut_program').number(true,0,',', '.');
   } );
 
 $(document).on('click', '.btnCariProgram', function() {    
-    $('#cariProgramRPJMD').modal('show');
-
-    $('#tblCariProgramRPJMD').DataTable().ajax.reload();
+    
+  LoadCariProgram();
+  $('#cariProgramRPJMD').modal('show');
+    // $('#tblCariProgramRPJMD').DataTable().ajax.reload();
   });
 
-  var cariprogram = $('#tblCariProgramRPJMD').DataTable( {
+var cariprogram;
+
+function LoadCariProgram(){
+  cariprogram = $('#tblCariProgramRPJMD').DataTable( {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
         "ajax": {"url": "./getRefProgramRPJMD"},
         "columns": [
-              { data: 'no_urut'},
-              { data: 'kd_program_rpjmd'},
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'kd_program_rpjmd', sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'}
-            ]
+            ],
+      "order": [[0, 'asc']],
+      "bDestroy": true
     });
+};
 
   $('#tblCariProgramRPJMD tbody').on( 'dblclick', 'tr', function () {
 
@@ -1807,7 +1895,7 @@ $(document).on('click', '.btnCariProgram', function() {
     document.getElementById("ur_program_rpjmd").value = data.uraian_program_rpjmd;
     $('#cariProgramRPJMD').modal('hide');    
 
-  } );
+  });
 
   $( ".kd_urusan" ).change(function() {
       
@@ -1833,7 +1921,60 @@ $(document).on('click', '.btnCariProgram', function() {
       });
     });
 
-} );
+$(document).on('click', '#btnUnProgram', function() {
+
+  var data = progrkpd.row( $(this).parents('tr') ).data();
+
+    $('#id_program_ranwal_posting').val(data.id_rkpd_ranwal);
+    $('#status_program_ranwal_posting').val(data.status_data);
+    $('#tahun_ranwal_posting').val(data.tahun_rkpd);
+
+    document.getElementById("ur_program_ranwal_posting").innerHTML = data.uraian_program_rpjmd;
+
+    if(data.status_data==0){
+        document.getElementById("ur_status_ranwal_posting").innerHTML = "Posting";
+    } else {
+        document.getElementById("ur_status_ranwal_posting").innerHTML = "Un-Posting";
+    }
+
+    $('#StatusProgram').modal('show');
+});
+
+$('.modal-footer').on('click', '#btnPostProgram', function() {
+      var status_post;
+      if($('#status_program_ranwal_posting').val()==0){
+          status_post = 1
+      } else {
+          status_post = 0
+      };
+
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: 'blangsung/postProgram',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_rkpd': $('#tahun_ranwal_posting').val(),
+              'id_rkpd_ranwal': $('#id_program_ranwal_posting').val(),
+              'status_data': status_post,
+          },
+          success: function(data) {
+              progrkpd.ajax.reload();
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+              $('#StatusProgram').modal('hide');
+          }
+      });
+    });
+
+
+});
 
 </script>
 @endsection

@@ -49,31 +49,18 @@ use hoaaah\LaravelMenu\Menu;
                         <span class="icon-bar"></span>
                     </button>                    
                     <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">simd@<strong>Perencanaan</strong> ver <strong>1.0</strong></a>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                      <i class="fa fa-home fa-stack-1x"></i>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0</strong></a>
                 </div>
                     <ul class="nav navbar-top-links navbar-right">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?> <i class="fa fa-caret-down"></i>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <?php 
-                                    $rpjmdDokumen = \App\models\RefSetting::where('status_setting','=','1')->get();
-                                    $tahun = [];
-                                    foreach($rpjmdDokumen as $data){
-                                        $tahun[$data->tahun_rencana] = $data->tahun_rencana;
-                                    }
-                                    foreach($tahun as $tahun):
-                                ?>
-                                <li>
-                                    <a href="{{ url('/ta/'.$tahun) }}">
-                                        <span class="text-muted small">{{ $tahun }}</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <?php endforeach;?>
-                            </ul>
                         </li>
                         <!-- /.dropdown -->
 
@@ -101,10 +88,10 @@ use hoaaah\LaravelMenu\Menu;
 
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                                     document.getElementById('logout-form').submit();">                                           
+                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -124,11 +111,12 @@ use hoaaah\LaravelMenu\Menu;
                                 'options' => [
                                     'ulId' => 'side-menu'
                                 ],
+                                // 'label' => 'RKPD dan Renja',
                                 'items' => [
-                                    ['label' => 'Dashboard', 'icon' => 'fa fa-home', 'url' => '/modul2'],
+                                    ['label' => 'Modul RKPD dan Renja','icon'=>'fa fa-tasks fa-fw fa-lg',  'url' => '#'],
                                     [
                                         'label' => 'RKPD', 
-                                        'visible' => $akses->get(4),
+                                        'visible' => $akses->get(4) || $akses->get(5),
                                         'items' => [
                                             [
                                                 'label' => 'Rancangan Awal RKPD',
@@ -136,30 +124,37 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Load Data Tahunan RPJMD', 'url' => '/ranwalrkpd/loadData', 'visible' => $akses->get(401)],
                                                     ['label' => 'Rancangan Awal RKPD', 'url' => '/ranwalrkpd', 'visible' => $akses->get(402)],
+                                                    ['label' => 'Dokumen Ranwal RKPD', 'url' => '/ranwalrkpd/Dokumen','visible' => $akses->get(401)],
                                                 ]
                                             ],
                                             [
                                                 'label' => 'Rancangan RKPD',
-                                                'visible' => $akses->get(403) || $akses->get(404),
+                                                'visible' => $akses->get(403) || $akses->get(404) || $akses->get(502),
                                                 'items' => [
-                                                    ['label' => 'Load Forum SKPD', 'url' => '/rancanganrkpd/loadData', 'visible' => $akses->get(403)],
+                                                    ['label' => 'Dokumen Rancangan RKPD', 'url' => '/rancanganrkpd/loadData', 'visible' => $akses->get(403)],
                                                     ['label' => 'Rancangan RKPD', 'url' => '/rancanganrkpd', 'visible' => $akses->get(404)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
+                                                    // ['label' => 'Dokumen Rancangan RKPD', 'url' => '#', 'visible' => $akses->get(403)],
                                                 ]
                                             ],
                                             [
                                                 'label' => 'Rancangan Akhir RKPD',
-                                                'visible' => $akses->get(405) || $akses->get(406),
+                                                'visible' => $akses->get(405) || $akses->get(406) || $akses->get(502),
                                                 'items' => [
                                                     ['label' => 'Load Musrenbang RKPD', 'url' => '/ranhirrkpd/loadData', 'visible' => $akses->get(405)],
                                                     ['label' => 'Rancangan Akhir RKPD', 'url' => '/ranhirrkpd', 'visible' => $akses->get(406)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Dokumen Ranhir RKPD', 'url' => '#', 'visible' => $akses->get(406)],
                                                 ]
                                             ],
                                             [
                                                 'label' => 'RKPD Final',
-                                                'visible' => $akses->get(408) || $akses->get(407),
+                                                'visible' => $akses->get(408) || $akses->get(407) || $akses->get(502),
                                                 'items' => [
                                                     ['label' => 'Load Ranhir RKPD', 'url' => '/rkpd/loadData', 'visible' => $akses->get(407)],
                                                     ['label' => 'RKPD Final', 'url' => '/rkpd', 'visible' => $akses->get(408)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Dokumen RKPD Final', 'url' => '#', 'visible' => $akses->get(408)],
                                                 ]
                                             ],
                                         ]
@@ -168,19 +163,43 @@ use hoaaah\LaravelMenu\Menu;
                                         'label' => 'Renja Perangkat Daerah',
                                         'visible' => $akses->get(5),
                                         'items' => [
-                                            ['label' => 'Load Data Rancangan Awal Renja', 'url' => '/renja/loadData', 'visible' => $akses->get(501)],
                                             [
                                                 'label' => 'Rancangan Awal Renja',
-                                                'visible' => $akses->get(5),
+                                                'visible' => $akses->get(501) || $akses->get(502),
                                                 'items' => [
-                                                    ['label' => 'Penyesuaian Program Renja', 'url' => '/renja/sesuai', 'visible' => $akses->get(502)],
-                                                    ['label' => 'Rancangan Awal Renja', 'url' => '/renja', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Load Data Rancangan Awal Renja', 'url' => '/ranwalrenja/loadData', 'visible' => $akses->get(501)],
+                                                    ['label' => 'Rancangan Awal Renja', 'url' => '/ranwalrenja/sesuai', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Dokumen Ranwal Renja', 'url' => '/ranwalrenja/dokumen', 'visible' => $akses->get(501)],
                                                 ]
                                             ],
-                                            ['label' => 'Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
+                                            [
+                                                'label' => 'Rancangan Renja',
+                                                'visible' => $akses->get(501) || $akses->get(502),
+                                                'items' => [
+                                                    ['label' => 'Load Data Rancangan Renja', 'url' => '/renja/loadData', 'visible' => $akses->get(501)],
+                                                    ['label' => 'Rancangan Renja', 'url' => '/renja', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Dokumen Rancangan Renja', 'url' => '/renja/dokumen', 'visible' => $akses->get(502)],
+                                                ]
+                                            ],
+                                            [
+                                                'label' => 'Renja Final',
+                                                'visible' => $akses->get(503) || $akses->get(401) || $akses->get(504),
+                                                'items' => [
+                                                    ['label' => 'Load Data RKPD Final', 'url' => '/renjafinal/loadData', 'visible' => $akses->get(503)],
+                                                    ['label' => 'Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
+                                                ]
+                                            ],
+                                            
                                         ]
                                     ],
-                                    ['label' => 'Pokok Pikiran DPRD', 'url' => '/pokir', 'visible' => $akses->get(503)],
+                                    ['label' => 'Pokok Pikiran DPRD',
+                                        'visible' => $akses->get(5) || $akses->get(4), 
+                                        'items' => [
+                                            ['label' => 'Pokok Pikiran DPRD', 'url' => '/pokir', 'visible' => $akses->get(503)],
+                                            ['label' => 'Verifikasi Pokir', 'url' => '/pokir/verpokir', 'visible' => $akses->get(401)],
+                                            ['label' => 'Tindak Lanjut Unit', 'url' => '/pokir/tlpokir', 'visible' => $akses->get(502)],
+                                        ]
+                                    ],
                                     [ 'label' => 'Forum Perangkat Daerah', 'visible' => $akses->get(606) || $akses->get(607),
                                        'items' => [
                                             ['label' => 'Load Rancangan Awal', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
@@ -198,17 +217,18 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Usulan RW', 'url' => '/musrenrw', 'visible' =>  $akses->get(601)],
                                                     ['label' => 'Usulan Desa', 'url' => '/musrendes', 'visible' => $akses->get(603)],
                                                     // ['label' => 'Posting Usulan Desa', 'url' => '/musrendes/loadData', 'visible' => $akses->get(602)],
-                                                    ['label' => 'Load Usulan Desa', 'url' => '/musrencam/loadData', 'visible' => $akses->get(604)],
+                                                    ['label' => 'Load Usulan Desa', 'url' => '/musrencam/loadData', 'visible' => $akses->get(605)],
                                                     ['label' => 'Musrenbang', 'url' => '/musrencam', 'visible' => $akses->get(605)],
-                                                    ['label' => 'Posting Musrenbang', 'url' => '/musrencam/loadData', 'visible' => $akses->get(604)],
+                                                    // ['label' => 'Posting Musrenbang', 'url' => '/musrencam/postingData', 'visible' => $akses->get(604)],
                                                 ]
                                             ],
                                             [
                                                 'label' => 'Kota/Kabupaten',
-                                                'visible' => $akses->get(608) || $akses->get(609),
+                                                'visible' => $akses->get(608) || $akses->get(609) || $akses->get(607),
                                                 'items' => [
                                                     ['label' => 'Load Rancangan RKPD', 'url' => '/musrenrkpd/loadData', 'visible' => $akses->get(608)],
                                                     ['label' => 'Musrenbang RKPD', 'url' => '/musrenrkpd', 'visible' => $akses->get(609)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(607)],
                                                 ]
                                             ],
                                         ]
@@ -227,7 +247,6 @@ use hoaaah\LaravelMenu\Menu;
 
     </div>
 
-        
         <script src="{{ asset('/js/jquery.min.js')}}"></script>
         <script src="{{ asset('/js/jquery-ui.js')}}"></script>
         <script src="{{ asset('/js/bootstrap.min.js')}}"></script>

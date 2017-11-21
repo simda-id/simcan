@@ -29,8 +29,11 @@ class TrxForumSkpd extends Model
 			'uraian_kegiatan_forum',
 			'pagu_tahun_kegiatan',
 			'pagu_kegiatan_renstra',
-			'pagu_musren',
-			'status_data',
+			'pagu_plus1_renja', 
+			'pagu_plus1_forum', 
+			'pagu_forum',
+			'status_data', 
+			'status_pelaksanaan',
 			'keterangan_status',
 			'sumber_data',
 			];

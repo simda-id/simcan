@@ -3,14 +3,20 @@ Kode sumber aplikasi SIMDA Perencanaan yang dikembangkan oleh Tim Aplikasi.
 
 Dalam aplikasi ini telah termasuk modul RKPD, Renja, Musrenbang, SSH, dan ASB.
 
-### Rilis Terakhir
+### Rilis Terakhir dan Dokumentasi
 
 Dapatkan [rilis terakhir di sini](https://github.com/simda-id/simcan/releases).
 
-### Requirements Teknis
-Untuk menjalankan aplikasi ini diperlukan web server yang terkoneksi ke internet; dengan PHP 5.6, MySQL 5.5, dan ioncube Loader terinstall.
+Dokumentasi sederhana [tersedia di sini](https://github.com/simda-id/simcan/wiki)
 
-### Instalasi
+### Requirements Teknis
+Untuk menjalankan aplikasi ini diperlukan:
+- [web server](https://httpd.apache.org/download.cgi) yang terkoneksi ke internet; 
+- [PHP 5.6](http://php.net/downloads.php) terinstall, 
+- [MySQL 5.5](https://dev.mysql.com/downloads/mysql/) terinstall, dan 
+- [ioncube Loader](http://ioncube.com/loader) telah terkonfigurasi.
+
+### Pedoman Ringkas Instalasi
 
 1. Unduh keseluruhan aplikasi ini, ekstrak, dan letakkan di web server.
 2. Hubungi Tim Aplikasi di perwakilan BPKP setempat untuk mendapatkan folder konfigurasi, database, dan username/password default.
@@ -31,17 +37,12 @@ Arahkan browser Anda ke folder aplikasi SIMDA Perencanaan, lalu login dengan use
 #### Problem Instalasi
 
 Jika ada kesulitan ketika instalasi, pastikan beberapa hal berikut ini:
-1. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP lain, dan tidak dirancang untuk PHP 7. Cek melalui phpinfo untuk memastikan.
+1. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP yang lebih rendah. Cek melalui phpinfo() untuk memastikan.
 2. Ioncube loader telah terinstalasi. Cek melalui phpinfo() untuk memastikan.
 3. Struktur folder /config telah benar dan isi file .env telah sesuai.
 
-### Dokumentasi
-
-Dokumentasi sederhana [tersedia di sini](https://github.com/simda-id/simcan/wiki)
-
-
 #### Lisensi
-Aplikasi SIMDA Perencanaan dapat dipergunakan tanpa biaya, dengan tetap menyebutkan hak cipta pada [BPKP](http://www.bpkp.go.id).
+Aplikasi SIMDA Perencanaan dapat dipergunakan tanpa biaya, dengan tetap menyebutkan hak cipta pada [Badan Pengawasan Keuangan dan Pembangunan](http://www.bpkp.go.id).
 
 Anda tidak diperkenankan mengubah aplikasi ini tanpa persetujuan tertulis terlebih dahulu. Perubahan dan atau penambahan fitur yang Anda lakukan harus dirilis secara terbuka untuk dipergunakan oleh siapapun secara gratis.
 

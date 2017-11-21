@@ -44,7 +44,7 @@ Jika ada kesulitan ketika instalasi, pastikan beberapa hal berikut ini:
 #### Lisensi
 Aplikasi SIMDA Perencanaan dapat dipergunakan tanpa biaya, dengan tetap menyebutkan hak cipta pada [Badan Pengawasan Keuangan dan Pembangunan](http://www.bpkp.go.id).
 
-Anda tidak diperkenankan mengubah aplikasi ini tanpa persetujuan tertulis terlebih dahulu. Perubahan dan atau penambahan fitur yang Anda lakukan harus dirilis secara terbuka untuk dipergunakan oleh siapapun secara gratis.
+ANDA TIDAK DIPERKENANKAN MENGGUNAKAN APLIKASI INI UNTUK TUJUAN KOMERSIAL. PERUBAHAN DAN ATAU PENAMBAHAN FITUR YANG ANDA KEMBANGKAN HARUS DIRILIS TERBUKA UNTUK DAPAT DIPERGUNAKAN OLEH SEMUA PIHAK SECARA GRATIS.
 
 #### Berkontribusi
-Untuk bug, permintaan fitur, dapat disampaikan melalui [timaplikasi et yahoo titik com](http://www.simda-online.com).
+Untuk bug, permintaan fitur, dapat disampaikan melalui [timaplikasi et yahoo titik com](http://www.simda-online.com) atau melalui [issues wiki](https://github.com/simda-id/simcan/issues).

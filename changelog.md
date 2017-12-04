@@ -1,6 +1,27 @@
 # change log
 
 [Releases](https://github.com/simda-id/simcan/releases)
+[Documentation] (https://github.com/simda-id/simcan/wiki)
+
+## versi v1.0.0-rc02-u
+
+Release Candidate 02 - update
+
+1. update beberapa view ppas disertakan kembali.
+
+## versi v1.0.0-rc02
+
+Release Candidate 02
+
+1. Beberapa perbaikan User Interface.
+2. Beberapa perbaikan bug.
+3. Penambahan beberapa kontrol.
+4. Penambahan beberapa report.
+5. Perbaikan proses Renja SKPD.
+6. Perbaikan proses Musrenbang Kecamatan.
+7. Perbaikan logic SSH dan ASB.
+8. User management.
+9. Perbaikan proses Forum RKPD.
 
 ## versi 1.0.0-rc01-u
 
@@ -22,14 +43,6 @@ Release Candidate 01
 ## Known Issues
 
 Beberapa kasus, terjadi kelambatan load data yang berjumlah puluhan ribu. Untuk sementara dapat diatasi dengan mematikan aplikasi yang berjalan di background, atau menambah RAM, dan mengoptimalkan konfigurasi PHP dan web server.
-
-## ToDo
-
-1. Perbaikan Musrenbang
-2. Perbaikan Forum RKPD dan PPA
-3. Pembuatan Dashboard tiap tahap
-4. Penambahan laporan-laporan
-
 
 ### Berkontribusi
 

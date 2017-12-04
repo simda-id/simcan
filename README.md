@@ -40,6 +40,7 @@ Jika ada kesulitan ketika instalasi, pastikan beberapa hal berikut ini:
 1. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP yang lebih rendah. Cek melalui phpinfo() untuk memastikan.
 2. Ioncube loader telah terinstalasi. Cek melalui phpinfo() untuk memastikan.
 3. Struktur folder /config telah benar dan isi file .env telah sesuai.
+4. Jika kesulitan mengedit file .env silakan gunakan [notepad++](https://notepad-plus-plus.org/download/).
 
 #### Lisensi
 Aplikasi SIMDA Perencanaan dapat dipergunakan tanpa biaya, dengan tetap menyebutkan hak cipta pada [Badan Pengawasan Keuangan dan Pembangunan](http://www.bpkp.go.id).

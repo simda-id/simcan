@@ -1,73 +1,41 @@
-<?php
-
-namespace App\Providers;
-
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-
-class RouteServiceProvider extends ServiceProvider
-{
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Http\Controllers';
-
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-
-        parent::boot();
-    }
-
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        //
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
-    {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
-    }
-}
+<?php //00512
+// bySimda@Perencanaan
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

@@ -40,35 +40,21 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-findcond navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">          
                     <!-- Branding Image -->
                     <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
-                   {{--  <span class="fa-stack">
-                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x text-info"></i>
-                    </span>  --}}
-                    simd@<strong>Perencanaan</strong> ver <strong>1.0</a>
+                        <div class="row">
+                            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span>
+                        </div>
+                    </a>
                 </div>
-                    <ul class="nav navbar-top-links navbar-right">
-
-                        <li class="form-group">
-                            <label for="id_tahun">Tahun Anggaran :</label>
-                        </li>
-                        <li class="form-group">
-                            <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
-                        </li>
-
-
-                        <!-- /.dropdown -->
-
-                        <!-- Authentication Links -->
+                    <ul class="nav navbar-nav navbar-right">                        
                         @if (Auth::guest())
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     User <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
                                         <a href="{{ route('register') }}">Register</a>
@@ -79,6 +65,14 @@ use hoaaah\LaravelMenu\Menu;
                                 </ul>
                             </li>
                         @else
+                            <li class="navbar-form">
+                                <div class="form-group">
+                                    <label for="id_tahun" style="color: #fff">Tahun Anggaran :</label>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
+                                </div>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -146,7 +140,7 @@ use hoaaah\LaravelMenu\Menu;
                     <p>
                         Merupakan perencanaan tahunan (<strong>RKPD</strong> dan <strong>Renja</strong>) sebagai operasionalisasi dari perencanaan jangka menengah.</p>
                     <p>
-                        <a class="btn btn-success" href="{{ url('/modul2') }}" role="button"><strong>RKPD dan Renja</strong> &raquo;</a></p>
+                        <a class="btn btn-success" href="{{ url('/rkpd/dash') }}" role="button"><strong>RKPD dan Renja</strong> &raquo;</a></p>
                 </div>
             </div>
             <!-- End Item -->

@@ -48,8 +48,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
           </form>
-          <div class="table-responsive">
-          <table id="tblTLPokir" class="table table-striped table-bordered">
+          {{-- <div class="table-responsive"> --}}
+          <table id="tblTLPokir" class="table table-striped table-bordered table-responsive" width="100%">
             <thead>
               <tr>
                   <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -70,7 +70,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <tbody>                                        
             </tbody>
           </table>
-          </div> 
+          {{-- </div>  --}}
           </div>
         </div>
       </div>

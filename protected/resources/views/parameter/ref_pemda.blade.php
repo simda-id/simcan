@@ -33,9 +33,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="hidden" name="id_pemda" id="id_pemda">
               <div class="row">
-                <div class="col-sm-3" style="text-align: center;">
-                  <img src="{{ asset('vendor/default.png') }}" class="img-thumbnail" alt="Cinque Terre" width="260" height="300" >
-                </div>
+                <div class="col-sm-3" style="text-align: center;" id="iPemda"></div>
                 <div class="col-sm-9">
                 <div class="col-sm-12">
                   <div class="form-group">
@@ -296,6 +294,7 @@ function LoadPemda() {
             $('#nama_kabappeda').val(data[0].nama_kepala_bappeda);
             $('#nip_kabpkad').val(data[0].nip_kepala_bpkad);
             $('#nama_kabpkad').val(data[0].nama_kepala_bpkad);
+            $('#iPemda').html(data[0].iPemda);
             if (data[0].nip_sekretariat_daerah==null) {
               $('#nip_sekda_display').val(null);
             } else {

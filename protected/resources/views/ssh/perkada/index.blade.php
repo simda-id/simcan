@@ -553,7 +553,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
               <div class="form-group">
-                <label for="no_urut_tarif" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
+                <label for="no_urut_tarif" class="col-sm-3 control-label" align='left'>Nomor Item :</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control number" id="no_urut_tarif" name="no_urut_tarif" required="required" >
                 </div>
@@ -714,7 +714,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
   <div class="form-group">
       <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
-        <div class="col-sm-5">
+        <div class="col-sm-7">
           <div class="input-group">
             <input type="text" class="form-control" id="param_cari" name="param_cari">
             <div class="input-group-btn">
@@ -862,8 +862,9 @@ $(document).ready(function() {
         "autoWidth": false
   });
 
+var detailtarif_tbl;
 function LoadItemSSH(id_zona){
-  var detailtarif = $('#tblDetailTarif').DataTable( {
+  detailtarif_tbl = $('#tblDetailTarif').DataTable( {
         processing: true,
         serverSide: true,
         deferRender: true,
@@ -1351,22 +1352,22 @@ $(document).on('click', '#btnparam_cari', function() {
 
   //Edit Tarif Perkada
   $(document).on('click', '.edit-tarif', function() {
-    // $('#nmbtnTarif').text(" Update");
-    // $('#nmbtnTarif').addClass('glyphicon-check');
-    // $('#nmbtnTarif').removeClass('glyphicon-plus');
+
+    var data = detailtarif_tbl.row( $(this).parents('tr') ).data();
+
     $('.btnTarif').addClass('btn-success');
     $('.btnTarif').removeClass('addtarif');
     $('.btnTarif').addClass('edittarif');
     $('.modal-title').text('Edit Data Tarif Item SSH');
     $('.form-horizontal').show();
-    $('#id_tarif_perkada').val($(this).data('id_tarif_perkada'));
-    $('#id_perkada_tarif').val($(this).data('id_perkada'));
-    $('#id_zona_perkada').val($(this).data('id_zona_perkada'));
-    $('#no_urut_tarif').val($(this).data('no_urut'));
-    $('#id_zona_tarif').val($(this).data('id_zona'));
-    $('#id_item_perkada').val($(this).data('id_tarif'));
-    $('#rupiah_tarif').val($(this).data('jml_rupiah'));
-    $('#ur_item_perkada'). val($(this).data('ur_tarif'));
+    $('#id_tarif_perkada').val(data.id_tarif_perkada);
+    $('#id_perkada_tarif').val(data.id_perkada);
+    $('#id_zona_perkada').val(data.id_zona_perkada);
+    $('#no_urut_tarif').val(data.no_tarif);
+    $('#id_zona_tarif').val(data.id_zona);
+    $('#id_item_perkada').val(data.id_tarif);
+    $('#rupiah_tarif').val(data.jml_rupiah);
+    $('#ur_item_perkada'). val(data.ur_tarif);
     document.getElementById("idperkada_tarif").innerHTML = no_sk_ssh;
     document.getElementById("idzona_tarif").innerHTML = nm_zona;
     $('#ModalTarifPerkada').modal('show');

@@ -11,7 +11,9 @@
 |
 */
 //Login
-Route::get('/', function () {return view('auth.login');});
+Route::get('/', 'WelcomeController@index');
+
+Route::get('/login', function () {return view('auth.login');});
 Route::get('/home', 'HomeController@index');
 Route::get('/getTahunSetting', 'HomeController@getTahunSetting');
 Auth::routes();
@@ -30,6 +32,7 @@ Route::get('/modul0', function () {return view('layouts.app0');})->middleware('a
 
 //Dashboard
 Route::get('/rpjmd/dash','Chart\ChartRPJMDController@ChartRPJMD');
+Route::get('/rkpd/dash','WelcomeController@index_tahunan');
 
 // parameter
 Route::group(['prefix' => '/admin/parameter', 'middleware' => ['auth']], function() {
@@ -224,8 +227,7 @@ Route::any('/admin/parameter', function(){
 */
 Route::group(['prefix' => '/admin/update', 'middleware' => ['auth', 'menu:9']], function() {
     Route::get('/',  'UpdateController@index');
-    Route::post('/execute',  'UpdateController@update');
-    Route::post('/rollback',  'UpdateController@rollback');
+    Route::any('/execute',  'UpdateController@update');
 });
 
 /* Choose Tahun Anggaran 

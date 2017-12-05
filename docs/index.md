@@ -10,14 +10,13 @@ Untuk mendapatkan aplikasi dapat menghubungi Perwakilan BPKP setempat.
 
 DAFTAR ISI
 
-1. [[Home]]
-2. [[Ruang Lingkup]]
-3. [[Technical Requirements]]
-4. [[System Requirements]]
-5. [[Pedoman Instalasi XAMPP di Windows]]
-6. [[Pedoman Instalasi SIMDA Perencanaan]]
-7. [[Pedoman Impor Database mySQL]]
-8. [[Tahapan Implementasi]]
-9. [[Tahapan Pelatihan]]
-10. [[Tips Optimasi]]
-11. [[Mengganti MariaDB dengan MySQL di XAMPP]]
+1. [Ruang Lingkup](Ruang-Lingkup.md)
+2. [Technical Requirements](Technical-Requirements.md)
+3. [System Requirements](System-Requirements.md)
+4. [Pedoman Instalasi XAMPP di Windows](Pedoman-Instalasi-XAMPP-di-Windows.md)
+5. [Pedoman Instalasi SIMDA Perencanaan](Pedoman-Instalasi-SIMDA-Perencanaan.md)
+6. [Pedoman Impor Database mySQL](Pedoman-Impor-Database-mySQL.md)
+7. [Tahapan Implementasi](Tahapan-Implementasi.md)
+8. [Tahapan Pelatihan](Tahapan-Pelatihan.md)
+9. [Tips Optimasi](Tips-Optimasi.md)
+10. [Mengganti MariaDB dengan MySQL di XAMPP](Mengganti-MariaDB-dengan-MySQL-di-XAMPP.md)

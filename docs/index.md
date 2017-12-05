@@ -1,14 +1,12 @@
-Aplikasi SIMDA Perencanaan merupakan bagian dari integrated financial management system yang dikembangkan oleh [Badan Pengawasan Keuangan dan Pembangunan](www.bpkp.go.id).
+Aplikasi **SIMDA Perencanaan** merupakan bagian dari integrated financial management system yang dikembangkan oleh [Badan Pengawasan Keuangan dan Pembangunan](www.bpkp.go.id).
 
-Aplikasi ini dibangun untuk dapat mengintegrasikan antara proses perencanaan dengan proses penganggaran.
+Aplikasi ini dibangun untuk dapat mengintegrasikan antara proses perencanaan dengan proses penganggaran pada Pemerintah Daerah. Disediakan secara gratis tanpa biaya, hubungi Perwakilan BPKP setempat untuk mendapatkannya.
 
-Aplikasi diperuntukkan bagi Pemerintah Daerah dan dapat diperoleh tanpa biaya.
+**RILIS TERAKHIR**
 
-Untuk mendapatkan aplikasi dapat menghubungi Perwakilan BPKP setempat.
+Lihat [Rilis terakhir](http://github.com/simda-id/simcan/releases)
 
-[Rilis terakhir](http://github.com/simda-id/simcan/releases)
-
-DAFTAR ISI
+**DOKUMENTASI**
 
 1. [Ruang Lingkup](Ruang-Lingkup.md)
 2. [Technical Requirements](Technical-Requirements.md)

@@ -45,9 +45,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
                     <ul class="nav nav-tabs nav-justified" role="tablist">
                       <li class="active"><a href="#programrkpd" aria-controls="programrkpd" role="tab" data-toggle="tab">Program RKPD</a></li>
-                      <li class="disabled"><a href="#program" aria-controls="program" role="tab-kv" data-toggle="tab">Program SKPD</a></li>
-                      <li class="disabled"><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan SKPD</a></li>
-                      <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana Aktivitas</a></li>
+                      <li class="disabled"><a href="#program" aria-controls="program" role="tab-kv" data-toggle="tab">Program PD</a></li>
+                      <li class="disabled"><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan PD</a></li>
+                      <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana</a></li>
                       <li class="disabled"><a href="#aktivitas" aria-controls="aktivitas" role="tab-kv" data-toggle="tab">Aktivitas</a></li>
                       <li class="disabled"><a href="#lokasi" aria-controls="lokasi" role="tab-kv" data-toggle="tab">Lokasi</a></li>
                       <li class="disabled"><a href="#belanja" aria-controls="belanja" role="tab-kv" data-toggle="tab">Rincian Belanja</a></li>

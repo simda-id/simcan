@@ -80,7 +80,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <p><a id="btnTambahProg" class="add-programrenja btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a></p>
                                       </div>
                                     <div class="col-md-12">
-                                    <div class="table-responsive">
+                                    {{-- <div class="table-responsive"> --}}
                                     <table id="tblProgramRenja" class="table display table-striped compact table-bordered table-responsive">
                                         <thead>
                                             <tr>
@@ -101,7 +101,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tbody>                                        
                                         </tbody>
                                     </table> 
-                                    </div>
+                                    {{-- </div> --}}
                                     </div>  
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="kegiatanrenja">
@@ -125,8 +125,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                    <div class="table-responsive">
-                                    <table id="tblKegiatanRenja" class="table display table-striped compact table-bordered" width="100%">
+                                    {{-- <div class="table-responsive"> --}}
+                                    <table id="tblKegiatanRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
@@ -149,7 +149,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tbody>                                        
                                         </tbody>
                                     </table>   
-                                </div>
+                                {{-- </div> --}}
                               </div>
 
                               <div role="tabpanel" class="tab-pane fade in" id="pelaksanarenja">
@@ -174,8 +174,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                  <div class="table-responsive">
-                                    <table id="tblPelaksanaRenja" class="table display table-striped compact table-bordered" width="100%">
+                                  {{-- <div class="table-responsive"> --}}
+                                    <table id="tblPelaksanaRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
                                                 <th width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
@@ -188,7 +188,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tbody>                                        
                                         </tbody>
                                     </table>   
-                                </div>                                     
+                                {{-- </div>                                      --}}
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="aktivitasrenja">
                                 <br>
@@ -216,8 +216,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>
                                   </div>
                                   </form>
-                                  <div class="table-responsive">
-                                    <table id="tblAktivitasRenja" class="table display table-striped compact table-bordered" width="100%">
+                                  {{-- <div class="table-responsive"> --}}
+                                    <table id="tblAktivitasRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Lokasi</th>
@@ -241,7 +241,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tbody>                                        
                                         </tbody>
                                     </table>   
-                                </div>  
+                                {{-- </div>   --}}
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="belanja">
                               <br>

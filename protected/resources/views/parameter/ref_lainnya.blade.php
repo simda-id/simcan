@@ -29,7 +29,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="panel-body">
             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
               <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li class="active"><a href="#jenislokasi" aria-controls="jenislokasi" role="tab" data-toggle="tab"><i class="fa fa-map-marker fa-fw fa-lg text-success"></i> Jenis Lokasi</a></li>
+                <li class="active"><a href="#jenislokasi" aria-controls="jenislokasi" role="tab" data-toggle="tab"><i class="fa fa-map-marker fa-fw fa-lg text-success"></i> Jenis Lokasi non Kewilayahan</a></li>
                 <li><a href="#sumberdana" aria-controls="sumberdana" role="tab-kv" data-toggle="tab"><i class="fa fa-money fa-fw fa-lg text-primary"></i> Sumber Dana</a></li>
               </ul>
               <div class="tab-content">

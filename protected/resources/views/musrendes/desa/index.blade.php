@@ -399,9 +399,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle;">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle;">Uraian Kegiatan Renja</th>
                             <th style="text-align: center; vertical-align:middle;">Uraian Aktivitas ASB</th>
                             <th width="10%" style="text-align: center; vertical-align:middle;">Pagu</th>
-                            <th width="40%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
+                            <th width="25%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
                             <th width="5%" style="text-align: center; vertical-align:middle;">Aksi</th>
                           </tr>
                     </thead>
@@ -675,7 +676,8 @@ $(document).on('click', '#btnCariASB', function() {
         dom: 'bfrtIp',
         "ajax": {"url": "./musrenrw/getDataASB"},
         "columns": [
-              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'no_urut', sClass: "dt-center"},              
+              { data: 'uraian_kegiatan_renstra'},
               { data: 'nm_aktivitas_asb'},
               { data: 'pagu_rata2', sClass: "dt-right",
                 render: $.fn.dataTable.render.number( '.', ',', 2, '' )},

@@ -37,7 +37,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="tab-pane fade in active" id="pokir">
                 <br>          
                   <p><a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok-Pokok Pemikiran</a></p>
-                    <div class="table-responsive">
+                    {{-- <div class="table-responsive"> --}}
                     <table id="tblPokir" class="table display table-striped table-bordered table-responsive"  width="100%">
                           <thead>
                               <tr>
@@ -51,18 +51,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>
                           </tbody>
                     </table>
-                  </div>
+                  {{-- </div> --}}
                 </div>
                 <div class="tab-pane fade in" id="uraian">
                 <br>          
                   <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="addUraian"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Uraian Pemikiran</a></p>
-                    <div class="table-responsive">
+                    {{-- <div class="table-responsive"> --}}
                     <table id="tblUraian" class="table table-striped display compact table-bordered table-responsive"  width="100%">
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                                 <th style="text-align: center; vertical-align:middle">Judul Usulan</th>
-                                <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Anggaran</th>
+                                {{-- <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Anggaran</th> --}}
                                 <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Output</th>
                                 <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                               </tr>
@@ -70,13 +70,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>
                           </tbody>
                     </table>
-                  </div>
+                  {{-- </div> --}}
                 </div>
                 <div class="tab-pane fade in" id="lokasi">
                 <br>          
                   <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="btnAddLokasi"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Lokasi</a></p>
-                    <div class="table-responsive">
-                    <table id="tblLokasi" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
+                    {{-- <div class="table-responsive"> --}}
+                    <table id="tblLokasi" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -88,7 +88,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>
                           </tbody>
                     </table>
-                  </div>
+                  {{-- </div> --}}
                 </div>
             </div>          
         </div>
@@ -282,7 +282,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <select type="text" class="form-control" id="id_satuan_usulan" name="id_satuan_usulan"></select>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group hidden">
                     <label class="control-label col-sm-3" for="pagu_usulan">Anggaran Usulan :</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control number" id="pagu_usulan" name="pagu_usulan">                    
@@ -648,8 +648,8 @@ function LoadTblRincian(id_pokir){
     "columns": [
           { data: 'no_urut', sClass: "dt-center"},
           { data: 'diskripsi_usulan'},
-          { data: 'jml_anggaran', sClass: "dt-right",
-              render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+          // { data: 'jml_anggaran', sClass: "dt-right",
+          //     render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
           { data: 'volume', sClass: "dt-center",width:"15px",
               render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
           { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }

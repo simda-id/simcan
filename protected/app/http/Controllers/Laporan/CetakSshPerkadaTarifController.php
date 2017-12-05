@@ -1,241 +1,210 @@
-<?php
-
-namespace App\Http\Controllers\Laporan;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests;
-// use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Yajra\Datatables\Datatables;
-use Response;
-use Session;
-use PDF;
-use App\Models\RefSshGolongan;
-use App\Models\RefSshKelompok;
-use App\Models\RefSshSubKelompok;
-use App\Models\RefSshPerkadaTarif;
-use App\Models\RefSshRekening;
-use App\Models\RefRek5;
-use Yajra\Datatables\Html\Builder;
-use Yajra\Datatables\Services\DataTable;
-
-
-class CetakSshPerkadaTarifController extends Controller
-{
-
-	public function printSshPerkadaTarif()
-  {
-  	$sshGolongan = RefSshGolongan::select('id_golongan_ssh','uraian_golongan_ssh')
-  	// ->where('id_golongan_ssh','<',30)
-                    ->get();
-
-    // set document information
-    PDF::SetCreator('BPKP');
-    PDF::SetAuthor('BPKP');
-    PDF::SetTitle('Simd@Perencanaan');
-    PDF::SetSubject('SSH Kelompok');
-
-    // set default header data
-    PDF::SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 011', PDF_HEADER_STRING);
-
-    // set header and footer fonts
-    PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-    // set default monospaced font
-    PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-    // set margins
-    PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
-    PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
-
-    // set auto page breaks
-    PDF::SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM);
-
-    // set image scale factor
-    // PDF::setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-    // set some language-dependent strings (optional)
-    // if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    //     require_once(dirname(__FILE__).'/lang/eng.php');
-    //     $pdf->setLanguageArray($l);
-    // }
-
-    // ---------------------------------------------------------
-
-    // set font
-    PDF::SetFont('helvetica', '', 6);
-
-    // add a page
-    PDF::AddPage('P');
-    $countrow=0;
-    $totalrow=39;
-
-    // column titles
-    $header = array('Kode','Uraian','Satuan','Harga','KD Belanja');
-
-    // Colors, line width and bold font
-    PDF::SetFillColor(200, 200, 200);
-    PDF::SetTextColor(0);
-    PDF::SetDrawColor(255, 255, 255);
-    PDF::SetLineWidth(0);
-    PDF::SetFont('helvetica', 'B', 10);
-
-    //Header
-    PDF::Cell('150', 5, 'PEMERINTAH DAERAH SIMULASI', 1, 0, 'C', 0);
-    PDF::Ln();
-    $countrow++;
-    PDF::Cell('150', 5, 'STANDAR SATUAN HARGA TARIF', 1, 0, 'C', 0);
-    PDF::Ln();
-    $countrow++;
-    PDF::SetFont('', 'B');
-    PDF::SetFont('helvetica', 'B', 6);
-    
-    // Header Column
-    $wh = array(34,82,30,30,30,30);
-    $w = array(7,7,10,10,8,8,8,58,30,30,30,30);
-    $num_headers = count($header);
-    for($i = 0; $i < $num_headers; ++$i) {
-            PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    }
-    PDF::Ln();
-    $countrow++;
-        // Color and font restoration
-
-    PDF::SetFillColor(224, 235, 255);
-    PDF::SetTextColor(0);
-    PDF::SetFont('helvetica', '', 6);
-        // Data
-    $fill = 0;
-    foreach($sshGolongan as $row) {
-    	PDF::Cell($w[0], 6, $row->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    	PDF::Cell($w[1], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[2], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[4], 6, $row->uraian_golongan_ssh, 'L', 0, 'L', $fill);
-    	PDF::Cell($w[5], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[6], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[7], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[8], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[9], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[10], 6, '', 'L', 0, 'L', $fill);
-    	
-    	PDF::Ln();
-    	$countrow++;
-    	if($countrow>=$totalrow)
-    	{
-    		PDF::AddPage('P');
-    		$countrow=0;
-    		for($i = 0; $i < $num_headers; ++$i) {
-    			PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    		}
-    		PDF::Ln();
-    		$countrow++;
-    	}
-    	//$fill=!$fill;
-    	$sshKelompok = RefSshKelompok::select('id_golongan_ssh','id_kelompok_ssh','uraian_kelompok_ssh')
-    	->where('id_golongan_ssh','=',$row->id_golongan_ssh)
-    	->get();
-    	foreach($sshKelompok as $row2) {
-    		PDF::Cell($w[0], 6, $row2->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    		PDF::Cell($w[1], 6, $row2->id_kelompok_ssh, 'L', 0, 'L', $fill);
-    		PDF::Cell($w[2], 6, '', 'L', 0, 'L', $fill);
-    		PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
-    		PDF::Cell($w[4], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Cell($w[5], 6, $row2->uraian_kelompok_ssh, 'L', 0, 'L', $fill);
-    		PDF::Cell($w[6], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Cell($w[7], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Cell($w[8], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Cell($w[9], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Cell($w[10], 6,'' , 'L', 0, 'L', $fill);
-    		PDF::Ln();
-    		$countrow++;
-    		if($countrow>=$totalrow)
-    		{
-    			PDF::AddPage('P');
-    			$countrow=0;
-    			for($i = 0; $i < $num_headers; ++$i) {
-    				PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    			}
-    			PDF::Ln();
-    			$countrow++;
-    		}
-    		$sshSubKelompok = RefSshSubKelompok::select('id_kelompok_ssh','id_sub_kelompok_ssh','uraian_sub_kelompok_ssh')
-    		->where('id_kelompok_ssh','=',$row2->id_kelompok_ssh)
-    		->get();
-    		foreach($sshSubKelompok as $row3) {
-    			PDF::Cell($w[0], 6, $row2->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    			PDF::Cell($w[1], 6, $row3->id_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Cell($w[2], 6, $row3->id_sub_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[4], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[5], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[6], 6, $row3->uraian_sub_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Cell($w[7], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[8], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[9], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[10], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Ln();
-    			$countrow++;
-    			if($countrow>=$totalrow)
-    			{
-    				PDF::AddPage('P');
-    				$countrow=0;
-    				for($i = 0; $i < $num_headers; ++$i) {
-    					PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    				}
-    				PDF::Ln();
-    				$countrow++;
-    			}
-    			$SshPerkadaTarif = RefSshPerkadaTarif::select('ref_ssh_perkada_tarif.id_tarif_perkada','ref_ssh_tarif.id_sub_kelompok_ssh','ref_ssh_tarif.uraian_tarif_ssh','ref_ssh_tarif.uraian_tarif_ssh','ref_ssh_rekening.id_rekening','ref_rek_5.kd_rek_1','ref_rek_5.kd_rek_2','ref_rek_5.kd_rek_3','ref_rek_5.kd_rek_4','ref_rek_5.kd_rek_5','ref_rek_5.nama_kd_rek_5','ref_satuan.uraian_satuan','ref_ssh_perkada_tarif.jml_rupiah')
-    			->leftjoin('ref_ssh_tarif','ref_ssh_perkada_tarif.id_tarif_ssh','=','ref_ssh_tarif.id_tarif_ssh')
-    			->leftjoin('ref_ssh_rekening','ref_ssh_tarif.id_tarif_ssh','=','ref_ssh_rekening.id_tarif_ssh')
-    			->leftjoin('ref_rek_5','ref_ssh_rekening.id_rekening','=','ref_rek_5.id_rekening')
-    			->leftjoin('ref_satuan','ref_ssh_tarif.id_satuan','=','ref_satuan.id_satuan')
-    			->distinct()
-    			->where('ref_ssh_tarif.id_sub_kelompok_ssh','=',$row3->id_sub_kelompok_ssh)
-    			->get();
-    			foreach($SshPerkadaTarif as $row4) {
-    				PDF::MultiCell($w[0], 6, $row2->id_golongan_ssh, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[1], 6, $row3->id_kelompok_ssh, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[2], 6, $row3->id_sub_kelompok_ssh, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[3], 6, $row4->id_tarif_ssh, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[4], 6, '', 0, 'L', 0, 0);
-    				PDF::MultiCell($w[5], 6, '', 0, 'L', 0, 0);
-    				PDF::MultiCell($w[6], 6, '', 0, 'L', 0, 0);
-    				PDF::MultiCell($w[7], 6, $row4->uraian_tarif_ssh, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[8], 6, $row4->uraian_satuan, 0, 'L', 0, 0);
-    				PDF::MultiCell($w[9], 6, number_format($row4->jml_rupiah, 2, ',', '.'), 0, 'L', 0, 0);
-    				PDF::MultiCell($w[10], 6, $row4->kd_rek_1 . '.' . $row4->kd_rek_2. '.' . $row4->kd_rek_3. '.' . $row4->kd_rek_4. '.' . $row4->kd_rek_5, 0, 'L', 0, 0);
-    				PDF::Ln();
-    				$countrow++;
-    				if($countrow>=$totalrow)
-    				{
-    					PDF::AddPage('P');
-    					$countrow=0;
-    					for($i = 0; $i < $num_headers; ++$i) {
-    						PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    					}
-    					PDF::Ln();
-    					$countrow++;
-    				}
-    				//$fill=!$fill;
-    			}
-    			//$fill=!$fill;
-    		}
-    		//$fill=!$fill;
-    	}
-        }
-    PDF::Cell(array_sum($w), 0, '', 'T');
-
-    // ---------------------------------------------------------
-
-    // close and output PDF document
-    PDF::Output('PerkadaTarifSSH.pdf', 'I');
-  }
-
-}
-
+<?php //00512
+// bySimda@Perencanaan
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

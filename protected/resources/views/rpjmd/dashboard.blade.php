@@ -25,7 +25,8 @@
         		<div id="chart">
         		<div class="col-sm-12">
         			<div id="piechart"></div>
-							@piechart('Misi5Tahun','piechart');
+							{{-- @piechart('Misi5Tahun','piechart'); --}}
+                            <?= \Lava::render("PieChart","Misi5Tahun","piechart");?>
         		</div>
         		<div class="col-sm-12">
         			<div id="barchart"></div>

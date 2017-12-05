@@ -343,8 +343,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divRincian">
-              <div class="table-responsive">
-              <table id="tblRincian" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+              {{-- <div class="table-responsive"> --}}
+              <table id="tblRincian" class="table display compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -360,7 +360,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <tbody>
                     </tbody>
               </table>
-              </div>
+              {{-- </div> --}}
               </div>
             </div>            
           </div>

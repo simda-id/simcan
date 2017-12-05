@@ -81,7 +81,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divKelompok">
-                <div class="table-responsive">
+                {{-- <div class="table-responsive"> --}}
               <table id="tblKelompok" class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
                   <thead>
                       <tr>
@@ -94,7 +94,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <tbody>
                   </tbody>
             </table>
-          </div>
+          {{-- </div> --}}
             </div>
             </div>
 
@@ -1543,9 +1543,9 @@ $(document).ready(function() {
 
           //Edit Kelompok
           $(document).on('click', '.edit-kelompok', function() {
-            $('.btnEditKel').addClass('btn-success');
-            $('.btnEditKel').removeClass('btn-danger');
-            $('.btnEditKel').addClass('editKelompok');
+            $('.btnEkel').addClass('btn-success');
+            $('.btnEkel').removeClass('btn-danger');
+            $('.btnEkel').addClass('editKelompok');
             $('.modal-title').text('Edit Data Kelompok SSH');
             $('.form-horizontal').show();
             $('#id_gol_kel_edit').val($(this).data('id_gol_kel'));

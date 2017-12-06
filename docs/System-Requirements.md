@@ -43,6 +43,4 @@ Untuk dapat menjalankan aplikasi SIMDA Perencanaan, kondisi-kondisi di bawah ini
 - Cost Driver: Satuan yang merubah besarnya biaya dalam suatu aktivitas, Dapat memiliki derivative (turunan cost driver).
 - Sifat-sifat biaya dalam komponen rinci: fixed (tidak dipengaruhi volume cost driver), independent (dipengaruhi volume cost driver), mixed (dipengaruhi volume cost driver sampai jumlah/range tertentu)
 
-
-
-
+[index](index.md)

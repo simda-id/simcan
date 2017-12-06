@@ -22,8 +22,12 @@ Untuk menjalankan modul tahunan diperlukan:
 
 Untuk mengakses aplikasi dapat menggunakan browser di masing-masing client. Konfigurasi akses oleh client terhadap server (melalui internet, LAN, VPN, WLAN) menjadi tanggung jawab Pemda pengguna. Pengamanan dan optimasi atas server (firewall, load balancing, dsb) menjadi tanggung jawab Pemda pengguna.
 
-## _Perhatian_
+### _Perhatian_
 
 Untuk fase produksi (menjalankan aplikasi untuk keseluruhan OPD) disarankan menggunakan konfigurasi server yang sebenarnya.
 
-Fase produksi __TIDAK__ disarankan menggunakan MSSQL personal edition/express, __TIDAK__ disarankan menggunakan paket instalasi XAMPP/ WAMP/ LAMP dan sejenisnya. Paket-paket tersebut perlu dikonfigurasi lebih lanjut agar dapat optimal untuk melayani transaksi dalam intensitas tinggi.
+Fase produksi
+- __TIDAK__ disarankan menggunakan MSSQL personal edition/express, edisi ini membatasi jumlah koneksi dari client ke server,
+- __TIDAK__ disarankan menggunakan paket instalasi standar XAMPP/ WAMP/ LAMP dan sejenisnya. Paket-paket tersebut perlu dikonfigurasi lebih lanjut agar dapat optimal untuk melayani transaksi dalam intensitas tinggi.
+
+[index](index.md)

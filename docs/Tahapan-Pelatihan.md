@@ -23,3 +23,5 @@ Aplikasi SIMDA Perencanaan dibangun dengan pendekatan fungsi. Agar dapat diimple
 - Lakukan pelatihan kepada operator di OPD yang menjalankan fungsi perencanaan, khususnya proses Musrenbang RKPD dan Pokir.
 - Lakukan pelatihan kepada operator di seluruh  OPD, khususnya proses penyesuaian terhadap hasil Musrenbang RKPD.
 - Lakukan pelatihan kepada operator di OPD yang menjalankan fungsi perencanaan, khususnya proses PPA.
+
+[index](index.md)

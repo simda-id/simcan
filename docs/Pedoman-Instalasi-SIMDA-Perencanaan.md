@@ -1,4 +1,4 @@
-## Pedoman Instalasi
+## Pedoman Setting SIMDA Perencanaan Modul Tahunan
 
 1. Unduh keseluruhan aplikasi ini, ekstrak, dan letakkan di web server.
 2. Hubungi Tim Aplikasi di perwakilan BPKP setempat untuk mendapatkan folder konfigurasi, database, dan username/password default.
@@ -13,3 +13,5 @@
 * DB_DATABASE=namadatabase // sesuaikan dengan nama database Simda Perencanaan Anda.
 * DB_USERNAME=usernamemysql // sesuaikan dengan username MySQL Anda.
 * DB_PASSWORD=passwordmysql // sesuaikan dengan password MySQL Anda. 
+
+[index](index.md)

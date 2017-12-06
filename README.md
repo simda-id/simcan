@@ -7,7 +7,7 @@ Dalam aplikasi ini telah termasuk modul RKPD, Renja, Musrenbang, SSH, dan ASB.
 
 Dapatkan [rilis terakhir di sini](https://github.com/simda-id/simcan/releases).
 
-Dokumentasi sederhana [tersedia di sini](https://github.com/simda-id/simcan/wiki)
+Dokumentasi sederhana [tersedia di sini](https://github.com/simda-id/simcan/wiki) atau [di sini](http://simda-id.github.io/simcan)
 
 ### Requirements Teknis
 Untuk menjalankan aplikasi ini diperlukan:

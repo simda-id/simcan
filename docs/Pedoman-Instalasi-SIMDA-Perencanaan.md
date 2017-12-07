@@ -1,4 +1,4 @@
-## Pedoman Setting SIMDA Perencanaan Modul Tahunan
+## Pedoman Setting Koneksi Database SIMDA Perencanaan (Modul Tahunan)
 
 1. Unduh keseluruhan aplikasi ini, ekstrak, dan letakkan di web server.
 2. Hubungi Tim Aplikasi di perwakilan BPKP setempat untuk mendapatkan folder konfigurasi, database, dan username/password default.

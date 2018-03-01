@@ -1215,19 +1215,21 @@ function getStatus(){
 
 $(document).on('click', '.btnSimulasi', function() {
 
-    location.replace('../printHitungSimulasiASB/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
+    window.open('../printHitungSimulasiASB/'+$('#id_perkada_simulasi').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
+    // location.replace('../printHitungSimulasiASB/'+$('#id_perkada_simulasi').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
     
   });
 
 $(document).on('click', '.btnCetakAktivitas', function() {
 
-    location.replace('../printHitungRumusASB/'+$('#aktivitas_simulasi').val());
+    window.open('../printHitungRumusASB/'+$('#aktivitas_simulasi').val());
     
   });
 
 $(document).on('click', '.print-hitungaktivitas', function() {
 
-    location.replace('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));
+    // location.replace('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));
+    window.open('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));
     
   });
 

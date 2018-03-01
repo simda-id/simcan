@@ -15,7 +15,6 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('/login', function () {return view('auth.login');});
 Route::get('/home', 'HomeController@index');
-Route::get('/getTahunSetting', 'HomeController@getTahunSetting');
 Auth::routes();
 
 //Jangka Pendek
@@ -31,8 +30,20 @@ Route::get('/modul3', function () {return view('layouts.app2');})->middleware('a
 Route::get('/modul0', function () {return view('layouts.app0');})->middleware('auth');
 
 //Dashboard
-Route::get('/rpjmd/dash','Chart\ChartRPJMDController@ChartRPJMD');
+Route::get('/rpjmd/dash','Chart\ChartRPJMDController@chartjs');
+Route::get('/rpjmd/misi5tahun','Chart\ChartRPJMDController@misi5tahun_view');
+Route::get('/rpjmd/misi1tahun','Chart\ChartRPJMDController@misi1tahun_view');
+Route::get('/rpjmd/urusan5tahun','Chart\ChartRPJMDController@urusan5tahun_view');
+Route::get('/rpjmd/urusan1','Chart\ChartRPJMDController@urusan1_view');
+Route::get('/rpjmd/urusan2','Chart\ChartRPJMDController@urusan2_view');
+Route::get('/rpjmd/urusan3','Chart\ChartRPJMDController@urusan3_view');
+Route::get('/rpjmd/urusan4','Chart\ChartRPJMDController@urusan4_view');
+Route::get('/rpjmd/bidang5tahun','Chart\ChartRPJMDController@bidang5tahun_view');
 Route::get('/rkpd/dash','WelcomeController@index_tahunan');
+Route::get('/asb/dash','WelcomeController@index_asb');
+Route::get('/parameter/dash','WelcomeController@index_parameter');
+Route::get('/agenda/tlJadwal/{tahun}', 'RefJadwalController@tlJadwal');
+Route::get('/getTahunSetting', 'RefJadwalController@getTahunSetting');
 
 // parameter
 Route::group(['prefix' => '/admin/parameter', 'middleware' => ['auth']], function() {
@@ -86,6 +97,8 @@ Route::group(['prefix' => '/admin/parameter', 'middleware' => ['auth']], functio
         Route::any('/editUser', 'UserController@editUser');
         Route::any('/gantiPass', 'UserController@gantiPass');
         Route::any('/hapusUser', 'UserController@hapusUser');
+
+        Route::any('/cekUserAdmin', 'UserController@cekUserAdmin');
 
         Route::any('/addUnit', 'UserController@addUnit');
         Route::any('/hapusUnit', 'UserController@hapusUnit');
@@ -246,18 +259,23 @@ Route::get('/printGolonganSsh', 'Laporan\CetakSshController@printGolonganSsh');
 Route::get('/printKelompokSsh', 'Laporan\CetakSshKelompokController@printSshKelompok');
 Route::get('/printSubKelompokSsh', 'Laporan\CetakSshSubKelompokController@printSshSubKelompok');
 Route::get('/printItemSsh', 'Laporan\CetakSshPerkadaTarifController@printSshPerkadaTarif');
-// Route::get('/printItemSsh/{id_sub_kel}', 'Laporan\CetakSshPerkadaTarifSubKelController@printSshPerkadaTarif');
 Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
 Route::get('/PrintKompilasiKegiatandanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiKegiatandanPaguRenja');
+Route::get('/PrintCekASBRenja/{id_unit}','Laporan\CetakRenjaController@CekSSHRancanganRenja');
+Route::get('/PrintCekSSHRenja/{id_unit}','Laporan\CetakRenjaController@CekSSHRancanganRenja');
+Route::get('/Print_T_VI_C_1/{id_unit}','Laporan\CetakRenjaController@T_VI_C_1');
+Route::get('/PrintCekASBForum/{id_unit}','Laporan\CetakForumController@CekASBforum');
+Route::get('/PrintUsulanRW','Laporan\CetakMusrendesController@printusulanrw');
 
 Route::get('/printAktivitasASB/{id_aktivitas}','Laporan\CetakASBAktivitasRinciController@printASBAktivitas');
-Route::get('/printHitungSimulasiASB/{id_aktivitas}/{d1}/{d2}','Laporan\CetakASBAktivitasHitungController@printASBAktivitas');
+Route::get('/printHitungSimulasiASB/{id_perhitungan}/{id_aktivitas}/{d1}/{d2}','Laporan\CetakASBAktivitasHitungController@printASBAktivitas');
 Route::get('/printHitungRumusASB/{id_aktivitas}','Laporan\CetakASBAktivitasRumusController@printASBAktivitas');
 
 Route::get('/printRPJMDTSK','Laporan\CetakRpjmdController@perumusanAKPembangunan');
 Route::get('/printProgPrio','Laporan\CetakRpjmdController@perumusanProgramPrioritasPemda');
 Route::get('/PrintProyeksiPendapatan','Laporan\CetakRpjmdController@ProyeksiPendapatan');
-Route::get('/PrintKompilasiProgramdanPagu','Laporan\CetakRpjmdController@KompilasiProgramdanPagu');
+Route::get('/PrintKompilasiProgramdanPagu/{tahun}','Laporan\CetakRkpdController@T_V_C_66');
+// Route::get('/PrintKompilasiProgramdanPagu','Laporan\CetakRpjmdController@KompilasiProgramdanPagu');
 Route::get('/PrintReviewRanwalRKPD','Laporan\CetakRpjmdController@ReviewRanwalRKPD');
 Route::get('/PrintRumusanReviewRanwal','Laporan\CetakRpjmdController@RumusanProgKeg');
 Route::get('/PrintProgPaguRenstra','Laporan\CetakRpjmdController@KompilasiProgramdanPaguRenstra');
@@ -293,6 +311,18 @@ Route::group(['prefix' => 'setting', 'middleware' => ['auth', 'menu:101']], func
     Route::post('/editSetting', 'SettingController@editSetting');
     Route::post('/hapusSetting', 'SettingController@hapusSetting');
     Route::post('/postSetting', 'SettingController@postSetting');
+
+});
+
+//Referensi Agenda Kerja
+Route::group(['prefix' => 'agenda', 'middleware' => ['auth', 'menu:101']], function () {
+    Route::get('/', 'RefJadwalController@index');
+    Route::get('/rinciagenda/{tahun}', 'RefJadwalController@getJadwal');
+    Route::get('/rekapagenda', 'RefJadwalController@getTahunJadwal');
+    // Route::get('/tlJadwal/{tahun}', 'RefJadwalController@tlJadwal');    
+    Route::get('/curJadwal', 'RefJadwalController@curJadwal');
+    Route::post('/addJadwal', 'RefJadwalController@addJadwal');
+    Route::post('/hapusJadwal', 'RefJadwalController@hapusJadwal');
 
 });
 
@@ -896,35 +926,48 @@ Route::group(['prefix' => 'renja', 'middleware' => ['auth', 'menu:50']], functio
     });        
 });
 
-Route::get('/renjafinal', 'TrxRenjaFinalController@index');
-Route::get('/renjafinal/edit', 'TrxRenjaFinalController@create');
-
-// Route::get('/admin/rancanganrenja', 'RancanganRenjaController@index');
-// Route::get('/admin/rancanganrenja/{id}/detail', 'RancanganRenjaController@detail');
-// Route::post('/admin/rancanganrenja/{id}/detail', 'RancanganRenjaController@detail');
-// Route::get('/admin/rancanganrenja/{id}/dataindikator', 'RancanganRenjaController@dataindikator');
-// Route::any('/admin/rancanganrenja/{id}/lokasi', 'RancanganRenjaController@lokasi');
-// Route::post('/admin/rancanganrenja/{id}/deletepelaksana', 'RancanganRenjaController@deletepelaksana');
+Route::group(['prefix' => 'renjafinal', 'middleware' => ['auth', 'menu:50']], function () {
+    Route::get('/', 'TrxRenjaFinalController@index');
+    Route::get('/loadData', 'TrxRenjaFinalController@loadData');
+    Route::get('/dokumen', 'TrxRenjaFinalController@dokumen');  
+    Route::get('/blangsung', 'TrxRenjaFinalController@blangsung');       
+});
 
 //PPAS
 Route::get('/ppas/loadData', 'TrxPpasController@loadData');
 Route::get('/ppas/edit', 'TrxPpasController@create');
 Route::get('/ppas', 'TrxPpasController@index');
 
-//RPJMD
 Route::group(['prefix' => 'rpjmd', 'middleware' => ['auth', 'menu:20']], function() {
-    Route::get('/', 'TrxRpjmdController@index');
-    Route::get('/visi', 'TrxRpjmdController@getVisiRPJMD');
-    Route::get('/misi/{id_visi_rpjmd}','TrxRpjmdController@getMisiRPJMD');
-    Route::get('/tujuan/{id_misi_rpjmd}','TrxRpjmdController@getTujuanRPJMD');
-    Route::get('/sasaran/{id_tujuan_rpjmd}','TrxRpjmdController@getSasaranRPJMD');
-    Route::get('/kebijakan/{id_sasaran_rpjmd}','TrxRpjmdController@getKebijakanRPJMD');
-    Route::get('/strategi/{id_sasaran_rpjmd}','TrxRpjmdController@getStrategiRPJMD');
-    Route::get('/program/{id_sasaran_rpjmd}','TrxRpjmdController@getProgramRPJMD');
-    Route::get('/programindikator/{id_program_rpjmd}','TrxRpjmdController@getIndikatorProgramRPJMD');
-    Route::get('/programurusan/{id_program_rpjmd}','TrxRpjmdController@getUrusanProgramRPJMD');
-    Route::get('/programpelaksana/{id_urbid_rpjmd}','TrxRpjmdController@getPelaksanaProgramRPJMD');
-});
+        Route::get('/', 'TrxRpjmdController@index');
+        Route::get('/getDokumen', 'TrxRpjmdController@getDokumen');
+        Route::get('/visi', 'TrxRpjmdController@getVisiRPJMD');
+        Route::post('/editVisi', ['uses'=>'TrxRpjmdController@editVisi','as'=>'EditVisi']);
+        Route::get('/misi/{id_visi_rpjmd}','TrxRpjmdController@getMisiRPJMD');
+        Route::post('/editMisi', ['uses'=>'TrxRpjmdController@editMisi','as'=>'EditMisi']);
+        Route::get('/tujuan/{id_misi_rpjmd}','TrxRpjmdController@getTujuanRPJMD');
+        Route::post('/edittujuan', ['uses'=>'TrxRpjmdController@editTujuan','as'=>'Edittujuan']);
+        Route::get('/sasaran/{id_tujuan_rpjmd}','TrxRpjmdController@getSasaranRPJMD');
+        Route::post('/editsasaran', ['uses'=>'TrxRpjmdController@editSasaran','as'=>'EditSasaran']);
+        Route::get('/kebijakan/{id_sasaran_rpjmd}','TrxRpjmdController@getKebijakanRPJMD');
+        Route::post('/editkebijakan', ['uses'=>'TrxRpjmdController@editKebijakan','as'=>'EditKebijakan']);
+        Route::get('/strategi/{id_sasaran_rpjmd}','TrxRpjmdController@getStrategiRPJMD');
+        Route::post('/editstrategi', ['uses'=>'TrxRpjmdController@editStrategi','as'=>'EditStrategi']);
+        Route::get('/program/{id_sasaran_rpjmd}','TrxRpjmdController@getProgramRPJMD');
+        Route::post('/editprogram', ['uses'=>'TrxRpjmdController@editProgram','as'=>'EditProgram']);
+        Route::get('/programindikator/{id_program_rpjmd}','TrxRpjmdController@getIndikatorProgramRPJMD');
+        Route::get('/programurusan/{id_program_rpjmd}','TrxRpjmdController@getUrusanProgramRPJMD');
+        Route::get('/getUrusan/{id_program_rpjmd}','TrxRpjmdController@getUrusan');        
+        Route::get('/getBidang/{id_urusan}','TrxRpjmdController@getBidang');
+        Route::post('/addUrusan', 'TrxRpjmdController@addUrusan');
+        Route::post('/editUrusan', 'TrxRpjmdController@editUrusan');
+        Route::post('/delUrusan', 'TrxRpjmdController@delUrusan');
+        Route::get('/programpelaksana/{id_urbid_rpjmd}','TrxRpjmdController@getPelaksanaProgramRPJMD');
+        Route::get('/getUnitPelaksana/{id_program_rpjmd}/{id_bidang}','TrxRpjmdController@getUnitPelaksana');
+        Route::post('/addPelaksana', 'TrxRpjmdController@addPelaksana');
+        Route::post('/delPelaksana', 'TrxRpjmdController@delPelaksana');
+        Route::any('/ReprosesPivotPelaksana', 'TrxRpjmdController@ReprosesPivotPelaksana');
+    });
 
 //RENSTRA
 Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], function() {
@@ -943,9 +986,11 @@ Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], funct
 });
 
 //MUSRENBANG-RKPD
-Route::get('/musrenrkpd', 'TrxMusrenbangRkpdController@index');
-Route::get('/musrenrkpd/edit', 'TrxMusrenbangRkpdController@create');
-Route::get('/musrenrkpd/loadData', 'TrxMusrenbangRkpdController@loadData');
+Route::group(['prefix' => 'musrenrkpd', 'middleware' => ['auth', 'menu:60']], function() {
+    Route::get('/', 'TrxMusrenbangRkpdController@index');    
+    Route::any('/blangsung', 'TrxMusrenbangRkpdController@blangsung');
+    Route::get('/loadData', 'TrxMusrenbangRkpdController@loadData');
+});
 
 //USULAN RW
 Route::group(['prefix' => 'musrenrw', 'middleware' => ['auth', 'menu:601']], function() {
@@ -1116,6 +1161,7 @@ Route::group(['prefix' => 'ranwalrkpd'], function () {
 Route::group(['prefix' => 'rancanganrkpd', 'middleware' => ['auth', 'menu:40']], function () {
     Route::any('/loadData', 'TrxRancangRKPDController@loadData')->middleware('auth', 'menu:403');    
     Route::get('/', 'TrxRancangRKPDController@index');
+    Route::any('/blangsung', 'TrxRancangRKPDController@blangsung');
 
     Route::any('/getDataDokumen', 'TrxRancangRKPDController@getDataDokumen');
     Route::any('/getDataPerencana', 'TrxRancangRKPDController@getDataPerencana');
@@ -1123,12 +1169,68 @@ Route::group(['prefix' => 'rancanganrkpd', 'middleware' => ['auth', 'menu:40']],
     Route::any('/editDokumen', 'TrxRancangRKPDController@editDokumen');
     Route::any('/hapusDokumen', 'TrxRancangRKPDController@hapusDokumen');
 
+    Route::get('/getUnitRenja', 'TrxForumSkpdController@getUnit');
+    Route::get('/getProgramRkpd/{tahun}/{unit}','TrxForumSkpdController@getProgramRkpdForum');
+    Route::get('/getChildBidang/{id_unit}/{id_ranwal}','TrxForumSkpdController@getChildBidang');
+    Route::any('/getProgramRenja/{tahun}/{unit}/{id_forum}','TrxForumSkpdController@getProgramRenja');
+    Route::any('/getKegiatanRenja/{id_program}','TrxForumSkpdController@getKegiatanRenja');
+    Route::any('/getAktivitas/{id_forum}','TrxForumSkpdController@getAktivitas');
+    Route::any('/getPelaksanaAktivitas/{id_aktivitas}','TrxForumSkpdController@getPelaksanaAktivitas');
+    Route::any('/getLokasiAktivitas/{id_pelaksana}','TrxForumSkpdController@getLokasiAktivitas');
+    Route::get('/getChildUsulan/{id_lokasi}','TrxForumSkpdController@getChildUsulan');    
+    Route::get('/getBelanja/{id_lokasi}','TrxForumSkpdController@getBelanja');
+
+    Route::post('/getHitungASB', 'TrxForumSkpdController@getHitungASB');
+    Route::post('/unloadASB', 'TrxForumSkpdController@unloadASB');
+    Route::get('/getLokasiCopy/{id_aktivitas}', 'TrxForumSkpdController@getLokasiCopy');
+    Route::post('/getBelanjaCopy', 'TrxForumSkpdController@getBelanjaCopy');
+
+    Route::post('/AddProgRenja','TrxForumSkpdController@AddProgRenja');
+    Route::post('/editProgRenja','TrxForumSkpdController@editProgRenja');
+    Route::post('/hapusProgRenja','TrxForumSkpdController@hapusProgRenja');
+
+    Route::post('/addKegRenja','TrxForumSkpdController@addKegRenja');
+    Route::post('/editKegRenja','TrxForumSkpdController@editKegRenja');
+    Route::post('/hapusKegRenja','TrxForumSkpdController@hapusKegRenja');
+
+    Route::post('/addAktivitas','TrxForumSkpdController@addAktivitas');
+    Route::post('/editAktivitas','TrxForumSkpdController@editAktivitas');
+    Route::post('/hapusAktivitas','TrxForumSkpdController@hapusAktivitas');
+
+    Route::post('/addPelaksana','TrxForumSkpdController@addPelaksana');
+    Route::post('/editPelaksana','TrxForumSkpdController@editPelaksana');
+    Route::post('/hapusPelaksana','TrxForumSkpdController@hapusPelaksana');
+
+    Route::post('/addLokasi','TrxForumSkpdController@addLokasi');
+    Route::post('/editLokasi','TrxForumSkpdController@editLokasi');
+    Route::post('/hapusLokasi','TrxForumSkpdController@hapusLokasi');
+
+    Route::post('/addUsulan','TrxForumSkpdController@addUsulan');
+    Route::post('/editUsulan','TrxForumSkpdController@editUsulan');
+    Route::post('/hapusUsulan','TrxForumSkpdController@hapusUsulan');
+
+    Route::post('/addBelanja','TrxForumSkpdController@addBelanja');
+    Route::post('/editBelanja','TrxForumSkpdController@editBelanja');
+    Route::post('/hapusBelanja','TrxForumSkpdController@hapusBelanja');
+    
+    Route::get('/dehashPemda','TrxForumSkpdController@dehashPemda');
+
       
 });
 
 //RANCANGAN  AKHIR RKPD
 Route::group(['prefix' => 'ranhirrkpd', 'middleware' => ['auth', 'menu:40']], function () {
-    Route::any('/loadData', 'TrxRanhirRKPDController@loadData')->middleware('auth', 'menu:405');
+    Route::any('/loadData', 'TrxRanhirRKPDController@loadData')->middleware('auth', 'menu:405');    
+    Route::any('/blangsung', 'TrxRanhirRKPDController@blangsung');
+
+
+    Route::any('/Dokumen', 'TrxRanhirRKPDController@dokumen');
+    Route::any('/getDataDokumen', 'TrxRanhirRKPDController@getDataDokumen');
+    Route::any('/getDataPerencana', 'TrxRanhirRKPDController@getDataPerencana');
+    Route::any('/addDokumen', 'TrxRanhirRKPDController@addDokumen');
+    Route::any('/editDokumen', 'TrxRanhirRKPDController@editDokumen');
+    Route::any('/hapusDokumen', 'TrxRanhirRKPDController@hapusDokumen');
+    Route::any('/postDokumen', 'TrxRanhirRKPDController@postDokumen');
     
     Route::get('/', 'TrxRanhirRKPDController@index');
     // pdt
@@ -1165,6 +1267,18 @@ Route::group(['prefix' => 'ranhirrkpd', 'middleware' => ['auth', 'menu:40']], fu
 
 
 //RANCANGAN  RKPD FINAL
-Route::get('/rkpd/loadData', 'TrxRKPDController@loadData');
-Route::get('/rkpd', 'TrxRKPDController@index');
-Route::get('/rkpd/edit', 'TrxRKPDController@create');
+Route::group(['prefix' => 'rkpd', 'middleware' => ['auth', 'menu:40']], function () {
+    Route::get('/loadData', 'TrxRKPDController@loadData');    
+    Route::any('/blangsung', 'TrxRKPDController@blangsung');
+    Route::get('/', 'TrxRKPDController@index');
+
+    Route::any('/Dokumen', 'TrxRanhirRKPDController@dokumen');
+    Route::any('/getDataDokumen', 'TrxRanhirRKPDController@getDataDokumen');
+    Route::any('/getDataPerencana', 'TrxRanhirRKPDController@getDataPerencana');
+    Route::any('/addDokumen', 'TrxRanhirRKPDController@addDokumen');
+    Route::any('/editDokumen', 'TrxRanhirRKPDController@editDokumen');
+    Route::any('/hapusDokumen', 'TrxRanhirRKPDController@hapusDokumen');
+    Route::any('/postDokumen', 'TrxRanhirRKPDController@postDokumen');
+
+    Route::get('/edit', 'TrxRKPDController@create');
+});

@@ -175,6 +175,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
     </div>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <div class="col-sm-12">
+              <label for="" class="control-label" align='left'>Registered to : {{Session::get('xPemda')}} , Rilis : {{Session::get('versiApp')}}
+              </label>
+        </div>
+      </div>
+    </div>  
+    </div>
   </div>
 </div>
 
@@ -379,35 +390,39 @@ $(document).on('click', "#btnEditPemda" , function() {
   $('.idbtnSimpanPemda').show();
   // alert($_FILES['logo_pemda']['name'])
 
-  // $.ajaxSetup({
-  //   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  // });  
+  $.ajaxSetup({
+    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });  
 
   // $.ajax({
   //     type: "GET",
   //     url: 'pemda/getPemdaX1',
   //     dataType: "json",
   //     success: function(data) {
+  //       console.log(data);
   //       var j = data.length;
   //       var post, i;
   //       for (i = 0; i < j; i++) {
   //         post = data[i];
-          // $.ajax({
-          //   type: 'POST',
-          //   url: 'pemda/getPemdaX',
-          //   data: {
-          //       '_token': $('input[name=_token]').val(),
-          //       'nama_kab' :'SIMULASI',
-                // 'id_kab' :post.id_kab,
-          //   },
-          //   success: function(data) {
-          //     console.log(data);
-          //   }
-          // }); 
-  //       }           
-  //     }
+  //         $.ajax({
+  //           type: 'POST',
+  //           url: 'pemda/getPemdaX',
+  //           data: {
+  //               '_token': $('input[name=_token]').val(),
+  //               'nama_kab' :post.nama_kab,
+  //               'id_kab' :post.id_kab,
+  //           },
+            // success: function(data) {
+        //       // if(data.status_pesan==1){
+        //       // createPesan(data.pesan,"success");
+        //       // } else {
+        //       // createPesan(data.pesan,"danger"); 
+        //       // }
+            // }
+      //     }); 
+      //   }           
+      // }
   // }); 
-
 });
 
 $(document).on('click', "#btnSimpanPemda" , function() {

@@ -192,7 +192,7 @@ function checkData(){
           dataType: "json",
           success: function(data) {
             console.log(data);
-            if(data[0].jml_data !== 0 || data[0].jml_data !== null){
+            if(data[0].jml_data != 0){
               $('#divProses').hide();
               $('#divReProses').show();
             } else { 

@@ -1297,7 +1297,7 @@ $(document).ready(function() {
 
       $(document).on('click', '.btnPrintItemSSh', function() {
 
-        location.replace('./printItemSsh');
+        window.open('./printItemSsh');
         
       });            
 

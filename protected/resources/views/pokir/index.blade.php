@@ -36,7 +36,16 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="pokir">
                 <br>          
-                  <p><a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok-Pokok Pemikiran</a></p>
+                  <a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok-Pokok Pemikiran</a>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Pokir <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                  <a class="dropdown-item btnPrintPokir" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Pokok Pikiran</a>
+                                </li>                     
+                            </ul>
+                    </div>
+                    
                     {{-- <div class="table-responsive"> --}}
                     <table id="tblPokir" class="table display table-striped table-bordered table-responsive"  width="100%">
                           <thead>
@@ -468,8 +477,6 @@ $(document).ready(function() {
 
       return tgl;
   }
-
-  $('.number').number(true,0,',', '.');
 
   function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
@@ -1142,6 +1149,10 @@ $(document).on('click', '#btnDelLokasi', function() {
 
 $("#btnTest").click(function () {
     alert(test);
+});
+
+$(document).on('click', '.btnPrintPokir', function() {
+  window.open('./printPokir');
 });
 
 

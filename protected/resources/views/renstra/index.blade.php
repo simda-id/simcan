@@ -31,13 +31,20 @@
               <br>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="id_unit">Unit Penyusun Renstra :</label>
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <select class="form-control cbUnit" name="id_unit" id="id_unit">
                     @foreach($dataunit as $val)
                       <option value={{ $val->id_unit }}>{{ $val->nm_unit }}</option>
                     @endforeach
                   </select>
                 </div>
+                <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Renstra <span class="caret"></span></button>
+                            <ul class="dropdown-menu"><li>
+                                  <a class="dropdown-item btnPrintKompilasiProgramdanPaguRenstra" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Kompilasi Program dan Pagu Renstra</a>
+                                </li>                    
+                            </ul>
+                    </div>
               </div>
               <br>
               <br>
@@ -693,6 +700,10 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
         $('.nav-tabs a[href="#pelaksana"]').tab('show');
         $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/"+id_kegiatan_renstra).load();
     });
+
+  $(document).on('click', '.btnPrintKompilasiProgramdanPaguRenstra', function() {
+    window.open('./PrintProgPaguRenstra');
+  });
 
 } );
 </script>

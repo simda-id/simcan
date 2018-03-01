@@ -370,6 +370,7 @@ function initTableBidang(tableId, data) {
             serverSide: true,
             ajax: data.details_url,
             dom : 'BFRtIP',
+            paging : false,
             autoWidth: false,
             columns: [
                 { data: 'kd_bidang', name: 'kd_bidang', sClass: "dt-center", width:'10%' },

@@ -40,7 +40,7 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-findcond navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -54,7 +54,7 @@ use hoaaah\LaravelMenu\Menu;
                       <i class="fa fa-home fa-stack-1x"></i>
                     </span> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span></a>
                 </div>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-top-links pull-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li class="dropdown">
@@ -84,11 +84,9 @@ use hoaaah\LaravelMenu\Menu;
 
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">                                           
-                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
-                                        </a>
+                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -99,7 +97,7 @@ use hoaaah\LaravelMenu\Menu;
                         @endif
                     </ul>
 
-                   <div class="navbar-findcond sidebar" role="navigation">
+                   <div class="navbar-default sidebar" role="navigation">
                         <?php
                             $akses = new CekAkses();
                             $menu = new Menu();
@@ -133,7 +131,7 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Load Data Forum PD', 'url' => '/rancanganrkpd/loadData', 'visible' => $akses->get(403)],
                                                     ['label' => 'Rancangan RKPD', 'url' => '/rancanganrkpd', 'visible' => $akses->get(404)],
                                                     // ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
-                                                    ['label' => 'Dokumen Rancangan RKPD', 'url' => '#', 'visible' => $akses->get(403)],
+                                                    // ['label' => 'Dokumen Rancangan RKPD', 'url' => '#', 'visible' => $akses->get(403)],
                                                 ]
                                             ],
                                             [
@@ -141,9 +139,9 @@ use hoaaah\LaravelMenu\Menu;
                                                 'visible' => $akses->get(405) || $akses->get(406) || $akses->get(502),
                                                 'items' => [
                                                     ['label' => 'Load Musrenbang RKPD', 'url' => '/ranhirrkpd/loadData', 'visible' => $akses->get(405)],
-                                                    // ['label' => 'Rancangan Akhir RKPD', 'url' => '/ranhirrkpd', 'visible' => $akses->get(406)],
+                                                    ['label' => 'Rancangan Akhir RKPD', 'url' => '/ranhirrkpd', 'visible' => $akses->get(406)],
                                                     // ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
-                                                    ['label' => 'Dokumen Ranhir RKPD', 'url' => '#', 'visible' => $akses->get(406)],
+                                                    ['label' => 'Dokumen Ranhir RKPD', 'url' => '/ranhirrkpd/Dokumen', 'visible' => $akses->get(406)],
                                                 ]
                                             ],
                                             [
@@ -152,8 +150,8 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Load Ranhir RKPD', 'url' => '/rkpd/loadData', 'visible' => $akses->get(407)],
                                                     ['label' => 'RKPD Final', 'url' => '/rkpd', 'visible' => $akses->get(408)],
-                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
-                                                    ['label' => 'Dokumen RKPD Final', 'url' => '#', 'visible' => $akses->get(408)],
+                                                    // ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Dokumen RKPD Final', 'url' => '/rkpd/Dokumen', 'visible' => $akses->get(408)],
                                                 ]
                                             ],
                                         ]
@@ -185,7 +183,8 @@ use hoaaah\LaravelMenu\Menu;
                                                 'visible' => $akses->get(503) || $akses->get(401) || $akses->get(504),
                                                 'items' => [
                                                     ['label' => 'Load Data RKPD Final', 'url' => '/renjafinal/loadData', 'visible' => $akses->get(503)],
-                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
+                                                    ['label' => 'Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
+                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal/dokumen', 'visible' => $akses->get(504)],
                                                 ]
                                             ],
                                             
@@ -227,9 +226,17 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Load Rancangan RKPD', 'url' => '/musrenrkpd/loadData', 'visible' => $akses->get(608)],
                                                     ['label' => 'Musrenbang RKPD', 'url' => '/musrenrkpd', 'visible' => $akses->get(609)],
-                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(607)],
+                                                    // ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(607)],
                                                 ]
                                             ],
+                                        ]
+                                    ],
+                                    [
+                                        'label' => 'Pencetakan RKPD &Renja',
+                                        'visible' => $akses->get(30) || $akses->get(20),
+                                        'items' => [
+                                            ['label' => 'Cetak RPJMD', 'url' => '/', 'visible' => $akses->get(20)],
+                                            ['label' => 'Cetak Renstra', 'url' => '/', 'visible' => $akses->get(30)],
                                         ]
                                     ],
                                 ]
@@ -252,6 +259,8 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('/js/handlebars.js')}}"></script>
         <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

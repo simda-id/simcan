@@ -764,12 +764,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
 
   function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
     html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
     html += message;
     html += '</div>';    
-    $(html).hide().prependTo('#pesan').slideDown();
+    $(html).hide().prependTo('#pesan').slideDown();    
+
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
   $('.page-alert .close').click(function(e) {
@@ -826,6 +829,8 @@ $(document).ready(function() {
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
       serverSide: true,
+      deferRender: true,
+      responsive: true,
       dom: 'BFrtip',
         "ajax":  {"url": "./getPerkada"},
         "columns": [
@@ -849,6 +854,7 @@ $(document).ready(function() {
         deferRender: true,
         processing: true,
         serverSide: true,
+        responsive: true,
         dom: 'Bfrtip',
         "ajax": {"url": "./getZona/0"},
         "columns": [
@@ -868,8 +874,9 @@ function LoadItemSSH(id_zona){
         processing: true,
         serverSide: true,
         deferRender: true,
+        responsive: true,
         scrollCollapse: true,
-        dom: 'Bfrtip',
+        "pagingType" : "input",
         "ajax": {"url": "./getTarifPerkada/"+id_zona},
         "language": {
               "decimal": ",",
@@ -893,7 +900,7 @@ function LoadCariItem(param){
   itemSSH = $('#tblItemSSH').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'BFrtIp',
+        // dom: 'BFrtIp',
         "ajax": {"url": "./cariItemSSH/"+param},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
@@ -1365,7 +1372,7 @@ $(document).on('click', '#btnparam_cari', function() {
     $('#id_zona_perkada').val(data.id_zona_perkada);
     $('#no_urut_tarif').val(data.no_tarif);
     $('#id_zona_tarif').val(data.id_zona);
-    $('#id_item_perkada').val(data.id_tarif);
+    $('#id_item_perkada').val(data.id_tarif_ssh);
     $('#rupiah_tarif').val(data.jml_rupiah);
     $('#ur_item_perkada'). val(data.ur_tarif);
     document.getElementById("idperkada_tarif").innerHTML = no_sk_ssh;

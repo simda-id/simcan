@@ -290,6 +290,7 @@ $('.display').DataTable({
 var setting_tbl=$('#tblSetting').DataTable({
                   processing: true,
                   serverSide: true,
+                  responsive: true,
                   dom : 'BfRtip',                  
                   autoWidth : false,
                   "ajax": {"url": "./setting/getListSetting"},

@@ -1,0 +1,692 @@
+SET FOREIGN_KEY_CHECKS=0;
+
+
+ALTER TABLE `ref_dokumen` ADD COLUMN `jenis_proses` int(11) NOT NULL DEFAULT 0 COMMENT "0 = rkpd 1 = renja 2 = rpjmd 3 = renstra" AFTER `nm_dokumen`;
+
+CREATE  TRIGGER `trg_group` BEFORE DELETE ON `ref_group` FOR EACH ROW IF old.id = 1 OR old.name ="super_admin" THEN 
+    SIGNAL SQLSTATE "45000" 
+    SET MESSAGE_TEXT = "This record is sacred! You are not allowed to remove it!!";
+END IF;
+
+
+CREATE TABLE `ref_jadwal`  (
+  `tahun` int(11) NOT NULL,
+  `id_proses` int(11) NOT NULL AUTO_INCREMENT,
+  `id_langkah` int(11) NOT NULL,
+  `jenis_proses` int(11) NOT NULL DEFAULT 0 COMMENT "0 = rkpd 1 = renja 2 = rpjmd 3 = renstra",
+  `uraian_proses` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tgl_mulai` date NULL DEFAULT NULL,
+  `tgl_akhir` date NULL DEFAULT NULL,
+  `status_proses` int(255) NULL DEFAULT 0 COMMENT "0 = belum 1 = proses 2 = selesai 3 = kedaluwarsa 4 = batal",
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_proses`) USING BTREE,
+  UNIQUE INDEX `idx_ref_jadwal`(`tahun`, `id_langkah`, `jenis_proses`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `ref_kolom_tabel_dasar`  (
+  `id_kolom_tabel_dasar` int(11) NOT NULL,
+  `id_tabel_dasar` int(11) NULL DEFAULT NULL,
+  `nama_kolom` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `level` int(2) NULL DEFAULT NULL,
+  `parent_id` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`id_kolom_tabel_dasar`) USING BTREE,
+  INDEX `parent_id`(`parent_id`) USING BTREE,
+  INDEX `id_tabel_dasar`(`id_tabel_dasar`) USING BTREE,
+  CONSTRAINT `ref_kolom_tabel_dasar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ref_kolom_tabel_dasar_ibfk_2` FOREIGN KEY (`id_tabel_dasar`) REFERENCES `ref_tabel_dasar` (`id_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `ref_log_akses`  (
+  `id_log` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `fl1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fd1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fp2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fu3` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fr4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_log`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE  TRIGGER `trg_ref_menu_u` BEFORE UPDATE ON `ref_menu` FOR EACH ROW IF old.group_id = 0 THEN 
+    SIGNAL SQLSTATE "45000" 
+     SET MESSAGE_TEXT = "This record is sacred! You are not allowed to update it!!";
+END IF;
+CREATE  TRIGGER `trg_ref_menu_d` BEFORE DELETE ON `ref_menu` FOR EACH ROW IF old.group_id = 1 THEN 
+    SIGNAL SQLSTATE "45000" 
+     SET MESSAGE_TEXT = "This record is sacred! You are not allowed to remove it!!";
+END IF;
+ALTER TABLE `ref_ssh_tarif` ADD COLUMN `keterangan_tarif_ssh` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `uraian_tarif_ssh`;
+ALTER TABLE `ref_ssh_tarif` MODIFY COLUMN `no_urut` int(11) NOT NULL AFTER `id_tarif_ssh`;
+CREATE TABLE `ref_tabel_dasar`  (
+  `id_tabel_dasar` int(11) NOT NULL,
+  `nama_tabel` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_tabel_dasar`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE  TRIGGER `trg_egroup_menu` BEFORE UPDATE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
+    SIGNAL SQLSTATE "45000" 
+     SET MESSAGE_TEXT = "This record is sacred! You are not allowed to update it!!";
+END IF;
+CREATE  TRIGGER `trg_group_menu` BEFORE DELETE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
+    SIGNAL SQLSTATE "45000" 
+     SET MESSAGE_TEXT = "This record is sacred! You are not allowed to remove it!!";
+END IF;
+CREATE TABLE `trx_isian_data_dasar`  (
+  `id_isian_tabel_dasar` int(11) NOT NULL AUTO_INCREMENT,
+  `id_kolom_tabel_dasar` int(11) NULL DEFAULT NULL,
+  `id_kecamatan` int(11) NULL DEFAULT NULL,
+  `nmin1` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin2` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin3` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin4` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin5` decimal(15, 2) NULL DEFAULT NULL,
+  `tahun` int(4) NULL DEFAULT NULL,
+  `nmin1_persen` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin2_persen` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin3_persen` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin4_persen` decimal(15, 2) NULL DEFAULT NULL,
+  `nmin5_persen` decimal(15, 2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_isian_tabel_dasar`) USING BTREE,
+  INDEX `id_kolom_tabel_dasar`(`id_kolom_tabel_dasar`) USING BTREE,
+  INDEX `id_kecamatan`(`id_kecamatan`) USING BTREE,
+  CONSTRAINT `trx_isian_data_dasar_ibfk_1` FOREIGN KEY (`id_kolom_tabel_dasar`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `trx_isian_data_dasar_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `trx_musrenkab_aktivitas_pd`  (
+  `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
+  `id_pelaksana_pd` bigint(20) NOT NULL,
+  `tahun_forum` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `sumber_aktivitas` int(11) NOT NULL DEFAULT 0 COMMENT "0 dari ASB 1 Bukan ASB",
+  `id_aktivitas_asb` int(11) NULL DEFAULT 0,
+  `id_aktivitas_renja` int(11) NULL DEFAULT 0,
+  `uraian_aktivitas_kegiatan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `volume_aktivitas_1` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `volume_forum_1` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_1` int(11) NOT NULL DEFAULT 0,
+  `volume_aktivitas_2` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `volume_forum_2` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 0,
+  `id_program_nasional` int(11) NULL DEFAULT NULL,
+  `id_program_provinsi` int(11) NULL DEFAULT NULL,
+  `jenis_kegiatan` int(11) NOT NULL DEFAULT 0 COMMENT "0 baru 1 lanjutan",
+  `sumber_dana` int(11) NOT NULL DEFAULT 0,
+  `pagu_aktivitas_renja` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_aktivitas_forum` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_musren` decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT "dalam persen %, minimal 0%",
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 draft 1 final",
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT "0 dilaksanakan 1 batal",
+  `keterangan_aktivitas` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT "0",
+  `status_musren` int(11) NOT NULL DEFAULT 0 COMMENT "0 = non musrenbang 1 = musrenbang",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 = renja 1 tambahan baru",
+  `id_satuan_publik` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_aktivitas_trx_forum_skpd`(`id_pelaksana_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_rancangan_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_belanja_pd`  (
+  `tahun_forum` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_belanja_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_aktivitas_pd` bigint(20) NOT NULL,
+  `id_zona_ssh` int(11) NOT NULL,
+  `id_belanja_renja` int(11) NOT NULL DEFAULT 0,
+  `sumber_belanja` int(11) NOT NULL DEFAULT 0 COMMENT "0 asb 1 ssh",
+  `id_aktivitas_asb` int(11) NOT NULL,
+  `id_item_ssh` bigint(20) NOT NULL,
+  `id_rekening_ssh` int(11) NOT NULL,
+  `uraian_belanja` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `volume_1` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `id_satuan_1` int(11) NOT NULL,
+  `volume_2` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 1,
+  `harga_satuan` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `jml_belanja` decimal(15, 4) NOT NULL,
+  `volume_1_forum` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `id_satuan_1_forum` int(11) NOT NULL,
+  `volume_2_forum` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `id_satuan_2_forum` int(11) NOT NULL DEFAULT 1,
+  `harga_satuan_forum` decimal(15, 4) NOT NULL DEFAULT 1.0000,
+  `jml_belanja_forum` decimal(15, 4) NOT NULL,
+  `status_data` int(11) NOT NULL,
+  `sumber_data` int(11) NOT NULL,
+  PRIMARY KEY (`id_belanja_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_skpd_belanja`(`tahun_forum`, `no_urut`, `id_belanja_pd`, `id_aktivitas_pd`) USING BTREE,
+  INDEX `fk_trx_forum_skpd_belanja`(`id_aktivitas_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_dokumen`  (
+  `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
+  `nomor_rkpd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `tanggal_rkpd` date NOT NULL,
+  `tahun_rkpd` int(11) NOT NULL COMMENT "tahun perencanaan",
+  `uraian_perkada` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_unit_perencana` int(11) NULL DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nama_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nip_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `flag` int(11) NOT NULL DEFAULT 0 COMMENT "0 draft 1 aktif 2 tidak aktif",
+  PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE,
+  UNIQUE INDEX `tahun_ranwal`(`tahun_rkpd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+ALTER TABLE `trx_musrenkab_indikator` DROP INDEX `idx_trx_rkpd_program_indikator`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `id_rkpd_rancangan` int(11) NOT NULL AFTER `no_urut`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `id_indikator_program_rkpd` int(11) NOT NULL COMMENT "nomor urut indikator sasaran" AFTER `id_rkpd_rancangan`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `uraian_indikator_program_rkpd` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `kd_indikator`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `target_rpjmd` decimal(12, 2) NOT NULL DEFAULT 0.00 AFTER `tolok_ukur_indikator`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `target_rkpd` decimal(12, 2) NOT NULL DEFAULT 0.00 AFTER `target_rpjmd`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `target_rkpd`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `target_input` decimal(15, 2) NOT NULL DEFAULT 0.00 AFTER `indikator_input`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `id_satuan_input` int(255) NULL DEFAULT NULL AFTER `target_input`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL AFTER `id_satuan_input`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `id_satuan_ouput` int(255) NULL DEFAULT NULL AFTER `indikator_output`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 belum direviu 1 sudah direviu" AFTER `id_satuan_ouput`;
+ALTER TABLE `trx_musrenkab_indikator` ADD COLUMN `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 data rpjmd 1 data baru" AFTER `status_data`;
+ALTER TABLE `trx_musrenkab_indikator` DROP COLUMN `id_program_rpjmd`;
+ALTER TABLE `trx_musrenkab_indikator` DROP COLUMN `uraian_indikator_program_rpjmd`;
+ALTER TABLE `trx_musrenkab_indikator` DROP COLUMN `angka_tahun`;
+ALTER TABLE `trx_musrenkab_indikator` ADD CONSTRAINT `trx_musrenkab_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_indikator` ADD UNIQUE INDEX `idx_trx_rkpd_program_indikator`(`tahun_rkpd`, `id_rkpd_rancangan`, `kd_indikator`, `no_urut`) USING BTREE;
+ALTER TABLE `trx_musrenkab_indikator` ADD INDEX `fk_trx_rkpd_ranwal_indikator`(`id_rkpd_rancangan`) USING BTREE;
+ALTER TABLE `trx_musrenkab_kebijakan` DROP INDEX `idx_trx_musrenkab_kebijakan`;
+ALTER TABLE `trx_musrenkab_kebijakan` DROP INDEX `fk_trx_musrenkab_kebijakan`;
+ALTER TABLE `trx_musrenkab_kebijakan` DROP FOREIGN KEY `fk_trx_musrenkab_kebijakan`;
+ALTER TABLE `trx_musrenkab_kebijakan` ADD COLUMN `id_rkpd_rancangan` int(11) NOT NULL AFTER `no_urut`;
+ALTER TABLE `trx_musrenkab_kebijakan` ADD COLUMN `id_kebijakan_rancangan` int(11) NOT NULL AFTER `id_rkpd_rancangan`;
+ALTER TABLE `trx_musrenkab_kebijakan` DROP COLUMN `id_sasaran_rpjmd`;
+ALTER TABLE `trx_musrenkab_kebijakan` ADD CONSTRAINT `trx_musrenkab_kebijakan_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_kebijakan` ADD UNIQUE INDEX `idx_trx_rkpd_ranwal_kebijakan`(`tahun_rkpd`, `id_rkpd_rancangan`, `no_urut`) USING BTREE;
+ALTER TABLE `trx_musrenkab_kebijakan` ADD INDEX `fk_trx_rkpd_ranwal_kebijakan`(`id_rkpd_rancangan`) USING BTREE;
+
+CREATE TABLE `trx_musrenkab_kebijakan_pd`  (
+  `tahun_renja` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `id_sasaran_renstra` int(11) NOT NULL,
+  `id_kebijakan_pd` int(11) NOT NULL AUTO_INCREMENT,
+  `uraian_kebijakan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id_kebijakan_pd`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_rpjmd_program_pelaksana`(`tahun_renja`, `id_unit`, `uraian_kebijakan`, `no_urut`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_keg_indikator_pd`  (
+  `tahun_renja` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_kegiatan_pd` bigint(11) NOT NULL,
+  `id_program_renstra` int(11) NULL DEFAULT NULL,
+  `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT "nomor urut indikator sasaran",
+  `id_perubahan` int(11) NULL DEFAULT 0,
+  `kd_indikator` int(11) NOT NULL,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tolok_ukur_indikator` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_renstra` decimal(15, 4) NULL DEFAULT 0.0000,
+  `target_renja` decimal(15, 4) NULL DEFAULT NULL,
+  `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `id_satuan_ouput` int(255) NULL DEFAULT NULL,
+  `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_input` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `id_satuan_input` int(255) NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 draft 1 posting",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 Renstra 1 baru",
+  PRIMARY KEY (`id_indikator_kegiatan`) USING BTREE,
+  UNIQUE INDEX `idx_trx_renja_rancangan_indikator`(`tahun_renja`, `id_program_renstra`, `kd_indikator`, `no_urut`, `id_perubahan`, `id_kegiatan_pd`) USING BTREE,
+  INDEX `fk_trx_renja_rancangan_indikator`(`id_program_renstra`) USING BTREE,
+  INDEX `trx_renja_rancangan_program_indikator_ibfk_1`(`id_kegiatan_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_kegiatan_pd`  (
+  `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_program_pd` bigint(20) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `tahun_forum` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_renja` int(11) NULL DEFAULT 0,
+  `id_rkpd_renstra` int(11) NULL DEFAULT 0,
+  `id_program_renstra` int(11) NULL DEFAULT 0,
+  `id_kegiatan_renstra` int(11) NULL DEFAULT 0,
+  `id_kegiatan_ref` int(11) NOT NULL,
+  `uraian_kegiatan_forum` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pagu_tahun_kegiatan` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_kegiatan_renstra` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_plus1_renja` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_plus1_forum` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `pagu_forum` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `keterangan_status` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 = non musrenbang 1 =  musrenbang",
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT "0 dilaksanakan 1 batal dilaksanakan",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 dari renja 1 baru tambahan",
+  PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
+  UNIQUE INDEX `id_unit_id_renja_id_kegiatan_ref`(`id_unit`, `id_kegiatan_ref`, `id_program_pd`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_trx_forum_skpd_program`(`id_program_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_lokasi_pd`  (
+  `tahun_forum` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_aktivitas_pd` bigint(20) NOT NULL,
+  `id_lokasi_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_lokasi` int(11) NOT NULL,
+  `id_lokasi_renja` int(11) NULL DEFAULT 0,
+  `id_lokasi_teknis` int(11) NULL DEFAULT NULL,
+  `jenis_lokasi` int(11) NOT NULL,
+  `volume_1` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `volume_usulan_1` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `volume_2` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `volume_usulan_2` decimal(15, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_1` int(11) NOT NULL DEFAULT 0,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 0,
+  `id_desa` int(11) NULL DEFAULT 0,
+  `id_kecamatan` int(11) NULL DEFAULT 0,
+  `rt` int(11) NULL DEFAULT 0,
+  `rw` int(11) NULL DEFAULT 0,
+  `uraian_lokasi` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `lat` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `lang` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT "0",
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0,
+  `ket_lokasi` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT "0",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 renja 1 tambahan 2 musrenbang 3 pokir",
+  PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_lokasi`(`id_aktivitas_pd`, `tahun_forum`, `no_urut`, `id_lokasi_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP INDEX `id_trx_musrenkab_pelaksana`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP FOREIGN KEY `fk_trx_musrenkab_pelaksana`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `id_pelaksana_rkpd` int(11) NOT NULL AFTER `no_urut`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `id_rkpd_rancangan` int(11) NOT NULL AFTER `id_pelaksana_rkpd`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `id_urusan_rkpd` int(11) NOT NULL AFTER `id_rkpd_rancangan`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `id_pelaksana_rpjmd` int(11) NOT NULL AFTER `id_urusan_rkpd`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `id_unit` int(11) NOT NULL AFTER `id_pelaksana_rpjmd`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `pagu_rpjmd` decimal(15, 2) NOT NULL DEFAULT 0.00 AFTER `id_unit`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `pagu_rkpd` decimal(15, 2) NOT NULL DEFAULT 0.00 AFTER `pagu_rpjmd`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `hak_akses` int(11) NOT NULL DEFAULT 0 COMMENT "0 tidak dapat menambah data 1 dapat menambah data" AFTER `pagu_rkpd`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 rpjmd 1 baru" AFTER `hak_akses`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT "0 dilaksanakan 1 dibatalkan" AFTER `sumber_data`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `ket_pelaksanaan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT "menjelaskan status pelaksanaan" AFTER `status_pelaksanaan`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD COLUMN `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 belum direviu 1 sudah direviu" AFTER `ket_pelaksanaan`;
+ALTER TABLE `trx_musrenkab_pelaksana` MODIFY COLUMN `id_pelaksana_musrenkab` int(11) NOT NULL;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP PRIMARY KEY;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD PRIMARY KEY (`id_pelaksana_rkpd`) USING BTREE;
+ALTER TABLE `trx_musrenkab_pelaksana` MODIFY COLUMN `id_pelaksana_rkpd` int(11) NOT NULL AUTO_INCREMENT AFTER `no_urut`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `id_pelaksana_musrenkab`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `id_musrenkab`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `id_musrencam`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `uraian_aktivitas_kegiatan`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `tolak_ukur_aktivitas`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `target_output_aktivitas`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `pagu_aktivitas_forum`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `pagu_aktivitas_sebelumnya`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `id_sub_unit`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `id_aktivitas_kegiatan`;
+ALTER TABLE `trx_musrenkab_pelaksana` DROP COLUMN `sumber_usulan`;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_rancangan_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD UNIQUE INDEX `idx_trx_rkpd_program_pelaksana`(`tahun_rkpd`, `id_rkpd_rancangan`, `id_unit`, `id_urusan_rkpd`, `no_urut`) USING BTREE;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD INDEX `fk_trx_rkpd_ranwal_pelaksana`(`id_rkpd_rancangan`) USING BTREE;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD INDEX `fk_trx_rkpd_ranwal_pelaksana_1`(`id_urusan_rkpd`) USING BTREE;
+ALTER TABLE `trx_musrenkab_pelaksana` ADD INDEX `fk_trx_rkpd_ranwal_pelaksana_2`(`id_unit`) USING BTREE;
+CREATE TABLE `trx_musrenkab_pelaksana_pd`  (
+  `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tahun_forum` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_kegiatan_pd` bigint(11) NOT NULL,
+  `id_sub_unit` int(11) NOT NULL,
+  `id_pelaksana_renja` int(11) NULL DEFAULT 0,
+  `id_lokasi` int(11) NULL DEFAULT 0 COMMENT "lokasi penyelenggaraan",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 renja 1 tambahan",
+  `ket_pelaksana` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT "0 dilaksanakan 1 batal 2 baru",
+  `status_data` int(11) NOT NULL COMMENT "0 draft 1 final",
+  PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_pelaksana`(`id_kegiatan_pd`, `tahun_forum`, `no_urut`, `id_pelaksana_pd`, `id_sub_unit`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_prog_indikator_pd`  (
+  `tahun_renja` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_program_pd` bigint(11) NOT NULL,
+  `id_program_renstra` int(11) NULL DEFAULT NULL,
+  `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT "nomor urut indikator sasaran",
+  `id_perubahan` int(11) NULL DEFAULT 0,
+  `kd_indikator` int(11) NOT NULL,
+  `uraian_indikator_program` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tolok_ukur_indikator` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_renstra` decimal(15, 4) NULL DEFAULT 0.0000,
+  `target_renja` decimal(15, 4) NULL DEFAULT NULL,
+  `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `id_satuan_ouput` int(255) NULL DEFAULT NULL,
+  `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_input` decimal(15, 4) NOT NULL DEFAULT 0.0000,
+  `id_satuan_input` int(255) NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 draft 1 posting",
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 Renstra 1 baru",
+  PRIMARY KEY (`id_indikator_program`) USING BTREE,
+  UNIQUE INDEX `idx_trx_renja_rancangan_indikator`(`tahun_renja`, `id_program_renstra`, `kd_indikator`, `no_urut`, `id_perubahan`, `id_program_pd`) USING BTREE,
+  INDEX `fk_trx_renja_rancangan_indikator`(`id_program_renstra`) USING BTREE,
+  INDEX `trx_renja_rancangan_program_indikator_ibfk_1`(`id_program_pd`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_program_pd`  (
+  `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
+  `id_rkpd_rancangan` int(11) NOT NULL,
+  `tahun_forum` int(11) NOT NULL,
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT "0 BL 1 Pdt 2 BTL",
+  `no_urut` int(11) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `id_renja_program` int(11) NULL DEFAULT 0,
+  `id_program_renstra` int(11) NULL DEFAULT 0,
+  `uraian_program_renstra` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_program_ref` int(11) NOT NULL,
+  `pagu_tahun_renstra` decimal(15, 2) NULL DEFAULT 0.00,
+  `pagu_forum` decimal(15, 2) NULL DEFAULT 0.00,
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 = renstra 1 = baru",
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0,
+  `ket_usulan` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT "0",
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 draft 1 posting",
+  `id_dokumen` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_program_pd`) USING BTREE,
+  UNIQUE INDEX `id_unit_id_renja_program_id_program_ref`(`id_unit`, `id_renja_program`, `id_program_ref`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal`(`id_rkpd_rancangan`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+CREATE TABLE `trx_musrenkab_urusan`  (
+  `tahun_rkpd` int(11) NOT NULL,
+  `no_urut` int(11) NULL DEFAULT NULL,
+  `id_rkpd_rancangan` int(11) NOT NULL,
+  `id_urusan_rkpd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_bidang` int(11) NOT NULL,
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT "0 rpjmd 1 baru",
+  PRIMARY KEY (`id_urusan_rkpd`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_program_pelaksana`(`tahun_rkpd`, `id_rkpd_rancangan`, `id_bidang`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana`(`id_rkpd_rancangan`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana_1`(`id_bidang`) USING BTREE,
+  CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `trx_musrenkab_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+ALTER TABLE `trx_rkpd_rpjmd_program_pelaksana` DROP INDEX `idx_trx_rkpd_rpjmd_program_pelaksana`;
+ALTER TABLE `trx_rkpd_rpjmd_program_pelaksana` ADD UNIQUE INDEX `idx_trx_rkpd_rpjmd_program_pelaksana`(`tahun_rkpd`, `id_rkpd_rpjmd`, `id_urbid_rpjmd`, `id_unit`) USING BTREE;
+ALTER TABLE `trx_rpjmd_kebijakan` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_kebijakan_rpjmd`;
+ALTER TABLE `trx_rpjmd_kebijakan` ADD COLUMN `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+ALTER TABLE `trx_rpjmd_misi` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_misi_rpjmd`;
+ALTER TABLE `trx_rpjmd_misi` ADD COLUMN `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+ALTER TABLE `trx_rpjmd_program` DROP INDEX `idx_trx_rpjmd_program`;
+ALTER TABLE `trx_rpjmd_program` ADD UNIQUE INDEX `idx_trx_rpjmd_program`(`thn_id`, `id_sasaran_rpjmd`, `id_perubahan`, `no_urut`) USING BTREE;
+ALTER TABLE `trx_rpjmd_sasaran` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_sasaran_rpjmd`;
+ALTER TABLE `trx_rpjmd_sasaran` ADD COLUMN `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+ALTER TABLE `trx_rpjmd_strategi` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_strategi_rpjmd`;
+ALTER TABLE `trx_rpjmd_strategi` ADD COLUMN `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+ALTER TABLE `trx_rpjmd_tujuan` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_tujuan_rpjmd`;
+ALTER TABLE `trx_rpjmd_tujuan` ADD COLUMN `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+ALTER TABLE `trx_rpjmd_visi` ADD COLUMN `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `uraian_visi_rpjmd`;
+ALTER TABLE `trx_rpjmd_visi` ADD COLUMN `updated_at` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) AFTER `created_at`;
+DROP TRIGGER `trg_user`;
+CREATE  TRIGGER `trg_user` BEFORE DELETE ON `users` FOR EACH ROW IF old.email = "super@simcan.dev" THEN 
+    SIGNAL SQLSTATE "45000" 
+     SET MESSAGE_TEXT = "This record is sacred! You are not allowed to remove it!!";
+END IF;
+DROP FUNCTION `PaguASB`;
+CREATE  FUNCTION `PaguASB`(jns_biaya INT, hub_driver INT, vol1 DECIMAL(15, 4), vol2 DECIMAL(15, 4), r1 DECIMAL(15, 4), r2 DECIMAL(15, 4), m1 DECIMAL(15, 4), m2 DECIMAL(15, 4), k1 DECIMAL(15, 4), k2 DECIMAL(15, 4), k3 DECIMAL(15, 4), harga DECIMAL(15, 4))
+ RETURNS decimal(15,4)
+  DETERMINISTIC
+BEGIN
+		DECLARE hargax DECIMAL(15,4);
+		DECLARE kmax DECIMAL(15,4);
+		DECLARE rx1 DECIMAL(15,4);
+		DECLARE rx2 DECIMAL(15,4);
+		DECLARE koef DECIMAL(15,4);		
+		SET koef = (k1*k2*k3);		
+		IF m1 = 1 THEN
+			IF m2 = 1 THEN
+				SET kmax = 1;
+			ELSE
+				IF m1 <= m2 THEN
+							SET kmax = CEILING(vol1/m1);
+						ELSE
+							SET kmax = CEILING(vol2/m2);
+						END IF;
+			END IF;
+		ELSE
+			IF m1 <= m2 THEN
+				SET kmax = CEILING(vol1/m1);
+			ELSE
+				SET kmax = CEILING(vol2/m2);
+			END IF;
+		END IF;
+    IF r1 <= 1 THEN 
+			SET rx1= CEILING(vol1/vol1); 
+		ELSE 
+			SET rx1= CEILING(vol1/r1); 
+		END IF		
+		IF r2 <= 1 THEN 
+			SET rx2= CEILING(vol2/vol2); 
+		ELSE 
+			SET rx2= CEILING(vol2/r2); 
+		END IF;
+		IF jns_biaya =1 THEN 
+			SET hargax = (koef*kmax*harga);
+		ELSE 			
+			IF hub_driver=1 THEN 
+				SET hargax = (vol1*koef*harga); 
+			END IF;			
+			IF hub_driver=2 THEN 
+				SET hargax = (vol2*koef*harga); 
+			END IF;			
+			IF hub_driver=3 THEN 
+				SET hargax = (vol1*vol2*koef*harga); 
+			END IF;			
+			IF hub_driver=4 THEN 
+				SET hargax = (vol1*koef*rx1*harga); 
+			END IF;			
+			IF hub_driver=5 THEN 
+				SET hargax = (vol2*koef*rx2*harga); 
+			END IF;			
+			IF hub_driver=6 THEN 
+				SET hargax = (vol1*vol2*koef*rx1*rx2*harga); 
+			END IF;			
+			IF hub_driver=7 THEN 
+				SET hargax = (vol1*vol2*koef*rx1*harga); 
+			END IF;			
+			IF hub_driver=8 THEN 
+				SET hargax = (vol1*vol2*koef*rx2*harga); 
+			END IF;			
+		END IF; 
+ RETURN (hargax);
+END;
+DROP FUNCTION `PaguASBDistribusi`;
+CREATE  FUNCTION `PaguASBDistribusi`(jns_biaya INT, hub_driver INT, vol1 DECIMAL(15, 4), vol2 DECIMAL(15, 4), r1 DECIMAL(15, 4), r2 DECIMAL(15, 4), m1 DECIMAL(15, 4), m2 DECIMAL(15, 4), k1 DECIMAL(15, 4), k2 DECIMAL(15, 4), k3 DECIMAL(15, 4), harga DECIMAL(15, 4), persen DECIMAL(15, 4))
+ RETURNS decimal(15,4)
+  DETERMINISTIC
+BEGIN
+		DECLARE hargax DECIMAL(15,4);
+		DECLARE kmax DECIMAL(15,4);
+		DECLARE rx1 DECIMAL(15,4);
+		DECLARE rx2 DECIMAL(15,4);
+		DECLARE koef DECIMAL(15,4);
+		DECLARE koef_dis DECIMAL(15,4);		
+		SET koef = (k1*k2*k3);		
+		IF persen <= 0 OR persen > 100 THEN 
+			SET koef_dis = 1;
+		ELSE
+			SET koef_dis = persen/100;
+		END IF;		
+		IF m1 = 1 THEN
+			IF m2 = 1 THEN
+				SET kmax = 1;
+			ELSE
+				IF m1 <= m2 THEN
+							SET kmax = CEILING(vol1/m1);
+						ELSE
+							SET kmax = CEILING(vol2/m2);
+						END IF;
+			END IF;
+		ELSE
+			IF m1 <= m2 THEN
+				SET kmax = CEILING(vol1/m1);
+			ELSE
+				SET kmax = CEILING(vol2/m2);
+			END IF;
+		END IF;
+    IF r1 <= 1 THEN 
+			SET rx1= CEILING(vol1/vol1); 
+		ELSE 
+			SET rx1= CEILING(vol1/r1); 
+		END IF;		
+		IF r2 <= 1 THEN 
+			SET rx2= CEILING(vol2/vol2); 
+		ELSE 
+			SET rx2= CEILING(vol2/r2); 
+		END IF;
+		IF jns_biaya =1 THEN 
+			SET hargax = (koef*kmax*harga*koef_dis); 
+		END IF;		
+		IF jns_biaya =2 AND hub_driver=1 THEN 
+			SET hargax = (vol1*koef*rx1*harga); 
+		END IF;		
+		IF jns_biaya =2 AND hub_driver=2 THEN 
+			SET hargax = (vol2*koef*rx2*harga); 
+		END IF;		
+		IF jns_biaya =3 AND hub_driver=1 THEN 
+			SET hargax = (vol1*koef*harga); 
+		END IF;		
+		IF jns_biaya =3 AND hub_driver=2 THEN 
+			SET hargax = (vol2*koef*harga); 
+		END IF;		
+		IF jns_biaya =3 AND hub_driver=3 THEN 
+			SET hargax = (vol1*vol2*koef*harga); 
+		END IF; 
+ RETURN (hargax);
+END;
+
+DROP TABLE IF EXISTS `trx_musrenkab`;
+DROP TABLE IF EXISTS `trx_musrenkab_belanja`;
+DROP TABLE IF EXISTS `trx_musrenkab_lokasi`;
+DROP TABLE IF EXISTS `trx_rkpd_belanja`;
+DROP TABLE IF EXISTS `trx_rkpd_final`;
+DROP TABLE IF EXISTS `trx_rkpd_indikator`;
+DROP TABLE IF EXISTS `trx_rkpd_kebijakan`;
+DROP TABLE IF EXISTS `trx_rkpd_lokasi`;
+DROP TABLE IF EXISTS `trx_rkpd_musren_kegiatan`;
+DROP TABLE IF EXISTS `trx_rkpd_pelaksana`;
+DROP TABLE IF EXISTS `trx_rkpd_rancangan`;
+DROP TABLE IF EXISTS `trx_rkpd_ranhir`;
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_belanja`;
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_lokasi`;
+
+DELETE FROM `ref_kolom_tabel_dasar`;
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (0, 1, "root", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (1, 1, "Pertanian", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (2, 1, "Pertambangan dan penggalian", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (3, 1, "Industri pengolahan", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (4, 1, "Listrik, gas dan air bersih", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (5, 1, "Konstruksi", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (6, 1, "Perdagangan, hotel dan restoran", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (7, 1, "Pengangkutan dan komunikasi", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (8, 1, "Keuangan, sewa dan jasa perusahaan", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (9, 1, "Jasa-jasa", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (10, 2, "root", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (11, 2, "Pertanian", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (12, 2, "Pertambangan dan penggalian", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (13, 2, "Industri pengolahan", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (14, 2, "Listrik, gas dan air bersih", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (15, 2, "Konstruksi", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (16, 2, "Perdagangan, hotel dan restoran", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (17, 2, "Pengangkutan dan komunikasi", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (18, 2, "Keuangan, sewa dan jasa perusahaan", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (19, 2, "Jasa-jasa", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (20, 3, "Jumlah penduduk usia diatas 15 tahun yang\r\nbisa membaca dan menulis", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (21, 3, "Jumlah penduduk usia 15 tahun keatas", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (22, 3, "Angka Melek Huruf", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (23, 4, "Rata-rata Lama Sekolah (tahun)", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (24, 5, "Jumlah grup kesenian per 10.000 penduduk", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (25, 5, "Jumlah gedung kesenian per 10.000 penduduk", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (26, 5, "Jumlah klub olahraga per 10.000 penduduk", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (27, 5, "Jumlah gedung olahraga per 10.000 penduduk", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (28, 6, "SD/MI", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (29, 6, "jumlah murid usia 7-12 thn", 1, 28);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (30, 6, "jumlah penduduk kelompok usia\r\n7-12 tahun", 1, 28);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (31, 6, "APS SD/MI", 1, 28);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (32, 6, "SMP", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (33, 6, "jumlah murid usia 13-15 thn", 1, 32);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (34, 6, "jumlah penduduk kelompok usia\r\n13-15 tahun", 1, 32);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (35, 6, "APS SMP/MTs", 1, 32);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (36, 7, "SD/MI", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (37, 7, "Jumlah gedung sekolah", 1, 36);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (38, 7, "jumlah penduduk kelompok usia\r\n7-12 tahun", 1, 36);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (39, 7, "Rasio", 1, 36);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (40, 7, "SMP", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (41, 7, "Jumlah gedung sekolah", 1, 40);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (42, 7, "jumlah penduduk kelompok usia\r\n13-15 tahun", 1, 40);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (43, 7, "Rasio", 1, 40);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (44, 8, "SD/MI", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (45, 8, "Jumlah Guru", 1, 44);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (46, 8, "Jumlah Murid", 1, 44);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (47, 8, "Rasio", 1, 44);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (48, 8, "SMP", 0, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (49, 8, "Jumlah guru", 1, 48);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (50, 8, "Jumlah Murid", 1, 48);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (51, 8, "Rasio", 1, 48);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (52, 9, "PMDN", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (53, 9, "PMA", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (54, 10, "Persetujuan Jumlah Proyek", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (55, 10, "Realisasi Jumlah Proyek", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (56, 10, "Persetujuan Nilai Investasi", 1, 0);
+INSERT INTO `ref_kolom_tabel_dasar`(`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES (57, 10, "Realisasi Nilai Investasi", 1, 0);
+
+DELETE FROM `ref_tabel_dasar`;
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (1, 'Nilai dan Kontribusi Sektor dalam PDRB ');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (2, 'Nilai dan Kontribusi Sektor dalam PDRB HB');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (3, 'Angka Melek Huruf');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (4, 'Rata-Rata Lama Sekolah Tahun');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (5, 'Perkembangan Seni, Budaya dan Olahraga');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (6, 'Angka Partisipasi Sekolah');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (7, 'Ketersediaan Sekolah dan Penduduk Usia Sekolah');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (8, 'Jumlah Guru dan Murid Jenjang Pendidikan Dasar');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (9, 'Jumlah Investor PMDN/PMA');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (10, 'Jumlah Investasi PMDN/PMA');
+
+DELETE FROM `ref_dokumen`;
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (1, 'Rancangan Awal RPJMD', 2);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (2, 'Rancangan RPJMD', 2);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (3, 'Musrenbang RPJMD', 2);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (4, 'Rancangan Akhir RPJMD', 2);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (5, 'RPJMD Final', 2);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (6, 'RPJMD Final Revisi', 4);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (7, 'Rancangan Awal Renstra Perangkat Daerah', 3);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (8, 'Rancangan Akhir Renstra Perangkat Daerah', 3);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (9, 'Renstra SKPD Final', 3);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (10, 'Renstra SKPD Revisi', 5);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (11, 'Rancangan Awal RKPD', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (12, 'Rancangan RKPD', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (13, 'Rancangan Akhir RKPD', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (14, 'RKPD Final', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (15, 'Rancangan Awal Renja Perangkat Daerah', 1);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (16, 'Rancangan Renja Perangkat Daerah', 1);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (17, 'Renja Perangkat Daerah Final', 1);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (18, 'Musrenbang RKPD Desa/Kelurahan', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (19, 'Musrenbang RKPD Kecamatan', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (20, 'Musrenbang RKPD Kabupaten/Kota', 0);
+INSERT INTO `ref_dokumen`(`id_dokumen`, `nm_dokumen`, `jenis_proses`) VALUES (21, 'Musrenbang RKPD Propinsi', 0);
+
+DELETE FROM `ref_langkah`;
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (1, 1, 'Penyusunan Rancangan Awal RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (2, 7, 'Penyusunan Rancangan Awal Renstra SKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (3, 1, 'Sinkronisasi Ranwal RPJMD dengan Ranwal Renstra SKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (4, 2, 'Finalisasi Rancangan RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (5, 3, 'Musrenbang RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (6, 4, 'Penyusunan Rancangan Akhir RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (7, 4, 'Konsultasi Rancangan RPJMD oleh Kementrian/Provinsi');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (8, 4, 'Finalisasi Rancangan Akhir RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (9, 8, 'Sinkronisasi Rancangan Renstra SKPD dengan Rankhir RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (10, 5, 'Pembahasan RPJMD dengan DPRD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (11, 5, 'Finalisasi RPJMD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (12, 8, 'Penyusunan Rancangan Akhir Renstra SKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (13, 9, 'Finalisasi Renstra SKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (15, 11, 'Rancangan Awal RKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (16, 12, 'Rancangan RKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (17, 13, 'Rancangan Akhir RKPD');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (18, 14, 'RKPD Final');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (19, 15, 'Rancangan Awal Renja Perangkat Daerah');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (20, 16, 'Rancangan Renja Perangkat Daerah');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (21, 17, 'Renja Perangkat Daerah Final');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (22, 18, 'Musrenbang RKPD Desa/Kelurahan');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (23, 19, 'Musrenbang RKPD Kecamatan');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (24, 20, 'Forum Perangkat Daerah');
+INSERT INTO `ref_langkah`(`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES (25, 21, 'Musrenbang RKPD Kabupaten Kota');
+
+SET FOREIGN_KEY_CHECKS=1;

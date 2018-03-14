@@ -70,7 +70,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <thead>
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th style="text-align: center; vertical-align:middle">Judul Usulan</th>
+                                <th width="25%" style="text-align: center; vertical-align:middle">Judul Usulan</th>
+                                <th style="text-align: center; vertical-align:middle">Uraian Usulan</th>
                                 {{-- <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Anggaran</th> --}}
                                 <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Output</th>
                                 <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
@@ -653,7 +654,8 @@ function LoadTblRincian(id_pokir){
             "decimal": ",",
             "thousands": "."},
     "columns": [
-          { data: 'no_urut', sClass: "dt-center"},
+          { data: 'no_urut', sClass: "dt-center"},          
+          { data: 'id_judul_usulan'},
           { data: 'diskripsi_usulan'},
           // { data: 'jml_anggaran', sClass: "dt-right",
           //     render: $.fn.dataTable.render.number( '.', ',', 2, '' )},

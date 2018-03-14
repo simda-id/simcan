@@ -29,6 +29,9 @@ Route::get('/modul3', function () {return view('layouts.app2');})->middleware('a
 //ASB
 Route::get('/modul0', function () {return view('layouts.app0');})->middleware('auth');
 
+//ASB
+Route::get('/modul4', function () {return view('layouts.app3');})->middleware('auth');
+
 //Dashboard
 Route::get('/rpjmd/dash','Chart\ChartRPJMDController@chartjs');
 Route::get('/rpjmd/misi5tahun','Chart\ChartRPJMDController@misi5tahun_view');
@@ -241,7 +244,11 @@ Route::any('/admin/parameter', function(){
 Route::group(['prefix' => '/admin/update', 'middleware' => ['auth', 'menu:9']], function() {
     Route::get('/',  'UpdateController@index');
     Route::any('/execute',  'UpdateController@update');
+    Route::any('/updateDB',  'UpdateController@updateDB');
+    Route::any('/getApp',  'UpdateController@getApi');
 });
+
+
 
 /* Choose Tahun Anggaran 
 * After session created, redirect to referrer
@@ -279,7 +286,7 @@ Route::get('/PrintKompilasiProgramdanPagu/{tahun}','Laporan\CetakRkpdController@
 Route::get('/PrintReviewRanwalRKPD','Laporan\CetakRpjmdController@ReviewRanwalRKPD');
 Route::get('/PrintRumusanReviewRanwal','Laporan\CetakRpjmdController@RumusanProgKeg');
 Route::get('/PrintProgPaguRenstra','Laporan\CetakRpjmdController@KompilasiProgramdanPaguRenstra');
-Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
+// Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
 Route::get('/printPokir','Laporan\CetakRpjmdController@KompilasiPokir');
 
 //Referensi Satuan
@@ -597,7 +604,7 @@ Route::group(['prefix' => 'pokir', 'middleware' => ['auth', 'menu:503']], functi
     Route::get('/getDataPokir','TrxTLPokirController@getDataPokir');
     Route::any('/importData','TrxTLPokirController@importData');
     Route::get('/getDataTL/{id_tahun}','TrxTLPokirController@getData');
-    Route::any('/editUsulan','TrxTLPokirController@editUsulan');
+    Route::any('/editTlUsulan','TrxTLPokirController@editUsulan');
 
     Route::any('/tlpokir','TrxPokirUnitController@index');
     Route::any('/getUnit','TrxPokirUnitController@getUnit');
@@ -967,7 +974,24 @@ Route::group(['prefix' => 'rpjmd', 'middleware' => ['auth', 'menu:20']], functio
         Route::post('/addPelaksana', 'TrxRpjmdController@addPelaksana');
         Route::post('/delPelaksana', 'TrxRpjmdController@delPelaksana');
         Route::any('/ReprosesPivotPelaksana', 'TrxRpjmdController@ReprosesPivotPelaksana');
+        Route::any('/RePivotRenstra', 'TrxRpjmdController@RePivotRenstra');
     });
+
+// //RENSTRA
+// Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], function() {
+//     Route::get('/', 'TrxRenstraController@index');
+//     Route::get('/visi/{id_unit}', 'TrxRenstraController@getVisiRenstra');
+//     Route::get('/misi/{id_visi_renstra}', 'TrxRenstraController@getMisiRenstra');
+//     Route::get('/tujuan/{id_misi_renstra}', 'TrxRenstraController@getTujuanRenstra');
+//     Route::get('/sasaran/{id_tujuan_renstra}', 'TrxRenstraController@getSasaranRenstra');
+//     Route::get('/kebijakan/{id_sasaran_renstra}', 'TrxRenstraController@getKebijakanRenstra');
+//     Route::get('/strategi/{id_sasaran_renstra}', 'TrxRenstraController@getStrategiRenstra');
+//     Route::get('/program/{id_sasaran_renstra}', 'TrxRenstraController@getProgramRenstra');
+//     Route::get('/programindikator/{id_program_renstra}', 'TrxRenstraController@getIndikatorProgramRenstra');
+//     Route::get('/kegiatan/{id_program_renstra}', 'TrxRenstraController@getKegiatanRenstra');
+//     Route::get('/kegiatanindikator/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanIndikator');
+//     Route::get('/kegiatanpelaksana/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanPelaksana');
+// });
 
 //RENSTRA
 Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], function() {
@@ -983,6 +1007,11 @@ Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], funct
     Route::get('/kegiatan/{id_program_renstra}', 'TrxRenstraController@getKegiatanRenstra');
     Route::get('/kegiatanindikator/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanIndikator');
     Route::get('/kegiatanpelaksana/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanPelaksana');
+    Route::post('/editprogram', 'TrxRenstraController@editProgram');
+    Route::post('/editindikatorprogram', 'TrxRenstraController@editIndikatorProgram');
+    Route::post('/editkegiatan', 'TrxRenstraController@editKegiatan');
+    Route::post('/editindikatorkegiatan', 'TrxRenstraController@editIndikatorKegiatan');
+    Route::post('/getsubunit/{id_sub_unit}', 'TrxRenstraController@getSubUnit');
 });
 
 //MUSRENBANG-RKPD
@@ -1282,3 +1311,151 @@ Route::group(['prefix' => 'rkpd', 'middleware' => ['auth', 'menu:40']], function
 
     Route::get('/edit', 'TrxRKPDController@create');
 });
+
+//PDRB
+    Route::group(['prefix' => '/pdrb', 'middleware' => ['auth', 'menu:109']], function() {
+        Route::any('/', 'RefPDRBController@index');
+        Route::any('/getListpdrb', 'RefPDRBController@getListpdrb');
+        Route::any('/getTahunpdrb', 'RefPDRBController@getTahunpdrb');
+        Route::any('/getKecamatanpdrb', 'RefPDRBController@getKecamatanpdrb');
+        Route::any('/getSektorpdrb/{tahun}/{kecamatan}', 'RefPDRBController@getSektorpdrb');
+        Route::any('/addPdrb', 'RefPDRBController@addpdrb');
+        Route::any('/getEditpdrb/{id}', 'RefPDRBController@getEditpdrb');
+        Route::any('/editPdrb', 'RefPDRBController@editpdrb');
+        Route::any('/hapusPdrb', 'RefPDRBController@hapuspdrb');
+        
+    });
+        //PDRB-HB
+        Route::group(['prefix' => '/pdrbhb', 'middleware' => ['auth', 'menu:109']], function() {
+            Route::any('/', 'RefPDRBHBController@index');
+            Route::any('/getListpdrbhb', 'RefPDRBHBController@getListpdrbhb');
+            Route::any('/getTahunpdrbhb', 'RefPDRBHBController@getTahunpdrbhb');
+            Route::any('/getKecamatanpdrbhb', 'RefPDRBHBController@getKecamatanpdrbhb');
+            Route::any('/getSektorpdrbhb/{tahun}/{kecamatan}', 'RefPDRBHBController@getSektorpdrbhb');
+            Route::any('/addPdrbhb', 'RefPDRBHBController@addpdrbhb');
+            Route::any('/getEditpdrbhb/{id}', 'RefPDRBHBController@getEditpdrbhb');
+            Route::any('/editPdrbhb', 'RefPDRBHBController@editpdrbhb');
+            Route::any('/hapusPdrbhb', 'RefPDRBHBController@hapuspdrbhb');
+            
+        });
+            //AMH
+            Route::group(['prefix' => '/amh', 'middleware' => ['auth', 'menu:109']], function() {
+                Route::any('/', 'RefAMHController@index');
+                Route::any('/getListamh', 'RefAMHController@getListamh');
+                Route::any('/getTahunamh', 'RefAMHController@getTahunamh');
+                Route::any('/getKecamatanamh', 'RefAMHController@getKecamatanamh');
+                Route::any('/getSektoramh/{tahun}/{kecamatan}', 'RefAMHController@getSektoramh');
+                Route::any('/addamh', 'RefAMHController@addamh');
+                Route::any('/getEditamh/{id}', 'RefAMHController@getEditamh');
+                Route::any('/editamh', 'RefAMHController@editamh');
+                Route::any('/hapusamh', 'RefAMHController@hapusamh');
+                
+            });
+            
+                //RataLamaSekolah
+                Route::group(['prefix' => '/ratalamasekolah', 'middleware' => ['auth', 'menu:109']], function() {
+                    Route::any('/', 'RefRataLamaSekolahController@index');
+                    Route::any('/getListratalamasekolah', 'RefRataLamaSekolahController@getListratalamasekolah');
+                    Route::any('/getTahunratalamasekolah', 'RefRataLamaSekolahController@getTahunratalamasekolah');
+                    Route::any('/getKecamatanratalamasekolah', 'RefRataLamaSekolahController@getKecamatanratalamasekolah');
+                    Route::any('/getSektorratalamasekolah/{tahun}/{kecamatan}', 'RefRataLamaSekolahController@getSektorratalamasekolah');
+                    Route::any('/addratalamasekolah', 'RefRataLamaSekolahController@addratalamasekolah');
+                    Route::any('/getEditratalamasekolah/{id}', 'RefRataLamaSekolahController@getEditratalamasekolah');
+                    Route::any('/editratalamasekolah', 'RefRataLamaSekolahController@editratalamasekolah');
+                    Route::any('/hapusratalamasekolah', 'RefRataLamaSekolahController@hapusratalamasekolah');
+                    
+                });
+                
+                    //SeniOR
+                    Route::group(['prefix' => '/senior', 'middleware' => ['auth', 'menu:109']], function() {
+                        Route::any('/', 'RefSeniORController@index');
+                        Route::any('/getListsenior', 'RefSeniORController@getListsenior');
+                        Route::any('/getTahunsenior', 'RefSeniORController@getTahunsenior');
+                        Route::any('/getKecamatansenior', 'RefSeniORController@getKecamatansenior');
+                        Route::any('/getSektorsenior/{tahun}/{kecamatan}', 'RefSeniORController@getSektorsenior');
+                        Route::any('/addsenior', 'RefSeniORController@addsenior');
+                        Route::any('/getEditsenior/{id}', 'RefSeniORController@getEditsenior');
+                        Route::any('/editsenior', 'RefSeniORController@editsenior');
+                        Route::any('/hapussenior', 'RefSeniORController@hapussenior');
+                        
+                    });
+                        //aps
+                        Route::group(['prefix' => '/aps', 'middleware' => ['auth', 'menu:109']], function() {
+                            Route::any('/', 'RefAPSController@index');
+                            Route::any('/getListaps', 'RefAPSController@getListaps');
+                            Route::any('/getTahunaps', 'RefAPSController@getTahunaps');
+                            Route::any('/getTingkataps', 'RefAPSController@getTingkataps');
+                            Route::any('/getKecamatanaps', 'RefAPSController@getKecamatanaps');
+                            Route::any('/getSektoraps/{tahun}/{kecamatan}/{tingkat}', 'RefAPSController@getSektoraps');
+                            Route::any('/addaps', 'RefAPSController@addaps');
+                            Route::any('/getEditaps/{id}', 'RefAPSController@getEditaps');
+                            Route::any('/editaps', 'RefAPSController@editaps');
+                            Route::any('/hapusaps', 'RefAPSController@hapusaps');
+                            
+                        });
+                            //kts
+                            Route::group(['prefix' => '/kts', 'middleware' => ['auth', 'menu:109']], function() {
+                                Route::any('/', 'RefKTSController@index');
+                                Route::any('/getListkts', 'RefKTSController@getListkts');
+                                Route::any('/getTahunkts', 'RefKTSController@getTahunkts');
+                                Route::any('/getTingkatkts', 'RefKTSController@getTingkatkts');
+                                Route::any('/getKecamatankts', 'RefKTSController@getKecamatankts');
+                                Route::any('/getSektorkts/{tahun}/{kecamatan}/{tingkat}', 'RefKTSController@getSektorkts');
+                                Route::any('/addkts', 'RefKTSController@addkts');
+                                Route::any('/getEditkts/{id}', 'RefKTSController@getEditkts');
+                                Route::any('/editkts', 'RefKTSController@editkts');
+                                Route::any('/hapuskts', 'RefKTSController@hapuskts');
+                                
+                            });
+                                //gurumurid
+                                Route::group(['prefix' => '/gurumurid', 'middleware' => ['auth', 'menu:109']], function() {
+                                    Route::any('/', 'RefGuruMuridController@index');
+                                    Route::any('/getListgurumurid', 'RefGuruMuridController@getListgurumurid');
+                                    Route::any('/getTahungurumurid', 'RefGuruMuridController@getTahungurumurid');
+                                    Route::any('/getTingkatgurumurid', 'RefGuruMuridController@getTingkatgurumurid');
+                                    Route::any('/getKecamatangurumurid', 'RefGuruMuridController@getKecamatangurumurid');
+                                    Route::any('/getSektorgurumurid/{tahun}/{kecamatan}/{tingkat}', 'RefGuruMuridController@getSektorgurumurid');
+                                    Route::any('/addgurumurid', 'RefGuruMuridController@addgurumurid');
+                                    Route::any('/getEditgurumurid/{id}', 'RefGuruMuridController@getEditgurumurid');
+                                    Route::any('/editgurumurid', 'RefGuruMuridController@editgurumurid');
+                                    Route::any('/hapusgurumurid', 'RefGuruMuridController@hapusgurumurid');
+                                    
+                                });
+                                    //investor
+                                    Route::group(['prefix' => '/investor', 'middleware' => ['auth', 'menu:109']], function() {
+                                        Route::any('/', 'RefInvestorController@index');
+                                        Route::any('/getListinvestor', 'RefInvestorController@getListinvestor');
+                                        Route::any('/getTahuninvestor', 'RefInvestorController@getTahuninvestor');
+                                        Route::any('/getTingkatinvestor', 'RefInvestorController@getTingkatinvestor');
+                                        Route::any('/getKecamataninvestor', 'RefInvestorController@getKecamataninvestor');
+                                        Route::any('/getSektorinvestor/{tahun}/{kecamatan}', 'RefInvestorController@getSektorinvestor');
+                                        Route::any('/addinvestor', 'RefInvestorController@addinvestor');
+                                        Route::any('/getEditinvestor/{id}', 'RefInvestorController@getEditinvestor');
+                                        Route::any('/editinvestor', 'RefInvestorController@editinvestor');
+                                        Route::any('/hapusinvestor', 'RefInvestorController@hapusinvestor');
+                                        
+                                    });
+                                        //investasi
+                                        Route::group(['prefix' => '/investasi', 'middleware' => ['auth', 'menu:109']], function() {
+                                            Route::any('/', 'RefInvestasiController@index');
+                                            Route::any('/getListinvestasi', 'RefInvestasiController@getListinvestasi');
+                                            Route::any('/getTahuninvestasi', 'RefInvestasiController@getTahuninvestasi');
+                                            Route::any('/getTingkatinvestasi', 'RefInvestasiController@getTingkatinvestasi');
+                                            Route::any('/getKecamataninvestasi', 'RefInvestasiController@getKecamataninvestasi');
+                                            Route::any('/getSektorinvestasi/{tahun}/{kecamatan}', 'RefInvestasiController@getSektorinvestasi');
+                                            Route::any('/addinvestasi', 'RefInvestasiController@addinvestasi');
+                                            Route::any('/getEditinvestasi/{id}', 'RefInvestasiController@getEditinvestasi');
+                                            Route::any('/editinvestasi', 'RefInvestasiController@editinvestasi');
+                                            Route::any('/hapusinvestasi', 'RefInvestasiController@hapusinvestasi');
+                                            
+                                        });
+                                        Route::get('/PrintPdrb/{tahun}','Laporan\CetakDataDasarController@printPdrb');
+Route::get('/PrintPdrbHb/{tahun}','Laporan\CetakDataDasarController@printPdrbHb');
+Route::get('/PrintAmh/{tahun}','Laporan\CetakDataDasarController@printAmh');
+Route::get('/Printratalamasekolah/{tahun}','Laporan\CetakDataDasarController@printRLS');
+Route::get('/Printsenior/{tahun}','Laporan\CetakDataDasarController@printSeniOR');
+Route::get('/PrintAps/{tahun}','Laporan\CetakDataDasarController@printAps');
+Route::get('/PrintKts/{tahun}','Laporan\CetakDataDasarController@printKts');
+Route::get('/Printgurumurid/{tahun}','Laporan\CetakDataDasarController@printGuruMurid');
+Route::get('/Printinvestor/{tahun}','Laporan\CetakDataDasarController@printInvestor');
+Route::get('/Printinvestasi/{tahun}','Laporan\CetakDataDasarController@printInvestasi');

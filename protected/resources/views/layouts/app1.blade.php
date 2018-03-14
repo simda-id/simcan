@@ -120,14 +120,14 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Renstra Final', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                         ]
                                     ],
-                                    [
-                                        'label' => 'Pencetakan RPJMD & Renstra',
-                                        'visible' => $akses->get(30) || $akses->get(20),
-                                        'items' => [
-                                            ['label' => 'Cetak RPJMD', 'url' => '/', 'visible' => $akses->get(20)],
-                                            ['label' => 'Cetak Renstra', 'url' => '/', 'visible' => $akses->get(30)],
-                                        ]
-                                    ],
+                                    // [
+                                    //     'label' => 'Pencetakan RPJMD & Renstra',
+                                    //     'visible' => $akses->get(30) || $akses->get(20),
+                                    //     'items' => [
+                                    //         ['label' => 'Cetak RPJMD', 'url' => '/', 'visible' => $akses->get(20)],
+                                    //         ['label' => 'Cetak Renstra', 'url' => '/', 'visible' => $akses->get(30)],
+                                    //     ]
+                                    // ],
                                 ]
                             ]);
                         ?>   

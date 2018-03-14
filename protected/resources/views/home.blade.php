@@ -23,102 +23,83 @@ use hoaaah\LaravelMenu\Menu;
     <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
 
     <style>
-        .btn3d {
-            position:relative;
-            top: -6px;
-            border:0;
-            transition: all 40ms linear;
-            margin-top:10px;
-            margin-bottom:10px;
-            margin-left:2px;
-            margin-right:2px;
-            text-align: center;
+    .xCss {
+      width: 15%;
+      height: 70px;
+      cursor: pointer;
+      margin: 0 auto;
+      font: normal 20px/50px "Domine Font Family", Helvetica, sans-serif;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      -o-text-overflow: clip;
+      text-overflow: clip;
+    }
 
-            /*width: 250px;*/
-            height: 60px;
-            /*padding: 10px 16px;*/
-            /*font-size: 24px;*/
-            /*line-height: 1.33;*/
-            /*border-radius: 50%;*/
-        }
-        .btn3d:active:focus,
-        .btn3d:focus:hover,
-        .btn3d:focus {
-            -moz-outline-style:none;
-                 outline:medium none;
-        }
-        .btn3d:active, .btn3d.active {
-            top:2px;
-        }
-        .btn3d.btn-white {
-            color: #666666;
-            box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0,0,0,.2);
-            background-color:#fff;
-        }
-        .btn3d.btn-white:active, .btn3d.btn-white.active {
-            color: #666666;
-            box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
-            background-color:#fff;
-        }
-        .btn3d.btn-default {
-            color: #666666;
-            box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #BEBEBE, 0 8px 8px 1px rgba(0,0,0,.2);
-            background-color:#f9f9f9;
-        }
-        .btn3d.btn-default:active, .btn3d.btn-default.active {
-            color: #666666;
-            box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
-            background-color:#f9f9f9;
-        }
-        .btn3d.btn-primary {
-            box-shadow:0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#4274D7;
-        }
-        .btn3d.btn-primary:active, .btn3d.btn-primary.active {
-            box-shadow:0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color:#4274D7;
-        }
-        .btn3d.btn-success {
-            box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#78d739;
-        }
-        .btn3d.btn-success:active, .btn3d.btn-success.active {
-            box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color: #78d739;
-        }
-        .btn3d.btn-info {
-            box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#39B3D7;
-        }
-        .btn3d.btn-info:active, .btn3d.btn-info.active {
-            box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color: #39B3D7;
-        }
-        .btn3d.btn-warning {
-            box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#FEAF20;
-        }
-        .btn3d.btn-warning:active, .btn3d.btn-warning.active {
-            box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color: #FEAF20;
-        }
-        .btn3d.btn-danger {
-            box-shadow:0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#D73814;
-        }
-        .btn3d.btn-danger:active, .btn3d.btn-danger.active {
-            box-shadow:0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color: #D73814;
-        }
-        .btn3d.btn-magick {
-            color: #fff;
-            box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #9823d5, 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#bb39d7;
-        }
-        .btn3d.btn-magick:active, .btn3d.btn-magick.active {
-            box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-            background-color: #bb39d7;
-        }
+    .btn span{
+        position: relative;
+        margin-top: 15px;
+        left: -15px;
+        /*float: left;*/
+    }
+
+    .bd-green{
+        border: 1px solid #16a085;
+        color:#16a085;
+    }
+    .btn.bd-green:hover,
+    .btn.bd-green:focus{
+        color:#fff;
+        border-radius: 15px;
+        background:#16a085; 
+    }
+    .bd-blue{
+        border: 1px solid #2980b9;
+        color:#2980b9;
+    }
+    .btn.bd-blue:hover,
+    .btn.bd-blue:focus{
+        color:#fff;
+        background:#2980b9;
+        border-radius: 15px;
+    }
+    .bd-orange{
+        border: 1px solid #df7401;
+        color:#df7401;
+    }
+    .btn.bd-orange:hover,
+    .btn.bd-orange:focus{
+        color:#fff;
+        background:#df7401;
+        border-radius: 15px;
+    }
+
+    .bd-red{
+        border: 1px solid #cb2027;
+        color:#cb2027;
+    }
+    .btn.bd-red:hover,
+    .btn.bd-red:focus{
+        color:#fff;
+        background:#cb2027;
+        border-radius: 15px;
+    }
+
+    .bd-purple{
+        border: 1px solid #8e44ad;
+        color:#8e44ad;
+    }
+    .btn.bd-purple:hover,
+    .btn.bd-purple:focus{
+        color:#fff;
+        background:#8e44ad;
+        border-radius: 15px;
+    }
+
+    @media only screen and (max-width: 767px) {
+    .btn{
+        margin-bottom: 15px;
+    }
+        
     </style>
 
     <script src="{{ asset('/js/jquery.min.js')}}"></script>
@@ -183,67 +164,63 @@ use hoaaah\LaravelMenu\Menu;
             </ul>
     </nav>
 
-    <div class="container-fluid" style="padding: 50px">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <br>
+    <div class="container-fluid" style="padding: 30px">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+        <hr>
         <div class="carousel-inner">
             <div class="item active">
                 <img data-src="holder.js/100px600?auto&bg=0B0B61&fg=FFFFFF&text=simd@Perencanaan">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Dihadirkan sebagai alat bantu untuk menyelaraskan perencanaan jangka menengah, jangka pendek, hingga ke penganggaran.<br> Dengan aplikasi ini dapat dijaga keterkaitan dan dukungan antara penganggaran, perencanaan tahunan hingga ke perencanaan lima tahunan.</p>
                 </div>
             </div>
             <div class="item">
                 <img data-src="holder.js/100px600?auto&bg=df7401&fg=FFFFFF&text=ASB dan SSH">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         <strong>Analisa Standar Belanja</strong> dan <strong>Standar Satuan Harga</strong> sebagai jembatan untuk menghubungkan antara proses perencanaan dengan proses penganggaran.</p>
                     <p>
-                        <a class="btn3d btn btn-primary btn-lg" href="{{ url('/asb/dash') }}" role="button"><strong>ASB dan SSH</strong> &raquo;</a></p>
                 </div>
             </div>
             <div class="item">
                 <img data-src="holder.js/100px600?auto&bg=2980b9&fg=FFFFFF&text=Perencanaan Jangka Menengah">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Merupakan perencanaan lima tahunan (<strong>RPJMD</strong> dan <strong>Renstra</strong>) sebagai penjabaran <strong>visi-misi Kepala Daerah</strong>.</p>
                     <p>
-                        <a class="btn3d btn btn-warning btn-lg" href="{{ url('/rpjmd/dash') }}" role="button"><strong>RPJMD dan Renstra</strong> &raquo;</a></p>
                 </div>
             </div>
             <div class="item">
                 <img data-src="holder.js/100px600?auto&bg=8e44ad&fg=FFFFFF&text=Perencanaan Jangka Pendek">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Merupakan perencanaan tahunan (<strong>RKPD</strong> dan <strong>Renja</strong>) sebagai operasionalisasi dari perencanaan jangka menengah.</p>
                     <p>
-                        <a class="btn3d btn btn-success btn-lg" href="{{ url('/rkpd/dash') }}" role="button"><strong>RKPD dan Renja</strong> &raquo;</a></p>
                 </div>
             </div>
             <div class="item">
                 <img data-src="holder.js/100px600?auto&bg=16a085&fg=FFFFFF&text=Penganggaran">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
-                        
+                    <hr>
+                    <p style="font-size: 24px">                        
                         Detail dari rencana kerja tahunan (<strong>PPAS</strong> dan <strong>Pra-RKA</strong>) sebagai dasar penyusunan anggaran yang pelaksanaannya akan dikelola melalui <strong>Simda Keuangan</strong>.</p>
                     <p>
-                        <a class="btn3d btn btn-danger btn-lg" href="{{ url('/modul3') }}" role="button"><strong>Penganggaran</strong> &raquo;</a></p>
                 </div>
             </div>
         </div>
-        <ul class="nav nav-pills nav-justified">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#"><i class="fa fa-star-o fa-fw"></i> simd@<strong>Perencanaan</strong></a></li>
-            <li data-target="#myCarousel" data-slide-to="1"><a class="btn" role="button" href="{{ url('/modul0') }}">ASB dan SSH</a></li>
-            <li data-target="#myCarousel" data-slide-to="2"><a class="btn" role="button" href="{{ url('/rpjmd/dash') }}">RPJMD dan Renstra</a></li>
-            <li data-target="#myCarousel" data-slide-to="3"><a class="btn" role="button" href="{{ url('/rkpd/dash') }}">RKPD dan Renja</a></li>
-            <li data-target="#myCarousel" data-slide-to="4"><a class="btn" role="button" href="{{ url('/modul3') }}">PPAS</a></li>
-        </ul>
+        <hr>
+        <div class="row" style="align-items: center; display: flex; justify-content: center;">
+            <a class="btn xCss bd-orange" role="button" href="{{ url('/modul0') }}"><span class="fa fa-braille "></span> ASB dan SSH</a>
+            <a class="btn xCss bd-red" role="button" href="{{ url('/modul4') }}"><span class="fa fa-folder-open-o "></span> Data Dukungan</a>
+            <a class="btn xCss bd-blue" role="button" href="{{ url('/rpjmd/dash') }}"><span class="fa fa-newspaper-o "></span> RPJMD & Renstra</a>
+            <a class="btn xCss bd-purple" role="button" href="{{ url('/rkpd/dash') }}"><span class="fa fa-calendar-check-o "></span> RKPD & Renja</a>
+            <a class="btn xCss bd-green" role="button" href="{{ url('/modul3') }}"><span class="fa fa-money "></span> PPAS</a>
+        </div> 
     </div>
 
     </div>
@@ -255,7 +232,7 @@ use hoaaah\LaravelMenu\Menu;
           </p>
                 <li class="navbar-btn btn pull-right dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-cog fa-spin fa-fw fa-lg"></i> simd@<strong>Perencanaan</strong> <span class="fa fa-caret-up fa-fw fa-lg"></span>
+                        <i class="fa fa-cog fa-spin fa-fw fa-lg"></i> simd@<strong>Perencanaan</strong> <i class="fa fa-caret-up fa-fw fa-lg"></i>
                     </a>
                     <ul class="dropdown-menu" role="menu" >
                         <li><a href="{{ url('/') }}"><i class="fa fa-cubes fa-fw text-info"></i> Dashboard</a></li>
@@ -359,34 +336,9 @@ use hoaaah\LaravelMenu\Menu;
 
 <script>
 $(document).ready( function() {
-    $('#myCarousel').carousel({
-        interval:   3500
-    });
-    // $('#myCarousel').carousel({
-    //     pause: true,        // init without autoplay (optional)
-    //     interval: false,    // do not autoplay after sliding (optional)
-    //     wrap:false          // do not loop
-    // });
-    
-    var clickEvent = false;
-    $('#myCarousel').on('click', '.nav a', function() {
-            clickEvent = true;
-            $('.nav li').removeClass('active');
-            $(this).parent().addClass('active');        
-    });
-    
-    $('#myCarousel').on('slid.bs.carousel', function(e) {
-        if(!clickEvent) {
-            var count = $('.nav').children().length -1;
-            var current = $('.nav li.active');
-            current.removeClass('active').next().addClass('active');
-            var id = parseInt(current.data('slide-to'));
-            if(count == id) {
-                $('.nav li').first().addClass('active');    
-            }
-        }
-        clickEvent = false;
-    });
+$('#myCarousel').carousel({
+    interval:   3500
+});
 
 $.ajax({
           type: "GET",

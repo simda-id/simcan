@@ -1496,7 +1496,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg"  >
   <div class="modal-content">
   <div class="modal-header">
-    <h3 class="modal-title" >Daftar Item yang terdapat di SSH</h3>
+    <h3>Daftar Item yang terdapat di SSH</h3>
   </div>
   <div class="modal-body">
   <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
@@ -1518,9 +1518,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="25%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Harga Satuan</th>
                 </tr>
           </thead>
           <tbody>
@@ -1549,7 +1551,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg"  >
   <div class="modal-content">
   <div class="modal-header">
-      <h3 class="modal-title">Daftar Komponen ASB</h3>
+      <h3>Daftar Komponen ASB</h3>
   </div>
   <div class="modal-body">
   <form name="frmCariKomponen" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -1597,7 +1599,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="modal-content">
         <div class="modal-header">
           {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
-            <h4 class="modal-title"> Copy Data Kelompok Analisis Standar Belanja</h4>
+            <h4> Copy Data Kelompok Analisis Standar Belanja</h4>
         </div>
       <div class="modal-body">
           <form name="frmModalCopyASB" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -2134,7 +2136,10 @@ $(document).on('click', '#btnparam_cari', function() {
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
-              { data: 'uraian_satuan', sClass: "dt-center",width:"100px"}
+              { data: 'keterangan_tarif_ssh'},
+              { data: 'uraian_satuan', sClass: "dt-center",width:"100px"},
+              { data: 'jml_rupiah', sClass: "dt-right",
+                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
             ],
         "order": [[0, 'asc']],
         "bDestroy": true

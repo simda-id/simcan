@@ -729,8 +729,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="35%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
                 </tr>
           </thead>
@@ -906,6 +907,7 @@ function LoadCariItem(param){
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
+              { data: 'keterangan_tarif_ssh'},
               { data: 'uraian_satuan', sClass: "dt-center"}
             ],
         "order": [[0, 'asc']],

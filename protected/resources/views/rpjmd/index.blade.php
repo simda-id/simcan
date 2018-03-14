@@ -42,22 +42,38 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <form class="form-horizontal" autocomplete='off' method="post">
                 <div class="form-group">
                   <label for="txt_no_perda" class="col-xs-2 text-left">Nomor Perda :</label>
-                  <div class="col-xs-10">
+                  <div class="col-xs-4">
                     <p class=""><span id="no_perda_rpjmd"></span></p>
                   </div>
+                    <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RPJMD <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item btnPrintRPJMDTSK" ><i class="fa fa-print fa-fw fa-lg text-success"></i> Cetak RPJMD </a> 
+                            </li>
+                            <li>
+                              <a class="dropdown-item btnPrintProgPrio" ><i class="fa fa-print fa-fw fa-lg text-danger"></i> Cetak Program Prioritas</a>
+                            </li>
+                            {{-- <li>
+                              <a class="dropdown-item btnPrintKompilasiProgramdanPagu" ><i class="fa fa-print fa-fw fa-lg text-primary"></i> Cetak Kompilasi Program dan Pagu RPJMD</a>
+                            </li> --}}                    
+                        </ul>
+                </div>
                 </div>
                 <div class="form-group">
                   <label for="txt_tgl_perda" class="col-xs-2" align='left'>Tanggal Perda :</label>
-                  <div class="col-xs-10">
+                  <div class="col-xs-6">
                     <p class=""><span id="tgl_perda_rpjmd"></span></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="txt_periode" class="col-xs-2" align='left'>Periode RPJMD :</label>
-                  <div class="col-xs-10">
+                  <div class="col-xs-6">
                     <p class=""><span id="periode_awal_rpjmd"></span> sampai dengan <span id="periode_akhir_rpjmd"></span></p>
                   </div>
+                  
                 </div>
+
               </form>
               <br>
               <table id='tblVisi' class="table display table-striped table-bordered table-responsive" cellspacing="0" width="100%">
@@ -1942,9 +1958,47 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
     });
   });
 
+  $(document).on('click', '.repivot-renstra', function() {
+    // var data = UrusanProg.row(this).data();
+    var data = Program.row( $(this).parents('tr') ).data();
+
+    $('#ModalProgress').modal('show');
+
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: './rpjmd/RePivotRenstra',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_program_rpjmd': data.id_program_rpjmd,
+          },
+          success: function(data) {             
+              Program.ajax.reload();                            
+              if(data.status_pesan==1){
+                createPesan(data.pesan,"success");
+              } else {
+                createPesan(data.pesan,"danger"); 
+              }
+
+              setTimeout(function() {
+                $('#ModalProgress').modal('hide');
+              }, 3500);             
+          },
+          error: function(data) {             
+              Program.ajax.reload();
+              setTimeout(function() {
+                $('#ModalProgress').modal('hide');
+              }, 3500);             
+          }
+      });    
+  });
+
   $(document).on('click', '.post-urbidprog', function() {
     // var data = UrusanProg.row(this).data();
-    var data = UrusanProg.row( $(this).parents('tr') ).data();
+    var data = Program.row( $(this).parents('tr') ).data();
 
     $('#ModalProgress').modal('show');
 
@@ -1958,11 +2012,10 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
           data: {
               '_token': $('input[name=_token]').val(),
               'id_program_rpjmd': data.id_program_rpjmd,
-              'id_urbid_rpjmd': data.id_urbid_rpjmd,
+              // 'id_urbid_rpjmd': data.id_urbid_rpjmd,
           },
           success: function(data) {             
-              $('#tblUrusan').DataTable().ajax.reload();
-                            
+              Program.ajax.reload();                            
               if(data.status_pesan==1){
                 createPesan(data.pesan,"success");
               } else {
@@ -1974,8 +2027,7 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
               }, 3500);             
           },
           error: function(data) {             
-              $('#tblUrusan').DataTable().ajax.reload();
-
+              Program.ajax.reload();
               setTimeout(function() {
                 $('#ModalProgress').modal('hide');
               }, 3500);             
@@ -2170,6 +2222,18 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
       $('#tblPelaksana').DataTable().ajax.url("./rpjmd/programpelaksana/"+id_urusan_program).load();
     });
 
-  } );
+  $(document).on('click', '.btnPrintRPJMDTSK', function() {  
+   window.open('./printRPJMDTSK');  
+  });
+
+  $(document).on('click', '.btnPrintProgPrio', function() {    
+    window.open('./printProgPrio');    
+  });
+
+  $(document).on('click', '.btnPrintKompilasiProgramdanPagu', function() {
+    window.open('./PrintKompilasiProgramdanPagu');
+  });
+
+  });
 </script>
 @endsection

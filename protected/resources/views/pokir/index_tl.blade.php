@@ -406,7 +406,7 @@ $('.modal-footer').on('click', '.editUsulan', function() {
   } else {
         $.ajax({
           type: 'post',
-          url: './editUsulan',
+          url: './editTlUsulan',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_pokir_tl' : $('#id_pokir_tl').val(),

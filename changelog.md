@@ -1,7 +1,21 @@
 # change log
 
-[Releases](https://github.com/simda-id/simcan/releases)
-[Documentation] (https://github.com/simda-id/simcan/wiki)
+[Releases](https://github.com/simda-id/simcan/releases) | [Documentation](https://github.com/simda-id/simcan/wiki)
+
+## versi v1.0.0-rc03
+
+Release Candidate 03
+
+1. Perbaikan view login
+2. Perbaikan User Management.
+3. Perbaikan proses Pokir.
+4. Perbaikan proses Renja SKPD.
+5. Perbaikan proses SSH.
+6. Perbaikan proses copy data ASB.
+7. Perbaikan proses Forum SKPD
+8. Perbaikan proses Rancangan Akhir
+9. Beberapa perbaikan bug.
+10. Penambahan bug baru (LOL)
 
 ## versi v1.0.0-rc02-u
 

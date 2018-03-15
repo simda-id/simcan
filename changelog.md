@@ -1,6 +1,21 @@
-# change log
+# change log (catatan perubahan versi)
 
 [Releases](https://github.com/simda-id/simcan/releases) | [Documentation](https://github.com/simda-id/simcan/wiki)
+
+## versi v1.0.0-rc04
+
+Release Candidate 04
+
+1. Penambahan data umum
+2. Penambahan timeline perencanaan
+3. Penambahan edit urusan/bidang pelaksana di rpjmd
+4. Perbaikan interface pokok pikiran
+5. Perbaikan interface penyusunan rincian komponen ASB
+6. Perbaikan interface pemilihan data SSH
+7. Penambahan dan perbaikan beberapa laporan
+8. Penambahan dan perbaikan beberapa interface
+9. Perbaikan pola aktivasi ke server
+10. Perbaikan beberapa bug dan penambahan bug lain :D
 
 ## versi v1.0.0-rc03
 

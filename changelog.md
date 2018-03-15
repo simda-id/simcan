@@ -15,7 +15,7 @@ Release Candidate 04
 7. Penambahan dan perbaikan beberapa laporan
 8. Penambahan dan perbaikan beberapa interface
 9. Perbaikan pola aktivasi ke server
-10. Perbaikan beberapa bug dan penambahan bug lain :D
+10. Perbaikan beberapa bug dan penambahan bug lain
 
 ## versi v1.0.0-rc03
 
@@ -30,7 +30,7 @@ Release Candidate 03
 7. Perbaikan proses Forum SKPD
 8. Perbaikan proses Rancangan Akhir
 9. Beberapa perbaikan bug.
-10. Penambahan bug baru (LOL)
+10. Penambahan bug baru.
 
 ## versi v1.0.0-rc02-u
 
@@ -72,7 +72,3 @@ Release Candidate 01
 ## Known Issues
 
 Beberapa kasus, terjadi kelambatan load data yang berjumlah puluhan ribu. Untuk sementara dapat diatasi dengan mematikan aplikasi yang berjalan di background, atau menambah RAM, dan mengoptimalkan konfigurasi PHP dan web server.
-
-### Berkontribusi
-
-Untuk laporan bug, permintaan fitur, dapat disampaikan melalui timaplikasi et yahoo titik com.

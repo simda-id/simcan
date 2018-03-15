@@ -6,7 +6,12 @@ use \hoaaah\LaravelHtmlHelpers\Html;
 @section('content')
 <div class="container-fluid col-sm-12 col-md-12 col-lg-12">	
     <!-- /.panel -->   
-    <div id="pesan"></div>
+    <div id="pesan" class="row">
+    @if (Session::has('pesan')) 
+        <div class="alert alert-info"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{Session::get('pesan')}}</div>
+    @endif
+    </div>
+    <br>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <i class="fa fa-clock-o fa-fw"></i> Update Database :
@@ -22,7 +27,7 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                 <div class="row">
                     <div class="col-sm-2 text-left"></div>
                     <div class="col-sm-10 text-left">
-                        <button type="submit" class="btn btn-warning btn-labeled btnProses" id='proses' data-dismiss="modal">
+                        <button type="submit" class="btn btn-warning btn-labeled btnProses" id='proses'>
                                 <span class="btn-label"><i class="fa fa-cogs fa-fw fa-lg"></i></span>Proses Update DB</button>
                     </div>
                 </div>
@@ -33,7 +38,8 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                 <label>2. Update ini hanya dilakukan sekali saja..</label><br>
                 <label>3. Jangan Lupa Backup Database sebelum update...</label><br>
                 <hr>
-                <h2>{{Session::get('pesan')}}</h2>
+
+                
         </div>
     </div>
 </div>
@@ -98,7 +104,21 @@ $(document).on('click', '#proses', function() {
 });
 
  $("body").on("click",".btnProses",function(e){
-    $(this).parents("form").ajaxForm(options);
+    complete: function(response) 
+    {
+        if($.isEmptyObject(response.responseJSON.error)){
+            // if(data.status_pesan==1){
+            //     createPesan(data.pesan,"success");
+            //     } else {
+            //     createPesan(data.pesan,"danger"); 
+            //   }
+            @if (session('pesan'))
+                createPesan({{Session::get('pesan')}});
+            @endif
+        }else{
+            printErrorMsg(response.responseJSON.error);
+        }
+    }
   });
 
   var options = { 

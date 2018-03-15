@@ -1,6 +1,6 @@
 # pedoman instalasi
 
-### Requirements Teknis
+## Requirements Teknis
 Untuk menjalankan aplikasi ini diperlukan:
 - [web server](https://httpd.apache.org/download.cgi) yang terkoneksi ke internet; 
 - [PHP 5.6](http://php.net/downloads.php) terinstall, 
@@ -10,7 +10,7 @@ Untuk menjalankan aplikasi ini diperlukan:
 1. Untuk edit file .env disarankan menggunakan [notepad++](https://notepad-plus-plus.org/download/).
 2. Untuk upload database dapat menggunakan phpmyadmin atau [heidisql](https://www.heidisql.com/download.php).
 
-## memasang aplikasi
+## Memasang Aplikasi
 
 1. Unduh keseluruhan aplikasi ini, ekstrak, dan letakkan di web server.
 2. Hubungi Tim Aplikasi di perwakilan BPKP setempat untuk mendapatkan folder konfigurasi (folder config), database, dan username/password default.
@@ -26,7 +26,7 @@ Untuk menjalankan aplikasi ini diperlukan:
 
 6. Buka aplikasi melalui web browser, login dengan username/password Anda.
 
-#### Problem Instalasi
+## Problem Instalasi
 
 Jika ada kesulitan ketika instalasi, pastikan beberapa hal berikut ini:
 1. Versi PHP adalah 5.6. Aplikasi ini tidak berjalan di versi PHP yang lebih rendah. Cek melalui phpinfo() untuk memastikan versi php.

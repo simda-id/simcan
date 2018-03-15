@@ -6,12 +6,13 @@ use \hoaaah\LaravelHtmlHelpers\Html;
 @section('content')
 <div class="container-fluid col-sm-12 col-md-12 col-lg-12">	
     <!-- /.panel -->   
-    <div id="pesan" class="row">
+    <div id="pesan" class="panel">
     @if (Session::has('pesan')) 
-        <div class="alert alert-info"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{Session::get('pesan')}}</div>
+        <div class="alert alert-info"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times-circle-o fa-fw fa-lg text-success"></i></button>
+            <h4>{{Session::get('pesan')}}</h4>
+        </div>
     @endif
     </div>
-    <br>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <i class="fa fa-clock-o fa-fw"></i> Update Database :

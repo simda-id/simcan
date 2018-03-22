@@ -394,35 +394,35 @@ $(document).on('click', "#btnEditPemda" , function() {
     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
   });  
 
-  // $.ajax({
-  //     type: "GET",
-  //     url: 'pemda/getPemdaX1',
-  //     dataType: "json",
-  //     success: function(data) {
-  //       console.log(data);
-  //       var j = data.length;
-  //       var post, i;
-  //       for (i = 0; i < j; i++) {
-  //         post = data[i];
-  //         $.ajax({
-  //           type: 'POST',
-  //           url: 'pemda/getPemdaX',
-  //           data: {
-  //               '_token': $('input[name=_token]').val(),
-  //               'nama_kab' :post.nama_kab,
-  //               'id_kab' :post.id_kab,
-  //           },
-            // success: function(data) {
+  $.ajax({
+      type: "GET",
+      url: 'pemda/getPemdaX1',
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+        // var j = data.length;
+        // var post, i;
+        // for (i = 0; i < j; i++) {
+        //   post = data[i];
+        //   $.ajax({
+        //     type: 'POST',
+        //     url: 'pemda/getPemdaX',
+        //     data: {
+        //         '_token': $('input[name=_token]').val(),
+        //         'nama_kab' :post.nama_kab,
+        //         'id_kab' :post.id_kab,
+        //     },
+        //     success: function(data) {
         //       // if(data.status_pesan==1){
         //       // createPesan(data.pesan,"success");
         //       // } else {
         //       // createPesan(data.pesan,"danger"); 
         //       // }
-            // }
-      //     }); 
-      //   }           
-      // }
-  // }); 
+        //     }
+        //   }); 
+        // }           
+      }
+  }); 
 });
 
 $(document).on('click', "#btnSimpanPemda" , function() {

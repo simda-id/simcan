@@ -59,6 +59,8 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                         <label>2. Update ini dilakukan untuk update database dengan catatan database yang digunakan adalah database sesuai update terakhir, jika belum lakukan update di luar system ini</label><br>
                         <label>3. Update ini hanya dilakukan sekali saja..</label><br>
                         <label>4. Jangan Lupa Backup Database sebelum update...</label><br>
+                        <br>
+                        <laber>{{$valueX}}</laber>
                   </div>                
                 </div>                
         </div>

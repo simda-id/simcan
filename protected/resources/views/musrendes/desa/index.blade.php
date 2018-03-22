@@ -702,6 +702,7 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 
@@ -718,6 +719,7 @@ $(document).on('click', '#btnPilihASB', function() {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 
@@ -915,6 +917,32 @@ $('.modal-footer').on('click', '.editMusrendes', function() {
       });
   });
 
+$(document).on('click', '#btnUnloadData', function() {
+
+  var data = usulan_tbl.row( $(this).parents('tr') ).data();
+
+  $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: 'musrendes/unLoadData',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_musrendes': data.id_musrendes
+      },
+      success: function(data) {
+        usulan_tbl.ajax.reload();
+        if(data.status_pesan==1){
+        createPesan(data.pesan,"success");
+        } else {
+        createPesan(data.pesan,"danger"); 
+        } 
+      }
+    });
+});
+
 $(document).on('click', '#btnHapusMusrendes', function() {
 
   var data = usulan_tbl.row( $(this).parents('tr') ).data();
@@ -1087,6 +1115,7 @@ $(document).on('click', '#btnHapusLokasiMusren', function() {
 
 });
 
+
 $(document).on('click', '#btnDelLokasiMusrendes', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -1137,7 +1166,7 @@ $(document).on('click', '#btnImportMusrendes', function() {
               } 
         },
         error: function(data){
-          createPesan("Data Gagal di Load","danger");
+          createPesan("Data Gagal di Load (err:3)","danger");
           usulan_tbl.ajax.reload();
           $('#ModalProgress').modal('hide');
         }

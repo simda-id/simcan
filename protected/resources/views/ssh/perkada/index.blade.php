@@ -34,6 +34,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <ul class="nav nav-tabs" role="tablist">
             <li class="active"><a href="#perkada" aria-controls="perkada" role="tab" data-toggle="tab">Perkada</a></li>
             <li><a href="#detailzona" aria-controls="detailzona" role="tab" data-toggle="tab">Zona Pemberlakukan SSH</a></li>
+            {{-- <li><a href="#golongan" aria-controls="golongan" role="tab" data-toggle="tab">Golongan SSH</a></li> --}}
             <li><a href="#detailtarif" aria-controls="detailtarif" role="tab" data-toggle="tab">Detail Tarif Item SSH</a></li>
           </ul>
 
@@ -67,9 +68,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
             <div role="tabpanel" class="tab-pane" id="detailzona">
             <br>
-            <div class="add">
-                <p><a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a></p>
+            <div id="divAddZona">
+                <a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-success">
+                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
               <div class="table-responsive">
@@ -77,7 +78,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
+                      <td width="25%" style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
+                      <td style="text-align: left; vertical-align:top;"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -100,6 +102,46 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             </div>
+
+            {{-- <div role="tabpanel" class="tab-pane" id="golongan">
+              <br>
+              <div class="add">
+                <p>
+                <span><a id="btnAddGol" class="add-golongan btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Golongan</a></span>
+                </p>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <tbody>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona" align='left'></label></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </form>
+              <div class="table-responsive">
+              <table id='tblGolongan' class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Golongan</th>
+                          <th width="150px" style="text-align: center; vertical-align:middle">Aksi</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+            </table>
+            </div>
+            </div> --}}
+
+
             <div role="tabpanel" class="tab-pane" id="detailtarif">
             <br>
             <div class="add">
@@ -966,7 +1008,7 @@ $(document).on('click', '#btnparam_cari', function() {
   var flag_perkada;
 
   if (flag_perkada == null && flag_perkada === undefined ){
-    document.getElementById("btnAddZona").style.visibility='hidden';
+    document.getElementById("divAddZona").style.visibility='hidden';
     document.getElementById("btnAddTarif").style.visibility='hidden';
     document.getElementById("btnCopyTarif").style.visibility='hidden';
   }
@@ -982,9 +1024,9 @@ $(document).on('click', '#btnparam_cari', function() {
       flag_perkada = data.flag;
 
       if (flag_perkada ==0 ){
-        document.getElementById("btnAddZona").style.visibility='visible';
+        document.getElementById("divAddZona").style.visibility='visible';
       } else {
-        document.getElementById("btnAddZona").style.visibility='hidden';
+        document.getElementById("divAddZona").style.visibility='hidden';
       };
 
       document.getElementById("no_sk_ssh").innerHTML = no_sk_ssh;

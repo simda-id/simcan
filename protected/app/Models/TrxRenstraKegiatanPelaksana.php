@@ -1,26 +1,31 @@
-<?php
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class TrxRenstraKegiatanPelaksana extends Model
-{
-    public $timestamps = false;
-    protected $table = 'trx_renstra_kegiatan_pelaksana';
-    protected $primaryKey = 'id_kegiatan_renstra_pelaksana';
-    protected $fillable = ['thn_id','no_urut','id_kegiatan_renstra','id_kegiatan_renstra_pelaksana','id_perubahan','id_sub_unit',
-    ];
-    
-    public function trx_renstra_kegiatan()
-    {
-        return $this->belongsTo('App\Models\TrxRenstraKegiatan','id_kegiatan_renstra');
-    }
-    
-    
-    public function ref_sub_unit()
-    {
-        return $this->belongsTo('App\Models\RefSubUnit','id_sub_unit','id_sub_unit');
-    }
-    
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

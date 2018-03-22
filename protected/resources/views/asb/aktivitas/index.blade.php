@@ -46,6 +46,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <br>
               <div class="add">
                   <p><a class="add-perkada btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a></p>
+                  {{-- <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak ASB <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                  <a class="dropdown-item cetak-perkada"><i class="fa fa-print fa-fw fa-lg"></i>Cetak List ASB</a>
+                                  <a class="dropdown-item cetak-duplikasi"><i class="fa fa-print fa-fw fa-lg"></i>Cetak Duplikasi ASB</a>
+                                </li>                     
+                            </ul>
+                    </div> --}}
               </div>
               <div>
               <table id='tblPerkada' class="table display compact table-striped table-bordered table-responsive" cellspacing="0" width="100%">
@@ -1640,6 +1649,58 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
 
+<div id="SimulasiHitung" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id_aktivitas_simulasi" id="id_aktivitas_simulasi" readonly>
+              <div class="form-group">
+                <label for="aktivitas_simulasi" class="col-sm-3 control-label" align='left'>Aktivitas ASB :</label>
+                <div class="col-sm-8">
+                  <input class="form-control aktivitas_simulasi" name="aktivitas_simulasi" id="aktivitas_simulasi" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
+                <div class="col-sm-2">
+                  <input type="test" class="form-control number" id="v1_simulasi" name="v1_simulasi" style="text-align: right;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
+                <div class="col-sm-2">
+                  <input type="test" class="form-control number" id="v2_simulasi" name="v2_simulasi" style="text-align: right;">
+                </div>
+              </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusBelanja">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn  btn-success btnSimulasi btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-print fa-fw fa-lg"></i></span>Cetak Aktivitas ASB</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -1696,6 +1757,7 @@ $('.page-alert .close').click(function(e) {
         $(this).closest('.page-alert').slideUp();
     });
 
+$('.number').number(true,2,',', '.');
 $('#thn_perkada').number(true,0,'', '');
 
 $('#tgl_perkada').datepicker({
@@ -3648,8 +3710,16 @@ $('.hub_driver').change(function() {
   });
 
   $(document).on('click', '.cetak-aktivitas', function() {
+    $('.modal-title').text('Pencetakan Aktivitas ASB');
+    $('.form-horizontal').show();
+    $('#id_aktivitas_simulasi').val($(this).data('id_aktivitas_asb'));
+    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));
+    $('#SimulasiHitung').modal('show');    
+  });
 
-    window.open('../printAktivitasASB/'+$(this).data('id_aktivitas_asb'));
+  $(document).on('click', '.btnSimulasi', function() {
+
+    window.open('../printHitungSimulasiASB2/'+$('#id_aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
     
   });
   
@@ -3894,6 +3964,16 @@ $(document).on('click', '.btnProsesCopyKomp', function(e) {
       });
     e.preventDefault();
   });
+
+
+  $(document).on('click', '.cetak-perkada', function() {
+   window.open('../printListASB/'+$(this).data('id_perkada'));
+  });
+
+$(document).on('click', '.cetak-duplikasi', function() {
+   window.open('../printDuplikasiASB/'+$(this).data('id_perkada'));
+  });
+
 
 });
 </script>

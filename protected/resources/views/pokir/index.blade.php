@@ -30,18 +30,22 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
                 <ul class="nav nav-tabs" role="tablist">
                     <li id="tab-pokir" class="active"><a href="#pokir" role="tab" data-toggle="tab">Identitas Pengusul</a></li>
-                    <li id="tab-uraian"><a href="#uraian" role="tab-kv" data-toggle="tab">Uraian Pokok-pokok Pemikiran</a></li>
+                    <li id="tab-uraian"><a href="#uraian" role="tab-kv" data-toggle="tab">Uraian Pokok Pikiran</a></li>
                     <li id="tab-lokasi"><a href="#lokasi" role="tab-kv" data-toggle="tab">Lokasi Usulan</a></li>
                 </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="pokir">
                 <br>          
-                  <a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok-Pokok Pemikiran</a>
+                  <a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok Pikiran</a>
+                  {{-- <a class="btn btn-labeled btn-info btnPrintPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a> --}}
                   <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Pokir <span class="caret"></span></button>
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Pokok Pikiran <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li>
-                                  <a class="dropdown-item btnPrintPokir" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Pokok Pikiran</a>
+                                  <a class="dropdown-item btnPrintPokir" ><i class="fa fa-print fa-fw fa-lg text-success"></i> XLS Pokok Pikiran</a>
+                                </li> 
+                                <li>
+                                  <a class="dropdown-item btnPrintUsulanPokir" ><i class="fa fa-print fa-fw fa-lg text-info"></i> Cetak Usulan Pokok Pikiran</a>
                                 </li>                     
                             </ul>
                     </div>
@@ -460,6 +464,9 @@ $(document).ready(function() {
   var id_tahun_temp = {{Session::get('tahun')}};
 
   $('.number').number(true,0,'', '');
+  $('#volume_usulan').number(true,2,',', '.');
+  
+
   $('[data-toggle="popover"]').popover();
 
   var pokir_tbl, rincian_tbl, lokasi_tbl;
@@ -859,26 +866,30 @@ $('.modal-footer').on('click', '.delIdentitas', function() {
     });
 
 $('#addUraian').click(function(){
-
-  $('#btnUsulan').addClass('addUsulan');
-  $('#btnUsulan').removeClass('editUsulan');
-  $('.form-horizontal').show();
-  $('.modal-title').text('Tambah Uraian Pokok-Pokok Pemikiran Dewan');
-  $('#id_pokir_usulan').val(null);
-  $('#id_pokir_rincian').val(pokir_temp);
-  $('#no_urut_usulan').val(1);
-  $('#judul_usulan').val(null);
-  $('#uraian_usulan').val(null);
-  $('#volume_usulan').val(0);
-  $('#id_satuan_usulan').val(0);
-  $('#pagu_usulan').val(0);
-  $('#id_unit').val(0);
-
-
-  $('#btnHapusUsulan').hide();
-  $('#ModalUsulan').modal('show');
+  $.ajax({
+          type: 'get',
+          url: './pokir/getNoUsulan/'+pokir_temp,
+          success: function(data) {
+              $('#btnUsulan').addClass('addUsulan');
+              $('#btnUsulan').removeClass('editUsulan');
+              $('.form-horizontal').show();
+              $('.modal-title').text('Tambah Uraian Pokok-Pokok Pemikiran Dewan');
+              $('#id_pokir_usulan').val(null);
+              $('#id_pokir_rincian').val(pokir_temp);
+              $('#no_urut_usulan').val(data[0].no_max);
+              $('#judul_usulan').val(null);
+              $('#uraian_usulan').val(null);
+              $('#volume_usulan').val(0);
+              $('#id_satuan_usulan').val(0);
+              $('#pagu_usulan').val(0);
+              $('#id_unit').val(0);
+              $('#btnHapusUsulan').hide();
+              $('#ModalUsulan').modal('show');
+          }
+      }); 
 
 });
+
 
 $('.modal-footer').on('click', '.addUsulan', function(){
   $.ajaxSetup({
@@ -1157,6 +1168,9 @@ $(document).on('click', '.btnPrintPokir', function() {
   window.open('./printPokir');
 });
 
+$(document).on('click', '.btnPrintUsulanPokir', function() {
+  window.open('./printUsulanPokir');
+});
 
 
 });

@@ -1,29 +1,30 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class RefAsbPerkada extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'ref_asb_perkada';
-    protected $fillable = ['id_perkada','nomor_perkada','tanggal_perkada','tahun_berlaku','uraian_perkada','flag',];
-    protected $primaryKey = 'id_perkada';
-
-    public $timestamps = false;
-
-    public function trxasbaktivitas()
-    {
-      return $this->hasMany('App\Models\TrxAsbAktivitas', 'id_perkada');
-    }
-
-    public function trxasbperhitungan()
-    {
-      return $this->hasMany('App\Models\TrxAsbPerhitungan', 'id_perkada');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+ZmbN/v0JgpIP5DIda6nbIm==

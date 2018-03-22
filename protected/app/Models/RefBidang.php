@@ -1,29 +1,31 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class RefBidang extends Model
-{
-    protected $table = 'ref_bidang';
-    protected $primaryKey = 'id_bidang';
-    protected $fillable = ['id_bidang','kd_urusan','kd_bidang','nm_bidang','kd_fungsi'];
-
-    public $timestamps = false;
-
-    public function ref_urusan()
-    {
-      return $this->belongsTo('App\Models\RefUrusan','kd_urusan');
-    }
-
-    public function ref_program()
-    {
-      return $this->hasMany('App\Models\RefProgram','id_bidang');
-    }
-
-    public function trx_rpjmd_program_urusan()
-    {
-      return $this->hasMany('App\Models\TrxRpjmdProgramUrusan','id_bidang');
-    }
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

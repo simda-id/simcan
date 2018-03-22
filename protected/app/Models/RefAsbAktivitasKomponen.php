@@ -1,29 +1,29 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class RefAsbAktivitasKomponen extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'ref_asb_aktivitas_komponen';
-    protected $fillable = ['id_aktivitas_komponen','id_aktivitas_asb','id_komponen_asb','no_urut'];
-    protected $primaryKey = 'id_aktivitas_komponen';
-
-    public $timestamps = false;
-
-    public function refasbaktivitas()
-    {
-      return $this->belongsTo('App\Models\TrxAsbAktivitas', 'id_aktivitas_asb');
-    }
-
-    public function refasbkomponen()
-    {
-      return $this->belongsTo('App\Models\RefAsbKomponen', 'id_komponen_asb');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

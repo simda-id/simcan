@@ -45,6 +45,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <label class="control-label col-sm-2 text-left" for="id_unit"></label>
               <div class="col-sm-7">
                   <a id="btnProses" type="button" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data Usulan Pokir Dewan</a>
+                  <a class="btn btn-labeled btn-info printPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a>
               </div>
             </div>
           </form>
@@ -426,6 +427,11 @@ $('.modal-footer').on('click', '.editUsulan', function() {
         });
   }      
 });
+
+$(document).on('click', '.printPokir', function() {
+  window.open('../printTLPokir');
+});
+
 
 });
 </script>

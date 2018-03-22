@@ -1,1461 +1,1600 @@
-<?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-//Login
-Route::get('/', 'WelcomeController@index');
-
-Route::get('/login', function () {return view('auth.login');});
-Route::get('/home', 'HomeController@index');
-Auth::routes();
-
-//Jangka Pendek
-Route::get('/modul2', function () {return view('layouts.app');})->middleware('auth');
-
-//Jangka Panjang
-Route::get('/modul1', function () {return view('layouts.app1');})->middleware('auth');
-
-//Anggaran
-Route::get('/modul3', function () {return view('layouts.app2');})->middleware('auth');
-
-//ASB
-Route::get('/modul0', function () {return view('layouts.app0');})->middleware('auth');
-
-//ASB
-Route::get('/modul4', function () {return view('layouts.app3');})->middleware('auth');
-
-//Dashboard
-Route::get('/rpjmd/dash','Chart\ChartRPJMDController@chartjs');
-Route::get('/rpjmd/misi5tahun','Chart\ChartRPJMDController@misi5tahun_view');
-Route::get('/rpjmd/misi1tahun','Chart\ChartRPJMDController@misi1tahun_view');
-Route::get('/rpjmd/urusan5tahun','Chart\ChartRPJMDController@urusan5tahun_view');
-Route::get('/rpjmd/urusan1','Chart\ChartRPJMDController@urusan1_view');
-Route::get('/rpjmd/urusan2','Chart\ChartRPJMDController@urusan2_view');
-Route::get('/rpjmd/urusan3','Chart\ChartRPJMDController@urusan3_view');
-Route::get('/rpjmd/urusan4','Chart\ChartRPJMDController@urusan4_view');
-Route::get('/rpjmd/bidang5tahun','Chart\ChartRPJMDController@bidang5tahun_view');
-Route::get('/rkpd/dash','WelcomeController@index_tahunan');
-Route::get('/asb/dash','WelcomeController@index_asb');
-Route::get('/parameter/dash','WelcomeController@index_parameter');
-Route::get('/agenda/tlJadwal/{tahun}', 'RefJadwalController@tlJadwal');
-Route::get('/getTahunSetting', 'RefJadwalController@getTahunSetting');
-
-// parameter
-Route::group(['prefix' => '/admin/parameter', 'middleware' => ['auth']], function() {
-    Route::any('/', function(){
-        return view('layouts.parameterlayout');
-    })->middleware('menu:1');
-
-    Route::any('/getUnit', 'RefParameterController@getUnit');
-    Route::any('/getKegRef/{id_program}', 'RefParameterController@getKegRef');
-    Route::any('/getProgRef/{id_bidang}', 'RefParameterController@getProgRef');
-    Route::any('/getUrusan', 'RefParameterController@getUrusan');
-    Route::any('/getBidang/{id_urusan}', 'RefParameterController@getBidang');
-    Route::any('/getSumberDana', 'RefParameterController@getSumberDana');
-    Route::any('/getKecamatan', 'RefParameterController@getKecamatan');
-    Route::any('/getDesaAll', 'RefParameterController@getDesaAll');
-    Route::any('/getDesa/{id_kecamatan}', 'RefParameterController@getDesa');
-    Route::any('/getSubUnit/{id_unit}', 'RefParameterController@getSubUnit');
-    Route::any('/getSubUnitTable/{id_unit}', 'RefParameterController@getSubUnitTable');
-    Route::any('/getZonaSSH', 'RefParameterController@getZonaSSH');
-    Route::any('/getSumberDana', 'RefParameterController@getSumberDana');
-    Route::any('/getRefSatuan', 'RefParameterController@getRefSatuan');
-    Route::any('/getLokasiLuarDaerah', 'RefParameterController@getLokasiLuarDaerah');
-    Route::any('/getLokasiTeknis', 'RefParameterController@getLokasiTeknis');
-    Route::any('/getLokasiDesa/{id_kecamatan}', 'RefParameterController@getLokasiDesa');
-    Route::any('/getAktivitasASB/{id_tahun}', 'RefParameterController@getAktivitasASB');
-    Route::any('/getRefIndikator', 'RefParameterController@getRefIndikator');
-
-    //USER
-
-    Route::group(['prefix'=>'/others','middleware'=>['auth']],function(){
-        Route::any('/', 'RefParameterLainnyaController@index');
-        Route::any('/getDataJenis', 'RefParameterLainnyaController@getDataJenis');
-        Route::any('/hapusJenisLokasi', 'RefParameterLainnyaController@hapusJenisLokasi');
-        Route::any('/addJenisLokasi', 'RefParameterLainnyaController@addJenisLokasi');
-        Route::any('/getSumberDana', 'RefParameterLainnyaController@getSumberDana');
-        Route::any('/hapusSumberDana', 'RefParameterLainnyaController@hapusSumberDana');
-        Route::any('/addSumberDana', 'RefParameterLainnyaController@addSumberDana');
-    });
-
-    Route::group(['prefix' => '/user', 'middleware' => ['auth', 'menu:110']], function() {
-        Route::any('/', 'UserController@index');
-        Route::any('/getUnit', 'UserController@getUnit');
-        Route::any('/getGroup', 'UserController@getGroup');
-        Route::any('/getUnitIndex', 'UserController@getUnitIndex');
-        Route::any('/getListUnit/{id_user}', 'UserController@getListUnit');
-        Route::any('/getListDesa/{id_user}', 'UserController@getListDesa');
-        Route::any('/getKecamatan', 'UserController@getKecamatan');
-        Route::any('/getDesa/{id_kecamatan}', 'UserController@getDesa');
-
-        Route::any('/addUser', 'UserController@addUser');
-        Route::any('/editUser', 'UserController@editUser');
-        Route::any('/gantiPass', 'UserController@gantiPass');
-        Route::any('/hapusUser', 'UserController@hapusUser');
-
-        Route::any('/cekUserAdmin', 'UserController@cekUserAdmin');
-
-        Route::any('/addUnit', 'UserController@addUnit');
-        Route::any('/hapusUnit', 'UserController@hapusUnit');
-
-        Route::any('/addWilayah', 'UserController@addWilayah');
-        Route::any('/hapusWilayah', 'UserController@hapusWilayah');
-
-        Route::group(['prefix' => '/group', 'middleware' => ['auth', 'menu:110']], function() {
-            Route::any('/', 'RefGroupMenuController@group');
-            Route::any('/{id}/akses', 'RefGroupMenuController@akses');
-            Route::any('/addGroup', 'RefGroupMenuController@addGroup');
-            Route::any('/editGroup', 'RefGroupMenuController@editGroup');
-            Route::any('/hapusGroup', 'RefGroupMenuController@hapusGroup');
-        });
-        
-    });
-
-    //Kecamatan/Desa
-    Route::group(['prefix' => '/kecamatan', 'middleware' => ['auth', 'menu:102']], function() {
-        Route::any('/', 'RefKecamatanController@index');
-        Route::any('/getListKecamatan', 'RefKecamatanController@getListKecamatan');
-        Route::any('/getListDesa/{id_kecamatan}', 'RefKecamatanController@getListDesa');
-
-        Route::any('/addKecamatan', 'RefKecamatanController@addKecamatan');
-        Route::any('/editKecamatan', 'RefKecamatanController@editKecamatan');
-        Route::any('/addDesa', 'RefKecamatanController@addDesa');
-        Route::any('/editDesa', 'RefKecamatanController@editDesa');
-    });
-    // }); 
-    
-    //Unit Organisasi
-    Route::group(['prefix' => '/unit', 'middleware' => ['auth', 'menu:103']], function() {
-        Route::any('/', 'RefUnitController@index');
-        Route::any('/getListUrusan', 'RefUnitController@getListUrusan');
-        Route::any('/getListBidang/{id_urusan}', 'RefUnitController@getListBidang');
-        Route::any('/getListUnit/{id_bidang}', 'RefUnitController@getListUnit');
-        Route::any('/getListSubUnit/{id_unit}', 'RefUnitController@getListSubUnit');
-        Route::any('/getListDataSubUnit/{id_unit}', 'RefUnitController@getListDataSubUnit');
-
-        Route::any('/addUnit', 'RefUnitController@addUnit');
-        Route::any('/editUnit', 'RefUnitController@editUnit');
-        Route::any('/hapusUnit', 'RefUnitController@hapusUnit');
-        Route::any('/addSubUnit', 'RefUnitController@addSubUnit');
-        Route::any('/editSubUnit', 'RefUnitController@editSubUnit');
-        Route::any('/hapusSubUnit', 'RefUnitController@hapusSubUnit');
-        Route::any('/addDataSubUnit', 'RefUnitController@addDataSubUnit');
-        Route::any('/editDataSubUnit', 'RefUnitController@editDataSubUnit');
-        Route::any('/hapusDataSubUnit', 'RefUnitController@hapusDataSubUnit');
-    });
-    
-    //Unit Organisasi
-    Route::group(['prefix' => '/rekening', 'middleware' => ['auth', 'menu:105']], function() {
-        Route::any('/', 'RefRekeningController@index');
-        Route::any('/getListAkun', 'RefRekeningController@getListAkun');
-        Route::any('/getListGolongan/{id_akun}', 'RefRekeningController@getListGolongan');
-        Route::any('/getListJenis/{id_akun}/{id_golongan}', 'RefRekeningController@getListJenis');
-        Route::any('/getListObyek/{id_akun}/{id_golongan}/{id_jenis}', 'RefRekeningController@getListObyek');
-        Route::any('/getListRincian/{id_akun}/{id_golongan}/{id_jenis}/{id_obyek}', 'RefRekeningController@getListRincian');
-
-        Route::any('/addRek4', 'RefRekeningController@addRek4');
-        Route::any('/editRek4', 'RefRekeningController@editRek4');
-        Route::any('/hapusRek4', 'RefRekeningController@hapusRek4');
-        Route::any('/addRek5', 'RefRekeningController@addRek5');
-        Route::any('/editRek5', 'RefRekeningController@editRek5');
-        Route::any('/hapusRek5', 'RefRekeningController@hapusRek5');
-
-
-        Route::any('/{id}/view', 'RekeningController@view');
-        // rek2
-        Route::group(['prefix' => '/{kd_rek_1}/rek2'], function() {
-            Route::any('/', 'RekeningController@rek2');
-        });
-        // rek3
-        Route::group(['prefix' => '/{kd_rek_2}/rek3'], function() {
-            Route::any('/', 'RekeningController@rek3');
-        });
-    });
-    
-    //Program/Kegiatan
-    Route::group(['prefix' => '/program', 'middleware' => ['auth', 'menu:106']], function() {
-        Route::any('/', 'RefProgramController@index');
-        Route::any('/getListUrusan', 'RefProgramController@getListUrusan');
-        Route::any('/getListBidang/{id_urusan}', 'RefProgramController@getListBidang');
-        Route::any('/getListProgram/{id_bidang}', 'RefProgramController@getListProgram');
-        Route::any('/getListKegiatan/{id_program}', 'RefProgramController@getListKegiatan');
-
-        Route::any('/addProgram', 'RefProgramController@addProgram');
-        Route::any('/editProgram', 'RefProgramController@editProgram');
-        Route::any('/hapusProgram', 'RefProgramController@hapusProgram');
-        Route::any('/addKegiatan', 'RefProgramController@addKegiatan');
-        Route::any('/editKegiatan', 'RefProgramController@editKegiatan');
-        Route::any('/hapusKegiatan', 'RefProgramController@hapusKegiatan');
-    });
-
-    Route::group(['prefix' => '/kegiatan', 'middleware' => ['auth', 'menu:106']], function() {
-        Route::any('/{id}', 'KegiatanController@index');
-        Route::any('/tambah/{id}', 'KegiatanController@create');
-        Route::any('/{id}/ubah', 'KegiatanController@update');
-        Route::any('/{id}/view', 'KegiatanController@view');
-        Route::post('/{id}/delete', 'KegiatanController@delete');
-    }); 
-
-    //Lokasi
-    Route::group(['prefix' => '/lokasi', 'middleware' => ['auth', 'menu:107']], function() {
-        Route::any('/', 'RefLokasiController@index');
-        Route::any('/getListLokasi', 'RefLokasiController@getListLokasi');
-        Route::any('/addLokasi', 'RefLokasiController@addLokasi');
-        Route::any('/editLokasi', 'RefLokasiController@editLokasi');
-        Route::any('/hapusLokasi', 'RefLokasiController@hapusLokasi');
-        Route::any('/insertWilayah', 'RefLokasiController@insertWilayah');
-        Route::any('/getJenisLokasi', 'RefLokasiController@getJenisLokasi');
-
-        Route::any('/getDataJenis', 'RefLokasiController@getDataJenis');
-        Route::any('/hapusJenisLokasi', 'RefLokasiController@hapusJenisLokasi');
-        Route::any('/addJenisLokasi', 'RefLokasiController@addJenisLokasi');
-    }); 
-    
-    //Indikator
-    Route::group(['prefix' => '/indikator', 'middleware' => ['auth', 'menu:108']], function() {
-        Route::any('/', 'RefIndikatorController@index');
-        Route::any('/getListIndikator', 'RefIndikatorController@getListIndikator');
-        Route::any('/addIndikator', 'RefIndikatorController@addIndikator');
-        Route::any('/editIndikator', 'RefIndikatorController@editIndikator');
-        Route::any('/hapusIndikator', 'RefIndikatorController@hapusIndikator');
-
-        Route::any('/tambah', 'SatuanindikatorController@create');
-        Route::any('/{id}/ubah', 'SatuanindikatorController@update');
-        Route::any('/{id}/view', 'SatuanindikatorController@view');
-        Route::post('/{id}/delete', 'SatuanindikatorController@delete');
-    });
-}); 
-
-Route::any('/admin/parameter', function(){
-    return view('layouts.parameterlayout');
-})->middleware('menu:1');
-
-/* update app
-* Tentative
-*/
-Route::group(['prefix' => '/admin/update', 'middleware' => ['auth', 'menu:9']], function() {
-    Route::get('/',  'UpdateController@index');
-    Route::any('/execute',  'UpdateController@update');
-    Route::any('/updateDB',  'UpdateController@updateDB');
-    Route::any('/getApp',  'UpdateController@getApi');
-});
-
-
-
-/* Choose Tahun Anggaran 
-* After session created, redirect to referrer
-* To call Session Value use this syntax
-* Session::get('tahun')
-*/
-Route::get('/ta/{tahun}', function($tahun) {
-    Session::put('tahun', $tahun);
-    return redirect()->back();
-});
-
-//Route laporan
-Route::get('/printPerkadaSsh', 'Laporan\CetakSshPerkadaController@printSshPerkada');
-Route::get('/printGolonganSsh', 'Laporan\CetakSshController@printGolonganSsh');
-Route::get('/printKelompokSsh', 'Laporan\CetakSshKelompokController@printSshKelompok');
-Route::get('/printSubKelompokSsh', 'Laporan\CetakSshSubKelompokController@printSshSubKelompok');
-Route::get('/printItemSsh', 'Laporan\CetakSshPerkadaTarifController@printSshPerkadaTarif');
-Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
-Route::get('/PrintKompilasiKegiatandanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiKegiatandanPaguRenja');
-Route::get('/PrintCekASBRenja/{id_unit}','Laporan\CetakRenjaController@CekSSHRancanganRenja');
-Route::get('/PrintCekSSHRenja/{id_unit}','Laporan\CetakRenjaController@CekSSHRancanganRenja');
-Route::get('/Print_T_VI_C_1/{id_unit}','Laporan\CetakRenjaController@T_VI_C_1');
-Route::get('/PrintCekASBForum/{id_unit}','Laporan\CetakForumController@CekASBforum');
-Route::get('/PrintUsulanRW','Laporan\CetakMusrendesController@printusulanrw');
-
-Route::get('/printAktivitasASB/{id_aktivitas}','Laporan\CetakASBAktivitasRinciController@printASBAktivitas');
-Route::get('/printHitungSimulasiASB/{id_perhitungan}/{id_aktivitas}/{d1}/{d2}','Laporan\CetakASBAktivitasHitungController@printASBAktivitas');
-Route::get('/printHitungRumusASB/{id_aktivitas}','Laporan\CetakASBAktivitasRumusController@printASBAktivitas');
-
-Route::get('/printRPJMDTSK','Laporan\CetakRpjmdController@perumusanAKPembangunan');
-Route::get('/printProgPrio','Laporan\CetakRpjmdController@perumusanProgramPrioritasPemda');
-Route::get('/PrintProyeksiPendapatan','Laporan\CetakRpjmdController@ProyeksiPendapatan');
-Route::get('/PrintKompilasiProgramdanPagu/{tahun}','Laporan\CetakRkpdController@T_V_C_66');
-// Route::get('/PrintKompilasiProgramdanPagu','Laporan\CetakRpjmdController@KompilasiProgramdanPagu');
-Route::get('/PrintReviewRanwalRKPD','Laporan\CetakRpjmdController@ReviewRanwalRKPD');
-Route::get('/PrintRumusanReviewRanwal','Laporan\CetakRpjmdController@RumusanProgKeg');
-Route::get('/PrintProgPaguRenstra','Laporan\CetakRpjmdController@KompilasiProgramdanPaguRenstra');
-// Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
-Route::get('/printPokir','Laporan\CetakRpjmdController@KompilasiPokir');
-
-//Referensi Satuan
-Route::group(['prefix' => 'satuan', 'middleware' => ['auth', 'menu:111']], function () {
-    Route::get('/', ['uses'=>'RefSatuanController@index','as'=>'DaftarSatuan']);
-    Route::get('/getdata', ['uses'=>'RefSatuanController@getdata','as'=>'AmbilSatuan']);
-    Route::post('/tambah', ['uses'=>'RefSatuanController@tambah','as'=>'TambahSatuan']);
-    Route::post('/edit', ['uses'=>'RefSatuanController@edit','as'=>'UpdateSatuan']);
-    Route::post('/hapus', ['uses'=>'RefSatuanController@hapus','as'=>'HapusSatuan']);
-});
-
-//Referensi Pemda
-Route::group(['prefix' => 'pemda', 'middleware' => ['auth', 'menu:101']], function () {
-    Route::get('/', 'RefPemdaController@index');
-    Route::get('/getPemda', 'RefPemdaController@getPemda');
-    Route::get('/getState', 'RefPemdaController@getState');
-    Route::get('/getRefUnit', 'RefPemdaController@getRefUnit');
-    Route::post('/editPemda', 'RefPemdaController@editPemda');
-    Route::get('/getPemdaX1', 'RefPemdaController@getPemdaX1');
-    Route::post('/getPemdaX', 'RefPemdaController@hashPemda');
-
-});
-
-//Referensi Setting
-Route::group(['prefix' => 'setting', 'middleware' => ['auth', 'menu:101']], function () {
-    Route::get('/', 'SettingController@index');
-    Route::get('/getListSetting', 'SettingController@getListSetting');
-    Route::post('/addSetting', 'SettingController@addSetting');
-    Route::post('/editSetting', 'SettingController@editSetting');
-    Route::post('/hapusSetting', 'SettingController@hapusSetting');
-    Route::post('/postSetting', 'SettingController@postSetting');
-
-});
-
-//Referensi Agenda Kerja
-Route::group(['prefix' => 'agenda', 'middleware' => ['auth', 'menu:101']], function () {
-    Route::get('/', 'RefJadwalController@index');
-    Route::get('/rinciagenda/{tahun}', 'RefJadwalController@getJadwal');
-    Route::get('/rekapagenda', 'RefJadwalController@getTahunJadwal');
-    // Route::get('/tlJadwal/{tahun}', 'RefJadwalController@tlJadwal');    
-    Route::get('/curJadwal', 'RefJadwalController@curJadwal');
-    Route::post('/addJadwal', 'RefJadwalController@addJadwal');
-    Route::post('/hapusJadwal', 'RefJadwalController@hapusJadwal');
-
-});
-
-//ZONA SSH
-Route::group(['prefix' => 'zonassh', 'middleware' => ['auth', 'menu:801']], function () {
-    Route::get('/', ['uses'=>'RefSshZonaController@index','as'=>'DaftarZona']);
-    Route::get('/getdata', ['uses'=>'RefSshZonaController@getdata','as'=>'AmbilZona']);
-    Route::post('/tambah', ['uses'=>'RefSshZonaController@store','as'=>'TambahZona']);
-    Route::post('/update', ['uses'=>'RefSshZonaController@update','as'=>'UpdateZona']);
-    Route::post('/delete', ['uses'=>'RefSshZonaController@destroy','as'=>'HapusZona']);
-});
-
-//SSH
-Route::group(['prefix' => 'ssh', 'middleware' => ['auth', 'menu:802']], function () {
-    Route::get('/', ['uses'=>'RefSshController@index','as'=>'DaftarSSH']);
-    Route::get('/getGolongan','RefSshController@getGolongan');
-    Route::get('/getRefSatuan','RefSshController@getRefSatuan');
-    Route::get('/getKelompok/{id_golongan_ssh}','RefSshController@getKelompok');
-    Route::get('/getSubKelompok/{id_kelompok_ssh}','RefSshController@getSubKelompok');
-    Route::get('/getTarif/{id_sub_kelompok_ssh}','RefSshController@getTarif');
-    Route::get('/getRekening/{id_tarif_ssh}','RefSshController@getRekening');
-    Route::post('/addGolongan', ['uses'=>'RefSshController@addGolongan','as'=>'TambahGolongan']);
-    Route::post('/editGolongan', ['uses'=>'RefSshController@editGolongan','as'=>'EditGolongan']);
-    Route::post('/hapusGolongan', ['uses'=>'RefSshController@hapusGolongan','as'=>'HapusGolongan']);
-    Route::post('/addKelompok', ['uses'=>'RefSshController@addKelompok','as'=>'TambahKelompok']);
-    Route::post('/editKelompok', ['uses'=>'RefSshController@editKelompok','as'=>'EditKelompok']);
-    Route::post('/hapusKelompok', ['uses'=>'RefSshController@hapusKelompok','as'=>'HapusKelompok']);
-    Route::post('/addSubKelompok', ['uses'=>'RefSshController@addSubKelompok','as'=>'TambahSubKelompok']);
-    Route::post('/editSubKelompok', ['uses'=>'RefSshController@editSubKelompok','as'=>'EditSubKelompok']);
-    Route::post('/hapusSubKelompok', ['uses'=>'RefSshController@hapusSubKelompok','as'=>'HapusSubKelompok']);
-    Route::post('/addItem', ['uses'=>'RefSshController@addItem','as'=>'TambahItem']);
-    Route::post('/editItem', ['uses'=>'RefSshController@editItem','as'=>'EditItem']);
-    Route::post('/hapusItem', ['uses'=>'RefSshController@hapusItem','as'=>'HapusItem']);
-    Route::post('/addRekeningSsh', ['uses'=>'RefSshController@addRekeningSsh','as'=>'TambahRekening']);
-    Route::post('/editRekeningSsh', ['uses'=>'RefSshController@editRekeningSsh','as'=>'EditRekening']);
-    Route::post('/hapusRekeningSsh', ['uses'=>'RefSshController@hapusRekeningSsh','as'=>'HapusRekening']);
-
-    Route::get('/getCariRekening','RefSshController@getCariRekening');
-});
-
-//SSH PERKADA
-Route::group(['prefix' => 'sshperkada', 'middleware' => ['auth', 'menu:803']], function () {
-    Route::get('/perkada', ['uses'=>'RefSshPerkadaController@index','as'=>"DaftarPerkadaSSH"]);
-    Route::get('/getPerkada','RefSshPerkadaController@getPerkada');
-    Route::get('/getZona/{id_test}','RefSshPerkadaController@getZona');
-    Route::get('/getTarifPerkada/{id_test}','RefSshPerkadaController@getTarif');
-    Route::post('/getRekening',['uses'=>'RefSshPerkadaController@getRekening','as'=>'GetRekening']);
-    Route::post('/addPerkada', ['uses'=>'RefSshPerkadaController@addPerkada','as'=>'TambahPerkada']);
-    Route::post('/editPerkada', ['uses'=>'RefSshPerkadaController@editPerkada','as'=>'EditPerkada']);
-    Route::post('/hapusPerkada', ['uses'=>'RefSshPerkadaController@hapusPerkada','as'=>'HapusPerkada']);
-    Route::post('/statusPerkada', ['uses'=>'RefSshPerkadaController@statusPerkada','as'=>'StatusPerkada']);
-    Route::post('/addZonaPerkada', ['uses'=>'RefSshPerkadaController@addZonaPerkada','as'=>'TambahZonaPerkada']);
-    Route::post('/editZonaPerkada', ['uses'=>'RefSshPerkadaController@editZonaPerkada','as'=>'EditZonaPerkada']);
-    Route::post('/hapusZonaPerkada', ['uses'=>'RefSshPerkadaController@hapusZonaPerkada','as'=>'HapusZonaPerkada']);
-    Route::post('/addTarifPerkada', ['uses'=>'RefSshPerkadaController@addTarifPerkada','as'=>'TambahTarifPerkada']);
-    Route::post('/editTarifPerkada', ['uses'=>'RefSshPerkadaController@editTarifPerkada','as'=>'EditTarifPerkada']);
-    Route::post('/hapusTarifPerkada', ['uses'=>'RefSshPerkadaController@hapusTarifPerkada','as'=>'HapusTarifPerkada']);
-    Route::get('/cariItemSSH/{id_param}', 'RefSshPerkadaController@getItemSSH');
-
-    Route::get('/getCountStatus/{flag}','RefSshPerkadaController@getCountStatus');
-
-    Route::any('/getDataPerkada','RefSshPerkadaController@getDataPerkada');
-    Route::any('/getDataZona/{id_perkada}','RefSshPerkadaController@getDataZona');
-    Route::any('/copyTarifRef','RefSshPerkadaController@copyTarifRef');
-
-});
-
-//ASB KOMPONEN
-Route::group(['prefix' => 'asb', 'middleware' => ['auth', 'menu:804']], function () {
-    Route::get('/komponen', ['uses'=>'RefAsbKomponenController@index','as'=>'DaftarKomponen']);
-    Route::get('/komponen/datakomponen', ['uses'=>'RefAsbKomponenController@datakomponen','as'=>'AmbilKomponen']);
-    Route::get('/komponen/datarinci/{id_komponen}', ['uses'=>'RefAsbKomponenController@datarinci','as'=>'AmbilKomponenRinci']);
-    Route::post('/addKomponen', ['uses'=>'RefAsbKomponenController@addKomponen','as'=>'TambahKomponen']);
-    Route::post('/editKomponen', ['uses'=>'RefAsbKomponenController@editKomponen','as'=>'EditKomponen']);
-    Route::post('/hapusKomponen', ['uses'=>'RefAsbKomponenController@hapusKomponen','as'=>'HapusKomponen']);
-    Route::post('/addRincian', ['uses'=>'RefAsbKomponenController@addRincian','as'=>'TambahRincian']);
-    Route::post('/editRincian', ['uses'=>'RefAsbKomponenController@editRincian','as'=>'EditRincian']);
-    Route::post('/hapusRincian', ['uses'=>'RefAsbKomponenController@hapusRincian','as'=>'HapusRincian']);
-});
-
-//ASB AKTIVITAS
-Route::group(['prefix' => 'asb', 'middleware' => ['auth', 'menu:805']], function () {
-    Route::get('/aktivitas', ['uses'=>'TrxAsbPerkadaController@index','as'=>'DaftarAktivitas']);
-    Route::get('/getPerkada','TrxAsbPerkadaController@getPerkada');
-    Route::get('/getGrouping','TrxAsbPerkadaController@getGrouping');    
-    Route::get('/getKelompok/{id_perkada}','TrxAsbPerkadaController@getKelompok');
-    Route::get('/getSubKelompok/{id_kelompok}','TrxAsbPerkadaController@getSubKelompok');
-    Route::get('/getSubsubkel/{id_sub_kelomok}','TrxAsbPerkadaController@getSubsubkel');
-    Route::get('/getAktivitas/{id_sub_sub_kelomok}','TrxAsbPerkadaController@getAktivitas');
-    Route::get('/getKomponen/{id_aktivitas_asb}','TrxAsbPerkadaController@getKomponen');
-    Route::get('/getRincian/{id_komponen_asb}','TrxAsbPerkadaController@getRincian');
-    
-    Route::post('/addKelompok','TrxAsbPerkadaController@addKelompok');
-    Route::post('/editKelompok','TrxAsbPerkadaController@editKelompok');
-    Route::post('/hapusKelompok','TrxAsbPerkadaController@hapusKelompok');
-    
-    Route::post('/addSubKelompok','TrxAsbPerkadaController@addSubKelompok');
-    Route::post('/editSubKelompok','TrxAsbPerkadaController@editSubKelompok');
-    Route::post('/hapusSubKelompok','TrxAsbPerkadaController@hapusSubKelompok');
-
-    Route::post('/addSubSubKelompok','TrxAsbPerkadaController@addSubSubKelompok');
-    Route::post('/editSubSubKelompok','TrxAsbPerkadaController@editSubSubKelompok');
-    Route::post('/hapusSubSubKelompok','TrxAsbPerkadaController@hapusSubSubKelompok');
-    
-    Route::post('/addPerkada', ['uses'=>'TrxAsbPerkadaController@addPerkada','as'=>'TambahPerkadaASB']);
-    Route::post('/editPerkada', ['uses'=>'TrxAsbPerkadaController@editPerkada','as'=>'EditPerkadaASB']);
-    Route::post('/hapusPerkada', ['uses'=>'TrxAsbPerkadaController@hapusPerkada','as'=>'HapusPerkadaASB']);
-    Route::post('/statusPerkada', ['uses'=>'TrxAsbPerkadaController@statusPerkada','as'=>'StatusPerkadaASB']);
-    
-    Route::post('/addAktivitas', ['uses'=>'TrxAsbPerkadaController@addAktivitas','as'=>'TambahAktivitasASB']);
-    Route::post('/editAktivitas', ['uses'=>'TrxAsbPerkadaController@editAktivitas','as'=>'EditAktivitasASB']);
-    Route::post('/hapusAktivitas', ['uses'=>'TrxAsbPerkadaController@hapusAktivitas','as'=>'HapusAktivitasASB']);
-    
-    Route::post('/addKomponenASB', ['uses'=>'TrxAsbPerkadaController@addKomponen','as'=>'TambahKomponenASB']);
-    Route::post('/editKomponenASB', ['uses'=>'TrxAsbPerkadaController@editKomponen','as'=>'EditKomponenASB']);
-    Route::post('/hapusKomponenASB', ['uses'=>'TrxAsbPerkadaController@hapusKomponen','as'=>'HapusKomponenASB']);
-
-    Route::post('/addRincianASB', ['uses'=>'TrxAsbPerkadaController@addRincian','as'=>'TambahRincianASB']);
-    Route::post('/editRincianASB', ['uses'=>'TrxAsbPerkadaController@editRincian','as'=>'EditRincianASB']);
-    Route::post('/hapusRincianASB', ['uses'=>'TrxAsbPerkadaController@hapusRincian','as'=>'HapusRincianASB']);
-
-    Route::get('/getRekening','TrxAsbPerkadaController@getRekening');
-    Route::get('/getItemSSH/{param_like}','TrxAsbPerkadaController@getItemSSH');
-    Route::get('/getRefSatuan','TrxAsbPerkadaController@getRefSatuan');
-    Route::get('/getRefSatuanDer/{id_asb_aktivitas}/{id_satuan}','TrxAsbPerkadaController@getRefSatuanDer');
-    Route::get('/getCariKomponen','TrxAsbPerkadaController@getCariKomponen');
-    Route::get('/getCariKelompok','TrxAsbPerkadaController@getCariKelompok');
-
-    Route::get('/getCountStatus/{flag}','TrxAsbPerkadaController@getCountStatus');
-
-    Route::get('/getTempKelompok/{id}','TrxAsbPerkadaController@getTempKelompok');
-    Route::get('/getTempSubKelompok/{id}','TrxAsbPerkadaController@getTempSubKelompok');
-    Route::get('/getTempSubSubKelompok/{id}/{id_subkel}','TrxAsbPerkadaController@getTempSubSubKelompok');
-    Route::get('/getTempAktivitas/{id}/{id_subsubkel}','TrxAsbPerkadaController@getTempAktivitas');
-    Route::get('/getTempKomponen/{id}/{id_aktivitas}','TrxAsbPerkadaController@getTempKomponen');
-    Route::get('/getTempRincian/{id}/{id_komponen}','TrxAsbPerkadaController@getTempRincian');
-
-    Route::post('/CopyKomponen','TrxAsbPerkadaController@CopyKomponen');
-    Route::post('/CopyKelompok','TrxAsbPerkadaController@CopyKelompok');
-    Route::post('/CopySubKelompok','TrxAsbPerkadaController@CopySubKelompok');
-    Route::post('/CopySubSubKelompok','TrxAsbPerkadaController@CopySubSubKelompok');
-    Route::post('/CopyAktivitas','TrxAsbPerkadaController@CopyAktivitas');
-    Route::post('/CopyKomponen2','TrxAsbPerkadaController@CopyKomponen2');
-    Route::post('/CopyRincian','TrxAsbPerkadaController@CopyRincian');
-
-});
-
-Route::group(['prefix' => 'asb', 'middleware' => ['auth', 'menu:806']], function () {
-    Route::get('/hitungasb', ['uses'=>'TrxAsbPerhitunganController@index','as'=>'DaftarPerhitungan']);
-    Route::get('/hitungasb/datahitung', ['uses'=>'TrxAsbPerhitunganController@datahitung','as'=>'AmbilDataHitung']);
-    Route::get('/hitungasb/datakelompok/{id_perhitungan}', 'TrxAsbPerhitunganController@datakelompok');
-    Route::get('/hitungasb/datasubkelompok/{id_kelompok}/{id_perhitungan}', 'TrxAsbPerhitunganController@datasubkelompok');
-    Route::get('/hitungasb/datasubsubkelompok/{id_kelompok}/{id_perhitungan}', 'TrxAsbPerhitunganController@datasubsubkelompok');
-    Route::get('/hitungasb/datazona/{id_subkelompok}/{id_perhitungan}', 'TrxAsbPerhitunganController@datazona');
-    Route::get('/hitungasb/dataaktivitas/{id_subkelompok}/{id_perhitungan}/{id_zona}', 'TrxAsbPerhitunganController@dataaktivitas');
-    Route::get('/hitungasb/datakomponen/{id_aktivitas}/{id_perhitungan}/{id_zona}', 'TrxAsbPerhitunganController@datakomponen');
-    Route::get('/hitungasb/datarinci/{id_komponen}/{id_perhitungan}/{id_zona}', 'TrxAsbPerhitunganController@datarinci');
-    Route::any('/prosesASB', 'TrxAsbPerhitunganController@ProsesHitungAsb');
-
-    Route::post('/addPerhitungan', 'TrxAsbPerhitunganController@addPerhitungan');
-    Route::post('/addPerhitunganRinci', 'TrxAsbPerhitunganController@addPerhitunganRinci');
-    Route::get('/GetHitungASB', 'TrxAsbPerhitunganController@GetHitungASB');
-
-    Route::post('/UbahStatus', 'TrxAsbPerhitunganController@UbahStatus');
-    Route::post('/hapusPerhitungan', 'TrxAsbPerhitunganController@hapusPerhitungan');
-
-    Route::get('/hitungasb/datax/{id_perhitungan}', 'TrxAsbPerhitunganController@datax');
-    Route::get('/nilaiFix/{dv1}/{dv2}/{kmax1}/{kmax2}','TrxAsbPerhitunganController@nilaiFCost');
-    Route::get('/nilaiDCost/{dv1}/{dv2}/{rmax1}/{rmax2}/{hub}','TrxAsbPerhitunganController@nilaiDCost');
-    Route::get('/nilaiICost/{dv1}/{dv2}/{hub}','TrxAsbPerhitunganController@nilaiICost');
-
-    Route::get('/cobaHitung','TrxAsbPerhitunganController@cobaHitung');
-
-    Route::get('/getTahunHitung','TrxAsbPerhitunganController@getTahunHitung');
-    Route::get('/getPerkadaSimulasi/{id_tahun}','TrxAsbPerhitunganController@getPerkadaSimulasi');
-    Route::get('/getAktivitasSimulasi/{id_hitung}','TrxAsbPerhitunganController@getAktivitasSimulasi');
-
-});
-
-//ForumSKPD
-Route::group(['prefix' => 'forumskpd', 'middleware' => ['auth', 'menu:60']], function() {
-Route::get('/', 'TrxForumSkpdController@index');
-Route::get('/getSelectProgram/{unit}/{tahun}', 'TrxForumSkpdController@getSelectProgram');
-
-Route::group(['prefix' => 'loadData', 'middleware' => ['auth', 'menu:606']], function() {
-    Route::get('/', 'TrxForumSkpdController@loadData');
-    Route::get('/getProgramRkpd/{tahun}/{unit}','TrxForumSkpdController@getProgramRkpd');
-    Route::post('/insertProgramRkpd', 'TrxForumSkpdController@insertProgramRkpd');
-    Route::post('/insertProgramRenja', 'TrxForumSkpdController@insertProgramRenja');
-    Route::post('/insertKegiatanRenja', 'TrxForumSkpdController@insertKegiatanRenja');
-    Route::post('/insertAktivitasRenja', 'TrxForumSkpdController@insertAktivitasRenja');
-    Route::post('/insertPelaksanaRenja', 'TrxForumSkpdController@insertPelaksanaRenja');
-    Route::post('/insertLokasiRenja', 'TrxForumSkpdController@insertLokasiRenja');
-    Route::post('/insertUsulanRenja', 'TrxForumSkpdController@insertUsulanRenja');
-    Route::post('/insertBelanjaRenja', 'TrxForumSkpdController@insertBelanjaRenja');
-    Route::post('/unLoadProgramRkpd', 'TrxForumSkpdController@unLoadProgramRkpd');
-});
-Route::group(['prefix' => 'forum', 'middleware' => ['auth', 'menu:607']], function() {
-    Route::get('/getUnitRenja', 'TrxForumSkpdController@getUnit');
-    Route::get('/getProgramRkpd/{tahun}/{unit}','TrxForumSkpdController@getProgramRkpdForum');
-    Route::get('/getChildBidang/{id_unit}/{id_ranwal}','TrxForumSkpdController@getChildBidang');
-    Route::any('/getProgramRenja/{tahun}/{unit}/{id_forum}','TrxForumSkpdController@getProgramRenja');
-    Route::any('/getKegiatanRenja/{id_program}','TrxForumSkpdController@getKegiatanRenja');
-    Route::any('/getAktivitas/{id_forum}','TrxForumSkpdController@getAktivitas');
-    Route::any('/getPelaksanaAktivitas/{id_aktivitas}','TrxForumSkpdController@getPelaksanaAktivitas');
-    Route::any('/getLokasiAktivitas/{id_pelaksana}','TrxForumSkpdController@getLokasiAktivitas');
-    Route::get('/getChildUsulan/{id_lokasi}','TrxForumSkpdController@getChildUsulan');    
-    Route::get('/getBelanja/{id_lokasi}','TrxForumSkpdController@getBelanja');
-
-    Route::post('/getHitungASB', 'TrxForumSkpdController@getHitungASB');
-    Route::post('/unloadASB', 'TrxForumSkpdController@unloadASB');
-    Route::get('/getLokasiCopy/{id_aktivitas}', 'TrxForumSkpdController@getLokasiCopy');
-    Route::post('/getBelanjaCopy', 'TrxForumSkpdController@getBelanjaCopy');
-
-    Route::post('/AddProgRenja','TrxForumSkpdController@AddProgRenja');
-    Route::post('/editProgRenja','TrxForumSkpdController@editProgRenja');
-    Route::post('/hapusProgRenja','TrxForumSkpdController@hapusProgRenja');
-
-    Route::post('/addKegRenja','TrxForumSkpdController@addKegRenja');
-    Route::post('/editKegRenja','TrxForumSkpdController@editKegRenja');
-    Route::post('/hapusKegRenja','TrxForumSkpdController@hapusKegRenja');
-
-    Route::post('/addAktivitas','TrxForumSkpdController@addAktivitas');
-    Route::post('/editAktivitas','TrxForumSkpdController@editAktivitas');
-    Route::post('/hapusAktivitas','TrxForumSkpdController@hapusAktivitas');
-
-    Route::post('/addPelaksana','TrxForumSkpdController@addPelaksana');
-    Route::post('/editPelaksana','TrxForumSkpdController@editPelaksana');
-    Route::post('/hapusPelaksana','TrxForumSkpdController@hapusPelaksana');
-
-    Route::post('/addLokasi','TrxForumSkpdController@addLokasi');
-    Route::post('/editLokasi','TrxForumSkpdController@editLokasi');
-    Route::post('/hapusLokasi','TrxForumSkpdController@hapusLokasi');
-
-    Route::post('/addUsulan','TrxForumSkpdController@addUsulan');
-    Route::post('/editUsulan','TrxForumSkpdController@editUsulan');
-    Route::post('/hapusUsulan','TrxForumSkpdController@hapusUsulan');
-
-    Route::post('/addBelanja','TrxForumSkpdController@addBelanja');
-    Route::post('/editBelanja','TrxForumSkpdController@editBelanja');
-    Route::post('/hapusBelanja','TrxForumSkpdController@hapusBelanja');
-    
-    Route::get('/dehashPemda','TrxForumSkpdController@dehashPemda');
-
-});
-
-});
-
-
-//POKIR DEWAN
-Route::group(['prefix' => 'pokir', 'middleware' => ['auth', 'menu:503']], function () {
-    Route::get('/','TrxPokirController@index');
-    Route::get('/getDesa/{id_kecamatan}','TrxPokirController@getDesa');
-    Route::get('/getDesaAll','TrxPokirController@getDesaAll');
-    Route::get('/getData/{id_tahun}','TrxPokirController@getData');
-    Route::get('/getUsulanPokir/{id_pokir}','TrxPokirController@getUsulanPokir');
-    Route::get('/getLokasiPokir/{id_usulan}','TrxPokirController@getLokasiPokir');
-
-    Route::any('/addIdentitas','TrxPokirController@addIdentitas');
-    Route::any('/editIdentitas','TrxPokirController@editIdentitas');
-    Route::any('/hapusIdentitas','TrxPokirController@hapusIdentitas');
-
-    Route::any('/addUsulan','TrxPokirController@addUsulan');
-    Route::any('/editUsulan','TrxPokirController@editUsulan');
-    Route::any('/hapusUsulan','TrxPokirController@hapusUsulan');
-
-    Route::any('/addLokasi','TrxPokirController@addLokasi');
-    Route::any('/editLokasi','TrxPokirController@editLokasi');
-    Route::any('/hapusLokasi','TrxPokirController@hapusLokasi');
-
-    Route::any('/verpokir','TrxTLPokirController@index');
-    Route::get('/getDataPokir','TrxTLPokirController@getDataPokir');
-    Route::any('/importData','TrxTLPokirController@importData');
-    Route::get('/getDataTL/{id_tahun}','TrxTLPokirController@getData');
-    Route::any('/editTlUsulan','TrxTLPokirController@editUsulan');
-
-    Route::any('/tlpokir','TrxPokirUnitController@index');
-    Route::any('/getUnit','TrxPokirUnitController@getUnit');
-    Route::any('/importPokirUnit','TrxPokirUnitController@importData');
-    Route::get('/getDataUnit/{id_tahun}/{id_unit}','TrxPokirUnitController@getData');
-    Route::get('/getDataAktivitas/{id_tahun}/{id_unit}','TrxPokirUnitController@getDataAktivitas');
-    Route::any('/editPokirUnit','TrxPokirUnitController@editPokirUnit');
-
-});
-//Ranwal Renja
-Route::group(['prefix' => 'ranwalrenja', 'middleware' => ['auth', 'menu:50']], function () {
-    Route::any('/loadData', 'TrxRenjaRanwalController@loadData')->middleware('auth', 'menu:501');
-    Route::get('/getUnitRenja', 'TrxRenjaRanwalController@getUnit');
-    Route::get('/getSelectProgram/{unit}/{tahun}', 'TrxRenjaRanwalController@getSelectProgram');
-    Route::get('/getProgramRkpd/{tahun}/{unit}', 'TrxRenjaRanwalController@getProgramRkpd');
-    Route::get('/getRekapProgram/{tahun}/{unit}/{ranwal}', 'TrxRenjaRanwalController@getRekapProgram');
-
-    Route::get('/getTahunKe/{tahun}', 'TrxRenjaRanwalController@getTahunKe');
-    Route::post('/transProgramRKPD', 'TrxRenjaRanwalController@transProgramRKPD');
-    Route::post('/unloadRenja', 'TrxRenjaRanwalController@unloadRenja');
-    
-    Route::get('/dokumen', 'TrxRanwalRenjaDokController@index');
-    Route::get('/getDataDokumen/{id_unit}', 'TrxRanwalRenjaDokController@getDataDokumen');
-    Route::any('/addDokumen', 'TrxRanwalRenjaDokController@addDokumen');
-    Route::any('/editDokumen', 'TrxRanwalRenjaDokController@editDokumen');
-    Route::any('/postDokumen', 'TrxRanwalRenjaDokController@postDokumen');
-    Route::any('/hapusDokumen', 'TrxRanwalRenjaDokController@hapusDokumen');
-
-    Route::group(['prefix' => 'sesuai', 'middleware' => ['auth', 'menu:501']], function() {
-        Route::get('/', 'TrxRenjaRanwalSesuaiController@index');
-        Route::get('/getUnitRenja', 'TrxRenjaRanwalSesuaiController@getUnit');
-        Route::get('/getProgramRkpd/{tahun}/{unit}', 'TrxRenjaRanwalSesuaiController@getProgramRkpd');
-        Route::get('/getProgramRenja/{tahun}/{unit}/{ranwal}', 'TrxRenjaRanwalSesuaiController@getProgramRenja');
-        Route::get('/getIndikatorRenja/{id_program}', 'TrxRenjaRanwalSesuaiController@getIndikatorRenja');
-        Route::get('/getKegiatanRenja/{id_program}', 'TrxRenjaRanwalSesuaiController@getKegiatanRenja');
-        Route::get('/getIndikatorKegiatan/{id_renja}', 'TrxRenjaRanwalSesuaiController@getIndikatorKegiatan');
-
-        Route::get('/getCheckProgram/{id_program}', 'TrxRenjaRanwalSesuaiController@getCheckProgram');
-        Route::get('/getCheckKegiatan/{id_renja}', 'TrxRenjaRanwalSesuaiController@getCheckKegiatan');
-        Route::get('/CheckProgram/{id_program}', 'TrxRenjaRanwalSesuaiController@CheckProgram');
-        Route::get('/CheckKegiatan/{id_renja}', 'TrxRenjaRanwalSesuaiController@CheckKegiatan');
-
-
-        Route::get('/getProgRenstra/{id_unit}', 'TrxRenjaRanwalSesuaiController@getProgRenstra');
-        Route::get('/getKegRenstra/{id_unit}/{id_program}', 'TrxRenjaRanwalSesuaiController@getKegRenstra');
-        Route::get('/getProgRef/{id_bidang}', 'TrxRenjaRanwalSesuaiController@getProgRef');
-        Route::get('/getKegRef/{id_program}', 'TrxRenjaRanwalSesuaiController@getKegRef');
-        Route::get('/getUrusan', 'TrxRenjaRanwalSesuaiController@getUrusan');
-        Route::get('/getBidang/{id_unit}/{id_ranwal}', 'TrxRenjaRanwalSesuaiController@getBidang');
-        Route::get('/getRefIndikator', 'TrxRenjaRanwalSesuaiController@getRefIndikator');
-
-        Route::get('/getAktivitas/{id_pelaksana}', 'TrxRenjaRanwalSesuaiController@getAktivitas');
-        Route::get('/getPelaksanaAktivitas/{id_renja}', 'TrxRenjaRanwalSesuaiController@getPelaksanaAktivitas');
-
-        Route::post('/addProgram', 'TrxRenjaRanwalSesuaiController@addProgramRenja');
-        Route::post('/editProgram', 'TrxRenjaRanwalSesuaiController@editProgram');
-        Route::post('/postProgram', 'TrxRenjaRanwalSesuaiController@postProgram');
-        Route::post('/hapusProgram', 'TrxRenjaRanwalSesuaiController@hapusProgram');
-
-        Route::post('/addKegiatanRenja', 'TrxRenjaRanwalSesuaiController@addKegiatanRenja');
-        Route::post('/editKegiatanRenja', 'TrxRenjaRanwalSesuaiController@editKegiatanRenja');
-        Route::post('/postKegiatanRenja', 'TrxRenjaRanwalSesuaiController@postKegiatanRenja');
-        Route::post('/postKegiatanRanwal', 'TrxRenjaRanwalSesuaiController@postKegiatanRanwal');
-        Route::post('/hapusKegiatanRenja', 'TrxRenjaRanwalSesuaiController@hapusKegiatanRenja');
-
-        Route::post('/addIndikatorRenja', 'TrxRenjaRanwalSesuaiController@addIndikatorRenja');
-        Route::post('/editIndikatorRenja', 'TrxRenjaRanwalSesuaiController@editIndikatorRenja');
-        Route::post('/hapusIndikatorRenja', 'TrxRenjaRanwalSesuaiController@hapusIndikatorRenja');
-
-        Route::post('/addIndikatorKeg', 'TrxRenjaRanwalSesuaiController@addIndikatorKeg');
-        Route::post('/editIndikatorKeg', 'TrxRenjaRanwalSesuaiController@editIndikatorKeg');
-        Route::post('/hapusIndikatorKeg', 'TrxRenjaRanwalSesuaiController@hapusIndikatorKeg');
-
-        Route::post('/addAktivitas', 'TrxRenjaRanwalSesuaiController@addAktivitas');
-        Route::post('/editAktivitas', 'TrxRenjaRanwalSesuaiController@editAktivitas');
-        Route::post('/hapusAktivitas', 'TrxRenjaRanwalSesuaiController@hapusAktivitas');
-        Route::get('/getHitungPaguASB', 'TrxRenjaRanwalSesuaiController@getHitungPaguASB');
-
-
-        Route::post('/addPelaksana', 'TrxRenjaRanwalSesuaiController@addPelaksana');
-        Route::post('/editPelaksana', 'TrxRenjaRanwalSesuaiController@editPelaksana');
-        Route::post('/hapusPelaksana', 'TrxRenjaRanwalSesuaiController@hapusPelaksana');
-
-    });
-    
-});
-
-//Renja
-Route::group(['prefix' => 'renja', 'middleware' => ['auth', 'menu:50']], function () {
-    Route::any('/loadData', 'TrxRenjaRancanganController@loadData')->middleware('auth', 'menu:501');
-    Route::get('/getUnitRenja', 'TrxRenjaRancanganController@getUnit');
-    Route::get('/getSelectProgram/{unit}/{tahun}', 'TrxRenjaRancanganController@getSelectProgram');
-    Route::get('/getProgramRkpd/{tahun}/{unit}', 'TrxRenjaRancanganController@getProgramRkpd');
-    Route::get('/getRekapProgram/{tahun}/{unit}', 'TrxRenjaRancanganController@getRekapProgram');
-
-    Route::get('/getTransProgram/{tahun}/{unit}', 'TrxRenjaRancanganController@getTransProgram');
-    Route::post('/transProgramRKPD', 'TrxRenjaRancanganController@transProgramRKPD');
-    Route::post('/unloadRenja', 'TrxRenjaRancanganController@unloadRenja');
-    Route::post('/transProgramRenja', 'TrxRenjaRancanganController@transProgramRenja');
-    Route::any('/transProgramIndikatorRenja', 'TrxRenjaRancanganController@transProgramIndikatorRenja');
-
-    Route::get('/getTahunKe/{tahun}', 'TrxRenjaRancanganController@getTahunKe');
-
-    Route::get('/getTransKegiatan/{tahun_renja}/{id_tahun}/{id_program_renstra}', 'TrxRenjaRancanganController@getTransKegiatan');
-    Route::any('/transKegiatanRenja', 'TrxRenjaRancanganController@transKegiatanRenja');
-    Route::any('/transKegiatanIndikatorRenja', 'TrxRenjaRancanganController@transKegiatanIndikatorRenja');
-    
-    Route::get('/', 'TrxRenjaController@index');
-    Route::get('/blangsung', 'TrxRenjaController@belanjalangsung');
-
-    Route::get('/program/{tahun_renja}/{id_unit}', 'TrxRenjaController@getProgramRenja');
-    Route::get('/programindikator/{tahun_renja}/{id_unit}/{id_program}', 'TrxRenjaController@getProgramIndikatorRenja');
-    Route::get('/kegiatanrenja/{tahun_renja}/{id_unit}/{id_program}', 'TrxRenjaController@getKegiatanRenja');
-    Route::get('/kegiatanindikatorenja/{tahun_renja}/{id_unit}/{id_renja}', 'TrxRenjaController@getKegiatanIndikatorRenja');
-    Route::get('/aktivitasrenja/{tahun_renja}/{id_unit}/{id_renja}', 'TrxRenjaController@getAktivitasRenja');
-
-    Route::get('/dokumen', 'TrxRenjaRancanganDokController@index');
-    Route::get('/getDataDokumen/{id_unit}', 'TrxRenjaRancanganDokController@getDataDokumen');
-    Route::any('/addDokumen', 'TrxRenjaRancanganDokController@addDokumen');
-    Route::any('/editDokumen', 'TrxRenjaRancanganDokController@editDokumen');
-    Route::any('/postDokumen', 'TrxRenjaRancanganDokController@postDokumen');
-    Route::any('/hapusDokumen', 'TrxRenjaRancanganDokController@hapusDokumen');
-
-    //Load dan Proses Renja
-    Route::group(['prefix' => 'sesuai', 'middleware' => ['auth', 'menu:501']], function() {
-        Route::get('/', 'TrxRenjaRancanganPenyesuaianController@index');
-        Route::get('/getUnitRenja', 'TrxRenjaRancanganPenyesuaianController@getUnit');
-        Route::get('/getProgramRkpd/{tahun}/{unit}', 'TrxRenjaRancanganPenyesuaianController@getProgramRkpd');
-        Route::get('/getProgramRenja/{tahun}/{unit}/{ranwal}', 'TrxRenjaRancanganPenyesuaianController@getProgramRenja');
-        Route::get('/getIndikatorRenja/{id_program}', 'TrxRenjaRancanganPenyesuaianController@getIndikatorRenja');
-        Route::get('/getKegiatanRenja/{id_program}', 'TrxRenjaRancanganPenyesuaianController@getKegiatanRenja');
-        Route::get('/getIndikatorKegiatan/{id_renja}', 'TrxRenjaRancanganPenyesuaianController@getIndikatorKegiatan');
-
-        Route::get('/getCheckProgram/{id_program}', 'TrxRenjaRancanganPenyesuaianController@getCheckProgram');
-        Route::get('/getCheckKegiatan/{id_renja}', 'TrxRenjaRancanganPenyesuaianController@getCheckKegiatan');
-        Route::get('/CheckProgram/{id_program}', 'TrxRenjaRancanganPenyesuaianController@CheckProgram');
-        Route::get('/CheckKegiatan/{id_renja}', 'TrxRenjaRancanganPenyesuaianController@CheckKegiatan');
-
-        Route::get('/getProgRenstra/{id_unit}', 'TrxRenjaRancanganPenyesuaianController@getProgRenstra');
-        Route::get('/getKegRenstra/{id_unit}/{id_program}', 'TrxRenjaRancanganPenyesuaianController@getKegRenstra');
-        Route::get('/getProgRef/{id_bidang}', 'TrxRenjaRancanganPenyesuaianController@getProgRef');
-        Route::get('/getKegRef/{id_program}', 'TrxRenjaRancanganPenyesuaianController@getKegRef');
-        Route::get('/getUrusan', 'TrxRenjaRancanganPenyesuaianController@getUrusan');
-        Route::get('/getBidang/{id_unit}/{id_ranwal}', 'TrxRenjaRancanganPenyesuaianController@getBidang');
-        Route::get('/getRefIndikator', 'TrxRenjaRancanganPenyesuaianController@getRefIndikator');
-
-        Route::post('/addProgram', 'TrxRenjaRancanganPenyesuaianController@addProgramRenja');
-        Route::post('/editProgram', 'TrxRenjaRancanganPenyesuaianController@editProgram');
-        Route::post('/postProgram', 'TrxRenjaRancanganPenyesuaianController@postProgram');
-        Route::post('/hapusProgram', 'TrxRenjaRancanganPenyesuaianController@hapusProgram');
-
-        Route::post('/addKegiatanRenja', 'TrxRenjaRancanganPenyesuaianController@addKegiatanRenja');
-        Route::post('/editKegiatanRenja', 'TrxRenjaRancanganPenyesuaianController@editKegiatanRenja');
-        Route::post('/postKegiatanRenja', 'TrxRenjaRancanganPenyesuaianController@postKegiatanRenja');
-        Route::post('/hapusKegiatanRenja', 'TrxRenjaRancanganPenyesuaianController@hapusKegiatanRenja');
-
-        Route::post('/addIndikatorRenja', 'TrxRenjaRancanganPenyesuaianController@addIndikatorRenja');
-        Route::post('/editIndikatorRenja', 'TrxRenjaRancanganPenyesuaianController@editIndikatorRenja');
-        Route::post('/hapusIndikatorRenja', 'TrxRenjaRancanganPenyesuaianController@hapusIndikatorRenja');
-
-        Route::post('/addIndikatorKeg', 'TrxRenjaRancanganPenyesuaianController@addIndikatorKeg');
-        Route::post('/editIndikatorKeg', 'TrxRenjaRancanganPenyesuaianController@editIndikatorKeg');
-        Route::post('/hapusIndikatorKeg', 'TrxRenjaRancanganPenyesuaianController@hapusIndikatorKeg');
-    });
-
-    Route::group(['prefix' => 'blang', 'middleware' => ['auth', 'menu:501']], function() {
-        // Route::get('/', 'TrxRenjaRancanganBLangsungController@index');
-
-        // Route::get('/getUnitRenja', 'TrxRenjaRancanganBLangsungController@getUnit');
-        Route::get('/getSubUnit/{id_unit}', 'TrxRenjaRancanganBLangsungController@getSubUnit');
-        Route::get('/getSumberDana', 'TrxRenjaRancanganBLangsungController@getSumberDana');
-        Route::get('/getKecamatan', 'TrxRenjaRancanganBLangsungController@getKecamatan');
-        Route::get('/getLokasiDesa/{kecamatan}', 'TrxRenjaRancanganBLangsungController@getLokasiDesa');
-        Route::get('/getLokasiTeknis', 'TrxRenjaRancanganBLangsungController@getLokasiTeknis');
-        Route::get('/getLokasiLuarDaerah', 'TrxRenjaRancanganBLangsungController@getLokasiLuarDaerah');
-        Route::get('/getRekening/{id}/{tarif}', 'TrxRenjaRancanganBLController@getRekening');
-        Route::get('/getRekeningDapat', 'TrxRenjaRancanganBLController@getRekeningDapat');
-        Route::get('/getRekeningBTL', 'TrxRenjaRancanganBLController@getRekeningBTL');
-        Route::get('/getZonaSSH', 'TrxRenjaRancanganBLangsungController@getZonaSSH');
-        Route::get('/getItemSSH/{id_zona}/{param_like}', 'TrxRenjaRancanganBLangsungController@getItemSSH');
-        // Route::get('/getSatuanPublik/{id_asb}', 'TrxRenjaRancanganBLangsungController@getSatuanPublik');
-
-        Route::get('/getIndikatorRenja/{id_program}', 'TrxRenjaRancanganBLangsungController@getIndikatorRenja');
-
-        Route::post('/getHitungASB', 'TrxRenjaRancanganBLController@getHitungASB');
-        Route::get('/getHitungASBMusren', 'TrxRenjaRancanganBLController@getHitungASBMusren');
-        Route::post('/unloadASB', 'TrxRenjaRancanganBLController@unloadASB');
-
-        // Route::get('/getAktivitasASB/{tahun}', 'TrxRenjaRancanganBLController@getAktivitasASB');
-        Route::get('/getBelanjaCopy/{id_lokasi}', 'TrxRenjaRancanganBLController@getBelanjaCopy');
-
-        // Route::get('/getProgramRenja/{tahun}/{unit}', 'TrxRenjaRancanganBLangsungController@getProgramRenja');
-        Route::get('/getProgramDapatRenja/{tahun}/{unit}', 'TrxRenjaRancanganBLangsungController@getProgramDapatRenja');
-        Route::get('/getProgramBtlRenja/{tahun}/{unit}', 'TrxRenjaRancanganBLangsungController@getProgramBtlRenja');
-
-        // Route::get('/getKegiatanRenja/{id_program}', 'TrxRenjaRancanganBLangsungController@getKegiatanRenja');
-        // Route::get('/getAktivitas/{id_renja}', 'TrxRenjaRancanganBLangsungController@getAktivitas');
-        // Route::get('/getPelaksanaAktivitas/{id_aktivitas}', 'TrxRenjaRancanganBLangsungController@getPelaksanaAktivitas');
-        Route::get('/getLokasiAktivitas/{id_pelaksana}', 'TrxRenjaRancanganBLController@getLokasiAktivitas');
-        Route::get('/getBelanja/{id_lokasi}', 'TrxRenjaRancanganBLController@getBelanja');
-        
-        Route::get('/getLokasiCopy/{id_aktivitas}', 'TrxRenjaRancanganBLController@getLokasiCopy');
-        Route::post('/getBelanjaCopy', 'TrxRenjaRancanganBLController@getBelanjaCopy');
-
-        // Route::post('/editKegiatanRenja', 'TrxRenjaRancanganBLangsungController@editKegiatanRenja');
-
-        Route::get('/getPaguPelaksana/{tahun}/{aktivitas}', 'TrxRenjaRancanganBLController@getPaguPelaksana');
-
-        // Route::post('/addAktivitas', 'TrxRenjaRancanganBLangsungController@addAktivitas');
-        // Route::post('/editAktivitas', 'TrxRenjaRancanganBLangsungController@editAktivitas');
-        // Route::post('/hapusAktivitas', 'TrxRenjaRancanganBLangsungController@hapusAktivitas');
-
-        // Route::post('/addPelaksana', 'TrxRenjaRancanganBLangsungController@addPelaksana');
-        // Route::post('/editPelaksana', 'TrxRenjaRancanganBLangsungController@editPelaksana');
-        // Route::post('/hapusPelaksana', 'TrxRenjaRancanganBLangsungController@hapusPelaksana');
-
-        Route::get('/', 'TrxRenjaRancanganBLController@index');
-        Route::get('/getUnitRenja', 'TrxRenjaRancanganBLController@getUnit');
-        Route::get('/getProgramRkpd/{tahun}/{unit}', 'TrxRenjaRancanganBLController@getProgramRkpd');
-        Route::get('/getProgramRenja/{tahun}/{unit}', 'TrxRenjaRancanganBLController@getProgramRenja');
-        Route::get('/getIndikatorRenja/{id_program}', 'TrxRenjaRancanganBLController@getIndikatorRenja');
-        Route::get('/getKegiatanRenja/{id_program}', 'TrxRenjaRancanganBLController@getKegiatanRenja');
-        Route::get('/getIndikatorKegiatan/{id_renja}', 'TrxRenjaRancanganBLController@getIndikatorKegiatan');
-
-        Route::get('/getCheckProgram/{id_program}', 'TrxRenjaRancanganBLController@getCheckProgram');
-        Route::get('/getCheckKegiatan/{id_renja}', 'TrxRenjaRancanganBLController@getCheckKegiatan');
-        Route::get('/CheckProgram/{id_program}', 'TrxRenjaRancanganBLController@CheckProgram');
-        Route::get('/CheckKegiatan/{id_renja}', 'TrxRenjaRancanganBLController@CheckKegiatan');
-
-
-        Route::get('/getProgRenstra/{id_unit}', 'TrxRenjaRancanganBLController@getProgRenstra');
-        Route::get('/getKegRenstra/{id_unit}/{id_program}', 'TrxRenjaRancanganBLController@getKegRenstra');
-        Route::get('/getProgRef/{id_bidang}', 'TrxRenjaRancanganBLController@getProgRef');
-        Route::get('/getKegRef/{id_program}', 'TrxRenjaRancanganBLController@getKegRef');
-        Route::get('/getUrusan', 'TrxRenjaRancanganBLController@getUrusan');
-        Route::get('/getBidang/{id_unit}/{id_ranwal}', 'TrxRenjaRancanganBLController@getBidang');
-        Route::get('/getRefIndikator', 'TrxRenjaRancanganBLController@getRefIndikator');
-
-        Route::get('/getAktivitas/{id_pelaksana}', 'TrxRenjaRancanganBLController@getAktivitas');
-        Route::get('/getPelaksanaAktivitas/{id_renja}', 'TrxRenjaRancanganBLController@getPelaksanaAktivitas');
-
-        Route::post('/addProgram', 'TrxRenjaRancanganBLController@addProgramRenja');
-        Route::post('/editProgram', 'TrxRenjaRancanganBLController@editProgram');
-        Route::post('/postProgram', 'TrxRenjaRancanganBLController@postProgram');
-        Route::post('/hapusProgram', 'TrxRenjaRancanganBLController@hapusProgram');
-
-        Route::post('/addKegiatanRenja', 'TrxRenjaRancanganBLController@addKegiatanRenja');
-        Route::post('/editKegiatanRenja', 'TrxRenjaRancanganBLController@editKegiatanRenja');
-        Route::post('/postKegiatanRenja', 'TrxRenjaRancanganBLController@postKegiatanRenja');
-        Route::post('/hapusKegiatanRenja', 'TrxRenjaRancanganBLController@hapusKegiatanRenja');
-
-        Route::post('/addIndikatorRenja', 'TrxRenjaRancanganBLController@addIndikatorRenja');
-        Route::post('/editIndikatorRenja', 'TrxRenjaRancanganBLController@editIndikatorRenja');
-        Route::post('/hapusIndikatorRenja', 'TrxRenjaRancanganBLController@hapusIndikatorRenja');
-
-        Route::post('/addIndikatorKeg', 'TrxRenjaRancanganBLController@addIndikatorKeg');
-        Route::post('/editIndikatorKeg', 'TrxRenjaRancanganBLController@editIndikatorKeg');
-        Route::post('/hapusIndikatorKeg', 'TrxRenjaRancanganBLController@hapusIndikatorKeg');
-
-        Route::post('/addAktivitas', 'TrxRenjaRancanganBLController@addAktivitas');
-        Route::post('/editAktivitas', 'TrxRenjaRancanganBLController@editAktivitas');
-        Route::post('/hapusAktivitas', 'TrxRenjaRancanganBLController@hapusAktivitas');
-        Route::post('/postAktivitas', 'TrxRenjaRancanganBLController@postAktivitas');
-        Route::get('/getHitungPaguASB', 'TrxRenjaRancanganBLController@getHitungPaguASB');
-
-
-        Route::post('/addPelaksana', 'TrxRenjaRancanganBLController@addPelaksana');
-        Route::post('/editPelaksana', 'TrxRenjaRancanganBLController@editPelaksana');
-        Route::post('/hapusPelaksana', 'TrxRenjaRancanganBLController@hapusPelaksana');
-
-        Route::post('/addLokasi', 'TrxRenjaRancanganBLController@addLokasi');
-        Route::post('/editLokasi', 'TrxRenjaRancanganBLController@editLokasi');
-        Route::post('/hapusLokasi', 'TrxRenjaRancanganBLController@hapusLokasi');
-
-        Route::post('/addBelanja', 'TrxRenjaRancanganBLController@addBelanja');
-        Route::post('/editBelanja', 'TrxRenjaRancanganBLController@editBelanja');
-        Route::post('/hapusBelanja', 'TrxRenjaRancanganBLController@hapusBelanja');
-    });
-    
-    
-
-    // pdt
-    Route::group(['prefix' => 'dapat', 'middleware' => ['auth', 'menu:501']], function() {
-        Route::get('/', 'TrxRenjaRancanganBLangsungController@index_dapat');
-    	// Route::get('/', 'TrxRenjaController@pdt');
-        
-        Route::get('/{id}/pelaksana', 'TrxRenjaController@pdtpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRenjaController@pdtpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRenjaController@pdtpelaksanadelete');
-        
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja', 'TrxRenjaController@pdtpelaksanabelanja');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/tambah', 'TrxRenjaController@pdtpelaksanabelanjatambah');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/ubah', 'TrxRenjaController@pdtpelaksanabelanjaubah');
-        Route::delete('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/delete', 'TrxRenjaController@pdtpelaksanabelanjadelete');    
-
-        Route::any('/{id}/indikator/tambah', 'TrxRenjaController@pdtindikatortambah');
-        Route::any('/{id}/indikator/{indikator_id}/ubah', 'TrxRenjaController@pdtindikatorubah');
-        Route::delete('/{id}/indikator/{indikator_id}/delete', 'TrxRenjaController@pdtindikatordelete');
-
-        Route::any('/{id}/kebijakan/tambah', 'TrxRenjaController@pdtkebijakantambah');
-        Route::any('/{id}/kebijakan/{kebijakan_id}/ubah', 'TrxRenjaController@pdtkebijakanubah');
-        Route::delete('/{id}/kebijakan/{kebijakan_id}/delete', 'TrxRenjaController@pdtkebijakandelete');
-    }); 
-
-    // btl
-    Route::group(['prefix' => 'btl', 'middleware' => ['auth', 'menu:501']], function() {
-        Route::get('/', 'TrxRenjaRancanganBLangsungController@index_btl');
-    	// Route::get('/', 'TrxRenjaController@btl');
-        
-        Route::get('/{id}/pelaksana', 'TrxRenjaController@btlpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRenjaController@btlpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRenjaController@btlpelaksanadelete');
-        
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja', 'TrxRenjaController@btlpelaksanabelanja');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/tambah', 'TrxRenjaController@btlpelaksanabelanjatambah');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/ubah', 'TrxRenjaController@btlpelaksanabelanjaubah');
-        Route::delete('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/delete', 'TrxRenjaController@btlpelaksanabelanjadelete');
-
-        Route::any('/{id}/indikator/tambah', 'TrxRenjaController@btlindikatortambah');
-        Route::any('/{id}/indikator/{indikator_id}/ubah', 'TrxRenjaController@btlindikatorubah');
-        Route::delete('/{id}/indikator/{indikator_id}/delete', 'TrxRenjaController@btlindikatordelete');
-
-        Route::any('/{id}/kebijakan/tambah', 'TrxRenjaController@btlkebijakantambah');
-        Route::any('/{id}/kebijakan/{kebijakan_id}/ubah', 'TrxRenjaController@btlkebijakanubah');
-        Route::delete('/{id}/kebijakan/{kebijakan_id}/delete', 'TrxRenjaController@btlkebijakandelete');
-    });        
-});
-
-Route::group(['prefix' => 'renjafinal', 'middleware' => ['auth', 'menu:50']], function () {
-    Route::get('/', 'TrxRenjaFinalController@index');
-    Route::get('/loadData', 'TrxRenjaFinalController@loadData');
-    Route::get('/dokumen', 'TrxRenjaFinalController@dokumen');  
-    Route::get('/blangsung', 'TrxRenjaFinalController@blangsung');       
-});
-
-//PPAS
-Route::get('/ppas/loadData', 'TrxPpasController@loadData');
-Route::get('/ppas/edit', 'TrxPpasController@create');
-Route::get('/ppas', 'TrxPpasController@index');
-
-Route::group(['prefix' => 'rpjmd', 'middleware' => ['auth', 'menu:20']], function() {
-        Route::get('/', 'TrxRpjmdController@index');
-        Route::get('/getDokumen', 'TrxRpjmdController@getDokumen');
-        Route::get('/visi', 'TrxRpjmdController@getVisiRPJMD');
-        Route::post('/editVisi', ['uses'=>'TrxRpjmdController@editVisi','as'=>'EditVisi']);
-        Route::get('/misi/{id_visi_rpjmd}','TrxRpjmdController@getMisiRPJMD');
-        Route::post('/editMisi', ['uses'=>'TrxRpjmdController@editMisi','as'=>'EditMisi']);
-        Route::get('/tujuan/{id_misi_rpjmd}','TrxRpjmdController@getTujuanRPJMD');
-        Route::post('/edittujuan', ['uses'=>'TrxRpjmdController@editTujuan','as'=>'Edittujuan']);
-        Route::get('/sasaran/{id_tujuan_rpjmd}','TrxRpjmdController@getSasaranRPJMD');
-        Route::post('/editsasaran', ['uses'=>'TrxRpjmdController@editSasaran','as'=>'EditSasaran']);
-        Route::get('/kebijakan/{id_sasaran_rpjmd}','TrxRpjmdController@getKebijakanRPJMD');
-        Route::post('/editkebijakan', ['uses'=>'TrxRpjmdController@editKebijakan','as'=>'EditKebijakan']);
-        Route::get('/strategi/{id_sasaran_rpjmd}','TrxRpjmdController@getStrategiRPJMD');
-        Route::post('/editstrategi', ['uses'=>'TrxRpjmdController@editStrategi','as'=>'EditStrategi']);
-        Route::get('/program/{id_sasaran_rpjmd}','TrxRpjmdController@getProgramRPJMD');
-        Route::post('/editprogram', ['uses'=>'TrxRpjmdController@editProgram','as'=>'EditProgram']);
-        Route::get('/programindikator/{id_program_rpjmd}','TrxRpjmdController@getIndikatorProgramRPJMD');
-        Route::get('/programurusan/{id_program_rpjmd}','TrxRpjmdController@getUrusanProgramRPJMD');
-        Route::get('/getUrusan/{id_program_rpjmd}','TrxRpjmdController@getUrusan');        
-        Route::get('/getBidang/{id_urusan}','TrxRpjmdController@getBidang');
-        Route::post('/addUrusan', 'TrxRpjmdController@addUrusan');
-        Route::post('/editUrusan', 'TrxRpjmdController@editUrusan');
-        Route::post('/delUrusan', 'TrxRpjmdController@delUrusan');
-        Route::get('/programpelaksana/{id_urbid_rpjmd}','TrxRpjmdController@getPelaksanaProgramRPJMD');
-        Route::get('/getUnitPelaksana/{id_program_rpjmd}/{id_bidang}','TrxRpjmdController@getUnitPelaksana');
-        Route::post('/addPelaksana', 'TrxRpjmdController@addPelaksana');
-        Route::post('/delPelaksana', 'TrxRpjmdController@delPelaksana');
-        Route::any('/ReprosesPivotPelaksana', 'TrxRpjmdController@ReprosesPivotPelaksana');
-        Route::any('/RePivotRenstra', 'TrxRpjmdController@RePivotRenstra');
-    });
-
-// //RENSTRA
-// Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], function() {
-//     Route::get('/', 'TrxRenstraController@index');
-//     Route::get('/visi/{id_unit}', 'TrxRenstraController@getVisiRenstra');
-//     Route::get('/misi/{id_visi_renstra}', 'TrxRenstraController@getMisiRenstra');
-//     Route::get('/tujuan/{id_misi_renstra}', 'TrxRenstraController@getTujuanRenstra');
-//     Route::get('/sasaran/{id_tujuan_renstra}', 'TrxRenstraController@getSasaranRenstra');
-//     Route::get('/kebijakan/{id_sasaran_renstra}', 'TrxRenstraController@getKebijakanRenstra');
-//     Route::get('/strategi/{id_sasaran_renstra}', 'TrxRenstraController@getStrategiRenstra');
-//     Route::get('/program/{id_sasaran_renstra}', 'TrxRenstraController@getProgramRenstra');
-//     Route::get('/programindikator/{id_program_renstra}', 'TrxRenstraController@getIndikatorProgramRenstra');
-//     Route::get('/kegiatan/{id_program_renstra}', 'TrxRenstraController@getKegiatanRenstra');
-//     Route::get('/kegiatanindikator/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanIndikator');
-//     Route::get('/kegiatanpelaksana/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanPelaksana');
-// });
-
-//RENSTRA
-Route::group(['prefix' => 'renstra', 'middleware' => ['auth', 'menu:30']], function() {
-    Route::get('/', 'TrxRenstraController@index');
-    Route::get('/visi/{id_unit}', 'TrxRenstraController@getVisiRenstra');
-    Route::get('/misi/{id_visi_renstra}', 'TrxRenstraController@getMisiRenstra');
-    Route::get('/tujuan/{id_misi_renstra}', 'TrxRenstraController@getTujuanRenstra');
-    Route::get('/sasaran/{id_tujuan_renstra}', 'TrxRenstraController@getSasaranRenstra');
-    Route::get('/kebijakan/{id_sasaran_renstra}', 'TrxRenstraController@getKebijakanRenstra');
-    Route::get('/strategi/{id_sasaran_renstra}', 'TrxRenstraController@getStrategiRenstra');
-    Route::get('/program/{id_sasaran_renstra}', 'TrxRenstraController@getProgramRenstra');
-    Route::get('/programindikator/{id_program_renstra}', 'TrxRenstraController@getIndikatorProgramRenstra');
-    Route::get('/kegiatan/{id_program_renstra}', 'TrxRenstraController@getKegiatanRenstra');
-    Route::get('/kegiatanindikator/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanIndikator');
-    Route::get('/kegiatanpelaksana/{id_kegiatan_renstra}', 'TrxRenstraController@getKegiatanPelaksana');
-    Route::post('/editprogram', 'TrxRenstraController@editProgram');
-    Route::post('/editindikatorprogram', 'TrxRenstraController@editIndikatorProgram');
-    Route::post('/editkegiatan', 'TrxRenstraController@editKegiatan');
-    Route::post('/editindikatorkegiatan', 'TrxRenstraController@editIndikatorKegiatan');
-    Route::post('/getsubunit/{id_sub_unit}', 'TrxRenstraController@getSubUnit');
-});
-
-//MUSRENBANG-RKPD
-Route::group(['prefix' => 'musrenrkpd', 'middleware' => ['auth', 'menu:60']], function() {
-    Route::get('/', 'TrxMusrenbangRkpdController@index');    
-    Route::any('/blangsung', 'TrxMusrenbangRkpdController@blangsung');
-    Route::get('/loadData', 'TrxMusrenbangRkpdController@loadData');
-});
-
-//USULAN RW
-Route::group(['prefix' => 'musrenrw', 'middleware' => ['auth', 'menu:601']], function() {
-    Route::get('/', 'TrxMusrenbangRwController@index');
-    Route::get('/getData/{id_desa}', 'TrxMusrenbangRwController@getData');
-    Route::get('/getDataASB', 'TrxMusrenbangRwController@getDataASB');
-    Route::post('/addMusrenbangRw', 'TrxMusrenbangRwController@addMusrendesRw');
-    Route::post('/editMusrenbangRw', 'TrxMusrenbangRwController@editMusrendesRw');
-    Route::post('/hapusMusrenbangRw', 'TrxMusrenbangRwController@hapusMusrendesRw');
-    Route::post('/postMusrendesRw', 'TrxMusrenbangRwController@postMusrendesRw');
-    Route::get('/getHitungASB/{id_asb}/{id_zona}/{vol1}/{vol2}', 'TrxMusrenbangRwController@getHitungASB');  
-
-});
-
-//MUSRENBANG DESA
-Route::group(['prefix' => 'musrendes', 'middleware' => ['auth', 'menu:603']], function() {
-    Route::get('/', 'TrxMusrenbangDesController@index');
-    Route::get('/getData/{id_desa}', 'TrxMusrenbangDesController@getData');
-    Route::get('/getLokasi/{id_musrendes}', 'TrxMusrenbangDesController@getLokasi');
-    Route::post('/ImportDataRW', 'TrxMusrenbangDesController@ImportDataRW');
-
-    Route::get('/getDataASB', 'TrxMusrenbangDesController@getDataASB');
-    Route::get('/getHitungASB/{id_asb}/{id_zona}/{vol1}/{vol2}', 'TrxMusrenbangDesController@getHitungASB'); 
-
-    Route::post('/addMusrenDesa', 'TrxMusrenbangDesController@addMusrendes');
-    Route::post('/editMusrenDesa', 'TrxMusrenbangDesController@editMusrendes');
-    Route::post('/hapusMusrenDesa', 'TrxMusrenbangDesController@hapusMusrendes');
-    Route::post('/postMusrenDesa', 'TrxMusrenbangDesController@postMusrendes');
-
-    Route::post('/addMusrenDesaLokasi', 'TrxMusrenbangDesController@addMusrendesLokasi');
-    Route::post('/editMusrenDesaLokasi', 'TrxMusrenbangDesController@editMusrendesLokasi');
-    Route::post('/hapusMusrenDesaLokasi', 'TrxMusrenbangDesController@hapusMusrendesLokasi');
-
-});
-
-
-//MUSRENBANG KECAMATAN
-Route::group(['prefix' => 'musrencam', 'middleware' => ['auth', 'menu:605']], function() {
-    Route::get('/', 'TrxMusrenbangCamController@index');
-    Route::post('/importData', 'TrxMusrenbangCamController@importData');
-    Route::post('/unLoadData', 'TrxMusrenbangCamController@unLoadData');
-
-    Route::get('/getData/{id_kecamatan}', 'TrxMusrenbangCamController@getData');
-    Route::get('/getLokasiData/{id_musrencam}', 'TrxMusrenbangCamController@getLokasiData');
-
-    Route::get('/getLoadData/{id_kecamatan}', 'TrxMusrenbangCamController@getLoadData');
-    Route::get('/getLokasi/{id_musrencam}', 'TrxMusrenbangCamController@getLokasi');
-
-    Route::get('/loadData', 'TrxMusrenbangCamController@loadData');
-    Route::get('/postingData', 'TrxMusrenbangCamController@postingData');
-
-    Route::post('/addMusrenCamLokasi', 'TrxMusrenbangCamController@addMusrenCamLokasi');
-    Route::post('/editMusrenCamLokasi', 'TrxMusrenbangCamController@editMusrenCamLokasi');
-    Route::post('/hapusMusrenCamLokasi', 'TrxMusrenbangCamController@hapusMusrenCamLokasi');
-
-    Route::post('/addMusrenCam', 'TrxMusrenbangCamController@addMusrenCam');
-    Route::post('/editMusrenCam', 'TrxMusrenbangCamController@editMusrenCam');
-    Route::post('/postMusrenCam', 'TrxMusrenbangCamController@postMusrenCam');
-    Route::post('/hapusMusrenCam', 'TrxMusrenbangCamController@hapusMusrenCam');
-});
-
-//RANWAL RKPD
-Route::group(['prefix' => 'ranwalrkpd'], function () {
-    Route::get('/', 'TrxRanwalRKPDController@index');
-    Route::get('/getJmlData', 'TrxRanwalRKPDController@getJmlData');
-    Route::get('/loadData', 'TrxRanwalRKPDController@loadData');
-    Route::get('/getRePostingData/{tahun}', 'TrxRanwalRKPDController@getRePostingData');
-    Route::get('/getDataRekap/{tahun}', 'TrxRanwalRKPDController@getDataRekap');
-    Route::POST('/unLoadProgramRkpd', 'TrxRanwalRKPDController@unLoadProgramRkpd');
-    Route::get('/getCheck/{id}', 'TrxRanwalRKPDController@getCheck');
-    Route::get('/getRefIndikator', 'TrxRanwalRKPDController@getRefIndikator');
-    Route::get('/getRefUnit', 'TrxRanwalRKPDController@getRefUnit');
-    Route::get('/getRefProgramRPJMD', 'TrxRanwalRKPDController@getRefProgramRPJMD');
-    Route::get('/getUrusan', 'TrxRanwalRKPDController@getUrusan');
-    Route::get('/getBidang/{id_urusan}', 'TrxRanwalRKPDController@getBidang');
-
-    Route::any('/prosesTransferData', 'TrxRanwalRKPDController@prosesTransferData');
-    Route::any('/transferIndikator/{tahun_rkpd}', 'TrxRanwalRKPDController@transferIndikator');
-    Route::any('/transferUrusan/{tahun_rkpd}', 'TrxRanwalRKPDController@transferUrusan');
-    Route::any('/transferPelaksana/{tahun_rkpd}', 'TrxRanwalRKPDController@transferPelaksana');
-
-    Route::any('/ReprosesTransferData', 'TrxRanwalRKPDController@ReprosesTransferData');
-    Route::any('/RetransferIndikator', 'TrxRanwalRKPDController@RetransferIndikator');
-    Route::any('/RetransferUrusan', 'TrxRanwalRKPDController@RetransferUrusan');
-    Route::any('/RetransferPelaksana', 'TrxRanwalRKPDController@RetransferPelaksana');
-
-    Route::any('/Dokumen', 'TrxRanwalRKPDDokController@index');
-    Route::any('/getDataDokumen', 'TrxRanwalRKPDDokController@getDataDokumen');
-    Route::any('/getDataPerencana', 'TrxRanwalRKPDDokController@getDataPerencana');
-    Route::any('/addDokumen', 'TrxRanwalRKPDDokController@addDokumen');
-    Route::any('/editDokumen', 'TrxRanwalRKPDDokController@editDokumen');
-    Route::any('/hapusDokumen', 'TrxRanwalRKPDDokController@hapusDokumen');
-    Route::any('/postDokumen', 'TrxRanwalRKPDDokController@postDokumen');
-
-    Route::group(['prefix' => 'blangsung', 'middleware' => ['auth', 'menu:402']], function() {
-        Route::get('/', 'TrxRanwalRKPDController@belanjalangsung');
-        Route::get('/getData', 'TrxRanwalRKPDController@getData');
-        Route::get('/getDataBtl', 'TrxRanwalRKPDController@getDataBtl');
-        Route::get('/getDataDapat', 'TrxRanwalRKPDController@getDataDapat');
-        Route::get('/getIndikatorRKPD/{id_rkpd}', 'TrxRanwalRKPDController@getIndikatorRKPD');
-        Route::get('/getUrusanRKPD/{id_rkpd}', 'TrxRanwalRKPDController@getUrusanRKPD');
-        Route::post('/postProgram', 'TrxRanwalRKPDController@postProgram');
-        Route::get('/getPelaksanaRKPD/{id_rkpd}/{id_urusan}', 'TrxRanwalRKPDController@getPelaksanaRKPD');
-
-        Route::post('/addPelaksanaRKPD', 'TrxRanwalRKPDController@addPelaksanaRKPD');
-        Route::post('/editPelaksanaRKPD', 'TrxRanwalRKPDController@editPelaksanaRKPD');
-        Route::post('/hapusPelaksanaRKPD', 'TrxRanwalRKPDController@hapusPelaksanaRKPD');
-
-        Route::post('/tambahUrusanRKPD', 'TrxRanwalRKPDController@addUrusanRKPD');
-        Route::post('/hapusUrusanRKPD', 'TrxRanwalRKPDController@hapusUrusanRKPD');
-        
-        Route::post('/tambahIndikatorRKPD', 'TrxRanwalRKPDController@addIndikatorRKPD');
-        Route::post('/editIndikatorRKPD', 'TrxRanwalRKPDController@editIndikatorRKPD');
-        Route::post('/hapusIndikatorRKPD', 'TrxRanwalRKPDController@hapusIndikatorRKPD');
-
-        Route::post('/tambahProgramRKPD', 'TrxRanwalRKPDController@addProgramRkpd');
-        Route::post('/editProgramRKPD', 'TrxRanwalRKPDController@editProgramRKPD');
-        Route::post('/hapusProgramRKPD', 'TrxRanwalRKPDController@hapusProgramRKPD');
-        
-    });
-
-
-    // btl
-    Route::group(['prefix' => 'btl', 'middleware' => ['auth', 'menu:402']], function() {
-    	// Route::get('/', 'TrxRanwalRKPDController@btl');
-        Route::get('/', 'TrxRanwalRKPDController@tidaklangsung');
-        
-        Route::any('/tambah', 'TrxRanwalRKPDController@btltambah');
-        Route::any('/{id}/ubah', 'TrxRanwalRKPDController@btlubah');
-        
-        Route::get('/{id}/pelaksana', 'TrxRanwalRKPDController@btlpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRanwalRKPDController@btlpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRanwalRKPDController@btlpelaksanadelete');
-
-        Route::any('/{id}/indikator/tambah', 'TrxRanwalRKPDController@btlindikatortambah');
-        Route::any('/{id}/indikator/{indikator_id}/ubah', 'TrxRanwalRKPDController@btlindikatorubah');
-        Route::delete('/{id}/indikator/{indikator_id}/delete', 'TrxRanwalRKPDController@btlindikatordelete');
-
-        Route::any('/{id}/kebijakan/tambah', 'TrxRanwalRKPDController@btlkebijakantambah');
-        Route::any('/{id}/kebijakan/{kebijakan_id}/ubah', 'TrxRanwalRKPDController@btlkebijakanubah');
-        Route::delete('/{id}/kebijakan/{kebijakan_id}/delete', 'TrxRanwalRKPDController@btlkebijakandelete');
-    });
-
-    // pdt
-    Route::group(['prefix' => 'pdt', 'middleware' => ['auth', 'menu:402']], function() {
-    	Route::get('/', 'TrxRanwalRKPDController@dapat');
-        // Route::get('/', 'TrxRanwalRKPDController@pdt');
-       
-        Route::any('/tambah', 'TrxRanwalRKPDController@pdttambah');
-        Route::any('/{id}/ubah', 'TrxRanwalRKPDController@pdtubah');
-        
-        Route::get('/{id}/pelaksana', 'TrxRanwalRKPDController@pdtpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRanwalRKPDController@pdtpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRanwalRKPDController@pdtpelaksanadelete');
-
-        Route::any('/{id}/indikator/tambah', 'TrxRanwalRKPDController@pdtindikatortambah');
-        Route::any('/{id}/indikator/{indikator_id}/ubah', 'TrxRanwalRKPDController@pdtindikatorubah');
-        Route::delete('/{id}/indikator/{indikator_id}/delete', 'TrxRanwalRKPDController@pdtindikatordelete');
-
-        Route::any('/{id}/kebijakan/tambah', 'TrxRanwalRKPDController@pdtkebijakantambah');
-        Route::any('/{id}/kebijakan/{kebijakan_id}/ubah', 'TrxRanwalRKPDController@pdtkebijakanubah');
-        Route::delete('/{id}/kebijakan/{kebijakan_id}/delete', 'TrxRanwalRKPDController@pdtkebijakandelete');
-    });
-});
-
-
-//RANCANGAN RKPD
-Route::group(['prefix' => 'rancanganrkpd', 'middleware' => ['auth', 'menu:40']], function () {
-    Route::any('/loadData', 'TrxRancangRKPDController@loadData')->middleware('auth', 'menu:403');    
-    Route::get('/', 'TrxRancangRKPDController@index');
-    Route::any('/blangsung', 'TrxRancangRKPDController@blangsung');
-
-    Route::any('/getDataDokumen', 'TrxRancangRKPDController@getDataDokumen');
-    Route::any('/getDataPerencana', 'TrxRancangRKPDController@getDataPerencana');
-    Route::any('/addDokumen', 'TrxRancangRKPDController@addDokumen');
-    Route::any('/editDokumen', 'TrxRancangRKPDController@editDokumen');
-    Route::any('/hapusDokumen', 'TrxRancangRKPDController@hapusDokumen');
-
-    Route::get('/getUnitRenja', 'TrxForumSkpdController@getUnit');
-    Route::get('/getProgramRkpd/{tahun}/{unit}','TrxForumSkpdController@getProgramRkpdForum');
-    Route::get('/getChildBidang/{id_unit}/{id_ranwal}','TrxForumSkpdController@getChildBidang');
-    Route::any('/getProgramRenja/{tahun}/{unit}/{id_forum}','TrxForumSkpdController@getProgramRenja');
-    Route::any('/getKegiatanRenja/{id_program}','TrxForumSkpdController@getKegiatanRenja');
-    Route::any('/getAktivitas/{id_forum}','TrxForumSkpdController@getAktivitas');
-    Route::any('/getPelaksanaAktivitas/{id_aktivitas}','TrxForumSkpdController@getPelaksanaAktivitas');
-    Route::any('/getLokasiAktivitas/{id_pelaksana}','TrxForumSkpdController@getLokasiAktivitas');
-    Route::get('/getChildUsulan/{id_lokasi}','TrxForumSkpdController@getChildUsulan');    
-    Route::get('/getBelanja/{id_lokasi}','TrxForumSkpdController@getBelanja');
-
-    Route::post('/getHitungASB', 'TrxForumSkpdController@getHitungASB');
-    Route::post('/unloadASB', 'TrxForumSkpdController@unloadASB');
-    Route::get('/getLokasiCopy/{id_aktivitas}', 'TrxForumSkpdController@getLokasiCopy');
-    Route::post('/getBelanjaCopy', 'TrxForumSkpdController@getBelanjaCopy');
-
-    Route::post('/AddProgRenja','TrxForumSkpdController@AddProgRenja');
-    Route::post('/editProgRenja','TrxForumSkpdController@editProgRenja');
-    Route::post('/hapusProgRenja','TrxForumSkpdController@hapusProgRenja');
-
-    Route::post('/addKegRenja','TrxForumSkpdController@addKegRenja');
-    Route::post('/editKegRenja','TrxForumSkpdController@editKegRenja');
-    Route::post('/hapusKegRenja','TrxForumSkpdController@hapusKegRenja');
-
-    Route::post('/addAktivitas','TrxForumSkpdController@addAktivitas');
-    Route::post('/editAktivitas','TrxForumSkpdController@editAktivitas');
-    Route::post('/hapusAktivitas','TrxForumSkpdController@hapusAktivitas');
-
-    Route::post('/addPelaksana','TrxForumSkpdController@addPelaksana');
-    Route::post('/editPelaksana','TrxForumSkpdController@editPelaksana');
-    Route::post('/hapusPelaksana','TrxForumSkpdController@hapusPelaksana');
-
-    Route::post('/addLokasi','TrxForumSkpdController@addLokasi');
-    Route::post('/editLokasi','TrxForumSkpdController@editLokasi');
-    Route::post('/hapusLokasi','TrxForumSkpdController@hapusLokasi');
-
-    Route::post('/addUsulan','TrxForumSkpdController@addUsulan');
-    Route::post('/editUsulan','TrxForumSkpdController@editUsulan');
-    Route::post('/hapusUsulan','TrxForumSkpdController@hapusUsulan');
-
-    Route::post('/addBelanja','TrxForumSkpdController@addBelanja');
-    Route::post('/editBelanja','TrxForumSkpdController@editBelanja');
-    Route::post('/hapusBelanja','TrxForumSkpdController@hapusBelanja');
-    
-    Route::get('/dehashPemda','TrxForumSkpdController@dehashPemda');
-
-      
-});
-
-//RANCANGAN  AKHIR RKPD
-Route::group(['prefix' => 'ranhirrkpd', 'middleware' => ['auth', 'menu:40']], function () {
-    Route::any('/loadData', 'TrxRanhirRKPDController@loadData')->middleware('auth', 'menu:405');    
-    Route::any('/blangsung', 'TrxRanhirRKPDController@blangsung');
-
-
-    Route::any('/Dokumen', 'TrxRanhirRKPDController@dokumen');
-    Route::any('/getDataDokumen', 'TrxRanhirRKPDController@getDataDokumen');
-    Route::any('/getDataPerencana', 'TrxRanhirRKPDController@getDataPerencana');
-    Route::any('/addDokumen', 'TrxRanhirRKPDController@addDokumen');
-    Route::any('/editDokumen', 'TrxRanhirRKPDController@editDokumen');
-    Route::any('/hapusDokumen', 'TrxRanhirRKPDController@hapusDokumen');
-    Route::any('/postDokumen', 'TrxRanhirRKPDController@postDokumen');
-    
-    Route::get('/', 'TrxRanhirRKPDController@index');
-    // pdt
-    Route::group(['prefix' => 'pdt', 'middleware' => ['auth', 'menu:406']], function() {
-    	Route::get('/', 'TrxRanhirRKPDController@pdt');
-
-        Route::get('/{id}/pelaksana', 'TrxRanhirRKPDController@pdtpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRanhirRKPDController@pdtpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRanhirRKPDController@pdtpelaksanadelete');
-        
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja', 'TrxRanhirRKPDController@pdtpelaksanabelanja');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/tambah', 'TrxRanhirRKPDController@pdtpelaksanabelanjatambah');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/ubah', 'TrxRanhirRKPDController@pdtpelaksanabelanjaubah');
-        Route::delete('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/delete', 'TrxRanhirRKPDController@pdtpelaksanabelanjadelete');    
-    }); 
-
-    // btl
-    Route::group(['prefix' => 'btl', 'middleware' => ['auth', 'menu:406']], function() {
-    	Route::get('/', 'TrxRanhirRKPDController@btl');
-        Route::any('/tambah', 'TrxRanwalRKPDController@btltambah');
-        Route::any('/{id}/ubah', 'TrxRanwalRKPDController@btlubah');
-        
-        Route::get('/{id}/pelaksana', 'TrxRanhirRKPDController@btlpelaksana');
-        Route::any('/{id}/pelaksana/tambah', 'TrxRanhirRKPDController@btlpelaksanatambah');
-        Route::delete('/{id}/pelaksana/{unit_id}/delete', 'TrxRanhirRKPDController@btlpelaksanadelete');
-        
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja', 'TrxRanhirRKPDController@btlpelaksanabelanja');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/tambah', 'TrxRanhirRKPDController@btlpelaksanabelanjatambah');
-        Route::get('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/ubah', 'TrxRanhirRKPDController@btlpelaksanabelanjaubah');
-        Route::delete('/{id}/pelaksana/{sub_unit_id}/belanja/{belanja_id}/delete', 'TrxRanhirRKPDController@btlpelaksanabelanjadelete');
-    });        
-
-});
-
-
-//RANCANGAN  RKPD FINAL
-Route::group(['prefix' => 'rkpd', 'middleware' => ['auth', 'menu:40']], function () {
-    Route::get('/loadData', 'TrxRKPDController@loadData');    
-    Route::any('/blangsung', 'TrxRKPDController@blangsung');
-    Route::get('/', 'TrxRKPDController@index');
-
-    Route::any('/Dokumen', 'TrxRanhirRKPDController@dokumen');
-    Route::any('/getDataDokumen', 'TrxRanhirRKPDController@getDataDokumen');
-    Route::any('/getDataPerencana', 'TrxRanhirRKPDController@getDataPerencana');
-    Route::any('/addDokumen', 'TrxRanhirRKPDController@addDokumen');
-    Route::any('/editDokumen', 'TrxRanhirRKPDController@editDokumen');
-    Route::any('/hapusDokumen', 'TrxRanhirRKPDController@hapusDokumen');
-    Route::any('/postDokumen', 'TrxRanhirRKPDController@postDokumen');
-
-    Route::get('/edit', 'TrxRKPDController@create');
-});
-
-//PDRB
-    Route::group(['prefix' => '/pdrb', 'middleware' => ['auth', 'menu:109']], function() {
-        Route::any('/', 'RefPDRBController@index');
-        Route::any('/getListpdrb', 'RefPDRBController@getListpdrb');
-        Route::any('/getTahunpdrb', 'RefPDRBController@getTahunpdrb');
-        Route::any('/getKecamatanpdrb', 'RefPDRBController@getKecamatanpdrb');
-        Route::any('/getSektorpdrb/{tahun}/{kecamatan}', 'RefPDRBController@getSektorpdrb');
-        Route::any('/addPdrb', 'RefPDRBController@addpdrb');
-        Route::any('/getEditpdrb/{id}', 'RefPDRBController@getEditpdrb');
-        Route::any('/editPdrb', 'RefPDRBController@editpdrb');
-        Route::any('/hapusPdrb', 'RefPDRBController@hapuspdrb');
-        
-    });
-        //PDRB-HB
-        Route::group(['prefix' => '/pdrbhb', 'middleware' => ['auth', 'menu:109']], function() {
-            Route::any('/', 'RefPDRBHBController@index');
-            Route::any('/getListpdrbhb', 'RefPDRBHBController@getListpdrbhb');
-            Route::any('/getTahunpdrbhb', 'RefPDRBHBController@getTahunpdrbhb');
-            Route::any('/getKecamatanpdrbhb', 'RefPDRBHBController@getKecamatanpdrbhb');
-            Route::any('/getSektorpdrbhb/{tahun}/{kecamatan}', 'RefPDRBHBController@getSektorpdrbhb');
-            Route::any('/addPdrbhb', 'RefPDRBHBController@addpdrbhb');
-            Route::any('/getEditpdrbhb/{id}', 'RefPDRBHBController@getEditpdrbhb');
-            Route::any('/editPdrbhb', 'RefPDRBHBController@editpdrbhb');
-            Route::any('/hapusPdrbhb', 'RefPDRBHBController@hapuspdrbhb');
-            
-        });
-            //AMH
-            Route::group(['prefix' => '/amh', 'middleware' => ['auth', 'menu:109']], function() {
-                Route::any('/', 'RefAMHController@index');
-                Route::any('/getListamh', 'RefAMHController@getListamh');
-                Route::any('/getTahunamh', 'RefAMHController@getTahunamh');
-                Route::any('/getKecamatanamh', 'RefAMHController@getKecamatanamh');
-                Route::any('/getSektoramh/{tahun}/{kecamatan}', 'RefAMHController@getSektoramh');
-                Route::any('/addamh', 'RefAMHController@addamh');
-                Route::any('/getEditamh/{id}', 'RefAMHController@getEditamh');
-                Route::any('/editamh', 'RefAMHController@editamh');
-                Route::any('/hapusamh', 'RefAMHController@hapusamh');
-                
-            });
-            
-                //RataLamaSekolah
-                Route::group(['prefix' => '/ratalamasekolah', 'middleware' => ['auth', 'menu:109']], function() {
-                    Route::any('/', 'RefRataLamaSekolahController@index');
-                    Route::any('/getListratalamasekolah', 'RefRataLamaSekolahController@getListratalamasekolah');
-                    Route::any('/getTahunratalamasekolah', 'RefRataLamaSekolahController@getTahunratalamasekolah');
-                    Route::any('/getKecamatanratalamasekolah', 'RefRataLamaSekolahController@getKecamatanratalamasekolah');
-                    Route::any('/getSektorratalamasekolah/{tahun}/{kecamatan}', 'RefRataLamaSekolahController@getSektorratalamasekolah');
-                    Route::any('/addratalamasekolah', 'RefRataLamaSekolahController@addratalamasekolah');
-                    Route::any('/getEditratalamasekolah/{id}', 'RefRataLamaSekolahController@getEditratalamasekolah');
-                    Route::any('/editratalamasekolah', 'RefRataLamaSekolahController@editratalamasekolah');
-                    Route::any('/hapusratalamasekolah', 'RefRataLamaSekolahController@hapusratalamasekolah');
-                    
-                });
-                
-                    //SeniOR
-                    Route::group(['prefix' => '/senior', 'middleware' => ['auth', 'menu:109']], function() {
-                        Route::any('/', 'RefSeniORController@index');
-                        Route::any('/getListsenior', 'RefSeniORController@getListsenior');
-                        Route::any('/getTahunsenior', 'RefSeniORController@getTahunsenior');
-                        Route::any('/getKecamatansenior', 'RefSeniORController@getKecamatansenior');
-                        Route::any('/getSektorsenior/{tahun}/{kecamatan}', 'RefSeniORController@getSektorsenior');
-                        Route::any('/addsenior', 'RefSeniORController@addsenior');
-                        Route::any('/getEditsenior/{id}', 'RefSeniORController@getEditsenior');
-                        Route::any('/editsenior', 'RefSeniORController@editsenior');
-                        Route::any('/hapussenior', 'RefSeniORController@hapussenior');
-                        
-                    });
-                        //aps
-                        Route::group(['prefix' => '/aps', 'middleware' => ['auth', 'menu:109']], function() {
-                            Route::any('/', 'RefAPSController@index');
-                            Route::any('/getListaps', 'RefAPSController@getListaps');
-                            Route::any('/getTahunaps', 'RefAPSController@getTahunaps');
-                            Route::any('/getTingkataps', 'RefAPSController@getTingkataps');
-                            Route::any('/getKecamatanaps', 'RefAPSController@getKecamatanaps');
-                            Route::any('/getSektoraps/{tahun}/{kecamatan}/{tingkat}', 'RefAPSController@getSektoraps');
-                            Route::any('/addaps', 'RefAPSController@addaps');
-                            Route::any('/getEditaps/{id}', 'RefAPSController@getEditaps');
-                            Route::any('/editaps', 'RefAPSController@editaps');
-                            Route::any('/hapusaps', 'RefAPSController@hapusaps');
-                            
-                        });
-                            //kts
-                            Route::group(['prefix' => '/kts', 'middleware' => ['auth', 'menu:109']], function() {
-                                Route::any('/', 'RefKTSController@index');
-                                Route::any('/getListkts', 'RefKTSController@getListkts');
-                                Route::any('/getTahunkts', 'RefKTSController@getTahunkts');
-                                Route::any('/getTingkatkts', 'RefKTSController@getTingkatkts');
-                                Route::any('/getKecamatankts', 'RefKTSController@getKecamatankts');
-                                Route::any('/getSektorkts/{tahun}/{kecamatan}/{tingkat}', 'RefKTSController@getSektorkts');
-                                Route::any('/addkts', 'RefKTSController@addkts');
-                                Route::any('/getEditkts/{id}', 'RefKTSController@getEditkts');
-                                Route::any('/editkts', 'RefKTSController@editkts');
-                                Route::any('/hapuskts', 'RefKTSController@hapuskts');
-                                
-                            });
-                                //gurumurid
-                                Route::group(['prefix' => '/gurumurid', 'middleware' => ['auth', 'menu:109']], function() {
-                                    Route::any('/', 'RefGuruMuridController@index');
-                                    Route::any('/getListgurumurid', 'RefGuruMuridController@getListgurumurid');
-                                    Route::any('/getTahungurumurid', 'RefGuruMuridController@getTahungurumurid');
-                                    Route::any('/getTingkatgurumurid', 'RefGuruMuridController@getTingkatgurumurid');
-                                    Route::any('/getKecamatangurumurid', 'RefGuruMuridController@getKecamatangurumurid');
-                                    Route::any('/getSektorgurumurid/{tahun}/{kecamatan}/{tingkat}', 'RefGuruMuridController@getSektorgurumurid');
-                                    Route::any('/addgurumurid', 'RefGuruMuridController@addgurumurid');
-                                    Route::any('/getEditgurumurid/{id}', 'RefGuruMuridController@getEditgurumurid');
-                                    Route::any('/editgurumurid', 'RefGuruMuridController@editgurumurid');
-                                    Route::any('/hapusgurumurid', 'RefGuruMuridController@hapusgurumurid');
-                                    
-                                });
-                                    //investor
-                                    Route::group(['prefix' => '/investor', 'middleware' => ['auth', 'menu:109']], function() {
-                                        Route::any('/', 'RefInvestorController@index');
-                                        Route::any('/getListinvestor', 'RefInvestorController@getListinvestor');
-                                        Route::any('/getTahuninvestor', 'RefInvestorController@getTahuninvestor');
-                                        Route::any('/getTingkatinvestor', 'RefInvestorController@getTingkatinvestor');
-                                        Route::any('/getKecamataninvestor', 'RefInvestorController@getKecamataninvestor');
-                                        Route::any('/getSektorinvestor/{tahun}/{kecamatan}', 'RefInvestorController@getSektorinvestor');
-                                        Route::any('/addinvestor', 'RefInvestorController@addinvestor');
-                                        Route::any('/getEditinvestor/{id}', 'RefInvestorController@getEditinvestor');
-                                        Route::any('/editinvestor', 'RefInvestorController@editinvestor');
-                                        Route::any('/hapusinvestor', 'RefInvestorController@hapusinvestor');
-                                        
-                                    });
-                                        //investasi
-                                        Route::group(['prefix' => '/investasi', 'middleware' => ['auth', 'menu:109']], function() {
-                                            Route::any('/', 'RefInvestasiController@index');
-                                            Route::any('/getListinvestasi', 'RefInvestasiController@getListinvestasi');
-                                            Route::any('/getTahuninvestasi', 'RefInvestasiController@getTahuninvestasi');
-                                            Route::any('/getTingkatinvestasi', 'RefInvestasiController@getTingkatinvestasi');
-                                            Route::any('/getKecamataninvestasi', 'RefInvestasiController@getKecamataninvestasi');
-                                            Route::any('/getSektorinvestasi/{tahun}/{kecamatan}', 'RefInvestasiController@getSektorinvestasi');
-                                            Route::any('/addinvestasi', 'RefInvestasiController@addinvestasi');
-                                            Route::any('/getEditinvestasi/{id}', 'RefInvestasiController@getEditinvestasi');
-                                            Route::any('/editinvestasi', 'RefInvestasiController@editinvestasi');
-                                            Route::any('/hapusinvestasi', 'RefInvestasiController@hapusinvestasi');
-                                            
-                                        });
-                                        Route::get('/PrintPdrb/{tahun}','Laporan\CetakDataDasarController@printPdrb');
-Route::get('/PrintPdrbHb/{tahun}','Laporan\CetakDataDasarController@printPdrbHb');
-Route::get('/PrintAmh/{tahun}','Laporan\CetakDataDasarController@printAmh');
-Route::get('/Printratalamasekolah/{tahun}','Laporan\CetakDataDasarController@printRLS');
-Route::get('/Printsenior/{tahun}','Laporan\CetakDataDasarController@printSeniOR');
-Route::get('/PrintAps/{tahun}','Laporan\CetakDataDasarController@printAps');
-Route::get('/PrintKts/{tahun}','Laporan\CetakDataDasarController@printKts');
-Route::get('/Printgurumurid/{tahun}','Laporan\CetakDataDasarController@printGuruMurid');
-Route::get('/Printinvestor/{tahun}','Laporan\CetakDataDasarController@printInvestor');
-Route::get('/Printinvestasi/{tahun}','Laporan\CetakDataDasarController@printInvestasi');
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

@@ -566,42 +566,6 @@
       </div>
 
       </div>
-      
-      {{-- <div class="col-sm-9 col-sm-pull-3">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title" style="color:#ffffff;">Rincian Rencana Pembangunan Jangka Menengah <a id="" class="pull-right"> &raquo;</a></h3>
-            </div>
-            <div class="panel-body">
-            <table id="tblRincianRpjmd" class="table table-inverse table-bordered table-responsive">
-              <thead class="alert-info">
-                  <tr>
-                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                      <th width="20%" style="text-align: center; vertical-align:middle">Misi</th>
-                      <th width="20%" style="text-align: center; vertical-align:middle">Tujuan</th>
-                      <th width="25%" style="text-align: center; vertical-align:middle">Sasaran</th>
-                      <th width="30%" style="text-align: center; vertical-align:middle">Program</th>
-                  </tr>
-              </thead>
-              <tbody>
-                @foreach($trxRpjmd as $data)
-                  <tr>
-                      <td width="5%" style="text-align: center">{{$data->no_misi}}</td>
-                      <td width="20%" style="text-align: left">{{$data->uraian_misi_rpjmd}}</td>
-                      <td width="20%" style="text-align: left">{{$data->uraian_tujuan_rpjmd}}</td>
-                      <td width="25%" style="text-align: left">{{$data->uraian_sasaran_rpjmd}}</td>
-                      <td width="30%" style="text-align: left">{{$data->uraian_program_rpjmd}}</td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
     
 
     </div>
@@ -636,6 +600,7 @@ function formatTgl(val_tanggal){
 
 var url_1 = "{{url('/rpjmd/misi5tahun')}}";
 var url_2 = "{{url('/rpjmd/urusan5tahun')}}";
+
 $(function(){
   $.getJSON(url_1, function (result) {
 

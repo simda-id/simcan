@@ -15,16 +15,23 @@ use \hoaaah\LaravelHtmlHelpers\Html;
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <i class="fa fa-clock-o fa-fw"></i> Update Database :
+            <i class="fa fa-refresh fa-fw fa-lg"></i> Update Database :
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
+                
+                
+
                 <form action="{{ url('admin/update/updateDB') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
+                        <label for="dbVersion" class="col-sm-2" align='left' style="font-size: 20px">Database Engine : </label>
+                        <label for="dbVersion" class="col-sm-8" align='left' style="font-size: 20px; color: #b94743">{{$dataVersion}}</label>
+                    </div>
+                    <div class="row">
                         <label for="txt_periode" class="col-sm-2" align='left'>File Update Database :</label>
                         <label class="btn btn-default col-sm-8">
-                        <input required="" type="file" name="updatedb" id="inputupdate" class="validate inputupdate" accept=".simcan" placeholder="Pilih File Update *.simcan" >
+                        <input required="" type="file" name="updatedb" id="inputupdate" class="validate inputupdate" accept=".simcan.php" placeholder="Pilih File Update *.simcan" >
                             {{-- style="position: absolute; top: -9999999; filter: alpha(opacity=0); opacity: 0; width:0; 
                             height:0; outline: none; cursor: inherit" --}}
                         </label>
@@ -33,10 +40,12 @@ use \hoaaah\LaravelHtmlHelpers\Html;
 
                     <br>
                 <div class="row">
-                    <div class="col-sm-2 text-left"></div>
-                    <div class="col-sm-10 text-left">
+                    <div class="col-sm-2 text-left"></div>                        
+                    <div class="col-sm-10 text-left"> 
                         <button type="submit" class="btn btn-warning btn-labeled btnProses" id='proses'>
-                                <span class="btn-label"><i class="fa fa-cogs fa-fw fa-lg"></i></span>Proses Update DB</button>
+                                <span class="btn-label"><i class="fa fa-refresh fa-fw fa-lg"></i></span>Proses Update DB</button>
+                        <button type="button" class="btn btn-danger btn-labeled" value="cancel" onclick="window.location='{{ URL::previous() }}'" >
+                                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>                
                     </div>
                 </div>
                 </form>
@@ -46,9 +55,10 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                       <h3 class="panel-title">Catatan Update :</h3>
                   </div>
                     <div class="panel-body">
-                        <label>1. Update ini dilakukan untuk update database dengan catatan database yang digunakan adalah database sesuai update terakhir, jika belum lakukan update di luar system ini</label><br>
-                        <label>2. Update ini hanya dilakukan sekali saja..</label><br>
-                        <label>3. Jangan Lupa Backup Database sebelum update...</label><br>
+                        <label>1. Database Engine yang dipakai minimal MySQL versi 5.6 atau MariaDB versi 10.1.2</label><br>
+                        <label>2. Update ini dilakukan untuk update database dengan catatan database yang digunakan adalah database sesuai update terakhir, jika belum lakukan update di luar system ini</label><br>
+                        <label>3. Update ini hanya dilakukan sekali saja..</label><br>
+                        <label>4. Jangan Lupa Backup Database sebelum update...</label><br>
                   </div>                
                 </div>                
         </div>
@@ -81,92 +91,8 @@ function createPesan(message, type) {
           $(this).closest('.page-alert').slideUp();
       });
 
-// $.ajax({
-//           type: "GET",
-//           url: 'update/getApp',
-//           dataType: "json",
-//           success: function(data) {
-
-//           console.log(data)  
-              
-//           }
-//       });
-
-$(document).on('click', '#proses', function() {
-
-    // var fileName = document.getElementById("inputupdate").files;
-
-    // $.ajax({
-    //           type: "POST",
-    //           url: 'update/updateDB',
-    //           data: {
-    //             '_token': $('input[name=_token]').val(),
-    //             'nama_file' :fileName[0].name,
-    //             },
-    //           success: function(data) {
-    //             console.log(data);
-    //             if(data.status_pesan==1){
-    //             createPesan(data.pesan,"success");
-    //             } else {
-    //             createPesan(data.pesan,"danger"); 
-    //           }
-    //           }
-    //       });
-});
-
-$(".inputupdate").change(function () {
-        // var fileName = document.getElementById("inputupdate").files;
-        // $('.label_file').text(fileName[0].name);
-        // alert('test');
-});
-
-
- $("body").on("click",".btnProses",function(e){
-    complete: function(response) 
-    {
-        if($.isEmptyObject(response.responseJSON.error)){
-            // if(data.status_pesan==1){
-            //     createPesan(data.pesan,"success");
-            //     } else {
-            //     createPesan(data.pesan,"danger"); 
-            //   }
-            @if (session('pesan'))
-                createPesan({{Session::get('pesan')}});
-            @endif
-        }else{
-            printErrorMsg(response.responseJSON.error);
-        }
-    }
-  });
-
-  var options = { 
-    complete: function(response) 
-    {
-        if($.isEmptyObject(response.responseJSON.error)){
-            // if(data.status_pesan==1){
-            //     createPesan(data.pesan,"success");
-            //     } else {
-            //     createPesan(data.pesan,"danger"); 
-            //   }
-            @if (session('pesan'))
-                createPesan({{Session::get('pesan')}});
-            @endif
-        }else{
-            printErrorMsg(response.responseJSON.error);
-        }
-    }
-  };
-
-  function printErrorMsg (msg) {
-    $(".print-error-msg").find("ul").html('');
-    $(".print-error-msg").css('display','block');
-    $.each( msg, function( key, value ) {
-        $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-    });
-  }
-
-
-
+  //encryptDB
+  //updateDB
 
 });
 </script>

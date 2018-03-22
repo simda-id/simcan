@@ -1,22 +1,30 @@
-<?php
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class TrxRpjmdProgramIndikator extends Model
-{
-    //
-    public $timestamps = false;
-    protected $table = 'trx_rpjmd_program_indikator';
-    protected $primaryKey = 'id_indikator_program_rpjmd';
-    protected $fillable = ['thn_id','no_urut','id_program_rpjmd','id_indikator_program_rpjmd','id_perubahan','id_indikator','uraian_indikator_program_rpjmd',
-    'tolok_ukur_indikator','angka_awal_periode','angka_tahun1','angka_tahun2','angka_tahun3','angka_tahun4','angka_tahun5','angka_akhir_periode'];
-
-    public function trx_rpjmd_program()
-    {
-      return $this->belongsTo('App\Models\TrxRpjmdProgram','id_program_rpjmd');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+HHN9Ppv289KDGeon4cJy/0==

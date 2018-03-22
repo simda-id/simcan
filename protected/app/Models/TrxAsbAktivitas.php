@@ -1,29 +1,29 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class TrxAsbAktivitas extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'trx_asb_aktivitas';
-    protected $fillable = ['id_aktivitas_asb', 'id_asb_sub_kelompok', 'nm_aktivitas_asb', 'satuan_aktivitas', 'volume_1', 'id_satuan_1','sat_derivatif_1', 'volume_2', 'id_satuan_2', 'sat_derivatif_2','diskripsi_aktivitas', 'range_max', 'kapasitas_max', 'range_max1', 'kapasitas_max1'];
-    protected $primaryKey = 'id_aktivitas_asb';
-
-    public $timestamps = false;
-
-    public function trxasbsubsubkelompok()
-    {
-      return $this->belongsTo('App\Models\TrxAsbSubSubKelompok', 'id_asb_sub_sub_kelompok');
-    }
-
-
-    // public function trxperhitunganaktivitas()
-    // {
-    //   return $this->belongsTo('App\Models\TrxAsbPerhitunganAktivitas', 'id_aktivitas_asb');
-    // }
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+HR+cPq06JrcpxREUIh3QUj+vPy7Hv06PNVLGfzz9accazFuOTaiZql8ki7LCfyXpGD5QByHJH0ow
+Yf7mpMFIYk9cvesrM0INasmMc5CjZEDpPybIHRQw47RcqntQEbc3CVzDITHjWh9kKRYuBgW6X8aj
+ehnXYb2NYgYHiL39CWNXydhQiZ/zppY2VrjZJ1qm63ep2wR64YQPMoEg/+ADgmtQYR0Cq67p3SPC
+FHm9vEQUp78LQ87EmPHAPJsp4P1+M3MEBoKttLSYct0X2Fn6GxTbA8fZnNvCQ4yvXBFpgjRNldqa
+QD7M9FyWeiC/2O7qwuk4frG9yX2fi5+KfLTopnL69/MNabTWt2zyN8M9wvz+OMq/AVFbHaJcSFbb
+tM/ZRRwyEpB700/3Pu3Ki0SUvDYpXdi8ZybUPXav+TvJ8rNmGEDmJZ+SYi522E1lHDOuka5H1tEX
+wFDMoqfTOwlQEcyDLQIvSdDyP/A8tGNIXXUt8b3ns9pjXQAt7IA/hreIEG8gS0dJyzISPtHbXKga
+2X589NgQ/wa9iKAsj2yS7uatQ1Ht7fLSFVWAE8Ok5h326Ia5UV7d4DPI7wSnM8czNBjhS5WX93Gb
+zQQ+UhkK+sV9mwlQ1VoApT83045jFt6BoV5CCjz69B1sAg5ZHQ1wLp/1EWMI2OSOQmbyeNGLPWM1
+Z67NEFaAuuXgdmdri2c8jyTkYvPEGZBuLWduxSv+q0fhmOABuyqtopzOXWjEf16sqanUuMqMsM82
+RMXDBmGfD+ZkIV0cyJx7Su8pIZu1+AzIN57Dk3SFscji0ECLOg8T7tnLcwnSwAnPvlw36XGszsCu
+z64m7K8ljAr+ha4NevbTTdP3EutlryaGx8e+16BxVVvBttGP87Io4wDoE6rVUDjkJh/0+IDZR/mV
+3E2WDc/I1o/eqh/Pc+nC3kS8p43KWoFphEj59NWN5jbITL1y6h10pFEUkwfh6ZeI1XN3UJx6ChV/
+AEeRrl0JOTgzK2W3wZB/SRI3vxKejcK4bXeVmx1KErX0lUsa6HbIwq/NUbYVeIDc/li5kJa4kGnh
+7VgyGcMkxANPPKZGKUC+byDXECmqhcKXQLywOdexW3R0DmIviQGvQZvoCc17zBC2eq0Dce5L1wET
+RtGf6+8aFkgEBNrZgi2Vj00lIXncMAL48K1Uqz0HJCSJCqGcyr7DHhvLkbVyJ9sVyvLF5HO+Ifuw
+fG8/nt/l5BYUbR5n+3sPHc8+QrIxrPBixlLlr92d8hkzVo82D39S8MG8KSRcOhLZifc9OLRmY0N0
+V09mGFIXvI1aYCpnIpv4Tzp1t35N6Eod++tSgCm0uYM7uFtZcxTNINa7OV/eJz7Dyeh56bwQqJsK
+GZNQwxrfAyAGYuC58S/q3BfNyE1eTuXG3rmdLQZeJ5akpv9NFNf8pgssdbN4uunE325dqm/NTcFg
+IQ6341N/nL0j2hUWLYeu1laMNoCsOov+mfXkOonOG/EHb9eo4z5dmVgr6FNKGBYZOIATsNgIxwUM
+dv29LHcPCINfVvwGdaTh9YJRdIqkjHJe1Tk0+jFaL7QUTCGdl+TSekuT1RIkjoaEUlXZW5JJ+7mj
+XBWTrZEsAEV/cIlnliQ0dxxYymbctRzuuVHb+Z8LCmPZr5/1He3MMKcZZwtlJikXXsX96tt7E+AM
+0JH/nKoUgrBKiQp520f3bsHFE2hiooDcPxEz675UsX/4dQcfIeVYKaoYEDf6qVEj8otbpHcEZBNm
+S+PJ92QD19jJTvqvqRqom4iSqCtQTizpPdBLt9pd8mYTAKmFxDVNd2T86PqNNNSzH0sfLqg0/phW
+OEFBU7BioEbmlXMdlgqu0KyfvFWijyXndoVMCUjwUw673tO6QHsLdBrG264aHV3vdBWDcsE3WLaU
+mrlBBui8GFyHB9alxQMq39tU8EZ5M9l3TIDREawoeYnJAg4=

@@ -466,26 +466,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="form-group">
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
                 <div class="col-sm-3">
-                  <input type="number" class="form-control" id="v1_simulasi" name="v1_simulasi">
+                  <input type="text" class="form-control number" id="v1_simulasi" name="v1_simulasi" style="text-align: right;">
                 </div>
-                {{-- <div class="col-sm-2">
-                  <label class="control-label" for="v1_satuan">Satuan :</label>
-                </div>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="v1_satuan" name="v1_satuan" readonly="">
-                </div> --}}
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
                 <div class="col-sm-3">
-                  <input type="number" class="form-control" id="v2_simulasi" name="v2_simulasi">
+                  <input type="text" class="form-control number" id="v2_simulasi" name="v2_simulasi" style="text-align: right;">
                 </div>
-                {{-- <div class="col-sm-2">
-                  <label class="control-label" for="v2_satuan">Satuan :</label>
-                </div>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="v2_satuan" name="v2_satuan" readonly="">
-                </div> --}}
               </div>
           </form>
         </div>
@@ -662,6 +650,8 @@ function createPesan(message, type) {
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
 };
+
+$('.number').number(true,2,',', '.');
 
 
 $('.page-alert .close').click(function(e) {

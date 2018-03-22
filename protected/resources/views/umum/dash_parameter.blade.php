@@ -1,3 +1,8 @@
+<?php
+use App\CekAkses;
+use hoaaah\LaravelMenu\Menu;
+?>
+
 @extends('layouts.parameterlayout')
 <meta name="_token" content="{!! csrf_token() !!}" />
 
@@ -152,9 +157,9 @@
             </div>
         </div>
         <div class="row">
-            <?php 
+            {{-- <?php 
                     $akses = new \App\CekAkses();
-            ?> 
+            ?>  --}}
             <div class="col-lg-offset-1 col-sm-12 col-md-12 col-lg-10">
                 <div class="features-list">
                     <div class="row">

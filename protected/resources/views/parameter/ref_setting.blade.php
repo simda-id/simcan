@@ -68,7 +68,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label for="ur_satuan" class="col-sm-3" align='left'>Tahun Perencanaan :</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control number" id="tahun_rencana" name="tahun_rencana" required="required" >
+                <input type="text" class="form-control number" id="tahun_rencana" name="tahun_rencana" required="required" style="text-align: center;" >
               </div>
             </div>
             <div class="form-group">
@@ -156,9 +156,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </tbody>
                     </table>
             </div>
-          </div>        
+          </div>
+
+          <div class="form-group">
+              <label for="deviasi_pagu" class="col-sm-3" align='left'>Deviasi Control Pagu (%) :</label>
+              <div class="col-sm-2">
+                <input type="text" class="form-control number" id="deviasi_pagu" name="deviasi_pagu" required="required" style="text-align: right;">
+              </div>
+          </div>
+
         </form>
-      </div>
+        </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusLokasi">
@@ -272,7 +280,8 @@ $('.page-alert .close').click(function(e) {
     });
 
 $('.number').number(true,0,',', '.');
-// $('#tahun_rencana').number(true,0,',', '.');
+
+$('#deviasi_pagu').number(true,2,',', '.');
 // $('#jml_rw').number(true,0,',', '.');
 // $('#pagu_rw').number(true,2,',', '.');
 // $('#jml_desa').number(true,0,',', '.');
@@ -327,6 +336,7 @@ $(document).on('click', '.add-satuan', function() {
   $('#jenis_kecamatan').val(0);
   $('#jml_kecamatan').val(0);
   $('#pagu_kecamatan').val(0);
+  $('#deviasi_pagu').val(5);
   $('#ModalSetting').modal('show');
 });
 
@@ -350,6 +360,7 @@ $('.modal-footer').on('click', '.add', function() {
             'jenis_kecamatan' : $('#jenis_kecamatan').val(),
             'jml_kecamatan' : $('#jml_kecamatan').val(),
             'pagu_kecamatan' : $('#pagu_kecamatan').val(),
+            'deviasi_pagu' : $('#deviasi_pagu').val(),
         },
         success: function(data) {
               $('#tblSetting').DataTable().ajax.reload();
@@ -383,6 +394,7 @@ $('#tblSetting tbody').on( 'dblclick', 'tr', function () {
   $('#jenis_kecamatan').val(data.jenis_kecamatan);
   $('#jml_kecamatan').val(data.jml_kecamatan);
   $('#pagu_kecamatan').val(data.pagu_kecamatan);
+  $('#deviasi_pagu').val(data.deviasi_pagu);
   $('#ModalSetting').modal('show');  
 
   } );
@@ -408,6 +420,7 @@ var data = setting_tbl.row( $(this).parents('tr') ).data();
   $('#jenis_kecamatan').val(data.jenis_kecamatan);
   $('#jml_kecamatan').val(data.jml_kecamatan);
   $('#pagu_kecamatan').val(data.pagu_kecamatan);
+  $('#deviasi_pagu').val(data.deviasi_pagu);
   $('#ModalSetting').modal('show');
 });
 
@@ -432,6 +445,7 @@ $('.modal-footer').on('click', '.edit', function() {
             'jenis_kecamatan' : $('#jenis_kecamatan').val(),
             'jml_kecamatan' : $('#jml_kecamatan').val(),
             'pagu_kecamatan' : $('#pagu_kecamatan').val(),
+            'deviasi_pagu' : $('#deviasi_pagu').val(),
         },
         success: function(data) {
             $('#tblSetting').DataTable().ajax.reload();

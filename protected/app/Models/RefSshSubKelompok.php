@@ -1,28 +1,30 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class refsshsubkelompok extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'ref_ssh_sub_kelompok';
-    protected $primaryKey = 'id_sub_kelompok_ssh';
-    protected $fillable = ['id_sub_kelompok_ssh','id_kelompok_ssh','no_urut','uraian_sub_kelompok_ssh',];
-
-    public $timestamps = false;
-
-    public function refsshkelompok()
-    {
-      return $this->belongsTo('App\Models\RefSshKelompok', 'id_kelompok_ssh');
-    }
-
-    public function refsshtarif()
-    {
-      return $this->hasMany('App\Models\RefSshTarif', 'id_sub_kelompok_ssh');
-    }
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+bwl4fCodlM1neOO=

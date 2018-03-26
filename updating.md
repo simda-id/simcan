@@ -9,12 +9,12 @@
 ## Update Database
 
 1. Download file untuk update database di folder protected/database/*.simcan
-2. Login sebagai super admin.
+2. Login sebagai admin.
 3. Temukan menu update.
-4. Pilih file updater database.
+4. Pilih file updater database. Pastikan memilih sesuai urutannya.
 5. Jalankan proses update.
 
 ## Known issues
 
-1. Di linux, diperlukan akses baca tulis ke folder storage. Silakan sesuaikan dengan permission 755 atau sesuai konfigurasi server Anda.
+1. Updater database __HANYA__ bisa dijalankan untuk mysql server 5.6.xx sesuai system requirements.
 2. Aplikasi __TIDAK__ berada dalam maintenance mode selama proses update. Silakan pilih waktu update ketika user tidak mengakses aplikasi.

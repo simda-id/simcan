@@ -209,8 +209,10 @@ $('.display').DataTable({
 var satuan_tbl = $('#tblsatuan').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'Bfrtip',
+        // dom: 'Bfrtip',
         autoWidth : false,
+        // "pagingType": "full_numbers",
+        "pagingType": "input",
         "ajax": "{{url('./satuan/getdata')}}",
         "columns": [
               { data: 'id_satuan','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},

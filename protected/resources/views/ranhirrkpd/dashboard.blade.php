@@ -22,7 +22,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <div class="col-lg-3 col-md-6">
-                            <a href="{{ url('/ranhirrkpd/pdt') }}">
+                            <a href="#">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -30,7 +30,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <i style="font-size:5em;" class="glyphicon glyphicon-download-alt"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">26</div>
+                                            <div class="huge">{{number_format(1325,0,",",".")}} jt</div>
                                             <div>Pendapatan</div>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <i class="fa fa-road fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">26</div>
+                                            <div class="huge">{{number_format(875,0,",",".")}} jt</div>
                                             <div>Belanja Langsung</div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <div class="col-lg-3 col-md-6">
-                            <a href="{{ url('/ranhirrkpd/btl') }}">
+                            <a href="#">
                             <div class="panel panel-danger">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -80,7 +80,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <i class="fa fa-comments fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">26</div>
+                                            <div class="huge">{{number_format(550,0,",",".")}} jt</div>
                                             <div>Belanja Tidak Langsung</div>
                                         </div>
                                     </div>

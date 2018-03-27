@@ -40,10 +40,25 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="program">
-              <br>
+              <br>              
               <div>
                 <a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Program baru yang belum ada di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a>
-              </div>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Ranwal RKPD <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                  <a class="dropdown-item btnPrintProyeksiPendapatan" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Proyeksi Pendapatan RKPD</a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item btnPrintReviewRanwalRKPD" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Review Ranwal RKPD</a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item btnPrintRumusanReviewRanwalRKPD" ><i class="fa fa-print fa-fw fa-lg"></i> Cetak Rumusan Review Ranwal RKPD</a>
+                                </li>                  
+                            </ul>
+                    </div>
+                  </div> 
+
               <div class="table-responsive">
               <table id="tblProgramRKPD" class="table display table-responsive table-striped compact table-bordered"  cellspacing="0" width="100%">
                         <thead>
@@ -1972,6 +1987,18 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
           }
       });
     });
+
+$(document).on('click', '.btnPrintProyeksiPendapatan', function() {      
+  window.open('./PrintProyeksiPendapatan');      
+});
+
+$(document).on('click', '.btnPrintReviewRanwalRKPD', function() {
+  window.open('./PrintReviewRanwalRKPD');
+});
+
+$(document).on('click', '.btnPrintRumusanReviewRanwalRKPD', function() {
+  window.open('./PrintRumusanReviewRanwal');
+});
 
 
 });

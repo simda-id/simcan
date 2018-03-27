@@ -1,7 +1,36 @@
-# change log
+# change log (catatan perubahan versi)
 
-[Releases](https://github.com/simda-id/simcan/releases)
-[Documentation] (https://github.com/simda-id/simcan/wiki)
+[Releases](https://github.com/simda-id/simcan/releases) | [Documentation](https://github.com/simda-id/simcan/wiki)
+
+## versi v1.0.0-rc04
+
+Release Candidate 04
+
+1. Penambahan data umum
+2. Penambahan timeline perencanaan
+3. Penambahan edit urusan/bidang pelaksana di rpjmd
+4. Perbaikan interface pokok pikiran
+5. Perbaikan interface penyusunan rincian komponen ASB
+6. Perbaikan interface pemilihan data SSH
+7. Penambahan dan perbaikan beberapa laporan
+8. Penambahan dan perbaikan beberapa interface
+9. Perbaikan pola aktivasi ke server
+10. Perbaikan beberapa bug dan penambahan bug lain
+
+## versi v1.0.0-rc03
+
+Release Candidate 03
+
+1. Perbaikan view login
+2. Perbaikan User Management.
+3. Perbaikan proses Pokir.
+4. Perbaikan proses Renja SKPD.
+5. Perbaikan proses SSH.
+6. Perbaikan proses copy data ASB.
+7. Perbaikan proses Forum SKPD
+8. Perbaikan proses Rancangan Akhir
+9. Beberapa perbaikan bug.
+10. Penambahan bug baru.
 
 ## versi v1.0.0-rc02-u
 
@@ -43,7 +72,3 @@ Release Candidate 01
 ## Known Issues
 
 Beberapa kasus, terjadi kelambatan load data yang berjumlah puluhan ribu. Untuk sementara dapat diatasi dengan mematikan aplikasi yang berjalan di background, atau menambah RAM, dan mengoptimalkan konfigurasi PHP dan web server.
-
-### Berkontribusi
-
-Untuk laporan bug, permintaan fitur, dapat disampaikan melalui timaplikasi et yahoo titik com.

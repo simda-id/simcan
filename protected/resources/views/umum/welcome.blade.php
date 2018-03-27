@@ -89,109 +89,690 @@
           color: #fff;
           transition: all 0.5s ease 0s;
       }
+
+      .Timeline {
+        display: flex;
+        align-items: center;
+        height: 250px;
+      }
+
+      .event1,
+      .event2, .event3 {
+        position: relative;
+      }
+
+      .event1Bubble {
+        position: absolute;
+        background-color: rgba(151, 202, 211, 0.1);
+        width: 160px;
+        height: 90px;
+        top: -100px;
+        left: -15px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(151, 202, 211, 0.64)
+      }
+
+      .event2Bubble {
+        position: absolute;
+        background-color: rgba(151, 202, 211, 0.1);
+        width: 160px;
+        height: 90px;
+        left: -105px;
+        top: 35px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(151, 202, 211, 0.64)
+      }
+
+      .event1Bubble:after,
+      .event1Bubble:before,
+      .event2Bubble:after,
+      .event2Bubble:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+        border-bottom: 0;
+      }
+
+      .event1Bubble:before {
+        bottom: -10px;
+        left: 13px;
+        border-top-color: rgba(222, 222, 222, 0.66);
+        border-width: 12px;
+      }
+
+      .event1Bubble:after {
+        bottom: -8px;
+        left: 13px;
+        border-top-color: #F6F6F6;
+        border-width: 12px;
+      }
+
+      .event2Bubble:before {
+        bottom: 89px;
+        left: 103px;
+        border-top-color: rgba(222, 222, 222, 0.66);
+        border-width: 12px;
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+
+      .event2Bubble:after {
+        bottom: 87px;
+        left: 103px;
+        border-top-color: #F6F6F6;
+        border-width: 12px;
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+
+      .eventTime {
+        display: flex;
+      }
+
+      .Day {
+        font-size: 24px;
+        font-family: "Arial Black", Gadget, sans-serif;
+        margin-left: 10px;
+        color: #4C4A4A;
+      }
+
+      .MonthYear {
+        font-size: 14px;
+        margin-left: 12px;
+        font-weight: bold;
+        margin-top: 6px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #4C4A4A;
+      }
+
+      .eventTitle {
+        font-family: "Arial", Gadget, sans-serif;
+        color: #0074d9;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        margin-left: 12px;
+        margin-top: -2px;
+      }
+
+      .time {
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 50px;
+        font-size: 8px;
+        margin-top: -3px;
+        margin-left: -5px;
+        color: #9E9E9E;
+      }
+
+      .now{
+          background-color: #004165;
+          color: white;
+          border-radius: 8px;
+          margin: 5px;
+          padding: 4px;
+          font-size: 10px;
+          font-family: Arial, Helvetica, sans-serif;
+          border: 2px solid white;
+          font-weight: bold;
+          box-shadow: 0 0 0 2px #004165
+      }
+
+      .start{
+          background-color: #2ecc40;
+          color: white;
+          border-radius: 6px;
+          margin: 5px;
+          padding: 5px;
+          font-size: 16px;
+          font-family: Arial, Helvetica, sans-serif;
+          border: 2px solid white;
+          font-weight: bold;
+          box-shadow: 0 0 0 1px #2ecc40
+      }
+
+      .stop{
+          background-color: #ff4136;
+          color: white;
+          border-radius: 6px;
+          margin: 5px;
+          padding: 5px;
+          font-size: 16px;
+          font-family: Arial, Helvetica, sans-serif;
+          border: 2px solid white;
+          font-weight: bold;
+          box-shadow: 0 0 0 1px #ff4136
+      }
     </style>
 
     <script src="{{ asset('/js/jquery.min.js')}}"></script>
     <script src="{{ asset('/js/jquery-ui.js')}}"></script>
     <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
-
+    <script src="{{ asset('/js/Chart.bundle.js') }}"></script>
+    <script src="{{ asset('/js/jquery.rowspanizer.js')}}"></script>
     
 
 </head>
 
 <body>
-    <nav class="navbar navbar-well navbar-static-top" role="navigation" style="margin-bottom: 0">
-      <div class="container">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
-        <a class="navbar-brand navbar-right" href="{{ url('/') }}">
+        <a class="navbar-brand pull-left" href="{{ url('/') }}">
           <div class="row">
-            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span>
+            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> <span class="badge"> ver 1.0 </span>
           </div>
         
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-top-links pull-right">
         @if (Auth::guest())
-          <li class="active"><a href="{{ route('login') }}" role="button" >Login <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="{{ route('login') }}" role="button" ><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span class="sr-only">(current)</span></a></li>
         @else
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-              <ul class="dropdown-menu dropdown-user" role="menu">
-                <li>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      <i class="fa fa-key fa-fw text-info"> Ganti Password</i>
-                  </a>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      {{ csrf_field() }}
-                  </form>
-                </li>
-              </ul>
+          <li class="active">
+            <a href="{{ url('/home') }}" role="button"><i class="fa fa-user fa-fw fa-lg"></i> {{ Auth::user()->name }}</a>
           </li>
         @endif
       </ul>
-    </div>
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
-            <div class="col-sm-12 col-sm-12 col-sm-12 col-sm-12">
-                <div class="box">
-                    <div id="iPemda">
-                        <img id="profile-img" class="box-icon" src="{{ asset('vendor/default.png') }}" />
-                        {{-- {{$iPemda}} --}}
-                    </div>
-                    <div class="info">
-                      @foreach($trxVisi as $dataVisi)
-                        <h4 class="text-center">PEMERINTAH {{$rPemda}}</h4>
-                        <h4 class="text-center">Periode : {{$dataVisi->tahun_1}} s/d {{$dataVisi->tahun_5}}</h4>                        
-                        <p class="text-center">{{$dataVisi->uraian_visi_rpjmd}}</p>
-                      @endforeach
-                    </div>
-                </div>
+      <div class="row" style="padding: 70px">
+      <div class="col-sm-3 col-sm-push-9">
+        <div class="col-md-12">
+          @foreach($trxVisi as $dataVisi)
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{$rPemda}}</h3>
             </div>
+            <div class="panel-body">
+              <div class="box" >
+                      <div id="iPemda">
+                          <img id="profile-img" class="box-icon" src="{{ asset('vendor/default.png') }}" />
+                      </div>
+                      <div class="">                        
+                          <h4 class="text-center">PEMERINTAH {{$rPemda}}</h4>
+                          <h4 class="text-center">Periode : {{$dataVisi->tahun_1}} s/d {{$dataVisi->tahun_5}}</h4>
+                          {{-- <a class="text-center">{{$xApp}}</a>   --}}
+                      </div>
+                  </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+        <div class="col-md-12">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Menu Utama</h3>
+            </div>
+            <div class="panel-body">
+              <dd><a href="#" target="_blank">RKPD</a></dd>
+              <dd><a href="#" target="_blank">Renja</a></dd>
+              <dd><a href="#" target="_blank">Usulan Musrenbang</a></dd>
+              <dd><a href="#" target="_blank">Pokir DPRD</a></dd>
+              <dd class="last"></dd>
+            </div>
+          </div>
+        </div>  
       </div>
-    <br>
+      <div class="col-sm-9 col-sm-pull-3">
+            <div class="col-sm-12">
+              <div class="panel panel-warning">
+              <div class="panel-heading">
+                <h3 class="panel-title">Rincian Rencana Pembangunan Jangka Menengah <a id="" class="pull-right"> &raquo;</a></h3>
+              </div>
+              <div class="panel-body">
+                @foreach($trxVisi as $dataVisi)
+                  <p><strong>Visi :</strong> {{$dataVisi->uraian_visi_rpjmd}}</p>
+                @endforeach
+                <table id="tblRincianRpjmd" class="tabletable-responsive">
+                  <thead>
+                      <tr>
+                          <th width="5%" style="text-align: left; vertical-align:middle">Misi :</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($trxRpjmd as $data)
+                      <tr>
+                          <td width="5%" style="text-align: center">{{$data->no_misi}}</td>
+                          <td style="text-align: left">{{$data->uraian_misi_rpjmd}}</td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-    <table id="tblRincianRpjmd" class="table table-inverse table-bordered table-responsive">
-      <thead class="alert-info">
-          <tr>
-              <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-              <th width="20%" style="text-align: center; vertical-align:middle">Misi</th>
-              <th width="20%" style="text-align: center; vertical-align:middle">Tujuan</th>
-              <th width="25%" style="text-align: center; vertical-align:middle">Sasaran</th>
-              <th width="30%" style="text-align: center; vertical-align:middle">Program</th>
-          </tr>
-      </thead>
-      <tbody>
-        @foreach($trxRpjmd as $data)
-          <tr>
-              <td width="5%" style="text-align: center">{{$data->no_misi}}</td>
-              <td width="20%" style="text-align: left">{{$data->uraian_misi_rpjmd}}</td>
-              <td width="20%" style="text-align: left">{{$data->uraian_tujuan_rpjmd}}</td>
-              <td width="25%" style="text-align: left">{{$data->uraian_sasaran_rpjmd}}</td>
-              <td width="30%" style="text-align: left">{{$data->uraian_program_rpjmd}}</td>
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
+          <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Misi Pemda selama 5 tahun </h3>
+              </div>
+                <div class="panel-body">
+                  <canvas id="canvasMisi5" height="300" width="600"></canvas>
+              </div>                
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Urusan 5 Tahun</h3>
+              </div>
+                <div class="panel-body">
+                  <canvas id="canvasUrusan5" height="300" width="600"></canvas>
+              </div>                
+            </div>
+          </div>
+
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title" style="color:#d9534f;">Jadwal dan Alur Proses Penyusunan RKPD-Renja 
+                  <select id="" class="col-sm-2 pull-right hidden" name="id_tahun" id="id_tahun"></select>                  
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div class="Timeline">
+                  <div class="start">
+                      Mulai
+                  </div>
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl1"></span></div>                            
+                        </div>
+                        <div class="eventTitle"><span id="ur1"></span></div>
+                        <div class="MonthYear"><span id="tglA1"></span></div>
+                      </div>
+                      {{-- <svg height="20" width="20">
+                         <circle cx="10" cy="11" r="5" fill="#004165" />
+                      </svg> --}}
+                      <div id="ico1"></div>
+                    </div>
+                    
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event2">                      
+                      <div class="event2Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl2"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur2"></span></div>
+                        <div class="MonthYear"><span id="tglA2"></span></div>
+                      </div>
+                      <div id="ico2"></div>
+                    </div>
+                    
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl3"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur3"></span></div>
+                        <div class="MonthYear"><span id="tglA3"></span></div>
+                      </div>
+                      <div id="ico3"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event2">                      
+                      <div class="event2Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl4"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur4"></span></div>
+                        <div class="MonthYear"><span id="tglA4"></span></div>
+                      </div>
+                    <div id="ico4"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl5"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur5"></span></div>
+                        <div class="MonthYear"><span id="tglA5"></span></div>
+                      </div>
+                      <div id="ico5"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event2">                      
+                      <div class="event2Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl6"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur6"></span></div>
+                        <div class="MonthYear"><span id="tglA6"></span></div>
+                      </div>
+                    <div id="ico6"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl7"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur7"></span></div>
+                        <div class="MonthYear"><span id="tglA7"></span></div>
+                      </div>
+                      <div id="ico7"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event2">                      
+                      <div class="event2Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl8"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur8"></span></div>
+                        <div class="MonthYear"><span id="tglA8"></span></div>
+                      </div>
+                    <div id="ico8"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        <div class="eventTime">
+                          <div class="MonthYear"><span id="tgl9"></span></div>
+                        </div>
+                        <div class="eventTitle"><span id="ur9"></span></div>
+                        <div class="MonthYear"><span id="tglA9"></span></div>
+                      </div>
+                      <div id="ico9"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event2">                      
+                      <div class="event2Bubble">
+                        {{-- <div class="eventTime"> --}}
+                          <div class="MonthYear"><span id="tgl10"></span></div>
+                        {{-- </div> --}}
+                        <div class="eventTitle"><span id="ur10"></span></div>
+                        <div class="MonthYear"><span id="tglA10"></span></div>
+                      </div>
+                    <div id="ico10"></div>
+                    </div>
+
+                  <svg height="5" width="70">
+                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                  </svg>
+
+                    <div class="event1">                      
+                      <div class="event1Bubble">
+                        {{-- <div class="eventTime"> --}}
+                          <div class="MonthYear"><span id="tgl11"></span></div>
+                        {{-- </div> --}}
+                        <div class="eventTitle"><span id="ur11"></span></div>
+                        <div class="MonthYear"><span id="tglA11"></span></div>
+                      </div>
+                      <div id="ico11"></div>
+                    </div>
+
+                    <div class="stop">
+                      Selesai
+                    </div>                     
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    
 
     </div>
     <hr>
-      <footer style="text-align: center;">
-        <p>&copy; <strong>Badan Pengawasan Keuangan dan Pembangunan - 2017</strong></p>
-      </footer>
+      <footer id="bottom">
+      <div class="pull-right wrapper footer">
+              <p>
+                  <b><a HREF="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan">Badan Pengawasan Keuangan dan Pembangunan</a></b>
+                  | <b>Tim Satgas Simda</b> | Copyright &copy; 2018  
+      </div>
+              </p>
+    </footer>
 </body>
 
-
-<script src="{{ asset('/js/jquery.rowspanizer.js')}}"></script>
-<script>
+<script  type="text/javascript" language="javascript" class="init">
 $(document).ready( function() {
-  $("#tblRincianRpjmd").rowspanizer({vertical_align: 'top'});
+$("#tblRincianRpjmd").rowspanizer({vertical_align: 'top'});
+
+function formatTgl(val_tanggal){
+      var formattedDate = new Date(val_tanggal);
+      var d = formattedDate.getDate();
+      var m = formattedDate.getMonth()+1;
+      var y = formattedDate.getFullYear();
+      var m_names = new Array("Jan", "Feb", "Mar", 
+        "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", 
+        "Okt", "Nov", "Des")
+
+      var tgl= d + "-" + m + "-" + y
+
+      return tgl;
+}
+
+var url_1 = "{{url('/rpjmd/misi5tahun')}}";
+var url_2 = "{{url('/rpjmd/urusan5tahun')}}";
+
+$(function(){
+  $.getJSON(url_1, function (result) {
+
+    var labels = [],data=[];
+    for (var i = 0; i < result.length; i++) {
+         labels.push(result[i].uraian_misi_rpjmd.substring(0,120));
+        data.push(result[i].count);
+    }
+
+    var chartData = {
+      labels : labels,
+      datasets : [
+        {            
+            label: 'Pagu',
+            backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+            data : data
+        }
+      ]
+    };
+
+    var ctx = document.getElementById('canvasMisi5').getContext('2d');
+    
+    var chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: chartData,
+        options: {
+                elements: {
+                      arc: {
+                    borderWidth: 0
+                }
+                },
+                title: {
+                    display: false,
+                    text: 'Misi 5 Tahun'
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data2) {
+//                             return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+//                                 return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
+//                             });
+                          return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
+                              return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
+                        }
+                    }
+                },
+                
+                legend: {
+                  callbacks: {
+                    label: function(tooltipItem, data2) {
+                      return labels[tooltipItem.index].substring(0,100);
+                          }
+                  },
+                    display: true,
+                    position : 'bottom',
+                    
+                    labels: {
+                        fontSize: 7
+                        // fontColor: 'rgb(255, 99, 132)'
+                    }
+                },                
+                responsive: true,
+            }
+    });
+  });
+
+  $.getJSON(url_2, function (result) {
+
+      var labels = [],data=[];
+      for (var i = 0; i < result.length; i++) {
+           labels.push(result[i].nm_urusan.substring(0,120));
+          data.push(result[i].total_pagu);
+      }
+
+      var chartData = {
+        labels : labels,
+        datasets : [
+          {
+              
+              label: 'Pagu',
+              backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+              data : data
+          }
+        ]
+      };
+
+      var ctx = document.getElementById('canvasUrusan5').getContext('2d');
+      
+      var chartInstance = new Chart(ctx, {
+          type: 'doughnut',
+          data: chartData,
+          options: {
+                  elements: {
+                      arc: {
+                    borderWidth: 0
+                }
+                  },
+                  title: {
+                      display: false,
+                      text: 'Urusan 5 Tahun'
+                  },
+                  tooltips: {
+                      callbacks: {
+                          label: function(tooltipItem, data2) {
+//                               return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+//                                   return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
+//                               });
+                            return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
+                                return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
+                          }
+                      }
+                  },
+                  
+                  legend: {
+                    callbacks: {
+                      label: function(tooltipItem, data2) {
+                        return labels[tooltipItem.index].substring(0,100);
+                            }
+                    },
+                      display: true,
+                      position : 'bottom',
+                      
+                      labels: {
+                          fontSize: 7
+                          // fontColor: 'rgb(255, 99, 132)'
+                      }
+                  },                
+                  responsive: true,
+              }
+      });
+    });  
+});
+
+var d = new Date();
+var n = d.getFullYear() + 1;
+
+$.ajax({
+    type: "GET",
+    url: './agenda/tlJadwal/'+n,
+    dataType: "json",
+
+    success: function(data) {
+      // console.log(data);
+      var j = data.length;
+          var post, i, k;
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            k = i+1;
+            $('#tgl'+k).text('M : '+ formatTgl(data[i].tgl_mulai));
+            $('#tglA'+k).text('S : '+formatTgl(data[i].tgl_akhir));
+            $('#ur'+k).text(data[i].nm_langkah);
+            $('#ico'+k).html('<i class="'+data[i].status_real+'"></i>');
+          }
+    }
+});
+
+$.ajax({
+          type: "GET",
+          url: './getTahunSetting',
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+          }
+          }
+      });
+
+
 });
 </script>
 

@@ -16,182 +16,244 @@ use hoaaah\LaravelMenu\Menu;
     <link rel="icon" href="{{asset('simda-favicon.ico')}}">
 
     <title>simd@Perencanaan</title>
-
-    <!-- Styles -->
-
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/1417cae13b.css"> --}}
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
 
+    <style>
+    .xCss {
+      width: 15%;
+      height: 70px;
+      cursor: pointer;
+      margin: 0 auto;
+      font: normal 20px/50px "Domine Font Family", Helvetica, sans-serif;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      -o-text-overflow: clip;
+      text-overflow: clip;
+    }
+
+    .btn span{
+        position: relative;
+        margin-top: 15px;
+        left: -15px;
+        /*float: left;*/
+    }
+
+    .bd-green{
+        border: 1px solid #16a085;
+        color:#16a085;
+    }
+    .btn.bd-green:hover,
+    .btn.bd-green:focus{
+        color:#fff;
+        border-radius: 15px;
+        background:#16a085; 
+    }
+    .bd-blue{
+        border: 1px solid #2980b9;
+        color:#2980b9;
+    }
+    .btn.bd-blue:hover,
+    .btn.bd-blue:focus{
+        color:#fff;
+        background:#2980b9;
+        border-radius: 15px;
+    }
+    .bd-orange{
+        border: 1px solid #df7401;
+        color:#df7401;
+    }
+    .btn.bd-orange:hover,
+    .btn.bd-orange:focus{
+        color:#fff;
+        background:#df7401;
+        border-radius: 15px;
+    }
+
+    .bd-red{
+        border: 1px solid #cb2027;
+        color:#cb2027;
+    }
+    .btn.bd-red:hover,
+    .btn.bd-red:focus{
+        color:#fff;
+        background:#cb2027;
+        border-radius: 15px;
+    }
+
+    .bd-purple{
+        border: 1px solid #8e44ad;
+        color:#8e44ad;
+    }
+    .btn.bd-purple:hover,
+    .btn.bd-purple:focus{
+        color:#fff;
+        background:#8e44ad;
+        border-radius: 15px;
+    }
+
+    @media only screen and (max-width: 767px) {
+    .btn{
+        margin-bottom: 15px;
+    }
+        
+    </style>
+
     <script src="{{ asset('/js/jquery.min.js')}}"></script>
     <script src="{{ asset('/js/jquery-ui.js')}}"></script>
     <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('/js/holder.js')}}"></script>
-
-    {{-- <style>
-        h1.padding {
-        padding-right: 1cm;
-        }
-    </style> --}}
-
 </head>
 
 <body>
-    <nav class="navbar navbar-findcond navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">          
-                    <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
-                        <div class="row">
-                            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span>
+    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <div class="row">
+                        <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> 
+                        :: {{Session::get('xPemda')}}
+                    </div>
+                </a>
+            </div>
+            <ul class="nav navbar-top-links pull-right">
+                <?php 
+                    $akses = new \App\CekAkses();
+                ?>                       
+                @if (Auth::guest())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            User <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user" role="menu">
+                            <li>
+                                <a href="{{ route('register') }}">Register</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('login') }}">Login</a>
+                            </li>
+                        </ul>
+                    </li>
+                @else                            
+                    <li class="navbar-form">
+                        <div class="form-group">
+                            <label for="id_tahun" style="color: #fff">Tahun Anggaran :</label>
                         </div>
-                    </a>
-                </div>
-                    <ul class="nav navbar-nav navbar-right">                        
-                        @if (Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    User <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ route('register') }}">Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('login') }}">Login</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="navbar-form">
-                                <div class="form-group">
-                                    <label for="id_tahun" style="color: #fff">Tahun Anggaran :</label>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-key fa-fw text-info"> Ganti Password</i>
-                                        </a>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                        <div class="form-group">
+                            <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="fa fa-caret-down fa-fw fa-lg"></span>
+                        </a>
+                            <ul class="dropdown-menu dropdown-user" role="menu">
+                                <li>
+                                    <a id="btn_ganti" onclick="event.preventDefault();"><i class="fa fa-key fa-fw text-info"></i> Ganti Password</a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>                                        
+                                </li>
+                            </ul>
+                    </li>
+                @endif
+            </ul>
     </nav>
 
-    <div class="container">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <br>
-        <!-- Wrapper for slides -->
+    <div class="container-fluid" style="padding: 30px">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+        <hr>
         <div class="carousel-inner">
             <div class="item active">
-                {{-- <img src="http://placehold.it/1200x500/0b0b61/ffffff&text=simd@Perencanaan {{Session::get('tahun')}} "> --}}
-                <img data-src="holder.js/1200x400?bg=0B0B61&fg=FFFFFF&text=simd@Perencanaan">
+                <img data-src="holder.js/100px600?auto&bg=0B0B61&fg=FFFFFF&text=simd@Perencanaan">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Dihadirkan sebagai alat bantu untuk menyelaraskan perencanaan jangka menengah, jangka pendek, hingga ke penganggaran.<br> Dengan aplikasi ini dapat dijaga keterkaitan dan dukungan antara penganggaran, perencanaan tahunan hingga ke perencanaan lima tahunan.</p>
                 </div>
             </div>
             <div class="item">
-                <img data-src="holder.js/1200x400?bg=df7401&fg=FFFFFF&text=ASB dan SSH">
+                <img data-src="holder.js/100px600?auto&bg=df7401&fg=FFFFFF&text=ASB dan SSH">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         <strong>Analisa Standar Belanja</strong> dan <strong>Standar Satuan Harga</strong> sebagai jembatan untuk menghubungkan antara proses perencanaan dengan proses penganggaran.</p>
                     <p>
-                        <a class="btn btn-primary" href="{{ url('/modul0') }}" role="button"><strong>ASB dan SSH</strong> &raquo;</a></p>
                 </div>
             </div>
-            <!-- End Item -->
             <div class="item">
-                <img data-src="holder.js/1200x400?bg=2980b9&fg=FFFFFF&text=Perencanaan Jangka Menengah">
+                <img data-src="holder.js/100px600?auto&bg=2980b9&fg=FFFFFF&text=Perencanaan Jangka Menengah">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Merupakan perencanaan lima tahunan (<strong>RPJMD</strong> dan <strong>Renstra</strong>) sebagai penjabaran <strong>visi-misi Kepala Daerah</strong>.</p>
                     <p>
-                        <a class="btn btn-warning" href="{{ url('/rpjmd/dash') }}" role="button"><strong>RPJMD dan Renstra</strong> &raquo;</a></p>
                 </div>
             </div>
-            <!-- End Item -->
             <div class="item">
-                <img data-src="holder.js/1200x400?bg=8e44ad&fg=FFFFFF&text=Perencanaan Jangka Pendek">
+                <img data-src="holder.js/100px600?auto&bg=8e44ad&fg=FFFFFF&text=Perencanaan Jangka Pendek">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
+                    <hr>
+                    <p style="font-size: 24px">
                         Merupakan perencanaan tahunan (<strong>RKPD</strong> dan <strong>Renja</strong>) sebagai operasionalisasi dari perencanaan jangka menengah.</p>
                     <p>
-                        <a class="btn btn-success" href="{{ url('/rkpd/dash') }}" role="button"><strong>RKPD dan Renja</strong> &raquo;</a></p>
                 </div>
             </div>
-            <!-- End Item -->
             <div class="item">
-                <img data-src="holder.js/1200x400?bg=16a085&fg=FFFFFF&text=Penganggaran">
+                <img data-src="holder.js/100px600?auto&bg=16a085&fg=FFFFFF&text=Penganggaran">
                 <div class="carousel-caption">
-                    <br>
-                    <p>
-                        
+                    <hr>
+                    <p style="font-size: 24px">                        
                         Detail dari rencana kerja tahunan (<strong>PPAS</strong> dan <strong>Pra-RKA</strong>) sebagai dasar penyusunan anggaran yang pelaksanaannya akan dikelola melalui <strong>Simda Keuangan</strong>.</p>
                     <p>
-                        <a class="btn btn-danger" href="{{ url('/modul3') }}" role="button"><strong>Penganggaran</strong> &raquo;</a></p>
                 </div>
             </div>
-            <!-- End Item -->
         </div>
-        <!-- End Carousel Inner -->
-        <ul class="nav nav-pills nav-justified">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">simd@<strong>Perencanaan</strong><small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="1"><a class="btn" role="button" href="{{ url('/modul0') }}">ASB dan SSH<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="2"><a class="btn" role="button" href="{{ url('/modul1') }}">RPJMD dan Renstra<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="3"><a class="btn" role="button" href="{{ url('/modul2') }}">RKPD dan Renja<small></small></a></li>
-            <li data-target="#myCarousel" data-slide-to="4"><a class="btn" role="button" href="{{ url('/modul3') }}">PPAS<small></small></a></li>
-        </ul>
-    <!-- End Carousel -->
-      <hr>
-  </div>
-      <footer>
-          <?php 
-              $akses = new \App\CekAkses(); 
-              if($akses->get(1)):
-          ?>
-          &copy; <strong>Badan Pengawasan Keuangan dan Pembangunan - 2017</strong>
-          <div class="btn-group">
-               @if($akses->get(110)) <a href="{{ url('/admin/parameter/user') }}" class="btn btn-sm btn-default"><i class="fa fa-user fa-fw"></i> User Management</a> @endif
-              @if($akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109])) <a href="{{ url('/admin/parameter') }}" class="btn btn-sm btn-default"><i class="fa fa-wrench fa-fw"></i> Parameter</a> @endif
-              @if($akses->get(9)) <a href="{{ url('/admin/update') }}" class="btn btn-sm btn-default"><i class="fa fa-refresh fa-fw"></i> Cek Update</a> @endif
-          </div>
-          <?php else:?>
-              <p>&copy; <strong>Badan Pengawasan Keuangan dan Pembangunan - 2017</strong></p>
-          <?php endif;?>
-      </footer>
-    </div> <!-- /container -->
+        <hr>
+        <div class="row" style="align-items: center; display: flex; justify-content: center;">
+            <a class="btn xCss bd-orange" role="button" href="{{ url('/modul0') }}"><span class="fa fa-braille "></span> ASB dan SSH</a>
+            <a class="btn xCss bd-red" role="button" href="{{ url('/modul4') }}"><span class="fa fa-folder-open-o "></span> Data Dukungan</a>
+            <a class="btn xCss bd-blue" role="button" href="{{ url('/rpjmd/dash') }}"><span class="fa fa-newspaper-o "></span> RPJMD & Renstra</a>
+            <a class="btn xCss bd-purple" role="button" href="{{ url('/rkpd/dash') }}"><span class="fa fa-calendar-check-o "></span> RKPD & Renja</a>
+            <a class="btn xCss bd-green" role="button" href="{{ url('/modul3') }}"><span class="fa fa-money "></span> PPAS</a>
+        </div> 
+    </div>
 
-<div id="ModalUser" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+          <p class="navbar-text pull-left">
+            <b><a href="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan">Badan Pengawasan Keuangan dan Pembangunan</a></b>
+                  | <b>Tim Satgas Simda</b> | Copyright &copy; 2018
+          </p>
+                <li class="navbar-btn btn pull-right dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-cog fa-spin fa-fw fa-lg"></i> simd@<strong>Perencanaan</strong> <i class="fa fa-caret-up fa-fw fa-lg"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" >
+                        <li><a href="{{ url('/') }}"><i class="fa fa-cubes fa-fw text-info"></i> Dashboard</a></li>
+                        <li class="divider"></li>
+                        <li>@if($akses->get(110)) <a href="{{ url('/admin/parameter/user') }}"><i class="fa fa-user fa-fw text-info"></i> User Management</a> @endif</li>
+                        <li>@if($akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109])) <a href="{{ url('/parameter/dash') }}"><i class="fa fa-cogs fa-fw text-info"></i> Parameter</a> @endif</li>
+                        <li>@if($akses->get(9)) <a href="{{ url('/admin/update') }}"><i class="fa fa-refresh fa-fw text-info"></i> Cek Update</a> @endif</li>
+                    </ul>
+                </li>
+        </div>
+        
+        
+    </div>
+
+<div id="ModalUser" class="modal" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
   <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Ganti Password</h4>
       </div>
-      <div class="modal-body"  style="background-color: #eee;">        
+        <div class="modal-body"  style="background-color: #eee;">        
         <form name="frmModalUser" class="form-horizontal" role="form" autocomplete='off' action="{{ Request::url() }}" method="post">
           <div class="row">
           <div class="col-sm-2" style="text-align: center;">
@@ -217,7 +279,12 @@ use hoaaah\LaravelMenu\Menu;
                         <input id="email" type="email" class="form-control" name="email" disabled>
                     </div>
             </div>
-
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="peran_user" class="col-md-3 control-label">Peran User</label>
+                    <div class="col-md-6">
+                        <input id="peran_user" type="text" class="form-control" name="peran_user" disabled>
+                    </div>
+            </div>
             <div id="divPassword" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-4">
@@ -242,9 +309,10 @@ use hoaaah\LaravelMenu\Menu;
                         @endif
                     </div>
             </div>
-        </div>
+           </div>
+           </div>
         </form>
-      </div>
+        </div>
         <div class="modal-footer" style="background-color: #357EBD;">
             <div class="row">
                 <div class="col-sm-2 text-left">                        
@@ -263,35 +331,14 @@ use hoaaah\LaravelMenu\Menu;
       </div>
     </div>
   </div>
-
+</body>
 
 
 <script>
-
 $(document).ready( function() {
-    $('#myCarousel').carousel({
-        interval:   4000
-    });
-    
-    var clickEvent = false;
-    $('#myCarousel').on('click', '.nav a', function() {
-            clickEvent = true;
-            $('.nav li').removeClass('active');
-            $(this).parent().addClass('active');        
-    });
-    
-    $('#myCarousel').on('slid.bs.carousel', function(e) {
-        if(!clickEvent) {
-            var count = $('.nav').children().length -1;
-            var current = $('.nav li.active');
-            current.removeClass('active').next().addClass('active');
-            var id = parseInt(current.data('slide-to'));
-            if(count == id) {
-                $('.nav li').first().addClass('active');    
-            }
-        }
-        clickEvent = false;
-    });
+$('#myCarousel').carousel({
+    interval:   3500
+});
 
 $.ajax({
           type: "GET",
@@ -301,24 +348,21 @@ $.ajax({
 
           var j = data.length;
           var post, i;
-          // alert({{Session::get('tahun')}});
           for (i = 0; i < j; i++) {
             post = data[i];
             $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
           }
           }
       });
-
 });
 
 $( "#id_tahun" ).change(function() {
+    sessionStorage.setItem("tahun",$('#id_tahun').val());
+});
 
-  sessionStorage.setItem("tahun",$('#id_tahun').val());
-
+$("#btn_ganti").click(function() {    
+    $('#ModalUser').modal('show');         
 });
 
 </script>
-
-  </body>
-
 </html>

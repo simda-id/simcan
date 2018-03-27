@@ -1,4 +1,4 @@
-## Tips Optimasi
+## Tips Optimasi XAMPP di Windows
 
 _Perhatian_ Instalasi XAMPP telah membundling paket PHP dan MySQL, namun **TIDAK** diperuntukkan bagi production environment. Berikut ini berapa optimasi yang dapat dilakukan terkait PHP dan MySQL yang diinstall melalui XAMPP agar dapat menangani data yang lebih besar. Use at your own risk.
 
@@ -36,3 +36,5 @@ _Perhatian_ Instalasi XAMPP telah membundling paket PHP dan MySQL, namun **TIDAK
 2. Cari baris <code>memory_limit=</code>
 3. Isikan nilai yang sesuai dalam satuan bytes. Contoh akan ditulis <code>memory_limit=1024M</code>
 4. Restart Apache
+
+[index](index.md)

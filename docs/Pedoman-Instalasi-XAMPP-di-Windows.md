@@ -1,6 +1,6 @@
 ## Pedoman Instalasi dengan XAMPP di Windows
 
-__Perhatian__ Instalasi XAMPP di Windows ditujukan untuk keperluan internal, TIDAK disarankan untuk production.
+__PERHATIAN__ Instalasi XAMPP di Windows ditujukan untuk keperluan internal, __TIDAK__ disarankan untuk production.
 
 #### instalasi XAMPP
 
@@ -36,3 +36,7 @@ Untuk data instalasi tahap berikutnya:
 4. Klik nama database yang baru dibuat tersebut dari daftar di sebelah kiri
 5. Klik tab 'impor' lalu pilih file database yang akan dipasang.
 6. Klik 'Go' di bagian bawah.
+Sebagai alternatif, pemasangan database dapat mengikuti [Pedoman Impor Database mySQL dengan HeidiSQL](Pedoman-Impor-Database-mySQL.md)
+
+
+[index](index.md)

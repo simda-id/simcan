@@ -4,14 +4,17 @@ Aplikasi SIMDA Perencanaan meliputi perencanaan lima tahunan, perencanaan tahuna
 
 ## Modul aplikasi
 
-Aplikasi terdiri dari dua modul besar:
-- Modul lima tahunan; dibuat berbasis windows dengan database MSSQL.
-- Modul tahunan; dibuat berbasis web dengan database mySQL.
+Aplikasi dikelompokkan sebagai berikut:
+- Modul lima tahunan
+  - berbasis windows dengan database MSSQL.
+  - meliputi modul RPJMD dan Renstra serta musrenbang RPJMD.
+- Modul tahunan
+  - berbasis web dengan database mySQL.
+  - meliputi modul RKPD, Renja, SSH dan ASB, serta PPA.
+  - Modul RPJMD dan Renstra yang ada di aplikasi tahunan adalah hasil transfer data dari aplikasi lima tahunan.
+- Modul suplemen
+  - berbasis windows
+  - Penghubung antara modul lima tahunan dengan modul tahunan.
+  - Penghubung antara aplikasi SIMDA Perencanaan dengan aplikasi SIMDA Keuangan.
 
-Selain itu terdapat modul suplemen berbasis windows:
-- Penghubung antara modul lima tahunan dengan modul tahunan. 
-- Penghubung antara aplikasi SIMDA Perencanaan dengan aplikasi SIMDA Keuangan.
-
-Dalam aplikasi lima tahunan terdapat modul RPJMD dan Renstra serta musrenbang RPJMD.
-
-Dalam aplikasi tahunan terdapat modul RKPD, Renja, SSH dan ASB, serta PPA. Modul RPJMD dan Renstra yang ada di aplikasi tahunan adalah hasil transfer data dari aplikasi lima tahunan.
+[index](index.md)

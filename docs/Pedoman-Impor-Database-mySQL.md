@@ -1,4 +1,4 @@
-## Pedoman Impor dan Backup Database MySQL
+## Pedoman Impor dan Backup Database MySQL dengan HeidiSQL
 
 Pedoman ini menggunakan tool [HeidiSQL](https://www.heidisql.com/download.php) yang bersifat free dan open source. HeidiSQL dapat dijalankan di Windows, atau menggunakan wine untuk menjalankannya di Linux/MacOS.
 Database yang akan diimpor dalam format .sql dan hasil ekspor juga dalam format .sql
@@ -42,3 +42,6 @@ Database yang akan diimpor dalam format .sql dan hasil ekspor juga dalam format 
 2. Pilih Drop.
 3. Konfirmasikan pada kotak dialog yang muncul.
 4. Tunggu sampai proses selesai
+
+
+[index](index.md)

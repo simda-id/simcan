@@ -50,4 +50,7 @@ Klik Start pada baris MySQL di XAMPP Control Panel.
 
 ## Impor Data MySQL
 
-Impor kembali database yang telah dibackup (jika ada)
+Impor kembali database yang telah dibackup (jika ada), ikuti petunjuk pada [Pedoman Impor Database mySQL dengan HeidiSQL](Pedoman-Impor-Database-mySQL.md)
+
+
+[index](index.md)

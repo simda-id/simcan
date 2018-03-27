@@ -29,3 +29,5 @@ Aplikasi SIMDA Perencanaan dibangun sebagai satu siklus yang utuh. Agar dapat di
 - Lakukan input data proses Forum SKPD
 - Lakukan input data proses Forum RKPD
 - Lakukan input data proses PPA
+
+[index](index.md)

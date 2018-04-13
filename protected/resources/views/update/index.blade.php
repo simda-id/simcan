@@ -27,6 +27,7 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                     <div class="row">
                         <label for="dbVersion" class="col-sm-2" align='left' style="font-size: 20px">Database Engine : </label>
                         <label for="dbVersion" class="col-sm-8" align='left' style="font-size: 20px; color: #b94743">{{$dataVersion}}</label>
+
                     </div>
                     <div class="row">
                         <label for="txt_periode" class="col-sm-2" align='left'>File Update Database :</label>
@@ -60,7 +61,7 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                         <label>3. Update ini hanya dilakukan sekali saja..</label><br>
                         <label>4. Jangan Lupa Backup Database sebelum update...</label><br>
                         <br>
-                        <laber>{{$valueX}}</laber>
+                        <laber>{{$infoX}}</laber>
                   </div>                
                 </div>                
         </div>

@@ -157,9 +157,10 @@ use hoaaah\LaravelMenu\Menu;
             </div>
         </div>
         <div class="row">
-            {{-- <?php 
-                    $akses = new \App\CekAkses();
-            ?>  --}}
+            <?php
+                $akses = new CekAkses();
+            ?>
+            
             <div class="col-lg-offset-1 col-sm-12 col-md-12 col-lg-10">
                 <div class="features-list">
                     <div class="row">

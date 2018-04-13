@@ -37,8 +37,8 @@ use hoaaah\LaravelMenu\Menu;
 
     .btn span{
         position: relative;
-        margin-top: 15px;
-        left: -15px;
+        /*margin-top: 15px;
+        left: -15px;*/
         /*float: left;*/
     }
 
@@ -165,6 +165,7 @@ use hoaaah\LaravelMenu\Menu;
     </nav>
 
     <div class="container-fluid" style="padding: 30px">
+    <div id="pesan"></div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel" >
         <hr>
         <div class="carousel-inner">
@@ -265,7 +266,7 @@ use hoaaah\LaravelMenu\Menu;
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">Nama User</label>
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control" name="name" required autofocus data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Nama untuk ditampilkan di header setelah login">
+                    <input id="txt_name" type="text" class="form-control" name="txt_name" required autofocus data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Nama untuk ditampilkan di header setelah login, dapat dilakukan pergantian nama">
                     @if ($errors->has('name'))
                         <span class="help-block">
                             <strong>{{ $errors->first('name') }}</strong>
@@ -276,19 +277,18 @@ use hoaaah\LaravelMenu\Menu;
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="col-md-3 control-label">Alamat e-Mail</label>
                     <div class="col-md-6">
-                        <input id="email" type="email" class="form-control" name="email" disabled>
-                    </div>
-            </div>
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="peran_user" class="col-md-3 control-label">Peran User</label>
-                    <div class="col-md-6">
-                        <input id="peran_user" type="text" class="form-control" name="peran_user" disabled>
+                        <input id="email" type="email" class="form-control" name="email" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk login.<br>Tidak dapat diganti." disabled>
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
                     </div>
             </div>
             <div id="divPassword" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="col-md-3 control-label">Password</label>
+                    <label for="password" class="col-md-3 control-label">Password Baru</label>
                     <div class="col-md-4">
-                        <input id="password" type="password" class="form-control" name="password" required>
+                        <input id="password" type="password" class="form-control" name="password" required data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Masukkan Password Baru">
                         @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -297,7 +297,7 @@ use hoaaah\LaravelMenu\Menu;
                     </div>
                     <div class="col-md-4">
                       <div class="input-group">
-                        <input id="password_confirmation" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' has-error' : '' }}" name="password_confirmation" required>
+                        <input id="password_confirmation" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' has-error' : '' }}" name="password_confirmation" required data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Masukkan Kembali Password Baru, harus sama dengan sebelumnya sebagai konfirmasi">
                           <div class="input-group-btn">
                                 <button type="button" id="showPass" name="showPass" data-val="1" class="btn btn-md btn-success" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk menampilkan Password yang diketik"><span id="eye" class="fa fa-eye fa-fw fa-lg"></span></button>
                           </div>
@@ -336,6 +336,26 @@ use hoaaah\LaravelMenu\Menu;
 
 <script>
 $(document).ready( function() {
+
+function createPesan(message, type) {
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
+    html += '</div>';    
+    $(html).hide().prependTo('#pesan').slideDown();
+
+    setTimeout(function() {
+        $('#pesanx').removeClass('in');
+         }, 3500);
+  };
+
+$('.page-alert .close').click(function(e) {
+        e.preventDefault();
+        $(this).closest('.page-alert').slideUp();
+    });
+
+$('[data-toggle="popover"]').popover();  
+
 $('#myCarousel').carousel({
     interval:   3500
 });
@@ -345,7 +365,6 @@ $.ajax({
           url: './getTahunSetting',
           dataType: "json",
           success: function(data) {
-
           var j = data.length;
           var post, i;
           for (i = 0; i < j; i++) {
@@ -360,8 +379,65 @@ $( "#id_tahun" ).change(function() {
     sessionStorage.setItem("tahun",$('#id_tahun').val());
 });
 
-$("#btn_ganti").click(function() {    
-    $('#ModalUser').modal('show');         
+$("#btn_ganti").click(function() { 
+    $.ajax({
+          type: "GET",
+          url: 'getUser',
+          dataType: "json",
+          success: function(data) {
+            $('.btnUser').removeClass('edit');
+            $('.btnUser').removeClass('add');
+            $('.btnUser').addClass('gantiPass');
+            $('#txt_name').val(data[0].name);
+            $('#email').val(data[0].email);
+            $('#password').val(null);
+            $('#password_confirmation').val(null);
+            $('.form-horizontal').show();
+            $('#ModalUser').modal('show');   
+          }
+      });      
+});
+
+$("#showPass").click(function() 
+         {
+            if ($(this).data('val') == "1") 
+            {
+               $("#password").prop('type','text');
+               $("#password_confirmation").prop('type','text');
+               $("#eye").attr("class","fa fa-eye-slash fa-fw fa-lg");
+               $(this).data('val','0');
+            }
+            else
+            {
+               $("#password").prop('type', 'password');
+               $("#password_confirmation").prop('type', 'password');
+               $("#eye").attr("class","fa fa-eye fa-fw fa-lg");
+               $(this).data('val','1');
+            }
+         });
+
+$('.modal-footer').on('click', '.gantiPass', function() {
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+        type: 'post',
+        url: 'gantiPass',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'password' : $('#password').val(),
+            'password_confirmation' : $('#password_confirmation').val(),
+            'nama' : $('#txt_name').val(),
+        },
+        success: function(data) {
+              if(data.status_pesan==1){
+                alert(data.pesan);
+              } else {
+                alert(data.pesan); 
+              }
+        },
+  });
 });
 
 </script>

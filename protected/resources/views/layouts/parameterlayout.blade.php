@@ -83,7 +83,7 @@ use hoaaah\LaravelMenu\Menu;
                                 'visible' => $akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109, 111]),
                                 'items' => [
                                     ['label' => 'Pemda', 'icon' => 'fa fa-bank fa-fw', 'url' => '/pemda','visible' => $akses->get(101)],
-                                    ['label' => 'Kecamatan-Desa', 'icon' => 'fa fa-map-o fa-fw','url' => '/admin/parameter/kecamatan','visible' => $akses->get(102)],
+                                    ['label' => 'Wilayah Pemerintahan', 'icon' => 'fa fa-map-o fa-fw','url' => '/admin/parameter/kecamatan','visible' => $akses->get(102)],
                                     ['label' => 'Unit Organisasi', 'icon' => 'fa fa-building-o fa-fw','url' => '/admin/parameter/unit','visible' => $akses->get(103)],
                                     // ['label' => 'Urusan Bidang', 'url' => '/','visible' => $akses->get(104)],
                                     ['label' => 'Rekening Anggaran', 'icon' => 'fa fa-money fa-fw','url' => '/admin/parameter/rekening','visible' => $akses->get(105)],

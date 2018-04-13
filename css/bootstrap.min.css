@@ -50,6 +50,11 @@
 .btn-labeled {padding-top: 0;padding-bottom: 0;}
 .btn { margin-bottom:10px; }
 
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}
+
  .modal-header-success {
     color:#fff;
     padding:9px 15px;

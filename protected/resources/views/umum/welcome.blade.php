@@ -272,7 +272,7 @@
       <div class="navbar-header">
         <a class="navbar-brand pull-left" href="{{ url('/') }}">
           <div class="row">
-            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> <span class="badge"> ver 1.0 </span>
+            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> <span class="badge"> ver 1.0</span>
           </div>
         
         </a>

@@ -3482,14 +3482,11 @@ $('.modal-footer').on('click', '#btnPostKegiatan', function() {
     });
 
 $(document).on('click', '.btnPrintKompilasiProgramdanPagu', function() {
-
-    location.replace('../PrintKompilasiProgramdanPaguRenja/'+ $('#id_unit').val());
-    
+    window.open('../PrintKompilasiProgramdanPaguRenja/'+ $('#id_unit').val());    
   });
-$(document).on('click', '.btnPrintKompilasiKegiatandanPaguRenja', function() {
 
-    location.replace('../PrintKompilasiKegiatandanPaguRenja/'+ $('#id_unit').val());
-    
+$(document).on('click', '.btnPrintKompilasiKegiatandanPaguRenja', function() {
+    window.open('../PrintKompilasiKegiatandanPaguRenja/'+ $('#id_unit').val());   
   });
 
 $(document).on('click', '.add-pelaksana', function() {

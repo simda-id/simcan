@@ -403,8 +403,11 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
-    $('#cariAktivitasASB').modal('hide');    
+    $('#cariAktivitasASB').modal('hide');
+
+       
 
   });
 
@@ -675,6 +678,7 @@ $(document).on('click', '#btnPilihASB', function() {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 

@@ -36,6 +36,7 @@
     32 => 'Elibyy\\TCPDF\\ServiceProvider',
     33 => 'Codedge\\Fpdf\\FpdfServiceProvider',
     34 => 'Khill\\Lavacharts\\Laravel\\LavachartsServiceProvider',
+    35 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -58,6 +59,7 @@
     16 => 'Yajra\\Datatables\\HtmlServiceProvider',
     17 => 'Yajra\\Datatables\\ButtonsServiceProvider',
     18 => 'Elibyy\\TCPDF\\ServiceProvider',
+    19 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (

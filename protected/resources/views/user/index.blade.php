@@ -3,6 +3,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 @extends('layouts.parameterlayout')
 
+<style>
+  .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+  .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
+</style>
+
 @section('content')
 
 <div class="container-fluid">
@@ -19,7 +24,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             ?>          
         </div>
     </div>
-  
+
     <div id="pesan"></div>
     <div class="row">
     <div class="col-md-12">
@@ -343,6 +348,30 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
 </div>
 
+<div id="ModalNotifikasi" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-dialog modal-xs"  >
+      <div class="modal-content">
+        <div class="modal-body" style="background-color: #5bc0de;">
+          <div id="bodyNotif" class="alert">
+              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left" aria-hidden="true"></i>
+                <br>
+                <strong><span id="uraian_notifikasi"></span></strong>
+                <br>
+          </div>
+          <hr class="message-inner-separator">
+          <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-primary icon-btn" data-dismiss="modal" aria-hidden="true">
+                            <i class="glyphicon btn-glyphicon glyphicon-log-out img-circle text-muted"></i> Tutup</button>
+                    </div>
+                </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 @endsection
  
 @section('scripts')
@@ -350,11 +379,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function(){ 
 
 function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += message;
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
+
+    setTimeout(function() {
+        $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
 $('.page-alert .close').click(function(e) {
@@ -371,6 +404,28 @@ $('.display').DataTable({
 });
 
 var id_user_temp;
+
+$.ajax({
+  type: "GET",
+  url: 'user/cekUserAdmin',
+  dataType: "json",
+  success: function(data) {
+    console.log(data);
+    if(data.status_pesan==1){
+      $('#bodyNotif').removeClass('alert-info');
+      $('#bodyNotif').addClass('alert-warning');
+      $('.form-horizontal').hide();
+      $('#uraian_notifikasi').html(data.pesan);
+      $('#ModalNotifikasi').modal('show');      
+    } else {
+      $('#bodyNotif').removeClass('alert-warning');
+      $('#bodyNotif').addClass('alert-info');
+      $('.form-horizontal').hide();
+      $('#uraian_notifikasi').html(data.pesan);
+      $('#ModalNotifikasi').modal('show');  
+    }
+  }
+});
 
 $.ajax({
   type: "GET",

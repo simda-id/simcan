@@ -1,1 +1,3 @@
-.
+.[2018-04-04 09:31:30] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Codedge\Updater\UpdaterServiceProvider' not found' in C:\xampp\htdocs\rc\simcan\protected\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:208
+Stack trace:
+#0 {main}  

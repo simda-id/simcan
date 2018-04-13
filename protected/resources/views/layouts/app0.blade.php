@@ -52,7 +52,7 @@ use hoaaah\LaravelMenu\Menu;
                       <i class="fa fa-home fa-stack-1x"></i>
                     </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
                 </div>
-                <ul class="nav navbar-top-links navbar-right">
+                <ul class="nav navbar-top-links pull-right">
 
                         <li>
                             <a>
@@ -84,11 +84,9 @@ use hoaaah\LaravelMenu\Menu;
 
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">                                          
-                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
-                                        </a>
+                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -108,9 +106,12 @@ use hoaaah\LaravelMenu\Menu;
                                     'ulId' => 'side-menu'
                                 ],
                                 'items' => [
-                                    ['label' => 'Modul SSH dan ASB','icon'=>'fa fa-database fa-fw fa-lg' , 'url' => '#'],
+                                    [   'label' => 'Modul SSH dan ASB',
+                                        'icon'=>'fa fa-database fa-fw fa-lg' , 
+                                        'url' => '/asb/dash'],
                                     [
-                                        'label' => 'Standard Satuan Harga', 
+                                        'label' => 'Standard Satuan Harga',
+                                        'icon' => 'fa fa-book fa-fw', 
                                         'visible' => $akses->get(801)||$akses->get(802)||$akses->get(803)||$akses->get(807),
                                         'items' => [
                                             ['label' => 'Zona SSH','url' => '/zonassh', 'visible' => $akses->get(801)],
@@ -120,7 +121,8 @@ use hoaaah\LaravelMenu\Menu;
                                         ]
                                     ],                                    
                                     [
-                                        'label' => 'Analisa Standar Belanja', 
+                                        'label' => 'Analisa Standar Belanja',
+                                        'icon' => 'fa fa-bookmark fa-fw', 
                                         'visible' => $akses->get(804)||$akses->get(805)||$akses->get(806)||$akses->get(808),
                                         'items' => [
                                             // ['label' => 'Komponen ASB','url' => '/asb/komponen','visible' => $akses->get(804)],
@@ -149,6 +151,8 @@ use hoaaah\LaravelMenu\Menu;
         <script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
+        <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
         <script type="text/javascript" src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>        
         <script type="text/javascript" src="{{ asset('/js/jquery.number.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/sb-admin-2.js')}}"></script>

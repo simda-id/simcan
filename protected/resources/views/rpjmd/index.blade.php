@@ -346,7 +346,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_visi btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_visi btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -409,7 +409,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_misi btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_misi btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -474,7 +474,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_tujuan btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_tujuan btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -535,7 +535,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_sasaran btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_sasaran btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -598,7 +598,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_kebijakan btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_kebijakan btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -661,7 +661,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_strategi btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_strategi btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -750,7 +750,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                             <td colspan="3" style="text-align: center; vertical-align:middle; font-weight: bold;">Pagu Total :
                             </td>
                             <td colspan="2" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu_total_edit" name="pagu_total_edit" style="text-align: right; " >
+                              <input type="text" class="form-control number" id="pagu_total_edit" name="pagu_total_edit" style="text-align: right;" readonly>
                             </td>
                           </tr>
                       </tbody>
@@ -763,7 +763,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_program btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_program btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -865,7 +865,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success actionBtn_program btn-labeled hidden" data-dismiss="modal">
+                        <button type="button" class="btn btn-success actionBtn_program btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
                         <div class="or hidden"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -1124,9 +1124,6 @@ $(document).ready(function() {
   var id_pelaksana_program;
   var tahun_rpjmd;
   
-
-  
-
   function formatTgl(val_tanggal){
       var formattedDate = new Date(val_tanggal);
       var d = formattedDate.getDate();
@@ -1675,6 +1672,7 @@ $.ajax({
         'pagu3_edit': $('#pagu3_edit').val(),
         'pagu4_edit': $('#pagu4_edit').val(),
         'pagu5_edit': $('#pagu5_edit').val(),
+        'pagu_total_edit': $('#pagu_total_edit').val(),
         'ur_program_rpjmd_edit': $('#ur_program_rpjmd_edit').val(),
     },
     success: function(data) {
@@ -1686,6 +1684,37 @@ $.ajax({
               }
     }
 });
+});
+
+function hitungpagu_program(){
+  var a = Number($('#pagu1_edit').val()); 
+  var b = Number($('#pagu2_edit').val()); 
+  var c = Number($('#pagu3_edit').val()); 
+  var d = Number($('#pagu4_edit').val()); 
+  var e = Number($('#pagu5_edit').val());
+
+  var x = a+b+c+d+e;
+  $('#pagu_total_edit').val(x);
+}
+
+$( "#pagu1_edit" ).change(function() {
+  hitungpagu_program();
+});
+
+$( "#pagu2_edit" ).change(function() {
+  hitungpagu_program();
+});
+
+$( "#pagu3_edit" ).change(function() {
+  hitungpagu_program();
+});
+
+$( "#pagu4_edit" ).change(function() {
+  hitungpagu_program();
+});
+
+$( "#pagu5_edit" ).change(function() {
+  hitungpagu_program();
 });
 
 $('#tblProgram tbody').on( 'dblclick', 'tr', function () {

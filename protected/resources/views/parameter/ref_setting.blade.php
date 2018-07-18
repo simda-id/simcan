@@ -72,7 +72,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
-              <label for="scope_pemakaian" class="col-sm-6" align='left'>Cakupan Penggunaan Satuan pada :</label>
+              <label for="scope_pemakaian" class="col-sm-6" align='left'>Setting Pembatasan Pengajuan Usulan pada :</label>
               <div class="col-sm-12">
               <table class="table table-striped table-bordered table-responsive">
                         <thead>

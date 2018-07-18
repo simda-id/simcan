@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <p><h2 class="panel-title">Load Data Rancangan Renja dari Rancangan Awal Renja</h2></p>
+                    <p><h2 class="panel-title">Load Data Rancangan Renja dari Rancangan Awal Renja X</h2></p>
                 </div>
             <div class="panel-body">
                 <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
@@ -43,14 +43,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                             <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
                         </div>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label class="control-label col-sm-2 text-left" for="id_rkpd_ranwal">Program Ranwal Renja:</label>
                         <div class="col-sm-7">
                             <select class="form-control id_rkpd_ranwal" name="id_rkpd_ranwal" id="id_rkpd_ranwal"></select>
                         </div>
-                </div>
+                </div> --}}
                 <div class="form-group">
-                    <label class="control-label col-sm-2 text-left" for="id_unit"></label>
+                    <label class="control-label col-sm-2 text-left" for=""></label>
                     <div class="col-sm-7">
                         <a id="btnProses" type="button" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data dari Ranwal Renja</a>
                     </div>
@@ -116,6 +116,47 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
 
+<div id="cariReload" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
+  <div class="modal-dialog modal-lg"  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" >Daftar Program Ranwal Renja yang belum di Load dalam Rancangan Renja</h3>
+      </div>
+      <div class="modal-body">
+      <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
+        <div class="form-group">
+        <div class="col-sm-12">
+          <table id='tblReProses' class="table display compact table-striped table-bordered" width="100%">
+              <thead>
+                    <tr>
+                      <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>
+        </div>
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-sm-2 text-left">
+                <button id="btnProsesAll" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Proses Load</button>
+            </div>
+            <div class="col-sm-10 text-right">
+                <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -156,8 +197,156 @@ $('.page-alert .close').click(function(e) {
         $(this).closest('.page-alert').slideUp();
     });
 
-$.ajax({
+$(document).on('click', '#btnProses', function() {
+    loadReProses($('#id_unit').val(),$('#tahun_rkpd').val());
+    $('#cariReload').modal('show');
+});
 
+$(document).on('click', '#btnProsesAll', function() {
+    var rows_selected = ReProses_Tbl.column(0).checkboxes.selected();
+    var counts_selected = rows_selected.count(); 
+    var rows_data = ReProses_Tbl.rows({ selected: true }).data(); 
+    var counts_data = ReProses_Tbl.rows({ selected: true }).count();  
+    var tahun =$('#tahun_rkpd').val();
+    var unit =$('#id_unit').val();
+
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $('#ModalProgress').modal('show');
+  $('#cariReload').modal('hide');  
+
+  $.each(rows_selected, function(index, rowId){    
+    var ranwal =rowId;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });         
+    $.ajax({
+            type: 'POST',
+            url: './transProgramRenja',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'tahun_renja' : tahun ,
+                'id_unit' : unit,
+                'id_rkpd_ranwal' : ranwal,
+            },
+            success: function(data) {
+                createPesan(data.pesan,"success");
+                tblProgramRekap.ajax.reload();
+                $('#ModalProgress').modal('hide'); 
+            },
+            error: function(data){
+                createPesan(data.pesan,"danger");
+                $('#tblProgramRKPD').DataTable().ajax.reload();
+                $('#ModalProgress').modal('hide');
+            }
+    });
+  });
+  e.preventDefault();
+});
+
+$(document).on('click', '#btnReLoad', function() {
+  var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
+  var tahun =$('#tahun_rkpd').val();
+  var unit =$('#id_unit').val();
+  var ranwal=data.id_renja_program;
+
+  $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
+
+  $('#ModalProgress').modal('show');
+  $('#cariReload').modal('hide');         
+  $.ajax({
+            type: 'POST',
+            url: './transProgramRenja',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'tahun_renja' : tahun ,
+                'id_unit' : unit,
+                'id_rkpd_ranwal' : ranwal,
+            },
+            success: function(data) {
+                createPesan(data.pesan,"success");
+                tblProgramRekap.ajax.reload();
+                $('#ModalProgress').modal('hide'); 
+            },
+            error: function(data){
+                createPesan(data.pesan,"danger");
+                $('#tblProgramRKPD').DataTable().ajax.reload();
+                $('#ModalProgress').modal('hide');
+            }
+    });
+});
+
+// $(document).on('click', '#btnProsesAll', function() {
+//     var tahun =$('#tahun_rkpd').val();
+//     var unit =$('#id_unit').val();
+//     var ranwal =$('#id_rkpd_ranwal').val();
+
+//     $('#ModalProgress').modal('show');
+
+//     $.ajaxSetup({
+//           headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+//     });
+
+//     $.ajax({
+//         type: "post",
+//         url: './transProgramRenja',
+//         data: {
+//                 '_token': $('input[name=_token]').val(),
+//                 'tahun_renja' : tahun ,
+//                 'id_unit' : unit,
+//                 'id_rkpd_ranwal' : ranwal,
+//             },
+//         success: function(data) {
+//             tblProgramRekap.ajax.reload();
+//             $('#ModalProgress').modal('hide'); 
+//             if(data.status_pesan==1){
+//                 createPesan(data.pesan,"success");                    
+//             } else {
+//                 createPesan(data.pesan,"danger");
+//             }
+//         },
+//         error: function(data) {
+//             $('#ModalProgress').modal('hide');
+//             createPesan('Proses Import Data Gagal',"danger");
+//         }
+//     });
+// });
+
+var ReProses_Tbl
+function loadReProses($id_unit,$tahun){
+  ReProses_Tbl = $('#tblReProses').DataTable({
+        processing: true,
+        serverSide: true,
+        "autoWidth": false,
+        "ajax" : {"url": './getSelectProgram/'+$id_unit+'/'+$tahun},
+        // url: './getSelectProgram/'+$('#id_unit').val()+'/'+$('#tahun_rkpd').val(),
+        "language": {
+                "decimal": ",",
+                "thousands": "."},
+        'columnDefs': [
+           { 'width': 10,
+              'targets': 0,
+              'checkboxes': {'selectRow': true } },
+           { "targets": 1, "width": 10 }
+          ],
+        'select': { 'style': 'multi' },
+        "columns": [
+              { data: 'id_renja_program', sClass: "dt-center", searchable: false, orderable:false,},
+              { data: 'no_urut',sClass: "dt-center"},
+              { data: 'uraian_program_renstra'},
+              { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
+            ],
+            "order": [[0, 'asc']],
+            "bDestroy": true
+      });
+}
+
+$.ajax({
     type: "GET",
     url: './getUnitRenja',
     dataType: "json",
@@ -231,42 +420,6 @@ function loadTblRekap(tahun,unit){
         });
 }
 
-$(document).on('click', '#btnProses', function() {
-
-    var tahun =$('#tahun_rkpd').val();
-    var unit =$('#id_unit').val();
-    var ranwal =$('#id_rkpd_ranwal').val();
-
-    $('#ModalProgress').modal('show');
-
-    $.ajaxSetup({
-          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: "post",
-        url: './transProgramRenja',
-        data: {
-                '_token': $('input[name=_token]').val(),
-                'tahun_renja' : tahun ,
-                'id_unit' : unit,
-                'id_rkpd_ranwal' : ranwal,
-            },
-        success: function(data) {
-            tblProgramRekap.ajax.reload();
-            $('#ModalProgress').modal('hide'); 
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");                    
-            } else {
-                createPesan(data.pesan,"danger");
-            }
-        },
-        error: function(data) {
-            $('#ModalProgress').modal('hide');
-            createPesan('Proses Import Data Gagal',"danger");
-        }
-    });
-});
 
 $(document).on('click', '.btnUnload', function() {
 

@@ -42,7 +42,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane active" id="golongan">
               <br>
               <div class="add">
-                <p><a id="btnPrintGol" class="print-golongan btn btn-primary btn-labeled" href="{{ url('/printGolonganSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Golongan</a>
+                <p><a id="btnPrintGol" class="print-golongan btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Golongan</a>
                 <span><a id="btnAddGol" class="add-golongan btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Golongan</a></span>
                 </p>
               </div>
@@ -64,7 +64,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="kelompok">
               <br>
               <div class="add">
-                <p ><a id="btnPrintKelSSh" class="print-kelompokssh btn btn-primary btn-labeled" href="{{ url('/printKelompokSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Kelompok</a>
+                <p ><a id="btnPrintKelSSh" class="print-kelompokssh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Kelompok</a>
                 <span><a id="btnAddKel" class="add-kelompok btn btn-sm btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Kelompok</a></span>
                 </p>
               </div>
@@ -101,7 +101,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="subkelompok">
             <br>
             <div class="add">
-              <p><a id="btnPrintSubKelSSh" class="print-subkelssh btn btn-primary btn-labeled" href="{{ url('/printSubKelompokSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Sub Kelompok</a>
+              <p><a id="btnPrintSubKelSSh" class="print-subkelssh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Sub Kelompok</a>
               <span><a id="btnAddSubKel" class="add-subkelompok btn btn-sm btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Kelompok</a></span>
               </p>
             </div>
@@ -1324,13 +1324,7 @@ $(document).ready(function() {
       $('#tblTarif').DataTable().ajax.url("./ssh/getTarif/"+id_skel_ssh).load();
       $('#tblRekening').DataTable().ajax.url("./ssh/getRekening/0").load();
 
-      $(document).on('click', '.btnPrintItemSSh', function() {
-
-        window.open('./printItemSsh');
-        
-      });            
-
-    } );
+    });
 
     var tarif = $('#tblTarif').DataTable( {
                 processing: true,
@@ -2034,6 +2028,21 @@ $(document).ready(function() {
                     });
                   });
 
-  } );
+$(document).on('click', '#btnPrintGol', function() {
+    window.open('./printGolonganSsh');
+  });
+$(document).on('click', '#btnPrintKelSSh', function() {
+    window.open('./printKelompokSsh');
+  });
+$(document).on('click', '#btnPrintSubKelSSh', function() {
+    window.open('./printSubKelompokSsh');
+  });
+$(document).on('click', '.btnPrintItemSSh', function() {
+    window.open('./printItemSsh');     
+  }); 
+
+
+
+});
 </script>
 @endsection

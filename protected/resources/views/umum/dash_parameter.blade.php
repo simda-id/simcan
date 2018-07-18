@@ -146,13 +146,13 @@ use hoaaah\LaravelMenu\Menu;
 </style>
 
 @section('content')
-<div class="container bootstrap snippet">
+<div class="container-fluid">
 <section id="content" class="current">
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 {{-- <h2>SSH & ASB</h2> --}}
-                <h2 style="font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;"><span class="highlight">Parameter </span></h2>
+                <h2 style="font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;"><span class="highlight">Parameter</span></h2>
                 <p style="font-size: 20px;">Referensi, Parameter dan Setting</p>
             </div>
         </div>
@@ -160,7 +160,7 @@ use hoaaah\LaravelMenu\Menu;
             <?php
                 $akses = new CekAkses();
             ?>
-            
+
             <div class="col-lg-offset-1 col-sm-12 col-md-12 col-lg-10">
                 <div class="features-list">
                     <div class="row">

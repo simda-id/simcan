@@ -107,6 +107,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblProgram" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
+                                                <th width="5px" rowspan="2" style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
                                                 <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Program</th>
@@ -134,11 +135,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgRkpd" >
                                             <td width="20%%" style="text-align: left; vertical-align:top;">Program Ranwal RKPD</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_kegrenja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backRenja" >
                                           <td width="20%%" style="text-align: left; vertical-align:top;">Program Rancangan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_kegrenja" align='left'></label></td>
                                         </tr>
@@ -149,6 +150,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblKegiatanRenja" class="table table-striped table-bordered table-responsive compact" width="100%">
                                         <thead>
                                             <tr>
+                                                <th width="5px" rowspan="2" style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Kegiatan SKPD</th>
                                                 <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Pagu Kegiatan</th>
@@ -177,15 +179,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgRkpd">
                                             <td width="20%" style="text-align: left; vertical-align:top;">Program Ranwal RKPD</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_pelaksana" align='left'></label></td>
                                           </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_pelaksana" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backKegiatan" id="nm_kegrenja_pelaksana" align='left'></label></td>
                                         </tr>
@@ -219,19 +221,19 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgRkpd">
                                             <td width="20%" style="text-align: left; vertical-align:top;">Program Ranwal RKPD</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_aktivitas" align='left'></label></td>
                                           </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_aktivitas" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backKegiatan" id="nm_kegrenja_aktivitas" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backPelaksana">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backPelaksana" id="nm_aktivitas_pelaksana" align='left'></label></td>
                                         </tr>
@@ -268,23 +270,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgRkpd">
                                             <td width="20%" style="text-align: left; vertical-align:top;">Program Ranwal RKPD</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_lokasi" align='left'></label></td>
                                           </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_lokasi" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backKegiatan" id="nm_kegrenja_lokasi" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backPelaksana">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Sub Unit Pelaksana</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backPelaksana" id="nm_sub_lokasi" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backAktivitas">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backAktivitas" id="nm_aktivitas_lokasi" align='left'></label></td>
                                         </tr>
@@ -331,23 +333,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
+                                        <tr class="backProgRkpd">
                                             <td width="20%" style="text-align: left; vertical-align:top;">Program Ranwal RKPD</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_belanja" align='left'></label></td>
                                           </tr>
-                                        <tr>
+                                        <tr class="backRenja">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backKegiatan">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backKegiatan" id="nm_kegrenja_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backPelaksana">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Sub Unit Pelaksana</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backPelaksana" id="nm_sub_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="backAktivitas">
                                           <td width="20%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backAktivitas" id="nm_aktivitas_belanja" align='left'></label></td>
                                         </tr>
@@ -427,11 +429,44 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 
+<script id="details-inProg" type="text/x-handlebars-template">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProg-@{{id_forum_program}}">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
+                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+</script>
+
+<script id="details-inKeg" type="text/x-handlebars-template">
+        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKeg-@{{id_forum_skpd}}">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
+                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
+                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+</script>
+
+
 <div id="ModalProgRenja" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-                <div class="modal-header">
-            <h4 class="modal-title"></h4>
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <form name="frmProgRenja" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
@@ -459,13 +494,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Program Renstra:</label>
+                  <label class="control-label col-sm-3" for="title">Uraian Program RKPD:</label>
                   <div class="col-sm-8">
                     <textarea type="name" class="form-control" name="uraian_program_renstra" id="uraian_program_renstra" rows="3" disabled></textarea>
                   </div>
                   <input type="hidden" id="id_renja_program" name="id_renja_program">
                   <input type="hidden" id="id_program_renstra" name="id_program_renstra">
-                  <span class="btn btn-sm btn-primary btnCariProgramRenstra" id="btnCariProgramRenstra" name="btnCariProgramRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span>
+                  {{-- <span class="btn btn-sm btn-primary btnCariProgramRenstra" id="btnCariProgramRenstra" name="btnCariProgramRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span> --}}
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="title">Uraian Program Referensi:</label>
@@ -495,7 +530,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <label for="status_pelaksanaan_progrenja" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
                   <div class="col-sm-8" id="myRadio">
                       <label class="radio-inline">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="0">Tepat Waktu
+                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="0">Dilaksanakan
                       </label>
                       <label class="radio-inline hidden">
                         <input type="radio" class="sp_progrenja " name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="1">Dimajukan
@@ -506,8 +541,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="3">Dibatalkan
                       </label>
-                      <label class="radio-inline" id="sp_progrenja4" style="display: none;">
+                      <label class="radio-inline hidden" id="sp_progrenja4">
                         <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="4">Baru
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="5">Non APBD
                       </label>
                   </div>
                 </div>
@@ -536,6 +574,80 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
     </div>
 </div>
+
+  <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" id="id_indikator_program_renja" name="id_indikator_program_renja">
+              <input type="hidden" id="id_renja_program_1" name="id_renja_program_1">
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id">No Urut :</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control number" id="no_urut_indikator" disabled>
+                </div>
+                <div class="col-sm-3 chkIndikator hidden">
+                    <label class="checkbox-inline">
+                    <input class="checkIndikator" type="checkbox" name="checkIndikator" id="checkIndikator" value="1"> Telah Direviu</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="title">Uraian Indikator Program Renja:</label>
+                <div class="col-sm-8">
+                  <textarea type="name" class="form-control" id="ur_indikator_renja" rows="3" disabled></textarea>
+                </div>
+                <input type="hidden" id="kd_indikator_renja" name="kd_indikator_renja">
+                <span class="btn btn-primary btnCariIndi" id="btnCariIndi" name="btnCariIndi"><i class="fa fa-search fa-fw fa-lg"></i></span>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Program Renja:</label>
+                <div class="col-sm-8">
+                  <textarea type="name" class="form-control" id="ur_tolokukur_renja" rows="3" disabled></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="target_indikator_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renstra :</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control number" id="target_indikator_renstra" name="target_indikator_renstra" disabled >
+                </div>
+                <label for="target_indikator_renja" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renja :</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control number" id="target_indikator_renja" name="target_indikator_renja" required="required" >
+                </div>
+              </div>
+              <div class="form-group">
+              <label class="control-label col-sm-3" for="id_satuan_output">Satuan Indikator :</label>
+                <div class="col-sm-8">
+                  <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
+                </div>
+              </div>
+            </form>
+          </div>
+              <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusIndikator">
+                        <button type="button" class="btn btn-danger btnHapusIndikator btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-success btnIndikator btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
 
 <div id="HapusProgRenja" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
@@ -629,7 +741,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <label for="status_pelaksanaan_kegrenja" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
                   <div class="col-sm-8" id="myRadio">
                       <label class="radio-inline">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="0">Tepat Waktu
+                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="0">Dilaksanakan
                       </label>
                       <label class="radio-inline hidden">
                         <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="1">Dimajukan
@@ -642,6 +754,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       </label>
                       <label class="radio-inline hidden" id="sp_kegrenja4">
                         <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="4">Baru
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="5">Non APBD
                       </label>
                   </div>
                 </div>
@@ -739,6 +854,80 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
 
+<div id="ModalIndikatorKeg" class="modal fade" role="dialog" data-backdrop="static">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" id="id_indikator_kegiatan_renja" name="id_indikator_kegiatan_renja">
+              <input type="hidden" id="id_renja_indikatorKeg" name="id_renja_indikatorKeg">
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id">No Urut :</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control number" id="no_urut_indikatorKeg" disabled>
+                </div>
+                <div class="col-sm-3 chkIndikatorKeg hidden">
+                    <label class="checkbox-inline">
+                    <input class="checkIndikatorKeg" type="checkbox" name="checkIndikatorKeg" id="checkIndikatorKeg" value="1"> Telah Direviu</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="title">Uraian Indikator Kegiatan Renja:</label>
+                <div class="col-sm-8">
+                  <textarea type="name" class="form-control" id="ur_indikatorKeg_renja" rows="3" disabled></textarea>
+                </div>
+                <input type="hidden" id="kd_indikatorKeg_renja" name="kd_indikatorKeg_renja">
+                <span class="btn btn-primary btnCariIndiKeg" id="btnCariIndiKeg" name="btnCariIndiKeg"><i class="fa fa-search fa-fw fa-lg"></i></span>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Kegiatan Renja:</label>
+                <div class="col-sm-8">
+                  <textarea type="name" class="form-control" id="ur_tolokukur_keg" rows="3" disabled></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="target_indikatorKeg_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renstra :</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control number" id="target_indikatorKeg_renstra" name="target_indikatorKeg_renstra" disabled >
+                </div>
+                <label for="target_indikatorKeg_renja" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renja :</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control number" id="target_indikatorKeg_renja" name="target_indikatorKeg_renja" required="required" >
+                </div>
+              </div>
+              <div class="form-group">
+              <label class="control-label col-sm-3" for="id_satuan_output_keg">Satuan Indikator :</label>
+                <div class="col-sm-8">
+                  <select type="text" class="form-control id_satuan_output_keg" id="id_satuan_output_keg" name="id_satuan_output_keg"></select>
+                </div>
+              </div>
+            </form>
+          </div>
+              <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusIndikatorKeg">
+                        <button type="button" class="btn btn-danger btnHapusIndikatorKeg btn-labeled">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-success btnIndikatorKeg btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
 <div id="HapusKegRenja" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
@@ -792,7 +981,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="col-sm-2">
                     <input type="text" class="form-control nomor" name="no_urut_aktivitas" id="no_urut_aktivitas">
                   </div>
-                  <div class="col-sm-3 chkAktivitas">
+                  <div class="col-sm-3 chkAktivitas hidden">
                     <label class="checkbox-inline">
                     <input class="checkAktivitas" type="checkbox" name="checkAktivitas" id="checkAktivitas" value="1"> Telah Direviu</label>
                   </div>
@@ -904,6 +1093,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sp_aktivitas" name="status_pelaksanaan_aktivitas" id="status_pelaksanaan_aktivitas" value="1">Tidak Dilaksanakan
                       </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_aktivitas" name="status_pelaksanaan_aktivitas" id="status_pelaksanaan_aktivitas" value="2">Non APBD
+                      </label>
                   </div>
                 </div>
                 <div class="form-group">
@@ -1013,6 +1205,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       </label>
                       <label class="radio-inline">
                         <input type="radio" class="sp_pelaksana" name="status_pelaksanaan_pelaksana" id="status_pelaksanaan_pelaksana" value="1">Tidak Dilaksanakan
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_pelaksana" name="status_pelaksanaan_pelaksana" id="status_pelaksanaan_pelaksana" value="2">Non APBD
                       </label>
                   </div>
                 </div>
@@ -1217,13 +1412,19 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="1">Dengan Perubahan
                       </label>
-                  </div>
-                  <div class="col-sm-8 col-sm-offset-3" id="myRadio">
                       <label class="radio-inline">
                         <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="2">Digabungkan
                       </label>
+                  </div>
+                  <div class="col-sm-8 col-sm-offset-3" id="myRadio">                      
                       <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="3">Ditolak/Tidak dilaksanakan
+                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="3">Tidak dilaksanakan
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="4">Diluarkewenangan
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="4">Non APBD
                       </label>
                   </div>
                 </div>
@@ -2098,6 +2299,49 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
 
+
+
+  <div id="cariIndikator" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+           <div class="form-group">
+             <div class="col-sm-12">
+                <table id='tblCariIndikator' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                          <tr>
+                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">Jenis Indikator</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">Sifat Indikator</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </form> 
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('scripts')
@@ -2108,6 +2352,8 @@ $(document).ready(function(){
 
 var template = Handlebars.compile($("#details-template").html());
 var usulan = Handlebars.compile($("#details-usulan").html());
+var detInProg = Handlebars.compile($("#details-inProg").html());
+var detInKeg = Handlebars.compile($("#details-inKeg").html());
 
 var tahun_temp,unit_temp,sub_unit_temp,ProgRkpd_temp,bidang_temp,jenis_belanja_temp;
 var id_progref_temp,id_progrenja_temp,id_kegrenja_temp,id_aktivitas_temp,id_pelaksana_temp,id_lokasi_temp;
@@ -2119,23 +2365,8 @@ $('[data-toggle="popover"]').popover();
 $('.number').number(true,2,',', '.');
 $('.nomor').number(true,0,',', '.');
 
-
-// $('#btnTambahProgRenja').hide();
-// $('#btnTambahKegiatan').hide();
-// $('#btnTambahAktivitas').hide();
-// $('#btnTambahPelaksana').hide();
-// $('#btnTambahLokasi').hide();
-// $('#divAddSSH').hide();
-// $('#divImportASB').hide();
-
-// $('#divTambahProg').hide();
-// $('#divTambahKegiatan').hide();
-// $('#divTambahAktivitas').hide();
-// $('#divTambahPelaksana').hide();
-// $('#divTambahLokasi').hide();
-// $('#divImportASB').hide();
-// $('#divAddSSH').hide();
-// $('#divImportASB').hide();
+$('#no_urut_indikator').number(true,0,',', '.');
+$('#no_urut_indikatorKeg').number(true,0,',', '.');
 
 function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
@@ -2158,6 +2389,30 @@ $('.page-alert .close').click(function(e) {
 $(".disabled").click(function (e) {
         e.preventDefault();
         return false;
+});
+
+$.ajax({
+          type: "GET",
+          url: './admin/parameter/getRefSatuan',
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_satuan_output"]').empty();
+          $('select[name="id_satuan_output"]').append('<option value="">--Pilih Satuan Indikator--</option>');
+
+          $('select[name="id_satuan_output_keg"]').empty();
+          $('select[name="id_satuan_output_keg"]').append('<option value="">--Pilih Satuan Indikator--</option>');
+
+          for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="id_satuan_output"]').append('<option value="'+ post.id_satuan +'">'+ post.uraian_satuan +'</option>');
+              $('select[name="id_satuan_output_keg"]').append('<option value="'+ post.id_satuan +'">'+ post.uraian_satuan +'</option>');
+            }
+              
+          }
 });
 
 function back2Rkpd(){
@@ -2746,8 +3001,11 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
     $('#id_aktivitas_asb').val(data.id_aktivitas_asb);
     $('#ur_aktivitas_kegiatan').val(data.nm_aktivitas_asb);
 
-    LoadSatuanPublik(data.id_aktivitas_asb);
-    $('#id_satuan_publik').removeAttr("disabled");
+    $('#id_satuan_1_aktivitas').val(data.id_satuan_1);
+    $('#id_satuan_2_aktivitas').val(data.id_satuan_2);
+    $('#ur_sat_utama1').text(data.uraian_satuan_1);
+    $('#ur_sat_utama2').text(data.uraian_satuan_2);
+    
     $('#cariAktivitasASB').modal('hide');    
 
   });
@@ -2844,8 +3102,6 @@ function loadTblProgRkpd(tahun,unit){
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
                         { data: 'jml_pagu', sClass: "dt-center",width:"50px",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        // { data: 'jml_musren', sClass: "dt-center",width:"50px",
-                        //     render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_aktivitas', sClass: "dt-center",width:"15px",
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
                         { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",width:"15px",
@@ -2853,7 +3109,6 @@ function loadTblProgRkpd(tahun,unit){
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
                         { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center",width:"50px" }
-                        // {data:null, defaultContent:"<button class='btnEditProgRKPD btn btn-sm' type='button' ><i class='fa fa-pencil'></i> Edit Data Program</button>"}
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -2950,6 +3205,14 @@ function loadTblProgRenja(tahun,unit,id_forum){
                       "decimal": ",",
                       "thousands": "."},
                   "columns": [
+                        {
+                            "className":      'details-control',
+                            "orderable":      false,
+                            "searchable":      false,
+                            "data":           null,
+                            "defaultContent": '',
+                            "width" : "5px"
+                        },
                         { data: 'urut', sClass: "dt-center", width:"5px"},
                         { data: 'uraian_program_renstra'},
                         { data: 'pagu_tahun_renstra', sClass: "dt-right",
@@ -2969,6 +3232,53 @@ function loadTblProgRenja(tahun,unit,id_forum){
         });
 }
 
+var tblInProg;
+function initInProg(tableId, data) {
+    tblInProg=$('#' + tableId).DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: data.details_url,
+            dom : 'BfRtIP',
+            autoWidth: false,
+            "language": {
+                      "decimal": ",",
+                      "thousands": "."},
+            "columns": [
+                        { data: 'urut', sClass: "dt-center"},
+                        { data: 'uraian_indikator_program'},
+                        { data: 'target_renstra', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'target_renja', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",
+                            render: function(data, type, row,meta) {
+                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
+                          }},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                      ],
+            "order": [[0, 'asc']],
+            "bDestroy": true
+        })
+
+}
+
+$('#tblProgram tbody').on('click', 'td.details-control', function () {
+
+        var tr = $(this).closest('tr');
+        var row = prog_renja_tbl.row( tr );
+        var tableId = 'inProg-' + row.data().id_forum_program;
+
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            row.child(detInProg(row.data())).show();
+            initInProg(tableId, row.data());
+            tr.addClass('shown');
+            tr.next().find('td').addClass('no-padding bg-gray');
+        }    
+  });
+
 var keg_renja_tbl;
 $('#tblKegiatanRenja').DataTable({
   dom : 'BfRtip',
@@ -2976,7 +3286,6 @@ $('#tblKegiatanRenja').DataTable({
   bDestroy: true
 });
 function loadTblKegiatanRenja(id_program){
-
     keg_renja_tbl=$('#tblKegiatanRenja').DataTable({
                   processing: true,
                   serverSide: true,
@@ -2987,6 +3296,14 @@ function loadTblKegiatanRenja(id_program){
                       "decimal": ",",
                       "thousands": "."},
                   "columns": [
+                        {
+                            "className":      'details-control',
+                            "orderable":      false,
+                            "searchable":      false,
+                            "data":           null,
+                            "defaultContent": '',
+                            "width" : "5px"
+                        },
                         { data: 'urut', sClass: "dt-center", width:"5px"},
                         { data: 'uraian_kegiatan_forum'},
                         { data: 'pagu_tahun_kegiatan', sClass: "dt-right",
@@ -2996,8 +3313,6 @@ function loadTblKegiatanRenja(id_program){
                         { data: 'jml_aktivitas', sClass: "dt-center"},
                         { data: 'jml_pagu_aktivitas', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        // { data: 'jml_musren_aktivitas', sClass: "dt-right",
-                        //     render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center", width:"5px",
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
@@ -3008,6 +3323,51 @@ function loadTblKegiatanRenja(id_program){
                   "bDestroy": true
         });
 }
+
+function initInKeg(tableId, data){
+    tblInKeg=$('#' + tableId).DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: data.details_url,
+            dom : 'BFRtIP',
+            autoWidth: false,
+            "language": {
+                      "decimal": ",",
+                      "thousands": "."},
+            "columns": [
+                        { data: 'urut', sClass: "dt-center"},
+                        { data: 'uraian_indikator_kegiatan'},
+                        { data: 'target_renstra', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'target_renja', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",
+                            render: function(data, type, row,meta) {
+                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
+                          }},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                      ],
+                  "order": [[0, 'asc']],
+                  "bDestroy": true
+        })
+}
+
+$('#tblKegiatanRenja tbody').on('click', 'td.details-control', function () {
+
+        var tr = $(this).closest('tr');
+        var row = keg_renja_tbl.row( tr );
+        var tableId = 'inKeg-' + row.data().id_forum_skpd;
+
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            row.child(detInKeg(row.data())).show();
+            initInKeg(tableId, row.data());
+            tr.addClass('shown');
+            tr.next().find('td').addClass('no-padding bg-gray');
+        }    
+  });
 
 var aktivitas_tbl;
 $('#tblAktivitas').DataTable({
@@ -3111,14 +3471,6 @@ function loadTblLokasi(id_pelaksana){
                       "decimal": ",",
                       "thousands": "."},
                   "columns": [
-                        // {
-                        //     "className":      'details-control',
-                        //     "orderable":      false,
-                        //     "searchable":      false,
-                        //     "data":           null,
-                        //     "defaultContent": '',<span class="badge">
-                        //     "width" : "5px"
-                        // },
                         { data: 'no_urut', sClass: "dt-center"},
                         { data: 'sumber_display', sClass: "dt-center"},
                         { data: 'nama_lokasi'},
@@ -3310,17 +3662,6 @@ $('#tblAktivitas tbody').on( 'dblclick', 'tr', function () {
     id_satuan_2_aktiv_temp = data.id_satuan_2;
     nm_sat_asb1 = data.ur_satuan_1;
     nm_sat_asb2 = data.ur_satuan_2;
-    // sbr_aktivitas=data.sumber_aktivitas;  
-
-    // if(sbr_aktivitas == 0){
-    //     if(id_satuan_publik_temp==0){
-    //       vol1_temp=data.jml_vol_lok;
-    //       vol2_temp=data.volume_2;
-    //     } else {          
-    //       vol1_temp=data.volume_1;
-    //       vol2_temp=data.jml_vol_lok;
-    //     }
-    // } else {
       vol1_temp=data.jml_vol_1;
       vol2_temp=data.jml_vol_2;
     // }
@@ -3470,6 +3811,7 @@ $(document).on('click', '.add-ProgRenja', function() {
   document.frmProgRenja.status_pelaksanaan_progrenja[4].checked=true;
   $('#sumber_data_progrenja').val(1);
   $('#status_data_progrenja').val(0);
+  $('#uraian_program_renstra').val($('#nm_program_progrenja').text());
 
   $('#idStatusProgRenja').attr('style', 'display:none;');
 
@@ -3535,7 +3877,7 @@ $(document).on('click', '.edit-ProgRenja', function() {
   $('#id_unit_progrenja').val(data.id_unit);
   $('#no_urut_progrenja').val(data.no_urut);
   $('#id_program_renstra').val(data.id_program_renstra);
-  $('#uraian_program_renstra').val(data.program_renstra);
+  $('#uraian_program_renstra').val(data.uraian_program_rpjmd);
   $('#ur_program_renja').val(data.uraian_program_renstra);
   $('#id_renja_program').val(data.id_renja_program);
   $('#ur_program_ref').val(data.uraian_program);
@@ -3924,11 +4266,15 @@ $( ".sumber_aktivitas" ).change(function() {
   if(document.frmModalAktivitas.sumber_aktivitas.value==0){
       document.getElementById("ur_aktivitas_kegiatan").setAttribute("disabled","disabled");
       $('.btnCariASB').show();
-      $('#id_satuan_publik').removeAttr("disabled");
+      $('#id_satuan_1_aktivitas').attr('disabled','disabled');
+      $('#id_satuan_2_aktivitas').attr('disabled','disabled');
+      // $('#id_satuan_publik').removeAttr("disabled");
     } else {
       document.getElementById("ur_aktivitas_kegiatan").removeAttribute("disabled");
       $('.btnCariASB').hide();
-      $('#id_satuan_publik').attr("disabled","disabled");
+      $('#id_satuan_1_aktivitas').removeAttr('disabled');
+      $('#id_satuan_2_aktivitas').removeAttr('disabled');
+      // $('#id_satuan_publik').attr("disabled","disabled");
     }
 });
 
@@ -4035,7 +4381,7 @@ $(document).on('click', '#btnTambahAktivitas', function() {
       $('#btnAktivitas').addClass('addAktivitas');
       $('#btnAktivitas').removeClass('editAktivitas');      
       $('.form-horizontal').show();
-      $('.modal-title').text('Tambah Aktivitas Kegiatan SKPD');
+      $('.modal-title').text('Tambah Aktivitas Kegiatan SKPD X');
       $('#id_forum_aktivitas').val(id_pelaksana_temp);
       $('#id_aktivitas').val(null);
       $('#tahun_forum_aktivitas').val(tahun_temp);
@@ -4055,6 +4401,8 @@ $(document).on('click', '#btnTambahAktivitas', function() {
       $('#keterangan_status_aktivitas').val(null);
       $('#persen_musren_aktivitas').attr('disabled', 'disabled');
       $('#id_satuan_publik').attr("disabled","disabled");
+      $('#id_satuan_1_aktivitas').attr('disabled','disabled');
+      $('#id_satuan_2_aktivitas').attr('disabled','disabled');
 
       $('#id_satuan_1_aktivitas').val(-1);
       $('#id_satuan_2_aktivitas').val(-1);
@@ -4074,8 +4422,8 @@ $(document).on('click', '#btnTambahAktivitas', function() {
       $(':radio[name=sumber_aktivitas]:not(:checked)').attr('disabled', false);
       $(':radio[name=jenis_aktivitas]:not(:checked)').attr('disabled', false);
       $(':radio[name=satuan_utama]:not(:checked)').attr('disabled', false);
-      $('#id_satuan_1_aktivitas').removeAttr("disabled");
-      $('#id_satuan_2_aktivitas').removeAttr("disabled");
+      // $('#id_satuan_1_aktivitas').removeAttr("disabled");
+      // $('#id_satuan_2_aktivitas').removeAttr("disabled");
 
       $('#ModalAktivitas').modal('show');
 
@@ -4737,7 +5085,7 @@ $( "#harga_satuan_forum" ).change(function() {
 });
 
 function checkAsalbelanja(asal){
-  if(asal==4){
+  if(asal==1){
     $('#btnCariSSH').addClass('btnCariSSH');
     $('#btnCariRekening').addClass('btnCariRekening');
     $('#btnCariSSH').removeClass('catatan');
@@ -4756,7 +5104,8 @@ function checkAsalbelanja(asal){
   }
 }
 
-$(document).on('click', '.catatan', function() {
+
+$(document).on('click', '.catatan', function() {  
   alert("Maaf Tidak Berfungsi karena asal belanja dari ASB")
 });
 
@@ -5105,6 +5454,523 @@ $(document).on('click', '.btnLoadAsb', function() {
   });
 });
 
+var cariindikator
+$(document).on('click', '.btnCariIndi', function() {    
+    $('#judulModal').text('Daftar Indikator yang terdapat dalam RPJMD/Renstra');    
+    $('#cariIndikator').modal('show');
+
+    cariindikator = $('#tblCariIndikator').DataTable( {
+        processing: true,
+        serverSide: true,
+        dom: 'bfrtIp',
+        autoWidth : false,
+        "ajax": {"url": "./admin/parameter/getRefIndikator"},
+        "columns": [
+              { data: 'no_urut'},
+              { data: 'nm_indikator'},
+              { data: 'jenis_display'},
+              { data: 'sifat_display'}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    });
+  });
+
+$(document).on('click', '.btnCariIndiKeg', function() {    
+    $('#judulModal').text('Daftar Indikator yang terdapat dalam RPJMD/Renstra');    
+    $('#cariIndikator').modal('show');
+
+    cariindikator = $('#tblCariIndikator').DataTable( {
+        processing: true,
+        serverSide: true,
+        dom: 'bfrtIp',
+        autoWidth : false,
+        "ajax": {"url": "./admin/parameter/getRefIndikator"},
+        "columns": [
+              { data: 'no_urut'},
+              { data: 'nm_indikator'},
+              { data: 'jenis_display'},
+              { data: 'sifat_display'}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    });
+  });
+
+  $('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
+    var data = cariindikator.row(this).data();
+
+    document.getElementById("ur_indikator_renja").value = data.nm_indikator;
+    document.getElementById("kd_indikator_renja").value = data.id_indikator;
+    document.getElementById("id_satuan_output").value = data.id_satuan_output;
+
+    document.getElementById("ur_indikatorKeg_renja").value = data.nm_indikator;
+    document.getElementById("kd_indikatorKeg_renja").value = data.id_indikator;
+    document.getElementById("id_satuan_output_keg").value = data.id_satuan_output;
+
+    $('#cariIndikator').modal('hide');
+  });
+
+$(document).on('click', '.add-indikator', function() {
+  var data = prog_renja_tbl.row( $(this).parents('tr') ).data();
+
+      $('.btnIndikator').removeClass('editIndikator');
+      $('.btnIndikator').addClass('addIndikator');
+      $('.modal-title').text('Tambah Target Capaian Program Forum SKPD');
+      $('.form-horizontal').show();
+      $('#id_renja_program_1').val(data.id_forum_program);
+      $('#kd_indikator_renja').val(null);
+      $('#id_indikator_program_renja').val(null);
+      $('#no_urut_indikator').val(null);
+      $('#ur_indikator_renja').val(null);
+      $('#ur_tolokukur_renja').val(null);
+      $('#target_indikator_renstra').val(0);
+      $('#target_indikator_renja').val(0);
+      $('#id_satuan_output').val(-1);
+
+
+      document.getElementById("no_urut_indikator").removeAttribute("disabled");
+      document.getElementById("ur_tolokukur_renja").removeAttribute("disabled");
+
+      $('.btnCariIndi').show();
+      $('.btnHapusIndikator').hide();
+      $('.chkIndikator').hide();
+
+      $('#ModalIndikator').modal('show');
+  });
+
+$('.modal-footer').on('click', '.addIndikator', function() {
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: './forumskpd/forum/addIndikatorProg',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_renja': tahun_temp,
+              'no_urut': $('#no_urut_indikator').val(),
+              'id_forum_program': $('#id_renja_program_1').val(),
+              'kd_indikator': $('#kd_indikator_renja').val(),
+              'uraian_indikator_program': $('#ur_indikator_renja').val(),
+              'tolok_ukur_indikator': $('#ur_tolokukur_renja').val(),
+              'target_renja': $('#target_indikator_renja').val(),
+              'id_satuan_output':$('#id_satuan_output').val(),
+          },
+          success: function(data) {
+              prog_renja_tbl.ajax.reload();
+              tblInProg.ajax.reload(); 
+              prog_rkpd_tbl.ajax.reload();             
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+              
+          }
+      });
+  });
+
+  $(document).on('click', '.edit-indikator', function() {
+  var data = tblInProg.row( $(this).parents('tr') ).data();
+
+      $('.btnIndikator').removeClass('addIndikator');
+      $('.btnIndikator').addClass('editIndikator');
+      $('.modal-title').text('Edit dan Reviu Target Capaian Program RKPD');
+      $('.form-horizontal').show();
+      $('#id_indikator_program_renja').val(data.id_indikator_program);
+      $('#id_renja_program_1').val(data.id_forum_program);
+      $('#kd_indikator_renja').val(data.kd_indikator);
+      $('#no_urut_indikator').val(data.no_urut);
+      $('#ur_indikator_renja').val(data.uraian_indikator_program);
+      $('#ur_tolokukur_renja').val(data.tolok_ukur_indikator);
+      $('#target_indikator_renstra').val(data.target_renstra);
+      $('#target_indikator_renja').val(data.target_renja);
+      $('#id_satuan_output').val(data.id_satuan_ouput);
+      
+      if(data.sumber_data==1){
+        document.getElementById("no_urut_indikator").removeAttribute("disabled");
+        $('.btnCariIndi').show();
+        $('.btnHapusIndikator').show();
+        document.getElementById("ur_tolokukur_renja").removeAttribute("disabled");
+      } else {
+        document.getElementById("no_urut_indikator").setAttribute("disabled","disabled");
+        $('.btnCariIndi').hide();
+        $('.btnHapusIndikator').hide();
+        document.getElementById("ur_tolokukur_renja").setAttribute("disabled","disabled");
+      }
+
+      $('.chkIndikator').show();
+      if(data.status_data==1){
+        $('.checkIndikator').prop('checked',true);
+      } else {
+        $('.checkIndikator').prop('checked',false);
+      }
+
+      $('#ModalIndikator').modal('show');
+    });
+
+  $('.modal-footer').on('click', '.editIndikator', function() {
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+      $.ajax({
+          type: 'post',
+          url: './forumskpd/forum/editIndikatorProg',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_indikator_program':$('#id_indikator_program_renja').val(),
+              'no_urut': $('#no_urut_indikator').val(),
+              'id_forum_program': $('#id_renja_program_1').val(),
+              'kd_indikator': $('#kd_indikator_renja').val(),
+              'uraian_indikator_program': $('#ur_indikator_renja').val(),
+              'tolok_ukur_indikator': $('#ur_tolokukur_renja').val(),
+              'target_renja': $('#target_indikator_renja').val(),
+              'id_satuan_output':$('#id_satuan_output').val(),
+          },
+          success: function(data) {
+              tblInProg.ajax.reload();
+              prog_renja_tbl.ajax.reload();
+              prog_rkpd_tbl.ajax.reload();
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          }
+      });
+  });
+
+$(document).on('click', '.btnHapusIndikator', function() {
+  var x = confirm("Anda yakin akan menghapus data indikator "+$('#ur_indikator_renja').val()+" ?");
+  if (x) {
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/delIndikatorProg',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_indikator_program': $('#id_indikator_program_renja').val()
+      },
+      success: function(data) {
+        $('#ModalIndikator').modal('hide');
+        tblInProg.ajax.reload();
+        prog_renja_tbl.ajax.reload();
+        prog_rkpd_tbl.ajax.reload();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+   } 
+  else {    
+    return false;
+  }
+});
+
+$(document).on('click', '.post-InProgRenja', function() {
+  var data = tblInProg.row( $(this).parents('tr') ).data();
+  var status_data;
+  if(data.status_data == 0){
+    status_data = 1;
+  }; 
+  if(data.status_data == 1){
+    status_data = 0;
+  };
+
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/postIndikatorProg',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_indikator_program': data.id_indikator_program,
+        'status_data':status_data,
+      },
+      success: function(data) {
+        tblInProg.ajax.reload();
+        prog_renja_tbl.ajax.reload();
+        prog_rkpd_tbl.ajax.reload();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
+
+$(document).on('click', '.add-indikatorKeg', function() {
+
+  var data = keg_renja_tbl.row( $(this).parents('tr') ).data();
+
+      $('.btnIndikatorKeg').removeClass('editIndikatorKeg');
+      $('.btnIndikatorKeg').addClass('addIndikatorKeg');
+      $('.modal-title').text('Tambah Target Capaian Kegiatan Renja');
+      $('.form-horizontal').show();
+      $('#id_indikator_kegiatan_renja').val(data.id_forum_skpd);
+      $('#kd_indikatorKeg_renja').val(null);
+      $('#id_renja_indikatorKeg').val(null);
+      $('#no_urut_indikatorKeg').val(null);
+      $('#ur_indikatorKeg_renja').val(null);
+      $('#ur_tolokukur_keg').val(null);
+      $('#target_indikatorKeg_renstra').val(0);
+      $('#target_indikatorKeg_renja').val(0);
+      $('#id_satuan_output_keg').val(0);
+
+
+      document.getElementById("no_urut_indikatorKeg").removeAttribute("disabled");
+      document.getElementById("ur_tolokukur_keg").removeAttribute("disabled");
+
+      $('.btnCariIndiKeg').show();
+      $('.btnHapusIndikatorKeg').hide();
+      $('.chkIndikatorKeg').hide();
+
+      alert(data.id_forum_skpd);
+
+      $('#ModalIndikatorKeg').modal('show');
+  });
+
+$('.modal-footer').on('click', '.addIndikatorKeg', function() {
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: './forumskpd/forum/addIndikatorKeg',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_renja': tahun_temp,
+              'no_urut': $('#no_urut_indikatorKeg').val(),
+              'id_forum_skpd': $('#id_indikator_kegiatan_renja').val(),
+              'kd_indikator': $('#kd_indikatorKeg_renja').val(),
+              'uraian_indikator_kegiatan': $('#ur_indikatorKeg_renja').val(),
+              'tolok_ukur_indikator': $('#ur_tolokukur_keg').val(),
+              'target_renja': $('#target_indikatorKeg_renja').val(),
+              'id_satuan_output':$('#id_satuan_output_keg').val(),
+          },
+          success: function(data) {              
+              keg_renja_tbl.ajax.reload();
+              tblInKeg.ajax.reload();
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }              
+          }
+      });
+  });
+
+  $(document).on('click', '.edit-indikator_keg', function() {
+
+    var data = tblInKeg.row( $(this).parents('tr') ).data();
+
+      $('.btnIndikatorKeg').removeClass('addIndikatorKeg');
+      $('.btnIndikatorKeg').addClass('editIndikatorKeg');
+      $('.modal-title').text('Edit dan Reviu Target Capaian Kegiatan Renja');
+      $('.form-horizontal').show();
+      $('#id_renja_indikatorKeg').val(data.id_indikator_kegiatan);
+      $('#id_indikator_kegiatan_renja').val(data.id_forum_skpd);
+      $('#kd_indikatorKeg_renja').val(data.kd_indikator);
+      $('#no_urut_indikatorKeg').val(data.no_urut);
+      $('#ur_indikatorKeg_renja').val(data.uraian_indikator_kegiatan);
+      $('#ur_tolokukur_keg').val(data.tolok_ukur_indikator);
+      $('#target_indikatorKeg_renstra').val(data.target_renstra);
+      $('#target_indikatorKeg_renja').val(data.target_renja);
+      $('#id_satuan_output_keg').val(data.id_satuan_ouput);
+
+
+      if(data.sumber_data==1){
+        document.getElementById("no_urut_indikatorKeg").removeAttribute("disabled");
+        $('.btnCariIndikeg').show();
+        $('.btnHapusIndikatorKeg').show();
+        document.getElementById("ur_tolokukur_keg").removeAttribute("disabled");
+      } else {
+        document.getElementById("no_urut_indikatorKeg").setAttribute("disabled","disabled");
+        $('.btnCariIndikeg').hide();
+        $('.btnHapusIndikatorKeg').hide();
+        document.getElementById("ur_tolokukur_keg").setAttribute("disabled","disabled");
+      };
+
+      $('.chkIndikatorKeg').show();
+      if(data.status_data==1){
+        $('.checkIndikatorKeg').prop('checked',true);
+      } else {
+        $('.checkIndikatorKeg').prop('checked',false);
+      };
+    
+      $('#ModalIndikatorKeg').modal('show');
+    });
+
+  $('.modal-footer').on('click', '.editIndikatorKeg', function() {
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: './forumskpd/forum/editIndikatorKeg',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_indikator_kegiatan':$('#id_renja_indikatorKeg').val(),
+              'no_urut': $('#no_urut_indikatorKeg').val(),
+              'id_forum_skpd': $('#id_indikator_kegiatan_renja').val(),
+              'kd_indikator': $('#kd_indikatorKeg_renja').val(),
+              'uraian_indikator_kegiatan': $('#ur_indikatorKeg_renja').val(),
+              'tolok_ukur_indikator': $('#ur_tolokukur_keg').val(),
+              'target_renja': $('#target_indikatorKeg_renja').val(),
+              'id_satuan_output':$('#id_satuan_output_keg').val(),
+          },
+          success: function(data) {
+              keg_renja_tbl.ajax.reload();
+              tblInKeg.ajax.reload();              
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              } 
+          }
+      });
+  });
+
+$(document).on('click', '.btnHapusIndikatorKeg', function() {
+  var x = confirm("Anda yakin akan menghapus data indikator "+$('#ur_indikatorKeg_renja').val()+" ?");
+  if (x) {
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/delIndikatorKeg',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_indikator_kegiatan': $('#id_renja_indikatorKeg').val()
+      },
+      success: function(data) {
+        $('#ModalIndikatorKeg').modal('hide');
+        tblInKeg.ajax.reload();
+        keg_renja_tbl.ajax.reload();
+        createPesan(data.pesan,"success");
+      }
+    });
+   } 
+  else {    
+    return false;
+  }
+});
+
+$(document).on('click', '.post-InKegRenja', function() {
+  var data = tblInKeg.row( $(this).parents('tr') ).data();
+  var status_data;
+  if(data.status_data == 0){
+    status_data = 1;
+  }; 
+  if(data.status_data == 1){
+    status_data = 0;
+  };
+
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/postIndikatorKeg',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_indikator_kegiatan': data.id_indikator_kegiatan,
+        'status_data':status_data,
+      },
+      success: function(data) {
+        tblInKeg.ajax.reload();
+        keg_renja_tbl.ajax.reload();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
+
+$(document).on('click', '.post-AktivForum', function() {
+  var data = aktivitas_tbl.row( $(this).parents('tr') ).data();
+  var status_data;
+  if(data.status_data == 0){
+    status_data = 1;
+  }; 
+  if(data.status_data == 1){
+    status_data = 0;
+  };
+
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/postAktivitas',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_aktivitas_forum': data.id_aktivitas_forum,
+        'status_data':status_data,
+      },
+      success: function(data) {
+        aktivitas_tbl.ajax.reload();
+        keg_renja_tbl.ajax.reload();
+        pelaksana_tbl.ajax.reload();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
+
+$(document).on('click', '.post-KegForum', function() {
+  var data = keg_renja_tbl.row( $(this).parents('tr') ).data();
+  var status_data;
+  if(data.status_data == 0){
+    status_data = 1;
+  }; 
+  if(data.status_data == 1){
+    status_data = 0;
+  };
+
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/postKegRenja',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_forum_skpd': data.id_forum_skpd,
+        'status_data':status_data,
+      },
+      success: function(data) {
+        keg_renja_tbl.ajax.reload();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
 
 });
 </script>

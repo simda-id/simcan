@@ -2,18 +2,18 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Rancangan RKPD';
+                $this->title = 'Proses Data PPAS';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'RKPD']);
+                $breadcrumb->add(['label' => 'PPAS']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -2272,7 +2272,7 @@ $(document).on('click', '.backLokasi', function() {
 
 $.ajax({
     type: "GET",
-    url: '../forumskpd/forum/getUnitRenja',
+    url: './forumskpd/forum/getUnitRenja',
     dataType: "json",
 
     success: function(data) {
@@ -2292,7 +2292,7 @@ $.ajax({
 
 $.ajax({
           type: "GET",
-          url: '../admin/parameter/getSumberDana',
+          url: './admin/parameter/getSumberDana',
           dataType: "json",
           success: function(data) {
 
@@ -2311,7 +2311,7 @@ $.ajax({
 
 $.ajax({
           type: "GET",
-          url: '../admin/parameter/getZonaSSH',
+          url: './admin/parameter/getZonaSSH',
           dataType: "json",
           success: function(data) {
 
@@ -2330,7 +2330,7 @@ $.ajax({
 
 $.ajax({
           type: "GET",
-          url: '../admin/parameter/getRefSatuan',
+          url: './admin/parameter/getRefSatuan',
           dataType: "json",
           success: function(data) {
 
@@ -2389,7 +2389,7 @@ $.ajax({
         serverSide: true,
         dom: 'BfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getRekening/0/0"},
+        "ajax": {"url": "./renja/blang/getRekening/0/0"},
         "columns": [
               { data: 'no_urut'},
               { data: 'kd_rekening'},
@@ -2409,7 +2409,7 @@ $(document).on('click', '.btnCariProgramRenstra', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../ranwalrenja/sesuai/getProgRenstra/"+unit_temp},
+        "ajax": {"url": "./ranwalrenja/sesuai/getProgRenstra/"+unit_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               // { data: 'kd_program', sClass: "dt-center"},
@@ -2444,7 +2444,7 @@ $(document).on('click', '.btnCariKegiatanRenstra', function() {
           serverSide: true,
           dom: 'bfrtIp',
           autoWidth : false,
-          "ajax": {"url": "../ranwalrenja/sesuai/getKegRenstra/"+unit_temp+"/"+id_program_renstra_temp},
+          "ajax": {"url": "./ranwalrenja/sesuai/getKegRenstra/"+unit_temp+"/"+id_program_renstra_temp},
           "columns": [
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_kegiatan_renstra'}
@@ -2484,7 +2484,7 @@ $(document).on('click', '#btnparam_cari', function() {
         serverSide: true,
         dom: 'BfrtIp',
         "autoWidth": false,
-        "ajax": {"url": "../renja/blang/getItemSSH/"+zona_temp+"/"+ param.toLowerCase()},
+        "ajax": {"url": "./renja/blang/getItemSSH/"+zona_temp+"/"+ param.toLowerCase()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
@@ -2561,7 +2561,7 @@ var cariLokasiLuar
 
 $.ajax({
     type: "GET",
-    url: '../admin/parameter/getKecamatan',
+    url: './admin/parameter/getKecamatan',
     dataType: "json",
 
     success: function(data) {
@@ -2586,7 +2586,7 @@ $( "#kecamatan" ).change(function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiDesa/"+$('#kecamatan').val()},
+        "ajax": {"url": "./renja/blang/getLokasiDesa/"+$('#kecamatan').val()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -2604,7 +2604,7 @@ $(document).on('click', '#btnCariLokasi', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiDesa/0"},
+        "ajax": {"url": "./renja/blang/getLokasiDesa/0"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -2618,7 +2618,7 @@ $(document).on('click', '#btnCariLokasi', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiLuarDaerah"},
+        "ajax": {"url": "./renja/blang/getLokasiLuarDaerah"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -2637,7 +2637,7 @@ $(document).on('click', '#btnCariLokasiTeknis', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiTeknis"},
+        "ajax": {"url": "./renja/blang/getLokasiTeknis"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -2701,7 +2701,7 @@ $(document).on('click', '#btnCariSubUnit', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getSubUnit/"+unit_temp},
+        "ajax": {"url": "./renja/blang/getSubUnit/"+unit_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nm_sub'}
@@ -2730,7 +2730,7 @@ $(document).on('click', '.btnCariASB', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../admin/parameter/getAktivitasASB/"+tahun_temp},
+        "ajax": {"url": "./admin/parameter/getAktivitasASB/"+tahun_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nm_aktivitas_asb'}
@@ -2760,7 +2760,7 @@ $(document).on('click', '.btnCariProgRef', function() {
         serverSide: true,
         dom: 'BfRtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/sesuai/getProgRef/"+bidang_temp},
+        "ajax": {"url": "./renja/sesuai/getProgRef/"+bidang_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_program', sClass: "dt-center"},
@@ -2790,7 +2790,7 @@ $(document).on('click', '.btnCariKegiatanRef', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/sesuai/getKegRef/"+id_progref_temp},
+        "ajax": {"url": "./renja/sesuai/getKegRef/"+id_progref_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_kegiatan', sClass: "dt-center"},
@@ -2826,7 +2826,7 @@ function loadTblProgRkpd(tahun,unit){
                   serverSide: true,
                   dom : 'BfRtip',
                   "autoWidth": false,
-                  "ajax": {"url": "../forumskpd/forum/getProgramRkpd/"+tahun+"/"+unit},
+                  "ajax": {"url": "./forumskpd/forum/getProgramRkpd/"+tahun+"/"+unit},
                   "columns": [
                         {
                             "className":      'details-control',
@@ -2945,7 +2945,7 @@ function loadTblProgRenja(tahun,unit,id_forum){
                   serverSide: true,
                   dom : 'BfRtip',
                   autoWidth : false,
-                  "ajax": {"url": "../forumskpd/forum/getProgramRenja/"+tahun+"/"+unit+"/"+id_forum},
+                  "ajax": {"url": "./forumskpd/forum/getProgramRenja/"+tahun+"/"+unit+"/"+id_forum},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -2982,7 +2982,7 @@ function loadTblKegiatanRenja(id_program){
                   serverSide: true,
                   dom : 'BfRtip',
                   autoWidth : false,
-                  "ajax": {"url": "../forumskpd/forum/getKegiatanRenja/"+id_program},
+                  "ajax": {"url": "./forumskpd/forum/getKegiatanRenja/"+id_program},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3022,7 +3022,7 @@ function loadTblAktivitas(id_forum){
                   serverSide: true,
                   dom : 'BfRtip',                  
                   autoWidth : false,
-                  "ajax": {"url": "../forumskpd/forum/getAktivitas/"+id_forum},
+                  "ajax": {"url": "./forumskpd/forum/getAktivitas/"+id_forum},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3067,7 +3067,7 @@ function loadTblPelaksana(id_aktivitas){
                   serverSide: true,
                   dom : 'BfRtip',
                   autoWidth : false,
-                  "ajax": {"url": "../forumskpd/forum/getPelaksanaAktivitas/"+id_aktivitas},
+                  "ajax": {"url": "./forumskpd/forum/getPelaksanaAktivitas/"+id_aktivitas},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3106,7 +3106,7 @@ function loadTblLokasi(id_pelaksana){
                   dom : 'BfRtip',
                   deferRender: true,
                   autoWidth : false,
-                  "ajax": {"url": "../forumskpd/forum/getLokasiAktivitas/"+id_pelaksana},
+                  "ajax": {"url": "./forumskpd/forum/getLokasiAktivitas/"+id_pelaksana},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3202,7 +3202,7 @@ function loadTblBelanja(lokasi){
                   serverSide: true,
                   autoWidth : false,
                   dom : 'BfRtip',
-                  "ajax": {"url": "../forumskpd/forum/getBelanja/"+lokasi},
+                  "ajax": {"url": "./forumskpd/forum/getBelanja/"+lokasi},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3489,7 +3489,7 @@ $('.modal-footer').on('click', '.addProgRenja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/AddProgRenja',
+          url: './forumskpd/forum/AddProgRenja',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_forum_rkpdprog' : $('#id_forum_rkpdprog_progrenja').val(),
@@ -3572,7 +3572,7 @@ $('.modal-footer').on('click', '.editProgRenja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editProgRenja',
+          url: './forumskpd/forum/editProgRenja',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_forum_program' : $('#id_forum_program').val(),
@@ -3624,7 +3624,7 @@ $(document).on('click', '.btnDelProgRenja', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusProgRenja',
+      url: './forumskpd/forum/hapusProgRenja',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_forum_program': $('#id_forum_program_hapus').val()
@@ -3733,7 +3733,7 @@ $('.modal-footer').on('click', '.addKegRenja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/addKegRenja',
+          url: './forumskpd/forum/addKegRenja',
           data: {
               '_token': $('input[name=_token]').val(),
               // 'id_forum_skpd' : $('#id_forum_skpd').val(),
@@ -3858,7 +3858,7 @@ $('.modal-footer').on('click', '.editKegRenja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editKegRenja',
+          url: './forumskpd/forum/editKegRenja',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_forum_skpd' : $('#id_forum_skpd').val(),
@@ -3906,7 +3906,7 @@ $(document).on('click', '#btnDelKegRenja', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusKegRenja',
+      url: './forumskpd/forum/hapusKegRenja',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_forum_skpd': $('#id_forum_hapus').val()
@@ -4094,7 +4094,7 @@ $('.modal-footer').on('click', '.addAktivitas', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/addAktivitas',
+          url: './forumskpd/forum/addAktivitas',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_forum_skpd' : $('#id_forum_aktivitas').val(),
@@ -4242,7 +4242,7 @@ $('.modal-footer').on('click', '.editAktivitas', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editAktivitas',
+          url: './forumskpd/forum/editAktivitas',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_aktivitas_forum' : $('#id_aktivitas').val(),
@@ -4294,7 +4294,7 @@ $(document).on('click', '#btnDelAktivitas', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusAktivitas',
+      url: './forumskpd/forum/hapusAktivitas',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_aktivitas_forum': $('#id_aktivitas_hapus').val()
@@ -4358,7 +4358,7 @@ $('.modal-footer').on('click', '.addPelaksana', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/addPelaksana',
+          url: './forumskpd/forum/addPelaksana',
           data: {
               '_token': $('input[name=_token]').val(),
               // 'id_pelaksana_forum' : $('#id_pelaksana_forum').val(),
@@ -4441,7 +4441,7 @@ $('.modal-footer').on('click', '.editPelaksana', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editPelaksana',
+          url: './forumskpd/forum/editPelaksana',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_pelaksana_forum' : $('#id_pelaksana_forum').val(),
@@ -4483,7 +4483,7 @@ $(document).on('click', '#btnDelPelaksana', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusPelaksana',
+      url: './forumskpd/forum/hapusPelaksana',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_pelaksana_forum': $('#id_pelaksana_hapus').val()
@@ -4550,7 +4550,7 @@ $('.modal-footer').on('click', '.addLokasi', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/addLokasi',
+          url: './forumskpd/forum/addLokasi',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_lokasi').val(),
@@ -4645,7 +4645,7 @@ $('.modal-footer').on('click', '.editLokasi', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editLokasi',
+          url: './forumskpd/forum/editLokasi',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_lokasi').val(),
@@ -4693,7 +4693,7 @@ $(document).on('click', '#btnDelLokasi', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusLokasi',
+      url: './forumskpd/forum/hapusLokasi',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_lokasi_forum': $('#id_lokasi_hapus').val()
@@ -4809,7 +4809,7 @@ $('.modal-footer').on('click', '.addBelanja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/addBelanja',
+          url: './forumskpd/forum/addBelanja',
           data: {
               '_token': $('input[name=_token]').val(),
               'tahun_forum' : tahun_temp,
@@ -4914,7 +4914,7 @@ $('.modal-footer').on('click', '.editBelanja', function() {
 
       $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/editBelanja',
+          url: './forumskpd/forum/editBelanja',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_belanja_forum' : $('#id_belanja_forum').val(),
@@ -4961,7 +4961,7 @@ $(document).on('click', '.btnHapusBelanja', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/hapusBelanja',
+      url: './forumskpd/forum/hapusBelanja',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_belanja_forum': $('#id_belanja_forum').val()
@@ -4995,7 +4995,7 @@ $(document).on('click', '#btnCopyBelanja', function() {
         serverSide: true,
         autoWidth : false,
         dom: 'bfrtIp',
-        "ajax": {"url": "../forumskpd/forum/getLokasiCopy/"+id_aktivitas_temp},
+        "ajax": {"url": "./forumskpd/forum/getLokasiCopy/"+id_aktivitas_temp},
         "columns": [
               { data: 'urut', sClass: "dt-center"},
               { data: 'uraian_aktivitas_kegiatan'},
@@ -5020,7 +5020,7 @@ $(document).on('click', '#btnProsesCopyBelanja', function() {
 
     $.ajax({
       type: 'post',
-      url: '../forumskpd/forum/getBelanjaCopy',
+      url: './forumskpd/forum/getBelanjaCopy',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_aktivitas': data.id_aktivitas_forum,
@@ -5040,7 +5040,7 @@ $(document).on('click', '#btnUnLoadAsb', function() {
 
   $.ajax({
           type: 'post',
-          url: '../forumskpd/forum/unloadASB',
+          url: './forumskpd/forum/unloadASB',
           data: {
             '_token': $('input[name=_token]').val(),
             'id_aktivitas_asb': id_asb_temp,
@@ -5081,7 +5081,7 @@ $(document).on('click', '#btnTambahBelanjaASB', function() {
 $(document).on('click', '.btnLoadAsb', function() {
   $.ajax({
          type: 'post',
-         url: '../forumskpd/forum/getHitungASB',
+         url: './forumskpd/forum/getHitungASB',
          data: {
              '_token': $('input[name=_token]').val(),
              'tahun_renja' : tahun_temp,

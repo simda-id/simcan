@@ -132,15 +132,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Kegiatan Renja</th>
-                                                <th colspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Pelaksana</th>
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
                                                 <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
-                                                <th width="5%" style="text-align: center; vertical-align:middle">Jml</th>
-                                                <th width="5%" style="text-align: center; vertical-align:middle">Reviu</th>
+                                                {{-- <th width="5%" style="text-align: center; vertical-align:middle">Jml</th>
+                                                <th width="5%" style="text-align: center; vertical-align:middle">Reviu</th> --}}
                                                 <th width="5%" style="text-align: center; vertical-align:middle">Kegiatan</th>
                                                 <th width="5%" style="text-align: center; vertical-align:middle">Aktivitas</th>
 
@@ -1739,8 +1739,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="45%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="25%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
                   <th width="10%" style="text-align: right; vertical-align:middle">Harga Satuan</th>
                 </tr>
@@ -2025,7 +2026,7 @@ $.ajax({
           var post, i;
 
           $('select[name="zona_ssh"]').empty();
-          $('select[name="zona_ssh"]').append('<option value="0">---Pilih Sumber Dana---</option>');
+          $('select[name="zona_ssh"]').append('<option value="0">---Pilih Zona Wilayah---</option>');
 
           for (i = 0; i < j; i++) {
             post = data[i];
@@ -2223,6 +2224,7 @@ $(document).on('click', '.btnCariSubUnit', function() {
 
 var itemSSH, rekening;
 $(document).on('click', '#btnparam_cari', function() {
+ 
   param=$('#param_cari').val();
   itemSSH = $('#tblItemSSH').DataTable( {
         // retrieve: true,
@@ -2235,6 +2237,7 @@ $(document).on('click', '#btnparam_cari', function() {
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
+              { data: 'keterangan_tarif_ssh'},
               { data: 'uraian_satuan', sClass: "dt-center",width:"100px"},
               { data: 'jml_rupiah', sClass: "dt-right",
                   render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -2791,7 +2794,7 @@ function loadTblKegiatanRenja(id_program){
                         { data: 'urut', sClass: "dt-center"},
                         { data: 'uraian_kegiatan_renja'},
                         { data: 'jml_indikator', sClass: "dt-center"},
-                        { data: 'jml_0i', sClass: "dt-center"},
+                        // { data: 'jml_0i', sClass: "dt-center"},
                         { data: 'jml_pelaksana', sClass: "dt-center"},
                         { data: 'pagu_tahun_kegiatan', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -5173,9 +5176,12 @@ $(document).on('click', '.btnHapusLokasi', function() {
 $(document).on('click', '.btnCariSSH', function() {
 
     zona_temp=$('#zona_ssh').val();
-
+    if(zona_temp == 0){
+      createPesan("Maaf Zona Pemberlakuan SSH belum dipilih","danger");
+      return;
+    } else {
       $('#cariItemSSH').modal('show');
-      // $('#tblItemSSH').DataTable().ajax.url("blang/getItemSSH/"+$('#zona_ssh').val()).load();
+    }
 
   });
 
@@ -5304,7 +5310,7 @@ $(document).on('click', '.add-belanja', function() {
       $('#id_lokasi_belanja').val(id_aktivitas_temp);
       $('#id_belanja').val(null);
       $('#tahun_renja_belanja').val(tahun_temp);
-      $('#no_urut_belanja').val(0);
+      $('#no_urut_belanja').val(1);
       $('#zona_ssh').val(0);
       $('#id_item_ssh').val(null);
       $('#rekening_ssh').val(null);
@@ -5324,18 +5330,53 @@ $(document).on('click', '.add-belanja', function() {
       $('#id_satuan2').val(id_sat_asb2);
       // $('#satuan2').text(nm_sat_asb2);
 
-
       checkAsalbelanja(1);
 
       $('#ModalBelanja').modal('show');
 
   });
 
+function validasiFormBelanja() {
+  if ( $.trim( $('#no_urut_belanja').val()) == 0) {
+    createPesan("Nomor Urut belum diisi dengan benar..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#zona_ssh').val()) == "") {
+    createPesan("Zona SSH belum dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_item_ssh').val()) == "") {
+    createPesan("SSH Belum dipilih..!!","danger"); 
+    return false;
+   } ;
+  if ( $.trim( $('#id_rekening').val()) == "") {
+    createPesan("Kode Rekening Belum dipilih..!!","danger"); 
+    return false;
+  } ;
+  if ( $.trim( $('#volume1').val()) <= 0) {
+    createPesan("Volume 1 harus diisi lebih besar dari 0","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_satuan1').val()) == "") {
+    createPesan("SSH Belum dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#volume2').val()) <= 0) {
+    createPesan("Volume 2 harus diisi lebih besar dari 0!!","danger"); 
+    return false;
+  } ;
+  if ( $.trim( $('#harga_satuan').val()) == "") {
+    createPesan("SSH Belum dipilih..!!","danger"); 
+    return false;
+  } ;
+}
+
 $('.modal-footer').on('click', '.addBelanja', function() {
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
-
+      
+      if (validasiFormBelanja() != false) {
       $.ajax({
           type: 'post',
           url: 'blang/addBelanja',
@@ -5370,6 +5411,7 @@ $('.modal-footer').on('click', '.addBelanja', function() {
               }
           }
       });
+      }
   });
 
 $(document).on('click', '.edit-belanja', function() {
@@ -5421,15 +5463,16 @@ $(document).on('click', '.edit-belanja', function() {
 $('.modal-footer').on('click', '.editBelanja', function() {
 
   if (document.getElementById("checkBelanja").checked){
-        check_data = 1
-      } else {
-        check_data = 0
-      }
+    check_data = 1
+  } else {
+    check_data = 0
+  }
 
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-
+  $.ajaxSetup({
+     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
+      
+  if (validasiFormBelanja() != false) {
       $.ajax({
           type: 'post',
           url: 'blang/editBelanja',
@@ -5465,6 +5508,7 @@ $('.modal-footer').on('click', '.editBelanja', function() {
               } 
           }
       });
+  }
   });
 
 $(document).on('click', '.btnHapusBelanja', function() {

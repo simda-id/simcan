@@ -44,7 +44,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="add">
                   <p><a id="btnPerkada" type="button" class="add-perkada btn btn-labeled btn-success">
                         <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a>
-                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-primary" href="{{ url('/printPerkadaSsh')}}">
+                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-primary">
                             <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Perkada SSH</a>
                   </p>
               </div>
@@ -52,12 +52,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <table id='tblPerkada' class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="15%" style="text-align: center; vertical-align:middle">No Perkada</th>
+                          <th width="30px" style="text-align: center; vertical-align:middle">No Perkada</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Tgl Perkada</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Perkada</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Tahun Berlaku</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                          <th width="180px" style="text-align: center; vertical-align:middle">Aksi</th>
+                          <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -73,13 +73,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div class="">
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
-                      <td width="25%" style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
-                      <td style="text-align: left; vertical-align:top;"></td>
+                      <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
                     </tr>
                   </tbody>
                 </table>
@@ -90,10 +89,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <table id="tblDetailZona" class="table table-striped table-bordered"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th width="12%" style="text-align: center; vertical-align:middle">No Zona</th>
+                            <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th width="30px" style="text-align: center; vertical-align:middle">No Zona</th>
                             <th style="text-align: center; vertical-align:middle">Uraian Zona</th>
-                            <th width="180px" style="text-align: center; vertical-align:middle">Aksi</th>
+                            <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Item SSH</th>
+                            <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,46 +102,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             </div>
-
-            {{-- <div role="tabpanel" class="tab-pane" id="golongan">
-              <br>
-              <div class="add">
-                <p>
-                <span><a id="btnAddGol" class="add-golongan btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Golongan</a></span>
-                </p>
-              </div>
-              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                  <tbody>
-                    <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh" align='left'></label></td>
-                    </tr>
-                    <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona" align='left'></label></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              </form>
-              <div class="table-responsive">
-              <table id='tblGolongan' class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                          <th style="text-align: center; vertical-align:middle">Uraian Golongan</th>
-                          <th width="150px" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-            </table>
-            </div>
-            </div> --}}
-
-
             <div role="tabpanel" class="tab-pane" id="detailtarif">
             <br>
             <div class="add">
@@ -172,7 +132,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <table id="tblDetailTarif" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Item</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Item</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Satuan Item</th>
@@ -904,6 +864,8 @@ $(document).ready(function() {
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'id_zona', sClass: "dt-center"},
               { data: 'ur_zona'},
+              { data: 'jml_item', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
               { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
               ],
         "order": [[0, 'asc']],
@@ -1492,6 +1454,7 @@ $(document).on('click', '#btnparam_cari', function() {
     $.ajax({
           type: "GET",
           url: './getDataPerkada',
+          data:"id_perkada="+ id_sk_ssh,
           dataType: "json",
           success: function(data) {
 
@@ -1578,6 +1541,10 @@ $(document).on('click', '#btnparam_cari', function() {
   // $( ".pilih_zona" ).change(function() {
   //   alert($('#pilih_zona').val())
   // });
+
+  $(document).on('click', '#btnPrintPerkadaSSh', function() {
+    window.open('../printPerkadaSsh');
+  });
 
 
 } );

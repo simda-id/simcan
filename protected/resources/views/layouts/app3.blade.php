@@ -19,45 +19,51 @@ use hoaaah\LaravelMenu\Menu;
                  <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x text-info"></i>
-                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong></a>
+                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
             </div>
             <ul class="nav navbar-top-links pull-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            User <span class="caret"></span>
-                        </a>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                            </a>
+                        </li>
 
-                        <ul class="dropdown-menu dropdown-user" role="menu">
-                            <li>
-                                <a href="{{ route('register') }}">Register</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('login') }}">Login</a>
-                            </li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    User <span class="caret"></span>
+                                </a>
 
-                        <ul class="dropdown-menu dropdown-user" role="menu">
-                            <li>
-                                <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                <ul class="dropdown-menu dropdown-user" role="menu">
+                                    <li>
+                                        <a href="{{ route('register') }}">Register</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('login') }}">Login</a>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
-                @endif
-            </ul>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-user" role="menu">
+                                    <li>
+                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
 
             <div class="navbar-default sidebar" role="navigation">
                 <?php

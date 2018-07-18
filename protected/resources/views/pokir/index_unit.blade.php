@@ -33,7 +33,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <label for="tahun_rkpd" class="col-sm-2 control-label" style="text-align: right;">Tahun RKPD</label>
               <div class="col-sm-2">
                 <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
-              </div>
+              </div>              
+              <a class="btn btn-labeled btn-info printPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a>
             </div>
             <div class="form-group">
               <label for="tahun_rkpd" class="col-sm-2 control-label" style="text-align: right;">Unit Pelaksana</label>
@@ -44,14 +45,16 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label class="control-label col-sm-2 text-left"></label>
               <div class="col-sm-7">
-                  <a id="btnProses" type="button" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data Usulan Pokir Dewan</a>
-                  <a class="btn btn-labeled btn-info printPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a>
+                  <a id="btnProses" type="button" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data Usulan</a>
+                  <a id="btnUnLoad" type="button" class="btn btn-danger btn-labeled"><span class="btn-label"><i class="fa fa-chain-broken fa-fw fa-lg"></i></span> Unload Data Usulan</a>
+                  <a id="btnPosting" type="button" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span> Posting Data Usulan</a>
               </div>
             </div>
           </form>
           <table id="tblTLPokir" class="table table-striped table-bordered table-responsive">
             <thead>
               <tr>
+                  <th rowspan="2"  width="3%" style="text-align: center; vertical-align:middle">Pilih</th>
                   <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
                   <th rowspan="2" width="20%" style="text-align: center; vertical-align:middle">Nama Pengusul</th>
                   <th rowspan="2" style="text-align: center; vertical-align:middle">Ringkasan Usulan</th>
@@ -93,9 +96,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="volume_usulan">No Urut :</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control number" id="no_urut_usulan" name="no_urut_usulan" style="text-align: center;" disabled>
+                        <input type="text" class="form-control nomor" id="no_urut_usulan" name="no_urut_usulan" style="text-align: center;" disabled>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 hidden">
                         <label class="checkbox-inline">
                         <input type="checkbox" name="checkStatus" id="checkStatus" value="1"> Telah Direviu</label>
                     </div>
@@ -133,9 +136,22 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <input type="text" class="form-control" id="id_satuan_usulan" name="id_satuan_usulan" style="text-align: center;" readonly>
                     </div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control number" id="pagu_usulan" name="pagu_usulan" style="text-align: right;" readonly>
+                        <input type="text" class="form-control number hidden" id="pagu_usulan" name="pagu_usulan" style="text-align: right;" readonly>
                     </div>
-                  </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="volume_usulan">Volume & Anggaran TL :</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control number" id="volume_usulan_tl" name="volume_usulan_tl" style="text-align: right;">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control" id="id_satuan_usulan_tl" name="id_satuan_usulan_tl" style="text-align: center;" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control number" id="pagu_usulan_tl" name="pagu_usulan_tl" style="text-align: right;">
+                    </div>
+                </div>
+
                   <div class="form-group">
                     <label class="control-label col-sm-3" for="kecamatan">Lokasi Usulan :</label>
                     <div class="col-sm-3">
@@ -249,7 +265,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
   var id_tahun_temp = {{Session::get('tahun')}};
 
-  $('.number').number(true,0,'', '');
+  $('.nomor').number(true,0,'', '');
   $('[data-toggle="popover"]').popover();
 
   var pokir_tbl, rincian_tbl, lokasi_tbl;
@@ -333,6 +349,83 @@ $(document).on('click', '#btnProses', function() {
   });
 });
 
+$(document).on('click', '#btnUnLoad', function() {
+  var rows_selected = pokir_tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = pokir_tbl.rows({ selected: true }).data(); 
+  var counts_data = pokir_tbl.rows({ selected: true }).count();
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $.each(rows_selected, function(index, rowId){
+    var id_pokir_tl=rowId;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    }); 
+    $.ajax({
+          type: 'post',
+          url: './unloadDataUnit',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_pokir_unit' : id_pokir_tl,              
+              'status_data' : rows_data[index].status_data,
+          },
+          success: function(data) {
+            pokir_tbl.ajax.reload();
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          }
+    });
+  });
+  e.preventDefault();
+});
+
+$(document).on('click', '#btnPosting', function() {
+  var rows_selected = pokir_tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = pokir_tbl.rows({ selected: true }).data(); 
+  var counts_data = pokir_tbl.rows({ selected: true }).count();
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $.each(rows_selected, function(index, rowId){
+    var id_pokir_tl=rowId;
+    if (rows_data[index].status_data == 1) {
+      var status_data_tl = 0;
+    } else {
+      var status_data_tl = 1;
+    }
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    }); 
+    $.ajax({
+          type: 'post',
+          url: './PostingUnit',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_pokir_unit' : id_pokir_tl,
+              'status_data' : status_data_tl,
+          },
+          success: function(data) {
+            pokir_tbl.ajax.reload();
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          }
+    });
+  });
+  e.preventDefault();
+});
+
 $('#tblTLPokir').DataTable({
   // dom : 'bfrtip',
   autoWidth : false,
@@ -343,13 +436,19 @@ function LoadTblRincian(id_pokir,id_unit){
   pokir_tbl=$('#tblTLPokir').DataTable( {
     processing: true,
     serverSide: true,
-    // dom : 'bfrtip',
     autoWidth : false,
     "ajax": {"url": "./getDataUnit/"+id_pokir+"/"+id_unit},
     "language": {
             "decimal": ",",
-            "thousands": "."},
+            "thousands": "."},   
+    'columnDefs': [
+       { 'targets': 0,
+         'checkboxes': {'selectRow': true } },
+       { "targets": 1, "width": 10 }
+      ],
+    'select': { 'style': 'multi' },
     "columns": [
+          { data: 'id_pokir_unit', sClass: "dt-center"},
           { data: 'no_urut', sClass: "dt-center"},
           { data: 'nama_pengusul'},
           { data: 'id_judul_usulan'},
@@ -427,7 +526,9 @@ function getStatusTL(){
     { xyz.push(xCheck[x].value); }
   var xvalues = xyz.join('');
   return xvalues;
-}
+};
+
+var status_usulan;
 
 $(document).on('click', '#edit-idenpokir', function() {
 
@@ -451,6 +552,9 @@ $(document).on('click', '#edit-idenpokir', function() {
   $('#volume_usulan').val(data.volume);
   $('#id_satuan_usulan').val(data.uraian_satuan);
   $('#pagu_usulan').val(data.jml_anggaran);
+  $('#volume_usulan_tl').val(data.volume_tl);
+  $('#id_satuan_usulan_tl').val(data.uraian_satuan);
+  $('#pagu_usulan_tl').val(data.pagu_tl);
   $('#kecamatan').val(data.nama_kecamatan);
   $('#desa').val(data.nama_desa);
   document.frmModalUsulan.status_tl[data.status_tl].checked=true;
@@ -459,21 +563,23 @@ $(document).on('click', '#edit-idenpokir', function() {
   $('#id_aktivitas_forum').val(data.id_aktivitas_forum);
   $('#uraian_aktivitas').val(data.uraian_aktivitas_kegiatan);
 
-  if(data.status_data==1){
-    $('#checkStatus').prop('checked',true);
-  } else {
-    $('#checkStatus').prop('checked',false);
-  };
+  // if(data.status_data==1){
+  //   $('#checkStatus').prop('checked',true);
+  // } else {
+  //   $('#checkStatus').prop('checked',false);
+  // };
+
+  status_usulan = data.status_data;
 
   $('#ModalUsulan').modal('show');
 });
 
 $('.modal-footer').on('click', '.editUsulan', function() {
-  if (document.getElementById("checkStatus").checked){
-    check_data = 1
-  } else {
-    check_data = 0
-  }
+  // if (document.getElementById("checkStatus").checked){
+  //   check_data = 1
+  // } else {
+  //   check_data = 0
+  // }
 
   $.ajaxSetup({
      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -487,9 +593,11 @@ $('.modal-footer').on('click', '.editUsulan', function() {
           'id_pokir_unit' : $('#id_pokir_unit').val(),
           'status_tl' : getStatusTL(),
           'keterangan_status' : $('#keterangan_status').val(),
-          'status_data' : check_data,
+          'status_data' : status_usulan,
           'id_aktivitas_renja' : $('#id_aktivitas_renja').val(),
           'id_aktivitas_forum' : $('#id_aktivitas_forum').val(),
+          'volume_tl' : $('#volume_usulan_tl').val(),
+          'pagu_tl' : $('#pagu_usulan_tl').val(),
       },
       success: function(data) {
         pokir_tbl.ajax.reload();

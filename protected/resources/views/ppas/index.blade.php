@@ -45,18 +45,17 @@ $(document).ready(function() {
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($trxforumskpd as $forums)
+                        {{-- @foreach($trxforumskpd as $forums) --}}
                             <tr>
-                                <th width="5%" style="text-align: center">{{$forums->no_urut}}</th>
-                                <th width="5%" style="text-align: center">{{$forums->id_unit}}</th>
-                                <th width="5%" style="text-align: center">{{$forums->id_unit}}</th>
-                                <th>{{$forums->uraian_kegiatan_renstra}}</th>
-                                <th style="text-align: right">{{$forums->pagu_tahun_kegiatan}}</th>
-                                <th style="text-align: center">{{$forums->status_data}}</th>
+                                <th width="5%" style="text-align: center"></th>
+                                <th width="5%" style="text-align: center"></th>
+                                <th width="5%" style="text-align: center"></th>
+                                <th></th>
+                                <th style="text-align: right"></th>
+                                <th style="text-align: center"></th>
                                 <th style="text-align: center">
                                   <div class="btn-group btn-group-action">
                                   <div class="btn-group">
-                                      {{-- <button class="btn btn-primary btn-sm">Review</button> --}}
                                       <a class="btn dropdown-toggle btn-primary btn-xs" data-toggle="dropdown" aria-hidden="true">
                                        Review<span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-action" role="menu">
@@ -68,7 +67,7 @@ $(document).ready(function() {
                                   </div>
                                 </th>
                             </tr>
-                        @endforeach
+                        {{-- @endforeach --}}
                         </tbody>
                   </table>
           </div>

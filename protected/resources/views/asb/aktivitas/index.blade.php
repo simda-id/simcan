@@ -1005,14 +1005,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <tbody>
                       <tr>
                         {{-- <td><input class="cekdrive2" type="checkbox" id="cekdrive2"></td> --}}
-                        <td style="text-align: center; vertical-align:middle">1</td>
-                        <td style="text-align: center; vertical-align:middle">2
+                        <td style="text-align: center; vertical-align:middle"></td>
+                        <td style="text-align: center; vertical-align:middle">Utama
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver utama, yang mempengaruhi besarnya biaya aktivitas.<br>Misal untuk aktivitas pelatihan, cost driver berupa peserta."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">3
+                        <td style="text-align: center; vertical-align:middle">Derivatif
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver derivatif, satuan yang berubah tergantung banyaknya volume pada cost driver utama.<br>Misal untuk aktivitas pelatihan, cost driver peserta, cost driver derivatif adalah kelas; semakin banyak peserta makin banyak kelas yang diperlukan."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">4 
+                        <td style="text-align: center; vertical-align:middle"> 
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Range: rentang berubahnya cost driver derivatif.<br>Misal: satu kelas pelatihan hanya bisa menampung 30 peserta, lebih dari 30 peserta harus dibuat kelas baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">5
+                        <td style="text-align: center; vertical-align:middle">
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Kapasitas: jumlah maksimum volume yang bisa dilayani oleh struktur biaya aktivitas.<br>Misal: panitia 5 orang hanya dapat melayani maksimal 120 peserta, lebih dari 120 peserta diperlukan kepanitiaan baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
                       </tr>
                       <tr>
@@ -3381,9 +3381,9 @@ $(document).on('click', '#btnparam_cari', function() {
     if($('#id_satuan2').val()==0){
       $(".id_satuan2_derivatif").attr("disabled", true);
       document.getElementById("range_max1").setAttribute("disabled","disabled");
-      $('#range_max1').val(0);
+      $('#range_max1').val(1);
       document.getElementById("kapasitas_max1").setAttribute("disabled","disabled");
-      $('#kapasitas_max1').val(0);
+      $('#kapasitas_max1').val(1);
     } else {
       $(".id_satuan2_derivatif").removeAttr("disabled");
       document.getElementById("range_max1").removeAttribute("disabled");
@@ -3713,7 +3713,9 @@ $('.hub_driver').change(function() {
     $('.modal-title').text('Pencetakan Aktivitas ASB');
     $('.form-horizontal').show();
     $('#id_aktivitas_simulasi').val($(this).data('id_aktivitas_asb'));
-    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));
+    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));    
+    $('#v1_simulasi').val(1);
+    $('#v2_simulasi').val(1);
     $('#SimulasiHitung').modal('show');    
   });
 
@@ -3972,6 +3974,10 @@ $(document).on('click', '.btnProsesCopyKomp', function(e) {
 
 $(document).on('click', '.cetak-duplikasi', function() {
    window.open('../printDuplikasiASB/'+$(this).data('id_perkada'));
+  });
+
+$(document).on('click', '.cetak-validitas', function() {
+   window.open('../printValiditasASB/'+$(this).data('id_perkada'));
   });
 
 

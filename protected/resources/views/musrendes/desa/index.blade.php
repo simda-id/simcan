@@ -526,6 +526,17 @@ $('.display').DataTable({
       bDestroy: true
   });
 
+function validasiDataAwal() {
+  if ( $.trim( $('#id_kecamatan').val()) == 0) {
+    createPesan("Nama Kecamatan Belum Dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_desa_cb').val()) == 0) {
+    createPesan("Nama Desa Belum Dipilih..!!","danger"); 
+    return false;
+  };
+}
+
 $("#id_kecamatan").change(function() {     
   loadDesa($("#id_kecamatan").val());
 });
@@ -1144,33 +1155,34 @@ $(document).on('click', '#btnImportMusrendes', function() {
 
   $.ajaxSetup({
     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });  
-
-  $('#ModalProgress').modal('show');
-
-  $.ajax({
-        type: 'POST',
-        url: 'musrendes/ImportDataRW',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'id_desa' :$('#id_desa_cb').val(),
-        },
-        success: function(data) {
-          // createPesan("Data Berhasil di Load","success");
-          usulan_tbl.ajax.reload();
-          $('#ModalProgress').modal('hide');
-          if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              } 
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load (err:3)","danger");
-          usulan_tbl.ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
   });
+
+  if(validasiDataAwal() != false){  
+    $('#ModalProgress').modal('show');
+    $.ajax({
+          type: 'POST',
+          url: 'musrendes/ImportDataRW',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_desa' :$('#id_desa_cb').val(),
+          },
+          success: function(data) {
+            // createPesan("Data Berhasil di Load","success");
+            usulan_tbl.ajax.reload();
+            $('#ModalProgress').modal('hide');
+            if(data.status_pesan==1){
+                createPesan(data.pesan,"success");
+                } else {
+                createPesan(data.pesan,"danger"); 
+                } 
+          },
+          error: function(data){
+            createPesan("Data Gagal di Load (err:3)","danger");
+            usulan_tbl.ajax.reload();
+            $('#ModalProgress').modal('hide');
+          }
+    });
+  }
 });
 
 $(document).on('click', '#btnPostUsulanDesa', function() {

@@ -599,11 +599,9 @@ $( "#id_kecamatan" ).change(function() {
 
 $.ajax({
           type: "GET",
-          url: './asb/getRefSatuan',
+          url: './admin/parameter/getRefSatuan',
           dataType: "json",
           success: function(data) {
-
-          // console.log(data)  
 
           var j = data.length;
           var post, i;
@@ -672,7 +670,7 @@ function LoadTblRincian(id_pokir){
         ],
     bDestroy: true
   } );
-}
+};
 
 $('#tblPokir tbody').on( 'dblclick', 'tr', function () {
 
@@ -1168,7 +1166,7 @@ $(document).on('click', '.btnPrintPokir', function() {
   window.open('./printPokir');
 });
 
-$(document).on('click', '.btnPrintUsulanPokir', function() {
+$(document).on('click', '.m', function() {
   window.open('./printUsulanPokir');
 });
 

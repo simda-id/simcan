@@ -41,6 +41,7 @@
         <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>

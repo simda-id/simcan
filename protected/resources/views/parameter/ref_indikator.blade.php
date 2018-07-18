@@ -109,7 +109,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                       <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Dampak</label>
                   </div>
-                  <div class="col-sm-2>
+                  <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Masukan</label>
                   </div>
@@ -139,6 +139,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                       <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="2"> Komulatif</label>
                   </div>
+            </div>            
+            <div class="form-group">
+            <label class="control-label col-sm-3" for="id_satuan_output">Satuan Indikator :</label>
+              <div class="col-sm-8">
+                <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
+              </div>
             </div>    
         </form>
       </div>
@@ -246,6 +252,25 @@ var indikator_tbl=$('#tblIndikator').DataTable({
                   "bDestroy": true
         });
 
+$.ajax({
+          type: "GET",
+          url: '../parameter/getRefSatuan',
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_satuan_output"]').empty();
+          $('select[name="id_satuan_output"]').append('<option value="">--Pilih Satuan Indikator--</option>');
+          for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="id_satuan_output"]').append('<option value="'+ post.id_satuan +'">'+ post.uraian_satuan +'</option>');
+            }
+              
+          }
+});
+
 function getflag_iku(){
 
     var xCheck = document.querySelectorAll('input[name="flag_iku"]:checked');
@@ -317,6 +342,7 @@ $('.modal-footer').on('click', '.add', function() {
             'nm_indikator' : $('#nm_indikator').val(),
             'flag_iku' : getflag_iku(),
             'sumber_data_indikator' : $('#sumber_data').val(),
+            'id_satuan_output' : $('#id_satuan_output').val(),
         },
         success: function(data) {
               $('#tblIndikator').DataTable().ajax.reload();
@@ -339,7 +365,8 @@ $('#tblIndikator tbody').on( 'dblclick', 'tr', function () {
   $('.form-horizontal').show();
   $('#id_indikator').val(data.id_indikator);
   $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
+  $('#sumber_data').val(data.sumber_data_indikator);  
+  $('#id_satuan_output').val(data.id_satuan_output);
   document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
   document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
   document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
@@ -360,7 +387,8 @@ var data = indikator_tbl.row( $(this).parents('tr') ).data();
   $('.form-horizontal').show();
   $('#id_indikator').val(data.id_indikator);
   $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
+  $('#sumber_data').val(data.sumber_data_indikator);  
+  $('#id_satuan_output').val(data.id_satuan_output);
   document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
   document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
   document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
@@ -388,6 +416,7 @@ $('.modal-footer').on('click', '.edit', function() {
             'nm_indikator' : $('#nm_indikator').val(),
             'flag_iku' : getflag_iku(),
             'sumber_data_indikator' : $('#sumber_data').val(),
+            'id_satuan_output' : $('#id_satuan_output').val(),
         },
         success: function(data) {
             $('#tblIndikator').DataTable().ajax.reload();

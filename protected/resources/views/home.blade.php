@@ -28,7 +28,7 @@ use hoaaah\LaravelMenu\Menu;
       height: 70px;
       cursor: pointer;
       margin: 0 auto;
-      font: normal 20px/50px "Domine Font Family", Helvetica, sans-serif;
+      font: normal 16px/50px "Domine Font Family", Helvetica, sans-serif;
       color: rgb(255, 255, 255);
       text-align: center;
       -o-text-overflow: clip;
@@ -49,7 +49,7 @@ use hoaaah\LaravelMenu\Menu;
     .btn.bd-green:hover,
     .btn.bd-green:focus{
         color:#fff;
-        border-radius: 15px;
+        /*border-radius: 15px;*/
         background:#16a085; 
     }
     .bd-blue{
@@ -60,7 +60,7 @@ use hoaaah\LaravelMenu\Menu;
     .btn.bd-blue:focus{
         color:#fff;
         background:#2980b9;
-        border-radius: 15px;
+        /*border-radius: 15px;*/
     }
     .bd-orange{
         border: 1px solid #df7401;
@@ -70,7 +70,7 @@ use hoaaah\LaravelMenu\Menu;
     .btn.bd-orange:focus{
         color:#fff;
         background:#df7401;
-        border-radius: 15px;
+        /*border-radius: 15px;*/
     }
 
     .bd-red{
@@ -81,7 +81,7 @@ use hoaaah\LaravelMenu\Menu;
     .btn.bd-red:focus{
         color:#fff;
         background:#cb2027;
-        border-radius: 15px;
+        /*border-radius: 15px;*/
     }
 
     .bd-purple{
@@ -92,7 +92,7 @@ use hoaaah\LaravelMenu\Menu;
     .btn.bd-purple:focus{
         color:#fff;
         background:#8e44ad;
-        border-radius: 15px;
+        /*border-radius: 15px;*/
     }
 
     @media only screen and (max-width: 767px) {
@@ -109,14 +109,20 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 
 <body>
-    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
                     <div class="row">
-                        <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> 
-                        :: {{Session::get('xPemda')}}
+                        <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> 
+                        :: {{Session::get('xPemda')}} 
+                        @if ( Session::get('AppType') == 0 )
+                                (Aplikasi Provinsi)
+                        @endif 
+                        @if (Session::get('AppType') == 'x')
+                                (Aplikasi Tidak Dikenal)
+                        @endif 
                     </div>
-                </a>
+                </a>                
             </div>
             <ul class="nav navbar-top-links pull-right">
                 <?php 
@@ -164,9 +170,18 @@ use hoaaah\LaravelMenu\Menu;
             </ul>
     </nav>
 
-    <div class="container-fluid" style="padding: 30px">
+    <div class="container-fluid" style="padding: 50px">
     <div id="pesan"></div>
+    
     <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+        {{-- <hr> --}}
+        <div class="row" style="align-items: center; display: flex; justify-content: center; margin-top: 25px">
+            <a class="btn xCss bd-orange" role="button" href="{{ url('/asb/dash') }}"><span class="fa fa-braille "></span> ASB dan SSH</a>
+            <a class="btn xCss bd-red" role="button" href="{{ url('/modul4') }}"><span class="fa fa-folder-open-o "></span> Data Dukungan</a>
+            <a class="btn xCss bd-blue" role="button" href="{{ url('/rpjmd/dash') }}"><span class="fa fa-newspaper-o "></span> RPJMD & Renstra</a>
+            <a class="btn xCss bd-purple" role="button" href="{{ url('/rkpd/dash') }}"><span class="fa fa-calendar-check-o "></span> RKPD & Renja</a>
+            <a class="btn xCss bd-green" role="button" href="{{ url('/modul3') }}"><span class="fa fa-money "></span> PPAS</a>
+        </div> 
         <hr>
         <div class="carousel-inner">
             <div class="item active">
@@ -214,14 +229,7 @@ use hoaaah\LaravelMenu\Menu;
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row" style="align-items: center; display: flex; justify-content: center;">
-            <a class="btn xCss bd-orange" role="button" href="{{ url('/modul0') }}"><span class="fa fa-braille "></span> ASB dan SSH</a>
-            <a class="btn xCss bd-red" role="button" href="{{ url('/modul4') }}"><span class="fa fa-folder-open-o "></span> Data Dukungan</a>
-            <a class="btn xCss bd-blue" role="button" href="{{ url('/rpjmd/dash') }}"><span class="fa fa-newspaper-o "></span> RPJMD & Renstra</a>
-            <a class="btn xCss bd-purple" role="button" href="{{ url('/rkpd/dash') }}"><span class="fa fa-calendar-check-o "></span> RKPD & Renja</a>
-            <a class="btn xCss bd-green" role="button" href="{{ url('/modul3') }}"><span class="fa fa-money "></span> PPAS</a>
-        </div> 
+        
     </div>
 
     </div>
@@ -336,6 +344,8 @@ use hoaaah\LaravelMenu\Menu;
 
 <script>
 $(document).ready( function() {
+
+    
 
 function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    

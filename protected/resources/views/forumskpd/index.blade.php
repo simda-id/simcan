@@ -13,8 +13,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['url' => '/modul2','label' => 'Musrenbang']);
-                // $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja']);
+                $breadcrumb->add(['url' => '/modul2','label' => 'Forum OPD']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -34,17 +33,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
                         <div class="col-sm-2">                            
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" style="text-align: center; vertical-align:middle" disabled>
-                        </div>
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Pencetakan Penyesuaian Renja <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiProgramdanPagu dropdown-item"><i class="fa fa-bullseye fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Program dan Pagu</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiKegiatandanPaguRenja dropdown-item"><i class="fa fa-male fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Kegiatan dan Pagu</a>
-                                    </li>                       
-                                </ul>
                         </div>
                 </div>
                 <div class="form-group">
@@ -366,7 +354,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
@@ -377,7 +364,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="hidden" id="tahun_renja" name="tahun_renja">
                 <input type="hidden" id="id_unit" name="id_unit">
                 <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
+                  <label class="control-label col-sm-3" for="id">No Urut:</label>
                   <div class="col-sm-2">
                     <input type="text" class="form-control number" name="no_urut_program" id="no_urut_program" disabled>
                   </div>
@@ -435,6 +422,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       </label>
                       <label class="radio-inline" id="status_pelaksanaan4">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="4">Baru
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="5">Dibawa ke Tingkat Provinsi/Nasional
                       </label>
                   </div>
                 </div>

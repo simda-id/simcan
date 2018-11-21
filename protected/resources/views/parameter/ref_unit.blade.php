@@ -227,6 +227,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div> 
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -242,7 +243,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -263,6 +263,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -270,7 +271,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -300,6 +300,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div> 
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -315,7 +316,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -336,6 +336,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -343,7 +344,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -398,6 +398,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>  
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -413,7 +414,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -434,6 +434,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelDataUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -441,7 +442,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -508,6 +508,8 @@ var angkaNip = document.getElementById('nipDisplay');
 angkaNip.onkeydown = function(e) {
       if(!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58) 
+        || (e.keyCode > 7 && e.keyCode < 10) 
+        || (e.keyCode = 13) 
         )) {
           return false;
       }
@@ -551,7 +553,7 @@ function initTableBidang(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BFRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             columns: [
                 { data: 'kd_bidang', name: 'kd_bidang', sClass: "dt-center", width:'10%' },

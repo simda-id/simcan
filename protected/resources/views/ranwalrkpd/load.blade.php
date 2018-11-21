@@ -36,11 +36,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="col-sm-2">
                     <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
                   </div>
-                  <div id="divProses">
-                    <a id="btnProses" type="button" class="btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Proses Load Data dari RPJMD</a>
-                  </div>
                   <div id="divReProses">
-                    <a id="btnReProses" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Re-Load Data dari RPJMD</a>
+                    <a id="btnReProses" type="button" class="btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Proses Load Data dari RPJMD</a>
                   </div>
                 </div>
             </form>
@@ -49,7 +46,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <table id="tblProgramRKPD" class="table table-striped compact table-bordered table-responsive"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th rowspan="2" width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
+                                {{-- <th rowspan="2" width="10px" style="text-align: center; vertical-align:middle">Pilih</th> --}}
+                                <th rowspan="2" width="20px" style="text-align: center; vertical-align:middle">No Urut</th>
                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
                                 <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RPJMD</th>
                                 <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RKPD</th>
@@ -88,6 +86,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <table id='tblReProses' class="table display compact table-striped table-bordered" width="100%">
               <thead>
                     <tr>
+                      <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
                       <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                       <th style="text-align: center; vertical-align:middle">Nama Program RPJMD</th>
                       <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
@@ -102,7 +101,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
       <div class="modal-footer">
         <div class="row">
-            <div class="col-sm-2 text-left idbtnHapusKeg"></div>
+            <div class="col-sm-2 text-left">
+                <button id="btnProsesAll" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Proses Load</button>
+            </div>
             <div class="col-sm-10 text-right">
                 <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                 <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
@@ -150,15 +151,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <h3><strong>Sedang proses...</strong></h3>
-          <i class="fa fa-spinner fa-pulse fa-5x fa-fw text-info"></i>
-        </div>
-      </div>
-    </div>
+  <div class="modal-body text-center" style="overflow-y: hidden;">
+    <h3><strong>Sedang proses...</strong></h3>
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw text-info"></i>
   </div>
+</div>
 
 @endsection
 
@@ -202,7 +199,7 @@ function checkData(){
         }
   });}
 
-checkData();
+// checkData();
 
 
 var ReProses_Tbl
@@ -215,7 +212,15 @@ function loadReProses(){
         "language": {
                 "decimal": ",",
                 "thousands": "."},
+        'columnDefs': [
+           { 'width': 10,
+              'targets': 0,
+              'checkboxes': {'selectRow': true } },
+           { "targets": 1, "width": 10 }
+          ],
+        'select': { 'style': 'multi' },
         "columns": [
+              { data: 'id_rkpd_rpjmd', sClass: "dt-center", searchable: false, orderable:false,},
               { data: 'no_urut',sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
               { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
@@ -233,15 +238,21 @@ var progrkpd = $('#tblProgramRKPD').DataTable({
         "language": {
                 "decimal": ",",
                 "thousands": "."},
+        // 'columnDefs': [
+        //    { 'width': 10,
+        //       'targets': 0,
+        //       'checkboxes': {'selectRow': true } },
+        //    { "targets": 1, "width": 10 }
+        //   ],
+        // 'select': { 'style': 'multi' },
         "columns": [
+              // { data: 'id_rkpd_ranwal', sClass: "dt-center", searchable: false, orderable:false,},
               { data: 'urut', sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
               { data: 'pagu_rpjmd',
-                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
-                sClass: "dt-right" },
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
               { data: 'pagu_ranwal',
-                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
-                sClass: "dt-right" },
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
               { data: 'jml_indikator',sClass: "dt-center",width:"5px",
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
               { data: 'indikator_0',sClass: "dt-center",width:"5px",
@@ -252,47 +263,17 @@ var progrkpd = $('#tblProgramRKPD').DataTable({
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
               { data: 'action', 'searchable': false, 'orderable':false }
             ],
-            "order": [[0, 'asc']],
-            "bDestroy": true
+        "order": [[0, 'asc']],
+        "bDestroy": true
       });
 
-$(document).on('click', '#btnProses', function() {
-
-$.ajaxSetup({
-    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
-
-$('#ModalProgress').modal('show');
-$.ajax({
-        type: 'POST',
-        url: './prosesTransferData',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'tahun_rkpd' : $('#tahun_rkpd').val(),
-        },
-        success: function(data) {
-          createPesan("Data Berhasil di Load","success");
-          $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
-});
-});
-
 $(document).on('click', '.btnUnload', function() {
-
-var data = progrkpd.row( $(this).parents('tr') ).data();
+  var data = progrkpd.row( $(this).parents('tr') ).data();
 
   $('#id_rkpd_ranwal_unload').val(data.id_rkpd_ranwal);
   $('.ur_id_rkpd_ranwal').text(data.uraian_program_rpjmd);
 
   $('#HapusData').modal('show');
-
 });
 
 
@@ -330,44 +311,33 @@ $(document).on('click', '#btnDelData', function() {
 });
 
 $(document).on('click', '#btnReProses', function() {
-    loadReProses();
-    $('#cariReload').modal('show');
+  loadReProses();
+  $('#cariReload').modal('show');
 });
 
 $(document).on('click', '#btnReLoad', function() {
-var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
+  var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
+  var tahun=$('#tahun_rkpd').val();
+  var id_rkpd=data.id_rkpd_rpjmd;
 
-var tahun=$('#tahun_rkpd').val();
-var id_rkpd=data.id_rkpd_rpjmd;
+  $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
 
-$.ajaxSetup({
-    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
-
-$('#ModalProgress').modal('show');
-$('#cariReload').modal('hide');
-
-$.ajax({
-        type: 'POST',
-        url: './ReprosesTransferData',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'tahun_rkpd' :tahun,
-            'id_rkpd_rpjmd' : id_rkpd,
-        },
-        success: function(data) {
-          $.ajax({
+  $('#ModalProgress').modal('show');
+  $('#cariReload').modal('hide');         
+  $.ajax({
           type: 'POST',
-          url: './RetransferIndikator',
+          url: './ReprosesTransferData',
           data: {
               '_token': $('input[name=_token]').val(),
-              'tahun_rkpd' :tahun,
+              'tahun_rkpd' : tahun,
               'id_rkpd_rpjmd' : id_rkpd,
           },
           success: function(data) {
             $.ajax({
             type: 'POST',
-            url: './RetransferUrusan',
+            url: './RetransferIndikator',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'tahun_rkpd' :tahun,
@@ -376,29 +346,110 @@ $.ajax({
             success: function(data) {
               $.ajax({
               type: 'POST',
-              url: './RetransferPelaksana',
+              url: './RetransferUrusan',
               data: {
                   '_token': $('input[name=_token]').val(),
                   'tahun_rkpd' :tahun,
                   'id_rkpd_rpjmd' : id_rkpd,
               },
               success: function(data) {
-                createPesan("Data Berhasil di Load","success");
-                $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-                $('#tblProgramRKPD').DataTable().ajax.reload();
-                $('#ModalProgress').modal('hide');
+                $.ajax({
+                type: 'POST',
+                url: './RetransferPelaksana',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'tahun_rkpd' :tahun,
+                    'id_rkpd_rpjmd' : id_rkpd,
+                },
+                success: function(data) {
+                  createPesan("Data Berhasil di Load","success");
+                  $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
+                  $('#tblProgramRKPD').DataTable().ajax.reload();
+                  $('#ModalProgress').modal('hide');
+                },});
               },});
             },});
-          },});
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
-});
+          },
+          error: function(data){
+            createPesan("Data Gagal di Load","danger");
+            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#ModalProgress').modal('hide');
+          }
+  });
 });
 
+$(document).on('click', '#btnProsesAll', function() {
+  var rows_selected = ReProses_Tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = ReProses_Tbl.rows({ selected: true }).data(); 
+  var counts_data = ReProses_Tbl.rows({ selected: true }).count();  
+  var tahun=$('#tahun_rkpd').val();
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $('#ModalProgress').modal('show');
+  $('#cariReload').modal('hide');  
+
+  $.each(rows_selected, function(index, rowId){
+    var id_rkpd=rowId;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });         
+    $.ajax({
+            type: 'POST',
+            url: './ReprosesTransferData',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'tahun_rkpd' :tahun,
+                'id_rkpd_rpjmd' : id_rkpd,
+            },
+            success: function(data) {
+              $.ajax({
+              type: 'POST',
+              url: './RetransferIndikator',
+              data: {
+                  '_token': $('input[name=_token]').val(),
+                  'tahun_rkpd' :tahun,
+                  'id_rkpd_rpjmd' : id_rkpd,
+              },
+              success: function(data) {
+                $.ajax({
+                type: 'POST',
+                url: './RetransferUrusan',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'tahun_rkpd' :tahun,
+                    'id_rkpd_rpjmd' : id_rkpd,
+                },
+                success: function(data) {
+                  $.ajax({
+                  type: 'POST',
+                  url: './RetransferPelaksana',
+                  data: {
+                      '_token': $('input[name=_token]').val(),
+                      'tahun_rkpd' :tahun,
+                      'id_rkpd_rpjmd' : id_rkpd,
+                  },
+                  success: function(data) {
+                    createPesan("Data Berhasil di Load","success");
+                    $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
+                    $('#tblProgramRKPD').DataTable().ajax.reload();
+                    $('#ModalProgress').modal('hide');
+                  },});
+                },});
+              },});
+            },
+            error: function(data){
+              createPesan("Data Gagal di Load","danger");
+              $('#tblProgramRKPD').DataTable().ajax.reload();
+              $('#ModalProgress').modal('hide');
+            }
+    });
+  });
+  e.preventDefault();
+});
 
 });
 </script>

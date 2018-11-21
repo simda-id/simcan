@@ -95,6 +95,41 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
 
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="alamat_setda" class="control-label">Alamat Sekretariat Daerah :</label>
+                  </div>
+                  <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="alamat_setda" name="alamat_setda" rows='3'></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="telepon_setda" class="control-label">Nomor Telepon :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="telepon_setda" name="telepon_setda" maxlength="24">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="faks_setda" class="control-label">Nomor Faksimili :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="faks_setda" name="faks_setda" maxlength="24">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="email_setda" class="control-label">Alamat Email :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="email_setda" name="email_setda" maxlength="50">
+                  </div>
+                </div>
+              </div>
+
               <div class="row">
                 <div class="col-sm-6">
                     <div class="col-sm-12">
@@ -267,6 +302,8 @@ var angkaNip = document.getElementsByClassName('nip');
 angkaNip.onkeydown = function(e) {
       if(!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58) 
+        || (e.keyCode > 7 && e.keyCode < 10) 
+        || (e.keyCode = 13) 
         )) {
           return false;
       }
@@ -327,6 +364,10 @@ function LoadPemda() {
             $('#id_unit_keuangan').val(data[0].unit_keuangan);
             $('#nm_unit_perencanaan').val(data[0].nm_perencana);
             $('#nm_unit_keuangan').val(data[0].nm_keuangan);
+            $('#alamat_setda').val(data[0].alamat);
+            $('#telepon_setda').val(data[0].no_telepon);
+            $('#faks_setda').val(data[0].no_faksimili);
+            $('#email_setda').val(data[0].email);
           }
         });
 
@@ -399,7 +440,7 @@ $(document).on('click', "#btnEditPemda" , function() {
       url: 'pemda/getPemdaX1',
       dataType: "json",
       success: function(data) {
-        console.log(data);
+        // console.log(data);
         // var j = data.length;
         // var post, i;
         // for (i = 0; i < j; i++) {
@@ -447,6 +488,10 @@ $(document).on('click', "#btnSimpanPemda" , function() {
               'unit_keuangan': $('#id_unit_keuangan').val(),
               'nama_kabpkad': $('#nama_kabpkad').val(),
               'nip_kabpkad': $('#nip_kabpkad').val(),
+              'alamat': $('#alamat_setda').val(),
+              'no_telepon': $('#telepon_setda').val(),
+              'no_faksimili': $('#faks_setda').val(),
+              'email': $('#email_setda').val(),
           },
           success: function(data) {
               $('.idbtnSimpanPemda').hide();

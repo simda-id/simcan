@@ -3,10 +3,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 @extends('layouts.parameterlayout')
 
-<style>
-  .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
-  .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
-</style>
+{{-- <style> --}}
+  {{-- /*.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+  .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}*/ --}}
+{{-- </style> --}}
 
 @section('content')
 
@@ -38,13 +38,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <li class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
                       <li><a href="#unit" aria-controls="unit" role="tab-kv" data-toggle="tab">Akses Unit</a></li>
                       <li><a href="#wilayah" aria-controls="wilayah" role="tab-kv" data-toggle="tab">Akses Wilayah</a></li>
+                      <li><a href="#kabupaten" aria-controls="kabupaten" role="tab-kv" data-toggle="tab">Akses Wilayah</a></li>
                     </ul>
 
                 <div class="tab-content">
                     <br>
                     <div role="tabpanel" class="tab-pane fade in active" id="user">
-                        <div class="col-md-12">
-                            <button type="button" id="btnTambahUser" class="btn btn-labeled btn-success" data-toggle="modal">
+                            <button type="button" id="btnTambahUser" class="btn btn-labeled btn-success">
                                 <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah User
                             </button>  
                             <table class="table display table-bordered table-striped compact table-responsive" id="users-table">
@@ -59,24 +59,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </tr>
                                 </thead>
                             </table>
-                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade in" id="unit">
                         <button type="button" id="btnTambahAUnit" class="btn btn-labeled  btn-success" data-toggle="modal">
                             <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Unit
                         </button>
-                        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
                              <tbody>
                                <tr>
                                  <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
-                                 <td style="text-align: left; vertical-align:top;"><label id="username_unit" align='left'</td>
+                                 <td style="text-align: left; vertical-align:top;"><label id="username_unit" align='left'></td>
                                </tr>
                              </tbody>
                             </table>
                         </div>
-                        </form>
                         <table class="table display table-bordered table-striped compact table-responsive" id="unit-table">
                             <thead>
                                 <tr>
@@ -91,24 +88,49 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <button type="button" id="btnTambahAWilayah" class="btn btn-labeled  btn-success" data-toggle="modal">
                             <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
                         </button>
-                        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
                              <tbody>
                                <tr>
                                  <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
-                                 <td style="text-align: left; vertical-align:top;"><label id="username_wilayah" align='left'</td>
+                                 <td style="text-align: left; vertical-align:top;"><label id="username_wilayah" align='left'></td>
                                </tr>
                              </tbody>
                             </table>
                         </div>
-                        </form>
                             <table class="table display table-bordered table-striped compact table-responsive" id="wilayah-table">
                                 <thead>
                                      <tr>
                                          <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
+                                         <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
                                          <th style="text-align: center; vertical-align:middle">Nama Kecamatan</th>
                                          <th style="text-align: center; vertical-align:middle">Nama Desa/Kelurahan</th>
+                                         <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                     </tr>
+                                </thead>
+                            </table>   
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="kabupaten">
+                        <button type="button" id="btnTambahAWilayahKab" class="btn btn-labeled btn-primary" data-toggle="modal">
+                            <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
+                        </button>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                             <tbody>
+                               <tr>
+                                 <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
+                                 <td style="text-align: left; vertical-align:top;"><label id="username_kabupaten" align='left'></td>
+                               </tr>
+                             </tbody>
+                            </table>
+                        </div>
+                            <table class="table display table-bordered table-striped compact table-responsive" id="kabupaten-table">
+                                <thead>
+                                     <tr>
+                                         <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
+                                         <th witdh='10%' style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
+                                         <th style="text-align: center; vertical-align:middle">Nama Provinsi</th>
+                                         <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
                                          <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
                                      </tr>
                                 </thead>
@@ -119,7 +141,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
         </div>
     </div>
-</div>
+    </div>
 </div>
 
 <div id="ModalUser" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
@@ -226,7 +248,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
                 <div class="col-sm-10 text-right">
                   <div class="ui-group-buttons">
-                       <button type="submit" class="btn btn-success btnUser btn-labeled" data-dismiss="modal">
+                       <button type="button" class="btn btn-success btnUser btn-labeled" >
                         <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Simpan</button>
                     <div class="or"></div>
                     <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
@@ -348,6 +370,48 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
 </div>
 
+<div id="ModalKabupaten" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Tambah Akses Wilayah</h4>
+        </div>
+        <div class="modal-body" style="background-color: #eee;">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+            {{-- <div class="form-group">
+                <label class="control-label col-sm-3" for="title">Kecamatan :</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control kecamatan" id="kecamatan" name="kecamatan"></select>
+                </div>
+            </div> --}}
+            <table id='tblKabupaten' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                      <tr>
+                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th width="10%" style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
+                        <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
+                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                      </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+          </form>
+        </div>
+          <div class="modal-footer" style="background-color: #357EBD;">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                    </div>
+                </div>
+              </div> 
+      </div>
+    </div>
+</div>
+
 <div id="ModalNotifikasi" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
     <div class="modal-dialog modal-xs"  >
       <div class="modal-content">
@@ -364,7 +428,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                     <div class="col-sm-10 text-right">
                         <button type="button" class="btn btn-primary icon-btn" data-dismiss="modal" aria-hidden="true">
-                            <i class="glyphicon btn-glyphicon glyphicon-log-out img-circle text-muted"></i> Tutup</button>
+                            <i class="glyphicon glyphicon-log-out" style="color: #fff"></i> Tutup</button>
                     </div>
                 </div>
         </div>
@@ -376,7 +440,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
  
 @section('scripts')
 <script>
-$(document).ready(function(){ 
+$(document).ready(function(){
+
+var dataApp = "{{Session::get('AppType')}}";
+
+if (dataApp == 0) {
+  $('[href="#wilayah"]').closest('li').hide();
+} else {
+  $('[href="#kabupaten"]').closest('li').hide();
+};
 
 function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
@@ -523,8 +595,28 @@ akses_wilayah = $('#wilayah-table').DataTable({
     "ajax": {"url": "./user/getListDesa/"+id_user},
     columns: [
         { data: 'no_urut', name: 'no_urut', sClass: "dt-center" },
+        { data: 'nama_kab_kota', name: 'nama_kab_kota' },
         { data: 'nama_kecamatan', name: 'nama_kecamatan' },
         { data: 'nama_desa', name: 'nama_desa' },
+        { data: 'action', name: 'action', orderable: false, searchable: false , sClass: "dt-center"}
+    ],
+      "order": [[0, 'asc']],
+      "bDestroy": true
+});}
+
+var akses_wilayah_kab
+function LoadAksesWilayahKab(id_user){
+akses_wilayah_kab = $('#kabupaten-table').DataTable({
+    processing: true,
+    serverSide: true,
+    autoWidth : false,
+    dom: 'bfrtIp',
+    "ajax": {"url": "./user/getListKab/"+id_user},
+    columns: [
+        { data: 'no_urut', name: 'no_urut', sClass: "dt-center" },
+        { data: 'kd_kab', name: 'kd_kab' },
+        { data: 'nm_prov', name: 'nm_prov' },
+        { data: 'nama_kab_kota', name: 'nama_kab_kota' },
         { data: 'action', name: 'action', orderable: false, searchable: false , sClass: "dt-center"}
     ],
       "order": [[0, 'asc']],
@@ -572,15 +664,15 @@ $( "#kecamatan" ).change(function() {
 });
 
 $(document).on('click', '#btnViewUnit', function() {
-var data = user_tbl.row( $(this).parents('tr') ).data();
+  var data = user_tbl.row( $(this).parents('tr') ).data();
 
-$('#username_unit').text(data.name);
-$('#username_wilayah').text(data.name);
-id_user_temp= data.id;
+  $('#username_unit').text(data.name);
+  $('#username_wilayah').text(data.name);
+  $('#username_kabupaten').text(data.name);
+  id_user_temp= data.id;
 
-$('.nav-tabs a[href="#unit"]').tab('show');
-LoadAksesUnit(id_user_temp);
-  
+  $('.nav-tabs a[href="#unit"]').tab('show');
+  LoadAksesUnit(id_user_temp);  
 });
 
 $(document).on('click', '#btnViewWilayah', function() {
@@ -588,10 +680,23 @@ $(document).on('click', '#btnViewWilayah', function() {
 
   $('#username_unit').text(data.name);
   $('#username_wilayah').text(data.name);
+  $('#username_kabupaten').text(data.name);
   id_user_temp= data.id;
 
   $('.nav-tabs a[href="#wilayah"]').tab('show');
-  LoadAksesWilayah(id_user_temp);  
+  LoadAksesWilayah(id_user_temp); 
+});
+
+$(document).on('click', '#btnViewWilayahKab', function() {
+  var data = user_tbl.row( $(this).parents('tr') ).data();
+
+  $('#username_unit').text(data.name);
+  $('#username_wilayah').text(data.name);
+  $('#username_kabupaten').text(data.name);
+  id_user_temp= data.id;
+
+  $('.nav-tabs a[href="#kabupaten"]').tab('show');
+  LoadAksesWilayahKab(id_user_temp); 
 });
 
   function getStatusUser(){
@@ -603,6 +708,36 @@ $(document).on('click', '#btnViewWilayah', function() {
     var xvalues = xyz.join('');
     return xvalues;
   }
+
+function validasiDataAwal() {
+  if ( $.trim( $('#group_id').val()) == -1 || $.trim( $('#group_id').val()) == 0) {
+    $('#ModalUser').modal('show');
+    document.getElementById("group_id").focus();
+    createPesan("Group User Belum Dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#password').val()) != $.trim( $('#password_confirmation').val())) {
+    createPesan("Password ke-2 tidak sama dengan yang pertama ... !!","danger");
+    $('#ModalUser').modal('show'); 
+    document.getElementById("password").focus();
+    return false;
+  };
+  if ( $('#password').val().length < 6 ) {
+    createPesan("Password Kurang dari 6 karakter..!!","danger");
+    $('#ModalUser').modal('show'); 
+    document.getElementById("password").focus();
+    return false;
+  };
+};
+
+function validasiDataEdit() {
+  if ( $.trim( $('#group_id').val()) == -1 || $.trim( $('#group_id').val()) == 0) {
+    $('#ModalUser').modal('show');
+    document.getElementById("group_id").focus();
+    createPesan("Group User Belum Dipilih..!!","danger"); 
+    return false;
+  };
+};
 
 $(document).on('click', '#btnTambahUser', function() {
     $('.btnUser').removeClass('edit');
@@ -628,6 +763,7 @@ $(document).on('click', '#btnTambahUser', function() {
 });
 
 $('.modal-footer').on('click', '.add', function() {
+  if(validasiDataAwal() != false){
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -647,13 +783,20 @@ $('.modal-footer').on('click', '.add', function() {
         },
         success: function(data) {
               $('#users-table').DataTable().ajax.reload();
+              $('#ModalUser').modal('hide'); 
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
               createPesan(data.pesan,"danger"); 
               }
         },
-  });
+        error: function(data) {
+              $('#users-table').DataTable().ajax.reload();
+              $('#ModalUser').modal('hide'); 
+              createPesan("Ada Isian yang kurang tepat..","danger"); 
+        },
+    });
+  }
 });
 
 $(document).on('click', '#btnGantiPass', function() {
@@ -683,6 +826,7 @@ var data = user_tbl.row( $(this).parents('tr') ).data();
 });
 
 $('.modal-footer').on('click', '.gantiPass', function() {
+  if(validasiDataAwal() != false){
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -697,14 +841,16 @@ $('.modal-footer').on('click', '.gantiPass', function() {
             'id' : $('#id_user').val(),
         },
         success: function(data) {
-              $('#users-table').DataTable().ajax.reload();
+              $('#users-table').DataTable().ajax.reload();              
+              $('#ModalUser').modal('hide'); 
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
               createPesan(data.pesan,"danger"); 
               }
         },
-  });
+    });
+  }
 });
 
 $(document).on('click', '#btnEditUser', function() {
@@ -731,6 +877,8 @@ var data = user_tbl.row( $(this).parents('tr') ).data();
 });
 
 $('.modal-footer').on('click', '.edit', function() {
+
+  if(validasiDataEdit() != false){
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -749,13 +897,15 @@ $('.modal-footer').on('click', '.edit', function() {
         },
         success: function(data) {
               $('#users-table').DataTable().ajax.reload();
+              $('#ModalUser').modal('hide'); 
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
               createPesan(data.pesan,"danger"); 
               }
         },
-  });
+    });
+  }
 });
 
 $(document).on('click', '#btnHapusUser', function() {
@@ -800,6 +950,30 @@ $(document).on('click', '#btnTambahAWilayah', function() {
     $('.modal-title').text('Tambah Akses Wilayah');
     $('.form-horizontal').show();
     $('#ModalDesa').modal('show');
+});
+
+var kab_tbl;
+$(document).on('click', '#btnTambahAWilayahKab', function() {
+
+    kab_tbl = $('#tblKabupaten').DataTable( {
+        processing: true,
+        serverSide: true,
+        autoWidth : false,
+        dom: 'bfrtIp',
+        "ajax": {"url": "./user/getKab"},
+        "columns": [
+                { data: 'no_urut', sClass: "dt-center"},
+                { data: 'kd_kab', sClass: "dt-center"},
+                { data: 'nama_kab_kota', name: 'nama_kab_kota' },
+                { data: 'action', name: 'action', orderable: false, searchable: false , sClass: "dt-center"}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    }); 
+
+    $('.modal-title').text('Tambah Akses Wilayah Kabupaten/Kota');
+    $('.form-horizontal').show();
+    $('#ModalKabupaten').modal('show');
 });
 
 var unit_tbl;
@@ -891,6 +1065,33 @@ $(document).on('click', '#btnPilihDesa', function() {
         }
       });
     $('#ModalDesa').modal('hide'); 
+  });
+
+$(document).on('click', '#btnPilihKab', function() {
+    var data = kab_tbl.row( $(this).parents('tr') ).data();
+    $.ajaxSetup({
+     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+        type: 'post',
+        url: 'user/addWilayah',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'user_id' : id_user_temp,
+            'kd_kecamatan' : data.id_prov,
+            'kd_desa' : data.id_kab,
+        },
+        success: function(data) {
+          $('#wilayah-table').DataTable().ajax.reload();
+          if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+        }
+      });
+    $('#ModalKabupaten').modal('hide'); 
   });
 
 $(document).on('click', '#btnHapusDesa', function() {

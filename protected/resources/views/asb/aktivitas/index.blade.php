@@ -1005,14 +1005,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <tbody>
                       <tr>
                         {{-- <td><input class="cekdrive2" type="checkbox" id="cekdrive2"></td> --}}
-                        <td style="text-align: center; vertical-align:middle">1</td>
-                        <td style="text-align: center; vertical-align:middle">2
+                        <td style="text-align: center; vertical-align:middle"></td>
+                        <td style="text-align: center; vertical-align:middle">Utama
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver utama, yang mempengaruhi besarnya biaya aktivitas.<br>Misal untuk aktivitas pelatihan, cost driver berupa peserta."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">3
+                        <td style="text-align: center; vertical-align:middle">Derivatif
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver derivatif, satuan yang berubah tergantung banyaknya volume pada cost driver utama.<br>Misal untuk aktivitas pelatihan, cost driver peserta, cost driver derivatif adalah kelas; semakin banyak peserta makin banyak kelas yang diperlukan."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">4 
+                        <td style="text-align: center; vertical-align:middle"> 
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Range: rentang berubahnya cost driver derivatif.<br>Misal: satu kelas pelatihan hanya bisa menampung 30 peserta, lebih dari 30 peserta harus dibuat kelas baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">5
+                        <td style="text-align: center; vertical-align:middle">
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Kapasitas: jumlah maksimum volume yang bisa dilayani oleh struktur biaya aktivitas.<br>Misal: panitia 5 orang hanya dapat melayani maksimal 120 peserta, lebih dari 120 peserta diperlukan kepanitiaan baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
                       </tr>
                       <tr>
@@ -2356,7 +2356,7 @@ $(document).on('click', '#btnparam_cari', function() {
                       'ur_perkada': $('#ur_perkada').val(),
                   },
                   success: function(data) {
-                      $('#tblPerkada').DataTable().ajax.reload();
+                      $('#tblPerkada').DataTable().ajax.reload(null,false);
                       createPesan("Proses Tambah Data Berhasil","success");
                       $('#ModalProgress').modal('hide');
                   },
@@ -2408,7 +2408,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_perkada_edit': $('#id_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2445,7 +2445,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'flag_perkada': $('.flag_perkada').text(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2480,7 +2480,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_perkada_hapus').text()).remove();
-        $('#tblPerkada').DataTable().ajax.reload();
+        $('#tblPerkada').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2543,7 +2543,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblAktivitas').DataTable().ajax.reload();
+                  $('#tblAktivitas').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2620,7 +2620,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_aktivitas_asb': $('#id_aktivitas_edit').val(),
           },
           success: function(data) {
-              $('#tblAktivitas').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2655,7 +2655,7 @@ $(document).on('click', '#btnparam_cari', function() {
       success: function(data) {
 
         $('.item' + $('.id_aktivitas_hapus').text()).remove();
-        $('#tblAktivitas').DataTable().ajax.reload();
+        $('#tblAktivitas').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2697,7 +2697,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2741,7 +2741,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2775,7 +2775,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_subsubkel_del').text()).remove();
-        $('#tblSubSubKelompok').DataTable().ajax.reload();
+        $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2827,7 +2827,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblKomponen').DataTable().ajax.reload();
+                  $('#tblKomponen').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2877,7 +2877,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_komponen_asb': $('#id_komponen_asb_edit').val(),
           },
           success: function(data) {
-              $('#tblKomponen').DataTable().ajax.reload();
+              $('#tblKomponen').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2910,7 +2910,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_komponen_hapus').text()).remove();
-        $('#tblKomponen').DataTable().ajax.reload();
+        $('#tblKomponen').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
         $('#ModalProgress').modal('hide');
       }
@@ -2921,7 +2921,7 @@ $(document).on('click', '#btnparam_cari', function() {
   $(document).on('click', '.copy-komponen', function() {
     $('.form-horizontal').show();
 
-    $('#tblCariKomponen').DataTable().ajax.reload();
+    $('#tblCariKomponen').DataTable().ajax.reload(null,false);
     $('#cariKomponen').modal('show');
   });
 
@@ -2957,7 +2957,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblKelompok').DataTable().ajax.reload();
+                  $('#tblKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
               }
@@ -2994,7 +2994,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'ur_asb_kel_edit': $('#ur_asb_kel_edit').val(),
           },
           success: function(data) {
-              $('#tblKelompok').DataTable().ajax.reload();
+              $('#tblKelompok').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -3027,7 +3027,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_kel_del').text()).remove();
-        $('#tblKelompok').DataTable().ajax.reload();
+        $('#tblKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -3069,7 +3069,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
               }
@@ -3109,7 +3109,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'ur_asb_subkel_edit': $('#ur_asb_subkel_edit').val(),
           },
           success: function(data) {
-              $('#tblSubKelompok').DataTable().ajax.reload();
+              $('#tblSubKelompok').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
               $('#ModalProgress').modal('hide');
           }
@@ -3143,7 +3143,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_subkel_del').text()).remove();
-        $('#tblSubKelompok').DataTable().ajax.reload();
+        $('#tblSubKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
         $('#ModalProgress').modal('hide');
       }
@@ -3236,7 +3236,7 @@ $(document).on('click', '#btnparam_cari', function() {
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
                   $('datalist[name="searchresults"]').append('<option value="'+ $('#ket_rinci').val() +'"/>');
-                  $('#tblRincian').DataTable().ajax.reload();
+                  $('#tblRincian').DataTable().ajax.reload(null,false);
           },
       });
   });
@@ -3337,7 +3337,7 @@ $(document).on('click', '#btnparam_cari', function() {
             createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
             $('datalist[name="searchresults"]').append('<option value="'+ $('#ket_rinci').val() +'"/>');
-              $('#tblRincian').DataTable().ajax.reload();
+              $('#tblRincian').DataTable().ajax.reload(null,false);
           }
       });
   });
@@ -3372,7 +3372,7 @@ $(document).on('click', '#btnparam_cari', function() {
         $('.item' + $('.id_komponen_rinci_hapus').text()).remove();
         createPesan("Proses Hapus Berhasil","success");
         $('#ModalProgress').modal('hide');
-        $('#tblRincian').DataTable().ajax.reload();
+        $('#tblRincian').DataTable().ajax.reload(null,false);
       }
     });
   });
@@ -3381,9 +3381,9 @@ $(document).on('click', '#btnparam_cari', function() {
     if($('#id_satuan2').val()==0){
       $(".id_satuan2_derivatif").attr("disabled", true);
       document.getElementById("range_max1").setAttribute("disabled","disabled");
-      $('#range_max1').val(0);
+      $('#range_max1').val(1);
       document.getElementById("kapasitas_max1").setAttribute("disabled","disabled");
-      $('#kapasitas_max1').val(0);
+      $('#kapasitas_max1').val(1);
     } else {
       $(".id_satuan2_derivatif").removeAttr("disabled");
       document.getElementById("range_max1").removeAttribute("disabled");
@@ -3713,7 +3713,9 @@ $('.hub_driver').change(function() {
     $('.modal-title').text('Pencetakan Aktivitas ASB');
     $('.form-horizontal').show();
     $('#id_aktivitas_simulasi').val($(this).data('id_aktivitas_asb'));
-    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));
+    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));    
+    $('#v1_simulasi').val(1);
+    $('#v2_simulasi').val(1);
     $('#SimulasiHitung').modal('show');    
   });
 
@@ -3757,7 +3759,7 @@ $('.hub_driver').change(function() {
 
 $(document).on('click', '.copy-asb', function() {
   $('.form-horizontal').show();
-  $('#tblCariKelompok').DataTable().ajax.reload();
+  $('#tblCariKelompok').DataTable().ajax.reload(null,false);
   $("#CopyDataASB").modal('show');
     
   });
@@ -3923,7 +3925,7 @@ $(document).on('click', '.btnProsesCopyKelompok', function(e) {
               }
             createPesan("Proses Copy Data Berhasil","success");
             $('#ModalProgress').modal('hide');
-            $('#tblKelompok').DataTable().ajax.reload(); 
+            $('#tblKelompok').DataTable().ajax.reload(null,false); 
           }
         });         
       });
@@ -3953,12 +3955,12 @@ $(document).on('click', '.btnProsesCopyKomp', function(e) {
                 success: function(data) {
                     createPesan("Proses Copy Data Berhasil","success");
                     $('#ModalProgress').modal('hide');
-                    $('#tblKomponen').DataTable().ajax.reload();
+                    $('#tblKomponen').DataTable().ajax.reload(null,false);
                 },
                 error: function(data) {
                     createPesan("Proses Copy Data Gagal ","danger");
                     $('#ModalProgress').modal('hide');
-                    $('#tblKomponen').DataTable().ajax.reload();
+                    $('#tblKomponen').DataTable().ajax.reload(null,false);
                 },
             });
       });
@@ -3972,6 +3974,10 @@ $(document).on('click', '.btnProsesCopyKomp', function(e) {
 
 $(document).on('click', '.cetak-duplikasi', function() {
    window.open('../printDuplikasiASB/'+$(this).data('id_perkada'));
+  });
+
+$(document).on('click', '.cetak-validitas', function() {
+   window.open('../printValiditasASB/'+$(this).data('id_perkada'));
   });
 
 

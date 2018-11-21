@@ -338,6 +338,17 @@ $('.display').DataTable({
       bDestroy: true
   });
 
+function validasiDataAwal() {
+  if ( $.trim( $('#id_kecamatan').val()) == 0) {
+    createPesan("Nama Kecamatan Belum Dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_desa_cb').val()) == 0) {
+    createPesan("Nama Desa Belum Dipilih..!!","danger"); 
+    return false;
+  };
+}
+
 var usulan_tbl,asb_tbl;
 function LoadUsulanRW($id_desa){
     usulan_tbl=$('#tblUsulanRW').DataTable({
@@ -484,34 +495,32 @@ $("#id_desa_cb").change(function() {
 });
 
 $('#btnAddUsulanRw').click(function(){
-  $('#btnUsulanRW').addClass('addUsulanRW');
-  $('#btnUsulanRW').removeClass('editUsulanRW');      
-  $('.form-horizontal').show();
-  $('.modal-title').text('Tambah Usulan tingkat RW');
-  $('#id_musrendes_rw').val(null);
-  $('#tahun_musren').val({{Session::get('tahun')}});
-  $('#id_desa').val($('#id_desa_cb').val());
-  $('#no_urut_usulan').val(1);
-  $('#id_rt').val(1);
-  $('#id_rw').val(1);
-  $('#id_aktivitas_asb').val(null);
-  $('#ur_aktivitas_kegiatan').val(null);
-  $('#id_renja').val(null);
-  $('#id_kegiatan').val(null);
-  $('#volume').val(0);
-  $('#id_satuan').val(null);
-  $('#ur_satuan').val(null);
-  $('#harga_satuan').val(1);
-  $('#jumlah_pagu').val(hitungpagu());
-  $('#uraian_kondisi').val(null);
 
-  // $('#btnHapusUsulanRW').show();
-  $('#btnUsulanRW').show();
-
-  $('.checkUsulanRw').prop('checked',false);
-
-  $('#ModalUsulanRW').modal('show');
-
+  if(validasiDataAwal() != false){
+    $('#btnUsulanRW').addClass('addUsulanRW');
+    $('#btnUsulanRW').removeClass('editUsulanRW');      
+    $('.form-horizontal').show();
+    $('.modal-title').text('Tambah Usulan tingkat RW');
+    $('#id_musrendes_rw').val(null);
+    $('#tahun_musren').val({{Session::get('tahun')}});
+    $('#id_desa').val($('#id_desa_cb').val());
+    $('#no_urut_usulan').val(1);
+    $('#id_rt').val(1);
+    $('#id_rw').val(1);
+    $('#id_aktivitas_asb').val(null);
+    $('#ur_aktivitas_kegiatan').val(null);
+    $('#id_renja').val(null);
+    $('#id_kegiatan').val(null);
+    $('#volume').val(0);
+    $('#id_satuan').val(null);
+    $('#ur_satuan').val(null);
+    $('#harga_satuan').val(1);
+    $('#jumlah_pagu').val(hitungpagu());
+    $('#uraian_kondisi').val(null);
+    $('#btnUsulanRW').show();
+    $('.checkUsulanRw').prop('checked',false);
+    $('#ModalUsulanRW').modal('show');
+  }
 });
 
   $('.modal-footer').on('click', '.addUsulanRW', function() {

@@ -9,12 +9,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Forum Perangkat Daerah';
+                $this->title = 'Forum Perangkat Daerah X';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
-                $breadcrumb->add(['url' => '/modul2','label' => 'Musrenbang']);
-                // $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja']);
+                $breadcrumb->add(['url' => '/modul2','label' => 'Forum OPD X']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -34,17 +33,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
                         <div class="col-sm-2">                            
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" style="text-align: center; vertical-align:middle" disabled>
-                        </div>
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Pencetakan Penyesuaian Renja <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiProgramdanPagu dropdown-item"><i class="fa fa-bullseye fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Program dan Pagu</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiKegiatandanPaguRenja dropdown-item"><i class="fa fa-male fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Kegiatan dan Pagu</a>
-                                    </li>                       
-                                </ul>
                         </div>
                 </div>
                 <div class="form-group">
@@ -250,7 +238,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <a id="btnTambahBelanja" type="button" class="add-belanja btn btn-labeled btn-success">
                                       <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah dari SSH</a>
                                      <a id="btnCopyBelanja" type="button" class="btn btn-labeled btn-primary">
-                                      <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Import dari Lokasi Lain</a>
+                                      <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Import dari Aktivitas Lain</a>
                                   </div>
                                   <div id="divImportASB">
                                     <a id="btnTambahBelanjaASB" type="button" class="add-belanjaASB btn btn-labeled btn-info">
@@ -366,7 +354,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
@@ -377,7 +364,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="hidden" id="tahun_renja" name="tahun_renja">
                 <input type="hidden" id="id_unit" name="id_unit">
                 <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
+                  <label class="control-label col-sm-3" for="id">No Urut:</label>
                   <div class="col-sm-2">
                     <input type="text" class="form-control number" name="no_urut_program" id="no_urut_program" disabled>
                   </div>
@@ -435,6 +422,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       </label>
                       <label class="radio-inline" id="status_pelaksanaan4">
                         <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="4">Baru
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" class="skegiatan" name="status_pelaksanaan_program" id="status_pelaksanaan_program" value="5">Dibawa ke Tingkat Provinsi/Nasional
                       </label>
                   </div>
                 </div>
@@ -1352,12 +1342,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                 <input type="hidden" class="form-control" id="id_satuan2" name="id_satuan2">
                                 <span class="input-group-addon" id="satuan2"></span>
                               </div>
-                              </td>
-                          
+                              </td>                          
                               <td width="20%" style="text-align: right; vertical-align:top;"><input type="text" class="form-control number" id="harga_satuan" name="harga_satuan" style="text-align: right; vertical-align:top;" disabled></td>
-
                               <td width="30%" style="text-align: right; vertical-align:top;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" style="text-align: right; vertical-align:top;" disabled></td>
-
                           </tr>
                         </tbody>
                     </table>
@@ -1855,7 +1842,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"> Copy Data Belanja dari Lokasi Lain</h4>
+            <h4 class="modal-title"> Copy Data Belanja dari Aktivitas Lain</h4>
         </div>
       <div class="modal-body">
           <form name="frmModalCopyBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -2474,7 +2461,6 @@ function initInProg(tableId, data) {
             "order": [[0, 'asc']],
             "bDestroy": true
         })
-
 }
 
 $('#tblProgramRenja tbody').on('click', 'td.details-control', function () {

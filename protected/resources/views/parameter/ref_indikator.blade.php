@@ -38,10 +38,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">IKU</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Tipe</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Type</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Jenis</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Sifat</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Teknik Pengukuran</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
@@ -58,30 +58,35 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 <!--Modal Tambah -->
 <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
+  <div class="modal-dialog modal-lg" role="document" >
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" style="text-align: center;"></h4>
       </div>
-
       <div class="modal-body">
         <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_indikator" id="id_indikator">
             <div class="form-group">
-              <label for="nm_indikator" class="col-sm-3" align='left'>Uraian Indikator</label>
-              <div class="col-sm-8">
+              <label for="nm_indikator" class="col-sm-2" align='left'>Uraian Indikator</label>
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="nm_indikator" name="nm_indikator" required="required" >
               </div>
-            </div>
+            </div>                       
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="id_satuan_output">Satuan Indikator</label>
+              <div class="col-sm-10">
+                <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
+              </div>
+            </div> 
             <div class="form-group">
               <label for="sumber_data" class="col-sm-5" align='left'>Sumber Data Pengukuran Indikator</label>
-              <div class="col-sm-offset-3 col-sm-8">
+              <div class="col-sm-offset-1 col-sm-11">
                 <textarea type="name" class="form-control" id="sumber_data" rows="4"></textarea>
               </div>
             </div>
-            <div class="form-group">
-              <label for="flag_iku" class="col-sm-3" align='left'>Jenis IKU</label>
+            <div class="form-group hidden">
+              <label for="flag_iku" class="col-sm-2" align='left'>Jenis IKU</label>
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="flag_iku" type="radio" name="flag_iku" id="flag_iku" value="0"> Non IKU</label>
@@ -96,26 +101,58 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
             </div>
             <div class="form-group">
-              <label for="flag_iku" class="col-sm-3" align='left'>Tipe Indikator</label>
+              <label for="jns_indikator" class="col-sm-2" align='left'>Jenis Indikator</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="0"> Keluaran</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="0"> Output</label>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="1"> Hasil</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="1"> Outcome Immediate</label>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Dampak</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="2"> Outcome Intermediate</label>
                   </div>
-                  <div class="col-sm-2>
+                  <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Masukan</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="3"> Outcome Ultimate</label>
                   </div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="jenis_indikator" class="col-sm-3" align='left'>Jenis Indikator</label>
+              <label for="tipe_indikator" class="col-sm-2" align='left'>Tipe Indikator</label>
+              <div class="col-sm-10">
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="0"> Kualitatif</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="1"> Kuantitatif</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Persentase</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="3"> Rasio</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="4"> Rata-rata</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="5"> Indeks</label>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="jenis_indikator" class="col-sm-2" align='left'>Sifat Indikator</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="jenis_indikator" type="radio" id="jenis_indikator" name="jenis_indikator" value="0"> Negatif</label>
@@ -124,9 +161,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                       <input class="jenis_indikator" type="radio" id="jenis_indikator" name="jenis_indikator" value="1"> Positif</label>
                   </div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="sifat_indikator" class="col-sm-3" align='left'>Sifat Indikator</label>
+              <label for="sifat_indikator" class="col-sm-2" align='left'>Type Pengukuran</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="0"> Incremental</label>
@@ -137,9 +176,35 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                   <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="2"> Komulatif</label>
+                      <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="2"> Kumulatif</label>
                   </div>
-            </div>    
+              </div>
+            </div> 
+            <div class="form-group hidden">
+              <label for="flag_iku" class="col-sm-3" align='left'>Kualitas Indikator</label>
+              <div class="col-sm-offset-1 col-sm-10">
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="0"> Spesifik (Spesific)</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="1"> Dapat Diukur (Measurable)</label>
+                  </div>
+                  <div class="col-sm-3">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="2"> Dapat Dicapai (Achievable)</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="3"> Relevan (Relevance)</label>
+                  </div>
+                  <div class="col-sm-3">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="4"> Dalam Waktu Tertentu (Time Bound)</label>
+                  </div>
+              </div>
+            </div>   
         </form>
       </div>
         <div class="modal-footer">
@@ -174,7 +239,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="alert alert-danger deleteContent">
               <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
                 <br>
-                Yakin akan menghapus Referensi Indikator Tahun : <strong><span id="nm_indikator_hapus"></span></strong> ?
+                Yakin akan menghapus Referensi Indikator : <strong><span id="nm_indikator_hapus"></span></strong> ?
                 <br>
                 <br>
           </div>
@@ -236,19 +301,38 @@ var indikator_tbl=$('#tblIndikator').DataTable({
                   "columns": [
                         { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
                         { data: 'nm_indikator', sClass: "dt-left"},
-                        { data: 'flag_display', sClass: "dt-center", width :"10%"},
+                        { data: 'kualitas_display', sClass: "dt-center", width :"10%"},
                         { data: 'type_display', sClass: "dt-center", width :"10%"},
-                        { data: 'jenis_display', sClass: "dt-center", width :"10%"},
                         { data: 'sifat_display', sClass: "dt-center", width :"10%"},
+                        { data: 'teknik_display', sClass: "dt-center", width :"10%"},
                         { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
 
+$.ajax({
+          type: "GET",
+          url: '../parameter/getRefSatuan',
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_satuan_output"]').empty();
+          $('select[name="id_satuan_output"]').append('<option value="">--Pilih Satuan Indikator--</option>');
+          for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="id_satuan_output"]').append('<option value="'+ post.id_satuan +'">'+ post.uraian_satuan +'</option>');
+            }
+              
+          }
+});
+
 function getflag_iku(){
 
-    var xCheck = document.querySelectorAll('input[name="flag_iku"]:checked');
+    var xCheck = document.querySelectorAll('input[name="jns_indikator"]:checked');
     var xyz = [];
     for(var x = 0, l = xCheck.length; x < l;  x++)
       { xyz.push(xCheck[x].value); }
@@ -294,7 +378,8 @@ $(document).on('click', '.add-indikator', function() {
   $('#id_indikator').val(null);
   $('#nm_indikator').val(null);
   $('#sumber_data').val(null);
-  document.frmModalIndikator.flag_iku[0].checked=true;
+  $('#id_satuan_output').val(null)
+  document.frmModalIndikator.jns_indikator[0].checked=true;
   document.frmModalIndikator.tipe_indikator[0].checked=true;
   document.frmModalIndikator.jenis_indikator[1].checked=true;
   document.frmModalIndikator.sifat_indikator[1].checked=true;
@@ -315,11 +400,13 @@ $('.modal-footer').on('click', '.add', function() {
             'sifat_indikator' : getsifat_indikator(),
             'type_indikator' : gettipe_indikator(),
             'nm_indikator' : $('#nm_indikator').val(),
-            'flag_iku' : getflag_iku(),
+            'kualitas_indikator' : getflag_iku(),
             'sumber_data_indikator' : $('#sumber_data').val(),
+            'id_satuan_output' : $('#id_satuan_output').val(),
         },
         success: function(data) {
-              $('#tblIndikator').DataTable().ajax.reload();
+              $('#tblIndikator').DataTable().ajax.reload(null,false);
+              $('#tblIndikator').DataTable().page('last').draw('page');
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -339,8 +426,9 @@ $('#tblIndikator tbody').on( 'dblclick', 'tr', function () {
   $('.form-horizontal').show();
   $('#id_indikator').val(data.id_indikator);
   $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
-  document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
+  $('#sumber_data').val(data.sumber_data_indikator);  
+  $('#id_satuan_output').val(data.id_satuan_output);
+  document.frmModalIndikator.jns_indikator[data.kualitas_indikator].checked=true;
   document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
   document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
   document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
@@ -360,8 +448,9 @@ var data = indikator_tbl.row( $(this).parents('tr') ).data();
   $('.form-horizontal').show();
   $('#id_indikator').val(data.id_indikator);
   $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
-  document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
+  $('#sumber_data').val(data.sumber_data_indikator);  
+  $('#id_satuan_output').val(data.id_satuan_output);
+  document.frmModalIndikator.jns_indikator[data.kualitas_indikator].checked=true;
   document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
   document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
   document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
@@ -386,11 +475,12 @@ $('.modal-footer').on('click', '.edit', function() {
             'sifat_indikator' : getsifat_indikator(),
             'type_indikator' : gettipe_indikator(),
             'nm_indikator' : $('#nm_indikator').val(),
-            'flag_iku' : getflag_iku(),
+            'kualitas_indikator' : getflag_iku(),
             'sumber_data_indikator' : $('#sumber_data').val(),
+            'id_satuan_output' : $('#id_satuan_output').val(),
         },
         success: function(data) {
-            $('#tblIndikator').DataTable().ajax.reload();
+            $('#tblIndikator').DataTable().ajax.reload(null,false);
             if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -434,7 +524,7 @@ $('.modal-footer').on('click', '.delete', function() {
     },
     success: function(data) {
       $('.item' + $('.id_indikator_hapus').text()).remove();
-      $('#tblIndikator').DataTable().ajax.reload();
+      $('#tblIndikator').DataTable().ajax.reload(null,false);
       createPesan(data.pesan,"success");
     }
   });

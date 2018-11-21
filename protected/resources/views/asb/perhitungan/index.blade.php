@@ -443,50 +443,46 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
-                <label for="tahun_simulasi" class="col-sm-3 control-label" align='left'>Tahun Perhitungan :</label>
-                <div class="col-sm-8">
-                  <select class="form-control tahun_simulasi" name="tahun_simulasi" id="tahun_simulasi">
-                  </select>
+                    <label class="control-label col-sm-3" for="title">Nomor Perkada :</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="nomor_perkada_simulasi" name="nomor_perkada_simulasi" class="form-control"  readonly>
+                    </div>
+                    <input type="hidden" id="aktivitas_simulasi" name="aktivitas_simulasi">
+                    <input type="hidden" id="id_perkada_aktivitas" name="id_perkada_aktivitas">
+                    <span class="btn btn-sm btn-primary btnCariASB" id="btnCariASB" name="btnCariASB" title="Pemilihan Aktivitas ASB yang akan disimulasikan"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>
-              </div>
               <div class="form-group">
-                <label class="control-label col-sm-3" for="id_perkada_simulasi">Nomor Perkada ASB :</label>
-                <div class="col-sm-8">
-                  <select class="form-control id_perkada_simulasi" name="id_perkada_simulasi" id="id_perkada_simulasi">
-                  </select>
+                    <label class="control-label col-sm-3" for="title">Aktivitas ASB :</label>
+                    <div class="col-sm-8">
+                      <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3" disabled></textarea>
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="aktivitas_simulasi" class="col-sm-3 control-label" align='left'>Aktivitas ASB :</label>
-                <div class="col-sm-8">
-                  <select class="form-control aktivitas_simulasi" name="aktivitas_simulasi" id="aktivitas_simulasi">
-                  </select>
-                </div>
-              </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                   <input type="text" class="form-control number" id="v1_simulasi" name="v1_simulasi" style="text-align: right;">
                 </div>
+                <label class="control-label col-sm-3" id="ur_satuan_1"></label>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                   <input type="text" class="form-control number" id="v2_simulasi" name="v2_simulasi" style="text-align: right;">
                 </div>
+                <label class="control-label col-sm-3" id="ur_satuan_2"></label>
               </div>
           </form>
         </div>
           <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idbtnHapusBelanja">
-                    <button type="button" class="btn  btn-default btnCetakAktivitas  btn-labeled">
-                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Rumus Aktivitas</button>
+                    {{-- <button type="button" class="btn  btn-default btnCetakAktivitas  btn-labeled">
+                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Rumus Aktivitas</button> --}}
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
                         <button type="button" class="btn  btn-success btnSimulasi btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-calculator fa-fw fa-lg"></i></span>Proses Simulasi</button>
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-eye fa-fw fa-lg"></i></span>Preview</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
@@ -602,6 +598,67 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
+
+<div id="cariAktivitasASB" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="text-align: center;">Daftar Aktivitas ASB</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="form-group">
+                <label for="tahun_simulasi" class="col-sm-3 control-label" align='left'>Tahun Perhitungan :</label>
+                <div class="col-sm-3">
+                  <select class="form-control tahun_simulasi" name="tahun_simulasi" id="tahun_simulasi">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id_perkada_simulasi">Nomor Perkada ASB :</label>
+                <div class="col-sm-6">
+                  <select class="form-control id_perkada_simulasi" name="id_perkada_simulasi" id="id_perkada_simulasi">
+                  </select>
+                </div>                                  
+                <span class="btn btn-sm btn-success btnLoadASB" id="btnLoadASB" name="btnLoadASB" title="Refresh Data Tabel ASB"><i class="fa fa-refresh fa-fw fa-lg"></i></span>
+              </div>
+            <div class="form-group hidden">
+              <label class="control-label col-sm-3" for="">Zona Wilayah SSH :</label>
+              <div class="col-sm-8">
+                <select type="text" class="form-control zona_ssh_load" id="zona_ssh_load" name="zona_ssh_load"></select>
+              </div>
+            </div> 
+           <div class="form-group">
+             <div class="col-sm-12">
+                <table id='tblCariAktivitasASB' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                          <tr>
+                            <th width="5%" style="text-align: center; vertical-align:middle;">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle;">Uraian Aktivitas ASB</th>
+                            <th width="5%" style="text-align: center; vertical-align:middle;">Aksi</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                    </div>
+                </div>
+        </div>
+      </div>
+    </div>
+</div>
 
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -1012,6 +1069,7 @@ $('.display').DataTable({
   $(document).on('click', '.add-hitungasb', function() {
     $('.modal-title').text('Proses Perhitungan Pagu ASB Tahunan');
     $('.form-horizontal').show();
+
     $('#ProsesHitung').modal('show');
   });
 
@@ -1037,16 +1095,16 @@ $('.display').DataTable({
                   data: {
                       '_token': $('input[name=_token]').val(),
                       'tahun_perhitungan' : $('#tahun_perhitungan').val(),
-                      'id_zona' : $('#id_zona').val(),
+                      // 'id_zona' : $('#id_zona').val(),
                   },
                   success: function(data) {
                     createPesan("Proses Perhitungan Berhasil","success");
-                    $('#tblPerkada').DataTable().ajax.reload();
+                    $('#tblPerkada').DataTable().ajax.reload(null,false);
                     $('#ModalProgress').modal('hide');
                   },
                   error: function(data) {
                     createPesan("Proses Perhitungan Gagal","danger");
-                    $('#tblPerkada').DataTable().ajax.reload();
+                    $('#tblPerkada').DataTable().ajax.reload(null,false);
                     $('#ModalProgress').modal('hide');
                   }
                 });
@@ -1079,7 +1137,7 @@ $('.display').DataTable({
               'flag_aktif': getStatus(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Posting Perhitungan Berhasil","success");
               $('#ModalProgress').modal('hide');
 
@@ -1111,7 +1169,7 @@ $(document).on('click', '.hapus-perhitungan', function() {
               'id_perhitungan': $('#id_perhitungan_hapus').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Perhitungan Berhasil Dihapus","info");
               $('#ModalProgress').modal('hide');
           }
@@ -1122,6 +1180,8 @@ $(document).on('click', '.hapus-perhitungan', function() {
 $(document).on('click', '.test-hitung', function() {
     $('.modal-title').text('Pencetakan Rumus dan Simulasi Aktivitas ASB');
     $('.form-horizontal').show();
+    $('#v1_simulasi').val(1);
+    $('#v2_simulasi').val(1);
     $('#SimulasiHitung').modal('show');
 
     $.ajax({
@@ -1134,7 +1194,7 @@ $(document).on('click', '.test-hitung', function() {
           var post, i;
 
           $('select[name="tahun_simulasi"]').empty();
-          $('select[name="tahun_simulasi"]').append('<option value="-1">---Pilih Tahun Perhitungan---</option>');
+          $('select[name="tahun_simulasi"]').append('<option value="-1">---Tahun Perhitungan---</option>');
 
           for (i = 0; i < j; i++) {
             post = data[i];
@@ -1159,35 +1219,11 @@ $( ".tahun_simulasi" ).change(function() {
           var post, i;
 
           $('select[name="id_perkada_simulasi"]').empty();
-          $('select[name="id_perkada_simulasi"]').append('<option value="-1">---Pilih Nomor Perkada---</option>');
+          $('select[name="id_perkada_simulasi"]').append('<option value="-1">---Nomor Perkada---</option>');
 
           for (i = 0; i < j; i++) {
             post = data[i];
             $('select[name="id_perkada_simulasi"]').append('<option value="'+ post.id_perhitungan +'">'+ post.nomor_perkada +'</option>');
-          }
-          }
-      });
-    });
-
-$( ".id_perkada_simulasi" ).change(function() {
-      
-      $.ajax({
-
-          type: "GET",
-          url: './getAktivitasSimulasi/'+$('#id_perkada_simulasi').val(),
-          dataType: "json",
-
-          success: function(data) {
-
-          var j = data.length;
-          var post, i;
-
-          $('select[name="aktivitas_simulasi"]').empty();
-          $('select[name="aktivitas_simulasi"]').append('<option value="-1">---Pilih Aktivitas---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="aktivitas_simulasi"]').append('<option value="'+ post.id_aktivitas_asb +'">'+ post.nm_aktivitas_asb +'</option>');
           }
           }
       });
@@ -1203,24 +1239,79 @@ function getStatus(){
     return xvalues;
   }
 
-$(document).on('click', '.btnSimulasi', function() {
+var asb_tbl;
+$(document).on('click', '#btnCariASB', function() {
+  $('.tahun_simulasi').val(null);
+  $('#id_perkada_simulasi').val(null);
 
-    window.open('../printHitungSimulasiASB/'+$('#id_perkada_simulasi').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
-    // location.replace('../printHitungSimulasiASB/'+$('#id_perkada_simulasi').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
+  $('#cariAktivitasASB').modal('show'); 
+
+});
+
+$(document).on('click', '#btnLoadASB', function() {
+  asb_tbl = $('#tblCariAktivitasASB').DataTable( {
+        processing: true,
+        serverSide: true,                 
+        autoWidth : false,
+        dom: 'bfrtIp',
+        "ajax": {"url": "./getDataASB/"+$('#id_perkada_simulasi').val()},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'nm_aktivitas_asb'},
+              { data: 'action', 'searchable': false, width :"20px", 'orderable':false, sClass: "dt-center" }
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    });
+
+  asb_tbl.ajax.reload(null,false);
+});
+
+$('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
+    var data = asb_tbl.row(this).data();   
+
+    document.getElementById("ur_satuan_1").innerHTML = data.uraian_satuan_1;
+    document.getElementById("ur_satuan_2").innerHTML = data.uraian_satuan_2;
+    document.getElementById("ur_aktivitas_kegiatan").value = data.nm_aktivitas_asb;
+    document.getElementById("aktivitas_simulasi").value = data.id_aktivitas_asb;
     
+    $('#id_perkada_aktivitas').val($('#id_perkada_simulasi').val());
+    $('#nomor_perkada_simulasi').val($('#id_perkada_simulasi option:selected').text());
+
+    $('#cariAktivitasASB').modal('hide');
+  });
+
+$(document).on('click', '#btnPilihASB', function() {
+
+    var data = asb_tbl.row( $(this).parents('tr') ).data();
+
+    document.getElementById("ur_satuan_1").innerHTML = data.uraian_satuan_1;
+    document.getElementById("ur_satuan_2").innerHTML = data.uraian_satuan_2;
+    document.getElementById("ur_aktivitas_kegiatan").value = data.nm_aktivitas_asb;
+    document.getElementById("aktivitas_simulasi").value = data.id_aktivitas_asb;
+    
+    $('#id_perkada_aktivitas').val($('#id_perkada_simulasi').val());
+    $('#nomor_perkada_simulasi').val($('#id_perkada_simulasi option:selected').text());
+
+    $('#cariAktivitasASB').modal('hide');
+  });
+
+$(document).on('click', '.btnSimulasi',  function() {
+    if ($('#id_perkada_aktivitas').val()!=null || $('#id_perkada_aktivitas').val()!=""){
+      window.open('../printHitungSimulasiASB/'+$('#id_perkada_aktivitas').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
+    } else {
+      alert("Maaf Belum Memilih Nomor Perkada ASB")
+    }
+    
+    // location.replace('../printHitungSimulasiASB/'+$('#id_perkada_simulasi').val()+'/'+$('#aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());    
   });
 
 $(document).on('click', '.btnCetakAktivitas', function() {
-
-    window.open('../printHitungRumusASB/'+$('#aktivitas_simulasi').val());
-    
+    window.open('../printHitungRumusASB/'+$('#aktivitas_simulasi').val());    
   });
 
 $(document).on('click', '.print-hitungaktivitas', function() {
-
-    // location.replace('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));
-    window.open('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));
-    
+    window.open('../printHitungRumusASB/'+$(this).data('id_aktivitas_asb'));    
   });
 
 

@@ -105,7 +105,7 @@ use hoaaah\LaravelMenu\Menu;
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-3">
-          <h2>Analisa Standar Belanja dan Standar Satuan Harga</h2>
+          <h2>Analisis Standar Belanja dan Standar Satuan Harga</h2>
           <p><strong>ASB</strong> dan <strong>SSH</strong> sebagai jembatan untuk menghubungkan antara proses perencanaan dengan proses penganggaran.</p>
           <p><a class="btn btn-primary" href="{{ url('/modul0') }}" role="button"><strong>ASB dan SSH</strong> &raquo;</a></p>
         </div>

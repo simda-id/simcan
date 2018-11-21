@@ -9,12 +9,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
       <div class="col-md-12">
         <?php
-                $this->title = 'Dokumen RKPD Final';
+                $this->title = 'Dokumen Musrenbang RKPD';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => 'RKPD']);
-                $breadcrumb->add(['label' => 'RKPD Final']);
+                $breadcrumb->add(['label' => 'Musrenbang RKPD']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?> 
@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <p><h2 class="panel-title">Dokumen RKPD Final</h2></p>
+            <p><h2 class="panel-title">Dokumen Rancangan RKPD</h2></p>
           </div>
 
           <div class="panel-body">
@@ -291,8 +291,8 @@ var dokumen_tbl = $('#tblDokumen').DataTable({
                 "thousands": "."},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
-              { data: 'tahun_ranwal', sClass: "dt-center"},
-              { data: 'nomor_ranwal'},
+              { data: 'tahun_rkpd', sClass: "dt-center"},
+              { data: 'nomor_rkpd'},
               { data: 'uraian_perkada'},
               { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",width:"15px",
                 render: function(data, type, row,meta) {
@@ -362,12 +362,12 @@ $.ajax({
         success: function(data) {
           createPesan("Data Berhasil di Load","success");
           $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
         },
         error: function(data){
           createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
         }
 });
@@ -390,12 +390,12 @@ $(document).on('click', '.btnUnload', function() {
         },
         success: function(data) {
             createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
         error: function(data){
             createPesan(data.pesan,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });
@@ -409,7 +409,7 @@ $(document).on('click', '#btnAddDokumen', function() {
     success: function(data) {
       $('#btnDokumen').removeClass('editDokumen');
       $('#btnDokumen').addClass('addDokumen');
-      $('.modal-title').text('Tambah Dokumen Penyusunan Rancangan Awal RKPD');
+      $('.modal-title').text('Tambah Dokumen Penyusunan Rancangan RKPD');
       $('.form-horizontal').show();
 
       $('#id_dokumen_rkpd').val(null);
@@ -417,7 +417,7 @@ $(document).on('click', '#btnAddDokumen', function() {
       $('#tanggal_rkpd').val(null);
       $('#tanggal_rkpd_x').val(null);
       $('#nomor_rkpd').val(null);
-      $('#uraian_perkada').val();
+      $('#uraian_perkada').val(null);
       $('#id_unit_perencana').val(data[0].unit_perencanaan);
       $('#id_unit_perencana_display').val(data[0].nm_unit);
       $('#nama_tandatangan').val(data[0].nama_kepala_bappeda);
@@ -456,7 +456,7 @@ $('.modal-footer').on('click', '.addDokumen', function() {
         'nip_tandatangan': $('#nip_tandatangan').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -475,11 +475,11 @@ $(document).on('click', '#btnEditDokumen', function() {
       $('.modal-title').text('Ubah Dokumen Penyusunan Rancangan Awal RKPD');
       $('.form-horizontal').show();
 
-      $('#id_dokumen_rkpd').val(data.id_dokumen_ranwal);
-      $('#tahun_rkpd').val(data.tahun_ranwal);
-      $('#tanggal_rkpd').val(data.tanggal_ranwal);
-      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_ranwal));
-      $('#nomor_rkpd').val(data.nomor_ranwal);
+      $('#id_dokumen_rkpd').val(data.id_dokumen_rkpd);
+      $('#tahun_rkpd').val(data.tahun_rkpd);
+      $('#tanggal_rkpd').val(data.tanggal_rkpd);
+      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_rkpd));
+      $('#nomor_rkpd').val(data.nomor_rkpd);
       $('#uraian_perkada').val(data.uraian_perkada);
       $('#id_unit_perencana').val(data.id_unit_perencana);
       $('#id_unit_perencana_display').val(data.nm_unit);
@@ -523,7 +523,7 @@ $('.modal-footer').on('click', '.editDokumen', function() {
         'nip_tandatangan': $('#nip_tandatangan').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -558,7 +558,7 @@ $('.modal-footer').on('click', '.delDokumen', function() {
         'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         $('#TambahDokumen').modal('hide');
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
@@ -574,10 +574,10 @@ $(document).on('click', '#btnPostingRkpd', function() {
   var data = dokumen_tbl.row( $(this).parents('tr') ).data();
       $('.form-horizontal').show();
 
-      $('#id_dokumen_posting').val(data.id_dokumen_ranwal);
+      $('#id_dokumen_posting').val(data.id_dokumen_rkpd);
       $('#status_dokumen_posting').val(data.flag);
-      $('#tahun_dokumen_posting').val(data.tahun_ranwal);      
-      $('#ur_tahun_posting').html(data.tahun_ranwal);
+      $('#tahun_dokumen_posting').val(data.tahun_rkpd);      
+      $('#ur_tahun_posting').html(data.tahun_rkpd);
 
       if(data.flag==0){
         $('#ur_status_dokumen_posting').html("Posting");
@@ -619,7 +619,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
               'status_awal': status_awal,
           },
           success: function(data) {
-              dokumen_tbl.ajax.reload();
+              dokumen_tbl.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -628,7 +628,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
               $('#ModalProgress').modal('hide');
           },
           error: function(data){
-          dokumen_tbl.ajax.reload();
+          dokumen_tbl.ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
           createPesan("Data Gagal Diposting (0vdrPD)","danger");
         }

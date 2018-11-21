@@ -26,6 +26,7 @@ use hoaaah\LaravelMenu\Menu;
     <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
     
     @yield('head')
     <style>
@@ -117,18 +118,24 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Zona SSH','url' => '/zonassh', 'visible' => $akses->get(801)],
                                             ['label' => 'Struktur SSH', 'url' => '/ssh', 'visible' => $akses->get(802)],
                                             ['label' => 'Perkada SSH', 'url' => '/sshperkada/perkada','visible' => $akses->get(803)],
-                                            // ['label' => 'Pencetakan SSH','visible' => $akses->get(807)],
                                         ]
                                     ],                                    
                                     [
-                                        'label' => 'Analisa Standar Belanja',
+                                        'label' => 'Analisis Standar Belanja',
                                         'icon' => 'fa fa-bookmark fa-fw', 
                                         'visible' => $akses->get(804)||$akses->get(805)||$akses->get(806)||$akses->get(808),
                                         'items' => [
-                                            // ['label' => 'Komponen ASB','url' => '/asb/komponen','visible' => $akses->get(804)],
                                             ['label' => 'Perkada & Struktur ASB','url' => '/asb/aktivitas','visible' => $akses->get(805)],
                                             ['label' => 'Perhitungan ASB','url' => '/asb/hitungasb','visible' => $akses->get(806)],
-                                            // ['label' => 'Pencetakan ASB','visible' => $akses->get(808)],
+                                        ]
+                                    ],
+                                    [
+                                        'label' => 'Pencetakan SSH & ASB',
+                                        'icon' => 'fa fa-bookmark fa-fw', 
+                                        'visible' => $akses->get(806)||$akses->get(808),
+                                        'items' => [
+                                            ['label' => 'Standard Satuan Harga','url' => '/printSsh','visible' => $akses->get(805)],
+                                            ['label' => 'Analisis Standar Belanja','url' => '/printSsh','visible' => $akses->get(806)],
                                         ]
                                     ],
                                 ]
@@ -138,7 +145,8 @@ use hoaaah\LaravelMenu\Menu;
                         </div>
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>

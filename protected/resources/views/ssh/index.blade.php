@@ -42,7 +42,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane active" id="golongan">
               <br>
               <div class="add">
-                <p><a id="btnPrintGol" class="print-golongan btn btn-primary btn-labeled" href="{{ url('/printGolonganSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Golongan</a>
+                <p>
+                  {{-- <a id="btnPrintGol" class="print-golongan btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Golongan</a> --}}
                 <span><a id="btnAddGol" class="add-golongan btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Golongan</a></span>
                 </p>
               </div>
@@ -64,7 +65,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="kelompok">
               <br>
               <div class="add">
-                <p ><a id="btnPrintKelSSh" class="print-kelompokssh btn btn-primary btn-labeled" href="{{ url('/printKelompokSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Kelompok</a>
+                <p >
+                  {{-- <a id="btnPrintKelSSh" class="print-kelompokssh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Kelompok</a> --}}
                 <span><a id="btnAddKel" class="add-kelompok btn btn-sm btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Kelompok</a></span>
                 </p>
               </div>
@@ -101,7 +103,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="subkelompok">
             <br>
             <div class="add">
-              <p><a id="btnPrintSubKelSSh" class="print-subkelssh btn btn-primary btn-labeled" href="{{ url('/printSubKelompokSsh')}}"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Sub Kelompok</a>
+              <p>
+                {{-- <a id="btnPrintSubKelSSh" class="print-subkelssh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Sub Kelompok</a> --}}
               <span><a id="btnAddSubKel" class="add-subkelompok btn btn-sm btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Kelompok</a></span>
               </p>
             </div>
@@ -143,7 +146,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="tarif">
             <br>
             <div class="add">
-              <p ><a id="btnPrintItemSSh" class="btnPrintItemSSh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Cetak Item SSH</a>
+              <p >
+                {{-- <a id="btnPrintItemSSh" class="btnPrintItemSSh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Cetak Item SSH</a> --}}
               <span><a id="btnAddItem" class="add-item btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Item</a></span>
               </p>
             </div>
@@ -1324,13 +1328,7 @@ $(document).ready(function() {
       $('#tblTarif').DataTable().ajax.url("./ssh/getTarif/"+id_skel_ssh).load();
       $('#tblRekening').DataTable().ajax.url("./ssh/getRekening/0").load();
 
-      $(document).on('click', '.btnPrintItemSSh', function() {
-
-        window.open('./printItemSsh');
-        
-      });            
-
-    } );
+    });
 
     var tarif = $('#tblTarif').DataTable( {
                 processing: true,
@@ -1455,6 +1453,7 @@ $(document).ready(function() {
                   success: function(data) {
                       $('#tblGolongan').DataTable().ajax.url("./ssh/getGolongan").load();
                       $('#tblGolongan').DataTable().ajax.reload(null,true);
+                      $('#tblGolongan').DataTable().page('last').draw('page');
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1492,7 +1491,7 @@ $(document).ready(function() {
                       'ur_gol_edit': $('#ur_gol_edit').val(),
                   },
                   success: function(data) {
-                      $('#tblGolongan').DataTable().ajax.reload();
+                      $('#tblGolongan').DataTable().ajax.reload(null,false);
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1528,7 +1527,7 @@ $(document).ready(function() {
               },
               success: function(data) {
                 $('.item' + $('.id_gol_hapus').text()).remove();
-                $('#tblGolongan').DataTable().ajax.reload();
+                $('#tblGolongan').DataTable().ajax.reload(null,false);
                 if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1565,8 +1564,8 @@ $(document).ready(function() {
                       'ur_kel_ssh': $('#ur_kel_ssh').val(),
                   },
                   success: function(data) {
-                      $('#tblKelompok').DataTable().ajax.reload();
-                          // $("#kelompok").load(location.href+" #kelompok>*","");
+                      $('#tblKelompok').DataTable().ajax.reload(null,false);                      
+                      $('#tblKelompok').DataTable().page('last').draw('page');
                       $('#kelompok').html();
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
@@ -1608,7 +1607,7 @@ $(document).ready(function() {
                       'ur_kel_edit': $('#ur_kel_edit').val(),
                   },
                   success: function(data) {
-                      $('#tblKelompok').DataTable().ajax.reload();
+                      $('#tblKelompok').DataTable().ajax.reload(null,false);
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1644,7 +1643,7 @@ $(document).ready(function() {
               },
               success: function(data) {
                 $('.item' + $('.id_kel_hapus').text()).remove();
-                $('#tblKelompok').DataTable().ajax.reload();
+                $('#tblKelompok').DataTable().ajax.reload(null,false);
                 if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1683,7 +1682,8 @@ $(document).ready(function() {
                       'ur_subkel_ssh': $('#ur_subkel_ssh').val(),
                   },
                   success: function(data) {
-                      $('#tblSubKelompok').DataTable().ajax.reload();
+                      $('#tblSubKelompok').DataTable().ajax.reload(null,false);                     
+                      $('#tblSubKelompok').DataTable().page('last').draw('page');
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1726,7 +1726,7 @@ $(document).ready(function() {
                       'ur_subkel_ssh': $('#ur_subkel_edit').val(),
                   },
                   success: function(data) {
-                      $('#tblSubKelompok').DataTable().ajax.reload();
+                      $('#tblSubKelompok').DataTable().ajax.reload(null,false);
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1762,7 +1762,7 @@ $(document).ready(function() {
               },
               success: function(data) {
                 $('.item' + $('.id_subkel_hapus').text()).remove();
-                $('#tblSubKelompok').DataTable().ajax.reload();
+                $('#tblSubKelompok').DataTable().ajax.reload(null,false);
                 if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1809,7 +1809,8 @@ $(document).ready(function() {
                       'id_satuan':$('#id_satuan_ssh').val(),
                   },
                   success: function(data) {
-                      $('#tblTarif').DataTable().ajax.reload();
+                      $('#tblTarif').DataTable().ajax.reload(null,false);                    
+                      $('#tblTarif').DataTable().page('last').draw('page');
                       if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1861,7 +1862,7 @@ $(document).ready(function() {
                           'id_satuan':$('#id_satuan_edit').val(),
                       },
                       success: function(data) {
-                          $('#tblTarif').DataTable().ajax.reload();
+                          $('#tblTarif').DataTable().ajax.reload(null,false);
                           if(data.status_pesan==1){
                             createPesan(data.pesan,"success");
                           } else {
@@ -1897,7 +1898,7 @@ $(document).ready(function() {
                   },
                   success: function(data) {
                     $('.item' + $('.id_item_hapus').text()).remove();
-                    $('#tblTarif').DataTable().ajax.reload();
+                    $('#tblTarif').DataTable().ajax.reload(null,false);
                     if(data.status_pesan==1){
                         createPesan(data.pesan,"success");
                       } else {
@@ -1941,7 +1942,8 @@ $(document).ready(function() {
                           'id_rekening': $('#id_rek').val(),
                       },
                       success: function(data) {
-                          $('#tblRekening').DataTable().ajax.reload();
+                          $('#tblRekening').DataTable().ajax.reload(null,false);
+                          $('#tblRekening').DataTable().page('last').draw('page');
                           if(data.status_pesan==1){
                             createPesan(data.pesan,"success");
                           } else {
@@ -1988,7 +1990,7 @@ $(document).ready(function() {
                               'id_rek_edit': $('#id_rek_edit').val(),
                           },
                           success: function(data) {
-                              $('#tblRekening').DataTable().ajax.reload();
+                              $('#tblRekening').DataTable().ajax.reload(null,false);
                               if(data.status_pesan==1){
                                 createPesan(data.pesan,"success");
                               } else {
@@ -2024,7 +2026,7 @@ $(document).ready(function() {
                       },
                       success: function(data) {
                         $('.item' + $('.id_rek_hapus').text()).remove();
-                        $('#tblRekening').DataTable().ajax.reload();
+                        $('#tblRekening').DataTable().ajax.reload(null,false);
                         if(data.status_pesan==1){
                           createPesan(data.pesan,"success");
                         } else {
@@ -2034,6 +2036,6 @@ $(document).ready(function() {
                     });
                   });
 
-  } );
+});
 </script>
 @endsection

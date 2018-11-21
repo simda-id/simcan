@@ -5,9 +5,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
+        <div class="col-md-12">
         <?php
                 $this->title = 'Load dan Proses Data Rancangan RKPD';
                 $breadcrumb = new Breadcrumb();
@@ -21,393 +21,371 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
     <div id="pesan"></div>
     <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <p><h2 class="panel-title">Proses Load Data Rancangan RKPD dari Forum Perangkat Daerah</h2></p>
-          </div>
-
-          <div class="panel-body">
-            <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#dokumen" aria-controls="dokumen" role="tab" data-toggle="tab">Dokumen Rancangan RKPD</a></li>
-                <li><a href="#loaddata" aria-controls="loaddata" role="tab-kv" data-toggle="tab">Load Data Rancangan RKPD</a></li>
-              </ul>
-
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="dokumen">
-                <br>
-                <form class="form-horizontal" role="form" autocomplete='off' action="#" method="" >
-                    {{-- <div class="form-group">
-                      <label for="tahun_rkpd" class="col-sm-2 control-label" align='left'>Tahun RKPD :</label>
-                      <div class="col-sm-2">
-                        <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
-                      </div> --}}
-                    <div>
-                      <a type="button" id="btnAddDokumen" class="btn btn-labeled btn-sm btn-success" data-dismiss="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Dokumen</a>
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ $this->title }}</h2>
+                </div>
+            <div class="panel-body">
+                <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
+                        <div class="col-sm-1">                            
+                            <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
+                        </div>
+                        <button id="btnProses" type="button" class="btnProses btn btn-labeled btn-sm btn-primary">
+                                      <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Proses Load Data dari Forum OPD</button>
+                </div>
+                <div class="form-group hidden">
+                    <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renja :</label>
+                        <div class="col-sm-7">
+                            <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
+                        </div>
+                </div>
+                <div class="form-group hidden">
+                    <label class="control-label col-sm-3 text-left" for="id_rkpd_ranwal">Program Ranwal RKPD :</label>
+                        <div class="col-sm-7">
+                            <select class="form-control id_rkpd_ranwal" name="id_rkpd_ranwal" id="id_rkpd_ranwal"></select>
+                        </div>
+                </div>
+                </form>
+                <div class='tabs-x tabs-above tab-bordered tabs-krajee'>                    
+                    <div id="judul" class="alert alert-info col-md-12" ><b>Daftar Program RKPD</b></div>
+                                <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle"></th>
+                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">No Urut</th>
+                                            <th rowspan="3" style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
+                                            <th colspan="8" style="text-align: center; vertical-align:middle">Rincian Data</th>
+                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align: center; vertical-align:middle">RKPD</th>
+                                            <th colspan="2" style="text-align: center; vertical-align:middle">Program SKPD</th>  
+                                            <th colspan="2" style="text-align: center; vertical-align:middle">Kegiatan SKPD</th>
+                                            <th colspan="2" style="text-align: center; vertical-align:middle">Aktivitas SKPD</th>
+                                        </tr>
+                                        <tr>
+                                            <th width="15px" style="text-align: center; vertical-align:middle">Pagu</th>
+                                            <th width="50px" style="text-align: center; vertical-align:middle">Pelaksana</th>                                            
+                                            <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
+                                            <th width="50px" style="text-align: center; vertical-align:middle">Pagu</th>
+                                            <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
+                                            <th width="50px" style="text-align: center; vertical-align:middle">Pagu</th>
+                                            <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
+                                            <th width="50px" style="text-align: center; vertical-align:middle">Pagu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                        
+                                    </tbody>
+                                </table>   
+                            </div>
+                        </div>
                     </div>
-                </form>
-                <table id="tblDokumen" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Tahun RKPD</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Nomor Dokumen</th>
-                        <th style="text-align: center; vertical-align:middle">Uraian Dokumen</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Status</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-                </div>
-                <div role="tabpanel" class="tab-pane fade in" id="loaddata" >
-                <br>
-                <form class="form-horizontal" role="form" autocomplete='off' action="#" method="" >
-                <div class="table-responsive">
-                  <table class="table table-condensed table-bordered">
-                    <tbody>
-                      <tr>
-                        <td width="15%" style="text-align: left; vertical-align:top;">Tahun RKPD</td>
-                        <td style="text-align: left; vertical-align:top;"><label id="tahun_rkpd_display" align='left'></label></td>
-                      </tr>
-                      <tr>
-                        <td width="15%" style="text-align: left; vertical-align:top;">Nomor Dokumen</td>
-                        <td style="text-align: left; vertical-align:top;"><label id="no_dokumen_display" align='left'></label></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td width="15%" style="text-align: left; vertical-align:top;"></td>
-                        <td style="text-align: left; vertical-align:top;">
-                        <a type="button" id="btnProses" class="btn btn-labeled btn-sm btn-primary" data-dismiss="modal"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data dari Forum Perangkat Daerah</a>
-                      </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                </form>
-                <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                        <th rowspan="2" width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
-                        <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
-                        <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RPJMD</th>
-                        <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RKPD</th>
-                        <th colspan="4" width="20%" style="text-align: center; vertical-align:middle">Perangkat Daerah</th>
-                        <th rowspan="2" width="50px" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                      <tr>
-                        <th width="5%" style="text-align: center; vertical-align:middle">Unit</th>
-                        <th width="5%" style="text-align: center; vertical-align:middle">Program</th>
-                        <th width="5%" style="text-align: center; vertical-align:middle">Kegiatan</th>
-                        <th width="5%" style="text-align: center; vertical-align:middle">Aktivitas</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-                </div>
-              </div>
-            </div>
-          </div>
+                </div> 
         </div>
-      </div>
     </div>
 </div>
 
-<div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
+<div id="cariReload" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
+  <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="text-center">
-          <h3><strong>Sedang proses...</strong></h3>
-          <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:grey;"></i>
-        </div>
+      <div class="modal-header">
+        <h3 class="modal-title" >Daftar Program RKPD yang belum di-Load ke Rancangan RKPD</h3>
       </div>
+      <div class="modal-body">
+      <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
+        <div class="form-group">
+        <div class="col-sm-12">
+          <table id='tblReProses' class="table display compact table-striped table-bordered" width="100%">
+              <thead>
+                    <tr>
+                      <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>
+        </div>
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-sm-2 text-left">
+                <button id="btnProsesAll" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Proses Load</button>
+            </div>
+            <div class="col-sm-10 text-right">
+                <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+        </div>
+      </div> 
     </div>
   </div>
 </div>
 
-<div id="TambahDokumen" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" >
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" autocomplete='off' action="" method="post" onsubmit="return false;">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="id_dokumen_rkpd" id="id_dokumen_rkpd">        
-          <div class="form-group">
-            <label for="tahun_rkpd" class="col-sm-3 control-label" align='left'>Tahun RKPD :</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control" id="tahun_rkpd" name="tahun_rkpd" required="required" disabled style="text-align: center;">
-            </div> 
-          </div>
-          <div class="form-group has-feedback">
-            <label for="tanggal_rkpd" class="col-sm-3 control-label" align='left'>Tanggal Dokumen :</label>
-            <input type="hidden" name="tanggal_rkpd" id="tanggal_rkpd">
-            <div class="col-sm-4">
-                <input type="text" class="form-control datepicker" id="tanggal_rkpd_x" name="tanggal_rkpd_x" style="text-align: center;">
-                <i class="fa fa-calendar fa-fw fa-lg text-primary form-control-feedback"></i>              
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="nomor_rkpd" class="col-sm-3 control-label" align='left'>Nomor Dokumen :</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" id="nomor_rkpd" name="nomor_rkpd" required="required">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="uraian_perkada" class="col-sm-3 control-label" align='left'>Uraian Dokumen :</label>
-            <div class="col-sm-8">
-              <textarea type="text" class="form-control" id="uraian_perkada" name="uraian_perkada" required="required" rows="3"></textarea>
-            </div>
-          </div>                              
-          <div class="form-group">
-            <label for="id_unit_perencana" class="col-sm-3 control-label" align='left'>Unit Perencana :</label>
-            <div class="col-sm-8">
-              <input type="hidden" class="form-control" name="id_unit_perencana" id="id_unit_perencana">
-              <input type="text" class="form-control" name="id_unit_perencana_display" id="id_unit_perencana_display" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="nama_tandatangan" class="col-sm-3 control-label" align='left'>Nama Kepala Bappeda :</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" id="nama_tandatangan" name="nama_tandatangan">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="nip_tandatangan" class="col-sm-3 control-label" align='left'>NIP Kepala Bappeda :</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control nip" id="nip_tandatangan_display" name="nip_tandatangan_display" maxlength="18" style="text-align: center;">
-              <input type="hidden" class="form-control" id="nip_tandatangan" name="nip_tandatangan">
-            </div>
-          </div>    
-        </form>
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-sm-2 text-left">
-            <button type="button" id="btnDelDokumen" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="fa fa-trash-o fa-lg fa-fw"></i></span>Hapus</button>
-          </div>
-          <div class="col-sm-10 text-right">
-            <div class="ui-group-buttons">
-              <button id="btnDokumen" type="button" class="btn btn-success btn-labeled" data-dismiss="modal">
-              <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-            <div class="or"></div>
-              <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-              <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-            </div>
-          </div>
+<div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+        {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
+        <div class="text-center">
+          <h3><strong>Sedang proses...</strong></h3>
+          <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:grey;"></i>
+        </div>
         </div>
       </div>
-      </div>      
     </div>
-</div>
+  </div>
 
-<div id="HapusDokumen" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
+  <!--Modal Status Perkada -->
+  <div id="StatusProgram" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4>Hapus Dokumen Rancangan RKPD</h4>
+            <h4 class="modal-title">Posting</h4>
         </div>
         <div class="modal-body">
-            <input type="hidden" id="id_dokumen_hapus" name="id_dokumen_hapus">
-            <div class="alert alert-danger">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-danger" aria-hidden="true"></i>
-                Yakin akan menghapus Dokumen Rancangan RKPD dengan nomor dokumen: <strong><span class="ur_dokumen_del"></span></strong>  ?
+            <div class="alert alert-success deleteContent">
+                <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true" style="color: red"></i>
+                Yakin akan mem-Posting Program : <strong><span class="uraian_posting"></span></strong> ?                
                 <br>
                 <br>
-                <strong>Catatan : Penghapusan dokumen ini akan menghapus data Rancangan RKPD yang telah diproses !!!!</strong>
+                <strong>Proses Posting Tidak dapat diulangi, Cek lagi sebelum memposting ! </strong> 
+            <span class="hidden id_forum_posting"></span>
           </div>
-        </div>
           <div class="modal-footer">
-            <div class="ui-group-buttons">
-            <button type="button" id="btnDelDokumen1" class="btn btn-labeled btn-danger" data-dismiss="modal" ><span class="btn-label"><i class="fa fa-trash-o fa-lg fa-fw"></i></span> Hapus</button>
-            <div class="or"></div>
-            <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
-            </div>
-          </div>
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-sm btn-success actionBtn btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="glyphicon glyphicon-check"></i></span>Posting</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
         </div>
       </div>
     </div>
+  </div>
 
 @endsection
 
 @section('scripts')
-<script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {
+<script>
 
-// function createPesan(message, type) {
-//     var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
-//     html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-//     html += message;
-//     html += '</div>';    
-//     $(html).hide().prependTo('#pesan').slideDown();
-// };
+
+$(document).ready(function(){
+
+$('[data-toggle="popover"]').popover();
+
 
 function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += message;
+    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
+    html += '<p><strong>'+message+'</strong></p>';
     html += '</div>';    
-    $(html).hide().prependTo('#pesan').slideDown();    
+    $(html).hide().prependTo('#pesan').slideDown();
 
     setTimeout(function() {
-            $('#pesanx').removeClass('in');
+        $('#pesanx').removeClass('in');
          }, 3500);
 };
 
-function formatTgl(val_tanggal){
-  var formattedDate = new Date(val_tanggal);
-  var d = formattedDate.getDate();
-  var m = formattedDate.getMonth();
-  var y = formattedDate.getFullYear();
-  var m_names = new Array("Januari", "Februari", "Maret", 
-    "April", "Mei", "Juni", "Juli", "Agustus", "September", 
-    "Oktober", "November", "Desember")
-
-  var tgl= d + " " + m_names[m] + " " + y;
-  return tgl;
-}
 
 $('.page-alert .close').click(function(e) {
-  e.preventDefault();
-  $(this).closest('.page-alert').slideUp();
+        e.preventDefault();
+        $(this).closest('.page-alert').slideUp();
+    });
+
+$.ajax({
+
+    type: "GET",
+    url: '../renja/getUnitRenja',
+    dataType: "json",
+
+    success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_unit"]').empty();
+          $('select[name="id_unit"]').append('<option value="-1">---Pilih Unit---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="id_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
+          }
+          }
 });
+var programrkpd;
+function loadProgram() {
+    programrkpd = $('#tblProgramRKPD').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  dom : 'BFRtIp',
+                  "autoWidth": false,
+                  "ajax": {"url": "./getDataRekap"},
+                  "language": {
+                          "decimal": ",",
+                          "thousands": "."},
+                  'columnDefs': [
+                     { 'width': 10,
+                        'targets': 0,
+                        'checkboxes': {'selectRow': true } },
+                     { "targets": 1, "width": 10 }
+                    ],
+                  'select': { 'style': 'multi' },
+                  "columns": [
+                        { data: 'id_rkpd_rancangan', sClass: "dt-center",width:"3px"},
+                        { data: 'no_urut', sClass: "dt-center",width:"5px"},
+                        { data: 'uraian_program_rpjmd'},
+                        { data: 'pagu_ranwal', sClass: "dt-center",width:"20px",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_unit', sClass: "dt-center",width:"5px",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},                            
+                        { data: 'jml_prog_renja', sClass: "dt-center",width:"5px",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
+                        { data: 'pagu_prog_renja', sClass: "dt-center",width:"20px",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_kegiatan', sClass: "dt-center",width:"5px",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
+                        { data: 'pagu_kegiatan', sClass: "dt-center",width:"20px",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'jml_aktivitas', sClass: "dt-center",width:"5px",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
+                        { data: 'pagu_aktivitas', sClass: "dt-center",width:"5px",
+                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center",width:"50px" }
+                      ],
+                  "order": [[0, 'asc']],
+                  "bDestroy": true
+    });
+};
 
-$('#tahun_rkpd').number(true,0,',','');
+loadProgram();
 
-$('#tanggal_rkpd_x').datepicker({
-  altField: "#tanggal_rkpd",
-  altFormat: "yy-mm-dd", 
-  dateFormat: "dd MM yy"
-});
-
-$('#btn').click(function() {
-    $("#tanggal_rkpd_x").focus();
-  });
-
-function buatNip(string){
-  return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
-}
-
-function nilaiNip(string){
-  return string.replace(/\D/g,'').substring(0, 20);
-}
-
-var angkaNip = document.getElementsByClassName('nip');
-
-angkaNip.onkeydown = function(e) {
-  if(!((e.keyCode > 95 && e.keyCode < 106)
-    || (e.keyCode > 47 && e.keyCode < 58) 
-    )) { return false; }
-}
-
-$("input[name='nip_tandatangan_display']").on("keyup", function(){
-    $("input[name='nip_tandatangan']").val(nilaiNip(this.value));
-    this.value = buatNip($("input[name='nip_tandatangan']").val());
-})
-
-var dokumen_tbl = $('#tblDokumen').DataTable({
+var ReProses_Tbl;
+function loadReProses($tahun){
+  ReProses_Tbl = $('#tblReProses').DataTable({
         processing: true,
         serverSide: true,
         "autoWidth": false,
-        "ajax": {"url": "./getDataDokumen"},
+        "ajax": {"url": "./getSelectProgram/"+$tahun},
         "language": {
                 "decimal": ",",
                 "thousands": "."},
+        'columnDefs': [
+           { 'width': 10,
+              'targets': 0,
+              'checkboxes': {'selectRow': true } },
+           { "targets": 1, "width": 10 }
+          ],
+        'select': { 'style': 'multi' },
         "columns": [
-              { data: 'no_urut', sClass: "dt-center"},
-              { data: 'tahun_rkpd', sClass: "dt-center"},
-              { data: 'nomor_rkpd'},
-              { data: 'uraian_perkada'},
-              { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",width:"15px",
-                render: function(data, type, row,meta) {
-                return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
-              }},
-              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+              { data: 'id_rkpd_ranwal', sClass: "dt-center", searchable: false, orderable:false,},
+              { data: 'urut',sClass: "dt-center"},
+              { data: 'uraian_program_rpjmd'},
+              { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
             ],
             "order": [[0, 'asc']],
             "bDestroy": true
       });
-
-var id_dokumen_temp, tahun_rkpd_temp;
-$('#tblDokumen tbody').on( 'dblclick', 'tr', function () {
-    var data = dokumen_tbl.row(this).data();
-    id_dokumen_temp=data.id_dokumen_rkpd;
-    tahun_rkpd_temp=data.tahun_rkpd;
-
-    if (data.flag == 1){
-      document.getElementById("btnProses").style.visibility='hidden';
-    } else {
-      document.getElementById("btnProses").style.visibility='visible';
-    }
-
-    document.getElementById("tahun_rkpd_display").innerHTML = data.tahun_rkpd;
-    document.getElementById("no_dokumen_display").innerHTML = data.nomor_rkpd;
-
-    $('.nav-tabs a[href="#loaddata"]').tab('show');
-    // LoadRekapLoad(id_dokumen_temp);
-
-  });
-
-$(document).on('click', '#btnRekapRkpd', function() {
-  
-  var data = dokumen_tbl.row( $(this).parents('tr') ).data();
-
-  id_dokumen_temp=data.id_dokumen_rkpd;
-  tahun_rkpd_temp=data.tahun_rkpd;
-
-    if (data.flag == 1){
-      document.getElementById("btnProses").style.visibility='hidden';
-    } else {
-      document.getElementById("btnProses").style.visibility='visible';
-    }
-
-    document.getElementById("tahun_rkpd_display").innerHTML = data.tahun_rkpd;
-    document.getElementById("no_dokumen_display").innerHTML = data.nomor_rkpd;
-
-    $('.nav-tabs a[href="#loaddata"]').tab('show');
-    // LoadRekapLoad(id_dokumen_temp);
-});
+};
 
 $(document).on('click', '.btnProses', function() {
-
-$.ajaxSetup({
-    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    loadReProses($('#tahun_rkpd').val());
+    $('#cariReload').modal('show');
 });
 
-$('#ModalProgress').modal('show');
-$.ajax({
+$(document).on('click', '#btnReLoad', function() {
+  var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
+  var tahun=$('#tahun_rkpd').val();
+  var id_rkpd=data.id_rkpd_ranwal;
+
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $('#ModalProgress').modal('show');
+    $('#cariReload').modal('hide'); 
+
+    $.ajax({
         type: 'POST',
-        url: './prosesTransferData',
+        url: './importData',
         data: {
-            '_token': $('input[name=_token]').val(),
-            'tahun_rkpd' : $('#tahun_rkpd').val(),
-        },
-        success: function(data) {
-          createPesan("Data Berhasil di Load","success");
-          $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
-});
+          '_token': $('input[name=_token]').val(),
+          'id_rkpd_ranwal' : id_rkpd,
+      },
+      success: function(data) {
+        createPesan(data.pesan,"success");
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
+        $('#ModalProgress').modal('hide');
+      },
+      error: function(data){
+        createPesan(data.pesan,"danger");
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
+        $('#ModalProgress').modal('hide');
+      }
+    });
 });
 
-$(document).on('click', '.btnUnload', function() {
+$(document).on('click', '#btnProsesAll', function() {
+  var rows_selected = ReProses_Tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = ReProses_Tbl.rows({ selected: true }).data(); 
+  var counts_data = ReProses_Tbl.rows({ selected: true }).count();  
+  
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $('#ModalProgress').modal('show');
+  $('#cariReload').modal('hide');  
+
+  $.each(rows_selected, function(index, rowId){
+    var id_rkpd=rowId;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });         
+    $.ajax({
+        type: 'POST',
+        url: './importData',
+        data: {
+          '_token': $('input[name=_token]').val(),
+          'id_rkpd_ranwal' : id_rkpd,
+      },
+      success: function(data) {
+        createPesan(data.pesan,"success");
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
+        $('#ModalProgress').modal('hide');
+      },
+      error: function(data){
+        createPesan(data.pesan,"danger");
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
+        $('#ModalProgress').modal('hide');
+      }
+    });
+  });
+  e.preventDefault();
+});
+
+$(document).on('click', '#btnUnload', function() {
+
+  var data = programrkpd.row( $(this).parents('tr') ).data();
+
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -416,194 +394,34 @@ $(document).on('click', '.btnUnload', function() {
 
     $.ajax({
         type: 'POST',
-        url: './unLoadProgramRkpd',
+        url: './unLoadData',
         data: {
             '_token': $('input[name=_token]').val(),
-            'tahun' : $(this).data('tahun_rkpd'),
-            'id_ranwal' : $(this).data('id_rkpd_ranwal'),
+            'id_rkpd_rancangan' : data.id_rkpd_rancangan
         },
         success: function(data) {
             createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
-        error: function(data){
-            createPesan(data.pesan,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+        error: function(err){
+            createPesan(err,"danger");
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });
+
 });
 
-$(document).on('click', '#btnAddDokumen', function() {
-  $.ajax({
-    type: "GET",
-    url: './getDataPerencana',
-    dataType: "json",
-    success: function(data) {
-      $('#btnDokumen').removeClass('editDokumen');
-      $('#btnDokumen').addClass('addDokumen');
-      $('.modal-title').text('Tambah Dokumen Penyusunan Rancangan RKPD');
-      $('.form-horizontal').show();
+$(document).on('click', '.btnPosting', function() {
 
-      $('#id_dokumen_rkpd').val(null);
-      $('#tahun_rkpd').val({{Session::get('tahun')}});
-      $('#tanggal_rkpd').val(null);
-      $('#tanggal_rkpd_x').val(null);
-      $('#nomor_rkpd').val(null);
-      $('#uraian_perkada').val();
-      $('#id_unit_perencana').val(data[0].unit_perencanaan);
-      $('#id_unit_perencana_display').val(data[0].nm_unit);
-      $('#nama_tandatangan').val(data[0].nama_kepala_bappeda);
-      
-      if(data[0].nip_kepala_bappeda==null){
-        $('#nip_tandatangan_display').val(null);
-      } else {
-        $('#nip_tandatangan_display').val(buatNip(data[0].nip_kepala_bappeda));
-      };
-      
-      $('#nip_tandatangan').val(data[0].nip_kepala_bappeda);
+    $('.uraian_posting').html($(this).data('uraian_program'));
+    $('.id_forum_posting').text($(this).data('id_forum_rkpdprog'));
 
-      $('#btnDelDokumen').hide();
-      $('#btnDokumen').show();
-      $('#TambahDokumen').modal('show');
-    }
-  });
+    $('#StatusProgram').modal('show');
+
 });
-
-$('.modal-footer').on('click', '.addDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './addDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'tahun_rkpd': $('#tahun_rkpd').val(),
-        'tanggal_rkpd': $('#tanggal_rkpd').val(),
-        'nomor_rkpd': $('#nomor_rkpd').val(),
-        'uraian_perkada': $('#uraian_perkada').val(),
-        'id_unit_perencana': $('#id_unit_perencana').val(),
-        'nama_tandatangan': $('#nama_tandatangan').val(),
-        'nip_tandatangan': $('#nip_tandatangan').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-$(document).on('click', '#btnEditDokumen', function() {
-
-  var data = dokumen_tbl.row( $(this).parents('tr') ).data();
-
-      $('#btnDokumen').removeClass('addDokumen');
-      $('#btnDokumen').addClass('editDokumen');
-      $('.modal-title').text('Ubah Dokumen Penyusunan Rancangan RKPD');
-      $('.form-horizontal').show();
-
-      $('#id_dokumen_rkpd').val(data.id_dokumen_rkpd);
-      $('#tahun_rkpd').val(data.tahun_rkpd);
-      $('#tanggal_rkpd').val(data.tanggal_rkpd);
-      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_rkpd));
-      $('#nomor_rkpd').val(data.nomor_rkpd);
-      $('#uraian_perkada').val(data.uraian_perkada);
-      $('#id_unit_perencana').val(data.id_unit_perencana);
-      $('#id_unit_perencana_display').val(data.nm_unit);
-      $('#nama_tandatangan').val(data.nama_tandatangan);      
-      $('#nip_tandatangan').val(data.nip_tandatangan);
-      
-      if(data.nip_tandatangan==null){
-        $('#nip_tandatangan_display').val(null);
-      } else {
-        $('#nip_tandatangan_display').val(buatNip(data.nip_tandatangan));
-      };
-
-      if(data.flag==1){
-        $('#btnDelDokumen').hide();
-        $('#btnDokumen').hide();
-      } else {
-        $('#btnDelDokumen').show();
-        $('#btnDokumen').show();
-      };
-
-      $('#TambahDokumen').modal('show');
-});
-
-$('.modal-footer').on('click', '.editDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './editDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_rkpd').val(),
-        'tahun_rkpd': $('#tahun_rkpd').val(),
-        'tanggal_rkpd': $('#tanggal_rkpd').val(),
-        'nomor_rkpd': $('#nomor_rkpd').val(),
-        'uraian_perkada': $('#uraian_perkada').val(),
-        'id_unit_perencana': $('#id_unit_perencana').val(),
-        'nama_tandatangan': $('#nama_tandatangan').val(),
-        'nip_tandatangan': $('#nip_tandatangan').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-$(document).on('click', '#btnDelDokumen', function() {
-  
-  $('#btnDelDokumen1').removeClass('delDokumen');
-  $('#btnDelDokumen1').addClass('delDokumen');
-  $('.form-horizontal').show();
-
-  $('#id_dokumen_hapus').val($('#id_dokumen_rkpd').val());
-  $('.ur_dokumen_del').html($('#nomor_rkpd').val());
-
-  $('#HapusDokumen').modal('show');
-});
-
-$('.modal-footer').on('click', '.delDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './hapusDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        $('#TambahDokumen').modal('hide');
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-
+    
 });
 </script>
 @endsection

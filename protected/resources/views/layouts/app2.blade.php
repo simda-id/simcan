@@ -18,15 +18,14 @@ use hoaaah\LaravelMenu\Menu;
 
     <title>simd@Perencanaan</title>
 
-    <!-- Styles -->
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/1417cae13b.css"> --}}
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
     <style>
         h1.padding {
         padding-right: 1cm;
@@ -109,6 +108,10 @@ use hoaaah\LaravelMenu\Menu;
                                     ['label' => 'Modul PPAS', 'icon'=>'fa fa-list-alt fa-fw fa-lg' ,'url' => '#'],
                                     ['label' => 'Load Data RKPD', 'url' => '/ppas/loadData', 'visible' => $akses->get(701)],
                                     ['label' => 'Penyusunan PPAS', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Validasi PPAS', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Proses RAPBD', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Finalisasi RAPBD', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Transfer Data ke Simda Keuangan', 'url' => '/ppas', 'visible' => $akses->get(702)],
                                 ]
                             ]);
                         ?>
@@ -125,7 +128,8 @@ use hoaaah\LaravelMenu\Menu;
         {{-- <h1 style="text-align:right; color:white; font-family:verdana" class="padding"><strong>KOTA SIMULASI </strong></h1>
         <h1 style="text-align:right; color:white; font-family:verdana" class="padding"><strong>TAHUN 2017 </strong></h1> --}}
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>
@@ -135,10 +139,12 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('/js/jquery.min.js')}}"></script>
         <script src="{{ asset('/js/jquery-ui.js')}}"></script>
         <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('/js/handlebars.js')}}"></script>
         <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
+        <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
+        <script src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

@@ -22,6 +22,8 @@
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
+
+    
     
     @yield('head')
     <style>

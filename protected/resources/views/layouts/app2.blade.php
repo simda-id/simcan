@@ -109,6 +109,9 @@ use hoaaah\LaravelMenu\Menu;
                                     ['label' => 'Load Data RKPD', 'url' => '/ppas/loadData', 'visible' => $akses->get(701)],
                                     ['label' => 'Penyusunan PPAS', 'url' => '/ppas', 'visible' => $akses->get(702)],
                                     ['label' => 'Validasi PPAS', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Proses RAPBD', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Finalisasi RAPBD', 'url' => '/ppas', 'visible' => $akses->get(702)],
+                                    ['label' => 'Transfer Data ke Simda Keuangan', 'url' => '/ppas', 'visible' => $akses->get(702)],
                                 ]
                             ]);
                         ?>
@@ -125,7 +128,8 @@ use hoaaah\LaravelMenu\Menu;
         {{-- <h1 style="text-align:right; color:white; font-family:verdana" class="padding"><strong>KOTA SIMULASI </strong></h1>
         <h1 style="text-align:right; color:white; font-family:verdana" class="padding"><strong>TAHUN 2017 </strong></h1> --}}
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>

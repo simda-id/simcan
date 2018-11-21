@@ -3,6 +3,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
 @extends('layouts.app')
+<style>
+  #radioBtn .notActive{
+    color: #b5b6b7;
+    background-color: #fff;
+  }
+</style>
 
 @section('content')
 <div class="container-fluid">
@@ -68,7 +74,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <th rowspan="3" style="text-align: center; vertical-align:middle">Nama Program</th>
                                             <th colspan="4" style="text-align: center; vertical-align:middle">Rincian Data</th>
                                             <th width="15px" rowspan="3" style="text-align: center; vertical-align:middle">Status</th>
-                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th>
+                                            {{-- <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th> --}}
                                         </tr>
                                         <tr>
                                             <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Program SKPD</th>  
@@ -78,7 +84,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <tr>                                            
                                             <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
                                             <th width="50px" style="text-align: center; vertical-align:middle">Pagu Total</th>
-                                            {{-- <th width="50px" style="text-align: center; vertical-align:middle">Pagu Musrenbang</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>                                        
@@ -110,12 +115,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th width="5px" rowspan="2" style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Program</th>
+                                                <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Pagu Program</th>
                                                 <th colspan="3" style="text-align: center; vertical-align:middle">Kegiatan</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
+                                              <th width='10%' style="text-align: center; vertical-align:middle">Rancangan Renja</th>
+                                              <th width='10%' style="text-align: center; vertical-align:middle">Forum</th>
                                               <th width='5%' style="text-align: center; vertical-align:middle">Jumlah</th>
                                               <th width='5%' style="text-align: center; vertical-align:middle">Reviu</th>
                                               <th width='10%' style="text-align: center; vertical-align:middle">Pagu</th>
@@ -462,1885 +469,34 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 
-<div id="ModalProgRenja" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form name="frmProgRenja" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_forum_program" name="id_forum_program">
-                <input type="hidden" id="id_forum_rkpdprog_progrenja" name="id_forum_rkpdprog_progrenja">
-                <input type="hidden" id="tahun_forum_progrenja" name="tahun_forum_progrenja">
-                <input type="hidden" id="id_unit_progrenja" name="id_unit_progrenja">
-                <input type="hidden" id="sumber_data_progrenja" name="sumber_data_progrenja">
-                <input type="hidden" id="status_data_progrenja" name="status_data_progrenja">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control nomor" name="no_urut_progrenja" id="no_urut_progrenja">
-                  </div>
-                  </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">Jenis Belanja :</label>
-                  <div class="col-sm-5">
-                    <select class="form-control" name="jenis_belanja" id="jenis_belanja">
-                      <option value="0">Belanja Langsung</option>
-                      <option value="1">Pendapatan</option>
-                      <option value="2">Belanja Tidak Langsung</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Program RKPD:</label>
-                  <div class="col-sm-8">
-                    <textarea type="name" class="form-control" name="uraian_program_renstra" id="uraian_program_renstra" rows="3" disabled></textarea>
-                  </div>
-                  <input type="hidden" id="id_renja_program" name="id_renja_program">
-                  <input type="hidden" id="id_program_renstra" name="id_program_renstra">
-                  {{-- <span class="btn btn-sm btn-primary btnCariProgramRenstra" id="btnCariProgramRenstra" name="btnCariProgramRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span> --}}
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Program Referensi:</label>
-                  <div class="col-sm-8">
-                    <textarea type="name" class="form-control ur_program_ref" name="ur_program_ref" id="ur_program_ref" rows="3" disabled></textarea>
-                  </div>
-                  <input type="hidden" id="id_program_ref" name="id_program_ref">
-                  <span class="btn btn-sm btn-primary btnCariProgRef" id="btnCariProgRef" name="btnCariProgRef"><i class="fa fa-search fa-fw fa-lg"></i></span>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Program Forum:</label>
-                  <div class="col-sm-8">
-                    <textarea type="name" class="form-control ur_program_renja" name="ur_program_renja" id="ur_program_renja" rows="3" disabled></textarea>
-                  </div>
-                </div>
-                <div class="form-group hidden">
-                  <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu Renja :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_renja_program" name="pagu_renja_program" disabled >
-                  </div>
-                  <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu Forum :</label>
-                  <div class="col-sm-3">
-                      <input type="text" class="form-control number" id="pagu_forum_progrenja" name="pagu_forum_progrenja" required="required" >                    
-                  </div>
-                </div>
-                <div class="form-group idStatusPelaksanaan" id="idStatusProgRenja">
-                  <label for="status_pelaksanaan_progrenja" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
-                  <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="0">Dilaksanakan
-                      </label>
-                      <label class="radio-inline hidden">
-                        <input type="radio" class="sp_progrenja " name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="1">Dimajukan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="2">Ditunda
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="3">Dibatalkan
-                      </label>
-                      <label class="radio-inline hidden" id="sp_progrenja4">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="4">Baru
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_progrenja" name="status_pelaksanaan_progrenja" id="status_pelaksanaan_progrenja" value="5">Non APBD
-                      </label>
-                  </div>
-                </div>
-                <div class="form-group KetPelaksanaanProgRenja">
-                  <label for="keterangan_status_program" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control keterangan_status_progrenja" name="keterangan_status_progrenja" id="keterangan_status_progrenja" rows="3"></textarea>
-                  </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapus">
-                        <button class="btn btn-sm btn-danger btn-labeled btnHapusProgRenja"><span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                         <button type="button" class="btn btn-sm btn-labeled btn-success btnProgRenja" data-dismiss="modal"><span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span> Simpan</button>
-                         <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span> Tutup</button>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('forumskpd.program');
+@include('forumskpd.indikatorprogram');
+@include('forumskpd.kegiatan');
+@include('forumskpd.indikatorkegiatan');
+@include('forumskpd.pelaksana');
+@include('forumskpd.aktivitas');
+@include('forumskpd.lokasi');
+@include('forumskpd.belanja');
 
-  <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title"></h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" id="id_indikator_program_renja" name="id_indikator_program_renja">
-              <input type="hidden" id="id_renja_program_1" name="id_renja_program_1">
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id">No Urut :</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control number" id="no_urut_indikator" disabled>
-                </div>
-                <div class="col-sm-3 chkIndikator hidden">
-                    <label class="checkbox-inline">
-                    <input class="checkIndikator" type="checkbox" name="checkIndikator" id="checkIndikator" value="1"> Telah Direviu</label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Uraian Indikator Program Renja:</label>
-                <div class="col-sm-8">
-                  <textarea type="name" class="form-control" id="ur_indikator_renja" rows="3" disabled></textarea>
-                </div>
-                <input type="hidden" id="kd_indikator_renja" name="kd_indikator_renja">
-                <span class="btn btn-primary btnCariIndi" id="btnCariIndi" name="btnCariIndi"><i class="fa fa-search fa-fw fa-lg"></i></span>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Program Renja:</label>
-                <div class="col-sm-8">
-                  <textarea type="name" class="form-control" id="ur_tolokukur_renja" rows="3" disabled></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="target_indikator_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renstra :</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control number" id="target_indikator_renstra" name="target_indikator_renstra" disabled >
-                </div>
-                <label for="target_indikator_renja" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renja :</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control number" id="target_indikator_renja" name="target_indikator_renja" required="required" >
-                </div>
-              </div>
-              <div class="form-group">
-              <label class="control-label col-sm-3" for="id_satuan_output">Satuan Indikator :</label>
-                <div class="col-sm-8">
-                  <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
-                </div>
-              </div>
-            </form>
-          </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusIndikator">
-                        <button type="button" class="btn btn-danger btnHapusIndikator btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success btnIndikator btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
+@include('forumskpd.loadBelanjaASB');
+@include('forumskpd.modalcopybelanja');
+@include('forumskpd.hapus');
 
-<div id="HapusProgRenja" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Program SKPD</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_forum_program_hapus" name="id_forum_program_hapus">
-            <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus Program : <strong><span id="ur_progrenja_hapus"></span></strong> ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
-          </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-danger btnDelProgRenja btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-
-<div id="ModalKegiatan" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-              <form name="frmModalKegiatan" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_forum_skpd" name="id_forum_skpd">
-                <input type="hidden" id="id_forum_program_kegrej" name="id_forum_program_kegrej">
-                <input type="hidden" id="tahun_forum_kegrej" name="tahun_forum_kegrej">
-                <input type="hidden" id="id_unit_kegrej" name="id_unit_kegrej">
-                <input type="hidden" id="id_renja" name="id_renja">
-                <input type="hidden" id="id_rkpd_renstra" name="id_rkpd_renstra">
-                <input type="hidden" id="id_program_renstra" name="id_program_renstra">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control nomor" name="no_urut_kegiatan" id="no_urut_kegiatan" disabled>
-                  </div>
-                  <div class="col-sm-3 chkKegiatan hidden">
-                    <label class="checkbox-inline">
-                    <input class="checkKegiatan" type="checkbox" name="checkKegiatan" id="checkKegiatan" value="1"> Telah Direviu</label>
-                  </div>
-                  </div>
-                  <div class="form-group lblKegiatanRenja">
-                    <label class="control-label col-sm-3" for="title">Uraian Kegiatan Renstra:</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_kegiatan_renstra" rows="3" disabled></textarea>
-                    </div>
-                    <input type="hidden" id="id_visi_renstra_keg" name="id_visi_renstra_keg">
-                    <input type="hidden" id="id_misi_renstra_keg" name="id_misi_renstra_keg">
-                    <input type="hidden" id="id_tujuan_renstra_keg" name="id_tujuan_renstra_keg">
-                    <input type="hidden" id="id_sasaran_renstra_keg" name="id_sasaran_renstra_keg">
-                    <input type="hidden" id="id_program_renstra_keg" name="id_program_renstra_keg">
-                    <input type="hidden" id="id_kegiatan_renstra" name="id_kegiatan_renstra">
-                    <span class="btn btn-sm btn-primary btnCariKegiatanRenstra" id="btnCariKegiatanRenstra" name="btnCariKegiatanRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span>
-                  </div>
-                  <div class="form-group urKegiatanRef">
-                    <label class="control-label col-sm-3" for="title">Uraian Kegiatan Referensi:</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_kegiatan_ref" rows="3" disabled></textarea>
-                    </div>
-                    <input type="hidden" id="id_kegiatan_ref" name="id_kegiatan_ref">
-                    <span class="btn btn-sm btn-primary btnCariKegiatanRef" id="btnCariKegiatanRef" name="btnCariKegiatanRef"><i class="fa fa-search fa-fw fa-lg"></i></span>
-                  </div>
-                  <div class="form-group lblKegiatanRenja">
-                    <label class="control-label col-sm-3" for="title">Uraian Kegiatan Forum:</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_kegiatan_forum" rows="3"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group" id="idStatuskegrenja">
-                  <label for="status_pelaksanaan_kegrenja" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
-                  <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="0">Dilaksanakan
-                      </label>
-                      <label class="radio-inline hidden">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="1">Dimajukan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="2">Ditunda
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="3">Dibatalkan
-                      </label>
-                      <label class="radio-inline hidden" id="sp_kegrenja4">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="4">Baru
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_kegrenja" name="status_pelaksanaan_kegrenja" id="status_pelaksanaan_kegrenja" value="5">Non APBD
-                      </label>
-                  </div>
-                </div>
-                <div class="form-group KetPelaksanaan_keg">
-                  <label for="keterangan_status_kegiatan" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control keterangan_status_kegiatan" name="keterangan_status_kegiatan" id="keterangan_status_kegiatan" rows="3" disabled></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                <div class="col-sm-11">
-                    <table class="table table-striped table-bordered table-responsive">
-                        <thead>
-                          <tr>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">
-                              <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Uraian</label>
-                            </td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">
-                              <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Pagu Renstra</label>
-                            </td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">
-                              <label for="pagu_renja_kegiatan" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Pagu Tahun ini</label>
-                            </td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">
-                              <label for="pagu_selanjutnya" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Pagu Tahun selanjutnya</label>
-                            </td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                              <td style="text-align: center; vertical-align:middle;">
-                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Pra-Forum</label>
-                              </td>
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renstra" name="pagu_renstra" style="text-align: right; vertical-align:middle" disabled ></td>
-                          
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renja_kegiatan" name="pagu_renja_kegiatan" style="text-align: right; vertical-align:middle" disabled></td>
-                          
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_selanjutnya" name="pagu_selanjutnya" style="text-align: right; vertical-align:middle" disabled></td>
-                          </tr>
-                          <tr>
-                              <td style="text-align: center; vertical-align:middle;">
-                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Forum</label>
-                              </td>
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renstra_forum" name="pagu_renstra_forum" style="text-align: right; vertical-align:middle" disabled></td>
-                          
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renja_kegiatan_forum" name="pagu_renja_kegiatan_forum" style="text-align: right; vertical-align:middle"></td>
-                          
-                              <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_selanjutnya_forum" name="pagu_selanjutnya_forum" style="text-align: right; vertical-align:middle"></td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-                <div class="form-group hidden">
-                  <label for="pagu_tahun_kegiatan" class="col-sm-3 control-label" align='left'>Pagu Renja :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_tahun_kegiatan" name="pagu_tahun_kegiatan" disabled >
-                  </div>
-                  <label for="pagu_forum" class="col-sm-2 control-label" align='left'>Pagu Forum :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_forum" name="pagu_forum" >
-                  </div>
-                </div>
-                <div class="form-group hidden">
-                  <label for="pagu_musren" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
-                  <div class="col-sm-2">
-                    <div class="input-group">
-                      <input type="text" class="form-control number" id="persen_musren" name="persen_musren">
-                      <span class="input-group-addon" text-align="center"><strong>%</strong></span>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_musren" name="pagu_musren" disabled >
-                  </div>
-                </div>
-              </form>
-            </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                      <button id="btnHapusKegRenja" class="btn btn-sm btn-danger btn-labeled"><span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnKegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-<div id="ModalIndikatorKeg" class="modal fade" role="dialog" data-backdrop="static">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title"></h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" id="id_indikator_kegiatan_renja" name="id_indikator_kegiatan_renja">
-              <input type="hidden" id="id_renja_indikatorKeg" name="id_renja_indikatorKeg">
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id">No Urut :</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control number" id="no_urut_indikatorKeg" disabled>
-                </div>
-                <div class="col-sm-3 chkIndikatorKeg hidden">
-                    <label class="checkbox-inline">
-                    <input class="checkIndikatorKeg" type="checkbox" name="checkIndikatorKeg" id="checkIndikatorKeg" value="1"> Telah Direviu</label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Uraian Indikator Kegiatan Renja:</label>
-                <div class="col-sm-8">
-                  <textarea type="name" class="form-control" id="ur_indikatorKeg_renja" rows="3" disabled></textarea>
-                </div>
-                <input type="hidden" id="kd_indikatorKeg_renja" name="kd_indikatorKeg_renja">
-                <span class="btn btn-primary btnCariIndiKeg" id="btnCariIndiKeg" name="btnCariIndiKeg"><i class="fa fa-search fa-fw fa-lg"></i></span>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Uraian Tolok Ukur Kegiatan Renja:</label>
-                <div class="col-sm-8">
-                  <textarea type="name" class="form-control" id="ur_tolokukur_keg" rows="3" disabled></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="target_indikatorKeg_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renstra :</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control number" id="target_indikatorKeg_renstra" name="target_indikatorKeg_renstra" disabled >
-                </div>
-                <label for="target_indikatorKeg_renja" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renja :</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control number" id="target_indikatorKeg_renja" name="target_indikatorKeg_renja" required="required" >
-                </div>
-              </div>
-              <div class="form-group">
-              <label class="control-label col-sm-3" for="id_satuan_output_keg">Satuan Indikator :</label>
-                <div class="col-sm-8">
-                  <select type="text" class="form-control id_satuan_output_keg" id="id_satuan_output_keg" name="id_satuan_output_keg"></select>
-                </div>
-              </div>
-            </form>
-          </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusIndikatorKeg">
-                        <button type="button" class="btn btn-danger btnHapusIndikatorKeg btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success btnIndikatorKeg btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-
-<div id="HapusKegRenja" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Kegiatan SKPD</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_forum_hapus" name="id_forum_hapus">
-            <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus Kegiatan : <strong><span id="ur_kegrenja_hapus"></span></strong> ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
-          </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnDelKegRenja" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-
-<div id="ModalAktivitas" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-              <form name="frmModalAktivitas" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_forum_aktivitas" name="id_forum_aktivitas">
-                <input type="hidden" id="id_aktivitas" name="id_aktivitas">
-                <input type="hidden" id="tahun_forum_aktivitas" name="tahun_forum_aktivitas">
-                <input type="hidden" id="id_renja_aktivitas" name="id_renja_aktivitas">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control nomor" name="no_urut_aktivitas" id="no_urut_aktivitas">
-                  </div>
-                  <div class="col-sm-3 chkAktivitas hidden">
-                    <label class="checkbox-inline">
-                    <input class="checkAktivitas" type="checkbox" name="checkAktivitas" id="checkAktivitas" value="1"> Telah Direviu</label>
-                  </div>
-                </div>
-                <div class="form-group rbSumberAktivitas"> 
-                  <label for="sumber_aktivitas" class="col-sm-3 control-label" align='left'>Asal Aktivitas :</label>                 
-                  <div class="col-sm-6">
-                    <label>
-                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="0"> Analisis Standar Belanja (ASB) 
-                    </label>
-                    <label>
-                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="1"> Non Analisis Standar Belanja (ASB)
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Uraian Aktivitas :</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3" disabled></textarea>
-                    </div>
-                    <input type="hidden" id="id_aktivitas_asb" name="id_aktivitas_asb">
-                    <span class="btn btn-sm btn-primary btnCariASB" id="btnCariASB" name="btnCariASB"><i class="fa fa-search fa-fw fa-lg"></i></span>
-                </div>
-                <div class="form-group rbJenisAktivitas"> 
-                  <label for="jenis_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Aktivitas :</label>                 
-                  <div class="col-sm-6">
-                    <label class="radio-inline">
-                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="0"> Baru 
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="1"> Lanjutan
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Sumber Dana :</label>
-                    <div class="col-sm-4">
-                        <select type="text" class="form-control sumber_dana" id="sumber_dana" name="sumber_dana"></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="pagu_aktivitas_renja" class="col-sm-3 control-label" align='left'>Pagu Rancangan Renja :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_aktivitas_renja" name="pagu_aktivitas_renja" disabled>
-                  </div>
-                  <label for="pagu_aktivitas" class="col-sm-2 control-label" align='left'>Pagu Forum :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_aktivitas" name="pagu_aktivitas">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="id_satuan_1_aktivitas" class="col-sm-3 control-label" align='left'>Satuan Vol 1 :</label>
-                  <div class="col-sm-3">
-                    <select type="text" class="form-control" id="id_satuan_1_aktivitas" name="id_satuan_1_aktivitas"></select> 
-                  </div>
-                  <label for="id_satuan_2_aktivitas" class="col-sm-2 control-label" align='left'>Satuan Vol 2 :</label>
-                  <div class="col-sm-3">
-                    <select type="text" class="form-control" id="id_satuan_2_aktivitas" name="id_satuan_2_aktivitas"></select> 
-                  </div>
-                </div>
-                <div class="form-group" id="divSatuanUtama"> 
-                  <label for="satuan_utama" class="col-sm-3 control-label" align='left'>Satuan Vol Utama :</label>                 
-                  <div class="col-sm-8">
-                    <label class="radio-inline">
-                      <input type="radio" class="satuan_utama" name="satuan_utama" id="satuan_utama" value="0">
-                      <span class="control-label" id="ur_sat_utama1" align='left'>-</span> 
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" class="satuan_utama" name="satuan_utama" id="satuan_utama" value="1">
-                      <span class="control-label" id="ur_sat_utama2" align='left'>-</span> 
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group" id="divJenisPembahasan"> 
-                  <label for="jenis_pembahasan" class="col-sm-3 control-label" align='left'>Jenis Pembahasan :</label>                 
-                  <div class="col-sm-6">
-                    <label class="radio-inline">
-                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="0"> Non Musrenbang 
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="1"> Musrenbang
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group" id="divPaguMusrenbang">
-                  <label for="pagu_musren_aktivitas" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
-                  <div class="col-sm-2">
-                  <div class="input-group">
-                    <input type="text" class="form-control number" id="persen_musren_aktivitas" name="persen_musren_aktivitas">
-                    <span class="input-group-addon" text-align="center"><strong>%</strong></span>
-                  </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_musren_aktivitas" name="pagu_musren_aktivitas" disabled >
-                  </div>
-                </div>                
-                {{-- <div class="form-group" id="divSatuanPublik hidden">
-                    <label class="control-label col-sm-3" for="title">Satuan Output Musrenbang :</label>
-                    <div class="col-sm-4">
-                        <select type="text" class="form-control" id="id_satuan_publik" name="id_satuan_publik"></select>
-                    </div>
-                </div> --}}
-                <div class="form-group" id="idStatusPelaksanaanAktivitas">
-                  <label for="status_pelaksanaan_aktivitas" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
-                  <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_aktivitas" name="status_pelaksanaan_aktivitas" id="status_pelaksanaan_aktivitas" value="0">Dilaksanakan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_aktivitas" name="status_pelaksanaan_aktivitas" id="status_pelaksanaan_aktivitas" value="1">Tidak Dilaksanakan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_aktivitas" name="status_pelaksanaan_aktivitas" id="status_pelaksanaan_aktivitas" value="2">Non APBD
-                      </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="keterangan_status_aktivitas" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="keterangan_status_aktivitas" id="keterangan_status_aktivitas" rows="3"></textarea>
-                  </div>
-                </div>
-              </form>
-            </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idHapusAktivitas">
-                        <button type="button" id="btnHapusAktivitas" class="btn btn-sm btn-danger btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnAktivitas" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-<div id="HapusAktivitas" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Aktivitas Kegiatan SKPD</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_aktivitas_hapus" name="id_aktivitas_hapus">
-            <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus Aktivitas : <strong><span id="ur_aktivitas_hapus"></span></strong> ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
-          </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnDelAktivitas" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-
-<div id="ModalPelaksana" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form name="frmModalPelaksana" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" id="id_pelaksana_forum" name="id_pelaksana_forum">
-            <input type="hidden" id="id_forum_pelaksana" name="id_forum_pelaksana">
-            <input type="hidden" id="id_aktivitas_pelaksana" name="id_aktivitas_pelaksana">
-            <input type="hidden" id="tahun_forum_pelaksana" name="tahun_forum_pelaksana">
-            <div class="form-group">
-              <label class="control-label col-sm-3" for="id">No Urut :</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control nomor" id="no_urut_pelaksana">
-              </div>
-              <div class="col-sm-3 chkPelaksana hidden">
-                    <label class="checkbox-inline">
-                    <input class="checkPelaksana" type="checkbox" name="checkPelaksana" id="checkPelaksana" value="1"> Telah Direviu</label>
-              </div>
-            </div>
-            <div class="form-group" >
-              <label class="control-label col-sm-3" for="title">Sub Unit Pelaksana :</label>
-              <div class="col-sm-8">
-              <div class="input-group">
-                <input type="hidden" id="id_subunit_pelaksana" name="id_subunit_pelaksana">
-                <input type="name" class="form-control" id="subunit_pelaksana" rows="2" disabled>
-                <div class="input-group-btn">
-                    <btn class="btn btn-primary" id="btnCariSubUnit" name="btnCariSubUnit"><i class="fa fa-search"></i></btn>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="form-group" id="idStatusPelaksanaanPelaksana">
-                  <label for="status_pelaksanaan_pelaksana" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
-                  <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_pelaksana" name="status_pelaksanaan_pelaksana" id="status_pelaksanaan_pelaksana" value="0">Dilaksanakan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_pelaksana" name="status_pelaksanaan_pelaksana" id="status_pelaksanaan_pelaksana" value="1">Tidak Dilaksanakan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_pelaksana" name="status_pelaksanaan_pelaksana" id="status_pelaksanaan_pelaksana" value="2">Non APBD
-                      </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="keterangan_status_pelaksana" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="keterangan_status_pelaksana" id="keterangan_status_pelaksana" rows="3"></textarea>
-                  </div>
-                </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Lokasi Penyelenggaraan :</label>
-                <div class="col-sm-8">
-                  <div class="input-group">
-                    <input type="hidden" id="id_lokasi_pelaksana" name="id_lokasi_pelaksana">
-                    <input type="name" class="form-control" id="nm_lokasi_pelaksana" rows="2" disabled>
-                    <div class="input-group-btn">
-                      <btn class="btn btn-primary" id="btnCariLokasi" name="btnCariLokasi"><i class="fa fa-search"></i></btn>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </form>
-        </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idHapusPelaksana">
-                        <button id="btnHapusPelaksana" type="button" class="btn btn-sm btn-danger btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button id="btnPelaksana" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<div id="HapusPelaksana" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Pelaksana Aktivitas Kegiatan SKPD</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_pelaksana_hapus" name="id_pelaksana_hapus">
-            <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus Sub Unit : <strong><span id="ur_pelaksana_hapus"></span></strong> sebagai pelaksana aktivitas ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
-          </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnDelPelaksana" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-
-<div id="ModalLokasi" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form name="frmModalLokasi" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" id="id_pelaksana_lokasi" name="id_pelaksana_lokasi">
-            <input type="hidden" id="id_lokasi_forum" name="id_lokasi_forum">
-            <input type="hidden" id="tahun_forum_lokasi" name="tahun_forum_lokasi">
-            <div class="form-group">
-              <label class="control-label col-sm-3" for="id">No Urut :</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control nomor" id="no_urut_lokasi">
-              </div>
-              <div class="col-sm-3 chkLokasi">
-                    <label class="checkbox-inline">
-                    <input class="checkLokasi" type="checkbox" name="checkLokasi" id="checkLokasi" value="1"> Telah Direviu</label>
-              </div>
-            </div>
-            <div class="form-group">
-                    <label class="control-label col-sm-3" for="sumber_data_lokasi">Sumber Usulan :</label>
-                    <div class="col-sm-5">
-                        <select type="text" class="form-control" id="sumber_data_lokasi" name="sumber_data_lokasi" disabled>
-                          <option value="0">Renja SKPD</option>
-                          <option value="1">Musrenbang Desa</option>
-                          <option value="2">Musrenbang Kecamatan</option>
-                          <option value="3">Pokir Dewan</option>
-                          <option value="4">Forum Perangkat Daerah</option>
-                        </select>
-                    {{-- </div> --}}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Lokasi Aktivitas :</label>
-                <div class="col-sm-8">
-                  <div class="input-group">
-                    <input type="hidden" id="id_lokasi" name="id_lokasi">
-                    <input type="hidden" id="jenis_lokasi" name="jenis_lokasi">
-                    <input type="name" class="form-control" id="nm_lokasi" rows="2" disabled>
-                    <div class="input-group-btn">
-                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="fa fa-search fa-fw fa-lg"></i></btn>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Lokasi Teknis Aktivitas :</label>
-                <div class="col-sm-8">
-                  <div class="input-group">
-                    <input type="hidden" id="id_lokasi_teknis" name="id_lokasi_teknis">
-                    <input type="name" class="form-control" id="nm_lokasi_teknis" rows="2" disabled>
-                    <div class="input-group-btn">
-                      <btn class="btn btn-primary btnCariLokasiTeknis" id="btnCariLokasiTeknis" name="btnCariLokasiTeknis"><i class="fa fa-search fa-fw fa-lg"></i></btn>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Keterangan Lokasi :</label>
-                <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="uraian_lokasi" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                    <table class="table table-bordered table-condensed">
-                        <thead style="background-color: #428bca; color: #fff">
-                          <tr>
-                            <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">Nomor</td>
-                            <td colspan="2"  width="65%" style="text-align: center; vertical-align:middle;">Volume</td>
-                            <td rowspan="2" width="30%" style="text-align: center; vertical-align:middle;">Satuan</td>
-                          </tr>
-                          <tr>
-                            <td width="30%" style="text-align: center; vertical-align:middle;">Sebelumnya</td>
-                            <td width="30%" style="text-align: center; vertical-align:middle;">Forum</td>
-                          </tr>
-                        </thead>
-                        <tbody style="background-color: #fff">
-                          <tr>
-                              <td width="5%" style="text-align: center; vertical-align:top;">
-                                <label class="control-label" style="text-align: center; vertical-align:top;">1</label>
-                              </td>
-                              <td width="30%" style="text-align: center; vertical-align:top;">
-                                <input type="text" class="form-control number" id="volume_usulan_1" name="volume_usulan_1" style="text-align: right; vertical-align:top;" disabled>
-                              </td>                          
-                              <td width="30%" style="text-align: center; vertical-align:top;">
-                                <input type="text" class="form-control number" id="volume_1" name="volume_1" style="text-align: right; vertical-align:top;"> 
-                              </td>
-                              <td width="30%" style="text-align: center; vertical-align:top;">
-                                <label class="radio">
-                                  <select type="text" class="form-control" id="id_satuan_1" name="id_satuan_1" disabled></select>
-                                </label>   
-                              </td>
-                          </tr>
-                          <tr>
-                              <td width="5%" style="text-align: center; vertical-align:top;">
-                                <label class="control-label" style="text-align: center; vertical-align:top;">2</label>
-                              </td>
-                              <td width="30%" style="text-align: center; vertical-align:top;">
-                                <input type="text" class="form-control number" id="volume_usulan_2" name="volume_usulan_2" style="text-align: right; vertical-align:top;" disabled>
-                              </td>                          
-                              <td width="30%" style="text-align: center; vertical-align:top;">
-                                <input type="text" class="form-control number" id="volume_2" name="volume_2" style="text-align: right; vertical-align:top;"> 
-                              </td>
-                              <td width="30%" style="text-align: center; vertical-align:top;" disabled>
-                                <label class="radio">
-                                  <select type="text" class="form-control" id="id_satuan_2" name="id_satuan_2" disabled></select>
-                                </label>   
-                              </td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
-              <div class="form-group" id="idStatusPelaksanaanLokasi">
-                  <label for="status_pelaksanaan_lokasi" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
-                  <div class="col-sm-8" id="myRadio">
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="0">Tanpa Perubahan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="1">Dengan Perubahan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="2">Digabungkan
-                      </label>
-                  </div>
-                  <div class="col-sm-8 col-sm-offset-3" id="myRadio">                      
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="3">Tidak dilaksanakan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="4">Diluarkewenangan
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" class="sp_lokasi" name="status_pelaksanaan_lokasi" id="status_pelaksanaan_lokasi" value="4">Non APBD
-                      </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="keterangan_status_lokasi" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="keterangan_status_lokasi" id="keterangan_status_lokasi" rows="3"></textarea>
-                  </div>
-                </div>
-          </form>
-        </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusLokasi">
-                        <button id="btnHapusLokasi" type="button" class="btn btn-sm btn-danger btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button id="btnLokasi" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-
-<div id="HapusLokasi" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Pelaksana Aktivitas Kegiatan SKPD</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_lokasi_hapus" name="id_lokasi_hapus">
-            <div class="alert alert-danger deleteContent">
-                <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus lokasi : <strong><span id="ur_lokasi_hapus"></span></strong> sebagai lokasi pelaksanaan aktivitas ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
-          </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnDelLokasi" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
+@include('forumskpd.cariProgramRenstra');
+@include('forumskpd.cariKegiatanRenstra');
+@include('forumskpd.CariSubUnit');
+@include('forumskpd.cariIndikator');
+@include('forumskpd.cariMusren');
+@include('forumskpd.cariLokasiModal');
+@include('forumskpd.cariLokasiTeknisModal');
+@include('forumskpd.cariAktivitasASB');
+@include('forumskpd.cariProgramRef');
+@include('forumskpd.cariKegiatanRef');
+@include('forumskpd.cariItemSSH');
+@include('forumskpd.cariRekening');
+@include('forumskpd.cari');
 
 
-<div id="ModalBelanja" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-              <form name="frmModalBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_lokasi_belanja" name="id_lokasi_belanja">
-                <input type="hidden" id="id_belanja_forum" name="id_belanja_forum">
-                <input type="hidden" id="tahun_forum_belanja" name="tahun_forum_belanja">
-                <input type="hidden" id="sumber_data_belanja" name="sumber_data_belanja">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control nomor" name="no_urut_belanja" id="no_urut_belanja">
-                  </div>
-                  <div class="col-sm-3 chkBelanja">
-                    <label class="checkbox-inline">
-                    <input class="checkBelanja" type="checkbox" name="checkBelanja" id="checkBelanja" value="1"> Telah Direviu</label>
-                  </div>
-                </div>
-                <div class="form-group hidden">
-                    <label class="control-label col-sm-3" for="title">Aktivitas ASB :</label>
-                    <input type="hidden" class="form-control" id="id_aktivitas_asb_belanja" name="id_aktivitas_asb_belanja" disabled="">
-                    <input type="hidden" class="form-control" id="sumber_belanja" name="sumber_belanja" disabled="">
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="uraian_aktivitas_asb" name="uraian_aktivitas_asb" rows="3" disabled=""></textarea>
-                    </div>
-                </div> 
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="">Zona Wilayah SSH :</label>
-                    <div class="col-sm-8">
-                        <select type="text" class="form-control zona_ssh" id="zona_ssh" name="zona_ssh"></select>
-                    </div>
-                </div>               
-                <div class="form-group">
-                  <label for="id_item_ssh" class="col-sm-3 control-label" align='left'>Item SSH:</label>                  
-                  <div class="col-sm-8">
-                    <input type="hidden" class="form-control" id="id_item_ssh" name="id_item_ssh">
-                    <input type="hidden" class="form-control" id="rekening_ssh" name="rekening_ssh" >
-                    <div class="input-group">
-                    <input type="text" class="form-control" id="ur_item_ssh" name="ur_item_ssh" disabled>
-                     <div class="input-group-btn">
-                      <button class="btn btn-primary btnCariSSH" id="btnCariSSH" name="btnCariSSH" data-toggle="modal" href="#"><i class="fa fa-search fa-fw fa-lg"></i></button>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-                <div class="form-group"> 
-                  <label for="id_rekening" class="col-sm-3 control-label" align='left'>Kode Rekening :</label>                 
-                  <div class="col-sm-8">
-                    <input type="hidden" class="form-control" id="id_rekening" name="id_rekening" disabled>
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="ur_rekening" name="ur_rekening" disabled>
-                      <div class="input-group-btn">
-                      <button class="btn btn-primary btnCariRekening" id="btnCariRekening" name="btnCariRekening" data-toggle="modal" href="#"><i class="fa fa-search fa-fw fa-lg"></i></button>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                <div class="col-sm-12">
-                    <table class="table table-bordered table-responsive">
-                        <thead style="background-color: #428bca; color: #fff">
-                          <tr>
-                            <td width="5%" style="text-align: center; vertical-align:middle;">Sumber</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Volume 1</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Volume 2</td>
-                            <td width="20%" style="text-align: center; vertical-align:middle;">Harga Satuan</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Jumlah Total</td>
-                          </tr>
-                        </thead>
-                        <tbody style="background-color: #fff">
-                          <tr>
-                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">Renja</td>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <input type="text" class="form-control number" id="volume1" name="volume1" disabled>
-                              </td>
-                          
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <input type="text" class="form-control number" id="volume2" name="volume2" disabled>
-                              </td>                          
-                              <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="harga_satuan" name="harga_satuan" disabled></td>
-                              <td rowspan="2" width="25%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" disabled></td>
-                          </tr>
-                          <tr>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <select type="text" class="form-control" id="id_satuan1" name="id_satuan1" disabled></select>
-                              </td>
-                          
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <select type="text" class="form-control" id="id_satuan2" name="id_satuan2" disabled></select>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">Forum</td>
-                              <td width="25%" style="text-align: left; vertical-align:top;">
-                                <input type="text" class="form-control number" id="volume1_forum" name="volume1_forum">
-                              </td>                          
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <input type="text" class="form-control number" id="volume2_forum" name="volume2_forum">
-                              </td>                          
-                              <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="harga_satuan_forum" name="harga_satuan_forum" disabled></td>
-                              <td rowspan="2" width="25%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja_forum" name="jumlah_belanja_forum" disabled></td>
-                          </tr>
-                          <tr>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <select type="text" class="form-control" id="id_satuan1_forum" name="id_satuan1_forum"></select>
-                              </td>
-                          
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
-                                <select type="text" class="form-control" id="id_satuan2_forum" name="id_satuan2_forum"></select>
-                              </td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>                  
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Penjelasan Belanja Lainnya :</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="uraian_belanja" name="uraian_belanja" rows="3"></textarea>
-                    </div>
-                </div> 
-              </form>
-            </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusBelanja">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusBelanja btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnBelanja btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-<div id="cariKegiatanRenstra" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariKegiatanRenstra' class="table display table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Kegiatan Renstra</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
-
-<div id="cariKegiatanRef" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">>Daftar Kegiatan sesuai Permendagri 13 dan perubahnnya</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariKegiatanRef' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Kegiatan</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
-
-<div id="cariProgramRef" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static" >
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Daftar Program sesuai Permendagri 13 dan perubahnnya</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariProgramRef' class="table compact display table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Kode Program</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Program</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-        </div>
-      </div>
-    </div>
-
-<div id="CariSubUnit" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Daftar Sub Unit</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariSubUnit' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Sub Unit Pelaksana</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
- 
-<div id="cariAktivitasASB" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Daftar Aktivitas dalam ASB</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariAktivitasASB' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Aktivitas ASB</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
-
-<div id="cariLokasiModal" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Daftar Referensi Lokasi</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-          <div class="form-group">
-             <div class="col-sm-12">
-             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                    <ul class="nav nav-tabs nav-justified" role="tablist">
-                      <li class="active"><a href="#wilayah" aria-controls="wilayah" role="tab" data-toggle="tab">Lokasi Kewilayahan</a></li>
-                      {{-- <li><a href="#teknis" aria-controls="teknis" role="tab-kv" data-toggle="tab">Lokasi Teknis</a></li> --}}
-                      <li><a href="#luardaerah" aria-controls="luar" role="tab-kv" data-toggle="tab">Lokasi Luar Daerah</a></li>
-                    </ul>
-                    
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="wilayah">
-                        <br>
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="title">Kecamatan :</label>
-                            <div class="col-sm-8">
-                                <select type="text" class="form-control kecamatan" id="kecamatan" name="kecamatan"></select>
-                            </div>
-                        </div>
-                        <table id='tblLokasiWilayah' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                  <tr>
-                                    <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                    <th style="text-align: center; vertical-align:middle">Nama Lokasi Kewilayahan</th>
-                                  </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade in" id="luardaerah">
-                        <br>
-                        <table id='tblLokasiLuar' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                  <tr>
-                                    <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                    <th style="text-align: center; vertical-align:middle">Uraian Lokasi Luar Daerah</th>
-                                  </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-              </div>            
-            </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
-
-<div id="cariLokasiTeknisModal" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Daftar Referensi Lokasi Teknis</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-          <div class="form-group">
-             <div class="col-sm-12">             
-              <table id='tblLokasiTeknis' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                  <thead>
-                        <tr>
-                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                          <th style="text-align: center; vertical-align:middle">Uraian Lokasi Teknis</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-              </table>
-            </div>
-            </div>
-          </form>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-        </div>
-      </div>
-    </div>
-
-<div id="cariRekening" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4>Daftar Rekening</h4>
-    </div>
-    <div class="modal-body">
-      <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
-        <div class="form-group">
-          <div class="col-sm-12">
-            <table id='tblRekening' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Kode Rekening</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Rekening</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </form>
-    </div>
-      <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-      </div>
-    </div>
-    </div>
-
-<div id="cariMusren" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4>Daftar Usulan Musrenbang</h4>
-    </div>
-    <div class="modal-body">
-      <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
-        <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                    <ul class="nav nav-tabs nav-justified" role="tablist">
-                      <li class="active"><a href="#musrencam" aria-controls="musrencam" role="tab" data-toggle="tab">Musrenbang Kecamatan</a></li>
-                      <li><a href="#musrendes" aria-controls="musrendes" role="tab-kv" data-toggle="tab">Musrenbang kelurahan/Desa</a></li>
-                    </ul>                    
-                    <div class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade in active" id="musrencam">
-                          <table id='tblMusrencam' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                              <tr>
-                                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th style="text-align: center; vertical-align:middle">Uraian Usulan</th>
-                                <th width="15%" style="text-align: center; vertical-align:middle">Volume Usulan</th>
-                                <th width="5%" style="text-align: center; vertical-align:middle">Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
-                      </div>
-                      <div role="tabpanel" class="tab-pane fade in" id="musrendes">
-                        <table id='tblMusrendes' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                          <thead>
-                            <tr>
-                              <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                              <th style="text-align: center; vertical-align:middle">Uraian Usulan</th>
-                              <th width="15%" style="text-align: center; vertical-align:middle">Volume Usulan</th>
-                              <th width="5%" style="text-align: center; vertical-align:middle">Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-        </div>
-      </form>
-    </div>
-      <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-      </div>
-    </div>
-    </div>
-
-<div id="cariPokir" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4>Daftar Usulan dalam Pokok - Pokok Pikiran Dewan</h4>
-    </div>
-    <div class="modal-body">
-      <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
-        <div class="form-group">
-          <div class="col-sm-12">
-            <table id='tblPokir' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Pokir</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Volume Usulan</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Pengusul</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </form>
-    </div>
-      <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-      </div>
-    </div>
-    </div>
-
-<div id="cariItemSSH" class="modal fade" role="dialog" tabindex="-1" data-backdrop="static" data-focus-on="input:first">
-  <div class="modal-dialog modal-lg"  >
-  <div class="modal-content">
-  <div class="modal-header">
-    <h3>Daftar Item Standar Satuan Harga</h3>
-  </div>
-  <div class="modal-body">
-  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
-        <div class="col-sm-8">
-          <div class="input-group">
-            <input type="text" class="form-control" id="param_cari" name="param_cari">
-            <div class="input-group-btn">
-              <button class="btn btn-primary" id="btnparam_cari" name="btnparam_cari"><i class="fa fa-search fa-fw fa-lg"></i></button>
-            </div>
-          </div>
-        </div>
-    </div>
-   <div class="form-group">
-   <div class="col-sm-12">
-      <table id='tblItemSSH' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-          <thead>
-                <tr>
-                  <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Item SSH</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
-                  <th width="10%" style="text-align: right; vertical-align:middle">Harga Satuan</th>
-                </tr>
-          </thead>
-          <tbody>
-          </tbody>
-      </table>
-    </div>
-    </div>
-  </form>
-</div>
-  <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>  
-  </div>
-  </div>
-  </div>
-
-  <div id="cariProgramRenstra" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariProgramRenstra' class="table display table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            {{-- <th width="10%" style="text-align: center; vertical-align:middle">Kode Renstra</th> --}}
-                            <th style="text-align: center; vertical-align:middle">Uraian Program Renstra</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form> 
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-        </div>
-      </div>
-    </div>
-
- <div id="ModalCopyBelanja" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"> Copy Data Belanja dari Lokasi Lain</h4>
-        </div>
-      <div class="modal-body">
-          <form name="frmModalCopyBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="form-group">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="col-sm-12">
-                <table id='tblCopyBelanja' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Nama Aktivitas</th>
-                            {{-- <th style="text-align: center; vertical-align:middle">Uraian Lokasi Pelaksanaan</th> --}}
-                            <th width="15%" style="text-align: center; vertical-align:middle">Aksi</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-              </div>
-            </form>          
-      </div>
-      <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left"></div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="loadBelanjaASB" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control number" id="status_musren_belanja" name="status_musren_belanja" style="text-align: right;" disabled>
-              <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Aktivitas ASB :</label>
-                    <input type="hidden" class="form-control" id="id_aktivitas_asb_load" name="id_aktivitas_asb_load" disabled="">
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="uraian_aktivitas_asb_load" name="uraian_aktivitas_asb_load" rows="3" disabled=""></textarea>
-                    </div>
-                </div>
-              <div class="form-group hidden"> 
-                  <label for="sumber_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Biaya :</label>
-                  <div class="col-sm-6">
-                    <div>
-                      <label>
-                        <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="0"> Biaya Tetap (Fix) 
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="1"> Tanpa Biaya Tetap (Non Fix)
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="2"> Semua Biaya
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input type="radio" class="jns_biaya_asb" name="jns_biaya_asb" id="jns_biaya_asb" value="3"> Semua Biaya (Biaya Tetap Terdistibusi)
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              <div class="form-group hidden">
-                    <label class="control-label col-sm-3" for="">Zona Wilayah SSH :</label>
-                    <div class="col-sm-8">
-                        <select type="text" class="form-control zona_ssh_load" id="zona_ssh_load" name="zona_ssh_load"></select>
-                    </div>
-                </div> 
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
-                <div class="col-sm-4">
-                  <div class="input-group">
-                      <input type="text" class="form-control number" id="v1_load" name="v1_load" style="text-align: right;" disabled>
-                      <span class="input-group-addon" id="satuan1_load_asb"></span>
-                  </div>
-                </div>
-                </div>
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
-                <div class="col-sm-4">
-                  <div class="input-group">
-                      <input type="text" class="form-control number" id="v2_load" name="v2_load" style="text-align: right;" disabled>
-                      <span class="input-group-addon" id="satuan2_load_asb"></span>
-                  </div>
-                </div>
-              </div>
-        </form>
-      </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusBelanja">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success btnLoadAsb btn-labeled" data-dismiss="modal" >
-                            <span class="btn-label"><i id="fooLoadAsb" class="fa fa-calculator fa-fw fa-lg"></i></span>Proses Load Belanja</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-
-
-
-  <div id="cariIndikator" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-           <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblCariIndikator' class="table display table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Jenis Indikator</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Sifat Indikator</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-          </form> 
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
 
 @endsection
 
@@ -2674,7 +830,7 @@ $(document).on('click', '.btnCariProgramRenstra', function() {
         "bDestroy": true
     });
 
-    $('#tblCariProgramRen').DataTable().ajax.reload();
+    $('#tblCariProgramRen').DataTable().ajax.reload(null,false);
   });
 
 $('#tblCariProgramRenstra tbody').on( 'dblclick', 'tr', function () {
@@ -2707,7 +863,7 @@ $(document).on('click', '.btnCariKegiatanRenstra', function() {
           "order": [[0, 'asc']],
           "bDestroy": true
         });
-      $('#tblCariKegiatanRen').DataTable().ajax.reload();
+      $('#tblCariKegiatanRen').DataTable().ajax.reload(null,false);
     }   
 
     
@@ -3108,7 +1264,7 @@ function loadTblProgRkpd(tahun,unit){
                             render: function(data, type, row,meta) {
                             return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
                           }},
-                        { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center",width:"50px" }
+                        // { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center",width:"50px" }
                       ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
@@ -3145,7 +1301,7 @@ function initTableBidang(tableId, data) {
         $('#btnTambahProgRenja').show();
 
         $('.nav-tabs a[href="#program"]').tab('show');
-        loadTblProgRenja(tahun_temp,unit_temp,ProgRkpd_temp);
+        loadTblProgRenja(tahun_temp,unit_temp,ProgRkpd_temp,bidang_temp);
 
     });
 
@@ -3182,7 +1338,7 @@ $(document).on('click', '.btnViewProgSkpd', function() {
   $('#btnTambahProgRenja').show();
 
   $('.nav-tabs a[href="#program"]').tab('show');
-  loadTblProgRenja(tahun_temp,unit_temp,ProgRkpd_temp);
+  loadTblProgRenja(tahun_temp,unit_temp,ProgRkpd_temp, bidang_temp);
   back2renja();
 });
 
@@ -3194,13 +1350,13 @@ $('#tblProgram').DataTable({
   bDestroy: true
 });
 
-function loadTblProgRenja(tahun,unit,id_forum){
+function loadTblProgRenja(tahun,unit,id_forum,bidang){
    prog_renja_tbl=$('#tblProgram').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BfRtip',
                   autoWidth : false,
-                  "ajax": {"url": "./forumskpd/forum/getProgramRenja/"+tahun+"/"+unit+"/"+id_forum},
+                  "ajax": {"url": "./forumskpd/forum/getProgramRenja/"+tahun+"/"+unit+"/"+id_forum+"/"+bidang},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -3216,6 +1372,8 @@ function loadTblProgRenja(tahun,unit,id_forum){
                         { data: 'urut', sClass: "dt-center", width:"5px"},
                         { data: 'uraian_program_renstra'},
                         { data: 'pagu_tahun_renstra', sClass: "dt-right",
+                          render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        { data: 'pagu_forum', sClass: "dt-right",
                           render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_kegiatan', sClass: "dt-center"},
                         { data: 'jml_0k', sClass: "dt-center"},
@@ -3238,7 +1396,7 @@ function initInProg(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BfRtIP',
+            dom : 'BfRtIp',
             autoWidth: false,
             "language": {
                       "decimal": ",",
@@ -3329,7 +1487,7 @@ function initInKeg(tableId, data){
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BFRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             "language": {
                       "decimal": ",",
@@ -3775,10 +1933,8 @@ $(document).on('click', '#btnViewBelanja', function() {
 $( "#id_unit" ).change(function() {
   tahun_temp = $('#tahun_rkpd').val();
   unit_temp = $('#id_unit').val();
-
   $('.nav-tabs a[href="#programrkpd"]').tab('show');
   loadTblProgRkpd(tahun_temp,unit_temp);
-
 });
 
 function getStatusPelaksanaanProgRenja(){
@@ -3851,7 +2007,7 @@ $('.modal-footer').on('click', '.addProgRenja', function() {
               // 'status_data' : $('#status_data_progrenja').val(),
           },
           success: function(data) {
-              $('#tblProgram').DataTable().ajax.reload();
+              $('#tblProgram').DataTable().ajax.reload(null,false);
               // if(data.status_pesan==1){
               // $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               // } else {
@@ -3935,7 +2091,7 @@ $('.modal-footer').on('click', '.editProgRenja', function() {
               'status_data' : $('#status_data_progrenja').val(),
           },
           success: function(data) {
-              $('#tblProgram').DataTable().ajax.reload();
+              $('#tblProgram').DataTable().ajax.reload(null,false);
               // if(data.status_pesan==1){
               // $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               // } else {
@@ -3973,7 +2129,7 @@ $(document).on('click', '.btnDelProgRenja', function() {
       },
       success: function(data) {
         $('#ModalProgRenja').modal('hide'); 
-        $('#tblProgram').DataTable().ajax.reload();
+        $('#tblProgram').DataTable().ajax.reload(null,false);
         // $('#pesan').html('<div class="alert alert-info col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
@@ -4097,8 +2253,8 @@ $('.modal-footer').on('click', '.addKegRenja', function() {
               // 'sumber_data' : $('#sumber_data').val(),
           },
           success: function(data) {
-              $('#tblKegiatanRenja').DataTable().ajax.reload();
-              $('#tblProgram').DataTable().ajax.reload();
+              $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
+              $('#tblProgram').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4221,8 +2377,8 @@ $('.modal-footer').on('click', '.editKegRenja', function() {
               'status_pelaksanaan' : getStatusPelaksanaanKegRenja(),
           },
           success: function(data) {
-              $('#tblKegiatanRenja').DataTable().ajax.reload();
-              $('#tblProgram').DataTable().ajax.reload();
+              $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
+              $('#tblProgram').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4255,8 +2411,8 @@ $(document).on('click', '#btnDelKegRenja', function() {
       },
       success: function(data) {
         $('#ModalKegiatan').modal('hide'); 
-        $('#tblProgram').DataTable().ajax.reload();
-        $('#tblKegiatanRenja').DataTable().ajax.reload();
+        $('#tblProgram').DataTable().ajax.reload(null,false);
+        $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
         createPesan(data.pesan,"info");
       }
     });
@@ -4466,8 +2622,8 @@ $('.modal-footer').on('click', '.addAktivitas', function() {
               'status_musren' : getJenisPembahasan(),
           },
           success: function(data) {
-              $('#tblAktivitas').DataTable().ajax.reload();
-              $('#tblKegiatanRenja').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload(null,false);
+              $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4615,8 +2771,8 @@ $('.modal-footer').on('click', '.editAktivitas', function() {
               'status_musren' : getJenisPembahasan(),
           },
           success: function(data) {
-              $('#tblAktivitas').DataTable().ajax.reload();
-              $('#tblKegiatanRenja').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload(null,false);
+              $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4649,8 +2805,8 @@ $(document).on('click', '#btnDelAktivitas', function() {
       },
       success: function(data) {
         $('#ModalAktivitas').modal('hide'); 
-        $('#tblAktivitas').DataTable().ajax.reload();
-        $('#tblKegiatanRenja').DataTable().ajax.reload();
+        $('#tblAktivitas').DataTable().ajax.reload(null,false);
+        $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
         createPesan(data.pesan,"info");
       }
     });
@@ -4721,8 +2877,8 @@ $('.modal-footer').on('click', '.addPelaksana', function() {
 
           },
           success: function(data) {
-              // $('#tblAktivitas').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              // $('#tblAktivitas').DataTable().ajax.reload(null,false);
+              $('#tblPelaksana').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4804,8 +2960,8 @@ $('.modal-footer').on('click', '.editPelaksana', function() {
 
           },
           success: function(data) {
-              // $('#tblAktivitas').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              // $('#tblAktivitas').DataTable().ajax.reload(null,false);
+              $('#tblPelaksana').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -4838,8 +2994,8 @@ $(document).on('click', '#btnDelPelaksana', function() {
       },
       success: function(data) {
         $('#ModalPelaksana').modal('hide'); 
-        // $('#tblAktivitas').DataTable().ajax.reload();
-        $('#tblPelaksana').DataTable().ajax.reload();
+        // $('#tblAktivitas').DataTable().ajax.reload(null,false);
+        $('#tblPelaksana').DataTable().ajax.reload(null,false);
         createPesan(data.pesan,"info");
       }
     });
@@ -4917,8 +3073,8 @@ $('.modal-footer').on('click', '.addLokasi', function() {
 
           },
           success: function(data) {
-              $('#tblLokasi').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              $('#tblLokasi').DataTable().ajax.reload(null,false);
+              $('#tblPelaksana').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5014,8 +3170,8 @@ $('.modal-footer').on('click', '.editLokasi', function() {
 
           },
           success: function(data) {
-              $('#tblLokasi').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              $('#tblLokasi').DataTable().ajax.reload(null,false);
+              $('#tblPelaksana').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5048,8 +3204,8 @@ $(document).on('click', '#btnDelLokasi', function() {
       },
       success: function(data) {
         $('#ModalLokasi').modal('hide'); 
-        $('#tblLokasi').DataTable().ajax.reload();
-        $('#tblPelaksana').DataTable().ajax.reload();
+        $('#tblLokasi').DataTable().ajax.reload(null,false);
+        $('#tblPelaksana').DataTable().ajax.reload(null,false);
         createPesan(data.pesan,"info");
       }
     });
@@ -5085,15 +3241,7 @@ $( "#harga_satuan_forum" ).change(function() {
 });
 
 function checkAsalbelanja(asal){
-  if(asal==1){
-    $('#btnCariSSH').addClass('btnCariSSH');
-    $('#btnCariRekening').addClass('btnCariRekening');
-    $('#btnCariSSH').removeClass('catatan');
-    $('#btnCariRekening').removeClass('catatan');
-    document.getElementById("volume1_forum").removeAttribute("disabled");
-    document.getElementById("volume2_forum").removeAttribute("disabled");
-    document.getElementById("zona_ssh").removeAttribute("disabled");
-  } else {
+  if(asal==1){    
     $('#btnCariSSH').removeClass('btnCariSSH');
     $('#btnCariRekening').removeClass('btnCariRekening');
     $('#btnCariSSH').addClass('catatan');
@@ -5101,6 +3249,14 @@ function checkAsalbelanja(asal){
     document.getElementById("volume1_forum").setAttribute("disabled","disabled");
     document.getElementById("volume2_forum").setAttribute("disabled","disabled");
     document.getElementById("zona_ssh").setAttribute("disabled","disabled");
+  } else {
+    $('#btnCariSSH').addClass('btnCariSSH');
+    $('#btnCariRekening').addClass('btnCariRekening');
+    $('#btnCariSSH').removeClass('catatan');
+    $('#btnCariRekening').removeClass('catatan');
+    document.getElementById("volume1_forum").removeAttribute("disabled");
+    document.getElementById("volume2_forum").removeAttribute("disabled");
+    document.getElementById("zona_ssh").removeAttribute("disabled");
   }
 }
 
@@ -5143,7 +3299,7 @@ $(document).on('click', '.add-belanja', function() {
       $('#id_satuan2_forum').val(0);
       $('#sumber_data_belanja').val(4);
 
-      checkAsalbelanja(1);
+      checkAsalbelanja(0);
 
       // alert(tahun_temp);
 
@@ -5186,9 +3342,9 @@ $('.modal-footer').on('click', '.addBelanja', function() {
 
           },
           success: function(data) {
-              belanja_renja_tbl.ajax.reload();
-              aktivitas_tbl.ajax.reload();
-              pelaksana_tbl.ajax.reload();
+              belanja_renja_tbl.ajax.reload(null,false);
+              aktivitas_tbl.ajax.reload(null,false);
+              pelaksana_tbl.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5285,9 +3441,9 @@ $('.modal-footer').on('click', '.editBelanja', function() {
 
           },
           success: function(data) {
-              belanja_renja_tbl.ajax.reload();
-              aktivitas_tbl.ajax.reload();
-              pelaksana_tbl.ajax.reload();
+              belanja_renja_tbl.ajax.reload(null,false);
+              aktivitas_tbl.ajax.reload(null,false);
+              pelaksana_tbl.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5316,9 +3472,9 @@ $(document).on('click', '.btnHapusBelanja', function() {
         'id_belanja_forum': $('#id_belanja_forum').val()
       },
       success: function(data) {
-        belanja_renja_tbl.ajax.reload();
-        aktivitas_tbl.ajax.reload();
-        pelaksana_tbl.ajax.reload();
+        belanja_renja_tbl.ajax.reload(null,false);
+        aktivitas_tbl.ajax.reload(null,false);
+        pelaksana_tbl.ajax.reload(null,false);
         $('#ModalBelanja').modal('hide');
         createPesan(data.pesan,"info");
       }
@@ -5377,9 +3533,9 @@ $(document).on('click', '#btnProsesCopyBelanja', function() {
 
       },    
       success: function(data) {
-        belanja_renja_tbl.ajax.reload();
-        aktivitas_tbl.ajax.reload();
-        pelaksana_tbl.ajax.reload();
+        belanja_renja_tbl.ajax.reload(null,false);
+        aktivitas_tbl.ajax.reload(null,false);
+        pelaksana_tbl.ajax.reload(null,false);
         createPesan(data.pesan,"success");
       }
     });
@@ -5396,9 +3552,9 @@ $(document).on('click', '#btnUnLoadAsb', function() {
             'id_lokasi_renja': id_aktivitas_temp,
           },
           success: function(data) {
-            belanja_renja_tbl.ajax.reload();
-            aktivitas_tbl.ajax.reload();
-            pelaksana_tbl.ajax.reload();
+            belanja_renja_tbl.ajax.reload(null,false);
+            aktivitas_tbl.ajax.reload(null,false);
+            pelaksana_tbl.ajax.reload(null,false);
             if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5442,9 +3598,9 @@ $(document).on('click', '.btnLoadAsb', function() {
              'id_satuan_2' : id_satuan_2_aktiv_temp,
          },
          success: function(data) {
-           belanja_renja_tbl.ajax.reload();
-           aktivitas_tbl.ajax.reload();
-           pelaksana_tbl.ajax.reload();
+           belanja_renja_tbl.ajax.reload(null,false);
+           aktivitas_tbl.ajax.reload(null,false);
+           pelaksana_tbl.ajax.reload(null,false);
            if(data.status_pesan==1){
              createPesan(data.pesan,"success");
              } else {
@@ -5559,9 +3715,9 @@ $('.modal-footer').on('click', '.addIndikator', function() {
               'id_satuan_output':$('#id_satuan_output').val(),
           },
           success: function(data) {
-              prog_renja_tbl.ajax.reload();
-              tblInProg.ajax.reload(); 
-              prog_rkpd_tbl.ajax.reload();             
+              prog_renja_tbl.ajax.reload(null,false);
+              tblInProg.ajax.reload(null,false); 
+              prog_rkpd_tbl.ajax.reload(null,false);             
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5630,9 +3786,9 @@ $('.modal-footer').on('click', '.addIndikator', function() {
               'id_satuan_output':$('#id_satuan_output').val(),
           },
           success: function(data) {
-              tblInProg.ajax.reload();
-              prog_renja_tbl.ajax.reload();
-              prog_rkpd_tbl.ajax.reload();
+              tblInProg.ajax.reload(null,false);
+              prog_renja_tbl.ajax.reload(null,false);
+              prog_rkpd_tbl.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5658,9 +3814,9 @@ $(document).on('click', '.btnHapusIndikator', function() {
       },
       success: function(data) {
         $('#ModalIndikator').modal('hide');
-        tblInProg.ajax.reload();
-        prog_renja_tbl.ajax.reload();
-        prog_rkpd_tbl.ajax.reload();
+        tblInProg.ajax.reload(null,false);
+        prog_renja_tbl.ajax.reload(null,false);
+        prog_rkpd_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -5697,9 +3853,9 @@ $(document).on('click', '.post-InProgRenja', function() {
         'status_data':status_data,
       },
       success: function(data) {
-        tblInProg.ajax.reload();
-        prog_renja_tbl.ajax.reload();
-        prog_rkpd_tbl.ajax.reload();
+        tblInProg.ajax.reload(null,false);
+        prog_renja_tbl.ajax.reload(null,false);
+        prog_rkpd_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -5760,8 +3916,8 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
               'id_satuan_output':$('#id_satuan_output_keg').val(),
           },
           success: function(data) {              
-              keg_renja_tbl.ajax.reload();
-              tblInKeg.ajax.reload();
+              keg_renja_tbl.ajax.reload(null,false);
+              tblInKeg.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5832,8 +3988,8 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
               'id_satuan_output':$('#id_satuan_output_keg').val(),
           },
           success: function(data) {
-              keg_renja_tbl.ajax.reload();
-              tblInKeg.ajax.reload();              
+              keg_renja_tbl.ajax.reload(null,false);
+              tblInKeg.ajax.reload(null,false);              
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -5859,8 +4015,8 @@ $(document).on('click', '.btnHapusIndikatorKeg', function() {
       },
       success: function(data) {
         $('#ModalIndikatorKeg').modal('hide');
-        tblInKeg.ajax.reload();
-        keg_renja_tbl.ajax.reload();
+        tblInKeg.ajax.reload(null,false);
+        keg_renja_tbl.ajax.reload(null,false);
         createPesan(data.pesan,"success");
       }
     });
@@ -5893,8 +4049,8 @@ $(document).on('click', '.post-InKegRenja', function() {
         'status_data':status_data,
       },
       success: function(data) {
-        tblInKeg.ajax.reload();
-        keg_renja_tbl.ajax.reload();
+        tblInKeg.ajax.reload(null,false);
+        keg_renja_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -5927,9 +4083,9 @@ $(document).on('click', '.post-AktivForum', function() {
         'status_data':status_data,
       },
       success: function(data) {
-        aktivitas_tbl.ajax.reload();
-        keg_renja_tbl.ajax.reload();
-        pelaksana_tbl.ajax.reload();
+        aktivitas_tbl.ajax.reload(null,false);
+        keg_renja_tbl.ajax.reload(null,false);
+        pelaksana_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -5962,7 +4118,7 @@ $(document).on('click', '.post-KegForum', function() {
         'status_data':status_data,
       },
       success: function(data) {
-        keg_renja_tbl.ajax.reload();
+        keg_renja_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -5971,6 +4127,48 @@ $(document).on('click', '.post-KegForum', function() {
       }
     });
 });
+
+$(document).on('click', '.post-ProgRenja', function() {
+  var data = prog_renja_tbl.row( $(this).parents('tr') ).data();
+  var status_data;
+  if(data.status_data == 0){
+    status_data = 1;
+  }; 
+  if(data.status_data == 1){
+    status_data = 0;
+  };
+
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: './forumskpd/forum/postProgRenja',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_forum_program': data.id_forum_program,
+        'status_data':status_data,
+      },
+      success: function(data) {
+        prog_renja_tbl.ajax.reload(null,false);
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
+
+$('#radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+    $('#'+tog).prop('value', sel);
+    
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('Active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('Active');
+  });
 
 });
 </script>

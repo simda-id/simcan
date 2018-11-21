@@ -75,6 +75,7 @@ use hoaaah\LaravelMenu\Menu;
                                 'items' => [
                                     ['label' => 'Daftar User', 'url' => '/admin/parameter/user','visible' => $akses->get(110)],
                                     ['label' => 'Group User', 'url' => '/admin/parameter/user/group','visible' => $akses->get(110)],
+                                    ['label' => 'Peran Group User', 'url' => '/admin/parameter/user/peran','visible' => $akses->get(110)],
                                 ]
                             ],                        
                             [
@@ -98,7 +99,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ['label' => 'Parameter Lainnya', 'icon' => 'fa fa-life-ring fa-fw','url' => '/admin/parameter/others','visible' => $akses->get(109)],
                                 ]
                             ],
-                            ['label' => 'Update Aplikasi', 'icon' => 'fa fa-refresh fa-fw', 'url' => '/admin/update','visible' => $akses->get(9)],
+                            ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw', 'url' => '/admin/update','visible' => $akses->get(9)],
                         ]
                     ]);
                 ?>

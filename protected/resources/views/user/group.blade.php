@@ -74,6 +74,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="text" class="form-control" id="keterangan" name="keterangan" required="required">
               </div>
             </div>
+            <div class="form-group">
+                    <label for="peranuser" class="col-md-3 control-label">Peran/Role User</label>
+                    <?php $groups = \App\Models\RefGroup::get(); ?>
+                    <div class="col-md-6">
+                        <select id="role_id" type="role_id" class="form-control" name="role_id" required>
+                        </select>
+                    </div>
+            </div>
             </div>
             </div> 
         </form>
@@ -144,6 +152,22 @@ $('.page-alert .close').click(function(e) {
         $(this).closest('.page-alert').slideUp();
     });
 
+$.ajax({
+  type: "GET",
+  url: 'group/peranGroup',
+  dataType: "json",
+  success: function(data) {
+     var j = data.length;
+    var post, i;
+    $('select[name="role_id"]').empty();
+    $('select[name="role_id"]').append('<option value="-1">---Pilih Peran/Role User---</option>');
+    for (i = 0; i < j; i++) {
+      post = data[i];
+      $('select[name="role_id"]').append('<option value="'+ post.id +'">'+ post.uraian_peran +'</option>');
+    }
+  }
+});
+
 var group_tbl=$('#group-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -168,6 +192,7 @@ $(document).on('click', '#btnTambahGroup', function() {
   $('#id_group').val(null);
   $('#name_proup').val(null);
   $('#keterangan').val(null);
+  $('#role_id').val(-1);
   
   $('#ModalGroup').modal('show');
 });
@@ -185,6 +210,7 @@ $('.modal-footer').on('click', '.add', function() {
             // 'id_pemda' : $('#id_pemda').val(),
             'nama_group' : $('#name_proup').val(),
             'keterangan' : $('#keterangan').val(),
+            'id_roles' : $('#role_id').val(),
         },
         success: function(data) {
               $('#group-table').DataTable().ajax.reload();
@@ -206,6 +232,7 @@ var data = group_tbl.row( $(this).parents('tr') ).data();
   $('#id_group').val(data.id);
   $('#name_proup').val(data.name);
   $('#keterangan').val(data.keterangan);
+  $('#role_id').val(data.id_roles);
   
   $('#ModalGroup').modal('show');
 });
@@ -223,6 +250,7 @@ $('.modal-footer').on('click', '.edit', function() {
             'id' : $('#id_group').val(),
             'name_group' : $('#name_proup').val(),
             'keterangan' : $('#keterangan').val(),
+            'id_roles' : $('#role_id').val(),
         },
         success: function(data) {
               $('#group-table').DataTable().ajax.reload();

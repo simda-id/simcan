@@ -26,16 +26,18 @@ use hoaaah\LaravelMenu\Menu;
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
     
+    @yield('css')
+
     @yield('head')
-    <style>
+    <style>        
         h1.padding {
         padding-right: 1cm;
         }
     </style>
 </head>
-<body>
+<body >
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; color:#fff;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -46,8 +48,8 @@ use hoaaah\LaravelMenu\Menu;
                     <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x"></i>
-                    </span> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span></a>
+                      <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span></span> </a>
                 </div>
                     <ul class="nav navbar-top-links pull-right">
                         <!-- Authentication Links -->
@@ -92,8 +94,8 @@ use hoaaah\LaravelMenu\Menu;
                         @endif
                     </ul>
 
-                    @if (Session::get('AppType')==0)
-                    <div id="id_0" class="navbar-default sidebar" role="navigation">
+                    @if (Session::get('AppType') == 0)
+                    <div class="navbar-default sidebar" role="navigation">
                         <?php
                             $akses = new CekAkses();
                             $menu = new Menu();
@@ -198,8 +200,8 @@ use hoaaah\LaravelMenu\Menu;
                                        'items' => [
                                             ['label' => 'Load Rancangan Awal', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
-                                            ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
-                                            // ['label' => 'Dokumen Forum Perangkat Daerah', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
+                                            // ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
+                                            ['label' => 'Dokumen Forum Perangkat Daerah', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
                                         ]
                                     ],
                                     
@@ -221,6 +223,7 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Load Rancangan RKPD', 'url' => '/musrenrkpd/loadData', 'visible' => $akses->get(608)],
                                                     ['label' => 'Musrenbang RKPD', 'url' => '/musrenrkpd', 'visible' => $akses->get(609)],
                                                     ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(607)],
+                                                    ['label' => 'Dokumen Musrenbang RKPD', 'url' => '/musrenrkpd/dokumen', 'visible' => $akses->get(609)],
                                                 ]
                                             ],
                                         ]
@@ -234,7 +237,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            ['label' => 'Pra-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
+                                            ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]
@@ -347,7 +350,7 @@ use hoaaah\LaravelMenu\Menu;
                                        'items' => [
                                             ['label' => 'Load Rancangan Awal', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
-                                            ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
+                                            // ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
                                             ['label' => 'Dokumen Forum', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
                                         ]
                                     ],
@@ -361,10 +364,8 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Usulan RW', 'url' => '/musrenrw', 'visible' =>  $akses->get(601)],
                                                     ['label' => 'Usulan Desa', 'url' => '/musrendes', 'visible' => $akses->get(603)],
-                                                    // ['label' => 'Posting Usulan Desa', 'url' => '/musrendes/loadData', 'visible' => $akses->get(602)],
                                                     ['label' => 'Load Usulan Desa', 'url' => '/musrencam/loadData', 'visible' => $akses->get(605)],
                                                     ['label' => 'Musrenbang', 'url' => '/musrencam', 'visible' => $akses->get(605)],
-                                                    // ['label' => 'Posting Musrenbang', 'url' => '/musrencam/postingData', 'visible' => $akses->get(604)],
                                                 ]
                                             ],
                                             
@@ -374,21 +375,39 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Load Rancangan RKPD', 'url' => '/musrenrkpd/loadData', 'visible' => $akses->get(608)],
                                                     ['label' => 'Musrenbang RKPD', 'url' => '/musrenrkpd', 'visible' => $akses->get(609)],
-                                                    ['label' => 'Penyesuaian PD', 'url' => '#', 'visible' => $akses->get(607)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '/musrenrkpd/sesuai', 'visible' => $akses->get(607)],
+                                                    ['label' => 'Dokumen Musrenbang RKPD', 'url' => '/musrenrkpd/dokumen', 'visible' => $akses->get(609)],
                                                 ]
                                             ],
                                         ]
                                     ],
                                     [
                                         'label' => 'Laporan RKPD & Renja',
-                                        'visible' => $akses->get(30) || $akses->get(20),
+                                        'visible' => $akses->get(40) || $akses->get(50) || $akses->get(60) ,
                                         'items' => [
-                                            ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                            ['label' => 'Renja', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
+                                            [
+                                                'label' => 'RKPD', 
+                                                'visible' => $akses->get(40),
+                                                'items' => [
+                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                ]
+                                            ],
+                                            [   
+                                                'label' => 'Renja', 
+                                                'visible' => $akses->get(50),
+                                                'items' => [
+                                                    ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja', 'url' => '/cetak/rkpd', 'visible' => $akses->get(50)],
+                                                ]
+                                            ],
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            ['label' => 'Pra-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
+                                            ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]
@@ -398,7 +417,8 @@ use hoaaah\LaravelMenu\Menu;
                     @endif
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>

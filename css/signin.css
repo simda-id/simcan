@@ -1,56 +1,9 @@
-/*body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}*/
-
-/*
- * Specific styles of signin component
- */
-/*
- * General styles
- */
 body, html {
     height: 100%;
     background-repeat: no-repeat;
     /*background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    background-image: linear-gradient(to bottom, rgb(30,87,153) 0%,rgb(32,124,202) 39%,rgb(32,124,202) 39%,rgb(41,137,216) 57%,rgb(125,185,232) 100%);
-}
+    background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+  }
 
 .card-container.card {
     max-width: 350px;
@@ -66,9 +19,6 @@ body, html {
     cursor: default;
 }
 
-/*
- * Card component
- */
 .card {
     background-color: #F7F7F7;
     /* just in case there no content*/
@@ -120,11 +70,7 @@ body, html {
     box-sizing: border-box;
 }
 
-/*.form-signin #email,
-.form-signin #password {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;*/
+
 }
 
 .form-signin input[type=email],

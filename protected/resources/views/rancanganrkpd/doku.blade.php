@@ -362,12 +362,12 @@ $.ajax({
         success: function(data) {
           createPesan("Data Berhasil di Load","success");
           $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
         },
         error: function(data){
           createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
+          $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
         }
 });
@@ -390,12 +390,12 @@ $(document).on('click', '.btnUnload', function() {
         },
         success: function(data) {
             createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
         error: function(data){
             createPesan(data.pesan,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });
@@ -456,7 +456,7 @@ $('.modal-footer').on('click', '.addDokumen', function() {
         'nip_tandatangan': $('#nip_tandatangan').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -523,7 +523,7 @@ $('.modal-footer').on('click', '.editDokumen', function() {
         'nip_tandatangan': $('#nip_tandatangan').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -558,7 +558,7 @@ $('.modal-footer').on('click', '.delDokumen', function() {
         'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
       },
       success: function(data) {
-        dokumen_tbl.ajax.reload();
+        dokumen_tbl.ajax.reload(null,false);
         $('#TambahDokumen').modal('hide');
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
@@ -619,7 +619,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
               'status_awal': status_awal,
           },
           success: function(data) {
-              dokumen_tbl.ajax.reload();
+              dokumen_tbl.ajax.reload(null,false);
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -628,7 +628,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
               $('#ModalProgress').modal('hide');
           },
           error: function(data){
-          dokumen_tbl.ajax.reload();
+          dokumen_tbl.ajax.reload(null,false);
           $('#ModalProgress').modal('hide');
           createPesan("Data Gagal Diposting (0vdrPD)","danger");
         }

@@ -316,12 +316,12 @@ $(document).on('click', '#btnReLoad', function() {
       },
       success: function(data) {
         createPesan(data.pesan,"success");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       },
       error: function(data){
         createPesan(data.pesan,"danger");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       }
     });
@@ -357,12 +357,12 @@ $(document).on('click', '#btnProsesAll', function() {
       },
       success: function(data) {
         createPesan(data.pesan,"success");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       },
       error: function(data){
         createPesan(data.pesan,"danger");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       }
     });
@@ -391,12 +391,12 @@ $(document).on('click', '#btnUnloadRenja', function() {
         },
         success: function(data) {
             createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
         error: function(err){
             createPesan(err,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });

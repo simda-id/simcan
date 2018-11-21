@@ -32,7 +32,7 @@
               display: table;
               font-weight: 300;
               font-family: 'Raleway';
-              background: linear-gradient(to bottom, rgb(30,87,153) 0%,rgb(32,124,202) 39%,rgb(32,124,202) 39%,rgb(41,137,216) 57%,rgb(125,185,232) 100%);
+              background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
             }
 
             .container {

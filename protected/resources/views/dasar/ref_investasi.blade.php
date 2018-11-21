@@ -2,7 +2,7 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.app3')
+@extends('layouts.app1')
 {{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
 
 @section('content')

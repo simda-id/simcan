@@ -988,12 +988,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Uraian Aktivitas :</label>
+                    <label class="control-label col-sm-3" for="title">Uraian Aktivitas ASB :</label>
                     <div class="col-sm-8">
                       <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3"></textarea>
                     </div>
                     <input type="hidden" id="id_aktivitas_asb" name="id_aktivitas_asb">
                     <span class="btn btn-primary btnCariASB" id="btnCariASB" name="btnCariASB"><i class="fa fa-search fa-fw fa-lg"></i></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="title">Uraian Aktivitas Renja :</label>
+                    <div class="col-sm-8">
+                      <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan_renja" rows="3"></textarea>
+                    </div>
                 </div>
                 <div class="form-group rbJenisAktivitas"> 
                   <label for="jenis_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Aktivitas :</label>                 
@@ -1880,6 +1886,7 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
 
     document.getElementById("ur_aktivitas_kegiatan").value = data.nm_aktivitas_asb;
     document.getElementById("id_aktivitas_asb").value = data.id_aktivitas_asb;
+    document.getElementById("ur_aktivitas_kegiatan_renja").value = data.nm_aktivitas_asb;
 
     document.getElementById("id_satuan_1").value = data.id_satuan_1;
     document.getElementById("id_satuan_2").value = data.id_satuan_2;    
@@ -3782,7 +3789,7 @@ $( ".sumber_aktivitas" ).change(function() {
       $('#id_satuan_2').attr("disabled","disabled");
       // $('#pagu_aktivitas').attr("disabled","disabled");
     } else {
-      $('#ur_aktivitas_kegiatan').removeAttr("disabled");
+      $('#ur_aktivitas_kegiatan').attr("disabled","disabled");
       $('.btnCariASB').hide();
       $('.jenis_pembahasan').attr("disabled","disabled");
       $('#persen_musren_aktivitas').attr("disabled","disabled");
@@ -3936,6 +3943,7 @@ $(document).on('click', '.add-aktivitas', function() {
       $('#tahun_renja_aktivitas').val(tahun_temp);
       $('#no_urut_aktivitas').val(1);
       $('#ur_aktivitas_kegiatan').val(null);
+      $('#ur_aktivitas_kegiatan_renja').val(null);
       $('#id_aktivitas_asb').val(null);
       document.frmModalAktivitas.jenis_aktivitas[0].checked=true;
       $('#sumber_dana').val(0);
@@ -3992,7 +4000,7 @@ $(document).on('click', '.add-aktivitas', function() {
               'id_renja': id_pelaksana_temp,
               'tahun_renja': $('#tahun_renja_aktivitas').val(),
               'id_aktivitas_asb' : $('#id_aktivitas_asb').val() ,
-              'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan').val() ,
+              'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan_renja').val() ,
               'sumber_dana' : $('#sumber_dana').val() ,
               'pagu_musren' : $('#persen_musren_aktivitas').val(),
               'pagu_rata2' : $('#pagu_rata2_asb').val(),
@@ -4035,7 +4043,8 @@ $(document).on('click', '.edit-aktivitas', function() {
       $('#tahun_renja_aktivitas').val(data.tahun_renja);
       $('#no_urut_aktivitas').val(data.nomor);
       document.frmModalAktivitas.sumber_aktivitas[data.sumber_aktivitas].checked=true;
-      $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);
+      $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);      
+      $('#ur_aktivitas_kegiatan_renja').val(data.uraian_aktivitas_kegiatan);
       $('#id_aktivitas_asb').val(data.id_aktivitas_asb);
       document.frmModalAktivitas.jenis_aktivitas[data.jenis_kegiatan].checked=true;
       $('#sumber_dana').val(data.sumber_dana);
@@ -4118,7 +4127,7 @@ $(document).on('click', '.edit-aktivitas', function() {
                   'id_renja': $('#id_renja_aktivitas').val(),
                   'tahun_renja': $('#tahun_renja_aktivitas').val(),
                   'id_aktivitas_asb' : $('#id_aktivitas_asb').val() ,
-                  'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan').val() ,
+                  'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan_renja').val() ,
                   'sumber_dana' : $('#sumber_dana').val() ,
                   'pagu_musren' : $('#persen_musren_aktivitas').val(),
                   'pagu_aktivitas' : $('#pagu_aktivitas').val() ,
@@ -4150,7 +4159,7 @@ $(document).on('click', '.edit-aktivitas', function() {
 $(document).on('click', '.btnHapusAktivitas', function() {
 
 
-  var x = confirm("Anda yakin akan menghapus data aktivitas "+$('#ur_aktivitas_kegiatan').val()+" ?");
+  var x = confirm("Anda yakin akan menghapus data aktivitas "+$('#ur_aktivitas_kegiatan_renja').val()+" ?");
 
   if (x) {
     $.ajaxSetup({

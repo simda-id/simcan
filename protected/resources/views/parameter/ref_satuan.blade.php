@@ -253,7 +253,8 @@ $('.modal-footer').on('click', '.add', function() {
             'scope_pemakaian': ambilNilaiScope(),
         },
         success: function(data) {
-              $('#tblsatuan').DataTable().ajax.reload();
+              $('#tblsatuan').DataTable().ajax.reload(null,false);
+              $('#tblsatuan').DataTable().page('last').draw('page');
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -301,7 +302,7 @@ $('.modal-footer').on('click', '.edit', function() {
             'scope_pemakaian': ambilNilaiScope(),
         },
         success: function(data) {
-            $('#tblsatuan').DataTable().ajax.reload();
+              $('#tblsatuan').DataTable().ajax.reload(null,false);
             if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -341,7 +342,7 @@ $('.modal-footer').on('click', '.delete', function() {
     },
     success: function(data) {
       $('.item' + $('.id_satuan_hapus').text()).remove();
-      $('#tblsatuan').DataTable().ajax.reload();
+      $('#tblsatuan').DataTable().ajax.reload(null,false);
       createPesan(data.pesan,"success");
     }
   });

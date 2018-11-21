@@ -570,12 +570,6 @@ function loadDesa($id_kecamatan){
   }); 
 }
 
-
-
-// $( "#id_desa_cb" ).change(function() {
-//   LoadUsulanDesa($('#id_desa_cb').val());
-// });
-
 var usulan_tbl
 function LoadUsulKecamatan($id_kecamatan){
     usulan_tbl=$('#tblMusrendes').DataTable({
@@ -1003,6 +997,7 @@ $('.modal-footer').on('click', '.addLokasi', function() {
           }
       });
   });
+  // $('#cb_eselon_4 option:selected').text()
 
 $(document).on('click','#btnEditLokasiMusren', function() {
 

@@ -51,7 +51,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     @endforeach
                   </select>
                 </div>
-                <button type="button" class="btn btn-primary btn-labeled btnPrintKompilasiProgramdanPaguRenstra" data-dismiss="modal" aria-hidden="true">
+                <button type="button" class="btn btn-primary btn-labeled btnPrintKompilasiProgramdanPaguRenstra hidden" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Kompilasi Program dan Pagu Renstra</button>
               </div>
               <br>
@@ -76,8 +76,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <table id="tblMisi" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Kode Visi</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Kode Misi</th>
+                          <th width="5%" style="text-align: center; vertical-align:middle">Kode Visi</th>
+                          <th width="5%" style="text-align: center; vertical-align:middle">Kode Misi</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Misi</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
@@ -93,8 +93,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <table id="tblTujuan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Kode Misi</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">No Tujuan</th>
+                          <th width="3%" style="text-align: center; vertical-align:middle"></th>
+                          <th width="5%" style="text-align: center; vertical-align:middle">Kode Misi</th>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Tujuan</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Tujuan</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
@@ -108,8 +109,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <br>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#sasaran1" aria-controls="visi" role="tab" data-toggle="tab">Sasaran</a></li>
-                <li><a href="#kebijakan" aria-controls="tujuan" role="tab" data-toggle="tab">Kebijakan</a></li>
                 <li><a href="#strategi" aria-controls="sasaran" role="tab" data-toggle="tab">Strategi</a></li>
+                <li><a href="#kebijakan" aria-controls="tujuan" role="tab" data-toggle="tab">Kebijakan</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="sasaran1">
@@ -118,8 +119,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <table id="tblSasaran" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
-                              <th width="10%" style="text-align: center; vertical-align:middle">Kode Tujuan</th>
-                              <th width="10%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
+                              <th width="3%" style="text-align: center; vertical-align:middle"></th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">Kode Tujuan</th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
                               <th style="text-align: center; vertical-align:middle">Uraian Sasaran</th>
                               <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                           </tr>
@@ -135,8 +137,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <table id="tblKebijakan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
-                              <th width="10%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
-                              <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                               <th style="text-align: center; vertical-align:middle">Uraian Kebijakan</th>
                           </tr>
                       </thead>
@@ -151,8 +153,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <table id="tblStrategi" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
-                              <th width="10%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
-                              <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
+                              <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                               <th style="text-align: center; vertical-align:middle">Uraian Strategi</th>
                           </tr>
                       </thead>
@@ -165,74 +167,36 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
             <div role="tabpanel" class="tab-pane" id="program">
             <br>
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#program1" aria-controls="visi" role="tab" data-toggle="tab">Program</a></li>
-                <li><a href="#indikatorprogram" aria-controls="misi" role="tab" data-toggle="tab">Indikator Program</a></li>
-            </ul>
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="program1">
-              <br>
-              <div class="">
-                <table id="tblProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                        <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
-                        <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Program</th>
-                        <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program SKPD</th>
-                        <th colspan="5" style="text-align: center; vertical-align:middle">Pagu Program per Tahun (juta rupiah)</th>
-                        <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                      <tr>
-                      @foreach($dataperda as $datas)
-                          <th width="5%" style="text-align: center">{{$datas->tahun_1}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_2}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_3}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_4}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_5}}</th>
-                      @endforeach
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="indikatorprogram">
-              <br>
-              <div class="">
-                <table id="tblIndikatorProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+            <div class="">
+                    <table id="tblProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Program</th>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
-                          <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                          <th colspan="7" style="text-align: center; vertical-align:middle">Target Indikator per Tahun</th>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                      <tr>
-                      @foreach($dataperda as $datas)
-                      	  <th width="5%" style="text-align: center">Awal</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_1}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_2}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_3}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_4}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_5}}</th>
-                          <th width="5%" style="text-align: center">Akhir</th>
-                      @endforeach
-                      </tr>
+                            <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle"></th>
+                            <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
+                            <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Kode Program</th>
+                            <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program SKPD</th>
+                            <th colspan="5" style="text-align: center; vertical-align:middle">Pagu Program per Tahun (juta rupiah)</th>
+                            <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                          </tr>
+                          <tr>
+                          @foreach($dataperda as $datas)
+                              <th width="5%" style="text-align: center">{{$datas->tahun_1}}</th>
+                              <th width="5%" style="text-align: center">{{$datas->tahun_2}}</th>
+                              <th width="5%" style="text-align: center">{{$datas->tahun_3}}</th>
+                              <th width="5%" style="text-align: center">{{$datas->tahun_4}}</th>
+                              <th width="5%" style="text-align: center">{{$datas->tahun_5}}</th>
+                          @endforeach
+                        </tr>
                       </thead>
                       <tbody>
                       </tbody>
-                </table>
-              </div>
-              </div>
-            </div>
+                    </table>
+                  </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="kegiatan">
             <br>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#kegiatan1" aria-controls="kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
-                <li><a href="#indikatorkegiatan" aria-controls="kegiatan" role="tab" data-toggle="tab">Indikator Kegiatan</a></li>
                 <li><a href="#pelaksana" aria-controls="kegiatan" role="tab" data-toggle="tab">Sub Unit Pelaksana</a></li>
             </ul>
            <div class="tab-content">
@@ -242,8 +206,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <table id="tblKegiatan" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Program</th>
-                      <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
+                      <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle"></th>
+                      <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Kode Program</th>
+                      <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
                       <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Kegiatan SKPD</th>
                       <th colspan="5" style="text-align: center; vertical-align:middle">Pagu Kegiatan per Tahun (juta rupiah)</th>
                       <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
@@ -263,41 +228,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </table>
               </div>
               </div>
-              <div role="tabpanel" class="tab-pane" id="indikatorkegiatan">
-              <br>
-              <div class="">
-                <table id="tblIndikatorkegiatan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                      <tr>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
-                          <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                          <th colspan="5" style="text-align: center; vertical-align:middle">Target Indikator per Tahun</th>
-                          <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                      <tr>
-                      @foreach($dataperda as $datas)
-                          <th width="5%" style="text-align: center">{{$datas->tahun_1}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_2}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_3}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_4}}</th>
-                          <th width="5%" style="text-align: center">{{$datas->tahun_5}}</th>
-                      @endforeach
-                      </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                  </table>
-                </div>
-              </div>
               <div role="tabpanel" class="tab-pane" id="pelaksana">
                 <br>
                 <div class="">
                   <table id="tblPelaksana" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th width="10%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
-                                <th width="10%" style="text-align: center; vertical-align:middle">Kode Unit</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
+                                <th width="5%" style="text-align: center; vertical-align:middle">Kode Unit</th>
                                 <th style="text-align: center; vertical-align:middle">Uraian Sub Unit Pelaksana</th>
                                 <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                             </tr>
@@ -315,751 +253,83 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
   </div>
+@endif
 
+<script id="details-inTujuan" type="text/x-handlebars-template">
+    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inTujuan-@{{id_tujuan_renstra}}">
+        <thead>
+          <tr>
+            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>        
+        </tbody>
+    </table>
+</script>
 
-    {{-- EditVisi --}}
-<div id="EditVisi" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_visi_renstra_edit" name="id_visi_renstra_edit">
-              <input type="hidden" class="form-control" id="id_renstra_edit" name="id_renstra_edit" required="required" >
-              <input type="hidden" class="form-control" id="thn_id_edit" name="thn_id_edit" required="required" readonly>
-              <div class="form-group">
-                <label for="thn_id_edit" class="col-sm-3 control-label" align='left'>Periode renstra :</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id="thn_periode_visi" name="thn_periode_visi" required="required" readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_edit" name="no_urut_edit" required="required">                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_edit" name="id_perubahan_edit" required="required">                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_visi_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Visi renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_visi_renstra_edit" name="ur_visi_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_visi btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-</div>
+<script id="details-inSasaran" type="text/x-handlebars-template">
+    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inSasaran-@{{id_sasaran_renstra}}">
+        <thead>
+          <tr>
+            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>        
+        </tbody>
+    </table>
+  </script>
+  
+  <script id="details-inProgram" type="text/x-handlebars-template">
+    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProgram-@{{id_program_renstra}}">
+        <thead>
+          <tr>
+            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>        
+        </tbody>
+    </table>
+  </script>
 
-<div id="EditMisi" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_misi_renstra_edit" name="id_misi_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_misi_edit" name="thn_id_edit" readonly >
-              <div class="form-group">
-                <label for="id_visi_renstra_edit" class="col-sm-3 control-label" align='left'>ID Visi renstra :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_visi_renstra_misi_edit" name="id_visi_renstra_edit" readonly >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_misi_edit" name="no_urut_misi_edit" required="required">                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_misi_edit" name="id_perubahan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_misi_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Misi renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_misi_renstra_edit" name="ur_misi_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_misi btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
+  <script id="details-inKegiatan" type="text/x-handlebars-template">
+    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKegiatan-@{{id_kegiatan_renstra}}">
+        <thead>
+          <tr>
+            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+            <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
+            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>        
+        </tbody>
+    </table>
+  </script>
 
-<div id="EditTujuan" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_tujuan_renstra_edit" name="id_tujuan_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_tujuan_edit" name="thn_id_edit" required="required" >
-              <input type="hidden" class="form-control" id="id_misi_renstra_tujuan_edit" name="id_misi_renstra_edit" required="required">
-              <div class="form-group">
-                <label for="id_misi_renstra_edit" class="col-sm-3 control-label" align='left'>ID Misi renstra :</label>
-                <div class="col-sm-6">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="id_misi_tujuan_edit" name="id_misi_tujuan_edit" readonly >
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_tujuan_edit" name="no_urut_tujuan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_tujuan_edit" name="id_perubahan_edit" required="required" >
-                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_tujuan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian tujuan renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_tujuan_renstra_edit" name="ur_tujuan_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_tujuan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
+@include('renstra.FrmRenstraVisi')
+@include('renstra.FrmRenstraMisi')
+@include('renstra.FrmRenstraTujuan')
+@include('renstra.FrmRenstraTujuanIndikator')
+@include('renstra.FrmRenstraSasaran')
+@include('renstra.FrmRenstraSasaranIndikator')
+@include('bebas.FrmCariSasaranIndikatorRpjmd')
+@include('renstra.FrmRenstraStrategi')
+@include('renstra.FrmRenstraKebijakan')
+@include('renstra.FrmRenstraProgram')
+@include('renstra.FrmRenstraProgramIndikator')
+@include('bebas.FrmCariSasaranIndikatorRenstra')
+@include('renstra.FrmRenstraKegiatan')
+@include('renstra.FrmRenstraKegiatanIndikator')
+@include('renstra.FrmRenstraKegiatanPelaksana')
+@include('bebas.FrmCariIndikator')
+@include('bebas.FrmCariSasaranRPJMD')
+@include('bebas.FrmModalProgress')
 
-<div id="Editsasaran" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_sasaran_renstra_edit" name="id_sasaran_renstra_edit">
-              <input type="hidden" class="form-control" id="thn_id_sasaran_edit" name="thn_id_edit">
-              <input type="hidden" class="form-control" id="id_tujuan_renstra_sasaran_edit" name="id_tujuan_renstra_sasaran_edit">
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id_sasaran_renstra_edit">ID Tujuan renstra :</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="id_tujuan_sasaran_edit" name="id_tujuan_sasaran_edit" readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_sasaran_edit" name="no_urut_sasaran_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_sasaran_edit" name="id_perubahan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_sasaran_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian sasaran renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_sasaran_renstra_edit" name="ur_sasaran_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_sasaran btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editkebijakan" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_kebijakan_renstra_edit" name="id_kebijakan_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_kebijakan_edit" name="thn_id_edit" readonly >
-              <input type="hidden" class="form-control" id="id_sasaran_renstra_kebijakan_edit" name="id_sasaran_renstra_kebijakan_edit" readonly >
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id_kebijakan_renstra_edit">ID Sasaran renstra :</label>
-                <div class="col-sm-2">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="id_sasaran_kebijakan_edit" name="id_sasaran_kebijakan_edit" readonly >
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_kebijakan_edit" name="no_urut_kebijakan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_kebijakan_edit" name="id_perubahan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_kebijakan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian kebijakan renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_kebijakan_renstra_edit" name="ur_kebijakan_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_kebijakan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editstrategi" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_strategi_renstra_edit" name="id_strategi_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_strategi_edit" name="thn_id_edit" readonly >
-              <input type="hidden" class="form-control" id="id_sasaran_renstra_strategi_edit" name="id_sasaran_renstra_edit" readonly >
-              <div class="form-group">
-                <label class="control-label col-sm-3" for="id_strategi_renstra_edit">ID strategi renstra :</label>
-                <div class="col-sm-6">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="id_sasaran_strategi_edit" name="id_sasaran_strategi_edit" readonly >
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_strategi_edit" name="no_urut_strategi_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_perubahan_strategi_edit" name="id_perubahan_edit" required="required" >                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="ur_strategi_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian strategi renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_strategi_renstra_edit" name="ur_strategi_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_strategi btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editprogram" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_program_renstra_edit" name="id_program_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_program_edit" name="thn_id_edit" readonly>
-              <input type="hidden" class="form-control" id="id_sasaran_renstra_program_edit" name="id_sasaran_renstra_edit" readonly>
-              <div class="form-group">
-                <label for="id_sasaran_renstra_edit" class="col-sm-3 control-label" align='left'>ID Sasaran renstra :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="id_sasaran_program_edit" name="id_sasaran_program_edit" readonly>                  
-                </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                <div class="col-sm-2">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_program_edit" name="no_urut_program_edit" required="required" >                  
-                </div>
-                </div>
-              </div>              
-             
-              <div class="form-group">
-                <label for="ur_program_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian program renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_program_renstra_edit" name="ur_program_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-              <label class="col-sm-12 control-label" style="text-align: left;">Rincian Pagu Program renstra :</label>
-              <table id="tblPaguProgram" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                          <tr>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu1_edit" name="pagu1_edit" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu2_edit" name="pagu2_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu3_edit" name="pagu3_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu4_edit" name="pagu4_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu5_edit" name="pagu5_edit" style="text-align: right; " >
-                            </td>
-                          </tr>
-                      </tbody>
-                </table>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_program btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-    
-<div id="Editindikatorprogram" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_program_renstra_edit" name="id_program_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="id_ind_program_renstra_edit" name="id_ind_program_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_program_edit" name="thn_id_edit" readonly>
-              <input type="hidden" class="form-control" id="id_sasaran_renstra_program_edit" name="id_sasaran_renstra_edit" readonly>
-                          
-             
-              <div class="form-group">
-                <label for="ur_ind_program_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian program renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_ind_program_renstra_edit" name="ur_program_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-              <label class="col-sm-12 control-label" style="text-align: left;">Rincian Pagu Program renstra :</label>
-              <table id="tblAngkaIndProgram" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                          <tr>
-                          	<th width="14.3%" style="text-align: center; vertical-align:middle">Angka Awal</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Tahun 1</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Tahun 2</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Tahun 3</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Tahun 4</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Tahun 5</th>
-                            <th width="14.3%" style="text-align: center; vertical-align:middle">Angka Akhir</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                        <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angkaawal_edit" name="angkaawal_edit" style="text-align: right; ">
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka1_edit" name="angka1_edit" style="text-align: right; ">
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka2_edit" name="angka2_edit" style="text-align: right; " >
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka3_edit" name="angka3_edit" style="text-align: right; " >
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka4_edit" name="angka4_edit" style="text-align: right; " >
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka5_edit" name="angka5_edit" style="text-align: right; " >
-                            </td>
-                            <td width="14.3%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angkaakhir_edit" name="angkaakhir_edit" style="text-align: right; ">
-                            </td>
-                          </tr>
-                      </tbody>
-                </table>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_ind_program btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editkegiatan" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_kegiatan_renstra_edit" name="id_kegiatan_renstra_edit" readonly >
-              
-              
-              <div class="form-group">
-                <label for="ur_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian kegiatan renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_kegiatan_renstra_edit" name="ur_kegiatan_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-              <label class="col-sm-12 control-label" style="text-align: left;">Rincian Pagu Kegiatan Renstra :</label>
-              <table id="tblPaguKegiatan" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                          <tr>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu1_edit_kegiatan" name="pagu1_edit_kegiatan" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu2_edit_kegiatan" name="pagu2_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu3_edit_kegiatan" name="pagu3_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu4_edit_kegiatan" name="pagu4_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu5_edit_kegiatan" name="pagu5_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                          </tr>
-                      </tbody>
-                </table>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_kegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editindikatorkegiatan" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_ind_kegiatan_renstra_edit" name="id_ind_kegiatan_renstra_edit" readonly >
-              
-                          
-             
-              <div class="form-group">
-                <label for="ur_ind_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian kegiatan renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_ind_kegiatan_renstra_edit" name="ur_kegiatan_renstra_edit" required="required" ></textarea>
-                </div>
-              </div>
-              <label class="col-sm-12 control-label" style="text-align: left;">Rincian Pagu Kegiatan renstra :</label>
-              <table id="tblAngkaIndKegiatan" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                          <tr>
-                          	
-                            <th width="20%" style="text-align: center; vertical-align:middle">Angka Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Angka Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Angka Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Angka Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Angka Tahun 5</th>
-                            
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                        
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka1_edit_kegiatan" name="angka1_edit_kegiatan" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka2_edit_kegiatan" name="angka2_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka3_edit_kegiatan" name="angka3_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka4_edit_kegiatan" name="angka4_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="angka5_edit_kegiatan" name="angka5_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                        
-                          </tr>
-                      </tbody>
-                </table>
-          </form>
-        </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_ind_kegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-
-<div id="Editpelaksana" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <form name="frmModalPelaksana" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id_pelaksana" id="id_pelaksana">
-
-            <div class="row">
-            <div class="col-sm-2" style="text-align: center;">
-              <i class="fa fa-map-marker fa-fw" style="font-size: 100px;color: #357EBD;"></i>
-            </div>
-            <div class="col-sm-10">
-            <div class="form-group">
-                <label for="pelaksana" class="col-sm-2 control-label" align='left'>Sub Unit Pelaksana :</label>
-                <div class="col-sm-10">
-                  <select class="form-control tahun" name="pelaksana" id="pelaksana">
-                  
-                  </select>
-<!--                   <input type="text" class="form-control number" id="text_tahun" name="text_tahun" required="required" align='right' > -->
-                </div>
-              </div>
-              
-            
-            </div>
-            </div> 
-        </form>
-      </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">                        
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-sm btn-success btnPelaksana btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i id="nmbtnPelaksana" class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>
-    </div>
-  </div>
-</div>
-  @endif
 @endsection
 
 
@@ -1067,6 +337,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @section('scripts')
 <script type="text/javascript" language="javascript" class="init">
 $(document).ready(function() {
+
+  var detInTujuan = Handlebars.compile($("#details-inTujuan").html());
+  var detInSasaran = Handlebars.compile($("#details-inSasaran").html());
+  var detInProgram = Handlebars.compile($("#details-inProgram").html());
+  var detInKegiatan = Handlebars.compile($("#details-inKegiatan").html());
+
   var id_unit_renstra;
   var id_visi_renstra;
   var id_misi_renstra;
@@ -1106,7 +382,7 @@ $(document).ready(function() {
   };
 
   $('[data-toggle="popover"]').popover();
-  $('.number').number(true,0,',', '.');
+  $('.number').number(true,4,',', '.');
 
 
   $('.page-alert .close').click(function(e) {
@@ -1114,7 +390,8 @@ $(document).ready(function() {
           $(this).closest('.page-alert').slideUp();
       });
 
-  var tbl_Visi = $('#tblVisi').DataTable( {
+  var tbl_Visi;
+  tbl_Visi = $('#tblVisi').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
@@ -1135,7 +412,8 @@ $(document).ready(function() {
                   "bDestroy": true
         } );
   
-  var tbl_Misi = $('#tblMisi').DataTable( {
+  var tbl_Misi;
+  tbl_Misi = $('#tblMisi').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
@@ -1157,11 +435,12 @@ $(document).ready(function() {
                   "bDestroy": true
         } );
 
-  var tbl_Tujuan = $('#tblTujuan').DataTable( {
+  var tbl_Tujuan;
+  tbl_Tujuan = $('#tblTujuan').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'bfrtip',                  
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
@@ -1170,20 +449,69 @@ $(document).ready(function() {
                 "thousands": "."},
           "ajax": {"url": "./renstra/tujuan/0"},
           "columns": [
+                {
+                  "className":      'details-control',
+                  "orderable":      false,
+                  "searchable":      false,
+                  "data":           null,
+                  "defaultContent": '',
+                  "width" : "5px"
+                },
                 { data: 'kd_misi', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_tujuan_renstra'},
                 { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
               ],
-                  "order": [[1, 'asc']],
+                  "order": [[2, 'asc']],
                   "bDestroy": true
           } );
 
-  var tbl_Sasaran = $('#tblSasaran').DataTable( {
+  
+  var tblInTujuan;
+    function initInTujuan(tableId, data) {
+        tblInTujuan=$('#' + tableId).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: data.details_url,
+                dom : 'bfrtip',
+                autoWidth: false,
+                "language": {
+                          "decimal": ",",
+                          "thousands": "."},
+                "columns": [
+                            { data: 'urut', sClass: "dt-center"},
+                            { data: 'nm_indikator'},
+                            { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                          ],
+                "order": [[0, 'asc']],
+                "bDestroy": true
+            })
+
+    }
+
+  $('#tblTujuan tbody').on('click', 'td.details-control', function () {
+      var tr = $(this).closest('tr');
+      var row = tbl_Tujuan.row( tr );
+      var tableId = 'inTujuan-' + row.data().id_tujuan_renstra;
+
+      if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+      } else {
+          row.child(detInTujuan(row.data())).show();
+          initInTujuan(tableId, row.data());
+          tr.addClass('shown');
+          tr.next().find('td').addClass('no-padding bg-gray');
+      }    
+  });
+
+
+  var tbl_Sasaran;
+  tbl_Sasaran = $('#tblSasaran').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'bfrtip',                  
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
@@ -1192,20 +520,70 @@ $(document).ready(function() {
                 "thousands": "."},
           "ajax": {"url": "./renstra/sasaran/0"},
           "columns": [
+                {
+                  "className":      'details-control',
+                  "orderable":      false,
+                  "searchable":      false,
+                  "data":           null,
+                  "defaultContent": '',
+                  "width" : "5px"
+                },
                 { data: 'kd_tujuan', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_sasaran_renstra'},
                 { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
               ],
-                  "order": [[1, 'asc']],
+                  "order": [[2, 'asc']],
                   "bDestroy": true
             } );
 
-  var tbl_Kebijakan = $('#tblKebijakan').DataTable( {
+
+  var tblInSasaran;
+    function initInSasaran(tableId, data) {
+        tblInSasaran=$('#' + tableId).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: data.details_url,
+                dom : 'bfrtip',
+                autoWidth: false,
+                "language": {
+                          "decimal": ",",
+                          "thousands": "."},
+                "columns": [
+                            { data: 'urut', sClass: "dt-center"},
+                            { data: 'nm_indikator'},
+                            { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                          ],
+                "order": [[0, 'asc']],
+                "bDestroy": true
+            })
+
+    }
+
+  $('#tblSasaran tbody').on('click', 'td.details-control', function () {
+      var tr = $(this).closest('tr');
+      var row = tbl_Sasaran.row( tr );
+      var tableId = 'inSasaran-' + row.data().id_sasaran_renstra;
+
+      if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+      } else {
+          row.child(detInSasaran(row.data())).show();
+          initInSasaran(tableId, row.data());
+          tr.addClass('shown');
+          tr.next().find('td').addClass('no-padding bg-gray');
+      }    
+  });
+  @include('renstra.JsRenstraSasaran');
+  @include('renstra.JsRenstraSasaranIndikator');
+
+  var tbl_Kebijakan;
+  tbl_Kebijakan = $('#tblKebijakan').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'bfrtip',                  
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
@@ -1222,11 +600,12 @@ $(document).ready(function() {
                   "bDestroy": true
             } );
 
-  var tbl_Strategi = $('#tblStrategi').DataTable( {
+  var tbl_Strategi;
+  tbl_Strategi = $('#tblStrategi').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'bfrtip',                  
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
@@ -1243,11 +622,12 @@ $(document).ready(function() {
                   "bDestroy": true
           } );
 
-  var tbl_Program = $('#tblProgram').DataTable( {
+  var tbl_Program;
+  tbl_Program = $('#tblProgram').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'bfrtip',                  
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
@@ -1259,6 +639,14 @@ $(document).ready(function() {
                 "decimal": ",",
                 "thousands": "."},
           "columns": [
+                {
+                  "className":      'details-control',
+                  "orderable":      false,
+                  "searchable":      false,
+                  "data":           null,
+                  "defaultContent": '',
+                  "width" : "5px"
+                },
                 { data: 'kd_sasaran', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'nm_program'},
@@ -1277,151 +665,108 @@ $(document).ready(function() {
             "columnDefs": [ {
                   "visible": false
                   } ],
-                  "order": [[1, 'asc']],
+                  "order": [[2, 'asc']],
                   "bDestroy": true
           } );
-  $(document).on('click', '.edit-program', function() {
 
-      var data = tbl_Program.row( $(this).parents('tr') ).data();
 
-	    $('.actionBtn_program').addClass('editprogram');
-	    $('.modal-title').text('Edit Data program SKPD');
-	    $('.form-horizontal').show();
-	    $('#id_program_renstra_edit').val($(this).data('id_program_renstra_program'));
-	    $('#no_urut_program_edit').val($(this).data('no_urut_program'));
-	    $('#pagu1_edit').val($(this).data('pagu_tahun1_program'));
-	    $('#pagu2_edit').val($(this).data('pagu_tahun2_program'));
-	    $('#pagu3_edit').val($(this).data('pagu_tahun3_program'));
-	    $('#pagu4_edit').val($(this).data('pagu_tahun4_program'));
-	    $('#pagu5_edit').val($(this).data('pagu_tahun5_program'));
-	    $('#ur_program_renstra_edit').val($(this).data('uraian_program_renstra_program'));
-      $('#id_sasaran_program_edit').val(id_sasaran_renstra);
-	    $('#Editprogram').modal('show');
-	  });
+  var tblInProgram;
+    function initInProgram(tableId, data) {
+        tblInProgram=$('#' + tableId).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: data.details_url,
+                dom : 'bfrtip',
+                autoWidth: false,
+                "language": {
+                          "decimal": ",",
+                          "thousands": "."},
+                "columns": [
+                            { data: 'urut', sClass: "dt-center"},
+                            { data: 'nm_indikator'},
+                            { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                          ],
+                "order": [[0, 'asc']],
+                "bDestroy": true
+            })
 
-$('.modal-footer').on('click', '.editprogram', function() {
-$.ajaxSetup({
-   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
-
-$.ajax({
-    type: 'post',
-    url: './renstra/editprogram',
-    data: {
-        '_token': $('input[name=_token]').val(),
-        'id_program_renstra_edit': $('#id_program_renstra_edit').val(),
-        'no_urut_program_edit': $('#no_urut_program_edit').val(),
-        'id_sasaran_renstra_program_edit': $('#id_sasaran_program_edit').val(),
-        'pagu1_edit': $('#pagu1_edit').val(),
-        'pagu2_edit': $('#pagu2_edit').val(),
-        'pagu3_edit': $('#pagu3_edit').val(),
-        'pagu4_edit': $('#pagu4_edit').val(),
-        'pagu5_edit': $('#pagu5_edit').val(),
-        'ur_program_renstra_edit': $('#ur_program_renstra_edit').val(),
-    },
-    success: function(data) {
-        $('#tblProgram').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-              }
     }
-});
-});
-  
 
-  var tbl_IndikatorProgram = $('#tblIndikatorProgram').DataTable( {
-          processing: true,
-          serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
-          autoWidth : false,
-          order: [[0, 'asc']],
-          bDestroy: true,
-          language: {
-                "decimal": ",",
-                "thousands": "."},
-          "ajax": {"url": "./renstra/programindikator/0"},
-          "language": {
-                "decimal": ",",
-                "thousands": "."},
-          "columns": [
-                { data: 'kd_program', sClass: "dt-center"},
-                { data: 'no_urut', sClass: "dt-center"},
-                { data: 'uraian_indikator_program_renstra'},
-                { data: 'angka_awal_periode',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_tahun1',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_tahun2',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_tahun3',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_tahun4',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_tahun5',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'angka_akhir_periode',
-                      render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-                { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
-              ],
-          "columnDefs": [ {
-              "visible": false
-              } ],
-                  "order": [[1, 'asc']],
-                  "bDestroy": true
-          } );
-  $(document).on('click', '.edit-ind-program', function() {
+  $('#tblProgram tbody').on('click', 'td.details-control', function () {
+      var tr = $(this).closest('tr');
+      var row = tbl_Program.row( tr );
+      var tableId = 'inProgram-' + row.data().id_program_renstra;
 
-      var data = tbl_IndikatorProgram.row( $(this).parents('tr') ).data();
+      if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+      } else {
+          row.child(detInProgram(row.data())).show();
+          initInProgram(tableId, row.data());
+          tr.addClass('shown');
+          tr.next().find('td').addClass('no-padding bg-gray');
+      }    
+  });
 
-	    $('.actionBtn_ind_program').addClass('editindprogram');
-	    $('.modal-title').text('Edit Data Indikator Program SKPD');
-	    $('.form-horizontal').show();
-	    $('#id_ind_program_renstra_edit').val($(this).data('id_ind_program_renstra_program'));
-	    $('#angkaawal_edit').val($(this).data('angka_awal_periode_program'));
-	    $('#angka1_edit').val($(this).data('angka_tahun1_program'));
-	    $('#angka2_edit').val($(this).data('angka_tahun2_program'));
-	    $('#angka3_edit').val($(this).data('angka_tahun3_program'));
-	    $('#angka4_edit').val($(this).data('angka_tahun4_program'));
-	    $('#angka5_edit').val($(this).data('angka_tahun5_program'));
-	    $('#angkaakhir_edit').val($(this).data('angka_akhir_periode_program'));
-	    $('#ur_ind_program_renstra_edit').val($(this).data('uraian_ind_program_renstra_program'));
-         $('#Editindikatorprogram').modal('show');
-	  });
+@include('renstra.JsRenstraProgramIndikator');
+@include('renstra.JsRenstraProgram');
 
-$('.modal-footer').on('click', '.editindprogram', function() {
-$.ajaxSetup({
-   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
+//   $(document).on('click', '.btnDetailProgram', function() {
+//       var data = tbl_Program.row( $(this).parents('tr') ).data();
+// 	    $('.actionBtn_program').addClass('editprogram');
+// 	    $('.modal-title').text('Detail Data program SKPD');
+// 	    $('.form-horizontal').show();
+//         $('#id_program_renstra_edit').val(data.id_program_renstra);
+//         $('#thn_id_program_edit').val(data.id_program_renstra);
+// 	    $('#no_urut_program_edit').val(data.thn_id);
+// 	    $('#pagu1_edit').val(data.pagu_tahun1a);
+// 	    $('#pagu2_edit').val(data.pagu_tahun2a);
+// 	    $('#pagu3_edit').val(data.pagu_tahun3a);
+// 	    $('#pagu4_edit').val(data.pagu_tahun4a);
+//         $('#pagu5_edit').val(data.pagu_tahun5a);
+//         $('#pagu6_edit').val(data.pagu_tahun6a);
+// 	    $('#ur_program_renstra_edit').val(data.nm_program);
+//         $('#id_sasaran_program_edit').val(data.kd_sasaran);
+//         $('#kd_program_edit').val(data.kd_program);
+//         $('#ur_program_rpjmd_edit').val(data.nm_program_rpjmd); 
+//         $('#id_program_rpjmd_edit').val(data.id_program_rpjmd); 
+//         $('#id_program_ref_edit').val(data.id_program_ref);        
+// 	    $('#ModalProgram').modal('show');
+// 	});
 
-$.ajax({
-    type: 'post',
-    url: './renstra/editindikatorprogram',
-    data: {
-        '_token': $('input[name=_token]').val(),
-        'id_ind_program_renstra_edit': $('#id_ind_program_renstra_edit').val(),
-        'angkaawal_edit': $('#angkaawal_edit').val(),
-        'angka1_edit': $('#angka1_edit').val(),
-        'angka2_edit': $('#angka2_edit').val(),
-        'angka3_edit': $('#angka3_edit').val(),
-        'angka4_edit': $('#angka4_edit').val(),
-        'angka5_edit': $('#angka5_edit').val(),
-        'angkaakhir_edit': $('#angkaakhir_edit').val(),
-        'ur_ind_program_renstra_edit': $('#ur_ind_program_renstra_edit').val(),
-    },
-    success: function(data) {
-        $('#tblIndikatorProgram').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-              }
-    }
-});
-});
-  var tbl_Kegiatan = $('#tblKegiatan').DataTable( {
+// $('.modal-footer').on('click', '.editprogram', function() {
+// $.ajaxSetup({
+//    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+// });
+
+//     $.ajax({
+//         type: 'post',
+//         url: './renstra/editprogram',
+//         data: {
+//             '_token': $('input[name=_token]').val(),
+//             'id_program_renstra_edit': $('#id_program_renstra_edit').val(),
+//             'no_urut_program_edit': $('#no_urut_program_edit').val(),
+//             'id_sasaran_renstra_program_edit': $('#id_sasaran_program_edit').val(),
+//             'pagu1_edit': $('#pagu1_edit').val(),
+//             'pagu2_edit': $('#pagu2_edit').val(),
+//             'pagu3_edit': $('#pagu3_edit').val(),
+//             'pagu4_edit': $('#pagu4_edit').val(),
+//             'pagu5_edit': $('#pagu5_edit').val(),
+//             'ur_program_renstra_edit': $('#ur_program_renstra_edit').val(),
+//         },
+//         success: function(data) {
+//             $('#tblProgram').DataTable().ajax.reload(null,false);
+//                 if(data.status_pesan==1){
+//                     createPesan(data.pesan,"success");
+//                     } else {
+//                     createPesan(data.pesan,"danger"); 
+//                 }
+//         }
+//     });
+// });
+
+  var tbl_Kegiatan;
+  tbl_Kegiatan = $('#tblKegiatan').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
@@ -1433,10 +778,15 @@ $.ajax({
                 "decimal": ",",
                 "thousands": "."},
           "ajax": {"url": "./renstra/kegiatan/0"},
-          "language": {
-              "decimal": ",",
-              "thousands": "."},
           "columns": [
+                {
+                  "className":      'details-control',
+                  "orderable":      false,
+                  "searchable":      false,
+                  "data":           null,
+                  "defaultContent": '',
+                  "width" : "5px"
+                },
               { data: 'kd_program', sClass: "dt-center"},
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'ur_kegiatan'},
@@ -1455,141 +805,106 @@ $.ajax({
             "columnDefs": [ {
                 "visible": false
               } ],
-                  "order": [[1, 'asc']],
+                  "order": [[2, 'asc']],
                   "bDestroy": true
             } );
-  $(document).on('click', '.edit-kegiatan', function() {
 
-      var data = tbl_Kegiatan.row( $(this).parents('tr') ).data();
 
-	    $('.actionBtn_kegiatan').addClass('editkegiatan');
-	    $('.modal-title').text('Edit Data Kegiatan SKPD');
-	    $('.form-horizontal').show();
-	    $('#id_kegiatan_renstra_edit').val($(this).data('id_kegiatan_renstra'));
-	    $('#pagu1_edit_kegiatan').val($(this).data('pagu_tahun1_kegiatan'));
-	    $('#pagu2_edit_kegiatan').val($(this).data('pagu_tahun2_kegiatan'));
-	    $('#pagu3_edit_kegiatan').val($(this).data('pagu_tahun3_kegiatan'));
-	    $('#pagu4_edit_kegiatan').val($(this).data('pagu_tahun4_kegiatan'));
-	    $('#pagu5_edit_kegiatan').val($(this).data('pagu_tahun5_kegiatan'));
-	    $('#ur_kegiatan_renstra_edit').val($(this).data('uraian_kegiatan_renstra'));
-        $('#Editkegiatan').modal('show');
-	  });
+  var tblInKegiatan;
+    function initInKegiatan(tableId, data) {
+        tblInKegiatan=$('#' + tableId).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: data.details_url,
+                dom : 'bfrtip',
+                autoWidth: false,
+                "language": {
+                          "decimal": ",",
+                          "thousands": "."},
+                "columns": [
+                            { data: 'urut', sClass: "dt-center"},
+                            { data: 'nm_indikator'},
+                            { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                          ],
+                "order": [[0, 'asc']],
+                "bDestroy": true
+            })
 
-$('.modal-footer').on('click', '.editkegiatan', function() {
-$.ajaxSetup({
-   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
-
-$.ajax({
-    type: 'post',
-    url: './renstra/editkegiatan',
-    data: {
-        '_token': $('input[name=_token]').val(),
-        'id_kegiatan_renstra_edit': $('#id_kegiatan_renstra_edit').val(),
-        'pagu1_edit': $('#pagu1_edit_kegiatan').val(),
-        'pagu2_edit': $('#pagu2_edit_kegiatan').val(),
-        'pagu3_edit': $('#pagu3_edit_kegiatan').val(),
-        'pagu4_edit': $('#pagu4_edit_kegiatan').val(),
-        'pagu5_edit': $('#pagu5_edit_kegiatan').val(),
-        'ur_kegiatan_renstra_edit': $('#ur_kegiatan_renstra_edit').val(),
-    },
-    success: function(data) {
-        $('#tblKegiatan').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-              }
     }
-});
-});
-  var tbl_Indikatorkegiatan = $('#tblIndikatorkegiatan').DataTable( {
-          processing: true,
-          serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
-          autoWidth : false,
-          order: [[0, 'asc']],
-          bDestroy: true,
-          language: {
-                "decimal": ",",
-                "thousands": "."},
-          "ajax": {"url": "./renstra/kegiatanindikator/0"},
-          "language": {
-              "decimal": ",",
-              "thousands": "."},
-          "columns": [
-              { data: 'kd_kegiatan', sClass: "dt-center"},
-              { data: 'no_urut', sClass: "dt-center"},
-              { data: 'uraian_indikator_kegiatan_renstra'},
-              { data: 'angka_tahun1',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-              { data: 'angka_tahun2',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-              { data: 'angka_tahun3',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-              { data: 'angka_tahun4',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-              { data: 'angka_tahun5',
-                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
-              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
-              ],
-          "columnDefs": [ {
-                "visible": false
-              } ],
-                  "order": [[1, 'asc']],
-                  "bDestroy": true
-          } );
-  $(document).on('click', '.edit-ind-kegiatan', function() {
 
-      var data = tbl_Indikatorkegiatan.row( $(this).parents('tr') ).data();
+  $('#tblKegiatan tbody').on('click', 'td.details-control', function () {
+      var tr = $(this).closest('tr');
+      var row = tbl_Kegiatan.row( tr );
+      var tableId = 'inKegiatan-' + row.data().id_kegiatan_renstra;
 
-	    $('.actionBtn_ind_kegiatan').addClass('editindkegiatan');
-	    $('.modal-title').text('Edit Data Indikator Program SKPD');
-	    $('.form-horizontal').show();
-	    $('#id_ind_kegiatan_renstra_edit').val($(this).data('id_ind_kegiatan_renstra_kegiatan'));
-	    
-	    $('#angka1_edit_kegiatan').val($(this).data('angka_tahun1_kegiatan'));
-	    $('#angka2_edit_kegiatan').val($(this).data('angka_tahun2_kegiatan'));
-	    $('#angka3_edit_kegiatan').val($(this).data('angka_tahun3_kegiatan'));
-	    $('#angka4_edit_kegiatan').val($(this).data('angka_tahun4_kegiatan'));
-	    $('#angka5_edit_kegiatan').val($(this).data('angka_tahun5_kegiatan'));
-	    
-	    $('#ur_ind_kegiatan_renstra_edit').val($(this).data('uraian_ind_kegiatan_renstra_kegiatan'));
-         $('#Editindikatorkegiatan').modal('show');
-	  });
+      if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+      } else {
+          row.child(detInKegiatan(row.data())).show();
+          initInKegiatan(tableId, row.data());
+          tr.addClass('shown');
+          tr.next().find('td').addClass('no-padding bg-gray');
+      }    
+  });
 
-$('.modal-footer').on('click', '.editindkegiatan', function() {
-$.ajaxSetup({
-   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
+@include('renstra.JsRenstraKegiatanIndikator');
 
-$.ajax({
-    type: 'post',
-    url: './renstra/editindikatorkegiatan',
-    data: {
-        '_token': $('input[name=_token]').val(),
-        'id_ind_kegiatan_renstra_edit': $('#id_ind_kegiatan_renstra_edit').val(),
-        
-        'angka1_edit': $('#angka1_edit_kegiatan').val(),
-        'angka2_edit': $('#angka2_edit_kegiatan').val(),
-        'angka3_edit': $('#angka3_edit_kegiatan').val(),
-        'angka4_edit': $('#angka4_edit_kegiatan').val(),
-        'angka5_edit': $('#angka5_edit_kegiatan').val(),
-        
-        'ur_ind_kegiatan_renstra_edit': $('#ur_ind_kegiatan_renstra_edit').val(),
-    },
-    success: function(data) {
-        $('#tblIndikatorkegiatan').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-              }
-    }
-});
-});
-  var tbl_Pelaksana = $('#tblPelaksana').DataTable( {
+//   $(document).on('click', '.btnDetailKegiatan', function() {
+
+//       var data = tbl_Kegiatan.row( $(this).parents('tr') ).data();
+
+// 	    $('.actionBtn_kegiatan').addClass('editkegiatan');
+// 	    $('.modal-title').text('Detail Data Kegiatan SKPD');
+// 	    $('.form-horizontal').show();        
+//         $('#id_kegiatan_renstra_edit').val(data.id_kegiatan_renstra);
+//         $('#thn_id_kegiatan_edit').val(data.thn_id);
+// 	    $('#no_urut_kegiatan_edit').val(data.no_urut);
+// 	    $('#pagu1_edit_kegiatan').val(data.pagu_tahun1a);
+// 	    $('#pagu2_edit_kegiatan').val(data.pagu_tahun2a);
+// 	    $('#pagu3_edit_kegiatan').val(data.pagu_tahun3a);
+// 	    $('#pagu4_edit_kegiatan').val(data.pagu_tahun4a);
+//         $('#pagu5_edit_kegiatan').val(data.pagu_tahun5a);
+//         $('#pagu6_edit_kegiatan').val(data.pagu_tahun6a);
+// 	    $('#ur_kegiatan_renstra_edit').val(data.nm_kegiatan);
+//         $('#kd_program_kegiatan_edit').val(data.kd_program);
+//         $('#id_program_renstra_kegiatan_edit').val(data.id_program_renstra);
+//         $('#kd_kegiatan_edit').val(data.kd_kegiatan); 
+//         $('#id_kegiatan_ref_edit').val(data.id_kegiatan_ref);
+//         $('#ModalKegiatan').modal('show');
+// 	  });
+
+// $('.modal-footer').on('click', '.editkegiatan', function() {
+// $.ajaxSetup({
+//    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+// });
+
+// $.ajax({
+//     type: 'post',
+//     url: './renstra/editkegiatan',
+//     data: {
+//         '_token': $('input[name=_token]').val(),
+//         'id_kegiatan_renstra_edit': $('#id_kegiatan_renstra_edit').val(),
+//         'pagu1_edit': $('#pagu1_edit_kegiatan').val(),
+//         'pagu2_edit': $('#pagu2_edit_kegiatan').val(),
+//         'pagu3_edit': $('#pagu3_edit_kegiatan').val(),
+//         'pagu4_edit': $('#pagu4_edit_kegiatan').val(),
+//         'pagu5_edit': $('#pagu5_edit_kegiatan').val(),
+//         'ur_kegiatan_renstra_edit': $('#ur_kegiatan_renstra_edit').val(),
+//     },
+//     success: function(data) {
+//         $('#tblKegiatan').DataTable().ajax.reload(null,false);
+//               if(data.status_pesan==1){
+//                 createPesan(data.pesan,"success");
+//                 } else {
+//                 createPesan(data.pesan,"danger"); 
+//               }
+//     }
+// });
+// });
+
+  var tbl_Pelaksana;
+  tbl_Pelaksana = $('#tblPelaksana').DataTable( {
           processing: true,
           serverSide: true,
           responsive: true,
@@ -1618,7 +933,6 @@ $.ajax({
 	    $('.modal-title').text('Edit Data Pelaksana Kegiatan SKPD');
 	    $('.form-horizontal').show();
 	    $('#id_pelaksana').val($(this).data('id_kegiatan_renstra_pelaksana'));
-	    //alert(data.nm_sub_unit);
 	    $('select[name="pelaksana"]').empty();
 	    $('select[name="pelaksana"]').append('<option value="'+data.id_sub_unit+'">'+data.nm_sub+'</option>');
 	    
@@ -1638,46 +952,130 @@ $.ajax({
              }
              }
          });
-         $('#Editpelaksana').modal('show');
+         $('#ModalKegiatanPelaksana').modal('show');
 	  });
 
-  $( ".cbUnit" ).change(function() {
-      // alert( $('#id_unit').val() );
+$( ".cbUnit" ).change(function() {
       id_unit_renstra =  $('#id_unit').val();
       $('#tblVisi').DataTable().ajax.url("./renstra/visi/"+id_unit_renstra).load();
       $('#tblMisi').DataTable().ajax.url("./renstra/misi/0").load();
-    });
-
-  $(document).on('click', '.view-renstramisi', function() {
-      id_visi_renstra =  $(this).data('id_visi');
-      $('.nav-tabs a[href="#misi"]').tab('show');
-      $('#tblMisi').DataTable().ajax.url("./renstra/misi/"+id_visi_renstra).load();
-      $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/0").load();
-    });
-
-$('#tblVisi tbody').on( 'dblclick', 'tr', function () {
-
-    var data = tbl_Visi.row(this).data();
-
-    id_visi_renstra =  data.id_visi_renstra;
-
-    $('.nav-tabs a[href="#misi"]').tab('show');
-      $('#tblMisi').DataTable().ajax.url("./renstra/misi/"+id_visi_renstra).load();
-      $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/0").load();
-
 });
 
-  $(document).on('click', '.view-renstratujuan', function() {
-      id_misi_renstra =  $(this).data('id_misi');
-      $('.nav-tabs a[href="#tujuan"]').tab('show');
-      $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/"+id_misi_renstra).load();
-      $('#tblSasaran').DataTable().ajax.url("./renstra/sasaran/0").load();
+var cariindikator
+$(document).on('click', '.btnCariIndi', function() {    
+    $('#judulModal').text('Daftar Indikator yang terdapat dalam RPJMD/Renstra');    
+    $('#cariIndikator').modal('show');
+
+    cariindikator = $('#tblCariIndikator').DataTable( {
+        processing: true,
+        serverSide: true,
+        dom: 'bfrtIp',
+        autoWidth : false,
+        "ajax": {"url": "./admin/parameter/getRefIndikator"},
+        "columns": [
+              { data: 'no_urut'},
+              { data: 'nm_indikator'},
+              { data: 'uraian_satuan'},
+              { data: 'type_display'},
+              { data: 'kualitas_display'},
+              { data: 'jenis_display'},
+              { data: 'sifat_display'}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
     });
+});
+
+$('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
+    var data = cariindikator.row(this).data();
+
+    document.getElementById("ur_indikator_tujuan_renstra").value = data.nm_indikator;
+    document.getElementById("kd_indikator_tujuan_renstra").value = data.id_indikator;
+    document.getElementById("satuan_tujuan_indikator_edit").value = data.uraian_satuan;
+
+
+    document.getElementById("ur_indikator_sasaran_renstra").value = data.nm_indikator;
+    document.getElementById("kd_indikator_sasaran_renstra").value = data.id_indikator;
+    document.getElementById("satuan_sasaran_indikator_edit").value = data.uraian_satuan;
+
+    document.getElementById("ur_indikator_program_renstra").value = data.nm_indikator;
+    document.getElementById("kd_indikator_program_renstra").value = data.id_indikator;
+    document.getElementById("satuan_program_indikator_edit").value = data.uraian_satuan;
+
+    document.getElementById("ur_indikator_kegiatan_renstra").value = data.nm_indikator;
+    document.getElementById("kd_indikator_kegiatan_renstra").value = data.id_indikator;
+    document.getElementById("satuan_kegiatan_indikator_edit").value = data.uraian_satuan;
+
+    $('#cariIndikator').modal('hide');    
+
+  });
+
+
+var cariindikatorrpjmd
+$(document).on('click', '.btnCariIndiSasaranRpjmd', function() {    
+    $('#judulModal').text('Daftar Indikator yang terdapat dalam RPJMD/Renstra');    
+    $('#ModalCariSasaranIndikatorRpjmd').modal('show');
+
+    cariindikatorrpjmd = $('#tblCariSasaranIndikatorRpjmd').DataTable( {
+        processing: true,
+        serverSide: true,
+        dom: 'bfrtIp',
+        autoWidth : false,
+        bDestroy: true,
+        language: {
+              "decimal": ",",
+              "thousands": "."},
+        "ajax": {"url": "./renstra/getIndikatorSasaranRpjmd/"+$('#id_indikator_sasaran_rpjmd_x').val()},
+        "columns": [
+              { data: 'no_urut'},
+              { data: 'uraian_sasaran_rpjmd'},
+              { data: 'nm_indikator'},
+              { data: 'angka_tahun1',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'angka_tahun2',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'angka_tahun3',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'angka_tahun4',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'angka_tahun5',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'angka_akhir_periode',
+                    render: $.fn.dataTable.render.number( '.', ',', 2, '' ), sClass: "dt-right"},
+              { data: 'uraian_satuan'}
+            ],
+        "order": [[0, 'asc']],
+        "bDestroy": true
+    });
+});
+
+$('#tblCariSasaranIndikatorRpjmd tbody').on( 'dblclick', 'tr', function () {
+    var data = cariindikatorrpjmd.row(this).data();
+
+    document.getElementById("ur_indikator_sasaran_rpjmd").value = data.nm_indikator;
+    document.getElementById("id_indikator_sasaran_rpjmd_x").value = data.id_sasaran_renstra;
+    document.getElementById("id_indikator_sasaran_rpjmd").value = data.id_indikator_sasaran_renstra;
+
+    $('#ModalCariSasaranIndikatorRpjmd').modal('hide');    
+
+  });
+
+@include('renstra.JsRenstraVisi');
+
+$('#tblVisi tbody').on( 'dblclick', 'tr', function () {
+  var data = tbl_Visi.row(this).data();
+  id_visi_renstra =  data.id_visi_renstra;
+
+  $('.nav-tabs a[href="#misi"]').tab('show');
+  $('#tblMisi').DataTable().ajax.url("./renstra/misi/"+id_visi_renstra).load();
+  $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/0").load();
+});
+
+@include('renstra.JsRenstraMisi');
 
 $('#tblMisi tbody').on( 'dblclick', 'tr', function () {
 
     var data = tbl_Misi.row(this).data();
-
     id_misi_renstra =  data.id_misi_renstra;
 
     $('.nav-tabs a[href="#tujuan"]').tab('show');
@@ -1686,19 +1084,9 @@ $('#tblMisi tbody').on( 'dblclick', 'tr', function () {
 
 });
 
-  $(document).on('click', '.view-renstrasasaran', function() {
-      id_tujuan_renstra =  $(this).data('id_tujuan');
-      $('.nav-tabs a[href="#sasaran"]').tab('show');
-      $('.nav-tabs a[href="#sasaran1"]').tab('show');
-      $('#tblSasaran').DataTable().ajax.url("./renstra/sasaran/"+id_tujuan_renstra).load();
-      $('#tblKebijakan').DataTable().ajax.url("./renstra/kebijakan/0").load();
-      $('#tblStrategi').DataTable().ajax.url("./renstra/strategi/0").load();
-    });
-
 $('#tblTujuan tbody').on( 'dblclick', 'tr', function () {
 
     var data = tbl_Tujuan.row(this).data();
-
     id_tujuan_renstra =  data.id_tujuan_renstra;
 
     $('.nav-tabs a[href="#sasaran"]').tab('show');
@@ -1709,77 +1097,57 @@ $('#tblTujuan tbody').on( 'dblclick', 'tr', function () {
 
 });
 
-  $(document).on('click', '.view-renstrakebijakan', function() {
-      id_sasaran_renstra =  $(this).data('id_sasaran');
-      $('.nav-tabs a[href="#kebijakan"]').tab('show');
-      $('#tblKebijakan').DataTable().ajax.url("./renstra/kebijakan/"+id_sasaran_renstra).load();
-    });
+@include('renstra.JsRenstraTujuan');
+@include('renstra.JsRenstraTujuanIndikator');
 
-  $(document).on('click', '.view-renstrastrategi', function() {
-      id_sasaran_renstra =  $(this).data('id_sasaran');
-      $('.nav-tabs a[href="#strategi"]').tab('show');
-      $('#tblStrategi').DataTable().ajax.url("./renstra/strategi/"+id_sasaran_renstra).load();
-    });
 
-  $(document).on('click', '.view-renstraprogram', function() {
-      id_sasaran_renstra =  $(this).data('id_sasaran');
-      $('.nav-tabs a[href="#program"]').tab('show');
-      $('.nav-tabs a[href="#program1"]').tab('show');
-      $('#tblProgram').DataTable().ajax.url("./renstra/program/"+id_sasaran_renstra).load();
-      $('#tblIndikatorProgram').DataTable().ajax.url("./renstra/programindikator/0").load();
-      $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/0").load();
-    });
+@include('renstra.JsRenstraKegiatan');
 
 $('#tblSasaran tbody').on( 'dblclick', 'tr', function () {
 
     var data = tbl_Sasaran.row(this).data();
-
     id_sasaran_renstra =  data.id_sasaran_renstra;
 
     $('.nav-tabs a[href="#program"]').tab('show');
       $('.nav-tabs a[href="#program1"]').tab('show');
       $('#tblProgram').DataTable().ajax.url("./renstra/program/"+id_sasaran_renstra).load();
-      $('#tblIndikatorProgram').DataTable().ajax.url("./renstra/programindikator/0").load();
       $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/0").load();
 
 });
 
-  $(document).on('click', '.view-renstraindikator', function() {
-      id_program_renstra =  $(this).data('id_program');
-      $('.nav-tabs a[href="#indikatorprogram"]').tab('show');
-      $('#tblIndikatorProgram').DataTable().ajax.url("./renstra/programindikator/"+id_program_renstra).load();
-    });
-
-  $(document).on('click', '.view-renstrakegiatan', function() {
-        id_program_renstra =  $(this).data('id_program');
-        $('.nav-tabs a[href="#kegiatan"]').tab('show');
-        $('.nav-tabs a[href="#kegiatan1"]').tab('show');
-        $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/"+id_program_renstra).load();
-        $('#tblIndikatorKegiatan').DataTable().ajax.url("./renstra/kegiatanindikator/0").load();
-        $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/0").load();
-      });
-
 $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
-
     var data = tbl_Program.row(this).data();
-
     id_program_renstra =  data.id_program_renstra;
 
     $('.nav-tabs a[href="#kegiatan"]').tab('show');
         $('.nav-tabs a[href="#kegiatan1"]').tab('show');
         $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/"+id_program_renstra).load();
-        $('#tblIndikatorKegiatan').DataTable().ajax.url("./renstra/kegiatanindikator/0").load();
         $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/0").load();
 
 });
 
-  $(document).on('click', '.view-kegiatanindikator', function() {
-        id_kegiatan_renstra =  $(this).data('id_kegiatan');
-        $('.nav-tabs a[href="#indikatorkegiatan"]').tab('show');
-        $('#tblIndikatorkegiatan').DataTable().ajax.url("./renstra/kegiatanindikator/"+id_kegiatan_renstra).load();
-      });
+$('#tblKegiatan tbody').on( 'dblclick', 'tr', function () {
+    var data = tbl_Kegiatan.row(this).data();
+    id_kegiatan_renstra =  data.id_kegiatan_renstra;
 
-  $(document).on('click', '.view-kegiatanpelaksana', function() {
+    $('.nav-tabs a[href="#pelaksana"]').tab('show');
+    $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/"+id_kegiatan_renstra).load();
+
+});
+
+$(document).on('click', '.view-renstrakebijakan', function() {
+    id_sasaran_renstra =  $(this).data('id_sasaran');
+    $('.nav-tabs a[href="#kebijakan"]').tab('show');
+    $('#tblKebijakan').DataTable().ajax.url("./renstra/kebijakan/"+id_sasaran_renstra).load();
+  });
+
+$(document).on('click', '.view-renstrastrategi', function() {
+    id_sasaran_renstra =  $(this).data('id_sasaran');
+    $('.nav-tabs a[href="#strategi"]').tab('show');
+    $('#tblStrategi').DataTable().ajax.url("./renstra/strategi/"+id_sasaran_renstra).load();
+  });
+
+$(document).on('click', '.view-kegiatanpelaksana', function() {
         id_kegiatan_renstra =  $(this).data('id_kegiatan');
         $('.nav-tabs a[href="#pelaksana"]').tab('show');
         $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/"+id_kegiatan_renstra).load();

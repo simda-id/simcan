@@ -35,7 +35,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
                         </div>
                         <button id="btnProses" type="button" class="btnProses btn btn-labeled btn-sm btn-primary">
-                                      <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Proses Load Data dari Rancangan Renja SKPD</button>
+                                      <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Proses Load Data dari Forum OPD</button>
                 </div>
                 <div class="form-group hidden">
                     <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renja :</label>
@@ -330,12 +330,12 @@ $(document).on('click', '#btnReLoad', function() {
       },
       success: function(data) {
         createPesan(data.pesan,"success");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       },
       error: function(data){
         createPesan(data.pesan,"danger");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       }
     });
@@ -369,12 +369,12 @@ $(document).on('click', '#btnProsesAll', function() {
       },
       success: function(data) {
         createPesan(data.pesan,"success");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       },
       error: function(data){
         createPesan(data.pesan,"danger");
-        $('#tblProgramRKPD').DataTable().ajax.reload();
+        $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
         $('#ModalProgress').modal('hide');
       }
     });
@@ -401,12 +401,12 @@ $(document).on('click', '#btnUnload', function() {
         },
         success: function(data) {
             createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
         error: function(err){
             createPesan(err,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
+            $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });

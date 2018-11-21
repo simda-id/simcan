@@ -22,81 +22,69 @@ use hoaaah\LaravelMenu\Menu;
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
 
-    <style>
-    .xCss {
-      width: 15%;
-      height: 70px;
-      cursor: pointer;
-      margin: 0 auto;
-      font: normal 16px/50px "Domine Font Family", Helvetica, sans-serif;
-      color: rgb(255, 255, 255);
-      text-align: center;
-      -o-text-overflow: clip;
-      text-overflow: clip;
+    <style>    
+    
+    a {text-decoration: none; }
+    a:visited { text-decoration:none; } 
+    a:active { text-decoration:none; }
+    a:link { text-decoration:none; }
+
+    .mb-60 {
+        margin-bottom: 60px;
+    }
+    .services-inner {
+        border: 2px solid #0E203A;
+        margin-left: 35px;
+        transition: .3s;
+        height: 150px;
+    }
+    .our-services-img {
+        float: left;
+        margin-left: -36px;
+        margin-right: 22px;
+        margin-top: 28px;    
+        border-radius: 50%;
     }
 
-    .btn span{
+    .our-services-text {
+        padding-right: 10px;
+    }
+    .our-services-text {
+        overflow: hidden;
+        padding: 28px 0 25px;
+    }
+    .our-services-text h4 {
+        color: #222222;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        padding-bottom: 10px;
         position: relative;
-        /*margin-top: 15px;
-        left: -15px;*/
-        /*float: left;*/
+        text-transform: uppercase;
     }
-
-    .bd-green{
-        border: 1px solid #16a085;
-        color:#16a085;
+    .our-services-text h4::before {
+        background: #ec6d48 none repeat scroll 0 0;
+        bottom: 0;
+        content: "";
+        height: 1px;
+        position: absolute;
+        width: 35px;
     }
-    .btn.bd-green:hover,
-    .btn.bd-green:focus{
-        color:#fff;
-        /*border-radius: 15px;*/
-        background:#16a085; 
+    .our-services-wrapper:hover .services-inner {
+        background: #F4FFBA none repeat scroll 0 0;
+        border: 2px solid transparent;
+        box-shadow: 0px 5px 10px 0px #F4FFBA;       
+        cursor: pointer;
     }
-    .bd-blue{
-        border: 1px solid #2980b9;
-        color:#2980b9;
+    .our-services-text p {
+        margin-bottom: 0;
     }
-    .btn.bd-blue:hover,
-    .btn.bd-blue:focus{
-        color:#fff;
-        background:#2980b9;
-        /*border-radius: 15px;*/
-    }
-    .bd-orange{
-        border: 1px solid #df7401;
-        color:#df7401;
-    }
-    .btn.bd-orange:hover,
-    .btn.bd-orange:focus{
-        color:#fff;
-        background:#df7401;
-        /*border-radius: 15px;*/
-    }
-
-    .bd-red{
-        border: 1px solid #cb2027;
-        color:#cb2027;
-    }
-    .btn.bd-red:hover,
-    .btn.bd-red:focus{
-        color:#fff;
-        background:#cb2027;
-        /*border-radius: 15px;*/
-    }
-
-    .bd-purple{
-        border: 1px solid #8e44ad;
-        color:#8e44ad;
-    }
-    .btn.bd-purple:hover,
-    .btn.bd-purple:focus{
-        color:#fff;
-        background:#8e44ad;
-        /*border-radius: 15px;*/
-    }
-
-    @media only screen and (max-width: 767px) {
-    .btn{
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 26px;
+        color: #666;
         margin-bottom: 15px;
     }
         
@@ -108,18 +96,17 @@ use hoaaah\LaravelMenu\Menu;
     <script src="{{ asset('/js/holder.js')}}"></script>
 </head>
 
-<body>
+<body style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+    height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fixed;">
+
     <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
                     <div class="row">
-                        <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan</strong> 
+                        <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Integrated</strong> 
                         :: {{Session::get('xPemda')}} 
                         @if ( Session::get('AppType') == 0 )
                                 (Aplikasi Provinsi)
-                        @endif 
-                        @if (Session::get('AppType') == 'x')
-                                (Aplikasi Tidak Dikenal)
                         @endif 
                     </div>
                 </a>                
@@ -170,69 +157,100 @@ use hoaaah\LaravelMenu\Menu;
             </ul>
     </nav>
 
-    <div class="container-fluid" style="padding: 50px">
+    <div class="container-fluid" style="padding: 50px;">
     <div id="pesan"></div>
     
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
-        {{-- <hr> --}}
-        <div class="row" style="align-items: center; display: flex; justify-content: center; margin-top: 25px">
-            <a class="btn xCss bd-orange" role="button" href="{{ url('/asb/dash') }}"><span class="fa fa-braille "></span> ASB dan SSH</a>
-            <a class="btn xCss bd-red" role="button" href="{{ url('/modul4') }}"><span class="fa fa-folder-open-o "></span> Data Dukungan</a>
-            <a class="btn xCss bd-blue" role="button" href="{{ url('/rpjmd/dash') }}"><span class="fa fa-newspaper-o "></span> RPJMD & Renstra</a>
-            <a class="btn xCss bd-purple" role="button" href="{{ url('/rkpd/dash') }}"><span class="fa fa-calendar-check-o "></span> RKPD & Renja</a>
-            <a class="btn xCss bd-green" role="button" href="{{ url('/modul3') }}"><span class="fa fa-money "></span> PPAS</a>
-        </div> 
-        <hr>
-        <div class="carousel-inner">
-            <div class="item active">
-                <img data-src="holder.js/100px600?auto&bg=0B0B61&fg=FFFFFF&text=simd@Perencanaan">
-                <div class="carousel-caption">
-                    <hr>
-                    <p style="font-size: 24px">
-                        Dihadirkan sebagai alat bantu untuk menyelaraskan perencanaan jangka menengah, jangka pendek, hingga ke penganggaran.<br> Dengan aplikasi ini dapat dijaga keterkaitan dan dukungan antara penganggaran, perencanaan tahunan hingga ke perencanaan lima tahunan.</p>
-                </div>
-            </div>
-            <div class="item">
-                <img data-src="holder.js/100px600?auto&bg=df7401&fg=FFFFFF&text=ASB dan SSH">
-                <div class="carousel-caption">
-                    <hr>
-                    <p style="font-size: 24px">
-                        <strong>Analisa Standar Belanja</strong> dan <strong>Standar Satuan Harga</strong> sebagai jembatan untuk menghubungkan antara proses perencanaan dengan proses penganggaran.</p>
-                    <p>
-                </div>
-            </div>
-            <div class="item">
-                <img data-src="holder.js/100px600?auto&bg=2980b9&fg=FFFFFF&text=Perencanaan Jangka Menengah">
-                <div class="carousel-caption">
-                    <hr>
-                    <p style="font-size: 24px">
-                        Merupakan perencanaan lima tahunan (<strong>RPJMD</strong> dan <strong>Renstra</strong>) sebagai penjabaran <strong>visi-misi Kepala Daerah</strong>.</p>
-                    <p>
-                </div>
-            </div>
-            <div class="item">
-                <img data-src="holder.js/100px600?auto&bg=8e44ad&fg=FFFFFF&text=Perencanaan Jangka Pendek">
-                <div class="carousel-caption">
-                    <hr>
-                    <p style="font-size: 24px">
-                        Merupakan perencanaan tahunan (<strong>RKPD</strong> dan <strong>Renja</strong>) sebagai operasionalisasi dari perencanaan jangka menengah.</p>
-                    <p>
-                </div>
-            </div>
-            <div class="item">
-                <img data-src="holder.js/100px600?auto&bg=16a085&fg=FFFFFF&text=Penganggaran">
-                <div class="carousel-caption">
-                    <hr>
-                    <p style="font-size: 24px">                        
-                        Detail dari rencana kerja tahunan (<strong>PPAS</strong> dan <strong>Pra-RKA</strong>) sebagai dasar penyusunan anggaran yang pelaksanaannya akan dikelola melalui <strong>Simda Keuangan</strong>.</p>
-                    <p>
-                </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2 style="font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;color:#fff;">simd<span style="color:#DF7401;">@</span><strong>Integrated</strong></h2>
+                <p style="font-size: 20px; color:#fff;">Dihadirkan sebagai alat bantu untuk menyelaraskan perencanaan jangka menengah, jangka pendek, hingga ke penganggaran.
+                    <br> Dengan aplikasi ini dapat dijaga keterkaitan dan dukungan antara penganggaran, perencanaan tahunan hingga ke perencanaan lima tahunan.</p>
             </div>
         </div>
-        
     </div>
-
+    <hr>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div class="our-services-wrapper mb-60">
+                <a href="{{ url('/asb/dash') }}" style="text-decoration:none;">
+                <div class="services-inner"  style="background:#eee">
+                    <div class="our-services-img">
+                        <img src="{{'./assets/images/marketing_1.png'}}" width="68px" alt="">
+                    </div>
+                    <div class="our-services-text">                            
+                        <h4>ASB dan SSH</h4>
+                        <p><span style="color:#DF7401"><strong> Analisis Standar Belanja</strong></span> dan <span style="color:#DF7401"><strong>Standar Satuan Harga</strong></span> 
+                            sebagai jembatan untuk menghubungkan antara proses perencanaan dengan proses penganggaran. </p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div class="our-services-wrapper mb-60">
+                <a href="{{ url('/rpjmd/dash') }}" style="text-decoration:none;">
+                    <div class="services-inner"  style="background:#eee">
+                        <div class="our-services-img">
+                            <img src="{{'./assets/images/marketing.png'}}" width="68px" alt="">
+                        </div>
+                        <div class="our-services-text">
+                            <h4>RPJMD & Renstra</h4>
+                            <p>Perencanaan lima tahunan (<span style="color:#1273EB"><strong>RPJMD</strong></span> dan 
+                                <span style="color:#1273EB"><strong>Renstra</strong></span>) sebagai penjabaran <span style="color:#1273EB"><strong>visi-misi Kepala Daerah</strong></span>.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>    
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div class="our-services-wrapper mb-60">
+                <a href="{{ url('/rkpd/dash') }}" style="text-decoration:none;">
+                    <div class="services-inner"  style="background:#eee">
+                        <div class="our-services-img">
+                            <img src="{{'./assets/images/marketing-strategy.png'}}" width="68px" alt="">
+                        </div>
+                        <div class="our-services-text">
+                            <h4>RKPD & Renja</h4>
+                            <p>Perencanaan tahunan (<span style="color:#00AF80"><strong>RKPD</strong></span> dan <span style="color:#00AF80"><strong>Renja</strong></span>) sebagai operasionalisasi dari perencanaan jangka menengah. </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>    
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div class="our-services-wrapper mb-60">
+                <a href="{{ url('/modul3') }}" style="text-decoration:none;">
+                    <div class="services-inner"  style="background:#eee;">
+                        <div class="our-services-img">
+                            <img src="{{'./assets/images/seo.png'}}" width="68px" alt="">
+                        </div>
+                        <div class="our-services-text">
+                            <h4>Anggaran</h4>
+                            <p>Rencana kerja tahunan (<span style="color:#0E203A"><strong>PPAS</strong></span> dan <span style="color:#0E203A"><strong>
+                                Pra-RKA</strong></span>) sebagai dasar penyusunan anggaran yang pelaksanaannya akan dikelola melalui <strong>Simda Keuangan</strong>. </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div class="our-services-wrapper mb-60">
+                <a href="{{ url('/kin') }}" style="text-decoration:none;">
+                    <div class="services-inner"  style="background:#eee">
+                        <div class="our-services-img">
+                            <img src="{{'./assets/images/web-analytics.png'}}" width="68px" alt="">
+                        </div>
+                        <div class="our-services-text">
+                            <h4>S A K I P</h4>
+                            <p>Instrumen untuk mengukur kewajaran antara beban kerja dan belanja dan sebuah aktifitas atau kegiatan </p>
+                        </div>
+                    </div>
+                </a>
+            </div> 
+        </div>
     </div>
+    
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
           <p class="navbar-text pull-left">
@@ -375,18 +393,32 @@ $.ajax({
           url: './getTahunSetting',
           dataType: "json",
           success: function(data) {
-          var j = data.length;
-          var post, i;
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
-          }
+            var j = data.length;
+            var post, i;
+            for (i = 0; i < j; i++) {
+                post = data[i];
+                $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+            }
           }
       });
 });
 
 $( "#id_tahun" ).change(function() {
-    sessionStorage.setItem("tahun",$('#id_tahun').val());
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+        type: 'post',
+        url: './putTahunSetting',
+        data: {
+              '_token': $('input[name=_token]').val(),
+              'tahun_rencana' : $('#id_tahun').val(),
+          },
+        success: function(data) {
+            // location.reload(true);
+        }
+      });
 });
 
 $("#btn_ganti").click(function() { 

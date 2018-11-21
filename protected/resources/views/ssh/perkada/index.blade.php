@@ -44,8 +44,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="add">
                   <p><a id="btnPerkada" type="button" class="add-perkada btn btn-labeled btn-success">
                         <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a>
-                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-primary">
-                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Perkada SSH</a>
                   </p>
               </div>
               <div class="table-responsive">
@@ -1067,7 +1065,8 @@ $(document).on('click', '#btnparam_cari', function() {
                     }
                     else {
                         $('.error').addClass('hidden');
-                        $('#tblPerkada').DataTable().ajax.reload();
+                        $('#tblPerkada').DataTable().ajax.reload(null,false);
+                        $('#tblPerkada').DataTable().page('last').draw('page');
                     }
                 },
               });
@@ -1114,7 +1113,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_perkada_edit': $('#id_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
@@ -1152,7 +1151,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'flag_perkada': $('.flag_perkada').text(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
                 createPesan(data.pesan,"success");
               } else {
@@ -1190,7 +1189,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_perkada_hapus').text()).remove();
-        $('#tblPerkada').DataTable().ajax.reload();
+        $('#tblPerkada').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1226,12 +1225,13 @@ $(document).on('click', '#btnparam_cari', function() {
           },
           success: function(data) {
                   $('.error').addClass('hidden');
-                  $('#tblDetailZona').DataTable().ajax.reload();
+                  $('#tblDetailZona').DataTable().ajax.reload(null,false);
+                  $('#tblDetailZona').DataTable().page('last').draw('page');
                   if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
-              } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
-              } 
+                    $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                  } else {
+                    $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                  } 
           },
       });
   });
@@ -1269,11 +1269,11 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_zona_perkada': $('#id_zona_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblDetailZona').DataTable().ajax.reload();
+              $('#tblDetailZona').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
               } 
           }
       });
@@ -1307,7 +1307,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_zona_perkada_hapus').text()).remove();
-        $('#tblDetailZona').DataTable().ajax.reload();
+        $('#tblDetailZona').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1353,7 +1353,8 @@ $(document).on('click', '#btnparam_cari', function() {
           success: function(data) {
               $('.nav-tabs a[href="#detailtarif"]').tab('show');
                   $('.error').addClass('hidden');
-                  $('#tblDetailTarif').DataTable().ajax.reload();
+                  $('#tblDetailTarif').DataTable().ajax.reload(null,false);
+                  $('#tblDetailTarif').DataTable().page('last').draw('page');
                   if(data.status_pesan==1){
                   $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
                   } else {
@@ -1403,11 +1404,11 @@ $(document).on('click', '#btnparam_cari', function() {
               'jml_rupiah': $('#rupiah_tarif').val(),
           },
           success: function(data) {
-              $('#tblDetailTarif').DataTable().ajax.reload();
+              $('#tblDetailTarif').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
               } 
           }
       });
@@ -1441,7 +1442,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_tarif_perkada_hapus').text()).remove();
-        $('#tblDetailTarif').DataTable().ajax.reload();
+        $('#tblDetailTarif').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1538,15 +1539,6 @@ $(document).on('click', '#btnparam_cari', function() {
       });
     });
 
-  // $( ".pilih_zona" ).change(function() {
-  //   alert($('#pilih_zona').val())
-  // });
-
-  $(document).on('click', '#btnPrintPerkadaSSh', function() {
-    window.open('../printPerkadaSsh');
-  });
-
-
-} );
+});
 </script>
 @endsection

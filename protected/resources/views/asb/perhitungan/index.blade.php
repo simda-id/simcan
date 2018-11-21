@@ -1095,16 +1095,16 @@ $('.display').DataTable({
                   data: {
                       '_token': $('input[name=_token]').val(),
                       'tahun_perhitungan' : $('#tahun_perhitungan').val(),
-                      'id_zona' : $('#id_zona').val(),
+                      // 'id_zona' : $('#id_zona').val(),
                   },
                   success: function(data) {
                     createPesan("Proses Perhitungan Berhasil","success");
-                    $('#tblPerkada').DataTable().ajax.reload();
+                    $('#tblPerkada').DataTable().ajax.reload(null,false);
                     $('#ModalProgress').modal('hide');
                   },
                   error: function(data) {
                     createPesan("Proses Perhitungan Gagal","danger");
-                    $('#tblPerkada').DataTable().ajax.reload();
+                    $('#tblPerkada').DataTable().ajax.reload(null,false);
                     $('#ModalProgress').modal('hide');
                   }
                 });
@@ -1137,7 +1137,7 @@ $('.display').DataTable({
               'flag_aktif': getStatus(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Posting Perhitungan Berhasil","success");
               $('#ModalProgress').modal('hide');
 
@@ -1169,7 +1169,7 @@ $(document).on('click', '.hapus-perhitungan', function() {
               'id_perhitungan': $('#id_perhitungan_hapus').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Perhitungan Berhasil Dihapus","info");
               $('#ModalProgress').modal('hide');
           }
@@ -1264,7 +1264,7 @@ $(document).on('click', '#btnLoadASB', function() {
         "bDestroy": true
     });
 
-  asb_tbl.ajax.reload();
+  asb_tbl.ajax.reload(null,false);
 });
 
 $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {

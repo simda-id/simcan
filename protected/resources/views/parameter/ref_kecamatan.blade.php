@@ -323,7 +323,7 @@ var desa_tbl, id_kecamatan_temp, id_kab_temp;
 
 $.ajax({
           type: "GET",
-          url: '../../renja/blang/getZonaSSH',
+          url: './getZonaSSH',
           dataType: "json",
           success: function(data) {
 

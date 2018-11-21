@@ -151,266 +151,243 @@ use hoaaah\LaravelMenu\Menu;
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                {{-- <h2>SSH & ASB</h2> --}}
-                <h2 style="font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;"><span class="highlight">Pencetakan Laporan</span></h2>
-                <p style="font-size: 50px; font-weight: 900;">Pra RKA</p>
+                <h2 style="font-size: 40px;line-height: 60px;margin-bottom: 10px;font-weight: 900;"><span class="highlight">Laporan Pokok-Pokok Pikiran Dewan</span></h2>
+                <br>
             </div>
         </div>
-        <div class="row">
-            <?php
-                $akses = new CekAkses();
-            ?>
-
-            <div class="col-lg-offset-1 col-sm-12 col-md-12 col-lg-10">
-                <div class="features-list">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(101)) 
-                                <a href="{{ url('/pemda') }}">
-                                    <div class="ico fa fa-bank fa-fw"></div>
-                                    <div class="name">Pemerintah Daerah</div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico fa fa-bank fa-fw"></div>
-                                    <div class="name">Pemerintah Daerah</div>
-                                </a>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(102)) 
-                                <a href="{{ url('/admin/parameter/kecamatan') }}">
-                                    <div class="ico-primary fa fa-map-o fa-fw"></div>
-                                    <div class="name">
-                                        Wilayah Pemerintahan
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-primary fa fa-map-o fa-fw"></div>
-                                    <div class="name">
-                                        Wilayah Pemerintahan
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div> 
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(103)) 
-                                <a href="{{ url('/admin/parameter/unit') }}">
-                                    <div class="ico-warning fa fa-building-o fa-fw"></div>
-                                    <div class="name">
-                                        Unit Organisasi
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-warning fa fa-building-o fa-fw"></div>
-                                    <div class="name">
-                                        Unit Organisasi
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div> 
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(107)) 
-                                <a href="{{ url('/admin/parameter/lokasi') }}">
-                                    <div class="ico-info fa fa-location-arrow fa-fw"></div>
-                                    <div class="name">
-                                        Lokasi
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-info fa fa-location-arrow fa-fw"></div>
-                                    <div class="name">
-                                        Lokasi
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div>                        
-                    </div>
-                    {{-- <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(106)) 
-                                <a href="{{ url('/admin/parameter/program') }}">
-                                    <div class="ico-danger fa fa-briefcase fa-fw"></div>
-                                    <div class="name">
-                                        Program - Kegiatan
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-danger fa fa-briefcase fa-fw"></div>
-                                    <div class="name">
-                                        Program - Kegiatan
-                                    </div>
-                                </a>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(105)) 
-                                <a href="{{ url('/admin/parameter/rekening') }}">
-                                    <div class="ico fa fa-money fa-fw"></div>
-                                    <div class="name">
-                                        Rekening Anggaran
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico fa fa-money fa-fw"></div>
-                                    <div class="name">
-                                        Rekening Anggaran
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div> 
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(108)) 
-                                <a href="{{ url('/admin/parameter/indikator') }}">
-                                    <div class="ico-success fa fa-tachometer fa-fw"></div>
-                                    <div class="name">
-                                        Indikator
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-success fa fa-tachometer fa-fw"></div>
-                                    <div class="name">
-                                        Indikator
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div> 
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(111)) 
-                                <a href="{{ url('/satuan') }}">
-                                    <div class="ico-primary fa fa-cube fa-fw"></div>
-                                    <div class="name">
-                                        Satuan
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-primary fa fa-cube fa-fw"></div>
-                                    <div class="name">
-                                        Satuan
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(101)) 
-                                <a href="{{ url('/agenda') }}">
-                                    <div class="ico-success fa fa-calendar fa-fw"></div>
-                                    <div class="name">
-                                        Agenda Tahunan
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-success fa fa-calendar fa-fw"></div>
-                                    <div class="name">
-                                        Agenda Tahunan
-                                    </div>
-                                </a>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(110)) 
-                                <a href="{{ url('/admin/parameter/user') }}">
-                                    <div class="ico-primary fa fa-user fa-fw"></div>
-                                    <div class="name">
-                                        User Management
-                                    </div>
-                                </a>
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-primary fa fa-user fa-fw"></div>
-                                    <div class="name">
-                                        User Management
-                                    </div>
-                                </a>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(101)) 
-                                <a href="{{ url('/setting') }}">
-                                    <div class="ico-warning fa fa-wrench fa-fw"></div>
-                                    <div class="name">
-                                        Setting Aplikasi
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-warning fa fa-wrench fa-fw"></div>
-                                    <div class="name">
-                                        Setting Aplikasi
-                                    </div>
-                                </a>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(109)) 
-                                <a href="{{ url('/admin/parameter/others') }}">
-                                    <div class="ico-danger fa fa-life-ring fa-fw"></div>
-                                    <div class="name">
-                                        Parameter Lainnya
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-danger fa fa-life-ring fa-fw"></div>
-                                    <div class="name">
-                                        Parameter Lainnya
-                                    </div>
-                                </a>
-                                @endif
-                                                            
-                                </div>
-                        </div>                       
-                    </div> --}}
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="form-group">
+                <label for="tahun_prarka" class="col-sm-3 control-label" align='left'>Tahun :</label>
+                <div class="col-sm-8">
+                    <select class="form-control tahun_prarka" name="tahun_prarka" id="tahun_prarka"></select>
                 </div>
-            </div>
+              </div>
+              <div class="form-group">
+                <label for="urusan_prarka" class="col-sm-3 control-label" align='left'>Urusan :</label>
+                <div class="col-sm-8">
+                    <select class="form-control urusan_prarka" name="urusan_prarka" id="urusan_prarka"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="bidang_prarka">Bidang :</label>
+                <div class="col-sm-8">
+                    <select class="form-control bidang_prarka" name="bidang_prarka" id="bidang_prarka"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="unit_prarka">Unit :</label>
+                <div class="col-sm-8">
+                    <select class="form-control unit_prarka" name="unit_prarka" id="unit_prarka"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="sub_prarka2">Sub Unit :</label>
+                <div class="col-sm-8">
+                    <select class="form-control sub_prarka2" name="sub_prarka2" id="sub_prarka2"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="prog_prarka">Program :</label>
+                <div class="col-sm-8">
+                    <select class="form-control prog_prarka" name="prog_prarka" id="prog_prarka"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="keg_prarka">Kegiatan :</label>
+                <div class="col-sm-8">
+                    <select class="form-control keg_prarka" name="keg_prarka" id="keg_prarka"></select>
+                </div>
+              </div> 
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
+                <div class="col-sm-8">
+                    <select class="form-control jns_laporan" name="jns_laporan" id="jns_laporan"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="jns_laporan"></label>
+                <div class="col-sm-8 text-left">
+                    <button type="button" class="btn btn-labeled btn-success btnProses"><span class="btn-label"><i class="fa fa-print fa-lg fa-fw"></i></span> Proses</button>  
+                </div>
+              </div>                            
+        </form>
 
-        </div>
     </div>
 </section>
 </div> 
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function(){
+
+$.ajax({
+    type: "GET",
+    url: '../admin/parameter/getUrusan',
+    dataType: "json",
+    success: function(data) {
+        var j = data.length;
+        var post, i;
+
+        $('select[name="urusan_prarka"]').empty();
+        $('select[name="urusan_prarka"]').append('<option value="-1">---Pilih Urusan---</option>');
+
+        for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="urusan_prarka"]').append('<option value="'+ post.kd_urusan +'">'+ post.nm_urusan +'</option>');
+
+        }
+    }
+});
+
+$.ajax({
+    type: "GET",
+    url: './jenis_renja_ranwal',
+    dataType: "json",
+    success: function(data) {
+        var j = data.length;
+        var post, i;
+
+        for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="jns_laporan"]').append('<option value="'+ post.id +'">'+ post.uraian_laporan +'</option>');
+        }
+    }
+});
+
+$.ajax({
+    type: "GET",
+    url: '../admin/parameter/getTahun',
+    dataType: "json",
+    success: function(data) {
+        var j = data.length;
+        var post, i;
+
+        $('select[name="tahun_prarka"]').empty();
+        $('select[name="tahun_prarka"]').append('<option value="-1">---Pilih Tahun---</option>');
+
+        for (i = 0; i < j; i++) {
+          post = data[i];
+          $('select[name="tahun_prarka"]').append('<option value="'+ post.tahun +'">'+ post.tahun +'</option>');
+        }
+    }
+});
+
+$( ".urusan_prarka" ).change(function() {
+    $.ajax({
+        type: "GET",
+        url: '../admin/parameter/getBidang/'+$('#urusan_prarka').val(),
+        dataType: "json",
+        success: function(data) {
+          var j = data.length;
+          var post, i;
+
+          $('select[name="bidang_prarka"]').empty();
+          $('select[name="bidang_prarka"]').append('<option value="-1">---Pilih  Bidang---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="bidang_prarka"]').append('<option value="'+ post.id_bidang +'">'+ post.nm_bidang +'</option>');
+          }
+        }
+    });
+});
+
+$( ".bidang_prarka" ).change(function() {  
+    $.ajax({
+        type: "GET",
+        url: '../admin/parameter/getUnit2/'+$('#bidang_prarka').val(),
+        dataType: "json",
+        success: function(data) {
+          var j = data.length;
+          var post, i;
+
+          $('select[name="unit_prarka"]').empty();
+          $('select[name="unit_prarka"]').append('<option value="-1">---Pilih Unit---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="unit_prarka"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
+          }
+        }
+    });
+});
+
+$( ".unit_prarka" ).change(function() { 
+    $.ajax({
+        type: "GET",
+        url: 'getProgramRanwalRenja/'+$('#unit_prarka').val()+'/'+$('#tahun_prarka').val(),
+        dataType: "json",
+        success: function(data) {
+          var j = data.length;
+          var post, i;
+
+          $('select[name="prog_prarka"]').empty();
+          $('select[name="prog_prarka"]').append('<option value="-1">---Pilih Program---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="prog_prarka"]').append('<option value="'+ post.id_renja_program +'">'+ post.uraian_program_renstra +'</option>');
+          }
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: '../admin/parameter/getSub2/'+$('#unit_prarka').val(),
+        dataType: "json",
+
+        success: function(data) {
+          var j = data.length;
+          var post, i;
+
+          $('select[name="sub_prarka2"]').empty();
+          $('select[name="sub_prarka2"]').append('<option value="-1">---Pilih Sub Unit---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="sub_prarka2"]').append('<option value="'+ post.id_sub_unit +'">'+ post.nm_sub +'</option>');
+          }
+        }
+    });
+
+});
+
+$( ".prog_prarka" ).change(function() {  
+    $.ajax({
+        type: "GET",
+        url: 'getKegiatanRanwalRenja/'+$('#prog_prarka').val(),
+        dataType: "json",
+        success: function(data) {
+          var j = data.length;
+          var post, i;
+
+          $('select[name="keg_prarka"]').empty();
+          $('select[name="keg_prarka"]').append('<option value="-1">---Pilih Kegiatan---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="keg_prarka"]').append('<option value="'+ post.id_renja +'">'+ post.uraian_kegiatan_renstra +'</option>');
+          }
+        }
+    });
+});
+
+
+$(document).on('click', '.btnProses', function() {
+    if($('#jns_laporan').val()==1){
+       window.open('../PrintKompilasiProgramRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==2){
+       window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==3){
+       window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
+    };    
+});
+
+
+});
+</script>
 @endsection
 

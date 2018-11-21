@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Rancangan Renja';
+                $this->title = 'Rancangan Renja x';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
@@ -1859,10 +1859,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"> Copy Data Belanja dari Lokasi Lain</h4>
+            <h4 class="modal-title"> Copy Data Belanja dari Aktivitas Lain</h4>
         </div>
       <div class="modal-body">
-          <form name="frmModalCopyBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+          <form name="frmModalCopyBelanja" class="form-horizontal" role="form" autocomplete='off' action="" method="">
               <div class="form-group">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="col-sm-12">
@@ -1871,7 +1871,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                             <th style="text-align: center; vertical-align:middle">Nama Aktivitas</th>
-                            {{-- <th style="text-align: center; vertical-align:middle">Uraian Lokasi Pelaksanaan</th> --}}
                             <th width="15%" style="text-align: center; vertical-align:middle">Aksi</th>
                           </tr>
                     </thead>
@@ -2909,11 +2908,10 @@ $(document).on('click', '#btnCopyBelanja', function() {
         serverSide: true,
         autoWidth : false,
         dom: 'bfrtIp',
-        "ajax": {"url": "./blang/getLokasiCopy/"+id_aktivitas_temp},
+        "ajax": {"url": "./blang/getLokasiCopy/"+unit_temp},
         "columns": [
               { data: 'urut', sClass: "dt-center"},
               { data: 'uraian_aktivitas_kegiatan'},
-              // { data: 'nama_lokasi'},
               { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
 
             ],
@@ -2927,7 +2925,6 @@ $(document).on('click', '#btnProsesCopyBelanja', function() {
     var data = CopyBelanjaTbl.row( $(this).parents('tr') ).data();
 
     $('#ModalCopyBelanja').modal('hide');
-    // $('#ModalProgress').modal('show');
 
     $.ajaxSetup({
       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -2944,7 +2941,6 @@ $(document).on('click', '#btnProsesCopyBelanja', function() {
       success: function(data) {
         belanja_renja_tbl.ajax.reload();
         createPesan(data.pesan,"success");
-        // $('#ModalProgress').modal('hide');
       }
     });
 });

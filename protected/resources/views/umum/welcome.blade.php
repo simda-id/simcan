@@ -21,7 +21,6 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"> 
-    {{-- <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet"> --}}
 
     <style>
     nav.navbar-well { background: #269abc; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
@@ -256,19 +255,12 @@
           box-shadow: 0 0 0 1px #ff4136
       }
     </style>
-
-    <script src="{{ asset('/js/jquery.min.js')}}"></script>
-    <script src="{{ asset('/js/jquery-ui.js')}}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('/js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('/js/jquery.rowspanizer.js')}}"></script>
-    
-
 </head>
 
-<body>
+<body style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fixed;">
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
         <a class="navbar-brand pull-left" href="{{ url('/') }}">
           <div class="row">
@@ -277,7 +269,7 @@
         
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-top-links pull-right">
+      <ul class="nav navbar-top-links pull-right">
         @if (Auth::guest())
           <li class="active"><a href="{{ route('login') }}" role="button" ><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span class="sr-only">(current)</span></a></li>
         @else
@@ -336,11 +328,11 @@
               <div class="panel-body">
                 @foreach($trxVisi as $dataVisi)
                   <p><strong>Visi :</strong> {{$dataVisi->uraian_visi_rpjmd}}</p>
-                @endforeach
-                <table id="tblRincianRpjmd" class="tabletable-responsive">
+                <table id="tblRincianRpjmd" class="table-responsive" border="0">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: left; vertical-align:middle">Misi :</th>
+                          <th style="text-align: left; vertical-align:middle"></th>
                       </tr>
                   </thead>
                   <tbody>
@@ -351,7 +343,8 @@
                       </tr>
                     @endforeach
                   </tbody>
-                </table>
+                </table>                
+                @endforeach
               </div>
             </div>
           </div>
@@ -572,17 +565,21 @@
     <hr>
       <footer id="bottom">
       <div class="pull-right wrapper footer">
-              <p>
-                  <b><a HREF="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan">Badan Pengawasan Keuangan dan Pembangunan</a></b>
-                  | <b>Tim Satgas Simda</b> | Copyright &copy; 2018  
+              <p style="color:#F6F6F6">
+                  <b><a HREF="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan" style="color:#5CD1FF; text-decoration: none; ">Badan Pengawasan Keuangan dan Pembangunan</a></b>
+                  | <b>Tim Satgas Simda</b> | <span style="color:#F2DEDE">Copyright &copy; 2018</span>  
       </div>
               </p>
     </footer>
 </body>
 
+
+<script src="{{ asset('/js/jquery.min.js')}}"></script>
+<script src="{{ asset('/js/jquery-ui.js')}}"></script>
+<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/js/Chart.bundle.js') }}"></script>
 <script  type="text/javascript" language="javascript" class="init">
 $(document).ready( function() {
-$("#tblRincianRpjmd").rowspanizer({vertical_align: 'top'});
 
 function formatTgl(val_tanggal){
       var formattedDate = new Date(val_tanggal);

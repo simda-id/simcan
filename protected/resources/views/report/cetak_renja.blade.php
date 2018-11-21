@@ -317,7 +317,7 @@ $( ".bidang_prarka" ).change(function() {
 $( ".unit_prarka" ).change(function() { 
     $.ajax({
         type: "GET",
-        url: '../admin/parameter/getProgramRenja/'+$('#unit_prarka').val()+'/'+$('#tahun_prarka').val(),
+        url: 'getProgramRancanganRenja/'+$('#unit_prarka').val()+'/'+$('#tahun_prarka').val(),
         dataType: "json",
         success: function(data) {
           var j = data.length;
@@ -356,7 +356,7 @@ $( ".unit_prarka" ).change(function() {
 $( ".prog_prarka" ).change(function() {  
     $.ajax({
         type: "GET",
-        url: '../admin/parameter/getKegiatanRenja/'+$('#prog_prarka').val(),
+        url: 'getKegiatanRancanganRenja/'+$('#prog_prarka').val(),
         dataType: "json",
         success: function(data) {
           var j = data.length;
@@ -388,7 +388,25 @@ $(document).on('click', '.btnProses', function() {
        window.open('../PrintPraRKA2/'+$('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
     };
     if($('#jns_laporan').val()==5){
-       window.open('../PrintPraRKA/'+$('#keg_prarka').val()); 
+       window.open('../PrintPraRKA/'+$('#keg_prarka').val()+'/'+$('#sub_prarka2').val()); 
+    };
+    if($('#jns_laporan').val()==6){
+       window.open('../PrintKompilasiAktivitasRenja/'+$('#keg_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==7){
+       window.open('../PrintRingkasanRenjaUrusan/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==8){
+       window.open('../PrintRingkasanRenjaUrusan1/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==10){
+       window.open('../PrintKompilasiProgramRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==9){
+       window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    };
+    if($('#jns_laporan').val()==11){
+       window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
     };    
 });
 

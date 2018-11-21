@@ -172,6 +172,13 @@
 .modal-static .modal-content .icon {
 }
 
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1360px;
+    }
+  }
+
 .form-horizontal .control-label {
     padding-top: 7px;
     margin-bottom: 0;
@@ -263,7 +270,7 @@ background-color: #269abc;
 background-color: #333333;
 }
 
-nav.navbar-findcond { background: #269abc; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
+nav.navbar-findcond { background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF; }
 nav.navbar-findcond .sidebar { background: #269abc; border-color: #ccc;}
 nav.navbar-findcond .sidebar a:active { background: #ccc; color: #269abc;}
 nav.navbar-findcond a { color: #fff; }
@@ -281,3 +288,85 @@ nav.navbar-findcond ul.dropdown-menu { border: 0; background: #fff; border-radiu
 nav.navbar-findcond ul.dropdown-menu > li > a { color: #444; }
 nav.navbar-findcond ul.dropdown-menu > li > a:hover { background: #fff; color: #269abc; }
 nav.navbar-findcond span.badge { background: #fff; font-weight: normal; font-size: 11px; margin: 0 4px; color: #269abc; }
+
+.lds-spinner {
+    color: official;
+    display: inline-block;
+	position:absolute;
+	top:50%;
+	left:50%;
+    width: 64px;
+    height: 64px;
+    z-index: 2;
+  }
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #337ab7;
+  }
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

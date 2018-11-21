@@ -331,7 +331,7 @@ $(document).on('click', '#btnReLoad', function() {
           url: './ReprosesTransferData',
           data: {
               '_token': $('input[name=_token]').val(),
-              'tahun_rkpd' :tahun,
+              'tahun_rkpd' : tahun,
               'id_rkpd_rpjmd' : id_rkpd,
           },
           success: function(data) {

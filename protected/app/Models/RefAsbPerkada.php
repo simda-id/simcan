@@ -1,29 +1,30 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class RefAsbPerkada extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'ref_asb_perkada';
-    protected $fillable = ['id_perkada','nomor_perkada','tanggal_perkada','tahun_berlaku','uraian_perkada','flag',];
-    protected $primaryKey = 'id_perkada';
-
-    public $timestamps = false;
-
-    public function trxasbaktivitas()
-    {
-      return $this->hasMany('App\Models\TrxAsbAktivitas', 'id_perkada');
-    }
-
-    public function trxasbperhitungan()
-    {
-      return $this->hasMany('App\Models\TrxAsbPerhitungan', 'id_perkada');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+HR+cPpceVkv9S4F251xhpN9cnrLXSdN3JjNu2wkuEeuuVliBSW5XdID1j4SZAvXb2DEq+hyKns0l
+pNZwWEW3LuZuxxfZLFt7bGwPPp3obhcCXdQehej4XH2RwmKjOWU6iNCUl52Ub9IVOAAxQvmnA98p
+uXrlAHYygybBiwQxgwSs1ZgXdN/BFLWFQugRlVBVMi8tbeBDkBhL486cqHtu79QKZKpq5as5VhUy
+44LYr3adXVAE9z8aamMxb5lAmFCf9zPBlub/iVLCRLf7fh0WkWxizeOrP35fnm3KATsVlVXH6bXK
+TBnjLBRjUOnHXbvoIN9ldV640nbGQ/XQXZuu8L8tak95TKmxyvRiNd1wo72RCZhoBHNrog/M8aHJ
+73Jc9I15563eVhocab6H5RpbNxdEhRCG67uRg+c65etiC5/lScD7Hw9XAO7El7IQOWAb87qYYM5D
+nBIgfy4g+SvukILWvCdJhckKoILxaLJ8HbbLMcysfwlSrPzqAFzSDBoKoMd3tb8go1/PztjyBdJY
+K0JGjEFTGhddbmhYBDvMh93rU4f4KJLTy40LEfu7qnMoQoZTTvmJscJv6ESEf8RKdlJa1VWwDwYS
+xH7fRHpYrTmwOQ32bef2asOgZ3fB8qLZkc5194yHpJanL1bL2NNrJfe6AtBp4+qjfHUmk0CZobWK
+tt4WUwgzQk/kFICL/pxDcn9Osvw+kYjoiUNdhDSkoUMnGI/9jMOzTq7zDpAX5l6Mdul6A9++AlQv
+ZfSS/gkmXXGs6DrECYuvxQaeo2cuDYuYE3rLPcz2Fed0/BXMAfkuvHmOGBuaBKTVXUpjFjzJXToa
+JHZVu/yCcR0WB/1DEJEV/nc7jm8h6tJsWzH2NRAn1mM2I3cJzrPs9AlPPdlIJEINI0p3QcyWfz7F
+zvCFLH7mDIyqUdntmfRutz2K5ofsyh3+Vasot/4GIyYyP6W6UYgU32JfllG+BeCpVZcl4OaNM7IL
+kN89ieDEU8E1cZtHDNZ/UJ7q2WN1M0E8GeexyFBgqdKHnR84r9IQKdnwvzxthSoRn6B4cV3yL3g8
+GH1tbob/3khH9kCN30mN0dbttkkh4TE5PFbXnw24CZkIcMJngfpIIMw5BerjBao8RW39ktuLzkLu
+dXzx3vFFYhyzfiTJGV5IUrvHCh6LGL16BDSKmT8IBHirU8BAt2et1Z6thWQU/fkEgprdeRtcIg2u
+c2gyWG9XDE6WdHTIjwaEq0sdB+En3ogsEn6QPqZqAQbp5Ubjdv07O3+9uMy8asRDg4/+Uf+KFmDG
+4LnxEI8oZCR8LzoJ7bLP0NRzofw3EGwzAPkrq3kIC/9GTxAb7WKlW/KrUG2xHoa8/ytOHqrwFfLV
+U+yvIpi+9QVVbjx6ngo5LHWKxWOJbqiP893cTwKa1Wi9Q9VYIwthvVL13kinhi2yFsr8uHMeHM0O
++PJvvHWihJeYNO2DItQk/rPTuZ27yBI1ZqbesTitaEfjugdMXm896jNV+jz2WaNOs0VbdL1MPrHK
++pryauX0pw+g056xf5j5m2HaG2+EcPWcSTP+wVgl0ivuO1VotlMmN9XOK052IakxfF59cJrBaSp+
+I1aA75RTwkbW8Fjv3CVe66oSrL4wqBz8LWRkOMkxXCP42W4XQqlgWLBprkCEz9nWZqfsfYJBPBM7
+rVdN3ZdVYjLapgQ9poghNVK/ha7J1oyUY97lvWbSbnyFteX8T6NyO6DtLvCVob02JK053s2ucjVr
+3ELlFU+yNUXoLz1Q+ZNx1sLSZO1t2fL4GFgpfuJeZfG1F+dxoIJbORzZGwYIM925o8RpqiA0HIKF
+kwL6xGw//sbMOPTeLfkc9iT/xcmcB2UEOS3PUTAu2PokHepMPCw3hvvDGSNp8q2uUMrf4zElAGZS
+h/rorSia7vpYZZPJCSITGAy4T+pMT6v1Zt4a1M3iRWivjjndqNzrKsYsZKU2pM4Vb8EFx/avriK+
+Bbs04xsAQ5ZO

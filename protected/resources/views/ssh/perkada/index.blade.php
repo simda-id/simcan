@@ -34,6 +34,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <ul class="nav nav-tabs" role="tablist">
             <li class="active"><a href="#perkada" aria-controls="perkada" role="tab" data-toggle="tab">Perkada</a></li>
             <li><a href="#detailzona" aria-controls="detailzona" role="tab" data-toggle="tab">Zona Pemberlakukan SSH</a></li>
+            <li><a href="#golongan" aria-controls="golongan" role="tab" data-toggle="tab">Golongan SSH</a></li>
+            <li><a href="#kelompok" aria-controls="kelompok" role="tab" data-toggle="tab">Kelompok SSH</a></li>
+            <li><a href="#subkelompok" aria-controls="subkelompok" role="tab" data-toggle="tab">Sub Kelompok SSH</a></li>
             <li><a href="#detailtarif" aria-controls="detailtarif" role="tab" data-toggle="tab">Detail Tarif Item SSH</a></li>
           </ul>
 
@@ -43,37 +46,35 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="add">
                   <p><a id="btnPerkada" type="button" class="add-perkada btn btn-labeled btn-success">
                         <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a>
-                      <a id="btnPrintPerkadaSSh" type="button" class="print-perkadassh btn btn-labeled btn-primary" href="{{ url('/printPerkadaSsh')}}">
-                            <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Perkada SSH</a>
                   </p>
               </div>
               <div class="table-responsive">
               <table id='tblPerkada' class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="15%" style="text-align: center; vertical-align:middle">No Perkada</th>
+                          <th width="30px" style="text-align: center; vertical-align:middle">No Perkada</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Tgl Perkada</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Perkada</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Tahun Berlaku</th>
                           <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                          <th width="180px" style="text-align: center; vertical-align:middle">Aksi</th>
+                          <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
                   <tbody>
                   </tbody>
-            </table>
+              </table>
+              </div>
             </div>
-          </div>
 
             <div role="tabpanel" class="tab-pane" id="detailzona">
             <br>
-            <div class="add">
-                <p><a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a></p>
+            <div id="divAddZona">
+                <a id="btnAddZona" type="button" class="add-zonaperkada btn btn-labeled btn-success">
+                        <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Zona SSH</a>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div class="">
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
@@ -84,22 +85,128 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id=divDetailZona>
-              <div class="table-responsive">
-              <table id="tblDetailZona" class="table table-striped table-bordered"  cellspacing="0" width="100%">
+              <table id="tblDetailZona" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th width="12%" style="text-align: center; vertical-align:middle">No Zona</th>
+                            <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
+                            <th width="30px" style="text-align: center; vertical-align:middle">No Zona</th>
                             <th style="text-align: center; vertical-align:middle">Uraian Zona</th>
-                            <th width="180px" style="text-align: center; vertical-align:middle">Aksi</th>
+                            <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Item SSH</th>
+                            <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
               </table>
+            </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="golongan">
+              <br>
+              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh_gol" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_zona_gol" align='left'></label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+              <table id='tblGolongan' class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Golongan</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="kelompok">
+              <br>
+              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh_kel" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_zona_kel" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Golongan SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_gol_kel" align='left'></label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+              <div id="divKelompok">
+              <table id="tblKelompok" class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Kelompok</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
               </div>
             </div>
+
+            <div role="tabpanel" class="tab-pane" id="subkelompok">
+              <br>
+              <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh_skel" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_zona_skel" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Golongan SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_gol_skel" align='left'></label></td>
+                      </tr>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Uraian Kelompok SSH</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="nm_kel_skel" align='left'></label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+              <div id="divSubKelompok">
+              <table id="tblSubKelompok" class="table display compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Sub Kelompok</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+              </div>
             </div>
+
             <div role="tabpanel" class="tab-pane" id="detailtarif">
             <br>
             <div class="add">
@@ -114,23 +221,34 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <table class="table table-striped table-bordered">
                   <tbody>
                     <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
+                      <td width="20%" style="text-align: left; vertical-align:top;">Nomor Perkada SSH</td>
                       <td style="text-align: left; vertical-align:top;"><label id="no_sk_ssh_tarif" align='left'></label></td>
                     </tr>
                     <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona" align='left'></label></td>
+                      <td width="20%" style="text-align: left; vertical-align:top;">Uraian Zona SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_zona_tarif" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="20%" style="text-align: left; vertical-align:top;">Uraian Golongan SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_gol_tarif" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="20%" style="text-align: left; vertical-align:top;">Uraian Kelompok SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_kel_tarif" align='left'></label></td>
+                    </tr>
+                    <tr>
+                      <td width="20%" style="text-align: left; vertical-align:top;">Uraian Sub Kelompok SSH</td>
+                      <td style="text-align: left; vertical-align:top;"><label id="nm_skel_tarif" align='left'></label></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               </form>
               <div id="divDetailTarif">
-                <div class="table-responsive">
-            <table id="tblDetailTarif" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
+                <table id="tblDetailTarif" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Item</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Item</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Satuan Item</th>
@@ -140,8 +258,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </thead>
                   <tbody>
                   </tbody>
-            </table>
-          </div>
+                </table>
             </div>
             </div>
           </div>
@@ -553,7 +670,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
               <div class="form-group">
-                <label for="no_urut_tarif" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
+                <label for="no_urut_tarif" class="col-sm-3 control-label" align='left'>Nomor Item :</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control number" id="no_urut_tarif" name="no_urut_tarif" required="required" >
                 </div>
@@ -714,7 +831,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
   <div class="form-group">
       <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
-        <div class="col-sm-5">
+        <div class="col-sm-7">
           <div class="input-group">
             <input type="text" class="form-control" id="param_cari" name="param_cari">
             <div class="input-group-btn">
@@ -729,8 +846,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="35%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
                 </tr>
           </thead>
@@ -764,12 +882,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
 
   function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
     html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    // html += '<i class="fa fa-exclamation fa-lg fa-fw" aria-hidden="true"></i>';
     html += message;
     html += '</div>';    
-    $(html).hide().prependTo('#pesan').slideDown();
+    $(html).hide().prependTo('#pesan').slideDown();    
+
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
   $('.page-alert .close').click(function(e) {
@@ -826,6 +947,8 @@ $(document).ready(function() {
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
       serverSide: true,
+      deferRender: true,
+      responsive: true,
       dom: 'BFrtip',
         "ajax":  {"url": "./getPerkada"},
         "columns": [
@@ -849,12 +972,15 @@ $(document).ready(function() {
         deferRender: true,
         processing: true,
         serverSide: true,
-        dom: 'Bfrtip',
+        responsive: true,
+        dom: 'BFrtip',
         "ajax": {"url": "./getZona/0"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'id_zona', sClass: "dt-center"},
               { data: 'ur_zona'},
+              { data: 'jml_item', sClass: "dt-right",
+                            render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
               { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
               ],
         "order": [[0, 'asc']],
@@ -862,14 +988,86 @@ $(document).ready(function() {
         "autoWidth": false
   });
 
-function LoadItemSSH(id_zona){
-  var detailtarif = $('#tblDetailTarif').DataTable( {
+var gol_tbl;
+function LoadGolongan(id_zona){
+  gol_tbl = $('#tblGolongan').DataTable( {
         processing: true,
         serverSide: true,
         deferRender: true,
+        responsive: true,
         scrollCollapse: true,
-        dom: 'Bfrtip',
-        "ajax": {"url": "./getTarifPerkada/"+id_zona},
+        dom: 'BFrtip',
+        "pagingType" : "input",
+        "ajax": {"url": "./getGolPerkada/"+id_zona},
+        "language": {
+              "decimal": ",",
+              "thousands": "."},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_golongan_ssh'}
+        ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
+  });}
+
+var kel_tbl;
+function LoadKelompok(id_zona,id_gol){
+  kel_tbl = $('#tblKelompok').DataTable( {
+        processing: true,
+        serverSide: true,
+        deferRender: true,
+        responsive: true,
+        scrollCollapse: true,
+        dom: 'BFrtip',
+        "pagingType" : "input",
+        "ajax": {"url": "./getKelPerkada/"+id_zona+"/"+id_gol},
+        "language": {
+              "decimal": ",",
+              "thousands": "."},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_kelompok_ssh'}
+        ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
+  });}
+
+var skel_tbl;
+function LoadSKelompok(id_zona,id_gol,id_kel){
+  skel_tbl = $('#tblSubKelompok').DataTable( {
+        processing: true,
+        serverSide: true,
+        deferRender: true,
+        responsive: true,
+        scrollCollapse: true,
+        dom: 'BFrtip',
+        "pagingType" : "input",
+        "ajax": {"url": "./getSKelPerkada/"+id_zona+"/"+id_gol+"/"+id_kel},
+        "language": {
+              "decimal": ",",
+              "thousands": "."},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_sub_kelompok_ssh'}
+        ],
+        "order": [[0, 'asc']],
+        "bDestroy": true,
+        "autoWidth": false
+  });}
+
+var detailtarif_tbl;
+function LoadItemSSH(id_zona,id_gol,id_kel,id_skel){
+  detailtarif_tbl = $('#tblDetailTarif').DataTable( {
+        processing: true,
+        serverSide: true,
+        deferRender: true,
+        responsive: true,
+        scrollCollapse: true,
+        dom: 'BFrtip',
+        "pagingType" : "input",
+        "ajax": {"url": "./getTarifPerkada2/"+id_zona+"/"+id_gol+"/"+id_kel+"/"+id_skel},
         "language": {
               "decimal": ",",
               "thousands": "."},
@@ -892,12 +1090,13 @@ function LoadCariItem(param){
   itemSSH = $('#tblItemSSH').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'BFrtIp',
+        // dom: 'BFrtIp',
         "ajax": {"url": "./cariItemSSH/"+param},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
+              { data: 'keterangan_tarif_ssh'},
               { data: 'uraian_satuan', sClass: "dt-center"}
             ],
         "order": [[0, 'asc']],
@@ -947,16 +1146,11 @@ $(document).on('click', '#btnparam_cari', function() {
       $( "#tgl_perkada_edit" ).datepicker( "option", "dateFormat", "dd MM yy" );
   });
 
-  var id_sk_ssh;
-  var no_sk_ssh;
-  var id_zonassh;
-  var nm_zonassh;
-  var id_zona;
-  var nm_zona;
-  var flag_perkada;
+  var id_sk_ssh,no_sk_ssh,id_zonassh,nm_zonassh,id_zona,nm_zona,flag_perkada,
+  id_gol_ssh, nm_gol_ssh, id_kel_ssh, nm_kel_ssh, id_skel_ssh, nm_skel_ssh;
 
   if (flag_perkada == null && flag_perkada === undefined ){
-    document.getElementById("btnAddZona").style.visibility='hidden';
+    document.getElementById("divAddZona").style.visibility='hidden';
     document.getElementById("btnAddTarif").style.visibility='hidden';
     document.getElementById("btnCopyTarif").style.visibility='hidden';
   }
@@ -972,9 +1166,9 @@ $(document).on('click', '#btnparam_cari', function() {
       flag_perkada = data.flag;
 
       if (flag_perkada ==0 ){
-        document.getElementById("btnAddZona").style.visibility='visible';
+        document.getElementById("divAddZona").style.visibility='visible';
       } else {
-        document.getElementById("btnAddZona").style.visibility='hidden';
+        document.getElementById("divAddZona").style.visibility='hidden';
       };
 
       document.getElementById("no_sk_ssh").innerHTML = no_sk_ssh;
@@ -997,6 +1191,64 @@ $(document).on('click', '#btnparam_cari', function() {
       id_zona =  data.id_zona;
       nm_zona = data.ur_zona;
 
+      // if (flag_perkada ==0 ){
+      //   document.getElementById("btnCopyTarif").style.visibility='visible';
+      //   document.getElementById("btnAddTarif").style.visibility='visible';
+      // } else {
+      //   document.getElementById("btnCopyTarif").style.visibility='hidden';
+      //   document.getElementById("btnAddTarif").style.visibility='hidden';
+      // };
+
+      document.getElementById("no_sk_ssh_gol").innerHTML = no_sk_ssh;
+      document.getElementById("nm_zona_gol").innerHTML = nm_zona;
+
+      // $('.nav-tabs a[href="#detailtarif"]').tab('show');
+      // $('#tblDetailTarif').DataTable().ajax.url("./getTarifPerkada/"+id_zonassh).load();
+      $('.nav-tabs a[href="#golongan"]').tab('show');
+      LoadGolongan(id_zonassh);
+
+    });
+
+    $('#tblGolongan tbody').on('dblclick', 'tr', function () {
+      
+      var data = gol_tbl.row( this ).data();
+      
+      id_gol_ssh =  data.id_golongan_ssh;
+      nm_gol_ssh = data.uraian_golongan_ssh;
+
+      document.getElementById("no_sk_ssh_kel").innerHTML = no_sk_ssh;
+      document.getElementById("nm_zona_kel").innerHTML = nm_zona;
+      document.getElementById("nm_gol_kel").innerHTML = nm_gol_ssh;
+      
+      $('.nav-tabs a[href="#kelompok"]').tab('show');
+      LoadKelompok(id_zonassh,id_gol_ssh);
+
+    });
+
+    $('#tblKelompok tbody').on('dblclick', 'tr', function () {
+      
+      var data = kel_tbl.row( this ).data();
+      
+      id_kel_ssh =  data.id_kelompok_ssh;
+      nm_kel_ssh = data.uraian_kelompok_ssh;
+
+      document.getElementById("no_sk_ssh_skel").innerHTML = no_sk_ssh;
+      document.getElementById("nm_zona_skel").innerHTML = nm_zona;
+      document.getElementById("nm_gol_skel").innerHTML = nm_gol_ssh;
+      document.getElementById("nm_kel_skel").innerHTML = nm_kel_ssh;
+      
+      $('.nav-tabs a[href="#subkelompok"]').tab('show');
+      LoadSKelompok(id_zonassh,id_gol_ssh,id_kel_ssh);
+
+    });
+
+    $('#tblSubKelompok tbody').on('dblclick', 'tr', function () {
+      
+      var data = skel_tbl.row( this ).data();
+      
+      id_skel_ssh =  data.id_sub_kelompok_ssh;
+      nm_skel_ssh = data.uraian_sub_kelompok_ssh;
+
       if (flag_perkada ==0 ){
         document.getElementById("btnCopyTarif").style.visibility='visible';
         document.getElementById("btnAddTarif").style.visibility='visible';
@@ -1006,13 +1258,16 @@ $(document).on('click', '#btnparam_cari', function() {
       };
 
       document.getElementById("no_sk_ssh_tarif").innerHTML = no_sk_ssh;
-      document.getElementById("nm_zona").innerHTML = nm_zona;
+      document.getElementById("nm_zona_tarif").innerHTML = nm_zona;
+      document.getElementById("nm_gol_tarif").innerHTML = nm_gol_ssh;
+      document.getElementById("nm_kel_tarif").innerHTML = nm_kel_ssh;
+      document.getElementById("nm_skel_tarif").innerHTML = nm_skel_ssh;
 
       $('.nav-tabs a[href="#detailtarif"]').tab('show');
       // $('#tblDetailTarif').DataTable().ajax.url("./getTarifPerkada/"+id_zonassh).load();
-      LoadItemSSH(id_zonassh);
+      LoadItemSSH(id_zonassh,id_gol_ssh,id_kel_ssh,id_skel_ssh);
 
-    } );
+    });
 
   //tambah perkada
   $(document).on('click', '.add-perkada', function() {
@@ -1053,7 +1308,8 @@ $(document).on('click', '#btnparam_cari', function() {
                     }
                     else {
                         $('.error').addClass('hidden');
-                        $('#tblPerkada').DataTable().ajax.reload();
+                        $('#tblPerkada').DataTable().ajax.reload(null,false);
+                        $('#tblPerkada').DataTable().page('last').draw('page');
                     }
                 },
               });
@@ -1100,7 +1356,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_perkada_edit': $('#id_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
               $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
@@ -1138,7 +1394,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'flag_perkada': $('.flag_perkada').text(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
                 createPesan(data.pesan,"success");
               } else {
@@ -1176,7 +1432,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_perkada_hapus').text()).remove();
-        $('#tblPerkada').DataTable().ajax.reload();
+        $('#tblPerkada').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1212,12 +1468,13 @@ $(document).on('click', '#btnparam_cari', function() {
           },
           success: function(data) {
                   $('.error').addClass('hidden');
-                  $('#tblDetailZona').DataTable().ajax.reload();
+                  $('#tblDetailZona').DataTable().ajax.reload(null,false);
+                  $('#tblDetailZona').DataTable().page('last').draw('page');
                   if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
-              } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
-              } 
+                    $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                  } else {
+                    $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                  } 
           },
       });
   });
@@ -1255,11 +1512,11 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_zona_perkada': $('#id_zona_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblDetailZona').DataTable().ajax.reload();
+              $('#tblDetailZona').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
               } 
           }
       });
@@ -1293,7 +1550,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_zona_perkada_hapus').text()).remove();
-        $('#tblDetailZona').DataTable().ajax.reload();
+        $('#tblDetailZona').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1339,7 +1596,8 @@ $(document).on('click', '#btnparam_cari', function() {
           success: function(data) {
               $('.nav-tabs a[href="#detailtarif"]').tab('show');
                   $('.error').addClass('hidden');
-                  $('#tblDetailTarif').DataTable().ajax.reload();
+                  $('#tblDetailTarif').DataTable().ajax.reload(null,false);
+                  $('#tblDetailTarif').DataTable().page('last').draw('page');
                   if(data.status_pesan==1){
                   $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
                   } else {
@@ -1351,22 +1609,22 @@ $(document).on('click', '#btnparam_cari', function() {
 
   //Edit Tarif Perkada
   $(document).on('click', '.edit-tarif', function() {
-    // $('#nmbtnTarif').text(" Update");
-    // $('#nmbtnTarif').addClass('glyphicon-check');
-    // $('#nmbtnTarif').removeClass('glyphicon-plus');
+
+    var data = detailtarif_tbl.row( $(this).parents('tr') ).data();
+
     $('.btnTarif').addClass('btn-success');
     $('.btnTarif').removeClass('addtarif');
     $('.btnTarif').addClass('edittarif');
     $('.modal-title').text('Edit Data Tarif Item SSH');
     $('.form-horizontal').show();
-    $('#id_tarif_perkada').val($(this).data('id_tarif_perkada'));
-    $('#id_perkada_tarif').val($(this).data('id_perkada'));
-    $('#id_zona_perkada').val($(this).data('id_zona_perkada'));
-    $('#no_urut_tarif').val($(this).data('no_urut'));
-    $('#id_zona_tarif').val($(this).data('id_zona'));
-    $('#id_item_perkada').val($(this).data('id_tarif'));
-    $('#rupiah_tarif').val($(this).data('jml_rupiah'));
-    $('#ur_item_perkada'). val($(this).data('ur_tarif'));
+    $('#id_tarif_perkada').val(data.id_tarif_perkada);
+    $('#id_perkada_tarif').val(data.id_perkada);
+    $('#id_zona_perkada').val(data.id_zona_perkada);
+    $('#no_urut_tarif').val(data.no_tarif);
+    $('#id_zona_tarif').val(data.id_zona);
+    $('#id_item_perkada').val(data.id_tarif_ssh);
+    $('#rupiah_tarif').val(data.jml_rupiah);
+    $('#ur_item_perkada'). val(data.ur_tarif);
     document.getElementById("idperkada_tarif").innerHTML = no_sk_ssh;
     document.getElementById("idzona_tarif").innerHTML = nm_zona;
     $('#ModalTarifPerkada').modal('show');
@@ -1389,11 +1647,11 @@ $(document).on('click', '#btnparam_cari', function() {
               'jml_rupiah': $('#rupiah_tarif').val(),
           },
           success: function(data) {
-              $('#tblDetailTarif').DataTable().ajax.reload();
+              $('#tblDetailTarif').DataTable().ajax.reload(null,false);
               if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
+                $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
               } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
+                $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
               } 
           }
       });
@@ -1427,7 +1685,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_tarif_perkada_hapus').text()).remove();
-        $('#tblDetailTarif').DataTable().ajax.reload();
+        $('#tblDetailTarif').DataTable().ajax.reload(null,false);
         $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
       }
     });
@@ -1440,6 +1698,7 @@ $(document).on('click', '#btnparam_cari', function() {
     $.ajax({
           type: "GET",
           url: './getDataPerkada',
+          data:"id_perkada="+ id_sk_ssh,
           dataType: "json",
           success: function(data) {
 
@@ -1517,17 +1776,12 @@ $(document).on('click', '#btnparam_cari', function() {
 
           for (i = 0; i < j; i++) {
             post = data[i];
-            $('select[name="pilih_zona"]').append('<option value="'+ post.id_zona +'">'+ post.keterangan_zona +'</option>');
+            $('select[name="pilih_zona"]').append('<option value="'+ post.id_zona_perkada +'">'+ post.keterangan_zona +'</option>');
           }
           }
       });
     });
 
-  // $( ".pilih_zona" ).change(function() {
-  //   alert($('#pilih_zona').val())
-  // });
-
-
-} );
+});
 </script>
 @endsection

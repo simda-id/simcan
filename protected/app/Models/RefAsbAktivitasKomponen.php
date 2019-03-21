@@ -1,29 +1,30 @@
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class RefAsbAktivitasKomponen extends Model
-{
-    //
-    // protected $fillable = ['id_golongan_ssh', 'no_urut', 'uraian_golongan_ssh'];
-    protected $table = 'ref_asb_aktivitas_komponen';
-    protected $fillable = ['id_aktivitas_komponen','id_aktivitas_asb','id_komponen_asb','no_urut'];
-    protected $primaryKey = 'id_aktivitas_komponen';
-
-    public $timestamps = false;
-
-    public function refasbaktivitas()
-    {
-      return $this->belongsTo('App\Models\TrxAsbAktivitas', 'id_aktivitas_asb');
-    }
-
-    public function refasbkomponen()
-    {
-      return $this->belongsTo('App\Models\RefAsbKomponen', 'id_komponen_asb');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+ohWnQicp

@@ -1,0 +1,90 @@
+{
+    "parameter" : {
+        "Pemda": "101",
+        "Kecamatan-Desa" : "102",
+        "Unit Organisasi": "103",
+        "Urusan-Bidang" : "104",
+        "Rekening" : "105",
+        "Program-Kegiatan": "106",
+        "Lokasi non-Wilayah" : "107",
+        "Satuan Indikator" : "108",
+        "Setting Aplikasi" : "109",
+        "User dan Group" : "110"
+    },
+    "RPJMD": {
+        "NaN" : "20."
+    },
+    "Renstra": {
+        "NaN" : "30."
+    },
+    "RKPD" : {
+        "Rancangan Awal RKPD": {
+            "Load Data Tahunan RPJMD" : "401",
+            "Rancangan Awal RKPD" : "402"
+        },
+        "Rancangan RKPD": {
+            "Load Data Forum SKPD" : "403",
+            "Rancangan RKPD" : "404"
+        },
+        "Rancangan Akhir RKPD": {
+            "Load Data Rancangan RKPD" : "405",
+            "Rancangan Akhir RKPD" : "406"
+        },
+        "RKPD Final": {
+            "Load Data Hasil Ranhir SKPD" : "407",
+            "RKPD Final" : "408"
+        }
+    },
+    "Renja" : {
+        "Load Data Tahunan Renstra": "501",
+        "Rancangan Awal Renja": "502",
+        "Pokok Pikiran DPRD": "503",
+        "Renja Final": "504"
+    },
+    "Musrenbang" : {
+        "Musrenbang Desa": {
+            "Usulan RW" : "601",
+            "Load Usulan RW" : "602",
+            "Musrenbang Desa/Kelurahan" : "603"
+        },
+        "Musrenbang Kecamatan": {
+            "Load Usulan Musrendes" : "604",
+            "Musrenbang Kecamatan" : "605"
+        },
+        "Forum SKPD": {
+            "Load Data Awal Forum SKPD" : "606",
+            "Forum SKPD" : "607"
+        },
+        "Musrenbang RKPD": {
+            "Load Data Forum SKPD" : "608",
+            "Musrenbang RKPD" : "609"
+        }
+    },
+    "PPAS" : {
+        "Dokumen PPAS": "701",
+        "Program Pemda": "702",
+        "Program OPD": "703",
+        "Pagu OPD": "704",
+    },
+    "APBD" : {
+        "Dokumen PPAS": "710",
+        "Program Pemda": "711",
+        "Program OPD": "712",
+        "Pagu OPD": "713",
+    },
+    "ASB-SSH" : {
+        "Standar Satuan Harga": {
+            "Zona SSH" : "801",
+            "Standar Satuan Harga" : "802",
+            "Perkada SSH" : "803",
+            "Percetakan SSH" : "807"
+        },
+        "Analisa Standar Belanja": {
+            "Komponen ASB" : "804",
+            "Perkada Aktivitas ASB" : "805",
+            "Perhitungan ASB" : "806",
+            "Percetakan ASB" : "808"
+        }
+    },
+    "update": 9 
+}

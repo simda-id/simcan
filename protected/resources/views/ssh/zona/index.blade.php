@@ -3,6 +3,33 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
 @extends('layouts.app0')
+<style>
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -16px;
+      z-index:1;
+    }
+    
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 @section('content')
   <div class="container-fluid">
         <div class="row">
@@ -20,6 +47,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         </div>
         <div id="pesan"></div>
+        <div id="proses" class="loader"></div>
         <div class="row">
             <div class="col-md-12">
 
@@ -36,11 +64,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah</a></p>
             </div>
             <br>
-            <div class="table-responsive">
-            <table id="tblzona" class="table display table-striped table-bordered table-responsive" width="100%">
+            <table id="tblzona" class="table display table-striped table-compact table-bordered table-responsive" >
                   <thead>
                       <tr>
-                          <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th witdh="25%" style="text-align: center; vertical-align:middle">Nama Zona SSH</th>
                           <th style="text-align: center; vertical-align:middle">Deskripsi Zona SSH</th>
                           <th width="80px" style="text-align: center; vertical-align:middle">Aksi</th>
@@ -48,7 +75,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </thead>
                   <tbody></tbody>
             </table>
-            </div>
           </div>
         </div>
       </div>
@@ -154,16 +180,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
 
   $('[data-toggle="popover"]').popover();
+  $('#proses').hide();
 
   var tzona = $('#tblzona').DataTable( {
         processing: true,
         serverSide: true,
         "ajax": "{{url('/zonassh/getdata')}}",
         "columns": [
-              { data: 'no_urut'},
+              { data: 'DT_Row_Index', orderable: false, searchable: false, sClass: "dt-center"},
               { data: 'keterangan_zona'},
               { data: 'diskripsi_zona'},
-              { data: 'action', 'searchable': false, 'orderable':false }
+              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
             ]
       } );
 
@@ -187,9 +214,6 @@ $(document).ready(function() {
     } );  
 
 $(document).on('click', '.add-modal', function() {
-  // $('#nmAddZona').text("Simpan");
-  // $('#nmAddZona').addClass('glyphicon-save');
-  // $('.btnAddZona').addClass('btn-success');
   $('.btnAddZona').removeClass('editZona');
   $('.btnAddZona').addClass('addZona');
   $('.modal-title').text('Tambah Data Zona SSH');

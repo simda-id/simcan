@@ -27,5 +27,4 @@
      deny from all
      satisfy all
     </Files>
-
 </IfModule>

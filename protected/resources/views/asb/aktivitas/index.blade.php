@@ -46,9 +46,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <br>
               <div class="add">
                   <p><a class="add-perkada btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a></p>
+                  {{-- <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak ASB <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                  <a class="dropdown-item cetak-perkada"><i class="fa fa-print fa-fw fa-lg"></i>Cetak List ASB</a>
+                                  <a class="dropdown-item cetak-duplikasi"><i class="fa fa-print fa-fw fa-lg"></i>Cetak Duplikasi ASB</a>
+                                </li>                     
+                            </ul>
+                    </div> --}}
               </div>
-              <div class="table-responsive">
-              <table id='tblPerkada' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
+              <div>
+              <table id='tblPerkada' class="table display compact table-striped table-bordered table-responsive" cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -69,9 +78,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <a id="btnTambahKel" class="add-kelompok btn btn-success btn-labeled" role="button"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kelompok Aktivitas ASB </a>
                 <a id="btnCopyASB" class="copy-asb btn btn-primary btn-labeled" role="button"><span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Copy Data ASB</a>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
+              <div>
               <br>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -82,8 +91,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divAktivitas">
-              <div class="table-responsive">
-              <table id="tblKelompok" class="table compact table-striped table-bordered"  cellspacing="0" width="100%">
+              <div>
+              <table id="tblKelompok" class="table compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -103,8 +112,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <p id="btnTambahSubKel"><a class="add-subkelompok btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Sub Kelompok Aktivitas ASB</a></p>
             </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div>
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -119,8 +128,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divAktivitas">
-              <div class="table-responsive">
-              <table id="tblSubKelompok" class="table compact table-striped table-bordered"  cellspacing="0" width="100%">
+              <div>
+              <table id="tblSubKelompok" class="table compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <tr>
@@ -142,8 +151,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <p id="btnTambahSubSubKel"><a class="add-sskel btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Sub Sub Kelompok ASB</a></p>
             </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div>
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -162,8 +171,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divAktivitas">
-              <div class="table-responsive">
-              <table id="tblSubSubKelompok" class="table compact table-striped table-bordered"  cellspacing="0" width="100%">
+              <div>
+              <table id="tblSubSubKelompok" class="table compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <tr>
@@ -185,8 +194,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <p id="btnTambahAktivitas"><a class="add-aktivitas btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Aktivitas ASB</a></p>
             </div>
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div>
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -209,8 +218,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divAktivitas">
-              <div class="table-responsive">
-              <table id="tblAktivitas" class="table compact table-striped table-bordered"  cellspacing="0" width="100%">
+              <div>
+              <table id="tblAktivitas" class="table compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -232,9 +241,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <a id="btnCopyKomponen" class="copy-komponen btn btn-primary btn-labeled" role="button"><span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span> Copy Data Komponen</a>
               
               <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
+              <div>
               <br>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="15%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -261,8 +270,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id="divKomponen">
-              <div class="table-responsive">
-              <table id="tblKomponen" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+              <div>
+              <table id="tblKomponen" class="table display compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -285,8 +294,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <p id="btnTambahRincian"><a class="add-rincian btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Rincian Komponen Aktivitas</a></p>
             </div>
             <form class="form-horizontal col-sm-12" role="form" autocomplete='off' action="" method="" >
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+              <div >
+                <table class="table table-striped table-bordered table-responsive">
                   <tbody>
                     <tr>
                       <td width="25%" style="text-align: left; vertical-align:top;">No Perkada</td>
@@ -317,7 +326,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </form>
               <div id="divTblRincian">
               {{-- <div class="table-responsive"> --}}
-                  <table id="tblRincian" class="table display compact table-striped table-bordered"  cellspacing="0" width="100%">
+                  <table id="tblRincian" class="table display compact table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                          <tr>
                              <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -996,14 +1005,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <tbody>
                       <tr>
                         {{-- <td><input class="cekdrive2" type="checkbox" id="cekdrive2"></td> --}}
-                        <td style="text-align: center; vertical-align:middle">1</td>
-                        <td style="text-align: center; vertical-align:middle">2
+                        <td style="text-align: center; vertical-align:middle"></td>
+                        <td style="text-align: center; vertical-align:middle">Utama
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver utama, yang mempengaruhi besarnya biaya aktivitas.<br>Misal untuk aktivitas pelatihan, cost driver berupa peserta."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">3
+                        <td style="text-align: center; vertical-align:middle">Derivatif
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Cost driver derivatif, satuan yang berubah tergantung banyaknya volume pada cost driver utama.<br>Misal untuk aktivitas pelatihan, cost driver peserta, cost driver derivatif adalah kelas; semakin banyak peserta makin banyak kelas yang diperlukan."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">4 
+                        <td style="text-align: center; vertical-align:middle"> 
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Range: rentang berubahnya cost driver derivatif.<br>Misal: satu kelas pelatihan hanya bisa menampung 30 peserta, lebih dari 30 peserta harus dibuat kelas baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
-                        <td style="text-align: center; vertical-align:middle">5
+                        <td style="text-align: center; vertical-align:middle">
                         <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="Perkada dan Aktivitas ASB" data-trigger="hover" data-content="Kapasitas: jumlah maksimum volume yang bisa dilayani oleh struktur biaya aktivitas.<br>Misal: panitia 5 orang hanya dapat melayani maksimal 120 peserta, lebih dari 120 peserta diperlukan kepanitiaan baru."><i class="glyphicon glyphicon-question-sign"></i></a></span></td>
                       </tr>
                       <tr>
@@ -1342,13 +1351,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <td colspan="3"><label for="jns_biaya" class="control-label" align='left'>Sifat Biaya</label></td>
                         <td colspan="5">
                             <label class="radio-inline">
-                              <input type="radio" class="jns_biaya" name="jns_biaya" id="jns_biaya" value="1">Fixed
+                              <input type="radio" class="jns_biaya" name="jns_biaya" id="jns_biaya" value="1">Fixed Cost
                             </label>
-                            <label class="radio-inline">
+                            <label class="radio-inline hidden">
                               <input type="radio" class="jns_biaya" name="jns_biaya" id="jns_biaya" value="3">Independent Variable
                             </label>
                             <label class="radio-inline">
-                              <input type="radio" class="jns_biaya" name="jns_biaya" id="jns_biaya" value="2">Mixed Variable
+                              <input type="radio" class="jns_biaya" name="jns_biaya" id="jns_biaya" value="2">Variable Cost
                               &nbsp;&nbsp;&nbsp;&nbsp
                               <span><a data-container="body" data-trigger="hover" data-html="true" data-toggle="popover" title="Perkada dan Aktivitas ASB" data-content="Fix Cost: tidak dipengaruhi cost driver<br>Independent: dipengaruhi cost driver, menggunakan satuan sesuai cost driver<br>Dependent: dipengaruhi range cost driver, menggunakan satuan derivatif"><i class="glyphicon glyphicon-question-sign"></i></a></span>
                             </label>
@@ -1356,22 +1365,54 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </td>                        
                       </tr>
                       <tr>
-                        <td colspan="3"><label for="hub_driver" class="control-label" align='left'>Hubungan Pemicu Biaya</label> </td>
-                        <td colspan="5">
-                            <label class="radio-inline">
-                              <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="1">
-                              <span class="control-label" id="shub_driver1" align='left'></span>
+                        <td colspan="3">
+                          <label for="hub_driver" class="control-label" align='left'>Hubungan Pemicu Biaya
+                          &nbsp;&nbsp;&nbsp;&nbsp
+                          <span><a data-container="body" data-trigger="hover" data-html="true" data-toggle="popover" title="Perkada dan Aktivitas ASB" data-content="Keterkaitan dependent/independent variable terhadap cost driver."><i class="glyphicon glyphicon-question-sign"></i></a></span>
+                          </label>
+                        </td>
+                        <td colspan="5" id="hub_driver_x">
+                            <div class="radio-inline">
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="1">
+                                <span class="control-label" id="shub_driver1" align='left'></span>
                               </label>
-                            <label class="radio-inline">
-                              <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="2">
-                              <span class="control-label" id="shub_driver2" align='left'></span>
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="2">
+                                <span class="control-label" id="shub_driver2" align='left'></span>
                               </label>
-                            <label class="radio-inline">
-                              <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="3">
-                              <span class="control-label" id="shub_driver3" align='left'></span>
-                              &nbsp;&nbsp;&nbsp;&nbsp
-                              <span><a data-container="body" data-trigger="hover" data-html="true" data-toggle="popover" title="Perkada dan Aktivitas ASB" data-content="Keterkaitan dependent/independent variable terhadap cost driver."><i class="glyphicon glyphicon-question-sign"></i></a></span>
-                            </label>
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="3">
+                                <span class="control-label" id="shub_driver3" align='left'></span>
+                              </label>
+                            </div>
+                            <div class="radio-inline">                              
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="4">
+                                <span class="control-label" id="shub_driver4" align='left'></span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="5">
+                                <span class="control-label" id="shub_driver5" align='left'></span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="6">
+                                <span class="control-label" id="shub_driver6" align='left'></span>
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="7">
+                                <span class="control-label" id="shub_driver7" align='left'></span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="hub_driver" name="hub_driver" id="hub_driver" value="8">
+                                <span class="control-label" id="shub_driver8" align='left'></span>
+                              </label>
+                              <label class="radio">
+                                &nbsp;&nbsp;&nbsp;&nbsp
+                              </label>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -1392,11 +1433,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <td colspan="2"><select class="form-control id_satuan2_rinc" name="id_satuan2_rinc" id="id_satuan2_rinc" required="required" ></select></td>
                         <td colspan="2"><select class="form-control id_satuan3_rinc" name="id_satuan3_rinc" id="id_satuan3_rinc" required="required" ></select></td>
                       </tr>
-                      <tr>
+                      {{-- <tr class="hidden">
                         <td colspan="2">Derivatif</td>
                         <td colspan="2"><select class="form-control id_satuan1_der" name="id_satuan1_der" id="id_satuan1_der"></select></td>
                         <td colspan="4"></td>
-                      </tr>
+                      </tr> --}}
                     </tbody>
               </table>
               </div>
@@ -1464,7 +1505,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg"  >
   <div class="modal-content">
   <div class="modal-header">
-    <h3 class="modal-title" >Daftar Item yang terdapat di SSH</h3>
+    <h3>Daftar Item yang terdapat di SSH</h3>
   </div>
   <div class="modal-body">
   <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
@@ -1486,9 +1527,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="40%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="25%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
                   <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Harga Satuan</th>
                 </tr>
           </thead>
           <tbody>
@@ -1517,7 +1560,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg"  >
   <div class="modal-content">
   <div class="modal-header">
-      <h3 class="modal-title">Daftar Komponen ASB</h3>
+      <h3>Daftar Komponen ASB</h3>
   </div>
   <div class="modal-body">
   <form name="frmCariKomponen" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -1565,7 +1608,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="modal-content">
         <div class="modal-header">
           {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
-            <h4 class="modal-title"> Copy Data Kelompok Analisis Standar Belanja</h4>
+            <h4> Copy Data Kelompok Analisis Standar Belanja</h4>
         </div>
       <div class="modal-body">
           <form name="frmModalCopyASB" class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -1606,6 +1649,58 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
 
+<div id="SimulasiHitung" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id_aktivitas_simulasi" id="id_aktivitas_simulasi" readonly>
+              <div class="form-group">
+                <label for="aktivitas_simulasi" class="col-sm-3 control-label" align='left'>Aktivitas ASB :</label>
+                <div class="col-sm-8">
+                  <input class="form-control aktivitas_simulasi" name="aktivitas_simulasi" id="aktivitas_simulasi" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 1 :</label>
+                <div class="col-sm-2">
+                  <input type="test" class="form-control number" id="v1_simulasi" name="v1_simulasi" style="text-align: right;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="id_perkada">Volume Pemicu Biaya 2 :</label>
+                <div class="col-sm-2">
+                  <input type="test" class="form-control number" id="v2_simulasi" name="v2_simulasi" style="text-align: right;">
+                </div>
+              </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left idbtnHapusBelanja">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn  btn-success btnSimulasi btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i id="fooSimulasi" class="fa fa-print fa-fw fa-lg"></i></span>Cetak Aktivitas ASB</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
 <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -1642,27 +1737,27 @@ $(document).ready(function() {
   var nm_rinci_asb;
   var flag_perkada;
 
-  var hub_driver1;
-  var hub_driver2;
-  var hub_driver3;
-  var n_driver;
-  var n_driver1;
-  var n_driver2;
+  var hub_driver1,hub_driver2,hub_driver3,hub_driver4,hub_driver5,hub_driver6,hub_driver7,hub_driver8;
+  var n_driver,n_driver,n_driver2,n_driver3,n_driver4,n_driver5,n_driver6,n_driver7;
 
 function createPesan(message, type) {
-    var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-12">';    
+    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
     html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
     html += message;
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
-};
-
+    
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
+  };
 
 $('.page-alert .close').click(function(e) {
         e.preventDefault();
         $(this).closest('.page-alert').slideUp();
-});
+    });
 
+$('.number').number(true,2,',', '.');
 $('#thn_perkada').number(true,0,'', '');
 
 $('#tgl_perkada').datepicker({
@@ -1753,11 +1848,10 @@ $('input:text[datalist][multiple]').each(function() {
 
 $('datalist[name="tempCariItem"]').empty();
 
-
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
       serverSide: true,
-      dom: 'bFrtip',
+      dom: 'bfrtip',
         "ajax": {"url":"./getPerkada"},
         "columns": [
             { data: 'no_urut', sClass: "dt-center"},
@@ -1974,8 +2068,8 @@ $('datalist[name="tempCariItem"]').empty();
 
   } );
 
-  var komponen = $('#tblKomponen').DataTable( {
-        // retrieve: true,
+  var komponen = $('#tblKomponen').DataTable({
+        retrieve: true,
         processing: false,
         serverSide: false,
         dom: 'BFrtip',
@@ -2013,10 +2107,17 @@ $('datalist[name="tempCariItem"]').empty();
     hub_driver1=data.driver1;
     hub_driver2=data.driver2;
     hub_driver3=data.driver3;
+    hub_driver4=data.driver4;
+    hub_driver5=data.driver5;
+    hub_driver6=data.driver6;
+    hub_driver7=data.driver7;
+    hub_driver8=data.driver8;
 
     n_driver=data.jml_driver;
     n_driver1=data.id_satuan_1;
     n_driver2=data.id_satuan_2;
+    n_driver3=data.sat_derivatif_1;
+    n_driver4=data.sat_derivatif_2;
 
     if (flag_perkada ==0 ){
         document.getElementById("btnTambahRincian").style.visibility='visible';
@@ -2089,14 +2190,17 @@ $(document).on('click', '#btnparam_cari', function() {
         // retrieve: true,
         processing: true,
         serverSide: true,
-        dom: 'BFrtIp',
+        dom: 'BfrtIp',
         "autoWidth": false,
         "ajax": {"url": "./getItemSSH/"+ param.toLowerCase()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
-              { data: 'uraian_satuan', sClass: "dt-center",width:"100px"}
+              { data: 'keterangan_tarif_ssh'},
+              { data: 'uraian_satuan', sClass: "dt-center",width:"100px"},
+              { data: 'jml_rupiah', sClass: "dt-right",
+                render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp ' )}
             ],
         "order": [[0, 'asc']],
         "bDestroy": true
@@ -2251,7 +2355,7 @@ $(document).on('click', '#btnparam_cari', function() {
                       'ur_perkada': $('#ur_perkada').val(),
                   },
                   success: function(data) {
-                      $('#tblPerkada').DataTable().ajax.reload();
+                      $('#tblPerkada').DataTable().ajax.reload(null,false);
                       createPesan("Proses Tambah Data Berhasil","success");
                       $('#ModalProgress').modal('hide');
                   },
@@ -2303,7 +2407,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_perkada_edit': $('#id_perkada_edit').val(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2340,7 +2444,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'flag_perkada': $('.flag_perkada').text(),
           },
           success: function(data) {
-              $('#tblPerkada').DataTable().ajax.reload();
+              $('#tblPerkada').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2375,7 +2479,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_perkada_hapus').text()).remove();
-        $('#tblPerkada').DataTable().ajax.reload();
+        $('#tblPerkada').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2438,7 +2542,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblAktivitas').DataTable().ajax.reload();
+                  $('#tblAktivitas').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2515,7 +2619,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_aktivitas_asb': $('#id_aktivitas_edit').val(),
           },
           success: function(data) {
-              $('#tblAktivitas').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2550,7 +2654,7 @@ $(document).on('click', '#btnparam_cari', function() {
       success: function(data) {
 
         $('.item' + $('.id_aktivitas_hapus').text()).remove();
-        $('#tblAktivitas').DataTable().ajax.reload();
+        $('#tblAktivitas').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2592,7 +2696,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2636,7 +2740,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2670,7 +2774,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_subsubkel_del').text()).remove();
-        $('#tblSubSubKelompok').DataTable().ajax.reload();
+        $('#tblSubSubKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2722,7 +2826,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblKomponen').DataTable().ajax.reload();
+                  $('#tblKomponen').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
             $('#ModalProgress').modal('hide');
               }
@@ -2772,7 +2876,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_komponen_asb': $('#id_komponen_asb_edit').val(),
           },
           success: function(data) {
-              $('#tblKomponen').DataTable().ajax.reload();
+              $('#tblKomponen').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2805,7 +2909,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_komponen_hapus').text()).remove();
-        $('#tblKomponen').DataTable().ajax.reload();
+        $('#tblKomponen').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
         $('#ModalProgress').modal('hide');
       }
@@ -2814,12 +2918,9 @@ $(document).on('click', '#btnparam_cari', function() {
 
 //Copy Komponen
   $(document).on('click', '.copy-komponen', function() {
-    // $('.btnCopyKomponen').addClass('btn-success');
-    // $('.btnCopyKomponen').removeClass('btn-danger');
-    // $('.btnCopyKomponen').addClass('addKomponenASB');
     $('.form-horizontal').show();
 
-    $('#tblCariKomponen').DataTable().ajax.reload();
+    $('#tblCariKomponen').DataTable().ajax.reload(null,false);
     $('#cariKomponen').modal('show');
   });
 
@@ -2855,7 +2956,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblKelompok').DataTable().ajax.reload();
+                  $('#tblKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
               }
@@ -2892,7 +2993,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'ur_asb_kel_edit': $('#ur_asb_kel_edit').val(),
           },
           success: function(data) {
-              $('#tblKelompok').DataTable().ajax.reload();
+              $('#tblKelompok').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
           }
@@ -2925,7 +3026,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_kel_del').text()).remove();
-        $('#tblKelompok').DataTable().ajax.reload();
+        $('#tblKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
             $('#ModalProgress').modal('hide');
       }
@@ -2967,7 +3068,7 @@ $(document).on('click', '#btnparam_cari', function() {
               }
               else {
                   $('.error').addClass('hidden');
-                  $('#tblSubKelompok').DataTable().ajax.reload();
+                  $('#tblSubKelompok').DataTable().ajax.reload(null,false);
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
               }
@@ -3007,7 +3108,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'ur_asb_subkel_edit': $('#ur_asb_subkel_edit').val(),
           },
           success: function(data) {
-              $('#tblSubKelompok').DataTable().ajax.reload();
+              $('#tblSubKelompok').DataTable().ajax.reload(null,false);
               createPesan("Proses Edit Data Berhasil","success");
               $('#ModalProgress').modal('hide');
           }
@@ -3041,7 +3142,7 @@ $(document).on('click', '#btnparam_cari', function() {
       },
       success: function(data) {
         $('.item' + $('.id_asb_subkel_del').text()).remove();
-        $('#tblSubKelompok').DataTable().ajax.reload();
+        $('#tblSubKelompok').DataTable().ajax.reload(null,false);
         createPesan("Proses Hapus Data Berhasil","success");
         $('#ModalProgress').modal('hide');
       }
@@ -3065,17 +3166,22 @@ $(document).on('click', '#btnparam_cari', function() {
     document.getElementById("idaktivitas_rinc").innerHTML = nm_aktiv_asb;
     document.getElementById("idkomponen_rinc").innerHTML = nm_komp_asb;
 
-    document.getElementById("shub_driver1").innerHTML = hub_driver1;
-    document.getElementById("shub_driver2").innerHTML = hub_driver2;
-    document.getElementById("shub_driver3").innerHTML = hub_driver3;
+    isi_hub_driver();
 
-    document.frmModalRincian.hub_driver[0].disabled=true;
-    document.frmModalRincian.hub_driver[1].disabled=true;
-    document.frmModalRincian.hub_driver[2].disabled=true;
+    document.frmModalRincian.jns_biaya[0].checked=false;
+    document.frmModalRincian.jns_biaya[1].checked=false;
+    document.frmModalRincian.jns_biaya[2].checked=false;
+
+    if (document.frmModalRincian.jns_biaya[1].checked) {
+      unlock_hub_driver();
+    } else {
+      lock_hub_driver();
+      clear_hub_driver();
+    }
     
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
+    // document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
     document.getElementById("koefisien2").setAttribute("disabled","disabled");
     document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled");
     document.getElementById("koefisien3").setAttribute("disabled","disabled");
@@ -3119,7 +3225,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_satuan1': $('#id_satuan1_rinc').val(),
               'id_satuan2': $('#id_satuan2_rinc').val(),
               'id_satuan3': $('#id_satuan3_rinc').val(),
-              'sat_derivatif1': $('#id_satuan1_der').val(),
+              // 'sat_derivatif1': $('#id_satuan1_der').val(),
               'jenis_biaya': getJnsBiaya(),
               'hub_driver': getHubDriver(),
               'ket_group' : $('#ket_rinci').val(),
@@ -3129,7 +3235,7 @@ $(document).on('click', '#btnparam_cari', function() {
                   createPesan("Proses Tambah Data Berhasil","success");
                   $('#ModalProgress').modal('hide');
                   $('datalist[name="searchresults"]').append('<option value="'+ $('#ket_rinci').val() +'"/>');
-                  $('#tblRincian').DataTable().ajax.reload();
+                  $('#tblRincian').DataTable().ajax.reload(null,false);
           },
       });
   });
@@ -3145,25 +3251,6 @@ $(document).on('click', '#btnparam_cari', function() {
     $('.form-horizontal').show();
     $('#id_komponen_asb_rinci').val($(this).data('id_komponen_rinci'));
     $('#id_komponen_rinc').val($(this).data('id_komponen'));
-    
-    // $.ajax({
-    //   type: "GET",
-    //   url: './getRefSatuanDer/'+id_aktiv_asb+'/'+$('#id_satuan1_rinc').val(),
-    //   dataType: "json",
-    //   success: function(data) {
-
-    //     var j = data.length;
-    //     var post, i;
-
-    //     $('select[name="id_satuan1_der"]').empty();
-    //     $('select[name="id_satuan1_der"]').append('<option value="-1">---Pilih Derivatif---</option>');
-
-    //     for (i = 0; i < j; i++) {
-    //       post = data[i];
-    //       $('select[name="id_satuan1_der"]').append('<option value="'+ post.sat_derivatif_1 +'">'+ post.uraian_satuan +'</option>');
-    //     }
-    //   }
-    // }); 
 
     document.getElementById("idperkada_rinc").innerHTML = nm_sk_asb;
     document.getElementById("idkel_rinc").innerHTML = nm_kel_asb;
@@ -3172,9 +3259,7 @@ $(document).on('click', '#btnparam_cari', function() {
     document.getElementById("idaktivitas_rinc").innerHTML = nm_aktiv_asb;
     document.getElementById("idkomponen_rinc").innerHTML = nm_komp_asb;
 
-    document.getElementById("shub_driver1").innerHTML = hub_driver1;
-    document.getElementById("shub_driver2").innerHTML = hub_driver2;
-    document.getElementById("shub_driver3").innerHTML = hub_driver3;
+    isi_hub_driver();
 
     $('#koefisien1'). val($(this).data('koefisien1'));
     $('#koefisien2'). val($(this).data('koefisien2'));
@@ -3182,7 +3267,7 @@ $(document).on('click', '#btnparam_cari', function() {
     $('#id_tarif_ssh').val($(this).data('id_tarif_ssh'));
     $('#ur_tarif_ssh').val($(this).data('ur_tarif_ssh'));
     $('#id_satuan1_rinc').val($(this).data('id_satuan1'));
-    $('#id_satuan1_der').val($(this).data('sat_derivatif1'));
+    // $('#id_satuan1_der').val($(this).data('sat_derivatif1'));
     $('#id_satuan2_rinc').val($(this).data('id_satuan2'));
     $('#id_satuan3_rinc').val($(this).data('id_satuan3'));
     $('#ket_rinci').val($(this).data('ket_group'));    
@@ -3192,52 +3277,29 @@ $(document).on('click', '#btnparam_cari', function() {
     }
 
     if($(this).data('jenis_biaya')==1){
-      document.frmModalRincian.hub_driver[0].disabled=true;
-      document.frmModalRincian.hub_driver[1].disabled=true;
-      document.frmModalRincian.hub_driver[2].disabled=true;
+      lock_hub_driver();
+      clear_hub_driver();
       document.getElementById("koefisien1").removeAttribute("disabled");
       document.getElementById("id_satuan1_rinc").removeAttribute("disabled");
-      document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
+      // document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
       document.getElementById("koefisien2").removeAttribute("disabled");
       document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
       document.getElementById("koefisien3").removeAttribute("disabled");
       document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
-      document.frmModalRincian.jns_biaya[$(this).data('jenis_biaya')-1].checked=true;
+      document.frmModalRincian.jns_biaya[0].checked=true;
       $('.hub_driver').removeAttr('checked');
     }
 
-    if($(this).data('jenis_biaya')==2){ 
-      document.frmModalRincian.hub_driver[0].disabled=false;
-      document.frmModalRincian.hub_driver[1].disabled=false;
-      document.frmModalRincian.hub_driver[2].disabled=true;
+    if($(this).data('jenis_biaya')!=1){
+      unlock_hub_driver();
       document.getElementById("koefisien1").setAttribute("disabled","disabled");
       document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-      document.getElementById("id_satuan1_der").removeAttribute("disabled");
+      // document.getElementById("id_satuan1_der").removeAttribute("disabled");
       document.getElementById("koefisien2").removeAttribute("disabled");
       document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
       document.getElementById("koefisien3").removeAttribute("disabled");
       document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
-      document.frmModalRincian.jns_biaya[$(this).data('jenis_biaya')].checked=true;
-    }
-
-    if($(this).data('jenis_biaya')==3){
-      document.frmModalRincian.hub_driver[0].disabled=false;
-      document.frmModalRincian.hub_driver[1].disabled=false;
-      document.frmModalRincian.hub_driver[2].disabled=false;
-      document.getElementById("koefisien1").setAttribute("disabled","disabled");
-      document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-      document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");      
-      document.getElementById("koefisien3").removeAttribute("disabled");
-      document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
-      document.frmModalRincian.jns_biaya[$(this).data('jenis_biaya')-2].checked=true;
-    if($(this).data('hub_driver')==3){
-        document.getElementById("koefisien2").setAttribute("disabled","disabled");
-        document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled"); 
-      }
-       else {
-        document.getElementById("koefisien2").removeAttribute("disabled");
-        document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
-      }
+      document.frmModalRincian.jns_biaya[2].checked=true;
     }
 
     rekomCari();
@@ -3265,7 +3327,7 @@ $(document).on('click', '#btnparam_cari', function() {
               'id_satuan1': $('#id_satuan1_rinc').val(),
               'id_satuan2': $('#id_satuan2_rinc').val(),
               'id_satuan3': $('#id_satuan3_rinc').val(),
-              'sat_derivatif1': $('#id_satuan1_der').val(),
+              // 'sat_derivatif1': $('#id_satuan1_der').val(),
               'jenis_biaya': getJnsBiaya(),
               'hub_driver': getHubDriver(),
               'ket_group' : $('#ket_rinci').val(),
@@ -3274,7 +3336,7 @@ $(document).on('click', '#btnparam_cari', function() {
             createPesan("Proses Edit Data Berhasil","success");
             $('#ModalProgress').modal('hide');
             $('datalist[name="searchresults"]').append('<option value="'+ $('#ket_rinci').val() +'"/>');
-              $('#tblRincian').DataTable().ajax.reload();
+              $('#tblRincian').DataTable().ajax.reload(null,false);
           }
       });
   });
@@ -3309,7 +3371,7 @@ $(document).on('click', '#btnparam_cari', function() {
         $('.item' + $('.id_komponen_rinci_hapus').text()).remove();
         createPesan("Proses Hapus Berhasil","success");
         $('#ModalProgress').modal('hide');
-        $('#tblRincian').DataTable().ajax.reload();
+        $('#tblRincian').DataTable().ajax.reload(null,false);
       }
     });
   });
@@ -3318,9 +3380,9 @@ $(document).on('click', '#btnparam_cari', function() {
     if($('#id_satuan2').val()==0){
       $(".id_satuan2_derivatif").attr("disabled", true);
       document.getElementById("range_max1").setAttribute("disabled","disabled");
-      $('#range_max1').val(0);
+      $('#range_max1').val(1);
       document.getElementById("kapasitas_max1").setAttribute("disabled","disabled");
-      $('#kapasitas_max1').val(0);
+      $('#kapasitas_max1').val(1);
     } else {
       $(".id_satuan2_derivatif").removeAttr("disabled");
       document.getElementById("range_max1").removeAttribute("disabled");
@@ -3328,15 +3390,70 @@ $(document).on('click', '#btnparam_cari', function() {
     }
   });
 
+function lock_hub_driver(){
+  document.frmModalRincian.hub_driver[0].disabled=true;
+  document.frmModalRincian.hub_driver[1].disabled=true;
+  document.frmModalRincian.hub_driver[2].disabled=true;
+  document.frmModalRincian.hub_driver[3].disabled=true;
+  document.frmModalRincian.hub_driver[4].disabled=true;
+  document.frmModalRincian.hub_driver[5].disabled=true;
+  document.frmModalRincian.hub_driver[6].disabled=true;
+  document.frmModalRincian.hub_driver[7].disabled=true;
+}
+
+function unlock_hub_driver(){
+  document.frmModalRincian.hub_driver[0].disabled=false;
+  if (hub_driver2 != 'N/A') {
+    document.frmModalRincian.hub_driver[1].disabled=false;
+  }
+  if (hub_driver3 != 'N/A') {
+    document.frmModalRincian.hub_driver[2].disabled=false;
+  }
+  if (hub_driver4 != 'N/A') {
+    document.frmModalRincian.hub_driver[3].disabled=false;
+  }
+  if (hub_driver5 != 'N/A') {
+    document.frmModalRincian.hub_driver[4].disabled=false;
+  }
+  if (hub_driver6 != 'N/A') {
+    document.frmModalRincian.hub_driver[5].disabled=false;
+  }
+  if (hub_driver7 != 'N/A') {
+    document.frmModalRincian.hub_driver[6].disabled=false;
+  }
+  if (hub_driver8 != 'N/A') {
+    document.frmModalRincian.hub_driver[7].disabled=false;
+  }
+}
+
+function clear_hub_driver(){
+  document.frmModalRincian.hub_driver[0].checked=false;
+  document.frmModalRincian.hub_driver[1].checked=false;
+  document.frmModalRincian.hub_driver[2].checked=false;
+  document.frmModalRincian.hub_driver[3].checked=false;
+  document.frmModalRincian.hub_driver[4].checked=false;
+  document.frmModalRincian.hub_driver[5].checked=false;
+  document.frmModalRincian.hub_driver[6].checked=false;
+  document.frmModalRincian.hub_driver[7].checked=false;
+}
+
+function isi_hub_driver(){  
+    document.getElementById("shub_driver1").innerHTML = hub_driver1;    
+    document.getElementById("shub_driver2").innerHTML = hub_driver2;
+    document.getElementById("shub_driver3").innerHTML = hub_driver3;
+    document.getElementById("shub_driver4").innerHTML = hub_driver4;    
+    document.getElementById("shub_driver5").innerHTML = hub_driver5;
+    document.getElementById("shub_driver6").innerHTML = hub_driver6;    
+    document.getElementById("shub_driver7").innerHTML = hub_driver7;
+    document.getElementById("shub_driver8").innerHTML = hub_driver8;
+}
+
 function eFixed(){
-    document.frmModalRincian.hub_driver[0].disabled=true;
-    document.frmModalRincian.hub_driver[1].disabled=true;
-    document.frmModalRincian.hub_driver[2].disabled=true;
+    lock_hub_driver();
     $('#id_satuan1_rinc').val(n_driver1);
     $('#id_satuan2_rinc').val(n_driver2);
     document.getElementById("koefisien1").removeAttribute("disabled");
     document.getElementById("id_satuan1_rinc").removeAttribute("disabled");
-    document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
     document.getElementById("koefisien2").removeAttribute("disabled");
     document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
@@ -3345,14 +3462,11 @@ function eFixed(){
 }
 
 function eIndependent1(){
-    document.frmModalRincian.hub_driver[0].disabled=false;
-    document.frmModalRincian.hub_driver[1].disabled=false;
-    document.frmModalRincian.hub_driver[2].disabled=false;
+    unlock_hub_driver();
     $('#id_satuan1_rinc').val(n_driver1);
     $('#id_satuan2_rinc').val(n_driver2);
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
     document.getElementById("koefisien2").removeAttribute("disabled");
     document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
@@ -3360,14 +3474,11 @@ function eIndependent1(){
 }
 
 function eIndependent2(){
-    document.frmModalRincian.hub_driver[0].disabled=false;
-    document.frmModalRincian.hub_driver[1].disabled=false;
-    document.frmModalRincian.hub_driver[2].disabled=false;
+    unlock_hub_driver();
     $('#id_satuan1_rinc').val(n_driver2);
     $('#id_satuan2_rinc').val(n_driver1);
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
     document.getElementById("koefisien2").removeAttribute("disabled");
     document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
@@ -3375,14 +3486,11 @@ function eIndependent2(){
 }
 
 function eIndependent3(){
-    document.frmModalRincian.hub_driver[0].disabled=false;
-    document.frmModalRincian.hub_driver[1].disabled=false;
-    document.frmModalRincian.hub_driver[2].disabled=false;
+    unlock_hub_driver();
     $('#id_satuan1_rinc').val(n_driver1);
     $('#id_satuan2_rinc').val(n_driver2);
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").setAttribute("disabled","disabled");
     document.getElementById("koefisien2").setAttribute("disabled","disabled");
     document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
@@ -3390,14 +3498,11 @@ function eIndependent3(){
 }
 
 function eMixed1(){
-    document.frmModalRincian.hub_driver[0].disabled=false;
-    document.frmModalRincian.hub_driver[1].disabled=false;
-    document.frmModalRincian.hub_driver[2].disabled=true;
-    $('#id_satuan1_rinc').val(n_driver1);
+    unlock_hub_driver();
+    $('#id_satuan1_rinc').val(n_driver3);
     $('#id_satuan2_rinc').val(n_driver2);
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").removeAttribute("disabled");
     document.getElementById("koefisien2").removeAttribute("disabled");
     document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
@@ -3405,148 +3510,128 @@ function eMixed1(){
 }
 
 function eMixed2(){
-    document.frmModalRincian.hub_driver[0].disabled=false;
-    document.frmModalRincian.hub_driver[1].disabled=false;
-    document.frmModalRincian.hub_driver[2].disabled=true;
-    $('#id_satuan1_rinc').val(n_driver2);
+    unlock_hub_driver();
+    $('#id_satuan1_rinc').val(n_driver4);
     $('#id_satuan2_rinc').val(n_driver1);
     document.getElementById("koefisien1").setAttribute("disabled","disabled");
     document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
-    document.getElementById("id_satuan1_der").removeAttribute("disabled");
     document.getElementById("koefisien2").removeAttribute("disabled");
     document.getElementById("id_satuan2_rinc").removeAttribute("disabled");
     document.getElementById("koefisien3").removeAttribute("disabled");
     document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
 }
 
+function eMixed3(){
+    unlock_hub_driver();
+    $('#id_satuan1_rinc').val(n_driver3);
+    $('#id_satuan2_rinc').val(n_driver4);
+    document.getElementById("koefisien1").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien2").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien3").removeAttribute("disabled");
+    document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
+}
+
+function eMixed4(){
+    unlock_hub_driver();
+    $('#id_satuan1_rinc').val(n_driver3);
+    $('#id_satuan2_rinc').val(n_driver2);
+    document.getElementById("koefisien1").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien2").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien3").removeAttribute("disabled");
+    document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
+}
+
+function eMixed5(){
+    unlock_hub_driver();
+    $('#id_satuan1_rinc').val(n_driver4);
+    $('#id_satuan2_rinc').val(n_driver1);
+    document.getElementById("koefisien1").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan1_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien2").setAttribute("disabled","disabled");
+    document.getElementById("id_satuan2_rinc").setAttribute("disabled","disabled");
+    document.getElementById("koefisien3").removeAttribute("disabled");
+    document.getElementById("id_satuan3_rinc").removeAttribute("disabled");
+}
+
 $('.jns_biaya').change(function() {
   if(document.frmModalRincian.jns_biaya.value==1){
-    document.frmModalRincian.hub_driver[0].checked=false;
-    document.frmModalRincian.hub_driver[1].checked=false;
-    document.frmModalRincian.hub_driver[1].checked=false;
+    lock_hub_driver();
+    clear_hub_driver();
     $('#id_satuan3_rinc').val(0);    
     eFixed();
+
   }
 
-  if(document.frmModalRincian.jns_biaya.value==2){             
+  if(document.frmModalRincian.jns_biaya.value!=1){
     $('#koefisien1').val(1);
     $('#koefisien2').val(1);
     $('#id_satuan3_rinc').val(0);
-    if(document.frmModalRincian.hub_driver.value!=3){
-        if(document.frmModalRincian.hub_driver.value==1){  
-          eMixed1();
-        } else { 
-          eMixed2();
-        }
-      }
-       else {
-          $('.hub_driver').removeAttr('checked');
-          eMixed1();
-      }  
-    
-    $.ajax({
-      type: "GET",
-      url: './getRefSatuanDer/'+id_aktiv_asb+'/'+$('#id_satuan1_rinc').val(),
-      dataType: "json",
-      success: function(data) {
+    unlock_hub_driver();
 
-        var j = data.length;
-        var post, i;
-
-        $('select[name="id_satuan1_der"]').empty();
-        $('select[name="id_satuan1_der"]').append('<option value="-1">---Pilih Derivatif---</option>');
-
-        for (i = 0; i < j; i++) {
-          post = data[i];
-          $('select[name="id_satuan1_der"]').append('<option value="'+ post.sat_derivatif_1 +'">'+ post.uraian_satuan +'</option>');
-        }
-      }
-    });   
-    
-  }
-
-  if(document.frmModalRincian.jns_biaya.value==3){
-    $('#koefisien1').val(1);
-    $('#koefisien2').val(1);
-    $('#id_satuan3_rinc').val(0); 
-    if(document.frmModalRincian.hub_driver.value!=3){
-        if(document.frmModalRincian.hub_driver.value==1){
-          eIndependent1();
-        } else {
-          eIndependent2();
-        }  
-      }
-       else {
-          eIndependent3();
-      }
+    if(document.frmModalRincian.hub_driver.value==1){
+      eIndependent1();
+    }
+    if(document.frmModalRincian.hub_driver.value==2){
+      eIndependent2();
+    }
+    if(document.frmModalRincian.hub_driver.value==3){
+      eIndependent3();
+    }
+    if(document.frmModalRincian.hub_driver.value==4){
+      eMixed1();
+    }
+    if(document.frmModalRincian.hub_driver.value==5){
+      eMixed2();
+    }
+    if(document.frmModalRincian.hub_driver.value==6){
+      eMixed3();
+    }
+    if(document.frmModalRincian.hub_driver.value==7){
+      eMixed4();
+    }
+    if(document.frmModalRincian.hub_driver.value==8){
+      eMixed5();
+    }         
   }
 });
 
 
-  $('.hub_driver').change(function() {
-    if(document.frmModalRincian.jns_biaya.value==2){
-      if(document.frmModalRincian.hub_driver.value!=3){
+$('.hub_driver').change(function() {
+    if(document.frmModalRincian.jns_biaya.value!=1){
+        $('#koefisien1').val(1);
+        $('#koefisien2').val(1);
+        $('#id_satuan3_rinc').val(0);
+        unlock_hub_driver();
+
         if(document.frmModalRincian.hub_driver.value==1){
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
-          eMixed1();
-        } else {
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
-          eMixed2();
-        }
-
-        $.ajax({
-            type: "GET",
-            url: './getRefSatuanDer/'+id_aktiv_asb+'/'+$('#id_satuan1_rinc').val(),
-            dataType: "json",
-            success: function(data) {
-
-              console.log(data)
-
-              var j = data.length;
-              var post, i;
-
-              $('select[name="id_satuan1_der"]').empty();
-              $('select[name="id_satuan1_der"]').append('<option value="-1">---Pilih Derivatif---</option>');
-
-              for (i = 0; i < j; i++) {
-                post = data[i];
-                $('select[name="id_satuan1_der"]').append('<option value="'+ post.sat_derivatif_1 +'">'+ post.uraian_satuan +'</option>');
-              }
-            }
-          }); 
-      }
-       else {          
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
-          eIndependent3();
-      }      
-    }
-
-    if(document.frmModalRincian.jns_biaya.value==3){
-        if(document.frmModalRincian.hub_driver.value==1){
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
           eIndependent1();
-        } 
+        }
         if(document.frmModalRincian.hub_driver.value==2){
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
           eIndependent2();
         }
         if(document.frmModalRincian.hub_driver.value==3){
-          $('#koefisien1').val(1);
-          $('#koefisien2').val(1);
-          $('#id_satuan3_rinc').val(0);
           eIndependent3();
         }
-    }
+        if(document.frmModalRincian.hub_driver.value==4){
+          eMixed1();
+        }
+        if(document.frmModalRincian.hub_driver.value==5){
+          eMixed2();
+        }
+        if(document.frmModalRincian.hub_driver.value==6){
+          eMixed3();
+        }
+        if(document.frmModalRincian.hub_driver.value==7){
+          eMixed4();
+        }
+        if(document.frmModalRincian.hub_driver.value==8){
+          eMixed5();
+        }       
+      }
   });
 
 
@@ -3556,8 +3641,6 @@ $('.jns_biaya').change(function() {
           url: './getRefSatuan',
           dataType: "json",
           success: function(data) {
-
-          // console.log(data)  
 
           var j = data.length;
           var post, i;
@@ -3626,8 +3709,18 @@ $('.jns_biaya').change(function() {
   });
 
   $(document).on('click', '.cetak-aktivitas', function() {
+    $('.modal-title').text('Pencetakan Aktivitas ASB');
+    $('.form-horizontal').show();
+    $('#id_aktivitas_simulasi').val($(this).data('id_aktivitas_asb'));
+    $('#aktivitas_simulasi').val($(this).data('ur_aktivitas'));    
+    $('#v1_simulasi').val(1);
+    $('#v2_simulasi').val(1);
+    $('#SimulasiHitung').modal('show');    
+  });
 
-    location.replace('../printAktivitasASB/'+$(this).data('id_aktivitas_asb'));
+  $(document).on('click', '.btnSimulasi', function() {
+
+    window.open('../printHitungSimulasiASB2/'+$('#id_aktivitas_simulasi').val()+'/'+$('#v1_simulasi').val()+'/'+$('#v2_simulasi').val());
     
   });
   
@@ -3665,7 +3758,7 @@ $('.jns_biaya').change(function() {
 
 $(document).on('click', '.copy-asb', function() {
   $('.form-horizontal').show();
-  $('#tblCariKelompok').DataTable().ajax.reload();
+  $('#tblCariKelompok').DataTable().ajax.reload(null,false);
   $("#CopyDataASB").modal('show');
     
   });
@@ -3831,7 +3924,7 @@ $(document).on('click', '.btnProsesCopyKelompok', function(e) {
               }
             createPesan("Proses Copy Data Berhasil","success");
             $('#ModalProgress').modal('hide');
-            $('#tblKelompok').DataTable().ajax.reload(); 
+            $('#tblKelompok').DataTable().ajax.reload(null,false); 
           }
         });         
       });
@@ -3861,17 +3954,31 @@ $(document).on('click', '.btnProsesCopyKomp', function(e) {
                 success: function(data) {
                     createPesan("Proses Copy Data Berhasil","success");
                     $('#ModalProgress').modal('hide');
-                    $('#tblKomponen').DataTable().ajax.reload();
+                    $('#tblKomponen').DataTable().ajax.reload(null,false);
                 },
                 error: function(data) {
                     createPesan("Proses Copy Data Gagal ","danger");
                     $('#ModalProgress').modal('hide');
-                    $('#tblKomponen').DataTable().ajax.reload();
+                    $('#tblKomponen').DataTable().ajax.reload(null,false);
                 },
             });
       });
     e.preventDefault();
   });
+
+
+  $(document).on('click', '.cetak-perkada', function() {
+   window.open('../printListASB/'+$(this).data('id_perkada'));
+  });
+
+$(document).on('click', '.cetak-duplikasi', function() {
+   window.open('../printDuplikasiASB/'+$(this).data('id_perkada'));
+  });
+
+$(document).on('click', '.cetak-validitas', function() {
+   window.open('../printValiditasASB/'+$(this).data('id_perkada'));
+  });
+
 
 });
 </script>

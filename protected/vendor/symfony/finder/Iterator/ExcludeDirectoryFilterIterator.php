@@ -20,12 +20,10 @@ class ExcludeDirectoryFilterIterator extends FilterIterator implements \Recursiv
 {
     private $iterator;
     private $isRecursive;
-    private $excludedDirs = array();
+    private $excludedDirs = [];
     private $excludedPattern;
 
     /**
-     * Constructor.
-     *
      * @param \Iterator $iterator    The Iterator to filter
      * @param array     $directories An array of directories to exclude
      */
@@ -33,7 +31,7 @@ class ExcludeDirectoryFilterIterator extends FilterIterator implements \Recursiv
     {
         $this->iterator = $iterator;
         $this->isRecursive = $iterator instanceof \RecursiveIterator;
-        $patterns = array();
+        $patterns = [];
         foreach ($directories as $directory) {
             $directory = rtrim($directory, '/');
             if (!$this->isRecursive || false !== strpos($directory, '/')) {
@@ -77,7 +75,7 @@ class ExcludeDirectoryFilterIterator extends FilterIterator implements \Recursiv
 
     public function getChildren()
     {
-        $children = new self($this->iterator->getChildren(), array());
+        $children = new self($this->iterator->getChildren(), []);
         $children->excludedDirs = $this->excludedDirs;
         $children->excludedPattern = $this->excludedPattern;
 

@@ -1,65 +1,38 @@
-<?php
-
-namespace App\Exceptions;
-
-use Exception;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
-class Handler extends ExceptionHandler
-{
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        \Illuminate\Auth\AuthenticationException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class,
-        \Symfony\Component\HttpKernel\Exception\HttpException::class,
-        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
-        \Illuminate\Session\TokenMismatchException::class,
-        \Illuminate\Validation\ValidationException::class,
-    ];
-
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $exception
-     * @return void
-     */
-    public function report(Exception $exception)
-    {
-        parent::report($exception);
-    }
-
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $exception)
-    {
-        return parent::render($request, $exception);
-    }
-
-    /**
-     * Convert an authentication exception into an unauthenticated response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
-
-        return redirect()->guest('login');
-    }
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+4QYsZgYaUbWfaG==

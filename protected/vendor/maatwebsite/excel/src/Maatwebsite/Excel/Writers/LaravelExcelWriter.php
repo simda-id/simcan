@@ -235,7 +235,7 @@ class LaravelExcelWriter {
         $this->sheet->setDefaultPageSetup();
 
         // Do the callback
-        if ($callback instanceof Closure)
+        if (is_callable($callback))
             call_user_func($callback, $this->sheet);
 
         // Autosize columns when no user didn't change anything about column sizing
@@ -346,12 +346,18 @@ class LaravelExcelWriter {
      */
     protected function _download(Array $headers = [])
     {
+        $filename = $this->filename;
+        $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        // Just for Microsoft Explore
+        if (preg_match('/Trident|Edge/i', $userAgent)) {
+            $filename = rawurlencode($filename);
+        }
         // Set the headers
         $this->_setHeaders(
             $headers,
             [
                 'Content-Type'        => $this->contentType,
-                'Content-Disposition' => 'attachment; filename="' . $this->filename . '.' . $this->ext . '"',
+                'Content-Disposition' => 'attachment; filename="' . $filename . '.' . $this->ext . '"',
                 'Expires'             => 'Mon, 26 Jul 1997 05:00:00 GMT', // Date in the past
                 'Last-Modified'       => Carbon::now()->format('D, d M Y H:i:s'),
                 'Cache-Control'       => 'cache, must-revalidate',
@@ -376,7 +382,7 @@ class LaravelExcelWriter {
      * @param  string  $ext
      * @param  boolean $path
      * @param  boolean $returnInfo
-     * @return LaravelExcelWriter
+     * @return LaravelExcelWriter|array
      */
     public function store($ext = 'xls', $path = false, $returnInfo = false)
     {

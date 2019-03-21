@@ -26,6 +26,7 @@ use hoaaah\LaravelMenu\Menu;
     <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
     
     @yield('head')
     <style>
@@ -36,34 +37,21 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
             {{-- <div class="container"> --}}
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button> 
-                  <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x"></i>
-                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
+                      <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></span> 
+                    </a>
                 </div>
-                <ul class="nav navbar-top-links navbar-right">
-
-                        <li>
-                            <a>
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                            </a>
-                        </li>
-
+                <ul class="nav navbar-top-links pull-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     User <span class="caret"></span>
                                 </a>
 
@@ -77,18 +65,19 @@ use hoaaah\LaravelMenu\Menu;
                                 </ul>
                             </li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span style="color:#fff">
+                            <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                        </span>
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-user" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">                                          
-                                            <i class="fa fa-sign-out fa-fw text-info"> Logout</i>
-                                        </a>
+                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -108,27 +97,38 @@ use hoaaah\LaravelMenu\Menu;
                                     'ulId' => 'side-menu'
                                 ],
                                 'items' => [
-                                    ['label' => 'Modul SSH dan ASB','icon'=>'fa fa-database fa-fw fa-lg' , 'url' => '#'],
+                                    [   'label' => 'Modul SSH dan ASB',
+                                        'icon'=>'fa fa-database fa-fw fa-lg' , 
+                                        'url' => '/asb/dash'],
                                     [
-                                        'label' => 'Standard Satuan Harga', 
+                                        'label' => 'Standard Satuan Harga',
+                                        'icon' => 'fa fa-book fa-fw', 
                                         'visible' => $akses->get(801)||$akses->get(802)||$akses->get(803)||$akses->get(807),
                                         'items' => [
                                             ['label' => 'Zona SSH','url' => '/zonassh', 'visible' => $akses->get(801)],
                                             ['label' => 'Struktur SSH', 'url' => '/ssh', 'visible' => $akses->get(802)],
                                             ['label' => 'Perkada SSH', 'url' => '/sshperkada/perkada','visible' => $akses->get(803)],
-                                            // ['label' => 'Pencetakan SSH','visible' => $akses->get(807)],
+                                            ['label' => 'Pencetakan SSH','url' => '/printSsh','visible' => $akses->get(803)],
                                         ]
                                     ],                                    
                                     [
-                                        'label' => 'Analisa Standar Belanja', 
+                                        'label' => 'Analisis Standar Belanja',
+                                        'icon' => 'fa fa-bookmark fa-fw', 
                                         'visible' => $akses->get(804)||$akses->get(805)||$akses->get(806)||$akses->get(808),
                                         'items' => [
-                                            // ['label' => 'Komponen ASB','url' => '/asb/komponen','visible' => $akses->get(804)],
                                             ['label' => 'Perkada & Struktur ASB','url' => '/asb/aktivitas','visible' => $akses->get(805)],
                                             ['label' => 'Perhitungan ASB','url' => '/asb/hitungasb','visible' => $akses->get(806)],
-                                            // ['label' => 'Pencetakan ASB','visible' => $akses->get(808)],
                                         ]
                                     ],
+                                    /*[
+                                        'label' => 'Pencetakan SSH & ASB',
+                                        'icon' => 'fa fa-bookmark fa-fw', 
+                                        'visible' => $akses->get(806)||$akses->get(808),
+                                        'items' => [
+                                            ['label' => 'Standard Satuan Harga','url' => '/printSsh','visible' => $akses->get(805)],
+                                            ['label' => 'Analisis Standar Belanja','url' => '/printSsh','visible' => $akses->get(806)],
+                                        ]
+                                    ],*/
                                 ]
                             ]);
                         ?>
@@ -136,7 +136,8 @@ use hoaaah\LaravelMenu\Menu;
                         </div>
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>
@@ -149,6 +150,8 @@ use hoaaah\LaravelMenu\Menu;
         <script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
+        <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
         <script type="text/javascript" src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>        
         <script type="text/javascript" src="{{ asset('/js/jquery.number.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/sb-admin-2.js')}}"></script>

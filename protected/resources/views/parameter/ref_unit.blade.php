@@ -19,6 +19,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
     </div>
     <div id="pesan"></div>
+    <div id="prosesbar" class="lds-spinner">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-info">
@@ -26,7 +31,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <h2 class="panel-title">Referensi Unit & Sub Unit Perangkat Daerah</h2>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body"><br>
+            <div class="form-group">
+              <button type="button" class="btn btn-success btn-labeled btnLoadUrbid" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Urusan-Bidang</button>
+              <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Unit-Sub Unit</button>
+                <button type="button" class="btn btn-danger btn-labeled btnTestApi" data-dismiss="modal" aria-hidden="true">
+                  <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Test Api</button>
+            </div>
             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
               <ul class="nav nav-tabs nav-justified" role="tablist">
                 <li class="active"><a href="#urusan" aria-controls="urusan" role="tab" data-toggle="tab">Urusan-Bidang</a></li>
@@ -227,6 +240,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div> 
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -242,7 +256,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -263,6 +276,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -270,7 +284,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -300,6 +313,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div> 
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -315,7 +329,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -336,6 +349,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -343,7 +357,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -398,6 +411,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>  
         </form>
+      </div>
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">                        
@@ -413,7 +427,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                 </div>
               </div>
-      </div>
     </div>
   </div>
 </div>
@@ -434,6 +447,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <br>
           </div>
+        </div>
           <div class="modal-footer">
             <div class="ui-group-buttons">
               <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelDataUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
@@ -441,7 +455,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -480,6 +493,8 @@ function createPesan(message, type) {
     $(html).hide().prependTo('#pesan').slideDown();
 };
 
+$('#prosesbar').hide();
+
 $('.page-alert .close').click(function(e) {
         e.preventDefault();
         $(this).closest('.page-alert').slideUp();
@@ -508,6 +523,8 @@ var angkaNip = document.getElementById('nipDisplay');
 angkaNip.onkeydown = function(e) {
       if(!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58) 
+        || (e.keyCode > 7 && e.keyCode < 10) 
+        || (e.keyCode = 13) 
         )) {
           return false;
       }
@@ -551,7 +568,7 @@ function initTableBidang(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BFRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             columns: [
                 { data: 'kd_bidang', name: 'kd_bidang', sClass: "dt-center", width:'10%' },
@@ -1053,6 +1070,64 @@ $('.modal-footer').on('click', '.delData', function() {
       createPesan(data.pesan,"success");
     }
   });
+});
+
+$(document).on('click', '.btnLoad', function() {   
+    $('#prosesbar').show();
+    $.ajax({
+      type: 'get',
+      url: '../../transfer/prosestrfApiunit',
+
+      dataType: 'json',
+      success: function(data) {
+        createPesan(data.pesan,"success");   
+        $('#prosesbar').hide();
+      },
+      error: function (data) {
+        createPesan(data.pesan,"danger");   
+        $('#prosesbar').hide();
+      }
+    });  
+});
+
+$(document).on('click', '.btnLoadUrbid', function() { 
+    $('#prosesbar').show();
+		$.ajax({
+		  type: 'get',
+		  url: '../../transfer/prosestrfApiurbid',
+
+			dataType: 'json',
+      success: function(data) {
+        createPesan(data.pesan,"success");   
+        $('#prosesbar').hide();
+      },
+      error: function (data) {
+        createPesan(data.pesan,"danger");   
+        $('#prosesbar').hide();
+      }
+		});
+});
+
+$(document).on('click', '.btnTestApi', function() { 
+    $('#prosesbar').show();
+		$.ajax({
+		  type: 'get',
+		  url: '../../unit/TestApi',
+			data: {
+            '_token': $('input[name=_token]').val(),
+            'id_bidang' : 1,
+            'kd_unit' : 1,
+            'nm_unit' : 'test data',
+      },
+      success: function(data) {
+        createPesan(data.pesan,"success");   
+        $('#prosesbar').hide();
+      },
+      error: function (data) {
+        createPesan(data.pesan,"danger");   
+        $('#prosesbar').hide();
+      }
+		});
 });
 
 });

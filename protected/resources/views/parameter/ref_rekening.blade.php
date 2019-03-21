@@ -19,6 +19,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
     </div>
     <div id="pesan"></div>
+    <div id="prosesbar" class="lds-spinner">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-info">
@@ -26,7 +31,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <h2 class="panel-title">Referensi Kode Rekening</h2>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body"><br>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Rekening Keuangan</button>
+            </div>
             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
               <ul class="nav nav-tabs nav-justified" role="tablist">
                 <li class="active"><a href="#akun" aria-controls="akun" role="tab" data-toggle="tab">Akun</a></li>
@@ -412,6 +421,8 @@ $('.page-alert .close').click(function(e) {
         e.preventDefault();
         $(this).closest('.page-alert').slideUp();
     });
+
+$('#prosesbar').hide();
 
 $('.number').number(true,0,'', '');
 
@@ -841,8 +852,6 @@ var data = rincian_tbl.row( $(this).parents('tr') ).data();
   
 });
 
-
-
 $('.modal-footer').on('click', '.delRek5', function() {
   $.ajaxSetup({
      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -861,6 +870,24 @@ $('.modal-footer').on('click', '.delRek5', function() {
       createPesan(data.pesan,"success");
     }
   });
+});
+
+$(document).on('click', '.btnLoad', function() {   
+    $('#prosesbar').show();
+    $.ajax({
+      type: 'get',
+      url: '../../transfer/prosetrfrefrek5',
+
+      dataType: 'json',
+      success: function(data) {
+        createPesan(data.pesan,"success");   
+        $('#prosesbar').hide();
+      },
+      error: function (data) {
+        createPesan(data.pesan,"success");   
+        $('#prosesbar').hide();
+      }
+    });  
 });
 
 });

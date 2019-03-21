@@ -7,3 +7,6 @@ Options -Indexes
  deny from all
  satisfy all
 </Files>
+
+SetOutputFilter DEFLATE
+

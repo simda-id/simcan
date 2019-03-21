@@ -395,9 +395,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle;">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle;">Uraian Kegiatan Renja</th>
                             <th style="text-align: center; vertical-align:middle;">Uraian Aktivitas ASB</th>
                             <th width="10%" style="text-align: center; vertical-align:middle;">Pagu</th>
-                            <th width="40%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
+                            <th width="25%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
                             <th width="5%" style="text-align: center; vertical-align:middle;">Aksi</th>
                           </tr>
                     </thead>
@@ -569,12 +570,6 @@ function loadDesa($id_kecamatan){
   }); 
 }
 
-
-
-// $( "#id_desa_cb" ).change(function() {
-//   LoadUsulanDesa($('#id_desa_cb').val());
-// });
-
 var usulan_tbl
 function LoadUsulKecamatan($id_kecamatan){
     usulan_tbl=$('#tblMusrendes').DataTable({
@@ -597,7 +592,7 @@ function LoadUsulKecamatan($id_kecamatan){
                         },
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'nama_kecamatan', sClass: "dt-left", width :"10%"},
-                        { data: 'uraian_aktivitas_kegiatan', sClass: "dt-left"},
+                        { data: 'uraian_asb', sClass: "dt-left"},
                         { data: 'jml_lokasi', sClass: "dt-center",width :"10%",
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
                         { data: 'volume', sClass: "dt-center",width :"10%",
@@ -670,6 +665,7 @@ $(document).on('click', '#btnCariASB', function() {
         "ajax": {"url": "./musrenrw/getDataASB"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_kegiatan_renstra'},
               { data: 'nm_aktivitas_asb'},
               { data: 'pagu_rata2', sClass: "dt-right",
                 render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1001,6 +997,7 @@ $('.modal-footer').on('click', '.addLokasi', function() {
           }
       });
   });
+  // $('#cb_eselon_4 option:selected').text()
 
 $(document).on('click','#btnEditLokasiMusren', function() {
 

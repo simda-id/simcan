@@ -54,14 +54,14 @@ class FileProfilerStorage implements ProfilerStorageInterface
         $file = $this->getIndexFilename();
 
         if (!file_exists($file)) {
-            return array();
+            return [];
         }
 
         $file = fopen($file, 'r');
         fseek($file, 0, SEEK_END);
 
-        $result = array();
-        while (count($result) < $limit && $line = $this->readLineFromFile($file)) {
+        $result = [];
+        while (\count($result) < $limit && $line = $this->readLineFromFile($file)) {
             $values = str_getcsv($line);
             list($csvToken, $csvIp, $csvMethod, $csvUrl, $csvTime, $csvParent, $csvStatusCode) = $values;
             $csvTime = (int) $csvTime;
@@ -78,7 +78,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
                 continue;
             }
 
-            $result[$csvToken] = array(
+            $result[$csvToken] = [
                 'token' => $csvToken,
                 'ip' => $csvIp,
                 'method' => $csvMethod,
@@ -86,7 +86,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
                 'time' => $csvTime,
                 'parent' => $csvParent,
                 'status_code' => $csvStatusCode,
-            );
+            ];
         }
 
         fclose($file);
@@ -136,7 +136,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
         $profileIndexed = is_file($file);
         if (!$profileIndexed) {
             // Create directory
-            $dir = dirname($file);
+            $dir = \dirname($file);
             if (!is_dir($dir) && false === @mkdir($dir, 0777, true) && !is_dir($dir)) {
                 throw new \RuntimeException(sprintf('Unable to create the storage directory (%s).', $dir));
             }
@@ -151,7 +151,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
         }, $profile->getChildren()));
 
         // Store profile
-        $data = array(
+        $data = [
             'token' => $profileToken,
             'parent' => $parentToken,
             'children' => $childrenToken,
@@ -161,7 +161,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
             'url' => $profile->getUrl(),
             'time' => $profile->getTime(),
             'status_code' => $profile->getStatusCode(),
-        );
+        ];
 
         if (false === file_put_contents($file, serialize($data))) {
             return false;
@@ -173,7 +173,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
                 return false;
             }
 
-            fputcsv($file, array(
+            fputcsv($file, [
                 $profile->getToken(),
                 $profile->getIp(),
                 $profile->getMethod(),
@@ -181,7 +181,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
                 $profile->getTime(),
                 $profile->getParentToken(),
                 $profile->getStatusCode(),
-            ));
+            ]);
             fclose($file);
         }
 

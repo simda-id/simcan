@@ -1,1399 +1,644 @@
-<?php
-namespace App\Http\Controllers\Laporan;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
-use Yajra\Datatables\Datatables;
-use Excel;
-use PHPExcel_IOFactory;
-use DB;
-use Response;
-use Session;
-use Yajra\Datatables\Html\Builder;
-use Yajra\Datatables\Services\DataTable;
-use App\Models\RefPemda;
-use App\Models\RefUnit;
-use App\Models\RefIndikator;
-use App\Models\RefUrusan;
-use App\Models\RefBidang;
-use App\Models\TrxRpjmdDokumen;
-use App\Models\TrxRpjmdVisi;
-use App\Models\TrxRpjmdMisi;
-use App\Models\TrxRpjmdTujuan;
-use App\Models\TrxRpjmdSasaran;
-use App\Models\TrxRpjmdKebijakan;
-use App\Models\TrxRpjmdStrategi;
-use App\Models\TrxRpjmdProgram;
-use App\Models\TrxRpjmdProgramIndikator;
-use App\Models\TrxRpjmdProgramUrusan;
-use App\Models\TrxRpjmdProgramPelaksana;
-
-class CetakRpjmdController extends Controller
-{
-	public function index()
-	{
-		
-		$dataperdarpjmd=TrxRpjmdDokumen::select('id_rpjmd','thn_dasar','tahun_1','tahun_2','tahun_3','tahun_4','tahun_5','no_perda','tgl_perda','id_revisi','id_status_dokumen')
-		->where('id_status_dokumen','=','1')
-		->get();
-		
-		return view('rpjmd.index')->with(compact('dataperdarpjmd'));
-		
-	}
-	
-public function perumusanAKPembangunan(){
-	
-	
-	Excel::create('PerumusanAKPembangunan', function($excel) {
-		// Set the title
-		$excel->setTitle('Perumusan Arah Kebijakan Pembangunan');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Perumusan Arah Kebijakan Pembangunan');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			
-			
-			$RPJMDVisi=DB::select('SELECT a.no_urut as no_visi,
-a.uraian_visi_rpjmd,
-b.no_urut AS no_misi,
-b.uraian_misi_rpjmd,
-c.no_urut AS no_tujuan,
-c.uraian_tujuan_rpjmd,
-d.no_urut AS no_sasaran,
-d.uraian_sasaran_rpjmd,
-e.no_urut AS no_kebijakan,
-e.uraian_kebijakan_rpjmd,
-f.no_urut AS no_strategi,
-f.uraian_strategi_rpjmd,
-CONCAT(a.no_urut, ".",b.no_urut) AS no_gab_misi,
-CONCAT(a.no_urut, ".",b.no_urut, ".", c.no_urut) AS no_gab_tujuan,
-CONCAT(a.no_urut, ".",b.no_urut,".",c.no_urut,".",d.no_urut) AS no_gab_sasaran,
-CONCAT(a.no_urut, ".",b.no_urut,".",c.no_urut,".",d.no_urut,".",e.no_urut) AS no_gab_kebijakan,
-CONCAT(a.no_urut, ".",b.no_urut,".",c.no_urut,".",d.no_urut,".",f.no_urut) AS no_gab_strategi
-FROM trx_rpjmd_visi a
-inner join trx_rpjmd_misi b
-on a.id_visi_rpjmd=b.id_visi_rpjmd
-inner join trx_rpjmd_tujuan c
-on b.id_misi_rpjmd=c.id_misi_rpjmd
-inner join trx_rpjmd_sasaran d
-on c.id_tujuan_rpjmd=d.id_tujuan_rpjmd
-LEFT OUTER JOIN  trx_rpjmd_kebijakan e
-on d.id_sasaran_rpjmd=e.id_sasaran_rpjmd
-LEFT OUTER JOIN trx_rpjmd_strategi f
-on d.id_sasaran_rpjmd=f.id_sasaran_rpjmd');
-	foreach($RPJMDVisi as $row) {
-		
-		$data[] = array(
-				$row->no_gab_tujuan,
-				$row->uraian_tujuan_rpjmd,
-				$row->no_gab_sasaran,
-				$row->uraian_sasaran_rpjmd,
-				$row->no_gab_kebijakan,
-				$row->uraian_kebijakan_rpjmd,
-				$row->no_gab_strategi,
-				$row->uraian_strategi_rpjmd,
-		);
-		
-	}
-	
-	$sheet->prependRow(3, array(
-			'Pemerintah Kabupaten Purworejo'
-	));
-	$sheet->prependRow(4, array(
-			'Perumusan Arah Kebijakan Pembangunan'
-	));
-	$sheet->prependRow(6, array(
-			'Tujuan','','Sasaran', '','Arah Kebjakan','','Strategi',''
-	));
-	$sheet->fromArray($data, null, 'A7', false, false);
-	$sheet->cells('A6:H6', function($cells) {
-		$cells->setBackground('#AAAAFF');
-		
-	});
-		$sheet->cells('A3:H4', function($cells) {
-			$cells->setFont(array(
-					'family'     => 'Calibri',
-					'size'       => '16',
-					'bold'       =>  true
-			));
-		});
-			$sheet->getStyle('B1:B' . $sheet->getHighestRow())
-			->getAlignment()->setWrapText(true);
-			$sheet->getStyle('D1:D' . $sheet->getHighestRow())
-			->getAlignment()->setWrapText(true);
-			$sheet->getStyle('F1:F' . $sheet->getHighestRow())
-			->getAlignment()->setWrapText(true);
-			$sheet->getStyle('H1:H' . $sheet->getHighestRow())
-			->getAlignment()->setWrapText(true);
-			
-			
-			$sheet->setAutoSize(false);
-			$sheet->setAutoSize(array(
-					'B','D','F','H'
-			));
-			$sheet->mergeCells('A3:H3');
-			$sheet->mergeCells('A4:H4');
-			$sheet->mergeCells('A6:B6');
-			$sheet->mergeCells('C6:D6');
-			$sheet->mergeCells('E6:F6');
-			$sheet->mergeCells('G6:H6');
-			$sheet->cells('A3:H6', function($cells) {
-				$cells->setAlignment('center');
-			});
-				$sheet->cells('A7:H10000', function($cells) {
-					$cells->setValignment('top');
-				});
-					
-					$sheet->setWidth('A', 10);
-					$sheet->setWidth('B', 60);
-					$sheet->setWidth('C', 10);
-					$sheet->setWidth('D', 60);
-					$sheet->setWidth('E', 10);
-					$sheet->setWidth('F', 60);
-					$sheet->setWidth('G', 10);
-					$sheet->setWidth('H', 60);
-					$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-						$protection->setSort(true);
-						$protection->setSheet(true);
-					});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function perumusanProgramPrioritasPemda(){
-	
-	
-	Excel::create('PerumusanProgramPrioritasPemda', function($excel) {
-		// Set the title
-		$excel->setTitle('Perumusan Program Prioritas Pemerintah Daerah');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Perumusan Program Prioritas Pemerintah Daerah');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			$sheet->setColumnFormat(array(
-					'E' => '0.00',
-					'F' => '0.00',
-					'G' => '0.00',
-					'H' => '0.00',
-					'I' => '0.00',
-			));
-			
-			$RPJMDProgram= DB::select('select DISTINCT uraian_strategi_rpjmd, uraian_kebijakan_rpjmd,
-uraian_program_rpjmd,uraian_indikator_program_rpjmd,
-pagu_tahun1,pagu_tahun2,pagu_tahun3,pagu_tahun4,
-pagu_tahun5
-from trx_rpjmd_sasaran a
-INNER join trx_rpjmd_kebijakan b
-on a.id_sasaran_rpjmd=b.id_kebijakan_rpjmd
-INNER JOIN trx_rpjmd_strategi c
-on a.id_sasaran_rpjmd=c.id_sasaran_rpjmd
-INNER JOIN trx_rpjmd_program d
-on a.id_sasaran_rpjmd=d.id_sasaran_rpjmd
-INNER JOIN trx_rpjmd_program_indikator e
-on d.id_program_rpjmd=e.id_program_rpjmd');
-			foreach($RPJMDProgram as $row) {
-				
-				$data[] = array(
-						$row->uraian_strategi_rpjmd,
-						$row->uraian_kebijakan_rpjmd,
-						$row->uraian_program_rpjmd,
-						$row->uraian_indikator_program_rpjmd,
-						number_format($row->pagu_tahun1,2,',','.'),
-						number_format($row->pagu_tahun2,2,',','.'),
-						number_format($row->pagu_tahun3,2,',','.'),
-						number_format($row->pagu_tahun4,2,',','.'),
-						number_format($row->pagu_tahun5,2,',','.'),
-						
-				);
-			}
-			$sheet->prependRow(4, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(5, array(
-					'Perumusan Program Prioritas Pemerintah Daerah'
-			));
-			$sheet->prependRow(7, array(
-					'Strategi','Kebijakan Umum','Program Pembangunan Daerah', 'Indikator Kinerja','Tahun1','Tahun2','Tahun3','Tahun4','Tahun5'
-			));
-			$sheet->fromArray($data, null, 'A8', false, false);
-			$sheet->cells('A7:I7', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('A8:A' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				$sheet->getStyle('B8:B' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				$sheet->getStyle('C8:C' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				$sheet->getStyle('D8:D' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				$sheet->setAutoSize(false);
-				$sheet->setAutoSize(array(
-						'A','B','C','D'
-				));
-				
-				$sheet->cells('A4:H5', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A4:H7', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A4:H4');
-						$sheet->mergeCells('A5:H5');
-						
-						$sheet->cells('A4:I7', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A8:I10000', function($cells) {
-								$cells->setValignment('top');
-							});
-								
-								$sheet->setWidth('A', 50);
-								$sheet->setWidth('B', 50);
-								$sheet->setWidth('C', 50);
-								$sheet->setWidth('D', 50);
-								$sheet->setWidth('E', 20);
-								$sheet->setWidth('F', 20);
-								$sheet->setWidth('G', 20);
-								$sheet->setWidth('H', 20);
-								$sheet->setWidth('I', 20);
-								$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-									$protection->setSort(true);
-									$protection->setSheet(true);
-								});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function ProyeksiPendapatan(){
-	
-	
-	Excel::create('ProyeksiPendapatanPemda', function($excel) {
-		// Set the title
-		$excel->setTitle('Proyeksi Pendapatan Pemerintah Daerah');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Proyeksi Pendapatan Pemerintah Daerah');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			
-			$RKPDTujuanSasaran= DB::select('select d.no_urut as no_tujuan,c.no_urut as no_sasaran,c.id_sasaran_rpjmd,c.uraian_sasaran_rpjmd
-from trx_rpjmd_sasaran c
-inner join trx_rpjmd_tujuan d
-on c.id_tujuan_rpjmd=d.id_tujuan_rpjmd
-INNER JOIN trx_rpjmd_misi e
-on d.id_misi_rpjmd=e.id_misi_rpjmd
-where e.no_urut=98
-union ALL
-select d.no_urut as no_tujuan,c.no_urut as no_misi,c.id_sasaran_rpjmd,uraian_sasaran_rpjmd from trx_rpjmd_sasaran c
-inner join trx_rpjmd_tujuan d
-on c.id_tujuan_rpjmd=d.id_tujuan_rpjmd
-INNER JOIN trx_rpjmd_misi e
-on d.id_misi_rpjmd=e.id_misi_rpjmd
-where e.no_urut=99
-union ALL
-select d.no_urut as no_tujuan,c.no_urut as no_misi,c.id_sasaran_rpjmd,uraian_sasaran_rpjmd from trx_rpjmd_sasaran c
-inner join trx_rpjmd_tujuan d
-on c.id_tujuan_rpjmd=d.id_tujuan_rpjmd
-INNER JOIN trx_rpjmd_misi e
-on d.id_misi_rpjmd=e.id_misi_rpjmd
-where e.no_urut not in (98,99)');
-			foreach($RKPDTujuanSasaran as $row) {
-				$data[] = array(
-						$row->no_tujuan.'.'.$row->no_sasaran,
-						$row->uraian_sasaran_rpjmd,
-				);
-				
-				$RKPDProgram= DB::select('select a.no_urut as no_program,a.uraian_program_rpjmd,0 as nmin3,0 as nmin2,0 as nmin1, pagu_ranwal,
-case g.tahun_5-a.tahun_rkpd
-when 4 then b.pagu_tahun2
-when 3 then b.pagu_tahun3
-when 2 then b.pagu_tahun4
-when 1 then b.pagu_tahun5
-end as pagu_n1
- from trx_rkpd_ranwal a
-inner join trx_rpjmd_program b
-on a.id_program_rpjmd = b.id_program_rpjmd
-inner join trx_rpjmd_sasaran c
-on b.id_sasaran_rpjmd=c.id_sasaran_rpjmd
-inner join trx_rpjmd_tujuan d
-on c.id_tujuan_rpjmd=d.id_tujuan_rpjmd
-INNER JOIN trx_rpjmd_misi e
-on d.id_misi_rpjmd=e.id_misi_rpjmd
-inner join trx_rpjmd_visi f
-on e.id_visi_rpjmd=f.id_visi_rpjmd
-inner join trx_rpjmd_dokumen g
-on f.id_rpjmd=g.id_rpjmd
-where c.id_sasaran_rpjmd = '.$row->id_sasaran_rpjmd.'
-');
-				foreach($RKPDProgram as $row2) {
-					
-					$data[] = array(
-							$row->no_tujuan.'.'.$row->no_sasaran.'.'.$row2->no_program,
-							'',
-							$row2->uraian_program_rpjmd,
-							number_format($row2->nmin3,2,',','.'),
-							number_format($row2->nmin2,2,',','.'),
-							number_format($row2->nmin1,2,',','.'),
-							number_format($row2->pagu_ranwal,2,',','.'),
-							number_format($row2->pagu_n1,2,',','.'),
-					);
-					
-				}
-			}
-			$sheet->prependRow(2, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(3, array(
-					'Realisasi dan Proyeksi/Target Pendapatan Pemerintah Daerah'
-			));
-			$sheet->prependRow(5, array(
-					'No','Uraian','','Jumlah','','','',''));
-			$sheet->prependRow(6, array(
-					'','','','Realisasi Tahun (n-3)','Realisasi Tahun (n-2)', 'Tahun Berjalan (n-1)','Proyeksi/Target Tahun Rencana (n)','Proyeksi/Target Tahun Rencana (n)'));
-			
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A5:H6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('C7:C' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				$sheet->getStyle('D6:H6' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				$sheet->cells('A2:H3', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A2:H6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A2:H2');
-						$sheet->mergeCells('A3:H3');
-						$sheet->mergeCells('A5:A6');
-						$sheet->mergeCells('B5:C6');
-						$sheet->mergeCells('D5:H5');
-						
-						
-						$sheet->cells('A2:H6', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A5:H6', function($cells) {
-								$cells->setValignment('center');
-							});
-								$sheet->cells('A7:H10000', function($cells) {
-									$cells->setValignment('top');
-								});
-									
-									$sheet->setWidth('A', 20);
-									$sheet->setWidth('B', 3);
-									$sheet->setWidth('C', 50);
-									$sheet->setWidth('D', 20);
-									$sheet->setWidth('E', 20);
-									$sheet->setWidth('F', 20);
-									$sheet->setWidth('G', 20);
-									$sheet->setWidth('H', 20);
-									
-									$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-										$protection->setSort(true);
-										$protection->setSheet(true);
-									});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function KompilasiProgramdanPagu(){
-	
-	
-	Excel::create('KompilasiProgramdanPaguSKPD', function($excel) {
-		// Set the title
-		$excel->setTitle('Kompilasi Program dan Pagu SKPD');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Kompilasi Program dan Pagu SKPD');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			
-			$RKPDSKPD= DB::select('select DISTINCT e.id_unit,e.nm_unit,sum(a.total_pagu) as sub_total
-				from trx_rpjmd_program a
-				inner join trx_rpjmd_program_urusan b
-				on a.id_program_rpjmd=b.id_program_rpjmd
-				inner join trx_rpjmd_program_indikator c
-				on a.id_program_rpjmd=c.id_program_rpjmd
-				inner join trx_rpjmd_program_pelaksana d
-				on b.id_urbid_rpjmd=d.id_urbid_rpjmd
-				inner join ref_unit e
-				on d.id_unit=e.id_unit
-				Group By e.id_unit,e.nm_unit
-				');
-			$i=1;
-			$prog=0;
-			$strProg='';
-			$pagu=0;
-			
-			foreach($RKPDSKPD as $row) {
-				
-				$RKPDProgram= DB::select('select DISTINCT a.id_program_rpjmd,a.uraian_program_rpjmd,a.total_pagu
-				from trx_rpjmd_program a
-				inner join trx_rpjmd_program_urusan b
-				on a.id_program_rpjmd=b.id_program_rpjmd
-				inner join trx_rpjmd_program_indikator c
-				on a.id_program_rpjmd=c.id_program_rpjmd
-				inner join trx_rpjmd_program_pelaksana d
-				on b.id_urbid_rpjmd=d.id_urbid_rpjmd
-				inner join ref_unit e
-				on d.id_unit=e.id_unit
-				where e.id_unit = '.$row->id_unit);
-				$data[] = array(
-						$i,
-						$row->nm_unit,
-						'',
-						'',
-						'',
-						number_format($row->sub_total,2,',','.'),
-						
-				);
-				
-				
-				
-				foreach($RKPDProgram as $row2) {
-					$RKPDIndikator= DB::select('select DISTINCT c.id_indikator, c.uraian_indikator_program_rpjmd,c.tolok_ukur_indikator
-					from trx_rpjmd_program a
-					inner join trx_rpjmd_program_urusan b
-					on a.id_program_rpjmd=b.id_program_rpjmd
-					inner join trx_rpjmd_program_indikator c
-					on a.id_program_rpjmd=c.id_program_rpjmd
-					inner join trx_rpjmd_program_pelaksana d
-					on b.id_urbid_rpjmd=d.id_urbid_rpjmd
-					inner join ref_unit e
-					on d.id_unit=e.id_unit
-					where a.id_program_rpjmd = '.$row2->id_program_rpjmd.' and e.id_unit = '.$row->id_unit  );
-					
-					$prog=0;
-					
-					foreach($RKPDIndikator as $row3) {
-						
-						$strProg='';
-						$pagu=0;
-						
-						if($prog<1)
-						{
-							$strProg=$row2->uraian_program_rpjmd;
-							$pagu=number_format($row2->total_pagu,2,',','.');
-							
-						}
-						
-						$data[] = array(
-								'',
-								'',
-								$strProg,
-								$row3->uraian_indikator_program_rpjmd,
-								$row3->tolok_ukur_indikator,
-								$pagu,
-								
-						);
-						
-						
-						$prog++;
-					}
-				}
-				$i++;
-			}
-			
-			$sheet->prependRow(2, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(3, array(
-					'Kompilasi Program dan Pagu Indikatif Tiap SKPD'
-			));
-			$sheet->prependRow(5, array(
-					'No','SKPD','Program','Kinerja','','Pagu Indikatif'));
-			$sheet->prependRow(6, array(
-					'','','','Indikator','Target', ''));
-			
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A5:F6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('B7:E' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				$sheet->cells('A2:F3', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A2:F6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A2:F2');
-						$sheet->mergeCells('A3:F3');
-						$sheet->mergeCells('A5:A6');
-						$sheet->mergeCells('B5:B6');
-						$sheet->mergeCells('C5:C6');
-						$sheet->mergeCells('D5:E5');
-						$sheet->mergeCells('F5:F6');
-						
-						$sheet->cells('A2:F6', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A5:F6', function($cells) {
-								$cells->setValignment('center');
-							});
-								$sheet->cells('A7:F10000', function($cells) {
-									$cells->setValignment('top');
-								});
-									$sheet->setBorder('A5:F10000', 'thin');
-									$sheet->setFreeze('A7');
-									
-									$sheet->setWidth('A', 3);
-									$sheet->setWidth('B', 30);
-									$sheet->setWidth('C', 30);
-									$sheet->setWidth('D', 30);
-									$sheet->setWidth('E', 30);
-									$sheet->setWidth('F', 20);
-									
-									$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-										$protection->setSort(true);
-										$protection->setSheet(true);
-									});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function ReviewRanwalRKPD(){
-	
-	
-	Excel::create('ReviewRanwalRKPD', function($excel) {
-		// Set the title
-		$excel->setTitle('Review Rancangan Awal RKPD');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Review Rancangan Awal RKPD');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			$tahun='2018';
-			$skpd=19;
-			
-			$i=1;
-			$prog=0;
-			$strProg='';
-			$pagu=0;
-			$thn='';
-			$unit='';
-			
-			
-			$RKPDProgram= DB::select('select DISTINCT a.id_rkpd_ranwal,a.uraian_program_rpjmd,a.pagu_ranwal
-from trx_rkpd_ranwal a
-inner join trx_rkpd_ranwal_urusan b
-on a.id_rkpd_ranwal=b.id_rkpd_ranwal and a.tahun_rkpd=b.tahun_rkpd
-inner join trx_rkpd_ranwal_indikator c
-on a.id_rkpd_ranwal=c.id_rkpd_ranwal and a.tahun_rkpd=c.tahun_rkpd
-inner join trx_rkpd_ranwal_pelaksana d
-on a.id_rkpd_ranwal=d.id_rkpd_ranwal and a.tahun_rkpd=d.tahun_rkpd
-inner join ref_unit e
-on d.id_unit=e.id_unit
-where e.id_unit = '.$skpd.' and a.tahun_rkpd= '.$tahun);
-			
-			foreach($RKPDProgram as $row2) {
-				$RKPDIndikator= DB::select('select distinct c.id_indikator_program_rkpd, c.uraian_indikator_program_rkpd,c.tolok_ukur_indikator,e.nm_unit,a.tahun_rkpd
-from trx_rkpd_ranwal a
-inner join trx_rkpd_ranwal_urusan b
-on a.id_rkpd_ranwal=b.id_rkpd_ranwal and a.tahun_rkpd=b.tahun_rkpd
-inner join trx_rkpd_ranwal_indikator c
-on a.id_rkpd_ranwal=c.id_rkpd_ranwal and a.tahun_rkpd=c.tahun_rkpd
-inner join trx_rkpd_ranwal_pelaksana d
-on a.id_rkpd_ranwal=d.id_rkpd_ranwal and a.tahun_rkpd=d.tahun_rkpd
-inner join ref_unit e
-on d.id_unit=e.id_unit
-where a.id_rkpd_ranwal = '.$row2->id_rkpd_ranwal.' and e.id_unit = '.$skpd.' and a.tahun_rkpd= '.$tahun  );
-				
-				$prog=0;
-				
-				foreach($RKPDIndikator as $row3) {
-					
-					$strProg='';
-					$pagu=0;
-					$count=0;
-					
-					if($prog<1)
-					{
-						$strProg=$row2->uraian_program_rpjmd;
-						$pagu=number_format($row2->pagu_ranwal,2,',','.');
-						$thn=$row3->tahun_rkpd;
-						$unit=$row3->nm_unit;
-						$count=$i;
-					}
-					
-					$data[] = array(
-							$count,
-							$strProg,
-							'',
-							$row3->uraian_indikator_program_rkpd,
-							$row3->tolok_ukur_indikator,
-							$pagu,
-							'',
-							'',
-							'',
-							'',
-							'',
-							
-					);
-					
-					
-					$prog++;
-				}
-				$i++;
-			}
-			
-			
-			$sheet->prependRow(1, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(2, array(
-					'Review terhadap Rancangan Awal RKPD Tahun '.$thn
-			));
-			$sheet->prependRow(3, array(
-					$unit
-			));
-			$sheet->prependRow(5, array(
-					'No','Rancangan Awal RKPD','','','','','Hasil Analisis Kebutuhan','','','','' ,'Catatan Penting'));
-			$sheet->prependRow(6, array(
-					'','Program','Lokasi','Indikator','Capaian Target','Pagu Indikatif(Ribuan)','Program','Lokasi','Indikator','Capaian Target','Pagu Indikatif(Ribuan)',''));
-			
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A5:L6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('B7:L' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				
-				$sheet->cells('A1:L3', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A2:L6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A1:L1');
-						$sheet->mergeCells('A2:L2');
-						$sheet->mergeCells('A3:L3');
-						$sheet->mergeCells('A5:A6');
-						$sheet->mergeCells('B5:F5');
-						$sheet->mergeCells('G5:K5');
-						$sheet->mergeCells('L5:L6');
-						$sheet->cells('A1:L6', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A5:L6', function($cells) {
-								$cells->setValignment('center');
-							});
-								$sheet->cells('A7:L10000', function($cells) {
-									$cells->setValignment('top');
-								});
-									$sheet->setBorder('A5:L10000', 'thin');
-									$sheet->setFreeze('A7');
-									
-									$sheet->setWidth('A', 3);
-									$sheet->setWidth('B', 30);
-									$sheet->setWidth('C', 30);
-									$sheet->setWidth('D', 30);
-									$sheet->setWidth('E', 30);
-									$sheet->setWidth('F', 20);
-									$sheet->setWidth('G', 30);
-									$sheet->setWidth('H', 30);
-									$sheet->setWidth('I', 30);
-									$sheet->setWidth('J', 30);
-									$sheet->setWidth('K', 20);
-									$sheet->setWidth('L', 30);
-									
-									$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-										$protection->setSort(true);
-										$protection->setSheet(true);
-									});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function RumusanProgKeg(){
-	
-	
-	Excel::create('RumusanKebutuhanReviewRanwalRKPD', function($excel) {
-		// Set the title
-		$excel->setTitle('Rumusan Kebutuhan Program dan Kegiatan Hasil Review Rancangan Awal RKPD');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Rumusan Kebutuhan Program dan Kegiatan Hasil Review Rancangan Awal RKPD');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			$tahun='2018';
-			$skpd=19;
-			
-			$i=1;
-			$prog=0;
-			$strProg='';
-			$pagu=0;
-			$thn='';
-			$unit='';
-			
-			
-			$RKPDProgram= DB::select('select DISTINCT a.id_rkpd_ranwal,a.uraian_program_rpjmd,a.pagu_ranwal
-from trx_rkpd_ranwal a
-inner join trx_rkpd_ranwal_urusan b
-on a.id_rkpd_ranwal=b.id_rkpd_ranwal and a.tahun_rkpd=b.tahun_rkpd
-inner join trx_rkpd_ranwal_indikator c
-on a.id_rkpd_ranwal=c.id_rkpd_ranwal and a.tahun_rkpd=c.tahun_rkpd
-inner join trx_rkpd_ranwal_pelaksana d
-on a.id_rkpd_ranwal=d.id_rkpd_ranwal and a.tahun_rkpd=d.tahun_rkpd
-inner join ref_unit e
-on d.id_unit=e.id_unit
-where e.id_unit = '.$skpd.' and a.tahun_rkpd= '.$tahun);
-			
-			foreach($RKPDProgram as $row2) {
-				$RKPDIndikator= DB::select('select distinct c.id_indikator_program_rkpd, c.uraian_indikator_program_rkpd,c.tolok_ukur_indikator,e.nm_unit,a.tahun_rkpd
-from trx_rkpd_ranwal a
-inner join trx_rkpd_ranwal_urusan b
-on a.id_rkpd_ranwal=b.id_rkpd_ranwal and a.tahun_rkpd=b.tahun_rkpd
-inner join trx_rkpd_ranwal_indikator c
-on a.id_rkpd_ranwal=c.id_rkpd_ranwal and a.tahun_rkpd=c.tahun_rkpd
-inner join trx_rkpd_ranwal_pelaksana d
-on a.id_rkpd_ranwal=d.id_rkpd_ranwal and a.tahun_rkpd=d.tahun_rkpd
-inner join ref_unit e
-on d.id_unit=e.id_unit
-where a.id_rkpd_ranwal = '.$row2->id_rkpd_ranwal.' and e.id_unit = '.$skpd.' and a.tahun_rkpd= '.$tahun  );
-				
-				$prog=0;
-				
-				foreach($RKPDIndikator as $row3) {
-					
-					$strProg='';
-					$pagu=0;
-					$count=0;
-					
-					if($prog<1)
-					{
-						$strProg=$row2->uraian_program_rpjmd;
-						$pagu=number_format($row2->pagu_ranwal,2,',','.');
-						$thn=$row3->tahun_rkpd;
-						$unit=$row3->nm_unit;
-						$count=$i;
-						
-					}
-					
-					$data[] = array(
-							$count,
-							$strProg,
-							'',
-							$row3->uraian_indikator_program_rkpd,
-							$row3->tolok_ukur_indikator,
-							$pagu,
-							'',
-							'',
-							
-							
-					);
-					
-					
-					$prog++;
-				}
-				$i++;
-			}
-			
-			
-			$sheet->prependRow(1, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(2, array(
-					'Rumusan kebutuhan program dan kegiatan hasil review terhadap Rancangan Awal RKPD'
-			));
-			$sheet->prependRow(3, array(
-					$unit
-			));
-			$sheet->prependRow(4, array(
-					$thn
-			));
-			
-			
-			$sheet->prependRow(6, array(
-					'No','Program','Lokasi','Indikator','Capaian Target','Kebutuhan Dana(Ribuan)','Sumber Dana','Catatan'));
-			
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A6:H6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('B6:H' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				
-				$sheet->cells('A1:H4', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A2:H6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A1:H1');
-						$sheet->mergeCells('A2:H2');
-						$sheet->mergeCells('A3:H3');
-						$sheet->mergeCells('A4:H4');
-						$sheet->cells('A1:H6', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A5:H6', function($cells) {
-								$cells->setValignment('center');
-							});
-								$sheet->cells('A7:H10000', function($cells) {
-									$cells->setValignment('top');
-								});
-									$sheet->setBorder('A5:H10000', 'thin');
-									$sheet->setFreeze('A7');
-									
-									$sheet->setWidth('A', 3);
-									$sheet->setWidth('B', 30);
-									$sheet->setWidth('C', 30);
-									$sheet->setWidth('D', 30);
-									$sheet->setWidth('E', 30);
-									$sheet->setWidth('F', 20);
-									$sheet->setWidth('G', 30);
-									$sheet->setWidth('H', 50);
-									
-									
-									$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-										$protection->setSort(true);
-										$protection->setSheet(true);
-									});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function KompilasiProgramdanPaguRenstra(){
-	
-	
-	Excel::create('KompilasiProgramdanPaguRenstraSKPD', function($excel) {
-		// Set the title
-		$excel->setTitle('Kompilasi Program dan Pagu SKPD');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Kompilasi Program dan Pagu SKPD');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			
-			
-			$RenstraSKPD= DB::select('select distinct i.id_sub_unit,i.nm_sub
-from trx_renstra_program e
-INNER JOIN trx_renstra_kegiatan f
-on e.id_program_renstra=f.id_program_renstra
-inner join trx_renstra_kegiatan_pelaksana h
-on f.id_kegiatan_renstra=h.id_kegiatan_renstra
-inner join ref_sub_unit i
-on h.id_sub_unit=i.id_sub_unit
-				');
-			$i=1;
-			$prog=0;
-			$strProg='';
-			$pagu=0;
-			
-			foreach($RenstraSKPD as $row) {
-				$data[] = array(
-						$i,
-						$row->nm_sub,
-						'',
-						'',
-						'',
-						'',
-						'',
-						'',
-						'',
-				);
-				
-				$RenstraProgram= DB::select('select distinct e.id_program_renstra,e.uraian_program_renstra,e.pagu_tahun1,e.pagu_tahun2,e.pagu_tahun3,e.pagu_tahun4,e.pagu_tahun5
-from trx_renstra_program e
-INNER JOIN trx_renstra_kegiatan f
-on e.id_program_renstra=f.id_program_renstra
-inner join trx_renstra_kegiatan_indikator g
-on f.id_kegiatan_renstra=g.id_kegiatan_renstra
-inner join trx_renstra_kegiatan_pelaksana h
-on f.id_kegiatan_renstra=h.id_kegiatan_renstra
-inner join ref_sub_unit i
-on h.id_sub_unit=i.id_sub_unit
-where i.id_sub_unit = '.$row->id_sub_unit);
-				foreach($RenstraProgram as $row2) {
-				$data[] = array(
-						'',
-						'',
-						$row2->uraian_program_renstra,
-						'',
-						number_format($row2->pagu_tahun1,2,',','.'),
-						number_format($row2->pagu_tahun2,2,',','.'),
-						number_format($row2->pagu_tahun3,2,',','.'),
-						number_format($row2->pagu_tahun4,2,',','.'),
-						number_format($row2->pagu_tahun5,2,',','.'),
-				);
-				
-				
-				
-				
-					
-					$RenstraKegiatan= DB::select('select distinct f.uraian_kegiatan_renstra,f.pagu_tahun1,f.pagu_tahun2,f.pagu_tahun3,f.pagu_tahun4,f.pagu_tahun5
-from trx_renstra_program e
-INNER JOIN trx_renstra_kegiatan f
-on e.id_program_renstra=f.id_program_renstra
-inner join trx_renstra_kegiatan_indikator g
-on f.id_kegiatan_renstra=g.id_kegiatan_renstra
-inner join trx_renstra_kegiatan_pelaksana h
-on f.id_kegiatan_renstra=h.id_kegiatan_renstra
-inner join ref_sub_unit i
-on h.id_sub_unit=i.id_sub_unit
-					where e.id_program_renstra = '.$row2->id_program_renstra.' and h.id_sub_unit = '.$row->id_sub_unit);
-					
-					
-					
-					foreach($RenstraKegiatan as $row3) {
-						
-						
-						
-						$data[] = array(
-								'',
-								'',
-								'',
-								$row3->uraian_kegiatan_renstra,
-								number_format($row3->pagu_tahun1,2,',','.'),
-								number_format($row3->pagu_tahun2,2,',','.'),
-								number_format($row3->pagu_tahun3,2,',','.'),
-								number_format($row3->pagu_tahun4,2,',','.'),
-								number_format($row3->pagu_tahun5,2,',','.'),
-								
-						);
-						
-						
-						$prog++;
-					}
-				}
-				$i++;
-			}
-			
-			$sheet->prependRow(2, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(3, array(
-					'Kompilasi Program dan Pagu Indikatif Renstra Tiap SKPD'
-			));
-			$sheet->prependRow(5, array(
-					'No','SKPD/Program/Kegiatan','','','Pagu Indikatif','','','',''));
-			$sheet->prependRow(6, array(
-					'','','','','Tahun 1','Tahun 2','Tahun 3','Tahun 4','Tahun 5'));
-			
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A5:I6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->getStyle('D7:D' . $sheet->getHighestRow())
-				->getAlignment()->setWrapText(true);
-				
-				
-				$sheet->cells('A2:I3', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->cells('A2:I6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->mergeCells('A2:I2');
-						$sheet->mergeCells('A3:I3');
-						$sheet->mergeCells('A5:A6');
-						$sheet->mergeCells('B5:D6');
-						$sheet->mergeCells('E5:I5');
-						
-						$sheet->cells('A2:I6', function($cells) {
-							$cells->setAlignment('center');
-						});
-							$sheet->cells('A5:I6', function($cells) {
-								$cells->setValignment('center');
-							});
-								$sheet->cells('A7:I10000', function($cells) {
-									$cells->setValignment('top');
-								});
-									$sheet->cells('E7:I10000', function($cells) {
-										$cells->setAlignment('right');
-								});
-									$sheet->setBorder('A5:I10000', 'thin');
-									$sheet->setFreeze('A7');
-									
-									$sheet->setWidth('A', 3);
-									$sheet->setWidth('B', 5);
-									$sheet->setWidth('C', 5);
-									$sheet->setWidth('D', 50);
-									$sheet->setWidth('E', 20);
-									$sheet->setWidth('F', 20);
-									$sheet->setWidth('G', 20);
-									$sheet->setWidth('H', 20);
-									$sheet->setWidth('I', 20);
-									
-									$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-										$protection->setSort(true);
-										$protection->setSheet(true);
-									});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-public function KompilasiPokir(){
-	
-	
-	Excel::create('Pokok Pikiran', function($excel) {
-		// Set the title
-		$excel->setTitle('Pokok Pikiran');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Pokok Pikiran');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			$i=1;
-			
-			
-			$Pokir= DB::select('SELECT
-	b.id_judul_usulan,
-	b.volume,
-	f.singkatan_satuan,
-	e.nama_kecamatan,
-	d.nama_desa,
-	c.rw,
-	c.rt,
-	b.id_satuan,
-	c.id_kecamatan,
-	c.id_desa
-FROM
-	trx_pokir AS a
-INNER JOIN trx_pokir_usulan AS b ON b.id_pokir = a.id_pokir
-INNER JOIN trx_pokir_lokasi AS c ON c.id_pokir_usulan = b.id_pokir_usulan
-INNER JOIN ref_desa AS d ON c.id_desa = d.id_desa
-INNER JOIN ref_kecamatan AS E ON c.id_kecamatan = e.id_kecamatan
-INNER JOIN ref_satuan AS F ON b.id_satuan = f.id_satuan
-				');
-			foreach($Pokir as $row) {
-				
-				$data[] = array(
-						$i,
-						$row->id_judul_usulan,
-						'',
-						$row->volume.' '.$row->singkatan_satuan,
-						$row->nama_kecamatan.', '.$row->nama_desa.', RT. '.$row->rt.', Rw. '.$row->rw,
-						'',
-						'',
-						
-				);
-				$i++;
-			}
-			
-			$sheet->prependRow(3, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(4, array(
-					'Rumusan Usulan Program/Kegiatan'
-			));
-			$sheet->prependRow(5, array(
-					'Hasil Penelaahan Pokok-pokok Pikiran DPRD dan Validasi'
-			));
-			
-			
-			$sheet->prependRow(6, array(
-					'No','Program/Kegiatan','Indikator', 'Volume','Lokasi','SKPD','Validasi/Ket'
-			));
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A6:G6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->cells('A3:H5', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->getStyle('B1:H' . $sheet->getHighestRow())
-					->getAlignment()->setWrapText(true);
-					
-					
-					
-					
-								$sheet->mergeCells('A3:G3');
-								$sheet->mergeCells('A4:G4');
-								$sheet->mergeCells('A5:G5');
-					// 			$sheet->mergeCells('C6:D6');
-					// 			$sheet->mergeCells('E6:F6');
-					// 			$sheet->mergeCells('G6:H6');
-					$sheet->cells('A3:G6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->cells('A7:G10000', function($cells) {
-							$cells->setValignment('top');
-						});
-							
-							$sheet->setWidth('A', 7);
-							$sheet->setWidth('B', 40);
-							$sheet->setWidth('C', 20);
-							$sheet->setWidth('D', 20);
-							$sheet->setWidth('E', 20);
-							$sheet->setWidth('F', 20);
-							$sheet->setWidth('G', 40);
-							
-							$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-								$protection->setSort(true);
-								$protection->setSheet(true);
-							});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-
-public function DaftarBelumSepakatMusrencam(){
-	
-	
-	Excel::create('Daftar Musrencam Belum Disepakati', function($excel) {
-		// Set the title
-		$excel->setTitle('Daftar Musrencam Belum Disepakati');
-		$excel->setCreator('SIMDA')->setCompany('BPKP');
-		$excel->setDescription('report Daftar Musrencam Belum Disepakati');
-		
-		$excel->sheet('sheet1', function($sheet) {
-			$i=1;
-			
-			
-			$Pokir= DB::select('SELECT
-	b.id_judul_usulan,
-	b.volume,
-	f.singkatan_satuan,
-	e.nama_kecamatan,
-	d.nama_desa,
-	c.rw,
-	c.rt,
-	b.id_satuan,
-	c.id_kecamatan,
-	c.id_desa
-FROM
-	trx_pokir AS a
-INNER JOIN trx_pokir_usulan AS b ON b.id_pokir = a.id_pokir
-INNER JOIN trx_pokir_lokasi AS c ON c.id_pokir_usulan = b.id_pokir_usulan
-INNER JOIN ref_desa AS d ON c.id_desa = d.id_desa
-INNER JOIN ref_kecamatan AS E ON c.id_kecamatan = e.id_kecamatan
-INNER JOIN ref_satuan AS F ON b.id_satuan = f.id_satuan
-				');
-			foreach($Pokir as $row) {
-				
-				$data[] = array(
-						$i,
-						$row->id_judul_usulan,
-						'',
-						$row->volume.' '.$row->singkatan_satuan,
-						$row->nama_kecamatan.', '.$row->nama_desa.', RT. '.$row->rt.', Rw. '.$row->rw,
-						'',
-						'',
-						
-				);
-				$i++;
-			}
-			
-			$sheet->prependRow(3, array(
-					'Pemerintah Kabupaten Purworejo'
-			));
-			$sheet->prependRow(4, array(
-					'Rumusan Usulan Program/Kegiatan'
-			));
-			$sheet->prependRow(5, array(
-					'Hasil Penelaahan Pokok-pokok Pikiran DPRD dan Validasi'
-			));
-			
-			
-			$sheet->prependRow(6, array(
-					'No','Program/Kegiatan','Indikator', 'Volume','Lokasi','SKPD','Validasi/Ket'
-			));
-			$sheet->fromArray($data, null, 'A7', false, false);
-			$sheet->cells('A6:G6', function($cells) {
-				$cells->setBackground('#AAAAFF');
-				
-			});
-				$sheet->cells('A3:H5', function($cells) {
-					$cells->setFont(array(
-							'family'     => 'Calibri',
-							'size'       => '16',
-							'bold'       =>  true
-					));
-				});
-					$sheet->getStyle('B1:H' . $sheet->getHighestRow())
-					->getAlignment()->setWrapText(true);
-					
-					
-					
-					
-					$sheet->mergeCells('A3:G3');
-					$sheet->mergeCells('A4:G4');
-					$sheet->mergeCells('A5:G5');
-					// 			$sheet->mergeCells('C6:D6');
-					// 			$sheet->mergeCells('E6:F6');
-					// 			$sheet->mergeCells('G6:H6');
-					$sheet->cells('A3:G6', function($cells) {
-						$cells->setAlignment('center');
-					});
-						$sheet->cells('A7:G10000', function($cells) {
-							$cells->setValignment('top');
-						});
-							
-							$sheet->setWidth('A', 7);
-							$sheet->setWidth('B', 40);
-							$sheet->setWidth('C', 20);
-							$sheet->setWidth('D', 20);
-							$sheet->setWidth('E', 20);
-							$sheet->setWidth('F', 20);
-							$sheet->setWidth('G', 40);
-							
-							$sheet->protect('password', function(\PHPExcel_Worksheet_Protection $protection) {
-								$protection->setSort(true);
-								$protection->setSheet(true);
-							});
-		});
-	})->export('xlsx');
-	return index();
-}
-
-
-}
-
-
-// Mas ini dipake ya
-// utk routes (web.php)
-// Route::get('/printRPJMDTSK','Laporan\CetakRpjmdController@perumusanAKPembangunan');
-// Route::get('/printProgPrio','Laporan\CetakRpjmdController@perumusanProgramPrioritasPemda');
-// Route::get('/PrintProyeksiPendapatan','Laporan\CetakRpjmdController@ProyeksiPendapatan');
-// Route::get('/PrintKompilasiProgramdanPagu','Laporan\CetakRpjmdController@KompilasiProgramdanPagu');
-// Route::get('/PrintReviewRanwalRKPD','Laporan\CetakRpjmdController@ReviewRanwalRKPD');
-// Route::get('/PrintRumusanReviewRanwal','Laporan\CetakRpjmdController@RumusanProgKeg');
-// Route::get('/PrintProgPaguRenstra','Laporan\CetakRpjmdController@KompilasiProgramdanPaguRenstra');
-// Route::get('/PrintKompilasiProgramdanPaguRenja/{id_unit}','Laporan\CetakRenjaController@KompilasiProgramdanPaguRenja');
-// Route::get('/printPokir','Laporan\CetakRpjmdController@KompilasiPokir');
-
-
-
-// utk view
-// <ul class="nav nav-tabs" role="tablist">
-// <li class="active"><a href="#visi" aria-controls="visi" role="tab" data-toggle="tab">Visi</a></li>
-// <li><a href="#misi" aria-controls="misi" role="tab" data-toggle="tab">Misi</a></li>
-// <li><a href="#tujuan" aria-controls="tujuan" role="tab" data-toggle="tab">Tujuan</a></li>
-// <li><a href="#sasaran" aria-controls="sasaran" role="tab" data-toggle="tab">Sasaran</a></li>
-// <li><a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program</a></li>
-// </ul>
-
-// <div class="tab-content">
-// <div class="btn-group">
-// <button type="button" class="btn btn-info btn-sm dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Print <span class="caret"></span></button>
-// <ul class="dropdown-menu">
-// <li>
-// <p><a class="btnPrintRPJMDTSK btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak RPJMD TSK</a></p>
-// </li>
-// <li>
-// <p><a class="btnPrintProgPrio btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Program Prioritas</a></p>
-// </li>
-// <li>
-// <p><a class="btnPrintProyeksiPendapatan btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Proyeksi Pend. RKPD</a></p></li>
-// <li>
-// <p><a class="btnPrintKompilasiProgramdanPagu btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Kompilasi Program dan Pagu RPJMD</a></p></li>
-// <li>
-// <p><a class="btnPrintReviewRanwalRKPD btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Review Ranwal RKPD</a></p>
-// </li>
-// <li>
-// <p><a class="btnPrintRumusanReviewRanwalRKPD btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Rumusan Review Ranwal RKPD</a></p>
-// </li>
-// <li>
-// <p><a class="btnPrintKompilasiProgramdanPaguRenstra btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Kompilasi Program dan Pagu Renstra</a></p>
-// </li>
-// <li>
-// <p><a class="btnPrintPokir btn btn-sm btn-success" ><i class="glyphicon glyphicon-print"></i> Cetak Pokok Pikiran</a></p>
-// </li>
-// </ul>
-// </div>
-
-
-// utk JS
-// $(document).on('click', '.btnPrintRPJMDTSK', function() {
-	
-// 	location.replace('./printRPJMDTSK');
-	
-// });
-// 	$(document).on('click', '.printProgPrio', function() {
-		
-// 		location.replace('./printProgPrio');
-		
-// 	});
-// 		$(document).on('click', '.btnPrintProyeksiPendapatan', function() {
-			
-// 			location.replace('./PrintProyeksiPendapatan');
-			
-// 		});
-// 			$(document).on('click', '.btnPrintKompilasiProgramdanPagu', function() {
-				
-// 				location.replace('./PrintKompilasiProgramdanPagu');
-				
-// 			});
-// 				$(document).on('click', '.btnPrintReviewRanwalRKPD', function() {
-					
-// 					location.replace('./PrintReviewRanwalRKPD');
-					
-// 				});
-// 					$(document).on('click', '.btnPrintRumusanReviewRanwalRKPD', function() {
-						
-// 						location.replace('./PrintRumusanReviewRanwal');
-						
-// 					});
-// 						$(document).on('click', '.btnPrintKompilasiProgramdanPaguRenstra', function() {
-							
-// 							location.replace('./PrintProgPaguRenstra');
-							
-// 						});
-// 							$(document).on('click', '.btnPrintPokir', function() {
-								
-// 								location.replace('./printPokir');
-								
-// 							});
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

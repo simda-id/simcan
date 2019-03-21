@@ -166,21 +166,12 @@ function resolveMacros($code) {
                      . ' $s->value = Node\Scalar\String_::parseEscapeSequences($s->value, ' . $args[1] . ', ' . $args[2] . '); } }';
             }
 
-            if ('parseEncapsedDoc' == $name) {
-                assertArgs(2, $args, $name);
-
-                return 'foreach (' . $args[0] . ' as $s) { if ($s instanceof Node\Scalar\EncapsedStringPart) {'
-                     . ' $s->value = Node\Scalar\String_::parseEscapeSequences($s->value, null, ' . $args[1] . '); } }'
-                     . ' $s->value = preg_replace(\'~(\r\n|\n|\r)\z~\', \'\', $s->value);'
-                     . ' if (\'\' === $s->value) array_pop(' . $args[0] . ');';
-            }
-
             if ('makeNop' == $name) {
-                assertArgs(2, $args, $name);
+                assertArgs(3, $args, $name);
 
                 return '$startAttributes = ' . $args[1] . ';'
                 . ' if (isset($startAttributes[\'comments\']))'
-                . ' { ' . $args[0] . ' = new Stmt\Nop([\'comments\' => $startAttributes[\'comments\']]); }'
+                . ' { ' . $args[0] . ' = new Stmt\Nop($startAttributes + ' . $args[2] . '); }'
                 . ' else { ' . $args[0] . ' = null; }';
             }
 
@@ -192,20 +183,11 @@ function resolveMacros($code) {
                      . '? Scalar\String_::KIND_SINGLE_QUOTED : Scalar\String_::KIND_DOUBLE_QUOTED)';
             }
 
-            if ('setDocStringAttrs' == $name) {
-                assertArgs(2, $args, $name);
-
-                return $args[0] . '[\'kind\'] = strpos(' . $args[1] . ', "\'") === false '
-                     . '? Scalar\String_::KIND_HEREDOC : Scalar\String_::KIND_NOWDOC; '
-                     . 'preg_match(\'/\A[bB]?<<<[ \t]*[\\\'"]?([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)[\\\'"]?(?:\r\n|\n|\r)\z/\', ' . $args[1] . ', $matches); '
-                     . $args[0] . '[\'docLabel\'] = $matches[1];';
-            }
-
             if ('prependLeadingComments' == $name) {
                 assertArgs(1, $args, $name);
 
                 return '$attrs = $this->startAttributeStack[#1]; $stmts = ' . $args[0] . '; '
-                . 'if (!empty($attrs[\'comments\']) && isset($stmts[0])) {'
+                . 'if (!empty($attrs[\'comments\'])) {'
                 . '$stmts[0]->setAttribute(\'comments\', '
                 . 'array_merge($attrs[\'comments\'], $stmts[0]->getAttribute(\'comments\', []))); }';
             }

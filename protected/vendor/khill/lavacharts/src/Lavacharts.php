@@ -12,6 +12,7 @@ use Khill\Lavacharts\Dashboards\Wrappers\ChartWrapper;
 use Khill\Lavacharts\Dashboards\Wrappers\ControlWrapper;
 use Khill\Lavacharts\DataTables\DataTable;
 use Khill\Lavacharts\DataTables\Formats\Format;
+use Khill\Lavacharts\Exceptions\InvalidElementId;
 use Khill\Lavacharts\Exceptions\InvalidLabel;
 use Khill\Lavacharts\Exceptions\InvalidLavaObject;
 use Khill\Lavacharts\Javascript\ScriptManager;
@@ -23,6 +24,8 @@ use Khill\Lavacharts\Values\Label;
 use Khill\Lavacharts\Values\StringValue;
 use Khill\Lavacharts\Support\Traits\HasOptionsTrait as HasOptions;
 use Khill\Lavacharts\Support\Contracts\RenderableInterface as Renderable;
+
+require(__DIR__.'/Support/Traits/HasOptionsTrait.php');
 
 /**
  * Lavacharts - A PHP wrapper library for the Google Chart API
@@ -43,7 +46,7 @@ class Lavacharts
     /**
      * Lavacharts version
      */
-    const VERSION = '3.1.7';
+    const VERSION = '3.1.11';
 
     /**
      * Locale for the Charts and Dashboards.
@@ -71,8 +74,6 @@ class Lavacharts
      */
     public function __construct(array $options = [])
     {
-        $this->initializeOptions($options);
-
         if ( ! $this->usingComposer()) {
             require_once(__DIR__.'/Support/Psr4Autoloader.php');
 
@@ -80,6 +81,8 @@ class Lavacharts
             $loader->register();
             $loader->addNamespace('Khill\Lavacharts', __DIR__);
         }
+
+        $this->initializeOptions($options);
 
         $this->volcano       = new Volcano;
         $this->chartFactory  = new ChartFactory;
@@ -136,6 +139,17 @@ class Lavacharts
         }
 
         return $lavaClass;
+    }
+
+    /**
+     * Get the ScriptManager instance.
+     *
+     * @since 3.1.9
+     * @return ScriptManager
+     */
+    public function getScriptManager()
+    {
+        return $this->scriptManager;
     }
 
     /**
@@ -344,12 +358,14 @@ class Lavacharts
     {
         $label = new Label($label);
 
-        if (is_string($elementId)) {
+        try {
             $elementId = new ElementId($elementId);
+        } catch (InvalidElementId $e) {
+            $elementId = null;
         }
 
         if (is_array($elementId)) {
-            $div = $elementId; // @TODO allow missing element ids to use renderable instance's id
+            $div = $elementId;
         }
 
         if ($type == 'Dashboard') {
@@ -404,6 +420,10 @@ class Lavacharts
     {
         /** @var \Khill\Lavacharts\Charts\Chart $chart */
         $chart = $this->volcano->get($type, $label);
+
+        if ($elementId === null) {
+            $elementId = $chart->getElementId();
+        }
 
         if ($elementId instanceof ElementId) {
             $chart->setElementId($elementId);

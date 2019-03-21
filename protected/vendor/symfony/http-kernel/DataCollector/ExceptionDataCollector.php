@@ -28,10 +28,18 @@ class ExceptionDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         if (null !== $exception) {
-            $this->data = array(
+            $this->data = [
                 'exception' => FlattenException::create($exception),
-            );
+            ];
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset()
+    {
+        $this->data = [];
     }
 
     /**

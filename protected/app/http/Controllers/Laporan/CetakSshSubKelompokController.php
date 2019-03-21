@@ -1,153 +1,74 @@
-<?php
-
-namespace App\Http\Controllers\Laporan;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests;
-// use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Yajra\Datatables\Datatables;
-use Response;
-use Session;
-use PDF;
-use App\Models\RefSshGolongan;
-use App\Models\RefSshKelompok;
-use App\Models\RefSshSubKelompok;
-use App\Models\RefSshTarif;
-use App\Models\RefSshRekening;
-use App\Models\RefRek5;
-use Yajra\Datatables\Html\Builder;
-use Yajra\Datatables\Services\DataTable;
-
-
-class CetakSshSubKelompokController extends Controller
-{
-
-  public function printSshSubKelompok()
-  {
-  	$sshGolongan = RefSshGolongan::select('id_golongan_ssh','uraian_golongan_ssh')
-                    ->get();
-
-    // set document information
-    PDF::SetCreator('BPKP');
-    PDF::SetAuthor('BPKP');
-    PDF::SetTitle('Simd@Perencanaan');
-    PDF::SetSubject('SSH Kelompok');
-
-    // set default header data
-    PDF::SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 011', PDF_HEADER_STRING);
-
-    // set header and footer fonts
-    PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-    // set default monospaced font
-    PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-    // set margins
-    PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
-    PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
-
-    // set auto page breaks
-    PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-    // set image scale factor
-    // PDF::setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-    // set some language-dependent strings (optional)
-    // if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    //     require_once(dirname(__FILE__).'/lang/eng.php');
-    //     $pdf->setLanguageArray($l);
-    // }
-
-    // ---------------------------------------------------------
-
-    // set font
-    PDF::SetFont('helvetica', '', 6);
-
-    // add a page
-    PDF::AddPage();
-
-    // column titles
-    $header = array('Kode','Uraian');
-
-    // Colors, line width and bold font
-    PDF::SetFillColor(200, 200, 200);
-    PDF::SetTextColor(0);
-    PDF::SetDrawColor(255, 255, 255);
-    PDF::SetLineWidth(0);
-    PDF::SetFont('helvetica', 'B', 10);
-
-    //Header
-    PDF::Cell('150', 5, 'PEMERINTAH DAERAH SIMULASI', 1, 0, 'C', 0);
-    PDF::Ln();
-    PDF::Cell('150', 5, 'STANDAR SATUAN HARGA SUB KELOMPOK', 1, 0, 'C', 0);
-    PDF::Ln();
-    PDF::SetFont('', 'B');
-    PDF::SetFont('helvetica', 'B', 6);
-    
-    // Header Column
-    $w = array(10,10,10,10,10,50);
-    $wh = array(30,70);
-    $num_headers = count($header);
-    for($i = 0; $i < $num_headers; ++$i) {
-            PDF::Cell($wh[$i], 7, $header[$i], 1, 0, 'C', 1);
-    }
-    PDF::Ln();
-        // Color and font restoration
-
-    PDF::SetFillColor(224, 235, 255);
-    PDF::SetTextColor(0);
-    PDF::SetFont('helvetica', '', 6);
-        // Data
-    $fill = 0;
-    foreach($sshGolongan as $row) {
-    	PDF::Cell($w[0], 6, $row->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    	PDF::Cell($w[1], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[2], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[3], 6, $row->uraian_golongan_ssh, 'L', 0, 'L', $fill);
-    	PDF::Cell($w[4], 6, '', 'L', 0, 'L', $fill);
-    	PDF::Cell($w[5], 6, '', 'L', 0, 'L', $fill);
-    	
-    	PDF::Ln();
-    	//$fill=!$fill;
-    	$sshKelompok = RefSshKelompok::select('id_golongan_ssh','id_kelompok_ssh','uraian_kelompok_ssh')
-    	->where('id_golongan_ssh','=',$row->id_golongan_ssh)
-    	->get();
-    	foreach($sshKelompok as $row2) {
-    		PDF::Cell($w[0], 6, $row2->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    		PDF::Cell($w[1], 6, $row2->id_kelompok_ssh, 'L', 0, 'L', $fill);
-    		PDF::Cell($w[2], 6, '', 'L', 0, 'L', $fill);
-    		PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
-    		PDF::Cell($w[4], 6, $row2->uraian_kelompok_ssh, 'L', 0, 'L', $fill);
-    		PDF::Cell($w[5], 6, '', 'L', 0, 'L', $fill);
-    		PDF::Ln();
-    		$sshSubKelompok = RefSshSubKelompok::select('id_kelompok_ssh','id_sub_kelompok_ssh','uraian_sub_kelompok_ssh')
-    		->where('id_kelompok_ssh','=',$row2->id_kelompok_ssh)
-    		->get();
-    		foreach($sshSubKelompok as $row3) {
-    			PDF::Cell($w[0], 6, $row2->id_golongan_ssh, 'LR', 0, 'C', $fill);
-    			PDF::Cell($w[1], 6, $row3->id_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Cell($w[2], 6, $row3->id_sub_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Cell($w[3], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[4], 6, '', 'L', 0, 'L', $fill);
-    			PDF::Cell($w[5], 6, $row3->uraian_sub_kelompok_ssh, 'L', 0, 'L', $fill);
-    			PDF::Ln();
-    			//$fill=!$fill;
-    		}
-    		//$fill=!$fill;
-    	}
-        }
-    PDF::Cell(array_sum($w), 0, '', 'T');
-
-    // ---------------------------------------------------------
-
-    // close and output PDF document
-    PDF::Output('KelompokSSH.pdf', 'I');
-  }
-
-}
-
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

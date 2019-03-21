@@ -45,7 +45,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <button id="btnAddUsulanRw" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Usulan RW</button>
                     </div>
                   </form>
-                    <div class="table-responsive">
+                    {{-- <div class="table-responsive"> --}}
                     <table id="tblUsulanRW" class="table table-striped table-bordered table-responsive compact display" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -61,7 +61,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                             <tbody>
                             </tbody>
                     </table>
-                    </div>  
+                    {{-- </div>   --}}
                   </div>
                 </div>
             </div>
@@ -270,9 +270,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle;">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle;">Uraian Kegiatan Renja</th>
                             <th style="text-align: center; vertical-align:middle;">Uraian Aktivitas ASB</th>
                             <th width="10%" style="text-align: center; vertical-align:middle;">Pagu</th>
-                            <th width="40%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
+                            <th width="25%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
                             <th width="5%" style="text-align: center; vertical-align:middle;">Aksi</th>
                           </tr>
                     </thead>
@@ -337,6 +338,17 @@ $('.display').DataTable({
       bDestroy: true
   });
 
+function validasiDataAwal() {
+  if ( $.trim( $('#id_kecamatan').val()) == 0) {
+    createPesan("Nama Kecamatan Belum Dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_desa_cb').val()) == 0) {
+    createPesan("Nama Desa Belum Dipilih..!!","danger"); 
+    return false;
+  };
+}
+
 var usulan_tbl,asb_tbl;
 function LoadUsulanRW($id_desa){
     usulan_tbl=$('#tblUsulanRW').DataTable({
@@ -351,7 +363,7 @@ function LoadUsulanRW($id_desa){
                   "columns": [
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'nama_desa', sClass: "dt-left", width :"10%"},
-                        { data: 'uraian_aktivitas_kegiatan', sClass: "dt-left"},
+                        { data: 'uraian_asb', sClass: "dt-left"},
                         { data: 'volume', sClass: "dt-center",width :"10%",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_pagu', sClass: "dt-right",width :"20%",
@@ -376,6 +388,7 @@ $(document).on('click', '#btnCariASB', function() {
         "ajax": {"url": "musrenrw/getDataASB"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
+              { data: 'uraian_kegiatan_renstra'},
               { data: 'nm_aktivitas_asb'},
               { data: 'pagu_rata2', sClass: "dt-right",
                 render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -401,8 +414,11 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
-    $('#cariAktivitasASB').modal('hide');    
+    $('#cariAktivitasASB').modal('hide');
+
+       
 
   });
 
@@ -479,34 +495,32 @@ $("#id_desa_cb").change(function() {
 });
 
 $('#btnAddUsulanRw').click(function(){
-  $('#btnUsulanRW').addClass('addUsulanRW');
-  $('#btnUsulanRW').removeClass('editUsulanRW');      
-  $('.form-horizontal').show();
-  $('.modal-title').text('Tambah Usulan tingkat RW');
-  $('#id_musrendes_rw').val(null);
-  $('#tahun_musren').val({{Session::get('tahun')}});
-  $('#id_desa').val($('#id_desa_cb').val());
-  $('#no_urut_usulan').val(1);
-  $('#id_rt').val(1);
-  $('#id_rw').val(1);
-  $('#id_aktivitas_asb').val(null);
-  $('#ur_aktivitas_kegiatan').val(null);
-  $('#id_renja').val(null);
-  $('#id_kegiatan').val(null);
-  $('#volume').val(0);
-  $('#id_satuan').val(null);
-  $('#ur_satuan').val(null);
-  $('#harga_satuan').val(1);
-  $('#jumlah_pagu').val(hitungpagu());
-  $('#uraian_kondisi').val(null);
 
-  // $('#btnHapusUsulanRW').show();
-  $('#btnUsulanRW').show();
-
-  $('.checkUsulanRw').prop('checked',false);
-
-  $('#ModalUsulanRW').modal('show');
-
+  if(validasiDataAwal() != false){
+    $('#btnUsulanRW').addClass('addUsulanRW');
+    $('#btnUsulanRW').removeClass('editUsulanRW');      
+    $('.form-horizontal').show();
+    $('.modal-title').text('Tambah Usulan tingkat RW');
+    $('#id_musrendes_rw').val(null);
+    $('#tahun_musren').val({{Session::get('tahun')}});
+    $('#id_desa').val($('#id_desa_cb').val());
+    $('#no_urut_usulan').val(1);
+    $('#id_rt').val(1);
+    $('#id_rw').val(1);
+    $('#id_aktivitas_asb').val(null);
+    $('#ur_aktivitas_kegiatan').val(null);
+    $('#id_renja').val(null);
+    $('#id_kegiatan').val(null);
+    $('#volume').val(0);
+    $('#id_satuan').val(null);
+    $('#ur_satuan').val(null);
+    $('#harga_satuan').val(1);
+    $('#jumlah_pagu').val(hitungpagu());
+    $('#uraian_kondisi').val(null);
+    $('#btnUsulanRW').show();
+    $('.checkUsulanRw').prop('checked',false);
+    $('#ModalUsulanRW').modal('show');
+  }
 });
 
   $('.modal-footer').on('click', '.addUsulanRW', function() {
@@ -566,7 +580,7 @@ $(document).on('click','#btnEditUsulanRw', function(){
   $('#id_rt').val(data.rt);
   $('#id_rw').val(data.rw);
   $('#id_aktivitas_asb').val(data.id_asb_aktivitas);
-  $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);
+  $('#ur_aktivitas_kegiatan').val(data.uraian_asb);
   $('#id_renja').val(data.id_renja);
   $('#id_kegiatan').val(data.id_kegiatan);
   $('#volume').val(data.volume);
@@ -673,6 +687,7 @@ $(document).on('click', '#btnPilihASB', function() {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 

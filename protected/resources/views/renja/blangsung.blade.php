@@ -1509,7 +1509,7 @@ function initInProg(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BfRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             "language": {
                       "decimal": ",",
@@ -3038,8 +3038,8 @@ $(document).on('click', '.btnCariRekening', function() {
 
   var x
 
-      if($('#rekening_ssh').val()==null || 
-        $('#rekening_ssh').val()==undefined ||
+      if($('#rekening_ssh').val() == null || 
+        $('#rekening_ssh').val() == undefined ||
         $('#rekening_ssh').val() == ""){
           x = 0
       } else {

@@ -1,22 +1,31 @@
-<?php
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
-
-class TrxRpjmdProgramIndikator extends Model
-{
-    //
-    public $timestamps = false;
-    protected $table = 'trx_rpjmd_program_indikator';
-    protected $primaryKey = 'id_indikator_program_rpjmd';
-    protected $fillable = ['thn_id','no_urut','id_program_rpjmd','id_indikator_program_rpjmd','id_perubahan','id_indikator','uraian_indikator_program_rpjmd',
-    'tolok_ukur_indikator','angka_awal_periode','angka_tahun1','angka_tahun2','angka_tahun3','angka_tahun4','angka_tahun5','angka_akhir_periode'];
-
-    public function trx_rpjmd_program()
-    {
-      return $this->belongsTo('App\Models\TrxRpjmdProgram','id_program_rpjmd');
-    }
-
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+mqW6v0D6DueKkRYPque=

@@ -11,6 +11,8 @@
 {
     border-radius: 0px;
 }
+
+
 .nav-pills>li[data-slide-to="0"].active a { background-color: #0b0b61; }
 .nav-pills>li[data-slide-to="1"].active a { background-color: #df7401; }
 .nav-pills>li[data-slide-to="2"].active a { background-color: #2980b9; }

@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Console\Helper;
 
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Terminal;
 
 /**
@@ -24,7 +24,6 @@ use Symfony\Component\Console\Terminal;
  */
 final class ProgressBar
 {
-    // options
     private $barWidth = 28;
     private $barChar;
     private $emptyBarChar = '-';
@@ -32,10 +31,6 @@ final class ProgressBar
     private $format;
     private $internalFormat;
     private $redrawFreq = 1;
-
-    /**
-     * @var OutputInterface
-     */
     private $output;
     private $step = 0;
     private $max;
@@ -43,7 +38,7 @@ final class ProgressBar
     private $stepWidth;
     private $percent = 0.0;
     private $formatLineCount;
-    private $messages = array();
+    private $messages = [];
     private $overwrite = true;
     private $terminal;
     private $firstRun = true;
@@ -508,8 +503,8 @@ final class ProgressBar
 
     private static function initPlaceholderFormatters()
     {
-        return array(
-            'bar' => function (ProgressBar $bar, OutputInterface $output) {
+        return [
+            'bar' => function (self $bar, OutputInterface $output) {
                 $completeBars = floor($bar->getMaxSteps() > 0 ? $bar->getProgressPercent() * $bar->getBarWidth() : $bar->getProgress() % $bar->getBarWidth());
                 $display = str_repeat($bar->getBarCharacter(), $completeBars);
                 if ($completeBars < $bar->getBarWidth()) {
@@ -519,10 +514,10 @@ final class ProgressBar
 
                 return $display;
             },
-            'elapsed' => function (ProgressBar $bar) {
+            'elapsed' => function (self $bar) {
                 return Helper::formatTime(time() - $bar->getStartTime());
             },
-            'remaining' => function (ProgressBar $bar) {
+            'remaining' => function (self $bar) {
                 if (!$bar->getMaxSteps()) {
                     throw new LogicException('Unable to display the remaining time if the maximum number of steps is not set.');
                 }
@@ -535,7 +530,7 @@ final class ProgressBar
 
                 return Helper::formatTime($remaining);
             },
-            'estimated' => function (ProgressBar $bar) {
+            'estimated' => function (self $bar) {
                 if (!$bar->getMaxSteps()) {
                     throw new LogicException('Unable to display the estimated time if the maximum number of steps is not set.');
                 }
@@ -548,24 +543,24 @@ final class ProgressBar
 
                 return Helper::formatTime($estimated);
             },
-            'memory' => function (ProgressBar $bar) {
+            'memory' => function (self $bar) {
                 return Helper::formatMemory(memory_get_usage(true));
             },
-            'current' => function (ProgressBar $bar) {
+            'current' => function (self $bar) {
                 return str_pad($bar->getProgress(), $bar->getStepWidth(), ' ', STR_PAD_LEFT);
             },
-            'max' => function (ProgressBar $bar) {
+            'max' => function (self $bar) {
                 return $bar->getMaxSteps();
             },
-            'percent' => function (ProgressBar $bar) {
+            'percent' => function (self $bar) {
                 return floor($bar->getProgressPercent() * 100);
             },
-        );
+        ];
     }
 
     private static function initFormats()
     {
-        return array(
+        return [
             'normal' => ' %current%/%max% [%bar%] %percent:3s%%',
             'normal_nomax' => ' %current% [%bar%]',
 
@@ -577,7 +572,7 @@ final class ProgressBar
 
             'debug' => ' %current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%',
             'debug_nomax' => ' %current% [%bar%] %elapsed:6s% %memory:6s%',
-        );
+        ];
     }
 
     /**
@@ -588,7 +583,7 @@ final class ProgressBar
         $regex = "{%([a-z\-_]+)(?:\:([^%]+))?%}i";
         $callback = function ($matches) {
             if ($formatter = $this::getPlaceholderFormatterDefinition($matches[1])) {
-                $text = call_user_func($formatter, $this, $this->output);
+                $text = \call_user_func($formatter, $this, $this->output);
             } elseif (isset($this->messages[$matches[1]])) {
                 $text = $this->messages[$matches[1]];
             } else {

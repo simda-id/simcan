@@ -34,6 +34,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="col-sm-2">
                 <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
               </div>
+              <a class="btn btn-labeled btn-info printPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a>
             </div>
             <div class="form-group">
               <label for="tahun_rkpd" class="col-sm-2 control-label" style="text-align: right;">Nama Pengusul</label>
@@ -44,14 +45,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label class="control-label col-sm-2 text-left" for="id_unit"></label>
               <div class="col-sm-7">
-                  <a id="btnProses" type="button" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data Usulan Pokir Dewan</a>
+                  <a id="btnProses" type="button" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span> Load Data Usulan</a>
+                  <a id="btnUnLoad" type="button" class="btn btn-danger btn-labeled"><span class="btn-label"><i class="fa fa-chain-broken fa-fw fa-lg"></i></span> Unload Data Usulan</a>
+                  <a id="btnPosting" type="button" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span> Posting Data Usulan</a>
               </div>
             </div>
           </form>
-          <div class="table-responsive">
-          <table id="tblTLPokir" class="table table-striped table-bordered">
+          {{-- <div class="table-responsive"> --}}
+          <table id="tblTLPokir" class="table table-striped table-bordered table-responsive" width="100%">
             <thead>
               <tr>
+                  <th rowspan="2"  width="3%" style="text-align: center; vertical-align:middle">Pilih</th>
                   <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
                   <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Nama Pengusul</th>
                   <th rowspan="2" style="text-align: center; vertical-align:middle">Ringkasan Usulan</th>
@@ -70,7 +74,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <tbody>                                        
             </tbody>
           </table>
-          </div> 
+          {{-- </div>  --}}
           </div>
         </div>
       </div>
@@ -94,9 +98,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="volume_usulan">No Urut :</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control number" id="no_urut_usulan" name="no_urut_usulan" style="text-align: center;" disabled>
+                        <input type="text" class="form-control nomor" id="no_urut_usulan" name="no_urut_usulan" style="text-align: center;" disabled>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" hidden>
                         <label class="checkbox-inline">
                         <input type="checkbox" name="checkStatus" id="checkStatus" value="1"> Telah Direviu</label>
                     </div>
@@ -134,7 +138,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <input type="text" class="form-control" id="id_satuan_usulan" name="id_satuan_usulan" style="text-align: center;" readonly>
                     </div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control number" id="pagu_usulan" name="pagu_usulan" style="text-align: right;" readonly>
+                        <input type="text" class="form-control number hidden" id="pagu_usulan" name="pagu_usulan" style="text-align: right;" readonly>
                     </div>
                   </div>
                   <div class="form-group">
@@ -156,12 +160,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="1">Diteruskan
                       </label>
                       <label class="radio">
-                        <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="2">Ditunda
+                        <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="2">Tidak Sesuai dengan Prioritas Pemda
                       </label>
                   </div>
                   <div class="col-sm-4" id="myRadio">
                       <label class="radio">
-                        <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="3">Dibahas Dahulu
+                        <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="3">Diproses dgn Sistem Hibah/Bansos
                       </label>
                       <label class="radio">
                         <input type="radio" class="status_tl" name="status_tl" id="status_tl" value="4">Tidak Dapat di-TL
@@ -203,7 +207,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 $(document).ready(function() {
   var id_tahun_temp = {{Session::get('tahun')}};
 
-  $('.number').number(true,0,'', '');
+  // $('.number').number(true,0,'', '');
+  $('.nomor').number(true,0,'', '');
   $('[data-toggle="popover"]').popover();
 
   var pokir_tbl, rincian_tbl, lokasi_tbl;
@@ -232,9 +237,7 @@ $(document).ready(function() {
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
 
-    setTimeout(function() {
-        $('#pesanx').removeClass('in');
-         }, 3500);
+    setTimeout(function(){$('#pesanx').removeClass('in')}, 3500);
   };
 
 
@@ -306,6 +309,82 @@ $(document).on('click', '#btnProses', function() {
   });
 });
 
+$(document).on('click', '#btnUnLoad', function() {
+  var rows_selected = pokir_tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = pokir_tbl.rows({ selected: true }).data(); 
+  var counts_data = pokir_tbl.rows({ selected: true }).count();
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $.each(rows_selected, function(index, rowId){
+    var id_pokir_tl=rowId;
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    }); 
+    $.ajax({
+          type: 'post',
+          url: './unloadData',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_pokir_tl' : id_pokir_tl,
+          },
+          success: function(data) {
+            pokir_tbl.ajax.reload();
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          }
+    });
+  });
+  e.preventDefault();
+});
+
+$(document).on('click', '#btnPosting', function() {
+  var rows_selected = pokir_tbl.column(0).checkboxes.selected();
+  var counts_selected = rows_selected.count(); 
+  var rows_data = pokir_tbl.rows({ selected: true }).data(); 
+  var counts_data = pokir_tbl.rows({ selected: true }).count();
+  if (rows_selected.count() == 0) {
+    createPesan("Data belum ada yang dipilih","danger");
+    return;
+  }; 
+
+  $.each(rows_selected, function(index, rowId){
+    var id_pokir_tl=rowId;
+    if (rows_data[index].status_data == 1) {
+      var status_data_tl = 0;
+    } else {
+      var status_data_tl = 1;
+    }
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    }); 
+    $.ajax({
+          type: 'post',
+          url: './Posting',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_pokir_tl' : id_pokir_tl,
+              'status_data' : status_data_tl,
+          },
+          success: function(data) {
+            pokir_tbl.ajax.reload();
+            if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          }
+    });
+  });
+  e.preventDefault();
+});
+
 $('#tblTLPokir').DataTable({
   dom : 'BfRtip',
   autoWidth : false,
@@ -321,8 +400,15 @@ function LoadTblRincian(id_pokir){
     "ajax": {"url": "./getDataTL/"+id_pokir},
     "language": {
             "decimal": ",",
-            "thousands": "."},
+            "thousands": "."},    
+    'columnDefs': [
+       { 'targets': 0,
+         'checkboxes': {'selectRow': true } },
+       { "targets": 1, "width": 10 }
+      ],
+    'select': { 'style': 'multi' },
     "columns": [
+          { data: 'id_pokir_tl', sClass: "dt-center"},
           { data: 'no_urut', sClass: "dt-center"},
           { data: 'nama_pengusul'},
           { data: 'id_judul_usulan'},
@@ -406,7 +492,7 @@ $('.modal-footer').on('click', '.editUsulan', function() {
   } else {
         $.ajax({
           type: 'post',
-          url: './editUsulan',
+          url: './editTlUsulan',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_pokir_tl' : $('#id_pokir_tl').val(),
@@ -426,6 +512,11 @@ $('.modal-footer').on('click', '.editUsulan', function() {
         });
   }      
 });
+
+$(document).on('click', '.printPokir', function() {
+  window.open('../printTLPokir');
+});
+
 
 });
 </script>

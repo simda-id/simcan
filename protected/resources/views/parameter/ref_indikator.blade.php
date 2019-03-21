@@ -2,7 +2,8 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.parameterlayout')
+@extends('layouts.app1')
+{{-- @extends('layouts.parameterlayout') --}}
 {{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
 
 @section('content')
@@ -10,7 +11,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = ' Parameter Indikator ';
+                $this->title = ' Indikator Kinerja';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'admin/parameter';
                 $breadcrumb->begin();
@@ -38,10 +39,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">IKU</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Tipe</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Type</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Jenis</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Sifat</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Teknik Pengukuran</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
@@ -58,30 +59,53 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 <!--Modal Tambah -->
 <div id="ModalIndikator" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
+  <div class="modal-dialog modal-lg" role="document" >
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" style="text-align: center;"></h4>
       </div>
-
       <div class="modal-body">
-        <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+        <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id_indikator" id="id_indikator">
+            <input type="hidden" name="id_indikator" id="id_indikator">                                  
             <div class="form-group">
-              <label for="nm_indikator" class="col-sm-3" align='left'>Uraian Indikator</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="nm_indikator" name="nm_indikator" required="required" >
+              <label class="control-label col-sm-2" for="id_aspek">Aspek Pembangunan</label>
+                <div class="col-sm-10">
+                  <select type="text" class="form-control id_aspek" id="id_aspek" name="id_aspek"></select>
+                </div>
+            </div>                                    
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="id_bidang">Bidang Pembangunan</label>
+                <div class="col-sm-10">
+                  <select type="text" class="form-control id_bidang" id="id_bidang" name="id_bidang"></select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="nm_indikator" class="col-sm-2" align='left'>Uraian Indikator</label>
+              <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="nm_indikator" name="nm_indikator" required="required" rows="2"></textarea>
+              </div>
+            </div>                       
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="id_satuan_output">Satuan Indikator</label>
+              <div class="col-sm-10">
+                <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
               </div>
             </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="metode_hitung">File Metode Perhitungan </label>
+              <label class="btn col-sm-10">
+                  <input type="file" name="metode_hitung" id="metode_hitung" class="validate metode_hitung" accept=".png, .jpg, .jpeg" placeholder="Pilih File Image *.png,*.jpg,*.jpeg" >
+              </label>            
+            </div> 
             <div class="form-group">
               <label for="sumber_data" class="col-sm-5" align='left'>Sumber Data Pengukuran Indikator</label>
-              <div class="col-sm-offset-3 col-sm-8">
-                <textarea type="name" class="form-control" id="sumber_data" rows="4"></textarea>
+              <div class="col-sm-offset-1 col-sm-11">
+                <textarea type="name" class="form-control" id="sumber_data" rows="3"></textarea>
               </div>
             </div>
-            <div class="form-group">
-              <label for="flag_iku" class="col-sm-3" align='left'>Jenis IKU</label>
+            <div class="form-group hidden">
+              <label for="flag_iku" class="col-sm-2" align='left'>Jenis IKU</label>
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="flag_iku" type="radio" name="flag_iku" id="flag_iku" value="0"> Non IKU</label>
@@ -96,26 +120,58 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
             </div>
             <div class="form-group">
-              <label for="flag_iku" class="col-sm-3" align='left'>Tipe Indikator</label>
+              <label for="jns_indikator" class="col-sm-2" align='left'>Jenis Indikator</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="0"> Keluaran</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="0"> Output</label>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="1"> Hasil</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="1"> Outcome Immediate</label>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Dampak</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="2"> Outcome Intermediate</label>
                   </div>
-                  <div class="col-sm-2>
+                  <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="flag_iku" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Masukan</label>
+                      <input class="jns_indikator" type="radio" name="jns_indikator" id="jns_indikator" value="3"> Outcome Ultimate</label>
                   </div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="jenis_indikator" class="col-sm-3" align='left'>Jenis Indikator</label>
+              <label for="tipe_indikator" class="col-sm-2" align='left'>Tipe Indikator</label>
+              <div class="col-sm-10">
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="0"> Kualitatif</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="1"> Kuantitatif</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="2"> Persentase</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="3"> Rasio</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="4"> Rata-rata</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="tipe_indikator" type="radio" name="tipe_indikator" id="tipe_indikator" value="5"> Indeks</label>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="jenis_indikator" class="col-sm-2" align='left'>Sifat Indikator</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="jenis_indikator" type="radio" id="jenis_indikator" name="jenis_indikator" value="0"> Negatif</label>
@@ -124,9 +180,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                       <input class="jenis_indikator" type="radio" id="jenis_indikator" name="jenis_indikator" value="1"> Positif</label>
                   </div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="sifat_indikator" class="col-sm-3" align='left'>Sifat Indikator</label>
+              <label for="sifat_indikator" class="col-sm-2" align='left'>Type Pengukuran</label>
+              <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">
                       <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="0"> Incremental</label>
@@ -137,9 +195,35 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   </div>
                   <div class="col-sm-3">
                       <label class="radio-inline">
-                      <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="2"> Komulatif</label>
+                      <input class="sifat_indikator" type="radio" id="sifat_indikator" name="sifat_indikator" value="2"> Kumulatif</label>
                   </div>
-            </div>    
+              </div>
+            </div> 
+            <div class="form-group hidden">
+              <label for="flag_iku" class="col-sm-3" align='left'>Kualitas Indikator</label>
+              <div class="col-sm-offset-1 col-sm-10">
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="0"> Spesifik (Spesific)</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="1"> Dapat Diukur (Measurable)</label>
+                  </div>
+                  <div class="col-sm-3">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="2"> Dapat Dicapai (Achievable)</label>
+                  </div>
+                  <div class="col-sm-2">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="3"> Relevan (Relevance)</label>
+                  </div>
+                  <div class="col-sm-3">
+                      <label class="radio-inline">
+                      <input class="flag_iku" type="radio" name="kualitas_indikator" id="kualitas_indikator" value="4"> Dalam Waktu Tertentu (Time Bound)</label>
+                  </div>
+              </div>
+            </div>   
         </form>
       </div>
         <div class="modal-footer">
@@ -174,7 +258,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="alert alert-danger deleteContent">
               <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
                 <br>
-                Yakin akan menghapus Referensi Indikator Tahun : <strong><span id="nm_indikator_hapus"></span></strong> ?
+                Yakin akan menghapus Referensi Indikator : <strong><span id="nm_indikator_hapus"></span></strong> ?
                 <br>
                 <br>
           </div>
@@ -193,253 +277,5 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-<script  type="text/javascript" language="javascript" class="init">
-
-$(document).ready(function() {
-
-$('[data-toggle="popover"]').popover();
-
-function createPesan(message, type) {
-  var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
-  html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
-  html += '<p><strong>'+message+'</strong></p>';
-  html += '</div>';    
-  $(html).hide().prependTo('#pesan').slideDown();
-
-  setTimeout(function() {
-    $('#pesanx').removeClass('in');
-  }, 3500);
-};
-
-$('.page-alert .close').click(function(e) {
-        e.preventDefault();
-        $(this).closest('.page-alert').slideUp();
-    });
-
-$('.number').number(true,0,',', '.');
-
-$('.display').DataTable({
-      dom : 'BfRtip',
-      autoWidth : false,
-      bDestroy: true
-  });
-
-var indikator_tbl=$('#tblIndikator').DataTable({
-                  processing: true,
-                  serverSide: true,
-                  // dom : 'BfRtip',                  
-                  autoWidth : false,
-                  "ajax": {"url": "./indikator/getListIndikator"},
-                  "language": {
-                      "decimal": ",",
-                      "thousands": "."},
-                  "columns": [
-                        { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
-                        { data: 'nm_indikator', sClass: "dt-left"},
-                        { data: 'flag_display', sClass: "dt-center", width :"10%"},
-                        { data: 'type_display', sClass: "dt-center", width :"10%"},
-                        { data: 'jenis_display', sClass: "dt-center", width :"10%"},
-                        { data: 'sifat_display', sClass: "dt-center", width :"10%"},
-                        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
-                      ],
-                  "order": [[0, 'asc']],
-                  "bDestroy": true
-        });
-
-function getflag_iku(){
-
-    var xCheck = document.querySelectorAll('input[name="flag_iku"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function getjenis_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="jenis_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function getsifat_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="sifat_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function gettipe_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="tipe_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-$(document).on('click', '.add-indikator', function() {
-  $('.btnIndikator').removeClass('edit');
-  $('.btnIndikator').addClass('add');
-  $('.modal-title').text('Tambah Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(null);
-  $('#nm_indikator').val(null);
-  $('#sumber_data').val(null);
-  document.frmModalIndikator.flag_iku[0].checked=true;
-  document.frmModalIndikator.tipe_indikator[0].checked=true;
-  document.frmModalIndikator.jenis_indikator[1].checked=true;
-  document.frmModalIndikator.sifat_indikator[1].checked=true;
-  $('#ModalIndikator').modal('show');
-});
-
-$('.modal-footer').on('click', '.add', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './indikator/addIndikator',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'jenis_indikator' : getjenis_indikator(),
-            'sifat_indikator' : getsifat_indikator(),
-            'type_indikator' : gettipe_indikator(),
-            'nm_indikator' : $('#nm_indikator').val(),
-            'flag_iku' : getflag_iku(),
-            'sumber_data_indikator' : $('#sumber_data').val(),
-        },
-        success: function(data) {
-              $('#tblIndikator').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              }
-        },
-  });
-});
-
-$('#tblIndikator tbody').on( 'dblclick', 'tr', function () {
-
-  var data = indikator_tbl.row(this).data();
-
-  $('.btnIndikator').removeClass('add');
-  $('.btnIndikator').addClass('edit');
-  $('.modal-title').text('Edit Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(data.id_indikator);
-  $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
-  document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
-  document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
-  document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
-  document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
-
-  $('#ModalIndikator').modal('show');  
-
-  } );
-
-//edit function
-$(document).on('click', '#btnEditIndikator', function() {
-
-var data = indikator_tbl.row( $(this).parents('tr') ).data();
-
-  $('.btnIndikator').removeClass('add');
-  $('.btnIndikator').addClass('edit');
-  $('.modal-title').text('Edit Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(data.id_indikator);
-  $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);
-  document.frmModalIndikator.flag_iku[data.flag_iku].checked=true;
-  document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
-  document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
-  document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
-
-
-  $('#ModalIndikator').modal('show');
-});
-
-
-$('.modal-footer').on('click', '.edit', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './indikator/editIndikator',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'id_indikator' : $('#id_indikator').val(),
-            'jenis_indikator' : getjenis_indikator(),
-            'sifat_indikator' : getsifat_indikator(),
-            'type_indikator' : gettipe_indikator(),
-            'nm_indikator' : $('#nm_indikator').val(),
-            'flag_iku' : getflag_iku(),
-            'sumber_data_indikator' : $('#sumber_data').val(),
-        },
-        success: function(data) {
-            $('#tblIndikator').DataTable().ajax.reload();
-            if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              }
-        }
-    });
-});
-
-//delete function
-$(document).on('click', '#btnHapusIndikator', function() {
-
-var data = indikator_tbl.row( $(this).parents('tr') ).data();
-
-if(data.asal_indikator!=9){
-  createPesan("Maaf Indikator Hasil Impor dari Aplikasi 5 Tahunan tidak dapat dihapus","danger"); 
-} else {
-  $('.actionBtn').addClass('delete');
-  $('.modal-title').text('Hapus Referensi Indikator');
-  $('.form-horizontal').hide();
-  $('#id_indikator_hapus').val(data.id_indikator);
-  $('#nm_indikator_hapus').html(data.nm_indikator);
-  $('#HapusModal').modal('show');
-}
-  
-});
-
-
-
-$('.modal-footer').on('click', '.delete', function() {
-  $.ajaxSetup({
-     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-  $.ajax({
-    type: 'post',
-    url: './indikator/hapusIndikator',
-    data: {
-      '_token': $('input[name=_token]').val(),
-      'id_indikator': $('#id_indikator_hapus').val(),
-    },
-    success: function(data) {
-      $('.item' + $('.id_indikator_hapus').text()).remove();
-      $('#tblIndikator').DataTable().ajax.reload();
-      createPesan(data.pesan,"success");
-    }
-  });
-});
-
-});
-</script>
+  <script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/parameter/js/js_indikator.js')}}"></script>
 @endsection

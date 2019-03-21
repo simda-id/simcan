@@ -34,8 +34,8 @@
     30 => 'Yajra\\Datatables\\HtmlServiceProvider',
     31 => 'Yajra\\Datatables\\ButtonsServiceProvider',
     32 => 'Elibyy\\TCPDF\\ServiceProvider',
-    33 => 'Codedge\\Fpdf\\FpdfServiceProvider',
-    34 => 'Khill\\Lavacharts\\Laravel\\LavachartsServiceProvider',
+    33 => 'Khill\\Lavacharts\\Laravel\\LavachartsServiceProvider',
+    34 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -58,6 +58,7 @@
     16 => 'Yajra\\Datatables\\HtmlServiceProvider',
     17 => 'Yajra\\Datatables\\ButtonsServiceProvider',
     18 => 'Elibyy\\TCPDF\\ServiceProvider',
+    19 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (
@@ -155,7 +156,6 @@
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
-    'fpdf' => 'Codedge\\Fpdf\\FpdfServiceProvider',
     'lavacharts' => 'Khill\\Lavacharts\\Laravel\\LavachartsServiceProvider',
   ),
   'when' => 
@@ -200,9 +200,6 @@
     array (
     ),
     'Collective\\Html\\HtmlServiceProvider' => 
-    array (
-    ),
-    'Codedge\\Fpdf\\FpdfServiceProvider' => 
     array (
     ),
     'Khill\\Lavacharts\\Laravel\\LavachartsServiceProvider' => 

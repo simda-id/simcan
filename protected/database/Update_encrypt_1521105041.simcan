@@ -1,0 +1,13 @@
+SET FOREIGN_KEY_CHECKS=0; 
+DELETE FROM `ref_tabel_dasar`;
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (1, 'Nilai dan Kontribusi Sektor dalam PDRB ');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (2, 'Nilai dan Kontribusi Sektor dalam PDRB HB');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (3, 'Angka Melek Huruf');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (4, 'Rata-Rata Lama Sekolah Tahun');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (5, 'Perkembangan Seni, Budaya dan Olahraga');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (6, 'Angka Partisipasi Sekolah');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (7, 'Ketersediaan Sekolah dan Penduduk Usia Sekolah');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (8, 'Jumlah Guru dan Murid Jenjang Pendidikan Dasar');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (9, 'Jumlah Investor PMDN/PMA');
+INSERT INTO `ref_tabel_dasar`(`id_tabel_dasar`, `nama_tabel`) VALUES (10, 'Jumlah Investasi PMDN/PMA');
+SET FOREIGN_KEY_CHECKS=1;

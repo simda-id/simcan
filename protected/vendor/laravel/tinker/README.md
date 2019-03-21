@@ -17,20 +17,10 @@ To get started with Laravel Tinker, simply run:
 
     composer require laravel/tinker
 
-Next, register the `Laravel\Tinker\TinkerServiceProvider` in your `config/app.php` file:
-
-```php
-'providers' => [
-    // Other service providers...
-
-    Laravel\Tinker\TinkerServiceProvider::class,
-],
-```
-
 ## Basic Usage
 
 From your console, execute the `php artisan tinker` command.
 
 ## License
 
-Laravel Tinker is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Laravel Tinker is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

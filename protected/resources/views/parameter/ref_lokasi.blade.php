@@ -33,6 +33,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Lokasi Non Kewilayahan</a>
               <a id="btnImportLokasi" type="button" class="btn btn-labeled btn-sm btn-info">
                   <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Import Lokasi Kewilayahan</a>
+              <a id="btnReImport" type="button" class="btn btn-labeled btn-sm btn-warning hidden">
+                  <span class="btn-label"><i class="fa fa-refresh fa-fw fa-lg"></i></span>Import Ulang Lokasi Kewilayahan</a>
               <a id="btnAddJenis" type="button" class="btn btn-labeled btn-sm btn-success hidden">
                   <span class="btn-label"><i class="fa fa-location-arrow fa-fw fa-lg"></i></span>Jenis Lokasi</a>
             </div>

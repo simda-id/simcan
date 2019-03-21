@@ -1,69 +1,29 @@
-<?php
-
-namespace App\Http;
-
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
-class Kernel extends HttpKernel
-{
-    /**
-     * The application's global HTTP middleware stack.
-     *
-     * These middleware are run during every request to your application.
-     *
-     * @var array
-     */
-    protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\InlineCss::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\ElideAttributes::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\InsertDNSPrefetch::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveComments::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\TrimUrls::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
-        // \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class,
-    ];
-
-    /**
-     * The application's route middleware groups.
-     *
-     * @var array
-     */
-    protected $middlewareGroups = [
-        'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            // \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ],
-
-        'api' => [
-            'throttle:60,1',
-            'bindings',
-        ],
-    ];
-
-    /**
-     * The application's route middleware.
-     *
-     * These middleware may be assigned to groups or used individually.
-     *
-     * @var array
-     */
-    protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'menu' => \App\Http\Middleware\Menu::class,
-    ];
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+HR+cPmlKDkQMFul9RsAZnRudqspPztiprz3C0ksGkicjfFOBCWFe37JMvxcfByxzL4BKLeBNdms+
+J2COQyW0cJ+N0+VMLu9FkvwojSqd+GqefMZCwYDJ7hbvR7E0AO5NE2nCjiSpD4ob/ftQxqgwXvvK
+b/1YRhGu8p778FrWxlhbHAmddJcn8DUdR7zKvNlbZ/iPw2QRFaZHoXmYiU3WIKjs6LlYBORFXelV
+2WvOd2S25zX8KBIZ6f6nfB7M1Q9i3fXMXKYv9h7rJ6rQHwQm8BeExFQ6DMJ/WMjsg/RTnrBBiO10
+A9xAS6Pw0jikOt5tWPyW3lL+TvnLFXVrFcBbhAGLf47b/BUuft67zAM0bEEv8BqYYleOwo8CEinR
+RfJ7qKg0VBeDW6iqBmzxrGH9iQo1lYtyfV96zL0jwmxcNZKohsMdxjVz7RI2C2CkjlQGSp0iW6Kj
+VZ7HZR9AvMYyNfs17BT8ynjY9Rq3R/Kd92GVh9TKKh4EQ7kYCNWL0BgGHmnhc2Koi7naAx7Fb1BY
+jmRMCDsF1KmZQAToQi022M+Zux2vOqyHHXGFBrOzpLEju1oV+kpUsoZc7GXPbE4FwfxMn9WJu7g9
+ziKmj6iZUAz7XRwZXUTFsosJHPdyqomnwi92eSrXW9INHyQ4pVXH/oDbem+7xyiCP1Mk13Kln1Le
+Pt0Wr51wclEc7of69cTatk1HJVPMk9oK79m5yeGhGL00rrwa8e49h5wT4MphFjZ18GgQgih+hgbL
+wYcVShzuVs2aFrokNbf7mEAliicNf6r6TVTegVK82UOm0GijBxPnKBN5zo07cyp8zsBkeunNTHoA
+f5en16gIyw4mmHStwonqp8olouF0LLRX/8m0aok7cMFWkMzfUkXg6wdvA+KdNhJ7VlDMHH/c50fr
+C/NvgSrFKQaZo3aMfR/JEC2eutPqg1IjxyCZhwE7OW4ho7KzqaclKEUaYrcZP6Ybr2ugCbd1OW8J
+47eTSsBAS+ZIAct/1LXDQRdoXi+y4ekCnaXfUwHok4VB52AtDFcaFwpTVv/Sv+hkdWFcdTWNWmUz
+HId+gQUHPZBLigt9c80Uc3I+LeoOHx4kIli0rRncRIxRd1YwFu/+2rmWsXaD+CwkB+gPuM6rsLXs
+LrbkTo2GvYYiraLR4/uwZfifQuNWv7JYIYFsnwEBCs5q0aMtxY6UC7UlOa9my6SeqLI49z03Hn94
+8jFEu8angLplZrHfmxh6jkD9AFqn4x3aYCy6npkT/Ha9Kt02BRXBECmJ9bif0RtRQeyJjn8zpLop
+VylD3lsBCgI7PNCgwJIgW6VxGzAa5vCSsw2XQo9s782hcZ58JOhO5XOqvhsROTVG3We7xLyfHAgo
+vFaxUNJEbg5zZ5NdpbArqOlyv4mWT6O4P+NDZglE8wdFWAy952xDVOvX19Y43jETRg7bAK+oa+2w
+SfjxH+zM8f7e3dYgAwZ3mPxQ3db982aIwIlKMNxPXOzEEwXKMIj053V/0gpcXkIO1ZQ2xUL+eEZY
+ncgqi+NhIiObMYCm80l1Urmw5Kzglb5tOJ0Az77P7Dxdqob2dGyE7QHI+qipmaxedcL61MqZB953
+JHBlw06dp3ToDWElZZGRFIAYXw3dTejPhBqfBmk7Bbh/mu3wzaRu6Oj8oJH/vvsnsczAKKVNA6Ht
+RCrdXLbYBihp89kyabmtLikU+qi3cQasdn2BUIOb04kpRUIMn3LuzB7HEC441zFNRSVTgCOC2Y1a
+PnfbPa1NnEQ0+u+CbTAzYg4xPyeXcvF1+rq5euCTWhPvAd21pnflvl2OtU11P2mibe+kSWorJnwm
+W3jbN6NWKKbyIgjc6YfBcO9Cmvug9fT5TF/4ToZbEc21eJzzlIUHfLdUcqhHdYXfoOy1SSMDVshS
+3L3Tah2GIWvB

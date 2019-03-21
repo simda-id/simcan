@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Kecamatan - Desa/Kelurahan';
+                $this->title = 'Wilayah Pemerintahan';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'admin/parameter';
                 $breadcrumb->begin();
@@ -23,23 +23,51 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h2 class="panel-title">Referensi Kecamatan - Desa/Kelurahan</h2>
+            <h2 class="panel-title">Referensi Wilayah Pemerintahan</h2>
           </div>
 
           <div class="panel-body">
             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
               <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li class="active"><a href="#kecamatan" aria-controls="kecamatan" role="tab" data-toggle="tab">Kecamatan</a></li>
+                <li class="active"><a href="#kabkota" aria-controls="kabkota" role="tab" data-toggle="tab">Kabupaten/Kota</a></li>
+                <li><a href="#kecamatan" aria-controls="kecamatan" role="tab" data-toggle="tab">Kecamatan</a></li>
                 <li><a href="#desa" aria-controls="desa" role="tab-kv" data-toggle="tab">Desa</a></li>
               </ul>
               <div class="tab-content">
                 <br>
-                <div role="tabpanel" class="tab-pane fade in active" id="kecamatan">
+                <div role="tabpanel" class="tab-pane fade in active" id="kabkota">
+                  <div class="col-md-12">
+                  <table id="tblKabkota" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                                <th width="10%" style="text-align: center; vertical-align:middle">Kode Kab/Kota</th>
+                                <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
+                                {{-- <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>                                        
+                        </tbody>
+                    </table> 
+                  </div>  
+                </div> 
+                <div role="tabpanel" class="tab-pane fade in" id="kecamatan">
                   <div class="col-md-12">
                   <div class="add">
                       <button id="btnAddKecamatan" type="button" class="btn btn-labeled btn-sm btn-success"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Kecamatan</button>
                   </div>
-                  <div class="table-responsive">
+                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                      <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                          <tbody>
+                            <tr>
+                              <td width="20%" style="text-align: left; vertical-align:top;">Nama Kabupaten/Kota</td>
+                              <td style="text-align: left; vertical-align:top;"><label class="backKab" id="nm_kabkota" align='left'></label></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      </form>
                   <table id="tblKecamatan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -52,7 +80,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <tbody>                                        
                         </tbody>
                     </table> 
-                    </div> 
                   </div>  
                 </div>  
                 <div role="tabpanel" class="tab-pane fade in" id="desa">
@@ -66,14 +93,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <table class="table table-striped table-bordered">
                           <tbody>
                             <tr>
+                              <td width="20%" style="text-align: left; vertical-align:top;">Nama Kabupaten/Kota</td>
+                              <td style="text-align: left; vertical-align:top;"><label class="backKab" id="nm_kabkota_desa" align='left'></label></td>
+                            </tr>
+                            <tr>
                               <td width="20%" style="text-align: left; vertical-align:top;">Nama Kecamatan</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_kecamatan" align='left'></label></td>
+                              <td style="text-align: left; vertical-align:top;"><label class="backKecamatan" id="nm_kecamatan" align='left'></label></td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                       </form>
-                      <div class="table-responsive">
                       <table id="tblDesa" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                             <thead>
                               <tr>
@@ -87,7 +117,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tbody>                                        
                           </tbody>
                       </table>
-                    </div>
                   </div> 
               </div>
             </div>
@@ -290,11 +319,11 @@ $('.display').DataTable({
       bDestroy: true
   });
 
-var desa_tbl, id_kecamatan_temp;
+var desa_tbl, id_kecamatan_temp, id_kab_temp;
 
 $.ajax({
           type: "GET",
-          url: '../../renja/blang/getZonaSSH',
+          url: './getZonaSSH',
           dataType: "json",
           success: function(data) {
 
@@ -312,12 +341,33 @@ $.ajax({
           }
       });
 
-var kecamatan_tbl=$('#tblKecamatan').DataTable({
+var kabkota_tbl=$('#tblKabkota').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BfRtip',                  
                   autoWidth : false,
-                  "ajax": {"url": "./kecamatan/getListKecamatan"},
+                  "ajax": {"url": "./kecamatan/getListKabKota"},
+                  "language": {
+                      "decimal": ",",
+                      "thousands": "."},
+                  "columns": [
+                        { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"10%"},
+                        { data: 'kd_kab', sClass: "dt-center", width :"10%"},
+                        { data: 'nama_kab_kota', sClass: "dt-left"}
+                      ],
+                  "order": [[0, 'asc']],
+                  "bDestroy": true
+        });
+
+
+var kecamatan_tbl;
+function LoadListKecamatan(id_kab){
+kecamatan_tbl=$('#tblKecamatan').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  dom : 'BfRtip',                  
+                  autoWidth : false,
+                  "ajax": {"url": "./kecamatan/getListKecamatan/"+id_kab},
                   "language": {
                       "decimal": ",",
                       "thousands": "."},
@@ -330,6 +380,7 @@ var kecamatan_tbl=$('#tblKecamatan').DataTable({
                   "order": [[0, 'asc']],
                   "bDestroy": true
         });
+}
 
 function LoadListDesa(id_kecamatan){
 desa_tbl=$('#tblDesa').DataTable({
@@ -353,17 +404,30 @@ desa_tbl=$('#tblDesa').DataTable({
         });
 }
 
+$('#tblKabkota tbody').on( 'dblclick', 'tr', function () {
+
+  var data = kabkota_tbl.row(this).data();
+
+  $('#nm_kabkota').text(data.nama_kab_kota);
+  id_kab_temp= data.id_kab;
+
+  $('.nav-tabs a[href="#kecamatan"]').tab('show');
+  LoadListKecamatan(data.id_kab);  
+
+  });
+
 $('#tblKecamatan tbody').on( 'dblclick', 'tr', function () {
 
   var data = kecamatan_tbl.row(this).data();
 
+  $('#nm_kabkota_desa').text($('#nm_kabkota').text());
   $('#nm_kecamatan').text(data.nama_kecamatan);
   id_kecamatan_temp= data.id_kecamatan;
 
   $('.nav-tabs a[href="#desa"]').tab('show');
   LoadListDesa(data.id_kecamatan);  
 
-  } );
+  });
 
 $(document).on('click', '#btnTambahDesa', function() {
   $('.btnDesa').removeClass('editDesa');
@@ -385,6 +449,9 @@ $('.modal-footer').on('click', '.addDesa', function() {
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
+    var str = $('#nama_desa').val();
+    str = str.replace(/'/g, '\'');
+
     $.ajax({
         type: 'post',
         url: './kecamatan/addDesa',
@@ -393,7 +460,7 @@ $('.modal-footer').on('click', '.addDesa', function() {
             'id_kecamatan' : $('#id_kecamatan_desa').val(),
             'kd_desa' : $('#kd_desa').val(),
             'status_desa' : $('#status_desa').val(),
-            'nama_desa' : $('#nama_desa').val(),
+            'nama_desa' : str,
             'id_zona' : $('#id_zona').val(),
         },
         success: function(data) {
@@ -414,6 +481,9 @@ $(document).on('click', '#btnEditDesa', function() {
 
 var data = desa_tbl.row( $(this).parents('tr') ).data();
 
+  //HtmlEntities
+  var strNamaDesa = $('<textarea />').html(data.nama_desa).text();
+
   $('.btnDesa').removeClass('addDesa');
   $('.btnDesa').addClass('editDesa');
   $('.modal-title').text('Edit Data Desa');
@@ -422,7 +492,7 @@ var data = desa_tbl.row( $(this).parents('tr') ).data();
   $('#id_kecamatan_desa').val(data.id_kecamatan);
   $('#kd_desa').val(data.kd_desa);
   $('#status_desa').val(data.status_desa);
-  $('#nama_desa').val(data.nama_desa);
+  $('#nama_desa').val(strNamaDesa);
   $('#id_zona').val(data.id_zona);
   
   $('#ModalDesa').modal('show');
@@ -434,6 +504,10 @@ $('.modal-footer').on('click', '.editDesa', function() {
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
+    //apostrophe
+    var str = $('#nama_desa').val();
+    str = str.replace(/'/g, '\'');
+
     $.ajax({
         type: 'post',
         url: './kecamatan/editDesa',
@@ -443,7 +517,7 @@ $('.modal-footer').on('click', '.editDesa', function() {
             'kd_desa' : $('#kd_desa').val(),
             'id_desa' : $('#id_desa').val(),
             'status_desa' : $('#status_desa').val(),
-            'nama_desa' : $('#nama_desa').val(),
+            'nama_desa' : str,
             'id_zona' : $('#id_zona').val(),
         },
         success: function(data) {
@@ -475,6 +549,9 @@ $('.modal-footer').on('click', '.add', function() {
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
+    var str = $('#nama_kecamatan').val();
+    str = str.replace(/'/g, '\'');
+
     $.ajax({
         type: 'post',
         url: './kecamatan/addKecamatan',
@@ -482,7 +559,7 @@ $('.modal-footer').on('click', '.add', function() {
             '_token': $('input[name=_token]').val(),
             'id_pemda' : $('#id_pemda').val(),
             'kd_kecamatan' : $('#kd_kecamatan').val(),
-            'nama_kecamatan' : $('#nama_kecamatan').val(),
+            'nama_kecamatan' : str,
         },
         success: function(data) {
               $('#tblKecamatan').DataTable().ajax.reload();
@@ -502,6 +579,8 @@ $(document).on('click', '#btnEditKecamatan', function() {
 
 var data = kecamatan_tbl.row( $(this).parents('tr') ).data();
 
+var str = $('<textarea />').html(data.nama_kecamatan).text();
+
   $('.btnKecamatan').removeClass('add');
   $('.btnKecamatan').addClass('edit');
   $('.modal-title').text('Edit Data Kecamatan');
@@ -509,7 +588,7 @@ var data = kecamatan_tbl.row( $(this).parents('tr') ).data();
   $('#id_pemda').val(data.id_pemda);
   $('#id_kecamatan').val(data.id_kecamatan);
   $('#kd_kecamatan').val(data.kd_kecamatan);
-  $('#nama_kecamatan').val(data.nama_kecamatan);
+  $('#nama_kecamatan').val(str);
   
   $('#ModalKecamatan').modal('show');
 });
@@ -520,6 +599,9 @@ $('.modal-footer').on('click', '.edit', function() {
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
+    var str = $('#nama_kecamatan').val();
+    str = str.replace(/'/g, '\'');
+
     $.ajax({
         type: 'post',
         url: './kecamatan/editKecamatan',
@@ -528,7 +610,7 @@ $('.modal-footer').on('click', '.edit', function() {
             'id_pemda' : $('#id_pemda').val(),
             'id_kecamatan' : $('#id_kecamatan').val(),
             'kd_kecamatan' : $('#kd_kecamatan').val(),
-            'nama_kecamatan' : $('#nama_kecamatan').val(),
+            'nama_kecamatan' : str,
 
         },
         success: function(data) {

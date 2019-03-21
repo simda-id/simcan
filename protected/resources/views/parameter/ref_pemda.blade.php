@@ -33,9 +33,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="hidden" name="id_pemda" id="id_pemda">
               <div class="row">
-                <div class="col-sm-3" style="text-align: center;">
-                  <img src="{{ asset('vendor/default.png') }}" class="img-thumbnail" alt="Cinque Terre" width="260" height="300" >
-                </div>
+                <div class="col-sm-3" style="text-align: center;" id="iPemda"></div>
                 <div class="col-sm-9">
                 <div class="col-sm-12">
                   <div class="form-group">
@@ -94,6 +92,41 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </div>
                       </div>
                 </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="alamat_setda" class="control-label">Alamat Sekretariat Daerah :</label>
+                  </div>
+                  <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="alamat_setda" name="alamat_setda" rows='3'></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="telepon_setda" class="control-label">Nomor Telepon :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="telepon_setda" name="telepon_setda" maxlength="24">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="faks_setda" class="control-label">Nomor Faksimili :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="faks_setda" name="faks_setda" maxlength="24">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                    <label for="email_setda" class="control-label">Alamat Email :</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="email_setda" name="email_setda" maxlength="50">
+                  </div>
                 </div>
               </div>
 
@@ -177,6 +210,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
     </div>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <div class="col-sm-12">
+              <label for="" class="control-label" align='left'>Registered to : {{Session::get('xPemda')}} , Rilis : {{Session::get('versiApp')}}
+              </label>
+        </div>
+      </div>
+    </div>  
+    </div>
   </div>
 </div>
 
@@ -258,6 +302,8 @@ var angkaNip = document.getElementsByClassName('nip');
 angkaNip.onkeydown = function(e) {
       if(!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58) 
+        || (e.keyCode > 7 && e.keyCode < 10) 
+        || (e.keyCode = 13) 
         )) {
           return false;
       }
@@ -296,6 +342,7 @@ function LoadPemda() {
             $('#nama_kabappeda').val(data[0].nama_kepala_bappeda);
             $('#nip_kabpkad').val(data[0].nip_kepala_bpkad);
             $('#nama_kabpkad').val(data[0].nama_kepala_bpkad);
+            $('#iPemda').html(data[0].iPemda);
             if (data[0].nip_sekretariat_daerah==null) {
               $('#nip_sekda_display').val(null);
             } else {
@@ -317,6 +364,10 @@ function LoadPemda() {
             $('#id_unit_keuangan').val(data[0].unit_keuangan);
             $('#nm_unit_perencanaan').val(data[0].nm_perencana);
             $('#nm_unit_keuangan').val(data[0].nm_keuangan);
+            $('#alamat_setda').val(data[0].alamat);
+            $('#telepon_setda').val(data[0].no_telepon);
+            $('#faks_setda').val(data[0].no_faksimili);
+            $('#email_setda').val(data[0].email);
           }
         });
 
@@ -380,35 +431,39 @@ $(document).on('click', "#btnEditPemda" , function() {
   $('.idbtnSimpanPemda').show();
   // alert($_FILES['logo_pemda']['name'])
 
-  // $.ajaxSetup({
-  //   headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  // });  
+  $.ajaxSetup({
+    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });  
 
-  // $.ajax({
-  //     type: "GET",
-  //     url: 'pemda/getPemdaX1',
-  //     dataType: "json",
-  //     success: function(data) {
-  //       var j = data.length;
-  //       var post, i;
-  //       for (i = 0; i < j; i++) {
-  //         post = data[i];
-          // $.ajax({
-          //   type: 'POST',
-          //   url: 'pemda/getPemdaX',
-          //   data: {
-          //       '_token': $('input[name=_token]').val(),
-          //       'nama_kab' :'SIMULASI',
-                // 'id_kab' :post.id_kab,
-          //   },
-          //   success: function(data) {
-          //     console.log(data);
-          //   }
-          // }); 
-  //       }           
-  //     }
-  // }); 
-
+  $.ajax({
+      type: "GET",
+      url: 'pemda/getPemdaX1',
+      dataType: "json",
+      success: function(data) {
+        // console.log(data);
+        // var j = data.length;
+        // var post, i;
+        // for (i = 0; i < j; i++) {
+        //   post = data[i];
+        //   $.ajax({
+        //     type: 'POST',
+        //     url: 'pemda/getPemdaX',
+        //     data: {
+        //         '_token': $('input[name=_token]').val(),
+        //         'nama_kab' :post.nama_kab,
+        //         'id_kab' :post.id_kab,
+        //     },
+        //     success: function(data) {
+        //       // if(data.status_pesan==1){
+        //       // createPesan(data.pesan,"success");
+        //       // } else {
+        //       // createPesan(data.pesan,"danger"); 
+        //       // }
+        //     }
+        //   }); 
+        // }           
+      }
+  }); 
 });
 
 $(document).on('click', "#btnSimpanPemda" , function() {
@@ -433,6 +488,10 @@ $(document).on('click', "#btnSimpanPemda" , function() {
               'unit_keuangan': $('#id_unit_keuangan').val(),
               'nama_kabpkad': $('#nama_kabpkad').val(),
               'nip_kabpkad': $('#nip_kabpkad').val(),
+              'alamat': $('#alamat_setda').val(),
+              'no_telepon': $('#telepon_setda').val(),
+              'no_faksimili': $('#faks_setda').val(),
+              'email': $('#email_setda').val(),
           },
           success: function(data) {
               $('.idbtnSimpanPemda').hide();

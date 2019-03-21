@@ -399,9 +399,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle;">No Urut</th>
+                            <th style="text-align: center; vertical-align:middle;">Uraian Kegiatan Renja</th>
                             <th style="text-align: center; vertical-align:middle;">Uraian Aktivitas ASB</th>
                             <th width="10%" style="text-align: center; vertical-align:middle;">Pagu</th>
-                            <th width="40%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
+                            <th width="25%" style="text-align: center; vertical-align:middle;">OPD Penanggung Jawab</th>
                             <th width="5%" style="text-align: center; vertical-align:middle;">Aksi</th>
                           </tr>
                     </thead>
@@ -525,6 +526,17 @@ $('.display').DataTable({
       bDestroy: true
   });
 
+function validasiDataAwal() {
+  if ( $.trim( $('#id_kecamatan').val()) == 0) {
+    createPesan("Nama Kecamatan Belum Dipilih..!!","danger"); 
+    return false;
+  };
+  if ( $.trim( $('#id_desa_cb').val()) == 0) {
+    createPesan("Nama Desa Belum Dipilih..!!","danger"); 
+    return false;
+  };
+}
+
 $("#id_kecamatan").change(function() {     
   loadDesa($("#id_kecamatan").val());
 });
@@ -600,7 +612,7 @@ function LoadUsulanDesa($id_desa){
                         },
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'nama_desa', sClass: "dt-left", width :"10%"},
-                        { data: 'uraian_aktivitas_kegiatan', sClass: "dt-left"},
+                        { data: 'uraian_asb', sClass: "dt-left"},
                         { data: 'jml_lokasi', sClass: "dt-center",width :"10%",
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
                         { data: 'volume', sClass: "dt-center",width :"10%",
@@ -675,7 +687,8 @@ $(document).on('click', '#btnCariASB', function() {
         dom: 'bfrtIp',
         "ajax": {"url": "./musrenrw/getDataASB"},
         "columns": [
-              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'no_urut', sClass: "dt-center"},              
+              { data: 'uraian_kegiatan_renstra'},
               { data: 'nm_aktivitas_asb'},
               { data: 'pagu_rata2', sClass: "dt-right",
                 render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -700,6 +713,7 @@ $('#tblCariAktivitasASB').on( 'dblclick', 'tr', function () {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 
@@ -716,6 +730,7 @@ $(document).on('click', '#btnPilihASB', function() {
     document.getElementById("id_renja").value = data.id_renja;
     document.getElementById("id_kegiatan").value = data.id_aktivitas_renja;
     $('#harga_satuan').val(data.pagu_rata2);
+    $('#jumlah_pagu').val(hitungpagu());
 
     $('#cariAktivitasASB').modal('hide');    
 
@@ -913,6 +928,32 @@ $('.modal-footer').on('click', '.editMusrendes', function() {
       });
   });
 
+$(document).on('click', '#btnUnloadData', function() {
+
+  var data = usulan_tbl.row( $(this).parents('tr') ).data();
+
+  $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    $.ajax({
+      type: 'post',
+      url: 'musrendes/unLoadData',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_musrendes': data.id_musrendes
+      },
+      success: function(data) {
+        usulan_tbl.ajax.reload();
+        if(data.status_pesan==1){
+        createPesan(data.pesan,"success");
+        } else {
+        createPesan(data.pesan,"danger"); 
+        } 
+      }
+    });
+});
+
 $(document).on('click', '#btnHapusMusrendes', function() {
 
   var data = usulan_tbl.row( $(this).parents('tr') ).data();
@@ -1085,6 +1126,7 @@ $(document).on('click', '#btnHapusLokasiMusren', function() {
 
 });
 
+
 $(document).on('click', '#btnDelLokasiMusrendes', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -1113,33 +1155,34 @@ $(document).on('click', '#btnImportMusrendes', function() {
 
   $.ajaxSetup({
     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });  
-
-  $('#ModalProgress').modal('show');
-
-  $.ajax({
-        type: 'POST',
-        url: 'musrendes/ImportDataRW',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'id_desa' :$('#id_desa_cb').val(),
-        },
-        success: function(data) {
-          // createPesan("Data Berhasil di Load","success");
-          usulan_tbl.ajax.reload();
-          $('#ModalProgress').modal('hide');
-          if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              } 
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load","danger");
-          usulan_tbl.ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
   });
+
+  if(validasiDataAwal() != false){  
+    $('#ModalProgress').modal('show');
+    $.ajax({
+          type: 'POST',
+          url: 'musrendes/ImportDataRW',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_desa' :$('#id_desa_cb').val(),
+          },
+          success: function(data) {
+            // createPesan("Data Berhasil di Load","success");
+            usulan_tbl.ajax.reload();
+            $('#ModalProgress').modal('hide');
+            if(data.status_pesan==1){
+                createPesan(data.pesan,"success");
+                } else {
+                createPesan(data.pesan,"danger"); 
+                } 
+          },
+          error: function(data){
+            createPesan("Data Gagal di Load (err:3)","danger");
+            usulan_tbl.ajax.reload();
+            $('#ModalProgress').modal('hide');
+          }
+    });
+  }
 });
 
 $(document).on('click', '#btnPostUsulanDesa', function() {

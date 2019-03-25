@@ -39,23 +39,19 @@ use hoaaah\LaravelMenu\Menu;
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; color:#fff;">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button> 
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
-                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> <span class="badge"> ver 1.0 </span></span> </a>
+                    </span>
+                    <span style="color:#fff"> simd@<strong>Perencanaan</strong> </span><span class="badge" style="background-color: #f89406;"> {{Session::get('versiApp')}} </span>
+                    </a>
                 </div>
                     <ul class="nav navbar-top-links pull-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     User <span class="caret"></span>
                                 </a>
 
@@ -68,14 +64,12 @@ use hoaaah\LaravelMenu\Menu;
                                     </li>
                                 </ul>
                             </li>
-                        @else
-                            <li>
-                                <a>
-                                    <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        @else                            
+                            <span style="color:#fff">
+                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                            </span>
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -94,7 +88,7 @@ use hoaaah\LaravelMenu\Menu;
                         @endif
                     </ul>
 
-                    @if (Session::get('AppType') == 0)
+                    @if (Session::get('AppType') === 0)
                     <div class="navbar-default sidebar" role="navigation">
                         <?php
                             $akses = new CekAkses();
@@ -230,21 +224,39 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                     [
                                         'label' => 'Laporan RKPD & Renja',
-                                        'visible' => $akses->get(30) || $akses->get(20),
+                                        'visible' => $akses->get(40) || $akses->get(50) || $akses->get(60) ,
                                         'items' => [
-                                            ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                            ['label' => 'Renja', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
+                                            [
+                                                'label' => 'RKPD', 
+                                                'visible' => $akses->get(40),
+                                                'items' => [
+                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                ]
+                                            ],
+                                            [   
+                                                'label' => 'Renja', 
+                                                'visible' => $akses->get(50),
+                                                'items' => [
+                                                    ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja', 'url' => '/cetak/rkpd', 'visible' => $akses->get(50)],
+                                                ]
+                                            ],
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
+                                            // ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]
                             ]);
                         ?>                        
                     </div>
-                    @else
+                    @endif
+                    @if (Session::get('AppType') == 5)
                     <div id="id_1" class="navbar-default sidebar" role="navigation">
                         <?php
                             $akses = new CekAkses();
@@ -391,7 +403,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
                                                     ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
                                                     ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
                                                 ]
                                             ],
@@ -407,7 +419,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
+                                            // ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]

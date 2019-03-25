@@ -50,9 +50,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 <script type="text/javascript" src="{{ asset('assets/orgchart/js/jquery.orgchart.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/orgchart/js/html2canvas.min.js')}}"></script>
-
-  <script type="text/javascript">
-    $(function() {
+<script type="text/javascript" language="javascript" class="init">
+$(function() {
 
     var datascource = {
       @foreach($data as $datas)
@@ -73,6 +72,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         'exportButton': true,
         'exportFilename': 'ChartSOTK'
       @endforeach
+        // console.log($data);
      };
 
     var oc = $('#pk').orgchart({

@@ -1,4 +1,4 @@
-<div id="ModalKegiatan" class="modal fade" role="dialog">
+<div id="ModalSasaranKegiatan" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
         <div class="modal-header">
@@ -7,83 +7,29 @@
         <div class="modal-body">
           <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" class="form-control" id="id_kegiatan_renstra_edit" name="id_kegiatan_renstra_edit" readonly >
-              <input type="hidden" class="form-control" id="thn_id_kegiatan_edit" name="thn_id_kegiatan_edit" readonly>
-              <input type="hidden" class="form-control" id="id_program_renstra_kegiatan_edit" name="id_program_renstra_kegiatan_edit" readonly>
+              <input type="hidden" class="form-control" id="id_hasil_kegiatan_edit" name="id_hasil_kegiatan_edit" readonly >
+              <input type="hidden" class="form-control" id="id_unit_kegiatan_edit" name="id_unit_kegiatan_edit" readonly >
+              <input type="hidden" class="form-control" id="id_hasil_program_kegiatan_edit" name="id_hasil_program_kegiatan_edit" readonly>
               <div class="form-group">
-                  <label for="id_sasaran_renstra_edit" class="col-sm-3 control-label" align='left'>Kd Program Renstra :</label>
-                  <div class="col-sm-2">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="kd_program_kegiatan_edit" name="kd_program_kegiatan_edit" readonly>                  
+                  <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Kegiatan :</label>
+                  <div class="col-sm-9">
+                    <textarea type="text" class="form-control" rows="3" id="ur_sasaran_kegiatan_renstra_edit" name="ur_sasaran_kegiatan_renstra_edit" required="required"></textarea>
                   </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
-                  <div class="col-sm-2">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="no_urut_kegiatan_edit" name="no_urut_kegiatan_edit" required="required" readonly>                  
-                  </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <label for="kd_program_edit" class="col-sm-3 control-label" align='left'>Kd Kegiatan :</label>
-                    <div class="col-sm-2">
-                    <div class="input-group">
-                      <input type="hidden" class="form-control" id="id_kegiatan_ref_edit" name="id_kegiatan_ref_edit" readonly>
-                      <input type="text" class="form-control" id="kd_kegiatan_edit" name="kd_kegiatan_edit" readonly>                  
-                    </div>
-                    </div>
-                </div>
-              <div class="form-group">
-                <label for="ur_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Kegiatan Renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_kegiatan_renstra_edit" name="ur_kegiatan_renstra_edit" required="required" ></textarea>
-                </div>
               </div>
               <div class="form-group">
-                <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Kegiatan Renstra :</label>
-                <div class="col-sm-8">
-                  <textarea type="text" class="form-control" rows="5" id="ur_sasaran_kegiatan_renstra_edit" name="ur_sasaran_kegiatan_renstra_edit" required="required" ></textarea>
+                  <label for="kd_kegiatan_edit" class="col-sm-3 control-label" align='left'>Uraian Kegiatan Renstra:</label>
+                  <div class="col-sm-2">
+                      <input type="text" class="form-control" id="kd_kegiatan_edit" name="kd_kegiatan_edit" style="text-align: center;" readonly> 
+                  </div>     
+                  <input type="hidden" class="form-control" id="id_kegiatan_renstra_edit" name="id_kegiatan_renstra_edit" readonly>
+                  <span class="btn btn-primary btnCariKegiatanRenstra" id="btnCariKegiatanRenstra" name="btnCariKegiatanRenstra"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>
+                <div class="form-group">
+                  <label for="" class="col-sm-3 control-label" align='left'></label>
+                  <div class="col-sm-9">
+                      <textarea type="text" class="form-control" rows="3" id="ur_kegiatan_renstra_edit" name="ur_kegiatan_renstra_edit" required="required" readonly></textarea>
+                  </div>
               </div>
-              <label class="col-sm-12 control-label" style="text-align: left;">Rincian Pagu Kegiatan Renstra :</label>
-              <table id="tblPaguKegiatan" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
-                      <thead>
-                          <tr>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu1_edit_kegiatan" name="pagu1_edit_kegiatan" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu2_edit_kegiatan" name="pagu2_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu3_edit_kegiatan" name="pagu3_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu4_edit_kegiatan" name="pagu4_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu5_edit_kegiatan" name="pagu5_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                          </tr>
-                          <tr>
-                              <td colspan="3" style="text-align: center; vertical-align:middle">TOTAL PAGU</td>
-                              <td colspan="2" style="text-align: center; vertical-align:middle">
-                                <input type="text" class="form-control number" id="pagu6_edit_kegiatan" name="pagu6_edit_kegiatan" style="text-align: right; " >
-                              </td>
-                            </tr>
-                      </tbody>
-                </table>
           </form>
         </div>
         <div class="modal-footer">
@@ -104,3 +50,38 @@
       </div>
     </div>
   </div>
+
+<div id="HapusKegiatan" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4>Hapus Data Sasaran Kegiatan Renstra OPD</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_hasil_kegiatan_hapus" name="id_hasil_kegiatan_hapus">
+            <div class="alert alert-danger deleteContent">
+              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
+                Yakin akan menghapus Sasaran Kegiatan Renstra : <strong><span id="ur_hasil_kegiatan_hapus"></span></strong> ?
+                <br>
+                <br>
+                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-sm btn-danger btnDelKegiatanRenstra btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>

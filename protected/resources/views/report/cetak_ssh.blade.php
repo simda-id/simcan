@@ -215,7 +215,7 @@ $(document).on('click', '.btnProses', function() {
         window.open('./printSubKelompokSsh'); 
     };
     if($('#jns_laporan').val()==4){
-        window.open('./printTarifSsh'); 
+        window.open('./printItemSshX'); 
     };
     if($('#jns_laporan').val()==5){
         window.open('./printPerkadaSsh/'+$('#cb_no_perda').val()+'/'+$('#cb_zona').val()); 

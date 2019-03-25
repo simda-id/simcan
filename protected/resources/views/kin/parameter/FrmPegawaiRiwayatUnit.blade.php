@@ -45,8 +45,8 @@
                     <select class="form-control cb_jabatan_riwayat_unit" name="cb_jabatan_riwayat_unit" id="cb_jabatan_riwayat_unit"></select>
                 </div>
             </div>
-            <div class="form-group hidden">
-                <label for="cb_jabatan_riwayat_unit" class="col-sm-3 control-label" align='left'></label>
+            <div class="form-group">
+                <label for="nama_eselon3_text" class="col-sm-3 control-label" align='left'></label>
                 <div class="col-sm-8">
                     <textarea type="text" class="form-control" rows="3" id="nama_eselon3_text" name="nama_eselon3_text" required="required" readonly></textarea>
                 </div>

@@ -237,9 +237,7 @@ $(document).ready(function() {
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
 
-    setTimeout(function() {
-        $('#pesanx').removeClass('in');
-         }, 3500);
+    setTimeout(function(){$('#pesanx').removeClass('in')}, 3500);
   };
 
 

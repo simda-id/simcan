@@ -17,15 +17,15 @@
                         <input type="text" class="form-control number" id="no_urut_indikator_sasaran_edit" name="no_urut_indikator_sasaran_edit" required="required" >                  
                     </div>
                   </div>
-                  <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
+                  <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan </label>
                   <div class="col-sm-2">
                     <div class="input-group">
                         <input type="text" class="form-control number" id="id_perubahan_indikator_sasaran_edit" name="id_perubahan_indikator_sasaran_edit" required="required" >                  
                     </div>
                   </div>
                 </div> 
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Uraian Indikator Sasaran RPJMD :</label>
+                <div class="form-group hidden">
+                    <label class="control-label col-sm-3" for="title">Uraian Indikator Sasaran RPJMD</label>
                     <div class="col-sm-8">
                       <textarea type="name" class="form-control" id="ur_indikator_sasaran_rpjmd" rows="3" disabled></textarea>
                     </div>
@@ -34,7 +34,7 @@
                     <span class="btn btn-primary btnCariIndiSasaranRpjmd" id="btnCariIndiSasaranRpjmd" name="btnCariIndiSasaranRpjmd"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>   
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="title">Uraian Indikator Sasaran Renstra :</label>
+                    <label class="control-label col-sm-3" for="title">Uraian Indikator Sasaran Renstra</label>
                     <div class="col-sm-8">
                       <textarea type="name" class="form-control" id="ur_indikator_sasaran_renstra" rows="3" disabled></textarea>
                     </div>
@@ -42,7 +42,7 @@
                     <span class="btn btn-primary btnCariIndi" id="btnCariIndi" name="btnCariIndi"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>             
                 <div class="form-group">
-                    <label for="satuan_sasaran_indikator_edit" class="col-sm-3 control-label" align='left'>Satuan Indikator :</label>
+                    <label for="satuan_sasaran_indikator_edit" class="col-sm-3 control-label" align='left'>Satuan Indikator</label>
                     <div class="col-sm-8">
                         <div class="input-group">
                           <input type="text" class="form-control" id="satuan_sasaran_indikator_edit" name="satuan_sasaran_indikator_edit" readonly>                  
@@ -50,7 +50,7 @@
                     </div>
                   
                 </div>
-                <label class="col-sm-12" style="text-align: left;">Rincian Target Indikator Sasaran Renstra :</label>
+                <label class="col-sm-12" style="text-align: left;">Rincian Target Indikator Sasaran Renstra</label>
                 <br>
                 <table id="tblIndikatorSasaranEdit" class="table table-bordered"  cellspacing="0" width="100%">
                         <thead style="background: #428bca; color: #fff">

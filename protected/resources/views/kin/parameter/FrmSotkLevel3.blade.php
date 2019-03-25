@@ -29,22 +29,44 @@
               </div>
               <div class="form-group">
                     <label for="checkEselon3" class="col-sm-3" align='left'>Tingkat Eselon</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-9">
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <label class="radio-inline">
+                            <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="0"> Eselon Ia</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="radio-inline">
+                            <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="1"> Eselon Ib</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="radio-inline">
+                            <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="2"> Eselon IIa</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="radio-inline">
+                            <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="3"> Eselon IIb</label>
+                        </div>
+                      </div>                    
+                      <div class="row">
+                      <div class="col-sm-3">
                         <label class="radio-inline">
-                        <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="0"> Eselon I</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="radio-inline">
-                        <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="1"> Eselon II</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="radio-inline">
-                        <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="2"> Eselon III</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="radio-inline">
-                        <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="3"> Eselon IV</label>
-                    </div>
+                        <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="4"> Eselon IIIa</label>
+                      </div>
+                      <div class="col-sm-3">
+                          <label class="radio-inline">
+                          <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="5"> Eselon IIIb</label>
+                      </div>
+                      <div class="col-sm-3">
+                          <label class="radio-inline">
+                          <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="6"> Eselon IVa</label>
+                      </div>
+                      <div class="col-sm-3">
+                          <label class="radio-inline">
+                          <input class="flag_iku" type="radio" name="checkEselon3" id="checkEselon3" value="7"> Eselon IVb</label>
+                      </div>
+                      </div>
+                      </div>
               </div>
           </form>
         </div>

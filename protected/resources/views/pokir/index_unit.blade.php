@@ -220,7 +220,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4>Daftar Aktivitas dalam Rancangan Renja</h4>
+        <h4>Daftar Aktivitas dalam Rancangan RKPD</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -230,9 +230,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <thead>
                   <tr>
                     <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                    <th style="text-align: center; vertical-align:middle">Uraian Kegiatan Renja</th>
-                    <th style="text-align: center; vertical-align:middle">Uraian Aktivitas Renja</th>
-                    <th width="15%" style="text-align: center; vertical-align:middle">Pagu Aktivitas Renja</th>
+                    <th style="text-align: center; vertical-align:middle">Uraian Kegiatan RKPD</th>
+                    <th style="text-align: center; vertical-align:middle">Uraian Aktivitas RKPD</th>
+                    <th width="15%" style="text-align: center; vertical-align:middle">Pagu Aktivitas RKPD</th>
                     <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                   </tr>
                 </thead>
@@ -484,9 +484,9 @@ $(document).on('click', '#btnCariAktivitas', function() {
     "ajax": {"url": "./getDataAktivitas/"+$('#tahun_rkpd').val()+"/"+$('#id_unit_pokir').val()},
     "columns": [
           { data: 'no_urut', sClass: "dt-center"},
-          { data: 'uraian_program_renstra'},
+          { data: 'uraian_kegiatan_forum'},
           { data: 'uraian_aktivitas_kegiatan'},
-          { data: 'pagu_aktivitas', sClass: "dt-right",
+          { data: 'pagu_aktivitas_forum', sClass: "dt-right",
                   render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
           { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
         ],

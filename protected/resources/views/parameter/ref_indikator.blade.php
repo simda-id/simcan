@@ -2,7 +2,8 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.parameterlayout')
+@extends('layouts.app1')
+{{-- @extends('layouts.parameterlayout') --}}
 {{-- <meta name="_token" content="{!! csrf_token() !!}" /> --}}
 
 @section('content')
@@ -10,7 +11,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = ' Parameter Indikator ';
+                $this->title = ' Indikator Kinerja';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'admin/parameter';
                 $breadcrumb->begin();
@@ -64,13 +65,25 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <h4 class="modal-title" style="text-align: center;"></h4>
       </div>
       <div class="modal-body">
-        <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+        <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id_indikator" id="id_indikator">
+            <input type="hidden" name="id_indikator" id="id_indikator">                                  
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="id_aspek">Aspek Pembangunan</label>
+                <div class="col-sm-10">
+                  <select type="text" class="form-control id_aspek" id="id_aspek" name="id_aspek"></select>
+                </div>
+            </div>                                    
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="id_bidang">Bidang Pembangunan</label>
+                <div class="col-sm-10">
+                  <select type="text" class="form-control id_bidang" id="id_bidang" name="id_bidang"></select>
+                </div>
+            </div>
             <div class="form-group">
               <label for="nm_indikator" class="col-sm-2" align='left'>Uraian Indikator</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="nm_indikator" name="nm_indikator" required="required" >
+                <textarea type="text" class="form-control" id="nm_indikator" name="nm_indikator" required="required" rows="2"></textarea>
               </div>
             </div>                       
             <div class="form-group">
@@ -78,11 +91,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="col-sm-10">
                 <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
               </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="metode_hitung">File Metode Perhitungan </label>
+              <label class="btn col-sm-10">
+                  <input type="file" name="metode_hitung" id="metode_hitung" class="validate metode_hitung" accept=".png, .jpg, .jpeg" placeholder="Pilih File Image *.png,*.jpg,*.jpeg" >
+              </label>            
             </div> 
             <div class="form-group">
               <label for="sumber_data" class="col-sm-5" align='left'>Sumber Data Pengukuran Indikator</label>
               <div class="col-sm-offset-1 col-sm-11">
-                <textarea type="name" class="form-control" id="sumber_data" rows="4"></textarea>
+                <textarea type="name" class="form-control" id="sumber_data" rows="3"></textarea>
               </div>
             </div>
             <div class="form-group hidden">
@@ -258,278 +277,5 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-<script  type="text/javascript" language="javascript" class="init">
-
-$(document).ready(function() {
-
-$('[data-toggle="popover"]').popover();
-
-function createPesan(message, type) {
-  var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
-  html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
-  html += '<p><strong>'+message+'</strong></p>';
-  html += '</div>';    
-  $(html).hide().prependTo('#pesan').slideDown();
-
-  setTimeout(function() {
-    $('#pesanx').removeClass('in');
-  }, 3500);
-};
-
-$('.page-alert .close').click(function(e) {
-        e.preventDefault();
-        $(this).closest('.page-alert').slideUp();
-    });
-
-$('.number').number(true,0,',', '.');
-
-$('.display').DataTable({
-      dom : 'BfRtip',
-      autoWidth : false,
-      bDestroy: true
-  });
-
-var indikator_tbl=$('#tblIndikator').DataTable({
-                  processing: true,
-                  serverSide: true,
-                  // dom : 'BfRtip',                  
-                  autoWidth : false,
-                  "ajax": {"url": "./indikator/getListIndikator"},
-                  "language": {
-                      "decimal": ",",
-                      "thousands": "."},
-                  "columns": [
-                        { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
-                        { data: 'nm_indikator', sClass: "dt-left"},
-                        { data: 'kualitas_display', sClass: "dt-center", width :"10%"},
-                        { data: 'type_display', sClass: "dt-center", width :"10%"},
-                        { data: 'sifat_display', sClass: "dt-center", width :"10%"},
-                        { data: 'teknik_display', sClass: "dt-center", width :"10%"},
-                        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
-                      ],
-                  "order": [[0, 'asc']],
-                  "bDestroy": true
-        });
-
-$.ajax({
-          type: "GET",
-          url: '../parameter/getRefSatuan',
-          dataType: "json",
-          success: function(data) {
-
-          var j = data.length;
-          var post, i;
-
-          $('select[name="id_satuan_output"]').empty();
-          $('select[name="id_satuan_output"]').append('<option value="">--Pilih Satuan Indikator--</option>');
-          for (i = 0; i < j; i++) {
-              post = data[i];
-              $('select[name="id_satuan_output"]').append('<option value="'+ post.id_satuan +'">'+ post.uraian_satuan +'</option>');
-            }
-              
-          }
-});
-
-function getflag_iku(){
-
-    var xCheck = document.querySelectorAll('input[name="jns_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function getjenis_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="jenis_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function getsifat_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="sifat_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-function gettipe_indikator(){
-
-    var xCheck = document.querySelectorAll('input[name="tipe_indikator"]:checked');
-    var xyz = [];
-    for(var x = 0, l = xCheck.length; x < l;  x++)
-      { xyz.push(xCheck[x].value); }
-    var xvalues = xyz.join('');
-    return xvalues;
-  }
-
-$(document).on('click', '.add-indikator', function() {
-  $('.btnIndikator').removeClass('edit');
-  $('.btnIndikator').addClass('add');
-  $('.modal-title').text('Tambah Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(null);
-  $('#nm_indikator').val(null);
-  $('#sumber_data').val(null);
-  $('#id_satuan_output').val(null)
-  document.frmModalIndikator.jns_indikator[0].checked=true;
-  document.frmModalIndikator.tipe_indikator[0].checked=true;
-  document.frmModalIndikator.jenis_indikator[1].checked=true;
-  document.frmModalIndikator.sifat_indikator[1].checked=true;
-  $('#ModalIndikator').modal('show');
-});
-
-$('.modal-footer').on('click', '.add', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './indikator/addIndikator',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'jenis_indikator' : getjenis_indikator(),
-            'sifat_indikator' : getsifat_indikator(),
-            'type_indikator' : gettipe_indikator(),
-            'nm_indikator' : $('#nm_indikator').val(),
-            'kualitas_indikator' : getflag_iku(),
-            'sumber_data_indikator' : $('#sumber_data').val(),
-            'id_satuan_output' : $('#id_satuan_output').val(),
-        },
-        success: function(data) {
-              $('#tblIndikator').DataTable().ajax.reload(null,false);
-              $('#tblIndikator').DataTable().page('last').draw('page');
-              if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              }
-        },
-  });
-});
-
-$('#tblIndikator tbody').on( 'dblclick', 'tr', function () {
-
-  var data = indikator_tbl.row(this).data();
-
-  $('.btnIndikator').removeClass('add');
-  $('.btnIndikator').addClass('edit');
-  $('.modal-title').text('Edit Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(data.id_indikator);
-  $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);  
-  $('#id_satuan_output').val(data.id_satuan_output);
-  document.frmModalIndikator.jns_indikator[data.kualitas_indikator].checked=true;
-  document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
-  document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
-  document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
-
-  $('#ModalIndikator').modal('show');  
-
-  } );
-
-//edit function
-$(document).on('click', '#btnEditIndikator', function() {
-
-var data = indikator_tbl.row( $(this).parents('tr') ).data();
-
-  $('.btnIndikator').removeClass('add');
-  $('.btnIndikator').addClass('edit');
-  $('.modal-title').text('Edit Referensi Indikator');
-  $('.form-horizontal').show();
-  $('#id_indikator').val(data.id_indikator);
-  $('#nm_indikator').val(data.nm_indikator);
-  $('#sumber_data').val(data.sumber_data_indikator);  
-  $('#id_satuan_output').val(data.id_satuan_output);
-  document.frmModalIndikator.jns_indikator[data.kualitas_indikator].checked=true;
-  document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
-  document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
-  document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
-
-
-  $('#ModalIndikator').modal('show');
-});
-
-
-$('.modal-footer').on('click', '.edit', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './indikator/editIndikator',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'id_indikator' : $('#id_indikator').val(),
-            'jenis_indikator' : getjenis_indikator(),
-            'sifat_indikator' : getsifat_indikator(),
-            'type_indikator' : gettipe_indikator(),
-            'nm_indikator' : $('#nm_indikator').val(),
-            'kualitas_indikator' : getflag_iku(),
-            'sumber_data_indikator' : $('#sumber_data').val(),
-            'id_satuan_output' : $('#id_satuan_output').val(),
-        },
-        success: function(data) {
-            $('#tblIndikator').DataTable().ajax.reload(null,false);
-            if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              }
-        }
-    });
-});
-
-//delete function
-$(document).on('click', '#btnHapusIndikator', function() {
-
-var data = indikator_tbl.row( $(this).parents('tr') ).data();
-
-if(data.asal_indikator!=9){
-  createPesan("Maaf Indikator Hasil Impor dari Aplikasi 5 Tahunan tidak dapat dihapus","danger"); 
-} else {
-  $('.actionBtn').addClass('delete');
-  $('.modal-title').text('Hapus Referensi Indikator');
-  $('.form-horizontal').hide();
-  $('#id_indikator_hapus').val(data.id_indikator);
-  $('#nm_indikator_hapus').html(data.nm_indikator);
-  $('#HapusModal').modal('show');
-}
-  
-});
-
-
-
-$('.modal-footer').on('click', '.delete', function() {
-  $.ajaxSetup({
-     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-  $.ajax({
-    type: 'post',
-    url: './indikator/hapusIndikator',
-    data: {
-      '_token': $('input[name=_token]').val(),
-      'id_indikator': $('#id_indikator_hapus').val(),
-    },
-    success: function(data) {
-      $('.item' + $('.id_indikator_hapus').text()).remove();
-      $('#tblIndikator').DataTable().ajax.reload(null,false);
-      createPesan(data.pesan,"success");
-    }
-  });
-});
-
-});
-</script>
+  <script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/parameter/js/js_indikator.js')}}"></script>
 @endsection

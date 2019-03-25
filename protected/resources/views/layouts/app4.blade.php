@@ -46,14 +46,7 @@ use hoaaah\LaravelMenu\Menu;
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
             {{-- <div class="container"> --}}
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button> 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
@@ -61,18 +54,10 @@ use hoaaah\LaravelMenu\Menu;
                     </a>
                 </div>
 
-                    <ul class="nav navbar-top-links pull-right">
-
-                        <li>
-                            <a style="color:#fff">
-                                <i class="fa fa-flag fa-fw" ></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                            </a>
-                        </li>
-
-                        <!-- Authentication Links -->
+                    <ul class="nav navbar-top-links pull-right">                        
                         @if (Auth::guest())
                             <li class="dropdown"  style="color:#fff">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     User <span class="caret"></span>
                                 </a>
 
@@ -85,7 +70,10 @@ use hoaaah\LaravelMenu\Menu;
                                     </li>
                                 </ul>
                             </li>
-                        @else
+                        @else                        
+                        <span style="color:#fff">
+                            <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                        </span>
                             <li class="dropdown" >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"  style="color:#fff">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -249,7 +237,7 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
-        <script src="{{ asset('/js/input.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

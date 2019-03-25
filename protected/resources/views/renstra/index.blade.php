@@ -45,19 +45,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="form-group">
                 <label class="control-label col-sm-2" for="id_unit">Unit Penyusun Renstra :</label>
                 <div class="col-sm-6">
-                  <select class="form-control cbUnit" name="id_unit" id="id_unit">
-                    @foreach($dataunit as $val)
-                      <option value={{ $val->id_unit }}>{{ $val->nm_unit }}</option>
-                    @endforeach
-                  </select>
+                  <select class="form-control cbUnit" name="id_unit" id="id_unit"></select>
                 </div>
                 <button type="button" class="btn btn-primary btn-labeled btnPrintKompilasiProgramdanPaguRenstra hidden" data-dismiss="modal" aria-hidden="true">
                             <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Kompilasi Program dan Pagu Renstra</button>
               </div>
               <br>
-              <br>
               <div class="">
-              <table id='tblVisi' class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
+              <table id='tblVisi' class="table compact table-responsive table-striped table-bordered display" cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="10%" style="text-align: center">No Visi</th>
@@ -73,7 +68,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div role="tabpanel" class="tab-pane" id="misi">
               <br>
               <div class="">
-              <table id="tblMisi" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
+              <table id="tblMisi" class="table compact table-responsive table-striped table-bordered display" cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">Kode Visi</th>
@@ -89,8 +84,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
             <div role="tabpanel" class="tab-pane" id="tujuan">
             <br>
+            <button type="button" class="btn btn-primary btn-labeled btnTambahTujuan" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Tujuan Renstra</button>
             <div class="">
-            <table id="tblTujuan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+            <table id="tblTujuan" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="3%" style="text-align: center; vertical-align:middle"></th>
@@ -113,10 +110,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <li><a href="#kebijakan" aria-controls="tujuan" role="tab" data-toggle="tab">Kebijakan</a></li>
             </ul>
             <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="sasaran1">
+              <div role="tabpanel" class="tab-pane active" id="sasaran1">              
               <br>
+              <button type="button" class="btn btn-primary btn-labeled btnTambahSasaran" data-dismiss="modal" aria-hidden="true">
+                              <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Sasaran Renstra</button>
               <div class="">
-                <table id="tblSasaran" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+                <table id="tblSasaran" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
                               <th width="3%" style="text-align: center; vertical-align:middle"></th>
@@ -131,10 +130,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </div>
-              <div role="tabpanel" class="tab-pane" id="kebijakan">
+              <div role="tabpanel" class="tab-pane" id="kebijakan">              
               <br>
+              <button type="button" class="btn btn-primary btn-labeled btnTambahKebijakan" data-dismiss="modal" aria-hidden="true">
+                              <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kebijakan Renstra</button>
               <div class="">
-                <table id="tblKebijakan" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+                <table id="tblKebijakan" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
                               <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
@@ -147,10 +148,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </table>
               </div>
               </div>
-              <div role="tabpanel" class="tab-pane" id="strategi">
+              <div role="tabpanel" class="tab-pane" id="strategi">           
               <br>
+              <button type="button" class="btn btn-primary btn-labeled btnTambahStrategi" data-dismiss="modal" aria-hidden="true">
+                              <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Strategi Renstra</button>
               <div class="">
-                <table id="tblStrategi" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+                <table id="tblStrategi" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
                               <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
@@ -167,8 +170,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
             <div role="tabpanel" class="tab-pane" id="program">
             <br>
+            <button type="button" class="btn btn-primary btn-labeled btnTambahProgram" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Program Renstra</button>
             <div class="">
-                    <table id="tblProgram" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+                    <table id="tblProgram" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
                             <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle"></th>
@@ -200,10 +205,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <li><a href="#pelaksana" aria-controls="kegiatan" role="tab" data-toggle="tab">Sub Unit Pelaksana</a></li>
             </ul>
            <div class="tab-content">
-              <br>
               <div role="tabpanel" class="tab-pane active" id="kegiatan1">
+                <br>                
+                <button type="button" class="btn btn-primary btn-labeled btnTambahKegiatan" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kegiatan Renstra</button>
               <div class="">
-              <table id="tblKegiatan" class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
+              <table id="tblKegiatan" class="table compact table-responsive table-striped table-bordered display" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle"></th>
@@ -230,8 +237,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               <div role="tabpanel" class="tab-pane" id="pelaksana">
                 <br>
+                      <button type="button" class="btn btn-primary btn-labeled btnTambahPelaksana" data-dismiss="modal" aria-hidden="true">
+                          <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Pelaksana Renstra</button>
                 <div class="">
-                  <table id="tblPelaksana" class="table compact table-responsive table-striped table-bordered"  cellspacing="0" width="100%">
+                  <table id="tblPelaksana" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">Kode Kegiatan</th>
@@ -256,7 +265,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endif
 
 <script id="details-inTujuan" type="text/x-handlebars-template">
-    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inTujuan-@{{id_tujuan_renstra}}">
+    <table class="table table-striped table-bordered table-responsive compact details-table" id="inTujuan-@{{id_tujuan_renstra}}">
         <thead>
           <tr>
             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -270,7 +279,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 <script id="details-inSasaran" type="text/x-handlebars-template">
-    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inSasaran-@{{id_sasaran_renstra}}">
+    <table class="table table-striped table-bordered table-responsive compact details-table" id="inSasaran-@{{id_sasaran_renstra}}">
         <thead>
           <tr>
             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -284,7 +293,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   </script>
   
   <script id="details-inProgram" type="text/x-handlebars-template">
-    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProgram-@{{id_program_renstra}}">
+    <table class="table table-striped table-bordered table-responsive compact details-table" id="inProgram-@{{id_program_renstra}}">
         <thead>
           <tr>
             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -298,7 +307,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   </script>
 
   <script id="details-inKegiatan" type="text/x-handlebars-template">
-    <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKegiatan-@{{id_kegiatan_renstra}}">
+    <table class="table table-striped table-bordered table-responsive compact details-table" id="inKegiatan-@{{id_kegiatan_renstra}}">
         <thead>
           <tr>
             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -317,17 +326,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @include('renstra.FrmRenstraTujuanIndikator')
 @include('renstra.FrmRenstraSasaran')
 @include('renstra.FrmRenstraSasaranIndikator')
-@include('bebas.FrmCariSasaranIndikatorRpjmd')
 @include('renstra.FrmRenstraStrategi')
 @include('renstra.FrmRenstraKebijakan')
 @include('renstra.FrmRenstraProgram')
 @include('renstra.FrmRenstraProgramIndikator')
-@include('bebas.FrmCariSasaranIndikatorRenstra')
 @include('renstra.FrmRenstraKegiatan')
 @include('renstra.FrmRenstraKegiatanIndikator')
 @include('renstra.FrmRenstraKegiatanPelaksana')
 @include('bebas.FrmCariIndikator')
 @include('bebas.FrmCariSasaranRPJMD')
+@include('bebas.FrmCariItemRenstra')
+@include('bebas.FrmCariSasaranIndikatorRpjmd')
+@include('bebas.FrmCariSasaranIndikatorRenstra')
+@include('bebas.FrmCariItemRenstra')
+@include('bebas.FrmCariProgramRef')
+@include('bebas.FrmCariKegiatanRef')
 @include('bebas.FrmModalProgress')
 
 @endsection
@@ -335,7 +348,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 
 @section('scripts')
-<script type="text/javascript" language="javascript" class="init">
+<script>
 $(document).ready(function() {
 
   var detInTujuan = Handlebars.compile($("#details-inTujuan").html());
@@ -343,28 +356,15 @@ $(document).ready(function() {
   var detInProgram = Handlebars.compile($("#details-inProgram").html());
   var detInKegiatan = Handlebars.compile($("#details-inKegiatan").html());
 
-  var id_unit_renstra;
-  var id_visi_renstra;
-  var id_misi_renstra;
-  var id_tujuan_renstra;
-  var id_sasaran_renstra;
-  var id_kebijakan_renstra;
-  var id_strategi_renstra;
-  var id_program_renstra;
-  var id_indikator_program_renstra;
-  var id_kegiatan_renstra;
-  var id_indikator_kegiatan_renstra;
-  var id_pelaksana_kegiatan_renstra;
+  var id_unit_renstra, id_visi_renstra, id_misi_renstra, id_tujuan_renstra, id_sasaran_renstra, id_kebijakan_renstra, id_strategi_renstra, id_program_renstra;
+  var id_indikator_program_renstra, id_kegiatan_renstra, id_indikator_kegiatan_renstra, id_pelaksana_kegiatan_renstra,thn_id,id_sasaran_rpjmd;
 
   function formatTgl(val_tanggal){
       var formattedDate = new Date(val_tanggal);
       var d = formattedDate.getDate();
       var m = formattedDate.getMonth();
       var y = formattedDate.getFullYear();
-      var m_names = new Array("Januari", "Februari", "Maret", 
-        "April", "Mei", "Juni", "Juli", "Agustus", "September", 
-        "Oktober", "November", "Desember")
-
+      var m_names = new Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember")
       var tgl= d + " " + m_names[m] + " " + y;
       return tgl;
   }
@@ -383,71 +383,97 @@ $(document).ready(function() {
 
   $('[data-toggle="popover"]').popover();
   $('.number').number(true,4,',', '.');
-
+  $('#tblVisi').DataTable({dom : 'BfRtip',});
+  $('#tblMisi').DataTable({dom : 'BfRtip'});
+  $('#tblTujuan').DataTable({dom : 'BfRtip'});
+  $('#tblSasaran').DataTable({dom : 'BfRtip'});
+  $('#tblKebijakan').DataTable({dom : 'BfRtip'});
+  $('#tblStrategi').DataTable({dom : 'BfRtip'});
+  $('#tblProgram').DataTable({dom : 'BfRtip'});
+  $('#tblKegiatan').DataTable({dom : 'BfRtip'});
+  $('#tblPelaksana').DataTable({dom : 'BfRtip'});
 
   $('.page-alert .close').click(function(e) {
           e.preventDefault();
           $(this).closest('.page-alert').slideUp();
-      });
+  });
+
+  $.ajax({
+      type: "GET",
+      url: './admin/parameter/getUnitUser',
+      dataType: "json",
+
+      success: function(data) {
+
+            var j = data.length;
+            var post, i;
+
+            $('select[name="id_unit"]').empty();
+            $('select[name="id_unit"]').append('<option value="-1">---Pilih Unit---</option>');
+
+            for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="id_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
+            }
+            }
+  });
 
   var tbl_Visi;
-  tbl_Visi = $('#tblVisi').DataTable( {
-          processing: true,
-          serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
-          autoWidth : false,
-          order: [[0, 'asc']],
-          bDestroy: true,
-          language: {
-                "decimal": ",",
-                "thousands": "."},
-          "ajax": "{{url('/renstra/visi/0')}}",
-          "columns": [
-                { data: 'no_urut', sClass: "dt-center"},
-                { data: 'uraian_visi_renstra'},
-                { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
-              ],
+  function loadTblVisi(id_unit){
+    tbl_Visi=$('#tblVisi').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  dom : 'BfRtip',
+                  autoWidth : false,
+                  "ajax": {"url": "./renstra/visi/"+id_unit},
+                  "language": {
+                      "decimal": ",",
+                      "thousands": "."},
+                  "columns": [
+                    { data: 'no_urut', sClass: "dt-center"},
+                    { data: 'uraian_visi_renstra'},
+                    { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
+                  ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
-        } );
-  
+        });
+  };
+
   var tbl_Misi;
+  function loadTblMisi(id_unit){
   tbl_Misi = $('#tblMisi').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/misi/0"},
+           "ajax": {"url": "./renstra/misi/"+id_unit},
           "columns": [
                 { data: 'id_visi_renstra', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_misi_renstra'},
                 { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}
               ],
-                  "order": [[1, 'asc']],
-                  "bDestroy": true
-        } );
+        });
+  };
 
   var tbl_Tujuan;
+  function loadTblTujuan(id_unit){
   tbl_Tujuan = $('#tblTujuan').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'bfrtip',                  
+          dom : 'BfRtip',
           autoWidth : false,
-          order: [[0, 'asc']],
+          order: [[2, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/tujuan/0"},
+           "ajax": {"url": "./renstra/tujuan/"+id_unit},
           "columns": [
                 {
                   "className":      'details-control',
@@ -462,10 +488,8 @@ $(document).ready(function() {
                 { data: 'uraian_tujuan_renstra'},
                 { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
               ],
-                  "order": [[2, 'asc']],
-                  "bDestroy": true
-          } );
-
+          });
+  };
   
   var tblInTujuan;
     function initInTujuan(tableId, data) {
@@ -505,20 +529,19 @@ $(document).ready(function() {
       }    
   });
 
-
   var tbl_Sasaran;
+  function loadTblSasaran(id_unit){
   tbl_Sasaran = $('#tblSasaran').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'bfrtip',                  
+          dom : 'BfRtip',
           autoWidth : false,
-          order: [[0, 'asc']],
+          order: [[2, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/sasaran/0"},
+           "ajax": {"url": "./renstra/sasaran/"+id_unit},
           "columns": [
                 {
                   "className":      'details-control',
@@ -533,10 +556,8 @@ $(document).ready(function() {
                 { data: 'uraian_sasaran_renstra'},
                 { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
               ],
-                  "order": [[2, 'asc']],
-                  "bDestroy": true
-            } );
-
+            });
+  };
 
   var tblInSasaran;
     function initInSasaran(tableId, data) {
@@ -546,6 +567,8 @@ $(document).ready(function() {
                 ajax: data.details_url,
                 dom : 'bfrtip',
                 autoWidth: false,
+                "order": [[0, 'asc']],
+                "bDestroy": true,
                 "language": {
                           "decimal": ",",
                           "thousands": "."},
@@ -554,11 +577,8 @@ $(document).ready(function() {
                             { data: 'nm_indikator'},
                             { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                           ],
-                "order": [[0, 'asc']],
-                "bDestroy": true
             })
-
-    }
+    };
 
   $('#tblSasaran tbody').on('click', 'td.details-control', function () {
       var tr = $(this).closest('tr');
@@ -575,69 +595,62 @@ $(document).ready(function() {
           tr.next().find('td').addClass('no-padding bg-gray');
       }    
   });
-  @include('renstra.JsRenstraSasaran');
-  @include('renstra.JsRenstraSasaranIndikator');
 
   var tbl_Kebijakan;
+  function loadTblKebijakan(id_unit){
   tbl_Kebijakan = $('#tblKebijakan').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'bfrtip',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/kebijakan/0"},
+           "ajax": {"url": "./renstra/kebijakan/"+id_unit},
           "columns": [
                 { data: 'kd_sasaran', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_kebijakan_renstra'}
               ],
-                  "order": [[1, 'asc']],
-                  "bDestroy": true
-            } );
+            });
+  };
 
   var tbl_Strategi;
+  function loadTblStrategi(id_unit){
   tbl_Strategi = $('#tblStrategi').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'bfrtip',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/strategi/0"},
+          "ajax": {"url": "./renstra/strategi/"+id_unit},
           "columns": [
                 { data: 'kd_sasaran', sClass: "dt-center"},
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_strategi_renstra'}
               ],
-                  "order": [[1, 'asc']],
-                  "bDestroy": true
-          } );
+          });
+  };
 
   var tbl_Program;
+  function loadTblProgram(id_unit){
   tbl_Program = $('#tblProgram').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'bfrtip',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/program/0"},
-          "language": {
-                "decimal": ",",
-                "thousands": "."},
+          "ajax": {"url": "./renstra/program/"+id_unit},
           "columns": [
                 {
                   "className":      'details-control',
@@ -667,8 +680,8 @@ $(document).ready(function() {
                   } ],
                   "order": [[2, 'asc']],
                   "bDestroy": true
-          } );
-
+          });
+  };
 
   var tblInProgram;
     function initInProgram(tableId, data) {
@@ -689,8 +702,7 @@ $(document).ready(function() {
                 "order": [[0, 'asc']],
                 "bDestroy": true
             })
-
-    }
+    };
 
   $('#tblProgram tbody').on('click', 'td.details-control', function () {
       var tr = $(this).closest('tr');
@@ -708,76 +720,19 @@ $(document).ready(function() {
       }    
   });
 
-@include('renstra.JsRenstraProgramIndikator');
-@include('renstra.JsRenstraProgram');
-
-//   $(document).on('click', '.btnDetailProgram', function() {
-//       var data = tbl_Program.row( $(this).parents('tr') ).data();
-// 	    $('.actionBtn_program').addClass('editprogram');
-// 	    $('.modal-title').text('Detail Data program SKPD');
-// 	    $('.form-horizontal').show();
-//         $('#id_program_renstra_edit').val(data.id_program_renstra);
-//         $('#thn_id_program_edit').val(data.id_program_renstra);
-// 	    $('#no_urut_program_edit').val(data.thn_id);
-// 	    $('#pagu1_edit').val(data.pagu_tahun1a);
-// 	    $('#pagu2_edit').val(data.pagu_tahun2a);
-// 	    $('#pagu3_edit').val(data.pagu_tahun3a);
-// 	    $('#pagu4_edit').val(data.pagu_tahun4a);
-//         $('#pagu5_edit').val(data.pagu_tahun5a);
-//         $('#pagu6_edit').val(data.pagu_tahun6a);
-// 	    $('#ur_program_renstra_edit').val(data.nm_program);
-//         $('#id_sasaran_program_edit').val(data.kd_sasaran);
-//         $('#kd_program_edit').val(data.kd_program);
-//         $('#ur_program_rpjmd_edit').val(data.nm_program_rpjmd); 
-//         $('#id_program_rpjmd_edit').val(data.id_program_rpjmd); 
-//         $('#id_program_ref_edit').val(data.id_program_ref);        
-// 	    $('#ModalProgram').modal('show');
-// 	});
-
-// $('.modal-footer').on('click', '.editprogram', function() {
-// $.ajaxSetup({
-//    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-// });
-
-//     $.ajax({
-//         type: 'post',
-//         url: './renstra/editprogram',
-//         data: {
-//             '_token': $('input[name=_token]').val(),
-//             'id_program_renstra_edit': $('#id_program_renstra_edit').val(),
-//             'no_urut_program_edit': $('#no_urut_program_edit').val(),
-//             'id_sasaran_renstra_program_edit': $('#id_sasaran_program_edit').val(),
-//             'pagu1_edit': $('#pagu1_edit').val(),
-//             'pagu2_edit': $('#pagu2_edit').val(),
-//             'pagu3_edit': $('#pagu3_edit').val(),
-//             'pagu4_edit': $('#pagu4_edit').val(),
-//             'pagu5_edit': $('#pagu5_edit').val(),
-//             'ur_program_renstra_edit': $('#ur_program_renstra_edit').val(),
-//         },
-//         success: function(data) {
-//             $('#tblProgram').DataTable().ajax.reload(null,false);
-//                 if(data.status_pesan==1){
-//                     createPesan(data.pesan,"success");
-//                     } else {
-//                     createPesan(data.pesan,"danger"); 
-//                 }
-//         }
-//     });
-// });
-
   var tbl_Kegiatan;
+  function loadTblKegiatan(id_unit){
   tbl_Kegiatan = $('#tblKegiatan').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/kegiatan/0"},
+          "ajax": {"url": "./renstra/kegiatan/"+id_unit},
           "columns": [
                 {
                   "className":      'details-control',
@@ -807,8 +762,8 @@ $(document).ready(function() {
               } ],
                   "order": [[2, 'asc']],
                   "bDestroy": true
-            } );
-
+            });
+  };
 
   var tblInKegiatan;
     function initInKegiatan(tableId, data) {
@@ -829,8 +784,7 @@ $(document).ready(function() {
                 "order": [[0, 'asc']],
                 "bDestroy": true
             })
-
-    }
+    };
 
   $('#tblKegiatan tbody').on('click', 'td.details-control', function () {
       var tr = $(this).closest('tr');
@@ -848,74 +802,19 @@ $(document).ready(function() {
       }    
   });
 
-@include('renstra.JsRenstraKegiatanIndikator');
-
-//   $(document).on('click', '.btnDetailKegiatan', function() {
-
-//       var data = tbl_Kegiatan.row( $(this).parents('tr') ).data();
-
-// 	    $('.actionBtn_kegiatan').addClass('editkegiatan');
-// 	    $('.modal-title').text('Detail Data Kegiatan SKPD');
-// 	    $('.form-horizontal').show();        
-//         $('#id_kegiatan_renstra_edit').val(data.id_kegiatan_renstra);
-//         $('#thn_id_kegiatan_edit').val(data.thn_id);
-// 	    $('#no_urut_kegiatan_edit').val(data.no_urut);
-// 	    $('#pagu1_edit_kegiatan').val(data.pagu_tahun1a);
-// 	    $('#pagu2_edit_kegiatan').val(data.pagu_tahun2a);
-// 	    $('#pagu3_edit_kegiatan').val(data.pagu_tahun3a);
-// 	    $('#pagu4_edit_kegiatan').val(data.pagu_tahun4a);
-//         $('#pagu5_edit_kegiatan').val(data.pagu_tahun5a);
-//         $('#pagu6_edit_kegiatan').val(data.pagu_tahun6a);
-// 	    $('#ur_kegiatan_renstra_edit').val(data.nm_kegiatan);
-//         $('#kd_program_kegiatan_edit').val(data.kd_program);
-//         $('#id_program_renstra_kegiatan_edit').val(data.id_program_renstra);
-//         $('#kd_kegiatan_edit').val(data.kd_kegiatan); 
-//         $('#id_kegiatan_ref_edit').val(data.id_kegiatan_ref);
-//         $('#ModalKegiatan').modal('show');
-// 	  });
-
-// $('.modal-footer').on('click', '.editkegiatan', function() {
-// $.ajaxSetup({
-//    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-// });
-
-// $.ajax({
-//     type: 'post',
-//     url: './renstra/editkegiatan',
-//     data: {
-//         '_token': $('input[name=_token]').val(),
-//         'id_kegiatan_renstra_edit': $('#id_kegiatan_renstra_edit').val(),
-//         'pagu1_edit': $('#pagu1_edit_kegiatan').val(),
-//         'pagu2_edit': $('#pagu2_edit_kegiatan').val(),
-//         'pagu3_edit': $('#pagu3_edit_kegiatan').val(),
-//         'pagu4_edit': $('#pagu4_edit_kegiatan').val(),
-//         'pagu5_edit': $('#pagu5_edit_kegiatan').val(),
-//         'ur_kegiatan_renstra_edit': $('#ur_kegiatan_renstra_edit').val(),
-//     },
-//     success: function(data) {
-//         $('#tblKegiatan').DataTable().ajax.reload(null,false);
-//               if(data.status_pesan==1){
-//                 createPesan(data.pesan,"success");
-//                 } else {
-//                 createPesan(data.pesan,"danger"); 
-//               }
-//     }
-// });
-// });
-
   var tbl_Pelaksana;
+  function loadTblPelaksana(id_unit){
   tbl_Pelaksana = $('#tblPelaksana').DataTable( {
           processing: true,
           serverSide: true,
-          responsive: true,
-          dom : 'BFRTIP',                  
+          dom : 'BfRtip',
           autoWidth : false,
           order: [[0, 'asc']],
           bDestroy: true,
           language: {
                 "decimal": ",",
                 "thousands": "."},
-          "ajax": {"url": "./renstra/kegiatanpelaksana/0"},
+          "ajax": {"url": "./renstra/kegiatanpelaksana/"+id_unit},
           "columns": [
               { data: 'kd_kegiatan', sClass: "dt-center"},
               { data: 'kd_sub', sClass: "dt-center"},
@@ -924,7 +823,9 @@ $(document).ready(function() {
             ],
                   "order": [[0, 'asc']],
                   "bDestroy": true
-          } );
+          });
+  };
+
   $(document).on('click', '.edit-pelaksana-kegiatan', function() {
 
       var data = tbl_Pelaksana.row( $(this).parents('tr') ).data();
@@ -934,31 +835,27 @@ $(document).ready(function() {
 	    $('.form-horizontal').show();
 	    $('#id_pelaksana').val($(this).data('id_kegiatan_renstra_pelaksana'));
 	    $('select[name="pelaksana"]').empty();
-	    $('select[name="pelaksana"]').append('<option value="'+data.id_sub_unit+'">'+data.nm_sub+'</option>');
-	    
+	    $('select[name="pelaksana"]').append('<option value="'+data.id_sub_unit+'">'+data.nm_sub+'</option>');	    
          
-         $.ajax({
-             type: "GET",
-             url: './renstra/getsubunit/'+data.id_sub_unit,
-             dataType: "json",
-             success: function(data) {
-
+      $.ajax({
+          type: "GET",
+          url: './renstra/getsubunit/'+data.id_sub_unit,
+          dataType: "json",
+          success: function(data) {
              var j = data.length;
-             var post, i;
-            
+             var post, i;            
              for (i = 0; i < j; i++) {
                post = data[i];
                $('select[name="pelaksana"]').append('<option value="'+ post.id_sub_unit +'">'+ post.nm_sub +'</option>');
              }
-             }
-         });
-         $('#ModalKegiatanPelaksana').modal('show');
+          }
+      });
+      $('#ModalKegiatanPelaksana').modal('show');
 	  });
 
 $( ".cbUnit" ).change(function() {
       id_unit_renstra =  $('#id_unit').val();
-      $('#tblVisi').DataTable().ajax.url("./renstra/visi/"+id_unit_renstra).load();
-      $('#tblMisi').DataTable().ajax.url("./renstra/misi/0").load();
+      loadTblVisi(id_unit_renstra);
 });
 
 var cariindikator
@@ -993,7 +890,6 @@ $('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
     document.getElementById("kd_indikator_tujuan_renstra").value = data.id_indikator;
     document.getElementById("satuan_tujuan_indikator_edit").value = data.uraian_satuan;
 
-
     document.getElementById("ur_indikator_sasaran_renstra").value = data.nm_indikator;
     document.getElementById("kd_indikator_sasaran_renstra").value = data.id_indikator;
     document.getElementById("satuan_sasaran_indikator_edit").value = data.uraian_satuan;
@@ -1007,7 +903,6 @@ $('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
     document.getElementById("satuan_kegiatan_indikator_edit").value = data.uraian_satuan;
 
     $('#cariIndikator').modal('hide');    
-
   });
 
 
@@ -1051,111 +946,90 @@ $(document).on('click', '.btnCariIndiSasaranRpjmd', function() {
 
 $('#tblCariSasaranIndikatorRpjmd tbody').on( 'dblclick', 'tr', function () {
     var data = cariindikatorrpjmd.row(this).data();
-
     document.getElementById("ur_indikator_sasaran_rpjmd").value = data.nm_indikator;
     document.getElementById("id_indikator_sasaran_rpjmd_x").value = data.id_sasaran_renstra;
     document.getElementById("id_indikator_sasaran_rpjmd").value = data.id_indikator_sasaran_renstra;
-
     $('#ModalCariSasaranIndikatorRpjmd').modal('hide');    
-
   });
-
-@include('renstra.JsRenstraVisi');
 
 $('#tblVisi tbody').on( 'dblclick', 'tr', function () {
   var data = tbl_Visi.row(this).data();
   id_visi_renstra =  data.id_visi_renstra;
-
+  thn_id = data.thn_id;
   $('.nav-tabs a[href="#misi"]').tab('show');
-  $('#tblMisi').DataTable().ajax.url("./renstra/misi/"+id_visi_renstra).load();
-  $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/0").load();
+  loadTblMisi(id_visi_renstra);
 });
 
-@include('renstra.JsRenstraMisi');
-
 $('#tblMisi tbody').on( 'dblclick', 'tr', function () {
-
     var data = tbl_Misi.row(this).data();
     id_misi_renstra =  data.id_misi_renstra;
-
+    thn_id = data.thn_id;
     $('.nav-tabs a[href="#tujuan"]').tab('show');
-      $('#tblTujuan').DataTable().ajax.url("./renstra/tujuan/"+id_misi_renstra).load();
-      $('#tblSasaran').DataTable().ajax.url("./renstra/sasaran/0").load();
-
+      loadTblTujuan(id_misi_renstra);
 });
 
 $('#tblTujuan tbody').on( 'dblclick', 'tr', function () {
-
     var data = tbl_Tujuan.row(this).data();
     id_tujuan_renstra =  data.id_tujuan_renstra;
-
     $('.nav-tabs a[href="#sasaran"]').tab('show');
-      $('.nav-tabs a[href="#sasaran1"]').tab('show');
-      $('#tblSasaran').DataTable().ajax.url("./renstra/sasaran/"+id_tujuan_renstra).load();
-      $('#tblKebijakan').DataTable().ajax.url("./renstra/kebijakan/0").load();
-      $('#tblStrategi').DataTable().ajax.url("./renstra/strategi/0").load();
-
+    $('.nav-tabs a[href="#sasaran1"]').tab('show');
+    loadTblSasaran(id_tujuan_renstra);
 });
 
-@include('renstra.JsRenstraTujuan');
-@include('renstra.JsRenstraTujuanIndikator');
-
-
-@include('renstra.JsRenstraKegiatan');
-
 $('#tblSasaran tbody').on( 'dblclick', 'tr', function () {
-
     var data = tbl_Sasaran.row(this).data();
     id_sasaran_renstra =  data.id_sasaran_renstra;
-
+    id_sasaran_rpjmd = data.id_sasaran_rpjmd;
     $('.nav-tabs a[href="#program"]').tab('show');
-      $('.nav-tabs a[href="#program1"]').tab('show');
-      $('#tblProgram').DataTable().ajax.url("./renstra/program/"+id_sasaran_renstra).load();
-      $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/0").load();
-
+    $('.nav-tabs a[href="#program1"]').tab('show');
+    loadTblProgram(id_sasaran_renstra);
 });
 
 $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
     var data = tbl_Program.row(this).data();
-    id_program_renstra =  data.id_program_renstra;
-
+    id_program_renstra =  data.id_program_renstra;    
+    id_program_ref =  data.id_program_ref;
     $('.nav-tabs a[href="#kegiatan"]').tab('show');
-        $('.nav-tabs a[href="#kegiatan1"]').tab('show');
-        $('#tblKegiatan').DataTable().ajax.url("./renstra/kegiatan/"+id_program_renstra).load();
-        $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/0").load();
-
+    $('.nav-tabs a[href="#kegiatan1"]').tab('show');
+    loadTblKegiatan(id_program_renstra);
 });
 
 $('#tblKegiatan tbody').on( 'dblclick', 'tr', function () {
     var data = tbl_Kegiatan.row(this).data();
     id_kegiatan_renstra =  data.id_kegiatan_renstra;
-
     $('.nav-tabs a[href="#pelaksana"]').tab('show');
-    $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/"+id_kegiatan_renstra).load();
-
+    loadTblPelaksana(id_kegiatan_renstra);
 });
 
 $(document).on('click', '.view-renstrakebijakan', function() {
     id_sasaran_renstra =  $(this).data('id_sasaran');
     $('.nav-tabs a[href="#kebijakan"]').tab('show');
-    $('#tblKebijakan').DataTable().ajax.url("./renstra/kebijakan/"+id_sasaran_renstra).load();
+    loadTblKebijakan(id_sasaran_renstra);
   });
 
 $(document).on('click', '.view-renstrastrategi', function() {
     id_sasaran_renstra =  $(this).data('id_sasaran');
     $('.nav-tabs a[href="#strategi"]').tab('show');
-    $('#tblStrategi').DataTable().ajax.url("./renstra/strategi/"+id_sasaran_renstra).load();
+    loadTblStrategi(id_sasaran_renstra);
   });
 
 $(document).on('click', '.view-kegiatanpelaksana', function() {
         id_kegiatan_renstra =  $(this).data('id_kegiatan');
         $('.nav-tabs a[href="#pelaksana"]').tab('show');
-        $('#tblPelaksana').DataTable().ajax.url("./renstra/kegiatanpelaksana/"+id_kegiatan_renstra).load();
-    });
+        loadTblPelaksana(id_kegiatan_renstra);
+});
 
-  $(document).on('click', '.btnPrintKompilasiProgramdanPaguRenstra', function() {
-    window.open('./PrintProgPaguRenstra');
-  });
+@include('renstra.JsRenstraVisi');
+@include('renstra.JsRenstraMisi');
+@include('renstra.JsRenstraTujuan');
+@include('renstra.JsRenstraTujuanIndikator');
+@include('renstra.JsRenstraSasaran');
+@include('renstra.JsRenstraSasaranIndikator');
+@include('renstra.JsRenstraProgram');
+@include('renstra.JsRenstraProgramIndikator');
+@include('renstra.JsRenstraKegiatan');
+@include('renstra.JsRenstraKegiatanIndikator');
+
 
 } );
 </script>

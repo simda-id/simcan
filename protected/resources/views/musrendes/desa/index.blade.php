@@ -612,7 +612,7 @@ function LoadUsulanDesa($id_desa){
                         },
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'nama_desa', sClass: "dt-left", width :"10%"},
-                        { data: 'uraian_aktivitas_kegiatan', sClass: "dt-left"},
+                        { data: 'uraian_asb', sClass: "dt-left"},
                         { data: 'jml_lokasi', sClass: "dt-center",width :"10%",
                             render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
                         { data: 'volume', sClass: "dt-center",width :"10%",

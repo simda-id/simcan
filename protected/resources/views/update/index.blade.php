@@ -23,29 +23,23 @@ use \hoaaah\LaravelHtmlHelpers\Html;
         <div class="panel-heading">
             <i class="fa fa-refresh fa-fw fa-lg"></i> Update Database - Rincian Sinkronisasi Database :
         </div>
-        <!-- /.panel-heading -->
         <div class="panel-body">
-                            {{-- <form action="{{ url('admin/update/updateDB') }}" method="post" enctype="multipart/form-data">
+                            <h4 style="color: #b94743">Update terhadap content database menggunakan file update :</h4>
+                            <form action="{{ url('admin/update/updateDB') }}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                                <div class="row" hidden>
-                                    <label for="txt_periode" class="col-sm-2" align='left'>File Update Database :</label>
-                                    <label class="btn btn-default col-sm-5">
+                                <div class="row" >
+                                    <label for="txt_periode" class="col-sm-2" align='left'>File Script Update :</label>
+                                    <label class="btn btn-default col-sm-6">
                                         <input required="" type="file" name="updatedb" id="inputupdate" class="validate inputupdate" accept=".simcan.php" placeholder="Pilih File Update *.simcan" >
                                     </label>
                                     <label  id='label_file'></label>
+                                    <button type="submit" class="btn btn-success btn-labeled btnProses " id='proses'>
+                                            <span class="btn-label"><i class="fa fa-refresh fa-fw fa-lg"></i></span>Jalankan File update</button>
                                     
                                 </div>
-                            <div class="row hidden">
-                                <div class="col-sm-2 text-left"></div>                        
-                                <div class="col-sm-10 text-left"> 
-                                    <button type="submit" class="btn btn-warning btn-labeled btnProses hidden" id='proses'>
-                                            <span class="btn-label"><i class="fa fa-refresh fa-fw fa-lg"></i></span>Proses Update DB</button>
-                                    
-                                    <button type="button" class="btn btn-danger btn-labeled" value="cancel" onclick="window.location='{{ URL::previous() }}'" >
-                                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>                
-                                </div>
-                            </div>
-                            </form> --}}
+                            </form>
+                            <br>
+                            <h4 style="color: #b94743">Update Struktur Database :</h4>
                             <table id='tblCekDB' class="table compact table-responsive table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -74,8 +68,8 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                                                     <label for="dbVersion"  align='left' style="color: #b94743">{{$dataVersion}}</label></div>
                                                 <div><label for="dbNama"  align='left' >Nama Database : </label>
                                                     <label for="dbNama"  align='left' style="color: #b94743">{{$namaDB}}</label></div>
-                                                <div><label for="dbNama"  align='left' >Rilis Database : </label>
-                                                    <label for="dbNama"  align='left' style="color: #b94743"></label></div>
+                                                {{-- <div><label for="dbRilis"  align='left' >Rilis Database : </label>
+                                                    <label for="dbRilis"  align='left' style="color: #b94743"></label></div> --}}
                                             </td>
                                             <td style="text-align: center; vertical-align:middle"><input type="text" class="form-control number" style="text-align: right;" id="jml_table1" disabled></td>
                                             <td style="text-align: center; vertical-align:middle"><input type="text" class="form-control number" style="text-align: right;" id="jml_table0" disabled></td>
@@ -119,7 +113,7 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                             </table> 
 
                 <hr>
-                <h3 style="color: #b94743">Langkah - Langkah Update Database :</h3>
+                <h4 style="color: #b94743">Langkah - Langkah Update Database :</h4>
                 <label>1. Tekan Tombol Cek Data untuk melihat rekapitulasi perbedaan data</label><br>
                 <label>2. Selanjutnya secara Tekan Tombol 1 Update Tabel, tunggu sampai selesai</label><br>
                 <label>3. Selanjutnya secara Tekan Tombol 2 Update Kolom, tunggu sampai selesai</label><br>
@@ -129,8 +123,8 @@ use \hoaaah\LaravelHtmlHelpers\Html;
                 <label>7. Untuk melihat hasilnya, dapat dilihat dengan menekan tombol Cek Data kembali</label><br>
 
                 <hr>
-                <h3 style="color: #b94743">Catatan :</h3>
-                <label>1. Database Engine yang dipakai minimal MySQL versi 5.6 atau MariaDB versi 10.1.2</label><br>
+                <h4 style="color: #b94743">Catatan :</h4>
+                <label>1. Database Engine yang dipakai MySQL versi 5.6 atau 5.7</label><br>
                 <label>2. Jangan Lupa Backup Database sebelum update...</label><br>
 
                 <br>
@@ -140,231 +134,5 @@ use \hoaaah\LaravelHtmlHelpers\Html;
 @endsection
  
 @section('scripts')
-<script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {
-
-function createPesan(message, type) {
-    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';   
-    html += '<p><strong>'+message+'</strong></p>';
-    html += '</div>';    
-    $(html).hide().prependTo('#pesan').slideDown();
-
-    setTimeout(function() {
-        $('#pesanx').removeClass('in');
-         }, 3500);
-  };
-
-  $('#prosesbar').hide();
-  $('[data-toggle="popover"]').popover();
-  $('.number').number(true,0,',', '.');
-
-
-  $('.page-alert .close').click(function(e) {
-          e.preventDefault();
-          $(this).closest('.page-alert').slideUp();
-    });
-
-var tbl_CekDB;
-  $(document).on('click', '.btnCekProses', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/getJmlTable',
-          dataType: "json",
-          success: function(data) {
-              var j = data.length;
-              var post, i;
-              for (i = 0; i < j; i++) {
-                  post = data[i];
-                  $('#jml_table1').val(post.jml_table1);
-                  $('#jml_table0').val(post.jml_table0);
-                  $('#jml_kolom1').val(post.jml_kolom1);
-                  $('#jml_kolom0').val(post.jml_kolom0);
-                  $('#jml_trigger1').val(post.jml_trigger1);
-                  $('#jml_trigger0').val(post.jml_trigger0);
-                  $('#jml_prosedur1').val(post.jml_prosedur1);
-                  $('#jml_prosedur0').val(post.jml_prosedur0);
-                  $('#column_modif').val(post.column_modif);
-              }
-    
-            $('#prosesbar').hide();
-          }
-      }); 
-  });
-
-  $(document).on('click', '.btnProsesKe1', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/BuatTable',
-          dataType: "json",
-          success: function(data) {
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-            }  
-            $('#prosesbar').hide();
-          },
-          error: function(data) {     
-            createPesan("AJAX Table Error....!!!","danger");
-            $('#prosesbar').hide();
-          }
-      }); 
-  });
-
-  $(document).on('click', '.btnProsesKe2', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/BuatKolom',
-          dataType: "json",
-          success: function(data) {  
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-            }
-            $('#prosesbar').hide();
-          },
-          error: function(data) {     
-            createPesan("AJAX Field Error....!!!","danger");
-            $('#prosesbar').hide();
-          }
-      }); 
-  });
-
-  $(document).on('click', '.btnProsesKe3', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/BuatTrigger',
-          dataType: "json",
-          success: function(data) { 
-            $.ajax({
-                type: "GET",
-                url: 'update/BuatFungsi',
-                dataType: "json",
-                success: function(data) {  
-                    $.ajax({
-                        type: "GET",
-                        url: 'update/UpdateAtribut',
-                        dataType: "json",
-                        success: function(data) { 
-                            $.ajax({
-                                type: "GET",
-                                url: 'update/UpdateAtributUnik',
-                                dataType: "json",
-                                success: function(data) { 
-                                    if(data.status_pesan==1){
-                                        createPesan(data.pesan,"success");
-                                        } else {
-                                        createPesan(data.pesan,"danger"); 
-                                    }
-                                    $('#prosesbar').hide();
-                                },
-                                error: function(data) {
-                                    createPesan("AJAX Atribute Key Unik Error....!!!","danger"); 
-                                    $('#prosesbar').hide();
-                                }
-                            })
-                        },
-                        error: function(data) {
-                            createPesan("AJAX Atribute Error....!!!","danger"); 
-                            $('#prosesbar').hide();
-                        }
-                    })
-                },
-                error: function(data) {     
-                    createPesan("AJAX Fungsi/Prosedur Error....!!!","danger");
-                    $('#prosesbar').hide();
-                }
-            }) 
-          },
-          error: function(data) {  
-            createPesan("AJAX Trigger Error....!!!","danger");
-            $('#prosesbar').hide();
-          }
-      }); 
-  });
-
-  $(document).on('click', '.btnProsesKe4', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/BuatForeignKey',
-          dataType: "json",
-          success: function(data) {  
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-            }
-            $('#prosesbar').hide();
-          },
-          error: function(data) {     
-            createPesan("AJAX Foreign Key Error....!!!","danger");
-            $('#prosesbar').hide();
-          }
-      }); 
-  });
-
-//   $(document).on('click', '.btnProsesKe5', function() {
-//         vars = "?token="     + $('input[name=_token]').val();
-//         vars += "&KodeMinta=1"     ;
-//         $('#prosesbar').show();
-//       $.ajax({
-//           type: "GET",
-//           url: 'update/TestApiSimda' + vars,
-//           dataType: "json",
-//           success: function(data) {     
-//             $('#prosesbar').hide(); 
-//             console.log(data);
-//           }
-//       }); 
-//   });
-
-  $(document).on('click', '.btnProsesKe5', function() {
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/UpdateEnter',
-          dataType: "json",
-          success: function(data) {
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-            } 
-            $('#prosesbar').hide();
-          },
-          error: function(data) { 
-            createPesan("AJAX Finalisasi Error....!!!","danger");    
-            $('#prosesbar').hide();
-          }
-    }); 
-
-  });
-
-  $(document).on('click', '.btnNormalisasi', function() {    
-    $('#prosesbar').show();
-      $.ajax({
-          type: "GET",
-          url: 'update/UpdateAtribut',
-          dataType: "json",
-          success: function(data) {  
-            if(data.status_pesan==1){
-                createPesan(data.pesan,"success");
-                } else {
-                createPesan(data.pesan,"danger"); 
-            }  
-            $('#prosesbar').hide();
-          }
-      }); 
-
-  });
-
-});
-</script>
+  <script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/update/js_update.js')}}"></script>
 @endsection

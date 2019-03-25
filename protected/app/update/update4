@@ -1,4 +1,20 @@
-rilis="Master_database_2018_11_20"
+rilis="Master_database_2019_03_20"
+
+temp_table_info = "CREATE TABLE `temp_table_info` (
+  `TBL_INDEX` VARCHAR(255) NULL DEFAULT NULL,
+  `TABLE_SCHEMA` VARCHAR(255) NULL DEFAULT NULL,
+  `TABLE_NAME` VARCHAR(255) NULL DEFAULT NULL,
+  `COLUMN_NAME` VARCHAR(255) NULL DEFAULT NULL,
+  `COLUMN_TYPE` VARCHAR(255) NULL DEFAULT NULL,
+  `IS_NULLABLE` VARCHAR(255) NULL DEFAULT NULL,
+  `COLUMN_KEY` VARCHAR(255) NULL DEFAULT NULL,
+  `COLUMN_DEFAULT` VARCHAR(255) NULL DEFAULT NULL,
+  `EXTRA` VARCHAR(255) NULL DEFAULT NULL,
+  `INDEX_NAME` VARCHAR(255) NULL DEFAULT NULL,
+  `SEQ_IN_INDEX` VARCHAR(255) NULL DEFAULT NULL,
+  `NON_UNIQUE` VARCHAR(255) NULL DEFAULT NULL,
+  INDEX `TBL_INDEX` (`TBL_INDEX`, `TABLE_NAME`, `COLUMN_NAME`, `IS_NULLABLE`, `COLUMN_KEY`, `INDEX_NAME`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_iku_opd_dok = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `id_dokumen` int(11) NOT NULL AUTO_INCREMENT,
@@ -11,51 +27,52 @@ kin_trx_iku_opd_dok = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `status_dokumen` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_unit` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_iku_opd_kegiatan = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_kegiatan` (
-  `id_iku_opd_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
+   `id_iku_opd_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
   `id_iku_opd_program` int(11) NOT NULL,
   `id_indikator_kegiatan_renstra` int(11) NOT NULL,
-  `id_kegiatan_renstra` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
-  `flag_iku` int(11) NOT NULL DEFAULT '0',
-  `id_esl4` int(11) NOT NULL DEFAULT '0',
-  `status_data` int(11) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag_iku` int(11) NOT NULL DEFAULT 0,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `id_esl4` int(11) NOT NULL DEFAULT 0,
+  `id_kegiatan_renstra` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_iku_opd_kegiatan`) USING BTREE,
-  KEY `id_dokumen` (`id_iku_opd_program`)
+  INDEX `id_dokumen`(`id_iku_opd_program`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_iku_opd_program = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_program` (
-  `id_iku_opd_program` int(11) NOT NULL AUTO_INCREMENT,
+   `id_iku_opd_program` int(11) NOT NULL AUTO_INCREMENT,
   `id_iku_opd_sasaran` int(11) NOT NULL,
   `id_indikator_program_renstra` int(11) NOT NULL,
-  `id_program_renstra` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
-  `flag_iku` int(11) NOT NULL DEFAULT '0',
-  `id_esl3` int(11) NOT NULL DEFAULT '0',
-  `status_data` int(11) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag_iku` int(11) NOT NULL DEFAULT 0,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `id_program_renstra` int(11) NOT NULL DEFAULT 0,
+  `id_esl3` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_iku_opd_program`) USING BTREE,
-  KEY `id_dokumen` (`id_iku_opd_sasaran`)
+  INDEX `id_dokumen`(`id_iku_opd_sasaran`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_iku_opd_sasaran = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_sasaran` (
-  `id_iku_opd_sasaran` int(11) NOT NULL AUTO_INCREMENT,
+   `id_iku_opd_sasaran` int(11) NOT NULL AUTO_INCREMENT,
   `id_dokumen` int(11) NOT NULL,
   `id_indikator_sasaran_renstra` int(11) NOT NULL,
-  `id_sasaran_renstra` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
-  `flag_iku` int(11) NOT NULL DEFAULT '0',
-  `status_data` int(11) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag_iku` int(11) NOT NULL DEFAULT 0,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `id_sasaran_renstra` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_iku_opd_sasaran`) USING BTREE,
-  KEY `id_dokumen` (`id_dokumen`)
+  INDEX `id_dokumen`(`id_dokumen`) USING BTREE,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_iku_pemda_dok = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_dok` (
@@ -76,13 +93,13 @@ kin_trx_iku_pemda_rinci = "CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_rinci` 
   `id_dokumen` int(11) NOT NULL,
   `id_indikator_sasaran_rpjmd` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
-  `flag_iku` int(11) NOT NULL DEFAULT '0',
-  `status_data` int(11) NOT NULL DEFAULT '0',
-  `unit_penanggung_jawab` int(11) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_iku_pemda`),
-  KEY `id_dokumen` (`id_dokumen`)
+  `flag_iku` int(11) NOT NULL DEFAULT 0,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `unit_penanggung_jawab` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_iku_pemda`) USING BTREE,
+  INDEX `id_dokumen`(`id_dokumen`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 kin_trx_perkin_es3_dok = "CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_dok` (
@@ -436,28 +453,28 @@ kin_trx_real_es3_program= "CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program`
 kin_trx_real_es3_program_indikator= "CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
   `id_real_program` int(11) NOT NULL,
-  `id_perkin_indikator` int(11) DEFAULT NULL,
-  `id_indikator_program_renstra` int(11) DEFAULT NULL,
-  `target_tahun` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t1` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t2` decimal(20,2) NOT NULL,
-  `target_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t1` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t2` decimal(20,2) NOT NULL,
-  `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
-  `reviu_real` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `reviu_deviasi` varchar(500) DEFAULT NULL,
-  `reviu_renaksi` varchar(500) DEFAULT NULL,
-  `status_data` int(2) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_perkin_indikator` int(11) NULL DEFAULT NULL,
+  `id_indikator_program_renstra` int(11) NULL DEFAULT NULL,
+  `target_tahun` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t2` decimal(20, 2) NOT NULL,
+  `target_t3` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t4` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t2` decimal(20, 2) NOT NULL,
+  `real_t3` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t4` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `uraian_deviasi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `uraian_renaksi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `status_data` int(2) NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `reviu_deviasi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
+  `reviu_real` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `reviu_renaksi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
   PRIMARY KEY (`id_real_indikator`) USING BTREE,
-  KEY `id_program` (`id_indikator_program_renstra`) USING BTREE,
-  KEY `id_real_program` (`id_real_program`)
+  INDEX `id_program`(`id_indikator_program_renstra`) USING BTREE,
+  INDEX `id_real_program`(`id_real_program`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;"
 
 kin_trx_real_es4_dok= "CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
@@ -509,29 +526,29 @@ kin_trx_real_es4_kegiatan= "CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiata
 
 kin_trx_real_es4_kegiatan_indikator= "CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
-  `id_real_kegiatan` int(11) DEFAULT NULL,
-  `id_perkin_indikator` int(11) DEFAULT NULL,
-  `id_indikator_kegiatan_renstra` int(11) DEFAULT NULL,
-  `target_tahun` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t1` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t2` decimal(20,2) NOT NULL,
-  `target_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `target_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t1` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t2` decimal(20,2) NOT NULL,
-  `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
-  `reviu_real` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `reviu_deviasi` varchar(500) DEFAULT NULL,
-  `reviu_renaksi` varchar(500) DEFAULT NULL,
-  `status_data` int(2) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_real_kegiatan` int(11) NULL DEFAULT NULL,
+  `id_perkin_indikator` int(11) NULL DEFAULT NULL,
+  `id_indikator_kegiatan_renstra` int(11) NULL DEFAULT NULL,
+  `target_tahun` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t2` decimal(20, 2) NOT NULL,
+  `target_t3` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_t4` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t2` decimal(20, 2) NOT NULL,
+  `real_t3` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `real_t4` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `uraian_deviasi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `uraian_renaksi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `status_data` int(2) NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `reviu_renaksi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
+  `reviu_deviasi` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
+  `reviu_real` decimal(20, 2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`id_real_indikator`) USING BTREE,
-  KEY `id_sasaran_kinerja_skpd` (`id_real_kegiatan`) USING BTREE,
-  KEY `id_program` (`id_indikator_kegiatan_renstra`) USING BTREE
+  INDEX `id_sasaran_kinerja_skpd`(`id_real_kegiatan`) USING BTREE,
+  INDEX `id_program`(`id_indikator_kegiatan_renstra`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;"
 
 migrations= "CREATE TABLE IF NOT EXISTS `migrations` (
@@ -585,8 +602,9 @@ ref_desa= "CREATE TABLE IF NOT EXISTS `ref_desa` (
 
 ref_dokumen= "CREATE TABLE IF NOT EXISTS `ref_dokumen` (
   `id_dokumen` int(255) NOT NULL,
-  `nm_dokumen` varchar(255) DEFAULT NULL,
-  `jenis_proses` int(11) NOT NULL DEFAULT '0' COMMENT '0 = rkpd 1 = renja 2 = rpjmd 3 = renstra',
+  `nm_dokumen` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `jenis_proses` int(11) NOT NULL DEFAULT 0 COMMENT '0 = rkpd 1 = renja 2 = rpjmd 3 = renstra',
+  `urut_tampil` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
@@ -605,17 +623,23 @@ ref_group= "CREATE TABLE IF NOT EXISTS `ref_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;"
 
 ref_indikator= "CREATE TABLE IF NOT EXISTS `ref_indikator` (
-  `id_indikator` int(11) NOT NULL AUTO_INCREMENT,
-  `type_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '0 keluaran 1 hasil 2 dampak 3 masukan',
-  `jenis_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '1 positif 0 negatif',
-  `sifat_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '1 Incremental 2 Absolut  3 Komulatif',
-  `nm_indikator` varchar(255) DEFAULT NULL,
-  `flag_iku` int(11) NOT NULL DEFAULT '0' COMMENT '0 non iku 1 iku pemda 2 iku skpd',
-  `asal_indikator` int(11) DEFAULT '0' COMMENT '0 rpjmd 1 renstra 2 rkpd 3 renja',
-  `metode_penghitungan` blob COMMENT 'file image ',
-  `sumber_data_indikator` varchar(255) DEFAULT NULL,
-  `id_satuan_output` int(255) DEFAULT NULL,
-  `kualitas_indikator` int(255) NOT NULL DEFAULT '0' COMMENT '0 kualitas 1 kuantitas 2 persentase 3 rata-rata 4 rasio',
+   `id_indikator` int(11) NOT NULL AUTO_INCREMENT,
+  `type_indikator` int(11) NOT NULL DEFAULT 0 COMMENT '0 keluaran 1 hasil 2 dampak 3 masukan',
+  `jenis_indikator` int(11) NOT NULL DEFAULT 0 COMMENT '1 positif 0 negatif',
+  `sifat_indikator` int(11) NOT NULL DEFAULT 0 COMMENT '1 Incremental 2 Absolut  3 Komulatif',
+  `nm_indikator` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `flag_iku` int(11) NOT NULL DEFAULT 0 COMMENT '0 non iku 1 iku pemda 2 iku skpd',
+  `asal_indikator` int(11) NULL DEFAULT 0 COMMENT '0 rpjmd 1 renstra 2 rkpd 3 renja',
+  `metode_penghitungan` blob NULL COMMENT 'file image ',
+  `sumber_data_indikator` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_satuan_output` int(255) NULL DEFAULT NULL,
+  `kualitas_indikator` int(255) NOT NULL DEFAULT 0 COMMENT '0 kualitas 1 kuantitas 2 persentase 3 rata-rata 4 rasio',
+  `id_bidang` int(11) NOT NULL DEFAULT 0,
+  `id_aspek` int(11) NOT NULL DEFAULT 0,
+  `nama_file` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id_indikator`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
@@ -1059,6 +1083,7 @@ ref_ssh_tarif= "CREATE TABLE IF NOT EXISTS `ref_ssh_tarif` (
   `uraian_tarif_ssh` varchar(255) NOT NULL,
   `keterangan_tarif_ssh` varchar(500) DEFAULT NULL,
   `id_satuan` int(11) DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = aktif, 1 = non aktif',
   PRIMARY KEY (`id_tarif_ssh`) USING BTREE,
   UNIQUE KEY `id_ref_ssh_tarif_1` (`id_tarif_ssh`,`no_urut`,`id_sub_kelompok_ssh`) USING BTREE,
   KEY `id_ref_ssh_tarif` (`id_sub_kelompok_ssh`) USING BTREE
@@ -1609,6 +1634,8 @@ trx_musrencam= "CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   `sumber_usulan` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Ranwal/Renja 1 = Desa 2 = Musrencam',
   `status_usulan` int(11) NOT NULL COMMENT '0 = Proses Usulan 1 = Kirim_Forum',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0= Diterima\r\n1= Diterima dengan perubahan\r\n2= Digabungkan dengan usulan lain\r\n3= Ditolak',
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id_musrencam`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes` (`id_renja`,`tahun_musren`,`no_urut`,`id_musrencam`,`id_kecamatan`,`id_usulan_desa`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
@@ -1744,7 +1771,7 @@ trx_musrenkab= "CREATE TABLE IF NOT EXISTS `trx_musrenkab` (
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_musrenkab`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_rkpd_rancangan`) USING BTREE
+  UNIQUE INDEX `idx_trx_rkpd_ranwal`(`id_program_rpjmd`, `id_visi_rpjmd`, `id_sasaran_rpjmd`, `thn_id_rpjmd`, `id_rkpd_rancangan`, `id_tujuan_rpjmd`, `tahun_rkpd`, `no_urut`, `id_misi_rpjmd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_musrenkab_aktivitas_pd= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
@@ -2016,9 +2043,7 @@ trx_musrenkab_program_pd= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_program_pd`
   `ket_usulan` varchar(250) DEFAULT '0',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
-  PRIMARY KEY (`id_program_pd`) USING BTREE,
-  UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_pelaksana_rkpd`,`id_program_ref`) USING BTREE,
-  KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_pelaksana_rkpd`) USING BTREE
+  PRIMARY KEY (`id_program_pd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_musrenkab_prog_indikator_pd= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
@@ -2042,9 +2067,7 @@ trx_musrenkab_prog_indikator_pd= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 Renstra 1 baru',
   PRIMARY KEY (`id_indikator_program`) USING BTREE,
-  UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`id_program_renstra`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_program_pd`) USING BTREE,
-  KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
-  KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE
+  UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`id_program_renstra`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_program_pd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_musrenkab_urusan= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
@@ -2055,27 +2078,25 @@ trx_musrenkab_urusan= "CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
   `id_bidang` int(11) NOT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   PRIMARY KEY (`id_urusan_rkpd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_musrenkab`,`id_bidang`) USING BTREE,
-  KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_musrenkab`) USING BTREE,
-  KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE
+  UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_musrenkab`,`id_bidang`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_pokir= "CREATE TABLE IF NOT EXISTS `trx_pokir` (
-  `id_tahun` int(11) NOT NULL,
+   `id_tahun` int(11) NOT NULL,
   `id_pokir` int(11) NOT NULL AUTO_INCREMENT,
   `tanggal_pengusul` date NOT NULL,
-  `asal_pengusul` int(11) NOT NULL DEFAULT '0' COMMENT '0 Fraksi\r\n1 Pempinan\r\n2 Badan Musyawarah\r\n3 Komisi\r\n4 Badan Legislasi Daerah\r\n5 Badan Anggaran\r\n6 Badan Kehormatan\r\n9 Badan Lainnya',
-  `jabatan_pengusul` int(11) NOT NULL DEFAULT '4' COMMENT '0 ketua 1 wakil ketua 2 sekretaris 3 bendahara 4 anggota',
-  `nama_pengusul` varchar(255) DEFAULT NULL,
-  `nomor_anggota` varchar(20) DEFAULT NULL,
-  `daerah_pemilihan` varchar(255) DEFAULT NULL,
-  `media_pokir` int(11) DEFAULT '0' COMMENT '1 surat 2 email 3 telepon 4 lisan 9 lainnya',
-  `bukti_dokumen` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `entried_at` varchar(255) DEFAULT NULL,
+  `asal_pengusul` int(11) NOT NULL DEFAULT 0 COMMENT '0 Fraksi\r\n1 Pempinan\r\n2 Badan Musyawarah\r\n3 Komisi\r\n4 Badan Legislasi Daerah\r\n5 Badan Anggaran\r\n6 Badan Kehormatan\r\n9 Badan Lainnya',
+  `jabatan_pengusul` int(11) NOT NULL DEFAULT 4 COMMENT '0 ketua 1 wakil ketua 2 sekretaris 3 bendahara 4 anggota',
+  `nama_pengusul` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nomor_anggota` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `daerah_pemilihan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `media_pokir` int(11) NULL DEFAULT 0 COMMENT '1 surat 2 email 3 telepon 4 lisan 9 lainnya',
+  `bukti_dokumen` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `entried_at` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_pokir`) USING BTREE,
-  UNIQUE KEY `id_tahun` (`id_tahun`,`tanggal_pengusul`,`asal_pengusul`,`jabatan_pengusul`,`nomor_anggota`) USING BTREE
+  UNIQUE INDEX `id_tahun`(`id_tahun`, `tanggal_pengusul`, `asal_pengusul`, `jabatan_pengusul`, `nomor_anggota`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_pokir_lokasi= "CREATE TABLE IF NOT EXISTS `trx_pokir_lokasi` (
@@ -3123,28 +3144,28 @@ trx_renstra_visi= "CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
 trx_rkpd_final= "CREATE TABLE IF NOT EXISTS `trx_rkpd_final` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
   `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
-  `id_forum_rkpdprog` int(11) NOT NULL DEFAULT '0' COMMENT '0 baru',
+  `id_forum_rkpdprog` int(11) NOT NULL DEFAULT 0 COMMENT '0 baru',
   `no_urut` int(11) NOT NULL,
   `tahun_rkpd` int(11) NOT NULL,
-  `jenis_belanja` int(11) NOT NULL DEFAULT '0' COMMENT '0 BL 1 Pendapatan 2 BTL',
-  `id_rkpd_rpjmd` int(11) DEFAULT NULL,
-  `thn_id_rpjmd` int(11) DEFAULT NULL,
-  `id_visi_rpjmd` int(11) DEFAULT NULL,
-  `id_misi_rpjmd` int(11) DEFAULT NULL,
-  `id_tujuan_rpjmd` int(11) DEFAULT NULL,
-  `id_sasaran_rpjmd` int(11) DEFAULT NULL,
-  `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
-  `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 BL 1 Pendapatan 2 BTL',
+  `id_rkpd_rpjmd` int(11) NULL DEFAULT NULL,
+  `thn_id_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_visi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_misi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_tujuan_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_sasaran_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_program_rpjmd` int(11) NULL DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pagu_rpjmd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_ranwal` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `keterangan_program` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
-  `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
-  `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
-  `id_dokumen` int(255) NOT NULL DEFAULT '0',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
+  `ket_usulan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
+  `id_dokumen` int(255) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_forum_rkpdprog`) USING BTREE
+  UNIQUE INDEX `idx_trx_rkpd_ranwal`(`thn_id_rpjmd`, `id_misi_rpjmd`, `id_sasaran_rpjmd`, `no_urut`, `tahun_rkpd`, `id_visi_rpjmd`, `id_tujuan_rpjmd`, `id_program_rpjmd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_final_aktivitas_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
@@ -3213,21 +3234,30 @@ trx_rkpd_final_belanja_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_p
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_final_dokumen= "CREATE TABLE IF NOT EXISTS `trx_rkpd_final_dokumen` (
-  `id_dokumen_rkpd` int(11) NOT NULL,
-  `nomor_rkpd` varchar(255) NOT NULL,
-  `tanggal_rkpd` date NOT NULL,
-  `tahun_rkpd` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
-  `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
-  `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
-  `id_log` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_log` varchar(6) NOT NULL,
-  `log_perubahan` int(11) DEFAULT NULL,
-  `date_created` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_log`) USING BTREE
+   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
+  `id_forum_rkpdprog` int(11) NOT NULL DEFAULT 0 COMMENT '0 baru',
+  `no_urut` int(11) NOT NULL,
+  `tahun_rkpd` int(11) NOT NULL,
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 BL 1 Pendapatan 2 BTL',
+  `id_rkpd_rpjmd` int(11) NULL DEFAULT NULL,
+  `thn_id_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_visi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_misi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_tujuan_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_sasaran_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_program_rpjmd` int(11) NULL DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pagu_rpjmd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_ranwal` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `keterangan_program` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
+  `ket_usulan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
+  `id_dokumen` int(255) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_ranwal`(`thn_id_rpjmd`, `id_misi_rpjmd`, `id_sasaran_rpjmd`, `no_urut`, `tahun_rkpd`, `id_visi_rpjmd`, `id_tujuan_rpjmd`, `id_program_rpjmd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;"
 
 trx_rkpd_final_indikator= "CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
@@ -3741,27 +3771,27 @@ trx_rkpd_rancangan_pelaksana_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_rancangan_program_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_program_pd` (
-  `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
+   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_rkpd_rancangan` int(11) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
-  `jenis_belanja` int(11) NOT NULL DEFAULT '0' COMMENT '0 BL 1 Pdt 2 BTL',
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 BL 1 Pdt 2 BTL',
   `no_urut` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
-  `id_forum_program` int(11) DEFAULT NULL,
-  `id_renja_program` int(11) DEFAULT '0',
-  `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `id_forum_program` int(11) NULL DEFAULT NULL,
+  `id_renja_program` int(11) NULL DEFAULT 0,
+  `id_program_renstra` int(11) NULL DEFAULT 0,
+  `uraian_program_renstra` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
-  `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
-  `pagu_forum` decimal(20,2) DEFAULT '0.00',
-  `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
-  `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
-  `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
-  `id_dokumen` int(255) DEFAULT NULL,
+  `pagu_tahun_renstra` decimal(20, 2) NULL DEFAULT 0.00,
+  `pagu_forum` decimal(20, 2) NULL DEFAULT 0.00,
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = renstra 1 = baru',
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0,
+  `ket_usulan` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 posting',
+  `id_dokumen` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
-  UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`) USING BTREE,
-  KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE
+  UNIQUE INDEX `id_unit_id_renja_program_id_program_ref`(`id_forum_program`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal`(`id_rkpd_rancangan`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_rancangan_prog_indikator_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
@@ -3785,9 +3815,7 @@ trx_rkpd_rancangan_prog_indikator_pd= "CREATE TABLE IF NOT EXISTS `trx_rkpd_ranc
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 Renstra 1 baru',
   PRIMARY KEY (`id_indikator_program`) USING BTREE,
-  UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`id_program_renstra`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_program_pd`) USING BTREE,
-  KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
-  KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE
+  UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`id_program_renstra`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_program_pd`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_rancangan_urusan= "CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusan` (
@@ -3798,9 +3826,7 @@ trx_rkpd_rancangan_urusan= "CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusa
   `id_bidang` int(11) NOT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   PRIMARY KEY (`id_urusan_rkpd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_bidang`) USING BTREE,
-  KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_rkpd_rancangan`) USING BTREE,
-  KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE
+  UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_bidang`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;"
 
 trx_rkpd_ranhir= "CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir` (
@@ -4942,6 +4968,431 @@ kin_trx_cascading_program_opd="CREATE TABLE IF NOT EXISTS `kin_trx_cascading_pro
   PRIMARY KEY (`id_hasil_program`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
+
+ref_aspek_pembangunan="CREATE TABLE IF NOT EXISTS `ref_aspek_pembangunan`  (
+  `id_aspek` int(11) NOT NULL AUTO_INCREMENT,
+  `uraian_aspek_pembangunan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_aspek`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;"
+
+trx_anggaran_aktivitas_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd`  (
+  `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
+  `id_pelaksana_pd` bigint(20) NOT NULL,
+  `id_aktivitas_rkpd_final` int(11) NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `sumber_aktivitas` int(11) NOT NULL DEFAULT 0 COMMENT '0 dari ASB 1 Bukan ASB',
+  `sumber_dana` int(11) NOT NULL DEFAULT 0,
+  `id_perubahan` int(11) NOT NULL DEFAULT 0,
+  `id_aktivitas_asb` int(11) NULL DEFAULT 0,
+  `id_program_nasional` int(11) NULL DEFAULT NULL,
+  `id_program_provinsi` int(11) NULL DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `volume_aktivitas_1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_rkpd_1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_aktivitas_2` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_rkpd_2` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_1` int(11) NOT NULL DEFAULT 0,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 0,
+  `id_satuan_publik` int(11) NULL DEFAULT NULL,
+  `jenis_kegiatan` int(11) NOT NULL DEFAULT 0 COMMENT '0 baru 1 lanjutan',
+  `pagu_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_anggaran` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 final',
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT '0 dilaksanakan 1 batal',
+  `keterangan_aktivitas` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0',
+  `group_keu` int(11) NOT NULL DEFAULT 0 COMMENT '0 = detail 1 = grouping',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = rkpd 1 tambahan baru',
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `checksum` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
+  UNIQUE INDEX `id_pelaksana_pd`(`id_pelaksana_pd`, `id_aktivitas_rkpd_final`, `tahun_anggaran`, `sumber_aktivitas`, `sumber_dana`, `id_perubahan`, `id_aktivitas_asb`, `sumber_data`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_aktivitas_trx_forum_skpd`(`id_pelaksana_pd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_belanja_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd`  (
+  `id_belanja_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_aktivitas_pd` bigint(20) NOT NULL,
+  `id_belanja_rkpd_final` int(11) NOT NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL DEFAULT 0,
+  `no_urut` int(11) NOT NULL DEFAULT 0,
+  `id_zona_ssh` int(11) NOT NULL DEFAULT 0,
+  `sumber_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 asb 1 ssh',
+  `id_aktivitas_asb` int(11) NOT NULL DEFAULT 0,
+  `id_item_ssh` bigint(20) NOT NULL DEFAULT 0,
+  `id_rekening_ssh` int(11) NOT NULL DEFAULT 0,
+  `uraian_belanja` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_satuan_1` int(11) NOT NULL DEFAULT 0,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 0,
+  `volume_1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_2` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `koefisien` decimal(20, 2) NOT NULL DEFAULT 1.00,
+  `harga_satuan` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `jml_belanja` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_1_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_2_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `koefisien_rkpd` decimal(20, 2) NOT NULL DEFAULT 1.00,
+  `harga_satuan_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `jml_belanja_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `sumber_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `checksum` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_belanja_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_skpd_belanja`(`tahun_anggaran`, `no_urut`, `id_belanja_pd`, `id_aktivitas_pd`) USING BTREE,
+  INDEX `fk_trx_forum_skpd_belanja`(`id_aktivitas_pd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_dokumen="CREATE TABLE IF NOT EXISTS `trx_anggaran_dokumen`  (
+  `id_dokumen_keu` int(11) NOT NULL AUTO_INCREMENT,
+  `jns_dokumen_keu` int(11) NOT NULL DEFAULT 0 COMMENT '0 ppas 1 apbd',
+  `kd_dokumen_keu` int(11) NOT NULL DEFAULT 0 COMMENT '0 murni 1 pergeseran_1 2 perubahan 3 pergeseran_2',
+  `id_perubahan` int(11) NOT NULL DEFAULT 0 COMMENT '0 awal',
+  `id_dokumen_ref` int(11) NOT NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL COMMENT 'tahun perencanaan',
+  `nomor_keu` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `tanggal_keu` date NOT NULL,
+  `uraian_perkada` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_unit_ppkd` int(11) NULL DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nama_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nip_tandatangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `sinkronisasi` int(11) NOT NULL DEFAULT 0,
+  `flag` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 aktif 2 tidak aktif',
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_dokumen_keu`) USING BTREE,
+  UNIQUE INDEX `tahun_ranwal`(`jns_dokumen_keu`, `kd_dokumen_keu`, `id_perubahan`, `tahun_anggaran`, `nomor_keu`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_indikator="CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator`  (
+  `id_indikator_program_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_anggaran_pemda` int(11) NOT NULL,
+  `id_indikator_rkpd_final` int(11) NOT NULL COMMENT 'nomor urut indikator sasaran',
+  `tahun_rkpd` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_perubahan` int(11) NOT NULL,
+  `kd_indikator` int(11) NOT NULL,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tolok_ukur_indikator` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `target_keuangan` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_input` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_input` int(255) NULL DEFAULT NULL,
+  `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `id_satuan_output` int(255) NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 belum direviu 1 sudah direviu',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 data rpjmd 1 data baru',
+  PRIMARY KEY (`id_indikator_program_rkpd`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_program_indikator`(`tahun_rkpd`, `id_anggaran_pemda`, `kd_indikator`, `no_urut`, `id_indikator_rkpd_final`) USING BTREE,
+  INDEX `id_anggaran_pemda`(`id_anggaran_pemda`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_keg_indikator_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd`  (
+  `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_kegiatan_pd` bigint(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_indikator_rkpd_final` int(11) NULL DEFAULT NULL,
+  `tahun_anggaran` int(11) NOT NULL,
+  `id_perubahan` int(11) NULL DEFAULT 0,
+  `kd_indikator` int(11) NOT NULL,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tolok_ukur_indikator` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_renstra` decimal(20, 2) NULL DEFAULT 0.00,
+  `target_renja` decimal(20, 2) NULL DEFAULT 0.00,
+  `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `id_satuan_output` int(255) NULL DEFAULT NULL,
+  `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_input` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_input` int(255) NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 posting',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 Renstra 1 baru',
+  PRIMARY KEY (`id_indikator_kegiatan`) USING BTREE,
+  UNIQUE INDEX `idx_trx_renja_rancangan_indikator`(`tahun_anggaran`, `id_indikator_rkpd_final`, `kd_indikator`, `no_urut`, `id_perubahan`, `id_kegiatan_pd`) USING BTREE,
+  INDEX `fk_trx_renja_rancangan_indikator`(`id_indikator_rkpd_final`) USING BTREE,
+  INDEX `trx_renja_rancangan_program_indikator_ibfk_1`(`id_kegiatan_pd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_kegiatan_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_kegiatan_pd`  (
+  `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_program_pd` bigint(20) NOT NULL,
+  `id_kegiatan_pd_rkpd_final` int(11) NULL DEFAULT NULL,
+  `id_unit` int(11) NOT NULL,
+  `id_perubahan` int(11) NOT NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_renja` int(11) NULL DEFAULT 0,
+  `id_rkpd_renstra` int(11) NULL DEFAULT 0,
+  `id_program_renstra` int(11) NULL DEFAULT 0,
+  `id_kegiatan_renstra` int(11) NULL DEFAULT 0,
+  `id_kegiatan_ref` int(11) NOT NULL,
+  `uraian_kegiatan_forum` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pagu_tahun_kegiatan` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_kegiatan_renstra` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_plus1_renja` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_plus1_forum` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_forum` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `keterangan_status` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = non musrenbang 1 =  musrenbang',
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT '0 dilaksanakan 1 batal dilaksanakan',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 dari renja 1 baru tambahan',
+  `kelompok_sasaran` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `checksum` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
+  UNIQUE INDEX `id_unit_id_renja_id_kegiatan_ref`(`id_unit`, `id_kegiatan_ref`, `id_program_pd`, `tahun_anggaran`, `id_kegiatan_pd_rkpd_final`, `id_perubahan`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_trx_forum_skpd_program`(`id_program_pd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_lokasi_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_lokasi_pd`  (
+  `id_lokasi_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_lokasi_rkpd_final` int(11) NOT NULL DEFAULT 0 COMMENT '0',
+  `id_aktivitas_pd` bigint(20) NOT NULL,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `jenis_lokasi` int(11) NOT NULL DEFAULT 0,
+  `id_lokasi` int(11) NOT NULL,
+  `id_lokasi_teknis` int(11) NULL DEFAULT NULL,
+  `volume_1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_usulan_1` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_2` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `volume_usulan_2` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_1` int(11) NOT NULL DEFAULT 0,
+  `id_satuan_2` int(11) NOT NULL DEFAULT 0,
+  `id_desa` int(11) NULL DEFAULT 0,
+  `id_kecamatan` int(11) NULL DEFAULT 0,
+  `rt` int(11) NULL DEFAULT 0,
+  `rw` int(11) NULL DEFAULT 0,
+  `uraian_lokasi` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `lat` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `lang` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0',
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0,
+  `ket_lokasi` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 rkpd 1 anggaran',
+  PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_lokasi`(`id_aktivitas_pd`, `tahun_anggaran`, `no_urut`, `id_lokasi_pd`, `jenis_lokasi`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_pelaksana="CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana`  (
+  `id_pelaksana_anggaran` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anggaran_pemda` int(11) NOT NULL,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_urusan_anggaran` int(11) NOT NULL,
+  `id_pelaksana_rkpd_final` int(11) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `pagu_rkpd_final` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_anggaran` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `hak_akses` int(11) NOT NULL DEFAULT 0 COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 rpjmd 1 baru',
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT '0 dilaksanakan 1 dibatalkan',
+  `ket_pelaksanaan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 belum direviu 1 sudah direviu',
+  PRIMARY KEY (`id_pelaksana_anggaran`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_program_pelaksana`(`tahun_anggaran`, `id_anggaran_pemda`, `id_unit`, `id_urusan_anggaran`, `no_urut`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana`(`id_anggaran_pemda`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana_1`(`id_urusan_anggaran`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana_2`(`id_unit`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_pelaksana_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana_pd`  (
+  `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_kegiatan_pd` bigint(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_pelaksana_rkpd_final` int(11) NULL DEFAULT NULL,
+  `tahun_anggaran` int(11) NOT NULL,
+  `id_sub_unit` int(11) NOT NULL,
+  `id_pelaksana_renja` int(11) NULL DEFAULT 0,
+  `id_lokasi` int(11) NULL DEFAULT 0 COMMENT 'lokasi penyelenggaraan',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 renja 1 tambahan',
+  `ket_pelaksana` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0 COMMENT '0 dilaksanakan 1 batal 2 baru',
+  `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
+  `hak_akses` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
+  UNIQUE INDEX `id_trx_forum_pelaksana`(`id_kegiatan_pd`, `tahun_anggaran`, `no_urut`, `id_pelaksana_pd`, `id_sub_unit`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_prog_indikator_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd`  (
+  `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_program_pd` bigint(11) NOT NULL,
+  `id_indikator_rkpd_final` int(11) NOT NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NOT NULL,
+  `id_program_renstra` int(11) NULL DEFAULT NULL,
+  `id_perubahan` int(11) NULL DEFAULT 0,
+  `kd_indikator` int(11) NOT NULL,
+  `uraian_indikator_program` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tolok_ukur_indikator` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_renstra` decimal(20, 2) NULL DEFAULT 0.00,
+  `target_renja` decimal(20, 2) NULL DEFAULT 0.00,
+  `indikator_output` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `id_satuan_output` int(255) NULL DEFAULT NULL,
+  `indikator_input` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `target_input` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `id_satuan_input` int(255) NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 posting',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 Renstra 1 baru',
+  PRIMARY KEY (`id_indikator_program`) USING BTREE,
+  UNIQUE INDEX `idx_trx_renja_rancangan_indikator`(`tahun_anggaran`, `id_indikator_rkpd_final`, `kd_indikator`, `no_urut`, `id_perubahan`, `id_program_pd`) USING BTREE,
+  INDEX `fk_trx_renja_rancangan_indikator`(`id_program_renstra`) USING BTREE,
+  INDEX `trx_renja_rancangan_program_indikator_ibfk_1`(`id_program_pd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_program="CREATE TABLE IF NOT EXISTS `trx_anggaran_program`  (
+  `id_anggaran_pemda` int(11) NOT NULL AUTO_INCREMENT,
+  `id_dokumen_keu` int(11) NOT NULL DEFAULT 0,
+  `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
+  `id_rkpd_final` int(11) NOT NULL DEFAULT 0 COMMENT '0 baru',
+  `no_urut` int(11) NOT NULL,
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 BL 1 Pendapatan 2 BTL 3 Pembiayaan',
+  `tahun_anggaran` int(11) NOT NULL,
+  `id_rkpd_rpjmd` int(11) NULL DEFAULT NULL,
+  `thn_id_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_visi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_misi_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_tujuan_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_sasaran_rpjmd` int(11) NULL DEFAULT NULL,
+  `id_program_rpjmd` int(11) NULL DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pagu_rkpd` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `pagu_keuangan` decimal(20, 2) NOT NULL DEFAULT 0.00,
+  `keterangan_program` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = Draft 1 = Posting',
+  `ket_usulan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = RKPD 1 = Baru',
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_anggaran_pemda`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_ranwal`(`tahun_anggaran`, `thn_id_rpjmd`, `id_visi_rpjmd`, `id_misi_rpjmd`, `id_tujuan_rpjmd`, `id_sasaran_rpjmd`, `id_program_rpjmd`, `no_urut`, `id_rkpd_final`, `id_rkpd_ranwal`, `id_dokumen_keu`) USING BTREE,
+  INDEX `id_dokumen_keu`(`id_dokumen_keu`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_program_pd="CREATE TABLE IF NOT EXISTS `trx_anggaran_program_pd`  (
+  `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
+  `id_pelaksana_anggaran` int(11) NOT NULL,
+  `kd_dokumen_keu` int(11) NOT NULL DEFAULT 0 COMMENT '0 murni 1 pergeseran_1 2 perubahan 3 pergeseran_2',
+  `jns_dokumen_keu` int(11) NOT NULL DEFAULT 0 COMMENT '0 ppas 1 apbd',
+  `id_perubahan` int(11) NOT NULL DEFAULT 0 COMMENT '0 awal',
+  `id_dokumen_keu` int(11) NOT NULL DEFAULT 0,
+  `tahun_anggaran` int(11) NOT NULL,
+  `jenis_belanja` int(11) NOT NULL DEFAULT 0 COMMENT '0 BL 1 Pdt 2 BTL 3 Penerimaan',
+  `no_urut` int(11) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `id_program_pd_rkpd_final` int(11) NULL DEFAULT NULL,
+  `id_program_renstra` int(11) NULL DEFAULT 0,
+  `uraian_program_renstra` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id_program_ref` int(11) NOT NULL,
+  `pagu_rkpd_final` decimal(20, 2) NULL DEFAULT 0.00,
+  `pagu_anggaran` decimal(20, 2) NULL DEFAULT 0.00,
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 = RKPD 1 = baru',
+  `status_pelaksanaan` int(11) NOT NULL DEFAULT 0,
+  `ket_usulan` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0',
+  `status_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 draft 1 posting',
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `checksum` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_program_pd`) USING BTREE,
+  UNIQUE INDEX `id_unit_id_renja_program_id_program_ref`(`id_unit`, `tahun_anggaran`, `kd_dokumen_keu`, `jns_dokumen_keu`, `id_perubahan`, `id_pelaksana_anggaran`, `id_program_ref`, `id_program_pd_rkpd_final`, `id_dokumen_keu`) USING BTREE,
+  INDEX `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal`(`id_pelaksana_anggaran`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_anggaran_urusan="CREATE TABLE IF NOT EXISTS `trx_anggaran_urusan`  (
+  `id_urusan_anggaran` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anggaran_pemda` int(11) NOT NULL,
+  `tahun_anggaran` int(11) NOT NULL,
+  `no_urut` int(11) NULL DEFAULT NULL,
+  `id_bidang` int(11) NOT NULL,
+  `sumber_data` int(11) NOT NULL DEFAULT 0 COMMENT '0 rkpd 1 baru',
+  `id_urusan_rkpd_final` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_urusan_anggaran`) USING BTREE,
+  UNIQUE INDEX `idx_trx_rkpd_program_pelaksana`(`tahun_anggaran`, `id_anggaran_pemda`, `id_bidang`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana`(`id_anggaran_pemda`) USING BTREE,
+  INDEX `fk_trx_rkpd_ranwal_pelaksana_1`(`id_bidang`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
+trx_rkpd_identifikasi_masalah="CREATE TABLE IF NOT EXISTS `trx_rkpd_identifikasi_masalah`  (
+  `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
+  `tahun_perencanaan` int(11) NULL DEFAULT NULL,
+  `id_indikator` bigint(255) NOT NULL,
+  `interpretasi` int(11) NOT NULL COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
+  `angka_target` decimal(20, 2) NULL DEFAULT NULL,
+  `angka_capaian` decimal(20, 2) NULL DEFAULT NULL,
+  `uraian_target` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `uraian_capaian` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `uraian_masalah` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `uraian_keberhasilan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_masalah`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;"
+
+trx_rpjmd_analisa_ikk="CREATE TABLE IF NOT EXISTS `trx_rpjmd_analisa_ikk`  (
+  `id_capaian_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pemda` int(11) NOT NULL,
+  `id_indikator` int(11) NOT NULL,
+  `capaian_min1` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `capaian_min2` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `capaian_min3` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `capaian_min4` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `capaian_min5` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `capaian_standard` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `interpretasi` int(11) NOT NULL DEFAULT 0 COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
+  `keterangan_capaian` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_capaian_rpjmd`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;"
+
+trx_rpjmd_identifikasi_masalah="CREATE TABLE IF NOT EXISTS `trx_rpjmd_identifikasi_masalah`  (
+  `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_pemda` int(11) NULL DEFAULT NULL,
+  `id_indikator` bigint(255) NOT NULL,
+  `interpretasi` int(11) NOT NULL COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
+  `angka_target` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `angka_capaian` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `uraian_masalah` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `uraian_keberhasilan` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_masalah`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;"
+
+trx_rpjmd_prioritas="CREATE TABLE IF NOT EXISTS `trx_rpjmd_prioritas`  (
+  `id_masalah` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pemda` int(11) NOT NULL DEFAULT 1,
+  `uraian_masalah` varchar(1000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `faktor_keberhasilan` varchar(1000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tingkatan_masalah` int(11) NOT NULL DEFAULT 4 COMMENT '1=Internasional, 2=Nasional, 3=Provinsi, 4=Kab/Kota',
+  `skor_prioritas` decimal(20, 4) NOT NULL DEFAULT 0.0000,
+  `urutan_prioritas` int(11) NOT NULL DEFAULT 1,
+  `status_data` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id_masalah`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;"
+
+user_level_sakip="CREATE TABLE IF NOT EXISTS `user_level_sakip`  (
+  `id_user_level` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `id_sotk_level_1` int(11) NOT NULL,
+  `id_sotk_level_2` int(11) NULL DEFAULT NULL,
+  `id_sotk_level_3` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_user_level`) USING BTREE,
+  UNIQUE INDEX `kd_unit`(`user_id`, `id_sotk_level_1`, `id_sotk_level_2`, `id_sotk_level_3`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;"
+
 trg_egroup = "CREATE TRIGGER `trg_egroup` BEFORE UPDATE ON `ref_group` FOR EACH ROW IF old.id = 1 OR old.name ='super_admin' THEN 
     SIGNAL SQLSTATE '45000' 
     SET MESSAGE_TEXT = 'This record is sacred! You are not allowed to update it!!';
@@ -5729,441 +6180,219 @@ END;"
 tambahKey = "SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-ALTER TABLE `kin_trx_cascading_indikator_kegiatan_pd` 
-  ADD CONSTRAINT `FK_kin_trx_cascading_indikator_kegiatan_pd_kin_1` FOREIGN KEY (`id_hasil_kegiatan`) REFERENCES `kin_trx_cascading_kegiatan_opd` (`id_hasil_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_cascading_indikator_program_pd`
-  ADD CONSTRAINT `FK_kin_trx_cascading_indikator_program_pd_1` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_cascading_kegiatan_opd`
-  ADD CONSTRAINT `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_iku_opd_kegiatan`
-  ADD CONSTRAINT `kin_trx_iku_opd_kegiatan_ibfk_1` FOREIGN KEY (`id_iku_opd_program`) REFERENCES `kin_trx_iku_opd_program` (`id_iku_opd_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_iku_opd_program`
-  ADD CONSTRAINT `kin_trx_iku_opd_program_ibfk_1` FOREIGN KEY (`id_iku_opd_sasaran`) REFERENCES `kin_trx_iku_opd_sasaran` (`id_iku_opd_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_iku_opd_sasaran`
-  ADD CONSTRAINT `kin_trx_iku_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_opd_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_iku_pemda_rinci`
-  ADD CONSTRAINT `kin_trx_iku_pemda_rinci_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_pemda_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_es3_kegiatan`
-  ADD CONSTRAINT `kin_trx_perkin_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_es3_program`
-  ADD CONSTRAINT `kin_trx_perkin_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_perkin_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program_opd`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_es3_program_indikator`
-  ADD CONSTRAINT `kin_trx_perkin_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_es4_kegiatan`
-  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan_es3`) REFERENCES `kin_trx_perkin_es3_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_es4_kegiatan_indikator`
-  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_opd_program`
-  ADD CONSTRAINT `kin_trx_perkin_opd_program_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_opd_sasaran`
-  ADD CONSTRAINT `kin_trx_perkin_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_perkin_opd_sasaran_indikator`
-  ADD CONSTRAINT `kin_trx_perkin_opd_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_real_es2_dok`
-  ADD CONSTRAINT `kin_trx_real_es2_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`),
-  ADD CONSTRAINT `kin_trx_real_es2_dok_ibfk_2` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`);
-ALTER TABLE `kin_trx_real_es2_program`
-  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`),
-  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_3` FOREIGN KEY (`id_real_program_es3`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`);
-ALTER TABLE `kin_trx_real_es2_sasaran`
-  ADD CONSTRAINT `kin_trx_real_es2_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es2_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_real_es2_sasaran_indikator`
-  ADD CONSTRAINT `kin_trx_real_es2_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_real_es3_dok`
-  ADD CONSTRAINT `kin_trx_real_es3_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`),
-  ADD CONSTRAINT `kin_trx_real_es3_dok_ibfk_2` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`);
-ALTER TABLE `kin_trx_real_es3_kegiatan`
-  ADD CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_2` FOREIGN KEY (`id_real_kegiatan_es4`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`);
-ALTER TABLE `kin_trx_real_es3_program`
-  ADD CONSTRAINT `kin_trx_real_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es3_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_real_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`);
-ALTER TABLE `kin_trx_real_es3_program_indikator`
-  ADD CONSTRAINT `kin_trx_real_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `kin_trx_real_es4_dok`
-  ADD CONSTRAINT `kin_trx_real_es4_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`),
-  ADD CONSTRAINT `kin_trx_real_es4_dok_ibfk_2` FOREIGN KEY (`id_sotk_es4`) REFERENCES `ref_sotk_level_3` (`id_sotk_es4`);
-ALTER TABLE `kin_trx_real_es4_kegiatan`
-  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es4_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`);
-ALTER TABLE `kin_trx_real_es4_kegiatan_indikator`
-  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_real_kegiatan`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_bidang`
-  ADD CONSTRAINT `fk_ref_bidang` FOREIGN KEY (`kd_urusan`) REFERENCES `ref_urusan` (`kd_urusan`),
-  ADD CONSTRAINT `fk_ref_fungsi` FOREIGN KEY (`kd_fungsi`) REFERENCES `ref_fungsi` (`kd_fungsi`);
-ALTER TABLE `ref_data_sub_unit`
-  ADD CONSTRAINT `fk_data_sub_unit` FOREIGN KEY (`id_sub_unit`) REFERENCES `ref_sub_unit` (`id_sub_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_desa`
-  ADD CONSTRAINT `ref_desa_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_kecamatan`
-  ADD CONSTRAINT `fk_ref_kecamatan` FOREIGN KEY (`id_pemda`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_kegiatan`
-  ADD CONSTRAINT `fk_ref_kegiatan` FOREIGN KEY (`id_program`) REFERENCES `ref_program` (`id_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_kolom_tabel_dasar`
-  ADD CONSTRAINT `ref_kolom_tabel_dasar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ref_kolom_tabel_dasar_ibfk_2` FOREIGN KEY (`id_tabel_dasar`) REFERENCES `ref_tabel_dasar` (`id_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_mapping_asb_renstra`
-  ADD CONSTRAINT `fk_ref_mapping_asb_renstra` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`),
-  ADD CONSTRAINT `fk_ref_mapping_asb_renstra1` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`);
-ALTER TABLE `ref_pegawai_pangkat`
-  ADD CONSTRAINT `ref_pegawai_pangkat_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_pegawai_unit`
-  ADD CONSTRAINT `ref_pegawai_unit_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ref_pegawai_unit_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_program`
-  ADD CONSTRAINT `fk_ref_program` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`);
-ALTER TABLE `ref_program_nasional`
-  ADD CONSTRAINT `ref_program_nasional_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_nasional` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_program_provinsi`
-  ADD CONSTRAINT `ref_program_provinsi_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_provinsi` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_rek_2`
-  ADD CONSTRAINT `fk_ref_rek_2` FOREIGN KEY (`kd_rek_1`) REFERENCES `ref_rek_1` (`kd_rek_1`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `ref_rek_3`
-  ADD CONSTRAINT `fk_ref_rek_3` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`) REFERENCES `ref_rek_2` (`kd_rek_1`, `kd_rek_2`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `ref_rek_4`
-  ADD CONSTRAINT `fk_ref_rek_4` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`) REFERENCES `ref_rek_3` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `ref_rek_5`
-  ADD CONSTRAINT `ref_rek_5_ibfk_1` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`) REFERENCES `ref_rek_4` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_sotk_level_1`
-  ADD CONSTRAINT `ref_sotk_level_1_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_sotk_level_2`
-  ADD CONSTRAINT `ref_sotk_level_2_ibfk_1` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_sotk_level_3`
-  ADD CONSTRAINT `ref_sotk_level_3_ibfk_1` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_kelompok`
-  ADD CONSTRAINT `fk_ssh_kelompok` FOREIGN KEY (`id_golongan_ssh`) REFERENCES `ref_ssh_golongan` (`id_golongan_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_perkada_tarif`
-  ADD CONSTRAINT `fk_ref_tarif_jumlah` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`),
-  ADD CONSTRAINT `fk_ref_tarif_jumlah_1` FOREIGN KEY (`id_zona_perkada`) REFERENCES `ref_ssh_perkada_zona` (`id_zona_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_perkada_zona`
-  ADD CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`),
-  ADD CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona_1` FOREIGN KEY (`id_perkada`) REFERENCES `ref_ssh_perkada` (`id_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_rekening`
-  ADD CONSTRAINT `fk_ref_ssh_rekening` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_sub_kelompok`
-  ADD CONSTRAINT `fk_ref_ssh_sub_kelompok` FOREIGN KEY (`id_kelompok_ssh`) REFERENCES `ref_ssh_kelompok` (`id_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_tarif`
-  ADD CONSTRAINT `fk_ref_ssh_tarif` FOREIGN KEY (`id_sub_kelompok_ssh`) REFERENCES `ref_ssh_sub_kelompok` (`id_sub_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_ssh_zona_lokasi`
-  ADD CONSTRAINT `fk_zona_lokasi` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ref_sub_unit`
-  ADD CONSTRAINT `fk_ref_sub_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`);
-ALTER TABLE `ref_unit`
-  ADD CONSTRAINT `fk_ref_unit` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`);
-ALTER TABLE `trx_asb_aktivitas`
-  ADD CONSTRAINT `FK_trx_asb_aktivitas_trx_asb_sub_sub_kelompok` FOREIGN KEY (`id_asb_sub_sub_kelompok`) REFERENCES `trx_asb_sub_sub_kelompok` (`id_asb_sub_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_kelompok`
-  ADD CONSTRAINT `FK_trx_asb_cluster_trx_asb_perkada` FOREIGN KEY (`id_asb_perkada`) REFERENCES `trx_asb_perkada` (`id_asb_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_komponen`
-  ADD CONSTRAINT `FK_trx_asb_komponen_trx_asb_aktivitas` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_komponen_rinci`
-  ADD CONSTRAINT `FK_trx_asb_komponen_rinci_ref_ssh_tarif` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_trx_asb_komponen_rinci_trx_asb_komponen` FOREIGN KEY (`id_komponen_asb`) REFERENCES `trx_asb_komponen` (`id_komponen_asb`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_perhitungan_rinci`
-  ADD CONSTRAINT `trx_asb_perhitungan_rinci_ibfk_1` FOREIGN KEY (`id_perhitungan`) REFERENCES `trx_asb_perhitungan` (`id_perhitungan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_sub_kelompok`
-  ADD CONSTRAINT `trx_asb_sub_kelompok_ibfk_1` FOREIGN KEY (`id_asb_kelompok`) REFERENCES `trx_asb_kelompok` (`id_asb_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_asb_sub_sub_kelompok`
-  ADD CONSTRAINT `FK_trx_asb_sub_sub_kelompok_trx_asb_sub_kelompok` FOREIGN KEY (`id_asb_sub_kelompok`) REFERENCES `trx_asb_sub_kelompok` (`id_asb_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd`
-  ADD CONSTRAINT `FK_trx_forum_skpd_trx_forum_skpd_program` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_aktivitas`
-  ADD CONSTRAINT `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd_pelaksana` (`id_pelaksana_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_belanja`
-  ADD CONSTRAINT `trx_forum_skpd_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_kegiatan_indikator`
-  ADD CONSTRAINT `trx_forum_skpd_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_lokasi`
-  ADD CONSTRAINT `trx_forum_skpd_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_pelaksana`
-  ADD CONSTRAINT `trx_forum_skpd_pelaksana_ibfk_1` FOREIGN KEY (`id_aktivitas_forum`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_program`
-  ADD CONSTRAINT `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` FOREIGN KEY (`id_forum_rkpdprog`) REFERENCES `trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_program_indikator`
-  ADD CONSTRAINT `trx_forum_skpd_program_indikator_ibfk_1` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_forum_skpd_usulan`
-  ADD CONSTRAINT `FK_trx_forum_skpd_usulan_trx_forum_skpd_lokasi` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_lokasi` (`id_lokasi_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_isian_data_dasar`
-  ADD CONSTRAINT `trx_isian_data_dasar_ibfk_1` FOREIGN KEY (`id_kolom_tabel_dasar`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_isian_data_dasar_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrencam`
-  ADD CONSTRAINT `trx_musrencam_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrencam_lokasi`
-  ADD CONSTRAINT `trx_musrencam_lokasi_ibfk_1` FOREIGN KEY (`id_musrencam`) REFERENCES `trx_musrencam` (`id_musrencam`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrendes`
-  ADD CONSTRAINT `fk_trx_musrendes` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrendes_lokasi`
-  ADD CONSTRAINT `fk_trx_musrendes_lokasi` FOREIGN KEY (`id_musrendes`) REFERENCES `trx_musrendes` (`id_musrendes`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrendes_rw`
-  ADD CONSTRAINT `trx_musrendes_rw_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_aktivitas_pd`
-  ADD CONSTRAINT `trx_musrenkab_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_musrenkab_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_belanja_pd`
-  ADD CONSTRAINT `trx_musrenkab_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_indikator`
-  ADD CONSTRAINT `trx_musrenkab_indikator_ibfk_1` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_kegiatan_pd`
-  ADD CONSTRAINT `trx_musrenkab_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_keg_indikator_pd`
-  ADD CONSTRAINT `trx_musrenkab_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_lokasi_pd`
-  ADD CONSTRAINT `trx_musrenkab_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_pelaksana`
-  ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_musrenkab_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_pelaksana_pd`
-  ADD CONSTRAINT `trx_musrenkab_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_program_pd`
-  ADD CONSTRAINT `trx_musrenkab_program_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_rkpd`) REFERENCES `trx_musrenkab_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_prog_indikator_pd`
-  ADD CONSTRAINT `trx_musrenkab_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_musrenkab_urusan`
-  ADD CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_musrenkab_urusan_ibfk_2` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_pokir_lokasi`
-  ADD CONSTRAINT `trx_pokir_lokasi_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_pokir_tl`
-  ADD CONSTRAINT `trx_pokir_tl_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_pokir_tl_unit`
-  ADD CONSTRAINT `trx_pokir_tl_unit_ibfk_1` FOREIGN KEY (`id_pokir_tl`) REFERENCES `trx_pokir_tl` (`id_pokir_tl`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_pokir_usulan`
-  ADD CONSTRAINT `trx_pokir_usulan_ibfk_1` FOREIGN KEY (`id_pokir`) REFERENCES `trx_pokir` (`id_pokir`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_pokir_usulan_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_aktivitas`
-  ADD CONSTRAINT `trx_renja_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_belanja`
-  ADD CONSTRAINT `trx_renja_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_kebijakan`
-  ADD CONSTRAINT `trx_renja_kebijakan_ibfk_1` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_kegiatan`
-  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_2` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_3` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_4` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_kegiatan_indikator`
-  ADD CONSTRAINT `trx_renja_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_lokasi`
-  ADD CONSTRAINT `trx_renja_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_pelaksana`
-  ADD CONSTRAINT `trx_renja_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_program_indikator`
-  ADD CONSTRAINT `trx_renja_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan`
-  ADD CONSTRAINT `FK_trx_renja_rancangan_trx_renja_rancangan_program` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_trx_rancangan_renja` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_trx_rancangan_renja_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_aktivitas`
-  ADD CONSTRAINT `trx_renja_rancangan_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_belanja`
-  ADD CONSTRAINT `FK_trx_renja_rancangan_belanja_trx_renja_rancangan_lokasi` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_indikator`
-  ADD CONSTRAINT `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_kebijakan`
-  ADD CONSTRAINT `fk_trx_renja_rancangan_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_lokasi`
-  ADD CONSTRAINT `fk_rancangan_renja_lokasi` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_pelaksana`
-  ADD CONSTRAINT `fk_trx_rancangan_renja_pelaksana` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_program_indikator`
-  ADD CONSTRAINT `trx_renja_rancangan_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_rancangan_ref_pokir`
-  ADD CONSTRAINT `trx_renja_rancangan_ref_pokir_ibfk_1` FOREIGN KEY (`id_aktivitas_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_aktivitas`
-  ADD CONSTRAINT `trx_renja_ranwal_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_kegiatan`
-  ADD CONSTRAINT `trx_renja_ranwal_kegiatan_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_kegiatan_indikator`
-  ADD CONSTRAINT `trx_renja_ranwal_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_pelaksana`
-  ADD CONSTRAINT `trx_renja_ranwal_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_program`
-  ADD CONSTRAINT `trx_renja_ranwal_program_ibfk_1` FOREIGN KEY (`id_renja_ranwal`) REFERENCES `trx_renja_ranwal_program_rkpd` (`id_renja_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renja_ranwal_program_indikator`
-  ADD CONSTRAINT `trx_renja_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_dokumen`
-  ADD CONSTRAINT `fk_trx_renstra_dokumen` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_trx_renstra_dokumen_1` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_kebijakan`
-  ADD CONSTRAINT `fk_trx_renstra_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_kegiatan`
-  ADD CONSTRAINT `fk_trx_renstra_kegiatan` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_kegiatan_indikator`
-  ADD CONSTRAINT `fk_trx_renstra_kegiatan_indikator` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_kegiatan_pelaksana`
-  ADD CONSTRAINT `fk_trx_renstra_kegiatan_pelaksana` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_misi`
-  ADD CONSTRAINT `fk_trx_renstra_misi` FOREIGN KEY (`id_visi_renstra`) REFERENCES `trx_renstra_visi` (`id_visi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_program`
-  ADD CONSTRAINT `fk_trx_renstra_program` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_trx_renstra_program_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_program_indikator`
-  ADD CONSTRAINT `fk_trx_renstra_program_indikator` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_sasaran`
-  ADD CONSTRAINT `fk_trx_renstra_sasaran` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_sasaran_indikator`
-  ADD CONSTRAINT `fk_trx_renstra_sasaran_indikator` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_strategi`
-  ADD CONSTRAINT `fk_trx_renstra_strategi` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`);
-ALTER TABLE `trx_renstra_tujuan`
-  ADD CONSTRAINT `fk_trx_renstra_tujuan` FOREIGN KEY (`id_misi_renstra`) REFERENCES `trx_renstra_misi` (`id_misi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_tujuan_indikator`
-  ADD CONSTRAINT `trx_renstra_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_renstra_visi`
-  ADD CONSTRAINT `FK_trx_renstra_visi_ref_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_aktivitas_pd`
-  ADD CONSTRAINT `trx_rkpd_final_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_final_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_belanja_pd`
-  ADD CONSTRAINT `trx_rkpd_final_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_indikator`
-  ADD CONSTRAINT `trx_rkpd_final_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_kegiatan_pd`
-  ADD CONSTRAINT `trx_rkpd_final_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_keg_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_final_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_lokasi_pd`
-  ADD CONSTRAINT `trx_rkpd_final_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_pelaksana`
-  ADD CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_final_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_pelaksana_pd`
-  ADD CONSTRAINT `trx_rkpd_final_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_program_pd`
-  ADD CONSTRAINT `trx_rkpd_final_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_prog_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_final_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_final_urusan`
-  ADD CONSTRAINT `trx_rkpd_final_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_final_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_aktivitas_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_rancangan_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_belanja_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_indikator`
-  ADD CONSTRAINT `trx_rkpd_rancangan_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_kegiatan_pd`
-  ADD CONSTRAINT `FK_trx_rkpd_rancangan_kegiatan_pd_trx_rkpd_rancangan_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_keg_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_lokasi_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_pelaksana`
-  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_rancangan_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_pelaksana_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_program_pd`
-  ADD CONSTRAINT `test` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_prog_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_rancangan_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rancangan_urusan`
-  ADD CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_3` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_aktivitas_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_ranhir_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_belanja_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_indikator`
-  ADD CONSTRAINT `trx_rkpd_ranhir_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_kegiatan_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_keg_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_lokasi_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_pelaksana`
-  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranhir_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_pelaksana_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_program_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_prog_indikator_pd`
-  ADD CONSTRAINT `trx_rkpd_ranhir_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranhir_urusan`
-  ADD CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranwal_indikator`
-  ADD CONSTRAINT `fk_trx_rkpd_ranwal_indikator` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranwal_kebijakan`
-  ADD CONSTRAINT `fk_trx_rkpd_ranwal_kebijakan` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranwal_pelaksana`
-  ADD CONSTRAINT `FK_trx_rkpd_ranwal_pelaksana_trx_rkpd_ranwal_urusan` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranwal_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_trx_rkpd_ranwal_pelaksana_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_ranwal_urusan`
-  ADD CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_renstra`
-  ADD CONSTRAINT `fk_trx_rkpd_renstra` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_renstra_indikator`
-  ADD CONSTRAINT `trx_rkpd_renstra_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_renstra_pelaksana`
-  ADD CONSTRAINT `fk_trx_rkpd_renstra_pelaksana` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rpjmd_kebijakan`
-  ADD CONSTRAINT `fk_trx_rkpd_rpjmd_kebijakan` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rpjmd_program_indikator`
-  ADD CONSTRAINT `fk_rkpd_rpjmd_indikator` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rpjmd_program_pelaksana`
-  ADD CONSTRAINT `fk_rkpd_rpjmd_pelaksana` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rkpd_rpjmd_ranwal`
-  ADD CONSTRAINT `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_kebijakan`
-  ADD CONSTRAINT `fk_trx_rpjmd_kebijakan` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_misi`
-  ADD CONSTRAINT `fk_trx_rpjmd_misi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_program`
-  ADD CONSTRAINT `fk_trx_rpjmd_program` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_program_indikator`
-  ADD CONSTRAINT `fk_trx_rpjmd_program_indikator` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_program_pelaksana`
-  ADD CONSTRAINT `fk_trx_rpjmd_program_pelaksana` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_program_urusan`
-  ADD CONSTRAINT `fk_trx_rpjmd_program_urusan` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_kebijakan`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_kebijakan_ibfk_1` FOREIGN KEY (`id_strategi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_strategi` (`id_strategi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_misi`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_misi_ibfk_1` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_program`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_program_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_program_indikator`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_program_pelaksana`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_program_pelaksana_ibfk_1` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_program_urusan`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_program_urusan_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_sasaran`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_sasaran_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_sasaran_indikator`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_strategi`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_strategi_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_tujuan`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_tujuan_ibfk_1` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_tujuan_indikator`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_ranwal_visi`
-  ADD CONSTRAINT `trx_rpjmd_ranwal_visi_ibfk_1` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_ranwal_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_sasaran`
-  ADD CONSTRAINT `FK_trx_rpjmd_sasaran_trx_rpjmd_tujuan` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_sasaran_indikator`
-  ADD CONSTRAINT `fk_trx_rpjmd_sasaran_indikator` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_strategi`
-  ADD CONSTRAINT `fk_trx_rpjmd_strategi` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_tujuan`
-  ADD CONSTRAINT `fk_trx_rpjmd_tujuan` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_tujuan_indikator`
-  ADD CONSTRAINT `trx_rpjmd_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_rpjmd_visi`
-  ADD CONSTRAINT `fk_trx_rpjmd_visi` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd_old`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_usulan_kab`
-  ADD CONSTRAINT `trx_usulan_kab_ibfk_1` FOREIGN KEY (`id_kab`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_usulan_kab_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `trx_usulan_kab_lokasi`
-  ADD CONSTRAINT `trx_usulan_kab_lokasi_ibfk_1` FOREIGN KEY (`id_usulan_kab`) REFERENCES `trx_usulan_kab` (`id_usulan_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trx_usulan_kab_lokasi_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `ref_lokasi` (`id_lokasi`) ON UPDATE CASCADE;
-ALTER TABLE `user_app`
-  ADD CONSTRAINT `user_app_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_app_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `ref_group` (`id`);
+ALTER TABLE `kin_trx_cascading_indikator_kegiatan_pd`  ADD CONSTRAINT `FK_kin_trx_cascading_indikator_kegiatan_pd_kin_1` FOREIGN KEY (`id_hasil_kegiatan`) REFERENCES `kin_trx_cascading_kegiatan_opd` (`id_hasil_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_cascading_indikator_program_pd`  ADD CONSTRAINT `FK_kin_trx_cascading_indikator_program_pd_1` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_cascading_kegiatan_opd`  ADD CONSTRAINT `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_iku_opd_kegiatan`  ADD CONSTRAINT `kin_trx_iku_opd_kegiatan_ibfk_1` FOREIGN KEY (`id_iku_opd_program`) REFERENCES `kin_trx_iku_opd_program` (`id_iku_opd_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_iku_opd_program`  ADD CONSTRAINT `kin_trx_iku_opd_program_ibfk_1` FOREIGN KEY (`id_iku_opd_sasaran`) REFERENCES `kin_trx_iku_opd_sasaran` (`id_iku_opd_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_iku_opd_sasaran`  ADD CONSTRAINT `kin_trx_iku_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_opd_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_iku_pemda_rinci`  ADD CONSTRAINT `kin_trx_iku_pemda_rinci_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_pemda_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_es3_kegiatan`  ADD CONSTRAINT `kin_trx_perkin_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_es3_program_indikator`  ADD CONSTRAINT `kin_trx_perkin_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_es3_program`  ADD CONSTRAINT `kin_trx_perkin_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_perkin_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program_opd`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_es4_kegiatan_indikator`  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_es4_kegiatan`  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan_es3`) REFERENCES `kin_trx_perkin_es3_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_opd_program`  ADD CONSTRAINT `kin_trx_perkin_opd_program_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_opd_sasaran_indikator`  ADD CONSTRAINT `kin_trx_perkin_opd_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_perkin_opd_sasaran`  ADD CONSTRAINT `kin_trx_perkin_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_real_es2_dok`  ADD CONSTRAINT `kin_trx_real_es2_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`),  ADD CONSTRAINT `kin_trx_real_es2_dok_ibfk_2` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`);
+ALTER TABLE `kin_trx_real_es2_program`  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`),  ADD CONSTRAINT `kin_trx_real_es2_program_ibfk_3` FOREIGN KEY (`id_real_program_es3`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`);
+ALTER TABLE `kin_trx_real_es2_sasaran_indikator`  ADD CONSTRAINT `kin_trx_real_es2_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_real_es2_sasaran`  ADD CONSTRAINT `kin_trx_real_es2_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es2_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_real_es3_dok`  ADD CONSTRAINT `kin_trx_real_es3_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`),  ADD CONSTRAINT `kin_trx_real_es3_dok_ibfk_2` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`);
+ALTER TABLE `kin_trx_real_es3_kegiatan`  ADD CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_2` FOREIGN KEY (`id_real_kegiatan_es4`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`);
+ALTER TABLE `kin_trx_real_es3_program_indikator`  ADD CONSTRAINT `kin_trx_real_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_real_es3_program`  ADD CONSTRAINT `kin_trx_real_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es3_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_real_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`);
+ALTER TABLE `kin_trx_real_es4_dok`  ADD CONSTRAINT `kin_trx_real_es4_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`),  ADD CONSTRAINT `kin_trx_real_es4_dok_ibfk_2` FOREIGN KEY (`id_sotk_es4`) REFERENCES `ref_sotk_level_3` (`id_sotk_es4`);
+ALTER TABLE `kin_trx_real_es4_kegiatan_indikator`  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_real_kegiatan`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `kin_trx_real_es4_kegiatan`  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es4_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`);
+ALTER TABLE `ref_bidang`  ADD CONSTRAINT `fk_ref_bidang` FOREIGN KEY (`kd_urusan`) REFERENCES `ref_urusan` (`kd_urusan`),  ADD CONSTRAINT `fk_ref_fungsi` FOREIGN KEY (`kd_fungsi`) REFERENCES `ref_fungsi` (`kd_fungsi`);
+ALTER TABLE `ref_data_sub_unit`  ADD CONSTRAINT `fk_data_sub_unit` FOREIGN KEY (`id_sub_unit`) REFERENCES `ref_sub_unit` (`id_sub_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_desa`  ADD CONSTRAINT `ref_desa_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_kecamatan`  ADD CONSTRAINT `fk_ref_kecamatan` FOREIGN KEY (`id_pemda`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_kegiatan`  ADD CONSTRAINT `fk_ref_kegiatan` FOREIGN KEY (`id_program`) REFERENCES `ref_program` (`id_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_kolom_tabel_dasar`  ADD CONSTRAINT `ref_kolom_tabel_dasar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `ref_kolom_tabel_dasar_ibfk_2` FOREIGN KEY (`id_tabel_dasar`) REFERENCES `ref_tabel_dasar` (`id_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_mapping_asb_renstra`  ADD CONSTRAINT `fk_ref_mapping_asb_renstra` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`),  ADD CONSTRAINT `fk_ref_mapping_asb_renstra1` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`);
+ALTER TABLE `ref_pegawai_pangkat`  ADD CONSTRAINT `ref_pegawai_pangkat_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_pegawai_unit`  ADD CONSTRAINT `ref_pegawai_unit_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `ref_pegawai_unit_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_program_nasional`  ADD CONSTRAINT `ref_program_nasional_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_nasional` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_program_provinsi`  ADD CONSTRAINT `ref_program_provinsi_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_provinsi` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_program`  ADD CONSTRAINT `fk_ref_program` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`);
+ALTER TABLE `ref_rek_2`  ADD CONSTRAINT `fk_ref_rek_2` FOREIGN KEY (`kd_rek_1`) REFERENCES `ref_rek_1` (`kd_rek_1`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ref_rek_3`  ADD CONSTRAINT `fk_ref_rek_3` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`) REFERENCES `ref_rek_2` (`kd_rek_1`, `kd_rek_2`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ref_rek_4`  ADD CONSTRAINT `fk_ref_rek_4` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`) REFERENCES `ref_rek_3` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ref_rek_5`  ADD CONSTRAINT `ref_rek_5_ibfk_1` FOREIGN KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`) REFERENCES `ref_rek_4` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_sotk_level_1`  ADD CONSTRAINT `ref_sotk_level_1_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_sotk_level_2`  ADD CONSTRAINT `ref_sotk_level_2_ibfk_1` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_sotk_level_3`  ADD CONSTRAINT `ref_sotk_level_3_ibfk_1` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_kelompok`  ADD CONSTRAINT `fk_ssh_kelompok` FOREIGN KEY (`id_golongan_ssh`) REFERENCES `ref_ssh_golongan` (`id_golongan_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_perkada_tarif`  ADD CONSTRAINT `fk_ref_tarif_jumlah` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`),  ADD CONSTRAINT `fk_ref_tarif_jumlah_1` FOREIGN KEY (`id_zona_perkada`) REFERENCES `ref_ssh_perkada_zona` (`id_zona_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_perkada_zona`  ADD CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`),  ADD CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona_1` FOREIGN KEY (`id_perkada`) REFERENCES `ref_ssh_perkada` (`id_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_rekening`  ADD CONSTRAINT `fk_ref_ssh_rekening` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_sub_kelompok`  ADD CONSTRAINT `fk_ref_ssh_sub_kelompok` FOREIGN KEY (`id_kelompok_ssh`) REFERENCES `ref_ssh_kelompok` (`id_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_tarif`  ADD CONSTRAINT `fk_ref_ssh_tarif` FOREIGN KEY (`id_sub_kelompok_ssh`) REFERENCES `ref_ssh_sub_kelompok` (`id_sub_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_ssh_zona_lokasi`  ADD CONSTRAINT `fk_zona_lokasi` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ref_sub_unit`  ADD CONSTRAINT `fk_ref_sub_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`);
+ALTER TABLE `ref_unit`  ADD CONSTRAINT `fk_ref_unit` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`);
+ALTER TABLE `trx_anggaran_aktivitas_pd`  ADD CONSTRAINT `FK_trx_anggaran_aktivitas_pd_trx_anggaran_pelaksana_pd` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_anggaran_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_belanja_pd`  ADD CONSTRAINT `FK_trx_anggaran_belanja_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_indikator`  ADD CONSTRAINT `FK_trx_anggaran_indikator_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_keg_indikator_pd`  ADD CONSTRAINT `FK_trx_anggaran_keg_indikator_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_kegiatan_pd`  ADD CONSTRAINT `FK_trx_anggaran_kegiatan_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_lokasi_pd`  ADD CONSTRAINT `FK_trx_anggaran_lokasi_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_pelaksana_pd`  ADD CONSTRAINT `FK_trx_anggaran_pelaksana_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_pelaksana`  ADD CONSTRAINT `FK_trx_anggaran_pelaksana_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_prog_indikator_pd`  ADD CONSTRAINT `FK_trx_anggaran_prog_indikator_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_program_pd`  ADD CONSTRAINT `FK_trx_anggaran_program_pd_trx_anggaran_pelaksana` FOREIGN KEY (`id_pelaksana_anggaran`) REFERENCES `trx_anggaran_pelaksana` (`id_pelaksana_anggaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_program`  ADD CONSTRAINT `FK_trx_anggaran_program_trx_anggaran_dokumen` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_anggaran_urusan`  ADD CONSTRAINT `FK_trx_anggaran_urusan_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_aktivitas`  ADD CONSTRAINT `FK_trx_asb_aktivitas_trx_asb_sub_sub_kelompok` FOREIGN KEY (`id_asb_sub_sub_kelompok`) REFERENCES `trx_asb_sub_sub_kelompok` (`id_asb_sub_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_kelompok`  ADD CONSTRAINT `FK_trx_asb_cluster_trx_asb_perkada` FOREIGN KEY (`id_asb_perkada`) REFERENCES `trx_asb_perkada` (`id_asb_perkada`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_komponen_rinci`  ADD CONSTRAINT `FK_trx_asb_komponen_rinci_ref_ssh_tarif` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE NO ACTION ON UPDATE NO ACTION,  ADD CONSTRAINT `FK_trx_asb_komponen_rinci_trx_asb_komponen` FOREIGN KEY (`id_komponen_asb`) REFERENCES `trx_asb_komponen` (`id_komponen_asb`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_komponen`  ADD CONSTRAINT `FK_trx_asb_komponen_trx_asb_aktivitas` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_perhitungan_rinci`  ADD CONSTRAINT `trx_asb_perhitungan_rinci_ibfk_1` FOREIGN KEY (`id_perhitungan`) REFERENCES `trx_asb_perhitungan` (`id_perhitungan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_sub_kelompok`  ADD CONSTRAINT `trx_asb_sub_kelompok_ibfk_1` FOREIGN KEY (`id_asb_kelompok`) REFERENCES `trx_asb_kelompok` (`id_asb_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_asb_sub_sub_kelompok`  ADD CONSTRAINT `FK_trx_asb_sub_sub_kelompok_trx_asb_sub_kelompok` FOREIGN KEY (`id_asb_sub_kelompok`) REFERENCES `trx_asb_sub_kelompok` (`id_asb_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_aktivitas`  ADD CONSTRAINT `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd_pelaksana` (`id_pelaksana_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_belanja`  ADD CONSTRAINT `trx_forum_skpd_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_kegiatan_indikator`  ADD CONSTRAINT `trx_forum_skpd_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_lokasi`  ADD CONSTRAINT `trx_forum_skpd_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_pelaksana`  ADD CONSTRAINT `trx_forum_skpd_pelaksana_ibfk_1` FOREIGN KEY (`id_aktivitas_forum`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_program_indikator`  ADD CONSTRAINT `trx_forum_skpd_program_indikator_ibfk_1` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_program`  ADD CONSTRAINT `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` FOREIGN KEY (`id_forum_rkpdprog`) REFERENCES `trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd_usulan`  ADD CONSTRAINT `FK_trx_forum_skpd_usulan_trx_forum_skpd_lokasi` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_lokasi` (`id_lokasi_forum`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_forum_skpd`  ADD CONSTRAINT `FK_trx_forum_skpd_trx_forum_skpd_program` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_isian_data_dasar`  ADD CONSTRAINT `trx_isian_data_dasar_ibfk_1` FOREIGN KEY (`id_kolom_tabel_dasar`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_isian_data_dasar_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrencam_lokasi`  ADD CONSTRAINT `trx_musrencam_lokasi_ibfk_1` FOREIGN KEY (`id_musrencam`) REFERENCES `trx_musrencam` (`id_musrencam`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrencam`  ADD CONSTRAINT `trx_musrencam_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrendes_lokasi`  ADD CONSTRAINT `fk_trx_musrendes_lokasi` FOREIGN KEY (`id_musrendes`) REFERENCES `trx_musrendes` (`id_musrendes`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrendes_rw`  ADD CONSTRAINT `trx_musrendes_rw_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrendes`  ADD CONSTRAINT `fk_trx_musrendes` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_aktivitas_pd`  ADD CONSTRAINT `trx_musrenkab_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_musrenkab_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_belanja_pd`  ADD CONSTRAINT `trx_musrenkab_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_indikator`  ADD CONSTRAINT `trx_musrenkab_indikator_ibfk_1` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_keg_indikator_pd`  ADD CONSTRAINT `trx_musrenkab_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_kegiatan_pd`  ADD CONSTRAINT `trx_musrenkab_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_lokasi_pd`  ADD CONSTRAINT `trx_musrenkab_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_pelaksana_pd`  ADD CONSTRAINT `trx_musrenkab_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_pelaksana`  ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_musrenkab_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_musrenkab_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_prog_indikator_pd`  ADD CONSTRAINT `trx_musrenkab_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_program_pd`  ADD CONSTRAINT `trx_musrenkab_program_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_rkpd`) REFERENCES `trx_musrenkab_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_musrenkab_urusan`  ADD CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,  ADD CONSTRAINT `trx_musrenkab_urusan_ibfk_2` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_pokir_lokasi`  ADD CONSTRAINT `trx_pokir_lokasi_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_pokir_tl_unit`  ADD CONSTRAINT `trx_pokir_tl_unit_ibfk_1` FOREIGN KEY (`id_pokir_tl`) REFERENCES `trx_pokir_tl` (`id_pokir_tl`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_pokir_tl`  ADD CONSTRAINT `trx_pokir_tl_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_pokir_usulan`  ADD CONSTRAINT `trx_pokir_usulan_ibfk_1` FOREIGN KEY (`id_pokir`) REFERENCES `trx_pokir` (`id_pokir`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_pokir_usulan_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_aktivitas`  ADD CONSTRAINT `trx_renja_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_belanja`  ADD CONSTRAINT `trx_renja_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_kebijakan`  ADD CONSTRAINT `trx_renja_kebijakan_ibfk_1` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_kegiatan_indikator`  ADD CONSTRAINT `trx_renja_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_kegiatan`  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_2` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_3` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_renja_kegiatan_ibfk_4` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_lokasi`  ADD CONSTRAINT `trx_renja_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_pelaksana`  ADD CONSTRAINT `trx_renja_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_program_indikator`  ADD CONSTRAINT `trx_renja_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_aktivitas`  ADD CONSTRAINT `trx_renja_rancangan_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_belanja`  ADD CONSTRAINT `FK_trx_renja_rancangan_belanja_trx_renja_rancangan_lokasi` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_indikator`  ADD CONSTRAINT `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_kebijakan`  ADD CONSTRAINT `fk_trx_renja_rancangan_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_lokasi`  ADD CONSTRAINT `fk_rancangan_renja_lokasi` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_pelaksana`  ADD CONSTRAINT `fk_trx_rancangan_renja_pelaksana` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_program_indikator`  ADD CONSTRAINT `trx_renja_rancangan_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan_ref_pokir`  ADD CONSTRAINT `trx_renja_rancangan_ref_pokir_ibfk_1` FOREIGN KEY (`id_aktivitas_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_rancangan`  ADD CONSTRAINT `FK_trx_renja_rancangan_trx_renja_rancangan_program` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `fk_trx_rancangan_renja` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `fk_trx_rancangan_renja_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_aktivitas`  ADD CONSTRAINT `trx_renja_ranwal_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_kegiatan_indikator`  ADD CONSTRAINT `trx_renja_ranwal_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_kegiatan`  ADD CONSTRAINT `trx_renja_ranwal_kegiatan_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_pelaksana`  ADD CONSTRAINT `trx_renja_ranwal_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_program_indikator`  ADD CONSTRAINT `trx_renja_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renja_ranwal_program`  ADD CONSTRAINT `trx_renja_ranwal_program_ibfk_1` FOREIGN KEY (`id_renja_ranwal`) REFERENCES `trx_renja_ranwal_program_rkpd` (`id_renja_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_dokumen`  ADD CONSTRAINT `fk_trx_renstra_dokumen` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `fk_trx_renstra_dokumen_1` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_kebijakan`  ADD CONSTRAINT `fk_trx_renstra_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_kegiatan_indikator`  ADD CONSTRAINT `fk_trx_renstra_kegiatan_indikator` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_kegiatan_pelaksana`  ADD CONSTRAINT `fk_trx_renstra_kegiatan_pelaksana` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_kegiatan`  ADD CONSTRAINT `fk_trx_renstra_kegiatan` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_misi`  ADD CONSTRAINT `fk_trx_renstra_misi` FOREIGN KEY (`id_visi_renstra`) REFERENCES `trx_renstra_visi` (`id_visi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_program_indikator`  ADD CONSTRAINT `fk_trx_renstra_program_indikator` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_program`  ADD CONSTRAINT `fk_trx_renstra_program` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `fk_trx_renstra_program_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_sasaran_indikator`  ADD CONSTRAINT `fk_trx_renstra_sasaran_indikator` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_sasaran`  ADD CONSTRAINT `fk_trx_renstra_sasaran` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_strategi`  ADD CONSTRAINT `fk_trx_renstra_strategi` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`);
+ALTER TABLE `trx_renstra_tujuan_indikator`  ADD CONSTRAINT `trx_renstra_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_tujuan`  ADD CONSTRAINT `fk_trx_renstra_tujuan` FOREIGN KEY (`id_misi_renstra`) REFERENCES `trx_renstra_misi` (`id_misi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_renstra_visi`  ADD CONSTRAINT `FK_trx_renstra_visi_ref_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_aktivitas_pd`  ADD CONSTRAINT `trx_rkpd_final_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_final_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_belanja_pd`  ADD CONSTRAINT `trx_rkpd_final_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_indikator`  ADD CONSTRAINT `trx_rkpd_final_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_keg_indikator_pd`  ADD CONSTRAINT `trx_rkpd_final_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_kegiatan_pd`  ADD CONSTRAINT `trx_rkpd_final_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_lokasi_pd`  ADD CONSTRAINT `trx_rkpd_final_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_pelaksana_pd`  ADD CONSTRAINT `trx_rkpd_final_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_pelaksana`  ADD CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_final_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_prog_indikator_pd`  ADD CONSTRAINT `trx_rkpd_final_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_program_pd`  ADD CONSTRAINT `trx_rkpd_final_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_final_urusan`  ADD CONSTRAINT `trx_rkpd_final_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_final_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_aktivitas_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_rancangan_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_belanja_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_indikator`  ADD CONSTRAINT `trx_rkpd_rancangan_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_keg_indikator_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_kegiatan_pd`  ADD CONSTRAINT `FK_trx_rkpd_rancangan_kegiatan_pd_trx_rkpd_rancangan_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_lokasi_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_pelaksana_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_pelaksana`  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_rancangan_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_prog_indikator_pd`  ADD CONSTRAINT `trx_rkpd_rancangan_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_program_pd`  ADD CONSTRAINT `test` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rancangan_urusan`  ADD CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_3` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_aktivitas_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_ranhir_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_belanja_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_indikator`  ADD CONSTRAINT `trx_rkpd_ranhir_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_keg_indikator_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_kegiatan_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_lokasi_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_pelaksana_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_pelaksana`  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranhir_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_prog_indikator_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_program_pd`  ADD CONSTRAINT `trx_rkpd_ranhir_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranhir_urusan`  ADD CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranwal_indikator`  ADD CONSTRAINT `fk_trx_rkpd_ranwal_indikator` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranwal_kebijakan`  ADD CONSTRAINT `fk_trx_rkpd_ranwal_kebijakan` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranwal_pelaksana`  ADD CONSTRAINT `FK_trx_rkpd_ranwal_pelaksana_trx_rkpd_ranwal_urusan` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranwal_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `fk_trx_rkpd_ranwal_pelaksana_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_ranwal_urusan`  ADD CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_renstra_indikator`  ADD CONSTRAINT `trx_rkpd_renstra_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_renstra_pelaksana`  ADD CONSTRAINT `fk_trx_rkpd_renstra_pelaksana` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_renstra`  ADD CONSTRAINT `fk_trx_rkpd_renstra` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rpjmd_kebijakan`  ADD CONSTRAINT `fk_trx_rkpd_rpjmd_kebijakan` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rpjmd_program_indikator`  ADD CONSTRAINT `fk_rkpd_rpjmd_indikator` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rpjmd_program_pelaksana`  ADD CONSTRAINT `fk_rkpd_rpjmd_pelaksana` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rkpd_rpjmd_ranwal`  ADD CONSTRAINT `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_kebijakan`  ADD CONSTRAINT `fk_trx_rpjmd_kebijakan` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_misi`  ADD CONSTRAINT `fk_trx_rpjmd_misi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_program_indikator`  ADD CONSTRAINT `fk_trx_rpjmd_program_indikator` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_program_pelaksana`  ADD CONSTRAINT `fk_trx_rpjmd_program_pelaksana` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_program_urusan`  ADD CONSTRAINT `fk_trx_rpjmd_program_urusan` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_program`  ADD CONSTRAINT `fk_trx_rpjmd_program` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_kebijakan`  ADD CONSTRAINT `trx_rpjmd_ranwal_kebijakan_ibfk_1` FOREIGN KEY (`id_strategi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_strategi` (`id_strategi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_misi`  ADD CONSTRAINT `trx_rpjmd_ranwal_misi_ibfk_1` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_program_indikator`  ADD CONSTRAINT `trx_rpjmd_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_program_pelaksana`  ADD CONSTRAINT `trx_rpjmd_ranwal_program_pelaksana_ibfk_1` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_program_urusan`  ADD CONSTRAINT `trx_rpjmd_ranwal_program_urusan_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_program`  ADD CONSTRAINT `trx_rpjmd_ranwal_program_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_sasaran_indikator`  ADD CONSTRAINT `trx_rpjmd_ranwal_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_sasaran`  ADD CONSTRAINT `trx_rpjmd_ranwal_sasaran_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_strategi`  ADD CONSTRAINT `trx_rpjmd_ranwal_strategi_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_tujuan_indikator`  ADD CONSTRAINT `trx_rpjmd_ranwal_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_tujuan`  ADD CONSTRAINT `trx_rpjmd_ranwal_tujuan_ibfk_1` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_ranwal_visi`  ADD CONSTRAINT `trx_rpjmd_ranwal_visi_ibfk_1` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_ranwal_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_sasaran_indikator`  ADD CONSTRAINT `fk_trx_rpjmd_sasaran_indikator` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_sasaran`  ADD CONSTRAINT `FK_trx_rpjmd_sasaran_trx_rpjmd_tujuan` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_strategi`  ADD CONSTRAINT `fk_trx_rpjmd_strategi` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_tujuan_indikator`  ADD CONSTRAINT `trx_rpjmd_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_tujuan`  ADD CONSTRAINT `fk_trx_rpjmd_tujuan` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_rpjmd_visi`  ADD CONSTRAINT `fk_trx_rpjmd_visi` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd_old`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `trx_usulan_kab_lokasi`  ADD CONSTRAINT `trx_usulan_kab_lokasi_ibfk_1` FOREIGN KEY (`id_usulan_kab`) REFERENCES `trx_usulan_kab` (`id_usulan_kab`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_usulan_kab_lokasi_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `ref_lokasi` (`id_lokasi`) ON UPDATE CASCADE;
+ALTER TABLE `trx_usulan_kab`  ADD CONSTRAINT `trx_usulan_kab_ibfk_1` FOREIGN KEY (`id_kab`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `trx_usulan_kab_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_app`  ADD CONSTRAINT `user_app_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,  ADD CONSTRAINT `user_app_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `ref_group` (`id`);
+ALTER TABLE `user_desa`  ADD CONSTRAINT `user_desa_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_level_sakip`   ADD CONSTRAINT `user_level_sakip_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_sub_unit`   ADD CONSTRAINT `user_sub_unit_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;"

@@ -260,26 +260,26 @@
 <body style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
 height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fixed;">
 
-    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation">
       <div class="navbar-header">
-        <a class="navbar-brand pull-left" href="{{ url('/') }}">
+        <a class="navbar-brand navbar-right" href="{{ url('/') }}">
           <div class="row">
-            <img style="max-width:50px; margin-top: -7px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> <span class="badge"> ver 1.0 </span>
-          </div>
-        
+            <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> 
+            <span class="badge" style="background-color: #006AC7; color:#fff;"> {{Session::get('versiApp')}} </span>
+          </div>        
         </a>
       </div>
       <ul class="nav navbar-top-links pull-right">
         @if (Auth::guest())
-          <li class="active"><a href="{{ route('login') }}" role="button" ><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span class="sr-only">(current)</span></a></li>
+          <li><a href="{{ route('login') }}" role="button" ><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span class="sr-only">(current)</span></a></li>
         @else
-          <li class="active">
+          <li>
             <a href="{{ url('/home') }}" role="button"><i class="fa fa-user fa-fw fa-lg"></i> {{ Auth::user()->name }}</a>
           </li>
         @endif
       </ul>
     </nav>
-
+    
     <div class="container-fluid">
       <div class="row" style="padding: 70px">
       <div class="col-sm-3 col-sm-push-9">
@@ -297,7 +297,6 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
                       <div class="">                        
                           <h4 class="text-center">PEMERINTAH {{$rPemda}}</h4>
                           <h4 class="text-center">Periode : {{$dataVisi->tahun_1}} s/d {{$dataVisi->tahun_5}}</h4>
-                          {{-- <a class="text-center">{{$xApp}}</a>   --}}
                       </div>
                   </div>
             </div>
@@ -392,9 +391,6 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
                         <div class="eventTitle"><span id="ur1"></span></div>
                         <div class="MonthYear"><span id="tglA1"></span></div>
                       </div>
-                      {{-- <svg height="20" width="20">
-                         <circle cx="10" cy="11" r="5" fill="#004165" />
-                      </svg> --}}
                       <div id="ico1"></div>
                     </div>
                     
@@ -524,24 +520,18 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
 
                     <div class="event2">                      
                       <div class="event2Bubble">
-                        {{-- <div class="eventTime"> --}}
                           <div class="MonthYear"><span id="tgl10"></span></div>
-                        {{-- </div> --}}
                         <div class="eventTitle"><span id="ur10"></span></div>
                         <div class="MonthYear"><span id="tglA10"></span></div>
                       </div>
                     <div id="ico10"></div>
                     </div>
-
                   <svg height="5" width="70">
                     <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
                   </svg>
-
                     <div class="event1">                      
                       <div class="event1Bubble">
-                        {{-- <div class="eventTime"> --}}
                           <div class="MonthYear"><span id="tgl11"></span></div>
-                        {{-- </div> --}}
                         <div class="eventTitle"><span id="ur11"></span></div>
                         <div class="MonthYear"><span id="tglA11"></span></div>
                       </div>
@@ -578,8 +568,12 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
 <script src="{{ asset('/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('/js/Chart.bundle.js') }}"></script>
+
 <script  type="text/javascript" language="javascript" class="init">
 $(document).ready( function() {
+  
+var d = new Date();
+var n = d.getFullYear() + 1;
 
 function formatTgl(val_tanggal){
       var formattedDate = new Date(val_tanggal);
@@ -588,159 +582,16 @@ function formatTgl(val_tanggal){
       var y = formattedDate.getFullYear();
       var m_names = new Array("Jan", "Feb", "Mar", 
         "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", 
-        "Okt", "Nov", "Des")
-
-      var tgl= d + "-" + m + "-" + y
+        "Okt", "Nov", "Des");
+      var tgl= d + "-" + m + "-" + y;
 
       return tgl;
-}
-
-var url_1 = "{{url('/rpjmd/misi5tahun')}}";
-var url_2 = "{{url('/rpjmd/urusan5tahun')}}";
-
-$(function(){
-  $.getJSON(url_1, function (result) {
-
-    var labels = [],data=[];
-    for (var i = 0; i < result.length; i++) {
-         labels.push(result[i].uraian_misi_rpjmd.substring(0,120));
-        data.push(result[i].count);
-    }
-
-    var chartData = {
-      labels : labels,
-      datasets : [
-        {            
-            label: 'Pagu',
-            backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
-            data : data
-        }
-      ]
-    };
-
-    var ctx = document.getElementById('canvasMisi5').getContext('2d');
-    
-    var chartInstance = new Chart(ctx, {
-        type: 'doughnut',
-        data: chartData,
-        options: {
-                elements: {
-                      arc: {
-                    borderWidth: 0
-                }
-                },
-                title: {
-                    display: false,
-                    text: 'Misi 5 Tahun'
-                },
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data2) {
-//                             return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
-//                                 return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
-//                             });
-                          return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
-                              return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
-                        }
-                    }
-                },
-                
-                legend: {
-                  callbacks: {
-                    label: function(tooltipItem, data2) {
-                      return labels[tooltipItem.index].substring(0,100);
-                          }
-                  },
-                    display: true,
-                    position : 'bottom',
-                    
-                    labels: {
-                        fontSize: 7
-                        // fontColor: 'rgb(255, 99, 132)'
-                    }
-                },                
-                responsive: true,
-            }
-    });
-  });
-
-  $.getJSON(url_2, function (result) {
-
-      var labels = [],data=[];
-      for (var i = 0; i < result.length; i++) {
-           labels.push(result[i].nm_urusan.substring(0,120));
-          data.push(result[i].total_pagu);
-      }
-
-      var chartData = {
-        labels : labels,
-        datasets : [
-          {
-              
-              label: 'Pagu',
-              backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
-              data : data
-          }
-        ]
-      };
-
-      var ctx = document.getElementById('canvasUrusan5').getContext('2d');
-      
-      var chartInstance = new Chart(ctx, {
-          type: 'doughnut',
-          data: chartData,
-          options: {
-                  elements: {
-                      arc: {
-                    borderWidth: 0
-                }
-                  },
-                  title: {
-                      display: false,
-                      text: 'Urusan 5 Tahun'
-                  },
-                  tooltips: {
-                      callbacks: {
-                          label: function(tooltipItem, data2) {
-//                               return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
-//                                   return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
-//                               });
-                            return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
-                                return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
-                          }
-                      }
-                  },
-                  
-                  legend: {
-                    callbacks: {
-                      label: function(tooltipItem, data2) {
-                        return labels[tooltipItem.index].substring(0,100);
-                            }
-                    },
-                      display: true,
-                      position : 'bottom',
-                      
-                      labels: {
-                          fontSize: 7
-                          // fontColor: 'rgb(255, 99, 132)'
-                      }
-                  },                
-                  responsive: true,
-              }
-      });
-    });  
-});
-
-var d = new Date();
-var n = d.getFullYear() + 1;
-
+};
 $.ajax({
     type: "GET",
     url: './agenda/tlJadwal/'+n,
     dataType: "json",
-
     success: function(data) {
-      // console.log(data);
       var j = data.length;
           var post, i, k;
           for (i = 0; i < j; i++) {
@@ -759,16 +610,121 @@ $.ajax({
           url: './getTahunSetting',
           dataType: "json",
           success: function(data) {
-
           var j = data.length;
           var post, i;
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+            for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+            }
           }
-          }
-      });
+  });
 
+var url_1 = "{{url('/rpjmd/misi5tahun')}}";
+var url_2 = "{{url('/rpjmd/urusan5tahun')}}";
+
+$(function(){
+  $.getJSON(url_1, function (result) {
+    var labels = [],data=[];
+    for (var i = 0; i < result.length; i++) {
+         labels.push(result[i].uraian_misi_rpjmd.substring(0,120));
+        data.push(result[i].count);
+    }
+    var chartData = {
+      labels : labels,
+      datasets : [
+        {            
+            label: 'Pagu',
+            backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+            data : data
+        }
+      ]
+    };
+    var ctx = document.getElementById('canvasMisi5').getContext('2d');    
+    var chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: chartData,
+        options: {
+                elements: {
+                  arc: { borderWidth: 0 }
+                },
+                title: {
+                    display: false,
+                    text: 'Misi 5 Tahun'
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data2) {
+                          return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
+                          return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
+                        }
+                    }
+                },                
+                legend: {
+                  callbacks: {
+                    label: function(tooltipItem, data2) {
+                      return labels[tooltipItem.index].substring(0,100);}
+                  },
+                    display: true,
+                    position : 'bottom',                    
+                    labels: { fontSize: 7}
+                },                
+                responsive: true,
+            }
+    });
+  });
+  $.getJSON(url_2, function (result) {
+      var labels = [],data=[];
+      for (var i = 0; i < result.length; i++) {
+           labels.push(result[i].nm_urusan.substring(0,120));
+          data.push(result[i].total_pagu);
+      }
+      var chartData = {
+        labels : labels,
+        datasets : [
+          {              
+              label: 'Pagu',
+              backgroundColor:  ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+              data : data
+          }
+        ]
+      };
+      var ctx = document.getElementById('canvasUrusan5').getContext('2d');      
+      var chartInstance = new Chart(ctx, {
+          type: 'doughnut',
+          data: chartData,
+          options: {
+                  elements: {
+                    arc: { borderWidth: 0 }
+                  },
+                  title: {
+                      display: false,
+                      text: 'Urusan 5 Tahun'
+                  },
+                  tooltips: {
+                      callbacks: {
+                          label: function(tooltipItem, data2) {
+                            return labels[tooltipItem.index].substring(0,100)+": "+"Rp" +Number(data[tooltipItem.index]).toFixed(0).replace(/./g, function(c, i, a){
+                            return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;});
+                          }
+                      }
+                  },                  
+                  legend: {
+                    callbacks: {
+                      label: function(tooltipItem, data2) {
+                        return labels[tooltipItem.index].substring(0,100);
+                            }
+                    },
+                      display: true,
+                      position : 'bottom',                      
+                      labels: {
+                          fontSize: 7
+                      }
+                  },                
+                  responsive: true,
+              }
+      });
+    });  
+});
 
 });
 </script>

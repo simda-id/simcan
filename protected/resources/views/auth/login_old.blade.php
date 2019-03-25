@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-xs-9">
                 <h1 class="text-center" style="color: #fff; margin-top:30px; font-weight:900; vertical-align:middle;">
-                    simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated</strong>
+                    simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated X</strong>
                 </h1>
                 <span style="color: #fff; display: block; margin-bottom: 10px; font-size: 20px; text-align: center;">
                     by <strong>bpkp@2018</strong> </span>

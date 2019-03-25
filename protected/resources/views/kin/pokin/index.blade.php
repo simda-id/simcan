@@ -193,6 +193,12 @@ $(document).on('click', '.btnProses', function() {
     };
     if($('#jns_laporan').val()==2){
         window.location.replace("pokin/getRenstraChart/"+$('#cb_no_renstra').val()+"/"+$('#cb_unit_renstra').val()); 
+    };     
+    if($('#jns_laporan').val()==3){
+        window.location.replace("pokin/getLintasChart/"+$('#cb_no_perda').val());
+    };      
+    if($('#jns_laporan').val()==4){
+        window.location.replace("pokin/getRenstraSasaranChart/"+$('#cb_no_renstra').val()+"/"+$('#cb_unit_renstra').val()); 
     }; 
 });
 

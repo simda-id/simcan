@@ -2,7 +2,7 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.app1')
+@extends('layouts.app4')
 @section('content')	
 <div class="col-sm-12 col-md-12 col-lg-12">	
     <div class="panel panel-primary">

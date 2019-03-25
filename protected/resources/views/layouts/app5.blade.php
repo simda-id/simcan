@@ -52,14 +52,9 @@ use hoaaah\LaravelMenu\Menu;
                 </div>
 
                     <ul class="nav navbar-top-links pull-right">
-
-                        <li>
-                            <a>
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                            </a>
-                        </li>
-
-                        <!-- Authentication Links -->
+                        <span style="color:#fff">
+                            <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                        </span>
                         @if (Auth::guest())
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -14,8 +14,8 @@
                     <thead>
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th width="5%" style="text-align: center; vertical-align:middle">Kode Sasaran</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Sasaran</th>
+                            <th width="5%" style="text-align: center; vertical-align:middle">Kode Item RPJMD</th>
+                            <th style="text-align: center; vertical-align:middle">Uraian Item RPJMD</th>
                           </tr>
                     </thead>
                     <tbody>

@@ -220,7 +220,7 @@ function loadReProses(){
           ],
         'select': { 'style': 'multi' },
         "columns": [
-              { data: 'id_rkpd_rpjmd', sClass: "dt-center", searchable: false, orderable:false,},
+              { data: 'id_program_rpjmd', sClass: "dt-center", searchable: false, orderable:false,},
               { data: 'no_urut',sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
               { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
@@ -318,7 +318,7 @@ $(document).on('click', '#btnReProses', function() {
 $(document).on('click', '#btnReLoad', function() {
   var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
   var tahun=$('#tahun_rkpd').val();
-  var id_rkpd=data.id_rkpd_rpjmd;
+  var id_rkpd=data.id_program_rpjmd;
 
   $.ajaxSetup({
       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -362,10 +362,20 @@ $(document).on('click', '#btnReLoad', function() {
                     'id_rkpd_rpjmd' : id_rkpd,
                 },
                 success: function(data) {
-                  createPesan("Data Berhasil di Load","success");
-                  $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-                  $('#tblProgramRKPD').DataTable().ajax.reload();
-                  $('#ModalProgress').modal('hide');
+                  $.ajax({
+                    type: 'POST',
+                    url: './RetransferUpdate',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'tahun_rkpd' :tahun,
+                        'id_rkpd_rpjmd' : id_rkpd,
+                    },
+                    success: function(data) {
+                      createPesan("Data Berhasil di Load","success");
+                      $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
+                      $('#tblProgramRKPD').DataTable().ajax.reload();
+                      $('#ModalProgress').modal('hide');
+                    },});
                 },});
               },});
             },});
@@ -433,10 +443,20 @@ $(document).on('click', '#btnProsesAll', function() {
                       'id_rkpd_rpjmd' : id_rkpd,
                   },
                   success: function(data) {
-                    createPesan("Data Berhasil di Load","success");
-                    $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-                    $('#tblProgramRKPD').DataTable().ajax.reload();
-                    $('#ModalProgress').modal('hide');
+                    $.ajax({
+                    type: 'POST',
+                    url: './RetransferUpdate',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'tahun_rkpd' :tahun,
+                        'id_rkpd_rpjmd' : id_rkpd,
+                    },
+                    success: function(data) {              
+                      createPesan("Data Berhasil di Load","success");
+                      $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
+                      $('#tblProgramRKPD').DataTable().ajax.reload();
+                      $('#ModalProgress').modal('hide');
+                    },});
                   },});
                 },});
               },});

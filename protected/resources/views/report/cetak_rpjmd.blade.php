@@ -164,6 +164,24 @@ use hoaaah\LaravelMenu\Menu;
                 </div>
               </div>
               <div class="form-group">
+                <label for="cb_misi_rpjmd" class="col-sm-3 control-label" align='left'>Misi RPJMD :</label>
+                <div class="col-sm-8">
+                    <select class="form-control cb_misi_rpjmd" name="cb_misi_rpjmd" id="cb_misi_rpjmd"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cb_tujuan_rpjmd" class="col-sm-3 control-label" align='left'>Tujuan RPJMD :</label>
+                <div class="col-sm-8">
+                    <select class="form-control cb_tujuan_rpjmd" name="cb_tujuan_rpjmd" id="cb_tujuan_rpjmd"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cb_sasaran_rpjmd" class="col-sm-3 control-label" align='left'>Sasaran RPJMD :</label>
+                <div class="col-sm-8">
+                    <select class="form-control cb_sasaran_rpjmd" name="cb_sasaran_rpjmd" id="cb_sasaran_rpjmd"></select>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
                 <div class="col-sm-8">
                     <select class="form-control jns_laporan" name="jns_laporan" id="jns_laporan"></select>
@@ -183,58 +201,6 @@ use hoaaah\LaravelMenu\Menu;
 @endsection
 
 @section('scripts')
-<script>
-$(document).ready(function(){
-
-$.ajax({
-    type: "GET",
-    url: './getDokumenRpjmd',
-    dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
-
-        $('select[name="cb_no_perda"]').empty();
-        $('select[name="cb_no_perda"]').append('<option value="-1">Pilih Nomor Perda RPJMD</option>');
-
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="cb_no_perda"]').append('<option value="'+ post.id_rpjmd +'">'+ post.no_perda +'</option>');
-
-        }
-    }
-});
-
-
-$.ajax({
-    type: "GET",
-    url: './jenis_rpjmd',
-    dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
-
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="jns_laporan"]').append('<option value="'+ post.id +'">'+ post.uraian_laporan +'</option>');
-        }
-    }
-});
-
-$(document).on('click', '.btnProses', function() {
-    if($('#jns_laporan').val()==1){
-       window.open('../CetakMatrikRpjmdAll/'+$('#cb_no_perda').val()); 
-    };
-    if($('#jns_laporan').val()==2){
-        window.open('../CetakMatrikRpjmd/'+$('#cb_no_perda').val()); 
-    };
-    if($('#jns_laporan').val()==3){
-        window.open('../CetakMatrikRpjmdFull/'+$('#cb_no_perda').val()); 
-    };   
-});
-
-
-});
-</script>
+    <script src="{{ asset('/protected/resources/views/report/js/js_cetak_rpjmd.js')}}"></script>
 @endsection
 

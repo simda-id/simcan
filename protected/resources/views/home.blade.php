@@ -104,9 +104,11 @@ use hoaaah\LaravelMenu\Menu;
                 <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
                     <div class="row">
                         <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Integrated</strong> 
-                        :: {{Session::get('xPemda')}} 
-                        @if ( Session::get('AppType') == 0 )
-                                (Aplikasi Provinsi)
+                        :: {{Session::get('xPemda')}}
+                        @if ( Session::get('AppType') === 0 )
+                        <span class="badge" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                        @else
+                            <span class="badge" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
                         @endif 
                     </div>
                 </a>                
@@ -129,15 +131,10 @@ use hoaaah\LaravelMenu\Menu;
                             </li>
                         </ul>
                     </li>
-                @else                            
-                    <li class="navbar-form">
-                        <div class="form-group">
-                            <label for="id_tahun" style="color: #fff">Tahun Anggaran :</label>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control id_tahun" name="id_tahun" id="id_tahun"></select>
-                        </div>
-                    </li>
+                @else 
+                    <span style="color:#fff">
+                        <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                    </span>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="fa fa-caret-down fa-fw fa-lg"></span>
@@ -239,7 +236,7 @@ use hoaaah\LaravelMenu\Menu;
                 <a href="{{ url('/kin') }}" style="text-decoration:none;">
                     <div class="services-inner"  style="background:#eee">
                         <div class="our-services-img">
-                            <img src="{{'./assets/images/web-analytics.png'}}" width="68px" alt="">
+                            <img src="{{'./assets/images/sakip.png'}}" width="68px" alt="">
                         </div>
                         <div class="our-services-text">
                             <h4>S A K I P</h4>
@@ -251,17 +248,17 @@ use hoaaah\LaravelMenu\Menu;
         </div>
     </div>
     
-    <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="navbar navbar-default navbar-fixed-bottom" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; color:#fff;">
         <div class="container-fluid">
-          <p class="navbar-text pull-left">
-            <b><a href="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan">Badan Pengawasan Keuangan dan Pembangunan</a></b>
+          <p class="navbar-text pull-left" style="color:#fff">
+            <b><a href="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan" style="color:#fff">Badan Pengawasan Keuangan dan Pembangunan</a></b>
                   | <b>Tim Satgas Simda</b> | Copyright &copy; 2018
           </p>
-                <li class="navbar-btn btn pull-right dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <li class="navbar-btn btn pull-right dropdown" style="color:#fff">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                         <i class="fa fa-cog fa-spin fa-fw fa-lg"></i> simd@<strong>Perencanaan</strong> <i class="fa fa-caret-up fa-fw fa-lg"></i>
                     </a>
-                    <ul class="dropdown-menu" role="menu" >
+                    <ul class="dropdown-menu" role="menu" style="color:#fff">
                         <li><a href="{{ url('/') }}"><i class="fa fa-cubes fa-fw text-info"></i> Dashboard</a></li>
                         <li class="divider"></li>
                         <li>@if($akses->get(110)) <a href="{{ url('/admin/parameter/user') }}"><i class="fa fa-user fa-fw text-info"></i> User Management</a> @endif</li>
@@ -384,10 +381,6 @@ $('.page-alert .close').click(function(e) {
 
 $('[data-toggle="popover"]').popover();  
 
-$('#myCarousel').carousel({
-    interval:   3500
-});
-
 $.ajax({
           type: "GET",
           url: './getTahunSetting',
@@ -397,13 +390,12 @@ $.ajax({
             var post, i;
             for (i = 0; i < j; i++) {
                 post = data[i];
-                $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>');
+                $('select[name="id_tahun"]').append('<option value="'+ post.tahun_rencana +'">'+ post.tahun_rencana +'</option>')
             }
           }
-      });
 });
 
-$( "#id_tahun" ).change(function() {
+$( "#id_tahun" ).change(function(){
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -416,7 +408,6 @@ $( "#id_tahun" ).change(function() {
               'tahun_rencana' : $('#id_tahun').val(),
           },
         success: function(data) {
-            // location.reload(true);
         }
       });
 });
@@ -437,26 +428,22 @@ $("#btn_ganti").click(function() {
             $('.form-horizontal').show();
             $('#ModalUser').modal('show');   
           }
-      });      
+      })      
 });
 
-$("#showPass").click(function() 
-         {
-            if ($(this).data('val') == "1") 
-            {
+$("#showPass").click(function() {
+            if ($(this).data('val') == "1") {
                $("#password").prop('type','text');
                $("#password_confirmation").prop('type','text');
                $("#eye").attr("class","fa fa-eye-slash fa-fw fa-lg");
                $(this).data('val','0');
-            }
-            else
-            {
+            } else {
                $("#password").prop('type', 'password');
                $("#password_confirmation").prop('type', 'password');
                $("#eye").attr("class","fa fa-eye fa-fw fa-lg");
                $(this).data('val','1');
             }
-         });
+});
 
 $('.modal-footer').on('click', '.gantiPass', function() {
     $.ajaxSetup({
@@ -480,6 +467,7 @@ $('.modal-footer').on('click', '.gantiPass', function() {
               }
         },
   });
+});
 });
 
 </script>

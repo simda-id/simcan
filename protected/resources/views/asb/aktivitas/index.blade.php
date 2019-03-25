@@ -1848,11 +1848,10 @@ $('input:text[datalist][multiple]').each(function() {
 
 $('datalist[name="tempCariItem"]').empty();
 
-
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
       serverSide: true,
-      dom: 'bFrtip',
+      dom: 'bfrtip',
         "ajax": {"url":"./getPerkada"},
         "columns": [
             { data: 'no_urut', sClass: "dt-center"},
@@ -2069,8 +2068,8 @@ $('datalist[name="tempCariItem"]').empty();
 
   } );
 
-  var komponen = $('#tblKomponen').DataTable( {
-        // retrieve: true,
+  var komponen = $('#tblKomponen').DataTable({
+        retrieve: true,
         processing: false,
         serverSide: false,
         dom: 'BFrtip',
@@ -2191,7 +2190,7 @@ $(document).on('click', '#btnparam_cari', function() {
         // retrieve: true,
         processing: true,
         serverSide: true,
-        dom: 'BFrtIp',
+        dom: 'BfrtIp',
         "autoWidth": false,
         "ajax": {"url": "./getItemSSH/"+ param.toLowerCase()},
         "columns": [

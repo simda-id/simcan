@@ -172,8 +172,34 @@
               border-bottom: 2px solid #5fbae9;
             }
 
-            input[type=password]:placeholder {
+            select:placeholder {
               color: #cccccc;
+            }
+
+            select{
+              background-color: #f6f6f6;
+              border: none;
+              color: #0d0d0d;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 5px;
+              width: 85%;
+              border: 2px solid #f6f6f6;
+              -webkit-transition: all 0.5s ease-in-out;
+              -moz-transition: all 0.5s ease-in-out;
+              -ms-transition: all 0.5s ease-in-out;
+              -o-transition: all 0.5s ease-in-out;
+              transition: all 0.5s ease-in-out;
+              -webkit-border-radius: 5px 5px 5px 5px;
+              border-radius: 5px 5px 5px 5px;
+            }
+
+            select:focus {
+              background-color: #fff;
+              border-bottom: 2px solid #5fbae9;
             }
 
 
@@ -256,6 +282,12 @@
               animation-delay: 1s;
             }
 
+            .fadeIn.fifth {
+              -webkit-animation-delay: 1.2s;
+              -moz-animation-delay: 1.2s;
+              animation-delay: 1.2s;
+            }
+
             .underlineHover:after {
               display: block;
               left: 0;
@@ -300,26 +332,25 @@
         
         <div class="wrapper fadeInDown">
             <div id="formContent">
-              <!-- Tabs Titles -->
-              <img class="profile-img-card" src="{{ asset('vendor/default.png') }}"  />
+              <img class="profile-img-card" src="{{ asset('vendor/default.png') }}"  style="padding:20px;"/>
               <h1 class="active"> 
                   simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated</strong>
               </h1>
 
               <form method="POST" action="{{ route('login') }}">
-                   @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                @if ($errors->has('email'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span>
+                @endif
                 <input type="text" id="email" class="fadeIn second" name="email" placeholder="Username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="submit" class="fadeIn fifth" value="Log In">
               </form>
               
               <div id="formFooter">                
                 by <img class="profile-img-card" src="{{ asset('vendor/bpkp_logo.png') }}" style="width:15%;" /> 
-                @2018
+                @2019 
               </div>
 
             </div>

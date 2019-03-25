@@ -37,34 +37,21 @@ use hoaaah\LaravelMenu\Menu;
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
             {{-- <div class="container"> --}}
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button> 
-                  <!-- Branding Image -->
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x"></i>
-                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
+                      <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></span> 
+                    </a>
                 </div>
                 <ul class="nav navbar-top-links pull-right">
-
-                        <li>
-                            <a>
-                                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                            </a>
-                        </li>
-
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     User <span class="caret"></span>
                                 </a>
 
@@ -78,8 +65,11 @@ use hoaaah\LaravelMenu\Menu;
                                 </ul>
                             </li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span style="color:#fff">
+                            <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                        </span>
+                            <li class="dropdown" style="color:#fff">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -118,6 +108,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Zona SSH','url' => '/zonassh', 'visible' => $akses->get(801)],
                                             ['label' => 'Struktur SSH', 'url' => '/ssh', 'visible' => $akses->get(802)],
                                             ['label' => 'Perkada SSH', 'url' => '/sshperkada/perkada','visible' => $akses->get(803)],
+                                            ['label' => 'Pencetakan SSH','url' => '/printSsh','visible' => $akses->get(803)],
                                         ]
                                     ],                                    
                                     [
@@ -129,7 +120,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Perhitungan ASB','url' => '/asb/hitungasb','visible' => $akses->get(806)],
                                         ]
                                     ],
-                                    [
+                                    /*[
                                         'label' => 'Pencetakan SSH & ASB',
                                         'icon' => 'fa fa-bookmark fa-fw', 
                                         'visible' => $akses->get(806)||$akses->get(808),
@@ -137,7 +128,7 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Standard Satuan Harga','url' => '/printSsh','visible' => $akses->get(805)],
                                             ['label' => 'Analisis Standar Belanja','url' => '/printSsh','visible' => $akses->get(806)],
                                         ]
-                                    ],
+                                    ],*/
                                 ]
                             ]);
                         ?>

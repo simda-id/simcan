@@ -6,23 +6,17 @@ use hoaaah\LaravelMenu\Menu;
 ?>
 @section('layoutBody')
 <div id="wrapper">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>                    
-                <!-- Branding Image -->
-                <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
                  <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x text-info"></i>
-                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong></a>
+                      <i class="fa fa-home fa-stack-1x text-info" style="color:#fff"></i>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong>
+                    </span>
+                    </a>
             </div>
             <ul class="nav navbar-top-links pull-right">
-                <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -39,12 +33,14 @@ use hoaaah\LaravelMenu\Menu;
                         </ul>
                     </li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <span style="color:#fff">
+                        <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                    </span>
+                    <li class="dropdown" style="color:#fff">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
                             <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
-                        <ul class="dropdown-menu dropdown-user" role="menu">
+                        <ul class="dropdown-menu dropdown-user" role="menu" style="color:#fff">
                             <li>
                                 <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -92,7 +88,7 @@ use hoaaah\LaravelMenu\Menu;
                                     // ['label' => 'Prioritas & Program Nasional', 'url' => '/admin/parameter/prognas','visible' => $akses->get(106)],
                                     // ['label' => 'Prioritas & Program Provinsi', 'url' => '/admin/parameter/progprov','visible' => $akses->get(106)],
                                     ['label' => 'Lokasi', 'icon' => 'fa fa-location-arrow fa-fw','url' => '/admin/parameter/lokasi','visible' => $akses->get(107)],
-                                    ['label' => 'Indikator', 'icon' => 'fa fa-tachometer fa-fw','url' => '/admin/parameter/indikator','visible' => $akses->get(108)],
+                                    // ['label' => 'Indikator', 'icon' => 'fa fa-tachometer fa-fw','url' => '/admin/parameter/indikator','visible' => $akses->get(108)],
                                     ['label' => 'Satuan', 'icon' => 'fa fa-cube fa-fw','url' => '/satuan','visible' => $akses->get(111)],
                                     ['label' => 'Agenda Tahunan', 'icon' => 'fa fa-calendar fa-fw','url' => '/agenda','visible' => $akses->get(101)],
                                     ['label' => 'Setting Aplikasi', 'icon' => 'fa fa-wrench fa-fw','url' => '/setting','visible' => $akses->get(101)],

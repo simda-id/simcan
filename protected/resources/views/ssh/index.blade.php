@@ -105,7 +105,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="add">
               <p>
                 {{-- <a id="btnPrintSubKelSSh" class="print-subkelssh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-print"></i></span>Cetak Sub Kelompok</a> --}}
-              <span><a id="btnAddSubKel" class="add-subkelompok btn btn-sm btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Kelompok</a></span>
+              <span><a id="btnAddSubKel" class="add-subkelompok btn btn-sm btn-success btn-labeled">
+                <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Kelompok</a></span>
               </p>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -148,7 +149,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="add">
               <p >
                 {{-- <a id="btnPrintItemSSh" class="btnPrintItemSSh btn btn-primary btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Cetak Item SSH</a> --}}
-              <span><a id="btnAddItem" class="add-item btn btn-success btn-labeled"><span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Item</a></span>
+              <span><a id="btnAddItem" class="add-item btn btn-success btn-labeled">
+                <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Item</a></span>
               </p>
             </div>
             <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -789,7 +791,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" >
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="post" name="frmEditItem">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
               <label class="control-label col-sm-3" for="id_gol_item_edit">Golongan SSH :</label>
@@ -845,6 +847,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <label class="control-label col-sm-3" for="id_satuan_edit">Satuan :</label>
               <div class="col-sm-8">
                 <select class="form-control" name="id_satuan_edit" id="id_satuan_edit"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="status_item_edit">Status Data Item :</label>
+              <div class="col-sm-8">
+                <label class="radio-inline">
+                  <input type="radio" class="status_item_edit" name="status_item_edit" id="status_item_edit" value="0"> Aktif 
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" class="status_item_edit" name="status_item_edit" id="status_item_edit" value="1"> Tidak Aktif
+                </label>
               </div>
             </div>
           </form>
@@ -1819,6 +1832,15 @@ $(document).ready(function() {
                   },
                 });
               });
+        
+      function getStatusData(){
+          var xCheck = document.querySelectorAll('input[name="status_item_edit"]:checked');
+          var xyz = [];
+          for(var x = 0, l = xCheck.length; x < l;  x++)
+            { xyz.push(xCheck[x].value); }
+          var xvalues = xyz.join('');
+          return xvalues;
+      }
 
               //Edit Item
         $(document).on('click', '.edit-tarif', function() {
@@ -1839,7 +1861,8 @@ $(document).ready(function() {
                 $('#id_item_edit').val($(this).data('id_item'));
                 $('#no_urut_item_edit').val($(this).data('no_urut_item'));
                 $('#ur_item_edit').val($(this).data('ur_item'));
-                $('#ket_item_ssh_edit').val(data.keterangan_tarif_ssh);
+                $('#ket_item_ssh_edit').val(data.keterangan_tarif_ssh);  
+                document.frmEditItem.status_item_edit[data.status_data].checked=true; 
                 $('#id_satuan_edit').val($(this).data('id_satuan'));
                 $('#EditItem').modal('show');
               });
@@ -1860,6 +1883,7 @@ $(document).ready(function() {
                           'ur_item_ssh': $('#ur_item_edit').val(),
                           'ket_tarif_ssh': $('#ket_item_ssh_edit').val(),
                           'id_satuan':$('#id_satuan_edit').val(),
+                          'status_data':getStatusData(),
                       },
                       success: function(data) {
                           $('#tblTarif').DataTable().ajax.reload(null,false);

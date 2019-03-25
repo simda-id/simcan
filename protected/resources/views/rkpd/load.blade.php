@@ -93,7 +93,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" >Daftar Program RKPD yang belum di-Load ke Musrenbang RKPD</h3>
+        <h3 class="modal-title" >Daftar Program RKPD yang belum di-Load ke RKPD Final</h3>
       </div>
       <div class="modal-body">
       <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
@@ -294,7 +294,7 @@ function loadReProses($tahun){
           ],
         'select': { 'style': 'multi' },
         "columns": [
-              { data: 'id_musrenkab', sClass: "dt-center", searchable: false, orderable:false,},
+              { data: 'id_rkpd_rancangan', sClass: "dt-center", searchable: false, orderable:false,},
               { data: 'urut',sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
               { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
@@ -312,7 +312,7 @@ $(document).on('click', '.btnProses', function() {
 $(document).on('click', '#btnReLoad', function() {
   var data = ReProses_Tbl.row( $(this).parents('tr') ).data();
   var tahun=$('#tahun_rkpd').val();
-  var id_rkpd=data.id_musrenkab;
+  var id_rkpd=data.id_rkpd_rancangan;
 
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }

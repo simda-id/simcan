@@ -1,4 +1,3 @@
-
 <div id="ModalTujuan" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg"  >
       <div class="modal-content">
@@ -12,7 +11,7 @@
               <input type="hidden" class="form-control" id="id_tujuan_renstra_edit" name="id_tujuan_renstra_edit" readonly >
               <input type="hidden" class="form-control" id="thn_id_tujuan_edit" name="thn_id_edit" required="required" >
               <input type="hidden" class="form-control" id="id_misi_renstra_tujuan_edit" name="id_misi_renstra_edit" required="required">
-              <div class="form-group">
+              <div class="form-group hidden">
                 <label for="id_misi_renstra_edit" class="col-sm-3 control-label" align='left'>ID Misi renstra :</label>
                 <div class="col-sm-6">
                   <div class="input-group">
@@ -48,18 +47,55 @@
         <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left">
+                      <button class="btn btn-sm btn-danger btn-labeled btnHapusTujuan">
+                        <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        {{-- <button type="button" class="btn btn-success actionBtn_tujuan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div> --}}
+                        <button type="button" class="btn btn-success btnAddTujuan btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                        <div class="or"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
                       </div>
                     </div>
                 </div>
               </div>
       </div>
     </div>
-  </div>
+</div>
+
+<div id="HapusTujuan" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4>Hapus Data Tujuan Renstra OPD</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_tujuan_renstra_hapus" name="id_tujuan_renstra_hapus">
+            <div class="alert alert-danger deleteContent">
+              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
+                Yakin akan menghapus Tujuan Renstra : <strong><span id="ur_tujuan_renstra_hapus"></span></strong> ?
+                <br>
+                <br>
+                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-sm btn-danger btnDelTujuanRenstra btn-labeled" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>

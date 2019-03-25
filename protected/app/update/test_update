@@ -1,0 +1,4 @@
+update="INSERT INTO `ref_aspek_pembangunan`(`id_aspek`, `uraian_aspek_pembangunan`, `status_data`) VALUES (1, 'Aspek Geografi dan Demografi', 0);
+INSERT INTO `ref_aspek_pembangunan`(`id_aspek`, `uraian_aspek_pembangunan`, `status_data`) VALUES (2, 'Aspek Kesejahteraan Masyarakat', 0);
+INSERT INTO `ref_aspek_pembangunan`(`id_aspek`, `uraian_aspek_pembangunan`, `status_data`) VALUES (3, 'Aspek Pelayanan Umum', 0);
+INSERT INTO `ref_aspek_pembangunan`(`id_aspek`, `uraian_aspek_pembangunan`, `status_data`) VALUES (4, 'Aspek Daya Saing Daerah', 0);"

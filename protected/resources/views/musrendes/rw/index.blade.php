@@ -363,7 +363,7 @@ function LoadUsulanRW($id_desa){
                   "columns": [
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'nama_desa', sClass: "dt-left", width :"10%"},
-                        { data: 'uraian_aktivitas_kegiatan', sClass: "dt-left"},
+                        { data: 'uraian_asb', sClass: "dt-left"},
                         { data: 'volume', sClass: "dt-center",width :"10%",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_pagu', sClass: "dt-right",width :"20%",
@@ -580,7 +580,7 @@ $(document).on('click','#btnEditUsulanRw', function(){
   $('#id_rt').val(data.rt);
   $('#id_rw').val(data.rw);
   $('#id_aktivitas_asb').val(data.id_asb_aktivitas);
-  $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);
+  $('#ur_aktivitas_kegiatan').val(data.uraian_asb);
   $('#id_renja').val(data.id_renja);
   $('#id_kegiatan').val(data.id_kegiatan);
   $('#volume').val(data.volume);

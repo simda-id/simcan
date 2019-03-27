@@ -40,11 +40,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="form-group">
                 <label class="control-label col-sm-2" for="id_unit">Unit Penyusun Renstra :</label>
                 <div class="col-sm-6">
-                  <select class="form-control cbUnit" name="id_unit" id="id_unit">
-                    {{-- @foreach($dataunit as $val)
-                      <option value={{ $val->id_unit }}>{{ $val->nm_unit }}</option>
-                    @endforeach --}}
-                  </select>
+                  <select class="form-control cbUnit" name="id_unit" id="id_unit"></select>
                 </div>
               </div>
               <div>

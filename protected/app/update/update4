@@ -5438,7 +5438,8 @@ trg_user="CREATE TRIGGER `trg_user` BEFORE DELETE ON `users` FOR EACH ROW IF old
      SET MESSAGE_TEXT = 'This record is sacred! You are not allowed to remove it!!';
 END IF;"
 
-buatFungsi="CREATE FUNCTION `GantiEnter`(`uraian` VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
+buatFungsi="
+CREATE FUNCTION `GantiEnter`(`uraian` VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
     COMMENT 'Mengganti Character NL, NF, HT, VT dan Merapikan Space'
 BEGIN 
   DECLARE xUraian VARCHAR(1000); 
@@ -5448,6 +5449,7 @@ BEGIN
 	END WHILE;
   RETURN (xUraian); 
 END;
+
 CREATE FUNCTION `HTML_UnEncode`(X VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
     DETERMINISTIC
 BEGIN 
@@ -5963,6 +5965,7 @@ BEGIN
     RETURN TextString ; 
 
 END;
+
 CREATE FUNCTION `PaguASB`(jns_biaya INT, hub_driver INT, vol1 DECIMAL(15, 4), vol2 DECIMAL(15, 4), r1 DECIMAL(15, 4), r2 DECIMAL(15, 4), m1 DECIMAL(15, 4), m2 DECIMAL(15, 4), k1 DECIMAL(15, 4), k2 DECIMAL(15, 4), k3 DECIMAL(15, 4), harga DECIMAL(15, 4)) RETURNS decimal(15,4)
     DETERMINISTIC
 BEGIN
@@ -6043,6 +6046,7 @@ BEGIN
  
  RETURN (hargax);
 END;
+
 CREATE FUNCTION `PaguASBDistribusi`(jns_biaya INT,hub_driver INT,vol1 DECIMAL(15,4),vol2 DECIMAL(15,4),r1 DECIMAL(15,4),r2 DECIMAL(15,4),m1 DECIMAL(15,4) ,m2 DECIMAL(15,4), k1 DECIMAL(15,4),k2 DECIMAL(15,4),k3 DECIMAL(15,4),harga DECIMAL(15,4),persen DECIMAL(15,4)) RETURNS decimal(15,4)
     DETERMINISTIC
 BEGIN
@@ -6117,8 +6121,8 @@ BEGIN
  
  RETURN (hargax);
 END;
-CREATE FUNCTION `XML_Encode`(X VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
-    DETERMINISTIC
+
+CREATE FUNCTION `XML_Encode`(X VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1 DETERMINISTIC
 BEGIN 
 
     DECLARE TextString VARCHAR(1000) ; 
@@ -6175,7 +6179,8 @@ BEGIN
     END IF ;
 		
 		RETURN TextString ; 
-END;"
+END;
+"
 
 tambahKey = "SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;

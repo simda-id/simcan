@@ -27,7 +27,7 @@
                                         <li data-value="105"> Rekening</li>
                                         <li data-value="106"> Program-Kegiatan</li>
                                         <li data-value="107"> Lokasi</li>
-                                        <li data-value="108"> Indikator</li>
+                                        {{-- <li data-value="108"> Indikator</li> --}}
                                         <li data-value="111"> Satuan</li>
                                         <li data-value="104"> Agenda Tahunan</li>
                                         <li data-value="109"> Setting Aplikasi</li>
@@ -69,38 +69,60 @@
                                 </li>
                             </ul>
                         </div><!--col-->
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        {{-- <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
                                 <li data-value ="901"> Data Pendukung</li>
                             </ul>
-                        </div><!--col-->
+                        </div> --}}<!--col-->
                     </div>
                     
                     <div class="row" style="padding: 5px">
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
-                                <li> RPJMD
+                                <li> Pra RPJMD
                                     <ul>
-                                        <li data-value ="20"> RPJMD</li>
-                                    </ul>
-                                </li>
-                                <li> Renstra Perangkat Daerah
-                                    <ul>
-                                        <li data-value ="30"> Renstra</li>
-                                    </ul>
-                                </li>
-                                <li> Pencetakan RPJMD dan Renstra
-                                    <ul>
-                                        <li data-value ="20"> Cetak RPJMD </li>
-                                        <li data-value ="30"> Cetak Renstra </li>
+                                        <li data-value ="290"> Analisa Capaian IKK</li>
+                                        <li data-value ="290"> Identifikasi Masalah</li>
+                                        <li data-value ="290"> Identifikasi Prioritas</li>
                                     </ul>
                                 </li>
                             </ul>
                         </div><!--col-->
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
-                                <li> RKPD
+                                <li> RPJMD
                                     <ul>
+                                        <li data-value ="20"> RPJMD</li>
+                                        <li data-value ="20"> Cetak RPJMD </li>
+                                    </ul>
+                                </li>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                <li> Renstra Perangkat Daerah
+                                    <ul>
+                                        <li data-value ="30"> Renstra</li>
+                                        <li data-value ="30"> Cetak Renstra </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!--col-->                        
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                <li> Indikator Kinerja
+                                    <ul>
+                                        <li data-value ="108"> Usulan Indikator</li>
+                                        <li data-value ="108"> Indikator Kinerja</li>
+                                        <li data-value ="108"> Verifikasi Indikator</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!--col-->
+                    </div>
+
+                    <div class="row" style="padding: 5px">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> Rancangan Awal RKPD
                                             <ul>
                                                 <li data-value ="401"> Load Data Tahunan RPJMD</li>
@@ -108,6 +130,10 @@
                                                 <li data-value ="401"> Dokumen Ranwal RKPD</li>
                                             </ul>
                                         </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> Rancangan RKPD
                                             <ul>
                                                 <li data-value ="403"> Load DataForum SKPD</li>
@@ -116,6 +142,10 @@
                                                 <li data-value ="403"> Dokumen Rancangan RKPD</li>
                                             </ul>
                                         </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> Rancangan Akhir RKPD
                                             <ul>
                                                 <li data-value ="405"> Load Data Musrenbang RKPD</li>
@@ -124,6 +154,10 @@
                                                 <li data-value ="405"> Dokumen Ranhir RKPD</li>
                                             </ul>
                                         </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> RKPD Final
                                             <ul>
                                                 <li data-value ="407"> Load Data Rancangan Akhir</li>
@@ -133,20 +167,22 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                            </ul>
                         </div><!--col-->
+                    </div>
+                        <div class="row" style="padding: 5px">
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
-                                <li> Renja Perangkat Daerah
-                                    <ul>
                                        <li> Rancangan Awal Renja
                                             <ul>
                                                 <li data-value="501"> Load Data Ranwal Renja</li>
                                                 <li data-value="501"> Rancangan Awal Renja</li>
                                                 <li data-value="501"> Dokumen Ranwal Renja</li>
                                             </ul>
-                                        </li>
+                                        </li>                                        
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> Rancangan Renja
                                             <ul>
                                                 <li data-value="502"> Load Rancangan Renja</li>
@@ -154,6 +190,10 @@
                                                 <li data-value="502"> Dokumen Rancangan Renja</li>
                                             </ul>
                                         </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                         <li> Renja Final
                                             <ul>
                                                 <li data-value="502"> Load Data RKPD Final</li>
@@ -161,8 +201,10 @@
                                                 <li data-value="502"> Dokumen Renja< Final</li>
                                             </ul>
                                         </li>
-                                    </ul>
-                                </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                 <li> Forum Perangkat Daerah
                                     <ul>
                                         <li data-value ="606"> Load Data Rancangan Awal</li>
@@ -171,12 +213,13 @@
                                     </ul>
                                 </li>                                
                             </ul>
-                        </div><!--col-->                        
+                        </div><!--col--> 
+                        </div>
+
+                        <div class="row" style="padding: 5px">                       
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
-                                <li> Musrenbang RKPD
-                                    <ul>
-                                        <li> Kecamatan
+                                        <li> Musrenbang Kecamatan
                                             <ul>
                                                 <li data-value ="601"> Usulan RW</li>
                                                 {{-- <li data-value ="602">Load Usulan RW</li> --}}
@@ -185,17 +228,33 @@
                                                 <li data-value ="605"> Musrenbang Kecamatan</li>
                                                 {{-- <li data-value ="605"> Posting Musrenbang Kecamatan</li> --}}
                                             </ul>
-                                        </li>
-                                        <li> Kota/Kabupaten
+                                        </li>                               
+                            </ul>
+                        </div><!--col--> 
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                        <li> Musrenbang Kota/Kabupaten
                                             <ul>
                                                 <li data-value ="608"> Load Data Forum PD</li>
                                                 <li data-value ="609"> Musrenbang RKPD</li>
                                                 <li data-value ="611"> Penyesuaian PD</li>
                                                 <li data-value ="608"> Dokumen Musrenbang RKPD</li>
                                             </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        </li>                               
+                            </ul>
+                        </div><!--col-->
+
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                        <li> Pra Musrenbang ( Khusus Provinsi )
+                                            <ul>
+                                                <li data-value ="699"> Usulan Kabupaten/Kota'</li>
+                                            </ul>
+                                        </li>                               
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul> 
                                 <li> Pokok Pikiran DPRD
                                      <ul>
                                                 <li data-value="503"> Pokok Pikiran DPRD</li>
@@ -221,9 +280,59 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <ul>
+                                <li> PPAS Pergeseran
+                                    <ul>
+                                        <li data-value="701"> Dokumen PPAS Pergeseran</li>
+                                        <li data-value="702"> Program Pemda</li>
+                                        <li data-value="703"> Program OPD</li>
+                                        <li data-value="704"> Pagu OPD</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                <li> PPAS Perubahan
+                                    <ul>
+                                        <li data-value="710"> Dokumen PPAS Perubahan</li>
+                                        <li data-value="711"> Program Pemda</li>
+                                        <li data-value="712"> Program OPD</li>
+                                        <li data-value="713"> Pagu OPD</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!--col-->
+                        </div> 
+                         <div class="row" style="padding: 5px">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
                                 <li> APBD
                                     <ul>
                                         <li data-value="710"> Dokumen APBD</li>
+                                        <li data-value="711"> Program Pemda</li>
+                                        <li data-value="712"> Program OPD</li>
+                                        <li data-value="713"> Pagu OPD</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                <li> APBD Pergeseran
+                                    <ul>
+                                        <li data-value="710"> Dokumen APBD Pergerseran</li>
+                                        <li data-value="711"> Program Pemda</li>
+                                        <li data-value="712"> Program OPD</li>
+                                        <li data-value="713"> Pagu OPD</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!--col-->
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <ul>
+                                <li> APBD Perubahan
+                                    <ul>
+                                        <li data-value="710"> Dokumen APBD Perubahan</li>
                                         <li data-value="711"> Program Pemda</li>
                                         <li data-value="712"> Program OPD</li>
                                         <li data-value="713"> Pagu OPD</li>
@@ -242,6 +351,14 @@
                                 </ul>
                             </li>
                         </ul>
+                        <ul>
+                            <li> Cascading Sasaran
+                                <ul>
+                                    <li data-value="930"> Cascading Program - Kegiatan</li>
+                                    <li data-value="931"> Pohon Kinerja</li>
+                                </ul>
+                            </li>
+                        </ul>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-3">
                         <ul>
@@ -255,16 +372,11 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-3">
                         <ul>
-                            <li> Perencanaan Kinerja
+                            <li> Perjanjian Kinerja
                                 <ul>
-                                    <li data-value="930"> Cascading Hasil Program - Kegiatan</li>
-                                    <li data-value="931"> Pohon Kinerja</li>
-                                    <li> Penetapan Kinerja
-                                    <ul>
-                                            <li data-value="932"> Penetapan Kinerja Level 1</li>
-                                            <li data-value="933"> Penetapan Kinerja Level 2</li>
-                                            <li data-value="934"> Penetapan Kinerja Level 3</li>
-                                    </ul>
+                                            <li data-value="932"> Perjanjian Kinerja Level 1</li>
+                                            <li data-value="933"> Perjanjian Kinerja Level 2</li>
+                                            <li data-value="934"> Perjanjian Kinerja Level 3</li>
                                     </li>
                                 </ul>
                             </li>

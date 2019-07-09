@@ -9,12 +9,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Rancangan Renja x';
+                $this->title = 'Rancangan Renja';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
                 $breadcrumb->add(['url' => '/modul2','label' => 'Renja Perangkat Daerah']);
-                $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja']);
+                $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja x']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -1978,7 +1978,7 @@ $('#no_urut_lokasi').number(true,0,'', '');
 $.ajax({
 
     type: "GET",
-    url: './blang/getUnitRenja',
+    url: 'renja/blang/getUnitRenja',
     dataType: "json",
 
     success: function(data) {

@@ -20,7 +20,7 @@
                   <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control number" id="id_perubahan_indikator_program_edit" name="id_perubahan_indikator_program_edit" required="required" >                  
+                        <input type="text" class="form-control number" id="id_perubahan_indikator_program_edit" name="id_perubahan_indikator_program_edit" required="required" >
                     </div>
                   </div>
                 </div> 

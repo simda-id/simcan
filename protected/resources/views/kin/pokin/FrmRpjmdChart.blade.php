@@ -15,8 +15,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <a href="{{url('/pokin')}}" id="btnBatal" type="button" class="btn btn-sm btn-danger btn-labeled">
                         <span class="btn-label"><i class="fa fa-undo fa-lg fa-fw"></i></span>Kembali</a>
                     </div>
-                </div>
-            
+                </div>            
         </div>
         <div class="panel-body" style="background: white">
             <div id="pk" style="width: 100%;height: 100%;"></div>
@@ -48,8 +47,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 <script type="text/javascript" src="{{ asset('assets/orgchart/js/jquery.orgchart.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/orgchart/js/html2canvas.min.js')}}"></script>
-
-  <script type="text/javascript">
+<script type="text/javascript" language="javascript" class="init">
     $(function() {
 
     var datascource = {
@@ -96,6 +94,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     });
 
   });
-  </script>
+</script>
+
+  
 
 @endsection

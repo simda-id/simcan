@@ -686,7 +686,7 @@ $(document).on('click', '.backUrusan', function() {
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_indikator').val(),
-              'id_rkpd_ranwal': $('#id_rkpd_ranwal_indikator').val(),
+              'id_rkpd_rancangan': $('#id_rkpd_ranwal_indikator').val(),
               'kd_indikator': $('#kd_indikator_rkpd').val(),
               'uraian_indikator': $('#ur_indikator_rkpd').val(),
               'tolok_ukur_indikator': $('#ur_tolokukur_rkpd').val(),
@@ -723,7 +723,7 @@ $(document).on('click', '.backUrusan', function() {
       $('#target_indikator_rkpd').val(data.target_rkpd);
       $('#id_satuan_output').val(data.id_satuan_ouput);
       
-      if($(this).data('sumber_data')==1){
+      if(data,sumber_data==1){
         document.getElementById("no_urut_indikator").removeAttribute("disabled");
         // document.getElementById("ur_indikator_rkpd").removeAttribute("disabled");
         $('.btnCariIndi').show();
@@ -808,7 +808,7 @@ $(document).on('click', '.backUrusan', function() {
       url: 'rkpd/hapusIndikatorRKPD',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_indikator_program_rkpd': $('#id_indikator_hapus').val()
+        'id_indikator_rkpd': $('#id_indikator_hapus').val()
       },
       success: function(data) {
         $('#ModalIndikator').modal('hide');
@@ -1345,7 +1345,7 @@ $(document).on('click', '#btnReviuIndikator', function() {
             data: {
                 '_token': $('input[name=_token]').val(),
                 'status_data':rows_data[index].status_data,
-                'id_indikator_program_rkpd' : rowId,
+                'id_indikator_rkpd' : rowId,
             },
             success: function(data) {
               createPesan(data.pesan,"success");

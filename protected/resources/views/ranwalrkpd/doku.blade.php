@@ -556,6 +556,8 @@ $('.modal-footer').on('click', '.delDokumen', function() {
       data: {
         '_token': $('input[name=_token]').val(),
         'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
+        'tahun_rkpd': $('#tahun_rkpd').val(),
+        'id_unit': $('#id_unit_perencana').val(),
       },
       success: function(data) {
         dokumen_tbl.ajax.reload();

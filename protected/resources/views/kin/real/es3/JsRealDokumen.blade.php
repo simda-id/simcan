@@ -18,7 +18,7 @@
     $('#jabatan_penandatangan_dok').val($('#cb_eselon_3 option:selected').text());
     $.ajax({
         type: "GET",
-        url: '../perkin/getPegawai/'+$( ".cb_eselon_3" ).val(),
+        url: '../real/es3/getPejabat/'+$( ".cb_eselon_3" ).val(),
         dataType: "json",
         success: function(data) {
           var j = data.length;

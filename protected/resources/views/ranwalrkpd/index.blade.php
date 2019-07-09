@@ -42,8 +42,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div role="tabpanel" class="tab-pane fade in active" id="program">
               <br>              
               <div>
-                {{-- <a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Program baru yang belum ada di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a> --}}
-                  <div class="btn-group">
+                <a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-success" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Program baru yang belum ada di RPJMD"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a>
+                  <div class="btn-group hidden">
                       <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Ranwal RKPD <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li>
@@ -285,9 +285,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <label class="radio-inline">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="3">Dibatalkan
                       </label>
-                      <label class="radio-inline hidden">
+                      {{-- <label class="radio-inline hidden">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="5">Tanpa Anggaran
-                      </label>
+                      </label> --}}
                       <label class="radio-inline hidden" id="status_pelaksanaan_unit4">
                         <input type="radio" class="sUnit" name="status_pelaksanaan_unit" id="status_pelaksanaan_unit" value="4">Baru
                       </label>
@@ -1154,8 +1154,8 @@ $('#tblPelaksanaRKPD tbody').on( 'mousedown', 'td', function (e) {
       document.getElementById("no_urut_pelaksana").removeAttribute("disabled");
       document.getElementById("keterangan_status_unit").removeAttribute("disabled");
       $('.KetPelaksanaanUnit').show();
-      document.frmEditPelaksana.status_pelaksanaan_unit[5].checked=true;
-      document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
+      // document.frmEditPelaksana.status_pelaksanaan_unit[5].checked=true;
+      // document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
       document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
       $('.idStatusPelaksanaUnit').hide();
 

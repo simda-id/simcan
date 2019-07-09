@@ -170,7 +170,7 @@ $(document).on('click', '#btnAddDokumen', function() {
     success: function(data) {
       $('#btnDokumen').removeClass('editDokumen');
       $('#btnDokumen').addClass('addDokumen');
-      $('.modal-title').text('Tambah Dokumen Penyusunan PPAS');
+      $('.modal-title').text('Tambah Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)');
       $('.form-horizontal').show();
 
       $('#id_dokumen_rkpd').val(null);
@@ -234,7 +234,7 @@ $(document).on('click', '#btnEditDokumen', function() {
 
       $('#btnDokumen').removeClass('addDokumen');
       $('#btnDokumen').addClass('editDokumen');
-      $('.modal-title').text('Ubah Dokumen Penyusunan Rancangan Awal RKPD');
+      $('.modal-title').text('Ubah Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)');
       $('.form-horizontal').show();
 
       $('#id_dokumen_rkpd').val(data.id_dokumen_rkpd);

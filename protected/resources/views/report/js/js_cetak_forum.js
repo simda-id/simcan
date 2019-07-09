@@ -169,10 +169,10 @@ $(document).on('click', '.btnProses', function() {
     if($('#jns_laporan').val()==5){
        window.open('../PrintPraRKAF/'+$('#keg_prarka').val()+'/'+$('#sub_prarka2').val()); 
     };
-    if($('#jns_laporan').val()==9){
-    	window.open('../PrintPrakiraanMajuF/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
+    // if($('#jns_laporan').val()==9){
+    // 	window.open('../PrintPrakiraanMajuF/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
  
-     };
+    //  };
   
      if($('#jns_laporan').val()==11){
        window.open('../PrintMatrikForm2/'+$('#tahun_prarka').val()); 
@@ -187,6 +187,14 @@ $(document).on('click', '.btnProses', function() {
 
        };
        
+      if($('#jns_laporan').val()==9){
+         vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+        vars += "&unit="   + $('#unit_prarka').val();
+
+        window.open('../PrintPrakiraanMajuHtml' + vars, '_blank');
+   
+       };
     
 //     if($('#jns_laporan').val()==9){
 //        window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 

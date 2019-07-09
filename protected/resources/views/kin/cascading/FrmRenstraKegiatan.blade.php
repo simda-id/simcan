@@ -11,12 +11,6 @@
               <input type="hidden" class="form-control" id="id_unit_kegiatan_edit" name="id_unit_kegiatan_edit" readonly >
               <input type="hidden" class="form-control" id="id_hasil_program_kegiatan_edit" name="id_hasil_program_kegiatan_edit" readonly>
               <div class="form-group">
-                  <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Kegiatan :</label>
-                  <div class="col-sm-9">
-                    <textarea type="text" class="form-control" rows="3" id="ur_sasaran_kegiatan_renstra_edit" name="ur_sasaran_kegiatan_renstra_edit" required="required"></textarea>
-                  </div>
-              </div>
-              <div class="form-group">
                   <label for="kd_kegiatan_edit" class="col-sm-3 control-label" align='left'>Uraian Kegiatan Renstra:</label>
                   <div class="col-sm-2">
                       <input type="text" class="form-control" id="kd_kegiatan_edit" name="kd_kegiatan_edit" style="text-align: center;" readonly> 
@@ -28,6 +22,12 @@
                   <label for="" class="col-sm-3 control-label" align='left'></label>
                   <div class="col-sm-9">
                       <textarea type="text" class="form-control" rows="3" id="ur_kegiatan_renstra_edit" name="ur_kegiatan_renstra_edit" required="required" readonly></textarea>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Kegiatan :</label>
+                  <div class="col-sm-9">
+                    <textarea type="text" class="form-control" rows="3" id="ur_sasaran_kegiatan_renstra_edit" name="ur_sasaran_kegiatan_renstra_edit" required="required"></textarea>
                   </div>
               </div>
           </form>

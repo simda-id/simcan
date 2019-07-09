@@ -69,9 +69,9 @@ $('#no_urut_program').number(true,0,',', '.');
         "autoWidth": false,
         "ajax": {
           "url": "rancanganrkpd/getData",
-          "data": {
-            'id_x' : 'blang',
-            },
+          // "data": {
+          //   'id_x' : 'blang',
+          //   },
           },
         "language": {
                 "decimal": ",",
@@ -85,7 +85,7 @@ $('#no_urut_program').number(true,0,',', '.');
               { data: 'pagu_ranwal',
                 render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
-              { data: 'pagu_prog_renja',
+              { data: 'pagu_unit',
                 render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
               { data: 'jml_indikator', sClass: "dt-center"},

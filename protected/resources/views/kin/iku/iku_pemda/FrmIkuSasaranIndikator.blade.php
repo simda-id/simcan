@@ -18,8 +18,8 @@
                     </div>
                 </div>             
                 <div class="form-group">
-                    <label for="satuan_sasaran_rinci" class="col-sm-3 control-label" align='left'>Target Indikator :</label>
-                    <div class="col-sm-3">
+                    <label for="satuan_sasaran_rinci" class="col-sm-3 control-label" align='left'>Satuan Indikator :</label>
+                    <div class="col-sm-3 hidden">
                         <input type="text" class="form-control" id="target_sasaran_rinci" name="target_sasaran_rinci" readonly>                  
                     </div>
                     <div class="col-sm-3"> 

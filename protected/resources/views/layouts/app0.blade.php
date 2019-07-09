@@ -155,6 +155,7 @@ use hoaaah\LaravelMenu\Menu;
         <script type="text/javascript" src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>        
         <script type="text/javascript" src="{{ asset('/js/jquery.number.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/sb-admin-2.js')}}"></script>
+        <script src="{{ asset('/js/datepicker-id.js')}}"></script>
 
 
         @yield('scripts')

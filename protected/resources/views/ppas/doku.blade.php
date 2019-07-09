@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
       <div class="col-md-12">
         <?php
-                $this->title = 'Dokumen Plafond Pagu Anggaran Sementara (PPAS)';
+                $this->title = 'Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul3';
                 $breadcrumb->begin();
@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <p><h2 class="panel-title">Dokumen Plafond Pagu Anggaran Sementara (PPAS)</h2></p>
+            <p><h2 class="panel-title">Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</h2></p>
           </div>
 
           <div class="panel-body">
@@ -36,7 +36,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>                    
                 </form>
                 <div class='tabs-x tabs-above tab-bordered tabs-krajee'>                    
-                  <div id="judul" class="alert alert-info col-md-12" ><b>Daftar Dokumen Plafond Pagu Anggaran Sementara (PPAS)</b></div>
+                  <div id="judul" class="alert alert-info col-md-12" ><b>Daftar Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</b></div>
                   <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#dokumen" aria-controls="dokumen" role="tab" data-toggle="tab">Dokumen PPAS</a></li>
                       <li><a href="#rekap" aria-controls="rekap" role="tab-kv" data-toggle="tab">Rekapitulasi PPAS</a></li>
@@ -177,16 +177,16 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4>Hapus Dokumen Plafond Pagu Anggaran Sementara (PPAS)</h4>
+            <h4>Hapus Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</h4>
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_dokumen_hapus" name="id_dokumen_hapus">
             <div class="alert alert-danger">
               <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-danger" aria-hidden="true"></i>
-                Yakin akan menghapus Dokumen Plafond Pagu Anggaran Sementara (PPAS) dengan nomor dokumen: <strong><span class="ur_dokumen_del"></span></strong>  ?
+                Yakin akan menghapus Dokumen Proritas dan Plafond Anggaran Sementara (PPAS) dengan nomor dokumen: <strong><span class="ur_dokumen_del"></span></strong>  ?
                 <br>
                 <br>
-                <strong>Catatan : Penghapusan dokumen ini akan menghapus data Plafond Pagu Anggaran Sementara (PPAS) yang telah diproses !!!!</strong>
+                <strong>Catatan : Penghapusan dokumen ini akan menghapus data Proritas dan Plafond Anggaran Sementara (PPAS) yang telah diproses !!!!</strong>
           </div>
         </div>
           <div class="modal-footer">
@@ -204,7 +204,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 style="text-align: center;">Perubahan Status Plafond Pagu Anggaran Sementara (PPAS)</h4>
+            <h4 style="text-align: center;">Perubahan Status Proritas dan Plafond Anggaran Sementara (PPAS)</h4>
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_dokumen_posting" name="id_dokumen_posting">
@@ -213,7 +213,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="alert alert-success">
                 <div>
                   <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
-                  <p>Yakin akan melakukan proses <strong><i><span id="ur_status_dokumen_posting"></span></i></strong> pada Dokumen Plafond Pagu Anggaran Sementara (PPAS) Tahun <strong><span id="ur_tahun_posting"></span></strong> ?</p>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_status_dokumen_posting"></span></i></strong> pada Dokumen Proritas dan Plafond Anggaran Sementara (PPAS) Tahun <strong><span id="ur_tahun_posting"></span></strong> ?</p>
                 </div>
                 <hr>
                 <div>

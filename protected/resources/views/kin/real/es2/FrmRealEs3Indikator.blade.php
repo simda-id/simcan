@@ -16,7 +16,13 @@
                       <input type="hidden" id="kd_indikator_realEs4" name="kd_indikator_realEs4">
                       <textarea type="name" class="form-control" id="ur_indikator_realEs4" rows="2" readonly ></textarea>
                     </div>
-                </div>             
+                </div> 
+                <div class="form-group">
+                    <label for="satuan_realEs4_indikator" class="col-sm-3 control-label" align='left'>Satuan Indikator :</label>
+                    <div class="col-sm-4">
+                          <input type="text" class="form-control" id="satuan_realEs4_indikator" name="satuan_realEs4_indikator" readonly>           
+                    </div> 
+                </div>           
                 <div class="form-group">
                     <label for="satuan_realEs4_indikator" class="col-sm-3 control-label" align='left'>Reviu Realisasi Indikator :</label>
                     <div class="col-sm-2">
@@ -25,9 +31,7 @@
                             </div>
                         </div> 
                     <div class="col-sm-3">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="satuan_realEs4_indikator" name="satuan_realEs4_indikator" readonly>                  
-                        </div>
+                        <label for="satuan_realEs4_indikator" class="control-label" align='left'>persen (%)</label>
                     </div>
                     <label for="flag_iku_rinci_kegiatan" class="col-sm-1 control-label" align='left'>Reviu :</label>
                     <div class="col-sm-3">
@@ -36,8 +40,7 @@
                             <a class="btn btn-primary btn-sm notActive" id="flag_reviu_realEs4_0" data-toggle="flag_reviu_realEs4" data-title="0">Belum Reviu</a>
                             </div>
                         <input type="hidden" class="form-control" id="flag_reviu_realEs4" name="flag_reviu_realEs4">                  
-                    </div>
-                                     
+                    </div>                                     
                 </div> 
                 <div class="form-group">
                 <label class="control-label col-sm-12" style="text-align: left;">Rincian Target Indikator Kegiatan Renstra :</label>

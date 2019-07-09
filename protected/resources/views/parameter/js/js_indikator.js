@@ -240,13 +240,12 @@ var data = indikator_tbl.row( $(this).parents('tr') ).data();
   document.frmModalIndikator.jenis_indikator[data.jenis_indikator].checked=true;
   document.frmModalIndikator.sifat_indikator[data.sifat_indikator].checked=true;
   document.frmModalIndikator.tipe_indikator[data.type_indikator].checked=true;
-
-
   $('#ModalIndikator').modal('show');
+
 });
 
 
-$('.modal-footer').on('click', '.edit', function(e) {
+$('.modal-footer').on('click', '.edit', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -254,8 +253,6 @@ $('.modal-footer').on('click', '.edit', function(e) {
     $.ajax({
         type: 'post',
         url: './indikator/editIndikator',
-        contentType: false,
-        processData: false,
         data: {
             '_token': $('input[name=_token]').val(),
             'id_indikator' : $('#id_indikator').val(),
@@ -279,8 +276,6 @@ $('.modal-footer').on('click', '.edit', function(e) {
               }
         }
     });
-    e.preventDefault();
-    e.unbind();
 });
 
 //delete function

@@ -206,6 +206,16 @@ use hoaaah\LaravelMenu\Menu;
                 </div>
               </div>
               <div class="form-group">
+                <label class="control-label col-sm-3" for="cb_status">Status Data :</label>
+                <div class="col-sm-8">
+                    <select class="form-control cb_status" name="cb_status" id="cb_status">
+                      <option value="-1"> Semua Status </option>
+                      <option value="1"> Status Posting/Reviu </option>
+                      <option value="0"> Status Belum Posting/Reviu </option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-3" for="jns_laporan"></label>
                 <div class="col-sm-8 text-left">
                     <button type="button" class="btn btn-labeled btn-success btnProses"><span class="btn-label"><i class="fa fa-print fa-lg fa-fw"></i></span> Proses</button>  

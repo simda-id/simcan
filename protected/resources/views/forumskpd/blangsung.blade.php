@@ -1276,7 +1276,7 @@ function initTableBidang(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BFRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             columns: [
                 { data: 'kd_bidang', name: 'kd_bidang', sClass: "dt-center", width:'15%' },
@@ -1657,7 +1657,7 @@ function initTableUsulan(tableId, data) {
             processing: true,
             serverSide: true,
             ajax: data.details_url,
-            dom : 'BFRtIP',
+            dom : 'BFRtIp',
             autoWidth: false,
             columns: [
                 { data: 'no_urut', sClass: "dt-center"},
@@ -3223,9 +3223,7 @@ function hitungsatuan(){
 }
 
 $( "#volume1_forum" ).change(function() {
-
   $('#jumlah_belanja_forum').val(hitungsatuan()); 
-
 });
 
 $( "#volume2_forum" ).change(function() {
@@ -3259,7 +3257,6 @@ function checkAsalbelanja(asal){
     document.getElementById("zona_ssh").removeAttribute("disabled");
   }
 }
-
 
 $(document).on('click', '.catatan', function() {  
   alert("Maaf Tidak Berfungsi karena asal belanja dari ASB")

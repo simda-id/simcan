@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Kegiatan Renstra :</label>
+                <label for="ur_sasaran_kegiatan_renstra_edit" class="col-sm-3 control-label" align='left'>Keterangan Kegiatan Renstra :</label>
                 <div class="col-sm-8">
                   <textarea type="text" class="form-control" rows="5" id="ur_sasaran_kegiatan_renstra_edit" name="ur_sasaran_kegiatan_renstra_edit" required="required" ></textarea>
                 </div>

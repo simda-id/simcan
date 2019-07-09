@@ -25,7 +25,7 @@
                         </div>
                     </div>                  
                 </div>
-                <label class="col-sm-12" style="text-align: left;">Rincian Target Indikator Kegiatan Renstra :</label>
+                <label class="col-sm-12" style="text-align: left;">Rincian Target Indikator Kegiatan Renstra (dalam persen (%)):(dalam persen (%))</label>
                 <br>
                 <table id="tblIndikatorSasaran" class="table table-bordered"  cellspacing="0" width="100%">
                         <thead style="background: #428bca; color: #fff">

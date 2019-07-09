@@ -9,12 +9,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
       <div class="col-md-12">
         <?php
-                $this->title = 'Dokumen Musrenbang RKPD';
+                $this->title = 'Dokumen RKPD Final';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => 'RKPD']);
-                $breadcrumb->add(['label' => 'Musrenbang RKPD']);
+                $breadcrumb->add(['label' => 'RKPD']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?> 
@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <p><h2 class="panel-title">Dokumen Rancangan RKPD</h2></p>
+            <p><h2 class="panel-title">Dokumen RKPD Final</h2></p>
           </div>
 
           <div class="panel-body">

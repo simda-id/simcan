@@ -181,19 +181,19 @@ use hoaaah\LaravelMenu\Menu;
                     <select class="form-control unit_prarka" name="unit_prarka" id="unit_prarka"></select>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group hidden">
                 <label class="control-label col-sm-3" for="sub_prarka2">Sub Unit :</label>
                 <div class="col-sm-8">
                     <select class="form-control sub_prarka2" name="sub_prarka2" id="sub_prarka2"></select>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group hidden">
                 <label class="control-label col-sm-3" for="prog_prarka">Program :</label>
                 <div class="col-sm-8">
                     <select class="form-control prog_prarka" name="prog_prarka" id="prog_prarka"></select>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group hidden">
                 <label class="control-label col-sm-3" for="keg_prarka">Kegiatan :</label>
                 <div class="col-sm-8">
                     <select class="form-control keg_prarka" name="keg_prarka" id="keg_prarka"></select>
@@ -203,6 +203,16 @@ use hoaaah\LaravelMenu\Menu;
                 <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
                 <div class="col-sm-8">
                     <select class="form-control jns_laporan" name="jns_laporan" id="jns_laporan"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="cb_status">Status Data :</label>
+                <div class="col-sm-8">
+                    <select class="form-control cb_status" name="cb_status" id="cb_status">
+                      <option value="-1"> Semua Status </option>
+                      <option value="1"> Status Posting/Reviu </option>
+                      <option value="0"> Status Belum Posting/Reviu </option>
+                    </select>
                 </div>
               </div>
               <div class="form-group">
@@ -219,175 +229,6 @@ use hoaaah\LaravelMenu\Menu;
 @endsection
 
 @section('scripts')
-<script>
-$(document).ready(function(){
-
-$.ajax({
-    type: "GET",
-    url: '../admin/parameter/getUrusan',
-    dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
-
-        $('select[name="urusan_prarka"]').empty();
-        $('select[name="urusan_prarka"]').append('<option value="-1">---Pilih Urusan---</option>');
-
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="urusan_prarka"]').append('<option value="'+ post.kd_urusan +'">'+ post.nm_urusan +'</option>');
-
-        }
-    }
-});
-
-$.ajax({
-    type: "GET",
-    url: './jenis_renja_ranwal',
-    dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
-
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="jns_laporan"]').append('<option value="'+ post.id +'">'+ post.uraian_laporan +'</option>');
-        }
-    }
-});
-
-$.ajax({
-    type: "GET",
-    url: '../admin/parameter/getTahun',
-    dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
-
-        $('select[name="tahun_prarka"]').empty();
-        $('select[name="tahun_prarka"]').append('<option value="-1">---Pilih Tahun---</option>');
-
-        for (i = 0; i < j; i++) {
-          post = data[i];
-          $('select[name="tahun_prarka"]').append('<option value="'+ post.tahun +'">'+ post.tahun +'</option>');
-        }
-    }
-});
-
-$( ".urusan_prarka" ).change(function() {
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getBidang/'+$('#urusan_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="bidang_prarka"]').empty();
-          $('select[name="bidang_prarka"]').append('<option value="-1">---Pilih  Bidang---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="bidang_prarka"]').append('<option value="'+ post.id_bidang +'">'+ post.nm_bidang +'</option>');
-          }
-        }
-    });
-});
-
-$( ".bidang_prarka" ).change(function() {  
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getUnit2/'+$('#bidang_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="unit_prarka"]').empty();
-          $('select[name="unit_prarka"]').append('<option value="-1">---Pilih Unit---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="unit_prarka"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
-          }
-        }
-    });
-});
-
-$( ".unit_prarka" ).change(function() { 
-    $.ajax({
-        type: "GET",
-        url: 'getProgramRanwalRenja/'+$('#unit_prarka').val()+'/'+$('#tahun_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="prog_prarka"]').empty();
-          $('select[name="prog_prarka"]').append('<option value="-1">---Pilih Program---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="prog_prarka"]').append('<option value="'+ post.id_renja_program +'">'+ post.uraian_program_renstra +'</option>');
-          }
-        }
-    });
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getSub2/'+$('#unit_prarka').val(),
-        dataType: "json",
-
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="sub_prarka2"]').empty();
-          $('select[name="sub_prarka2"]').append('<option value="-1">---Pilih Sub Unit---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="sub_prarka2"]').append('<option value="'+ post.id_sub_unit +'">'+ post.nm_sub +'</option>');
-          }
-        }
-    });
-
-});
-
-$( ".prog_prarka" ).change(function() {  
-    $.ajax({
-        type: "GET",
-        url: 'getKegiatanRanwalRenja/'+$('#prog_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="keg_prarka"]').empty();
-          $('select[name="keg_prarka"]').append('<option value="-1">---Pilih Kegiatan---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="keg_prarka"]').append('<option value="'+ post.id_renja +'">'+ post.uraian_kegiatan_renstra +'</option>');
-          }
-        }
-    });
-});
-
-
-$(document).on('click', '.btnProses', function() {
-    if($('#jns_laporan').val()==1){
-       window.open('../PrintKompilasiProgramRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==2){
-       window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==3){
-       window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
-    };    
-});
-
-
-});
-</script>
+  <script src="{{ asset('/protected/resources/views/report/js/js_cetak_pokir.js')}}"></script>
 @endsection
 

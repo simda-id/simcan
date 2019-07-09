@@ -17,15 +17,23 @@
                       <textarea type="name" class="form-control" id="ur_indikator_sasaran" rows="3" readonly ></textarea>
                     </div>
                 </div>             
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="satuan_sasaran_indikator" class="col-sm-3 control-label" align='left'>Satuan Indikator :</label>
                     <div class="col-sm-8">
                         <div class="input-group">
                           <input type="text" class="form-control" id="satuan_sasaran_indikator" name="satuan_sasaran_indikator" readonly>                  
                         </div>
                     </div>                  
+                </div> --}}
+                <div class="form-group">
+                  <label class="col-sm-9" style="text-align: left;">Rincian Target Indikator Sasaran Renstra (dalam persen (%)):</label>
+                  <div class="col-sm-3 hidden">
+                      <button type="button" class="btn btn-labeled btn-success btnBagiRata">
+                        <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span> Percepatan Target
+                      </button>  
+                  </div>
                 </div>
-                <label class="col-sm-12" style="text-align: left;">Rincian Target Indikator Sasaran Renstra :</label>
+                
                 <br>
                 <table id="tblIndikatorSasarant" class="table table-bordered"  cellspacing="0" width="100%">
                         <thead style="background: #428bca; color: #fff">
@@ -56,6 +64,9 @@
                               </td>
                               <td style="text-align: center; vertical-align:middle">
                                  <input type="text" class="form-control number" id="target_tahun" name="target_tahun" style="text-align: right; " readonly >
+                              </td>
+                              <td style="text-align: center; vertical-align:middle">
+                                 <input type="text" class="form-control" id="satuan_sasaran_indikator" name="satuan_sasaran_indikator" readonly>  
                               </td>
                           </tr>
                         </tbody>

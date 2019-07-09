@@ -32,7 +32,7 @@
                 <table id="tblIndikatorSasaran" class="table table-bordered"  cellspacing="0" width="100%">
                         <thead style="background: #428bca; color: #fff">
                             <tr>
-                              <th width="20%" style="text-align: center; vertical-align:middle">Total</th>
+                              <th width="20%" style="text-align: center; vertical-align:middle">Uraian</th>
                               <th width="20%" style="text-align: center; vertical-align:middle">Triwulan 1</th>
                               <th width="20%" style="text-align: center; vertical-align:middle">Triwulan 2</th>
                               <th width="20%" style="text-align: center; vertical-align:middle">Triwulan 3</th>
@@ -42,7 +42,7 @@
                         <tbody>
                           <tr>
                             <td style="text-align: center; vertical-align:middle">
-                              Rencana Target Indikator
+                              Rencana Target Indikator (dalam persen (%))
                             </td>
                               <td width="20%" style="text-align: center; vertical-align:middle">
                                 <input type="text" class="form-control number" id="target_t1" name="target_t1" style="text-align: right; " readonly>
@@ -59,7 +59,7 @@
                           </tr>
                           <tr style="background: #428bca; color: #fff">
                               <td style="text-align: center; vertical-align:middle">
-                                  Realisasi Target Indikator
+                                  Realisasi Target Indikator (dalam persen (%))
                               </td>
                             <td width="20%" style="text-align: center; vertical-align:middle">
                                 <input type="text" class="form-control number realisasi" id="real_indikator_t1" name="real_indikator_t1" style="text-align: right; ">
@@ -72,6 +72,20 @@
                               </td>
                               <td width="20%" style="text-align: center; vertical-align:middle">
                                 <input type="text" class="form-control number realisasi" id="real_indikator_t4" name="real_indikator_t4" style="text-align: right; " >
+                              </td>
+                          </tr>
+                          <tr style="background: #428bca; color: #fff">
+                              <td style="text-align: center; vertical-align:middle">
+                                  Realisasi Fisik (dalam satuan indikator)
+                              </td>
+                            <td width="20%" style="text-align: center; vertical-align:middle">
+                              </td>
+                              <td width="20%" style="text-align: center; vertical-align:middle">
+                              </td>
+                              <td width="20%" style="text-align: center; vertical-align:middle">
+                              </td>
+                              <td width="20%" style="text-align: center; vertical-align:middle">
+                                <input type="text" class="form-control number realisasi" id="real_fisik_t4" name="real_fisik_t4" style="text-align: right; " >
                               </td>
                           </tr>
                         </tbody>

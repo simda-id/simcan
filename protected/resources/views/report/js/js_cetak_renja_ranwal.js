@@ -175,6 +175,12 @@ $(document).on('click', '.btnProses', function() {
         vars += "&tahun="     + $('#tahun_prarka').val();
         vars += "&id_program="     + $('#prog_prarka').val();
        window.open('../PrintMatrikSasProgRenjaRanwal'+ vars, '_blank');    
+     }; 
+     if($('#jns_laporan').val()==6){
+      vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+        vars += "&unit="     + $('#unit_prarka').val();
+       window.open('../PrakiraanMajuRanwalRenja'+ vars, '_blank');    
      };     
 });
 });

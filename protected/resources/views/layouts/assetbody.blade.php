@@ -7,3 +7,4 @@
         <script src="{{ asset('/js/jquery.number.min.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
+        <script src="{{ asset('/js/datepicker-id.js')}}"></script>

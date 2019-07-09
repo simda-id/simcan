@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div class="form-group">
-                  <label for="ur_sasaran_program_renstra_edit" class="col-sm-3 control-label" align='left'>Uraian Sasaran Program Renstra :</label>
+                  <label for="ur_sasaran_program_renstra_edit" class="col-sm-3 control-label" align='left'>Kegiatan Program Renstra :</label>
                   <div class="col-sm-8">
                     <textarea type="text" class="form-control" rows="3" id="ur_sasaran_program_renstra_edit" name="ur_sasaran_program_renstra_edit" required="required"></textarea>
                   </div>

@@ -11,7 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- membuang struktur untuk function dbsimcan_simulasi_1.GantiEnter
+-- membuang struktur untuk function dbsimcan_simulasi.GantiEnter
 DROP FUNCTION IF EXISTS `GantiEnter`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `GantiEnter`(`uraian` VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
@@ -26,7 +26,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- membuang struktur untuk function dbsimcan_simulasi_1.HTML_UnEncode
+-- membuang struktur untuk function dbsimcan_simulasi.HTML_UnEncode
 DROP FUNCTION IF EXISTS `HTML_UnEncode`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `HTML_UnEncode`(X VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
@@ -546,7 +546,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_cascading_indikator_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_cascading_indikator_kegiatan_pd
 DROP TABLE IF EXISTS `kin_trx_cascading_indikator_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_kegiatan_pd` (
   `id_indikator_kegiatan_pd` int(11) NOT NULL AUTO_INCREMENT,
@@ -555,10 +555,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_kegiatan_pd` (
   PRIMARY KEY (`id_indikator_kegiatan_pd`) USING BTREE,
   KEY `FK_kin_trx_cascading_indikator_program_pd_1` (`id_hasil_kegiatan`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_indikator_kegiatan_pd_kin_1` FOREIGN KEY (`id_hasil_kegiatan`) REFERENCES `kin_trx_cascading_kegiatan_opd` (`id_hasil_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_cascading_indikator_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_cascading_indikator_program_pd
 DROP TABLE IF EXISTS `kin_trx_cascading_indikator_program_pd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_program_pd` (
   `id_indikator_program_pd` int(11) NOT NULL AUTO_INCREMENT,
@@ -567,42 +567,42 @@ CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_program_pd` (
   PRIMARY KEY (`id_indikator_program_pd`) USING BTREE,
   KEY `FK_kin_trx_cascading_indikator_program_pd_1` (`id_hasil_program`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_indikator_program_pd_1` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_cascading_kegiatan_opd
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_cascading_kegiatan_opd
 DROP TABLE IF EXISTS `kin_trx_cascading_kegiatan_opd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_kegiatan_opd` (
   `id_hasil_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit` int(11) NOT NULL DEFAULT '0',
   `id_hasil_program` int(11) NOT NULL DEFAULT '0',
   `id_renstra_kegiatan` int(11) NOT NULL DEFAULT '0',
-  `uraian_hasil_kegiatan` varchar(500) NOT NULL DEFAULT '0',
+  `uraian_hasil_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_hasil_kegiatan`) USING BTREE,
   KEY `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` (`id_hasil_program`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_cascading_program_opd
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_cascading_program_opd
 DROP TABLE IF EXISTS `kin_trx_cascading_program_opd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_program_opd` (
   `id_hasil_program` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit` int(11) NOT NULL DEFAULT '0',
   `id_renstra_sasaran` int(11) NOT NULL DEFAULT '0',
   `id_renstra_program` int(11) NOT NULL DEFAULT '0',
-  `uraian_hasil_program` varchar(500) NOT NULL DEFAULT '0',
+  `uraian_hasil_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_hasil_program`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_opd_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_opd_dok
 DROP TABLE IF EXISTS `kin_trx_iku_opd_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `id_dokumen` int(11) NOT NULL AUTO_INCREMENT,
-  `no_dokumen` varchar(255) DEFAULT NULL,
+  `no_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date NOT NULL,
-  `uraian_dokumen` varchar(255) DEFAULT NULL,
+  `uraian_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_renstra` int(11) NOT NULL DEFAULT '1',
   `id_perubahan` int(11) DEFAULT NULL,
   `status_dokumen` int(11) DEFAULT NULL,
@@ -610,10 +610,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_unit` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_dokumen`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_opd_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_opd_kegiatan
 DROP TABLE IF EXISTS `kin_trx_iku_opd_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_kegiatan` (
   `id_iku_opd_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -629,10 +629,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_kegiatan` (
   PRIMARY KEY (`id_iku_opd_kegiatan`) USING BTREE,
   KEY `id_dokumen` (`id_iku_opd_program`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_kegiatan_ibfk_1` FOREIGN KEY (`id_iku_opd_program`) REFERENCES `kin_trx_iku_opd_program` (`id_iku_opd_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_opd_program
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_opd_program
 DROP TABLE IF EXISTS `kin_trx_iku_opd_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_program` (
   `id_iku_opd_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -648,10 +648,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_program` (
   PRIMARY KEY (`id_iku_opd_program`) USING BTREE,
   KEY `id_dokumen` (`id_iku_opd_sasaran`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_program_ibfk_1` FOREIGN KEY (`id_iku_opd_sasaran`) REFERENCES `kin_trx_iku_opd_sasaran` (`id_iku_opd_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_opd_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_opd_sasaran
 DROP TABLE IF EXISTS `kin_trx_iku_opd_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_sasaran` (
   `id_iku_opd_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -666,26 +666,26 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_sasaran` (
   PRIMARY KEY (`id_iku_opd_sasaran`) USING BTREE,
   KEY `id_dokumen` (`id_dokumen`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_opd_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_pemda_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_pemda_dok
 DROP TABLE IF EXISTS `kin_trx_iku_pemda_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_dok` (
   `id_dokumen` int(11) NOT NULL AUTO_INCREMENT,
-  `no_dokumen` varchar(255) DEFAULT NULL,
+  `no_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date NOT NULL,
-  `uraian_dokumen` varchar(255) DEFAULT NULL,
+  `uraian_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_rpjmd` int(11) NOT NULL DEFAULT '1',
   `id_perubahan` int(11) DEFAULT NULL,
   `status_dokumen` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_iku_pemda_rinci
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_iku_pemda_rinci
 DROP TABLE IF EXISTS `kin_trx_iku_pemda_rinci`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_rinci` (
   `id_iku_pemda` int(11) NOT NULL AUTO_INCREMENT,
@@ -700,33 +700,33 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_rinci` (
   PRIMARY KEY (`id_iku_pemda`) USING BTREE,
   KEY `id_dokumen` (`id_dokumen`) USING BTREE,
   CONSTRAINT `kin_trx_iku_pemda_rinci_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_pemda_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es3_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es3_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es3` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `tanggal_mulai` date NOT NULL DEFAULT '2018-01-01',
   `id_pegawai` int(11) NOT NULL DEFAULT '0',
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) NOT NULL DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es3`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es3_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es3_kegiatan
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -741,10 +741,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_kegiatan` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_program`) USING BTREE,
   KEY `id_program` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es3_program
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es3_program
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program` (
   `id_perkin_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -765,10 +765,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program` (
   KEY `id_perkin_program_opd` (`id_perkin_program_opd`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_perkin_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program_opd`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es3_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es3_program_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_program_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -786,33 +786,33 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_program`) USING BTREE,
   KEY `id_program` (`id_indikator_program_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es4_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es4_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es4` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `tanggal_mulai` date NOT NULL DEFAULT '2018-01-01',
   `id_pegawai` int(11) DEFAULT NULL,
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) NOT NULL DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es4`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es4_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es4_kegiatan
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -833,10 +833,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan` (
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan_es3`) REFERENCES `kin_trx_perkin_es3_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_es4_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_es4_kegiatan_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -854,37 +854,38 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_kegiatan`) USING BTREE,
   KEY `id_program` (`id_indikator_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_opd_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es2` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `tanggal_mulai` date NOT NULL DEFAULT '2018-01-01',
   `id_pegawai` int(11) NOT NULL DEFAULT '0',
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es2`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_opd_program
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_program
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program` (
   `id_perkin_program` int(11) NOT NULL AUTO_INCREMENT,
   `id_perkin_sasaran` int(11) NOT NULL,
+  `id_hasil_program` int(11) NOT NULL DEFAULT '0',
   `id_program_renstra` int(11) NOT NULL,
   `id_sotk_es3` int(11) NOT NULL DEFAULT '0',
   `pagu_tahun` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -895,10 +896,37 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_sasaran`) USING BTREE,
   KEY `id_program` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_program_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_opd_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_program_indikator
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_indikator`;
+CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_indikator` (
+  `id_perkin_indikator` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_perkin_program` bigint(255) NOT NULL,
+  `id_indikator_program_pd` bigint(255) NOT NULL,
+  `id_renstra_program_indikator` bigint(255) NOT NULL,
+  `jml_target` decimal(20,4) NOT NULL DEFAULT '0.0000',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_perkin_indikator`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Pengeluaran data tidak dipilih.
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_program_pelaksana
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_pelaksana`;
+CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_pelaksana` (
+  `id_perkin_pelaksana` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_perkin_indikator` bigint(255) NOT NULL,
+  `id_sotk_es3` bigint(255) NOT NULL,
+  `jml_target` decimal(20,4) NOT NULL DEFAULT '0.0000',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_perkin_pelaksana`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Pengeluaran data tidak dipilih.
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_sasaran
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran` (
   `id_perkin_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -911,10 +939,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran` (
   KEY `id_sasaran_kinerja_skpd` (`id_dokumen_perkin`) USING BTREE,
   KEY `id_program` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_perkin_opd_sasaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_perkin_opd_sasaran_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -932,10 +960,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_sasaran`) USING BTREE,
   KEY `id_program` (`id_indikator_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es2_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es2_dok
 DROP TABLE IF EXISTS `kin_trx_real_es2_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -943,14 +971,14 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_dok` (
   `id_sotk_es2` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
   `triwulan` int(11) NOT NULL DEFAULT '1',
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) NOT NULL DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -959,10 +987,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_dok` (
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`),
   CONSTRAINT `kin_trx_real_es2_dok_ibfk_2` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es2_program
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es2_program
 DROP TABLE IF EXISTS `kin_trx_real_es2_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_program` (
   `id_real_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -990,10 +1018,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_program` (
   CONSTRAINT `kin_trx_real_es2_program_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_real_es2_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`),
   CONSTRAINT `kin_trx_real_es2_program_ibfk_3` FOREIGN KEY (`id_real_program_es3`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es2_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es2_sasaran
 DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran` (
   `id_real_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -1007,10 +1035,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran` (
   KEY `id_sasaran_kinerja_skpd` (`id_dokumen_real`) USING BTREE,
   KEY `id_program` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es2_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es2_sasaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es2_sasaran_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -1026,8 +1054,9 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran_indikator` (
   `real_t2` decimal(20,2) NOT NULL,
   `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
   `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
+  `real_fisik` decimal(20,2) NOT NULL DEFAULT '0.00',
+  `uraian_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(2) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1035,10 +1064,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_real_sasaran`) USING BTREE,
   KEY `id_program` (`id_indikator_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es3_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es3_dok
 DROP TABLE IF EXISTS `kin_trx_real_es3_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -1046,14 +1075,14 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_dok` (
   `id_sotk_es3` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
   `triwulan` int(11) NOT NULL DEFAULT '1',
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) NOT NULL DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1062,10 +1091,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_dok` (
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`),
   CONSTRAINT `kin_trx_real_es3_dok_ibfk_2` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es3_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es3_kegiatan
 DROP TABLE IF EXISTS `kin_trx_real_es3_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -1093,10 +1122,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_kegiatan` (
   KEY `id_real_kegiatan_es4` (`id_real_kegiatan_es4`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_2` FOREIGN KEY (`id_real_kegiatan_es4`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es3_program
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es3_program
 DROP TABLE IF EXISTS `kin_trx_real_es3_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program` (
   `id_real_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -1112,8 +1141,8 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program` (
   `real_t2` decimal(20,2) NOT NULL,
   `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
   `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
+  `uraian_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(2) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1123,10 +1152,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program` (
   KEY `id_dokumen_perkin` (`id_dokumen_real`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es3_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_real_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es3_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es3_program_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es3_program_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -1142,22 +1171,23 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program_indikator` (
   `real_t2` decimal(20,2) NOT NULL,
   `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
   `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
+  `real_fisik` decimal(20,2) NOT NULL DEFAULT '0.00',
+  `uraian_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(2) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `reviu_deviasi` varchar(500) DEFAULT '0',
+  `reviu_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `reviu_real` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `reviu_renaksi` varchar(500) DEFAULT '0',
+  `reviu_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_real_indikator`) USING BTREE,
   KEY `id_program` (`id_indikator_program_renstra`) USING BTREE,
   KEY `id_real_program` (`id_real_program`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es4_dok
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es4_dok
 DROP TABLE IF EXISTS `kin_trx_real_es4_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -1165,14 +1195,14 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
   `id_sotk_es4` int(11) NOT NULL,
   `tahun` int(11) DEFAULT NULL,
   `triwulan` int(11) NOT NULL DEFAULT '1',
-  `no_dokumen` varchar(100) DEFAULT NULL,
+  `no_dokumen` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
-  `nama_penandatangan` varchar(255) DEFAULT NULL,
-  `jabatan_penandatangan` varchar(255) DEFAULT NULL,
+  `nama_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pangkat_penandatangan` int(11) NOT NULL DEFAULT '0',
-  `uraian_pangkat_penandatangan` varchar(255) NOT NULL DEFAULT '0',
-  `nip_penandatangan` varchar(30) DEFAULT NULL,
+  `uraian_pangkat_penandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_penandatangan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1181,10 +1211,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
   CONSTRAINT `kin_trx_real_es4_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`),
   CONSTRAINT `kin_trx_real_es4_dok_ibfk_2` FOREIGN KEY (`id_sotk_es4`) REFERENCES `ref_sotk_level_3` (`id_sotk_es4`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es4_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es4_kegiatan
 DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -1201,8 +1231,8 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan` (
   `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
   `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(2) DEFAULT NULL,
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
+  `uraian_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_real_kegiatan`) USING BTREE,
@@ -1211,10 +1241,10 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan` (
   KEY `id_dokumen_perkin` (`id_dokumen_real`) USING BTREE,
   CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es4_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.kin_trx_real_es4_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.kin_trx_real_es4_kegiatan_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -1230,32 +1260,33 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan_indikator` (
   `real_t2` decimal(20,2) NOT NULL,
   `real_t3` decimal(20,2) NOT NULL DEFAULT '0.00',
   `real_t4` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `uraian_deviasi` varchar(500) DEFAULT NULL,
-  `uraian_renaksi` varchar(500) DEFAULT NULL,
+  `real_fisik` decimal(20,2) NOT NULL,
+  `uraian_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(2) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `reviu_renaksi` varchar(500) DEFAULT '0',
-  `reviu_deviasi` varchar(500) DEFAULT '0',
+  `reviu_renaksi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reviu_deviasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `reviu_real` decimal(20,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id_real_indikator`) USING BTREE,
   KEY `id_sasaran_kinerja_skpd` (`id_real_kegiatan`) USING BTREE,
   KEY `id_program` (`id_indikator_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_real_kegiatan`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.migrations
+-- membuang struktur untuk table dbsimcan_simulasi.migrations
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk function dbsimcan_simulasi_1.PaguASB
+-- membuang struktur untuk function dbsimcan_simulasi.PaguASB
 DROP FUNCTION IF EXISTS `PaguASB`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `PaguASB`(jns_biaya INT, hub_driver INT, vol1 DECIMAL(15, 4), vol2 DECIMAL(15, 4), r1 DECIMAL(15, 4), r2 DECIMAL(15, 4), m1 DECIMAL(15, 4), m2 DECIMAL(15, 4), k1 DECIMAL(15, 4), k2 DECIMAL(15, 4), k3 DECIMAL(15, 4), harga DECIMAL(15, 4)) RETURNS decimal(15,4)
@@ -1340,7 +1371,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- membuang struktur untuk function dbsimcan_simulasi_1.PaguASBDistribusi
+-- membuang struktur untuk function dbsimcan_simulasi.PaguASBDistribusi
 DROP FUNCTION IF EXISTS `PaguASBDistribusi`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `PaguASBDistribusi`(jns_biaya INT,hub_driver INT,vol1 DECIMAL(15,4),vol2 DECIMAL(15,4),r1 DECIMAL(15,4),r2 DECIMAL(15,4),m1 DECIMAL(15,4) ,m2 DECIMAL(15,4), k1 DECIMAL(15,4),k2 DECIMAL(15,4),k3 DECIMAL(15,4),harga DECIMAL(15,4),persen DECIMAL(15,4)) RETURNS decimal(15,4)
@@ -1419,205 +1450,205 @@ BEGIN
 END//
 DELIMITER ;
 
--- membuang struktur untuk table dbsimcan_simulasi_1.password_resets
+-- membuang struktur untuk table dbsimcan_simulasi.password_resets
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_aspek_pembangunan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_aspek_pembangunan
 DROP TABLE IF EXISTS `ref_aspek_pembangunan`;
 CREATE TABLE IF NOT EXISTS `ref_aspek_pembangunan` (
   `id_aspek` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_aspek_pembangunan` varchar(500) DEFAULT NULL,
+  `uraian_aspek_pembangunan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_aspek`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_bidang
+-- membuang struktur untuk table dbsimcan_simulasi.ref_bidang
 DROP TABLE IF EXISTS `ref_bidang`;
 CREATE TABLE IF NOT EXISTS `ref_bidang` (
   `id_bidang` int(11) NOT NULL AUTO_INCREMENT,
   `kd_urusan` int(255) NOT NULL,
   `kd_bidang` int(255) NOT NULL,
-  `nm_bidang` varchar(255) NOT NULL,
+  `nm_bidang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `kd_fungsi` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_bidang`) USING BTREE,
   UNIQUE KEY `idx_ref_bidang` (`kd_urusan`,`kd_bidang`) USING BTREE,
   KEY `fk_ref_fungsi` (`kd_fungsi`) USING BTREE,
   CONSTRAINT `fk_ref_bidang` FOREIGN KEY (`kd_urusan`) REFERENCES `ref_urusan` (`kd_urusan`),
   CONSTRAINT `fk_ref_fungsi` FOREIGN KEY (`kd_fungsi`) REFERENCES `ref_fungsi` (`kd_fungsi`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_data_sub_unit
+-- membuang struktur untuk table dbsimcan_simulasi.ref_data_sub_unit
 DROP TABLE IF EXISTS `ref_data_sub_unit`;
 CREATE TABLE IF NOT EXISTS `ref_data_sub_unit` (
   `tahun` int(11) NOT NULL,
   `id_rincian_unit` int(11) NOT NULL AUTO_INCREMENT,
   `id_sub_unit` int(11) NOT NULL,
-  `alamat_sub_unit` varchar(200) NOT NULL,
-  `kota_sub_unit` varchar(100) NOT NULL,
-  `nama_jabatan_pimpinan_skpd` varchar(100) NOT NULL,
-  `nama_pimpinan_skpd` varchar(150) NOT NULL,
-  `nip_pimpinan_skpd` varchar(20) NOT NULL,
+  `alamat_sub_unit` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kota_sub_unit` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_jabatan_pimpinan_skpd` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_pimpinan_skpd` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_pimpinan_skpd` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_rincian_unit`) USING BTREE,
   UNIQUE KEY `tahun` (`tahun`,`id_sub_unit`) USING BTREE,
   KEY `id_sub_unit` (`id_sub_unit`) USING BTREE,
   CONSTRAINT `fk_data_sub_unit` FOREIGN KEY (`id_sub_unit`) REFERENCES `ref_sub_unit` (`id_sub_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_desa
+-- membuang struktur untuk table dbsimcan_simulasi.ref_desa
 DROP TABLE IF EXISTS `ref_desa`;
 CREATE TABLE IF NOT EXISTS `ref_desa` (
   `id_kecamatan` int(11) NOT NULL,
   `kd_desa` int(11) NOT NULL COMMENT 'kode desa / kelurahan',
   `id_desa` int(11) NOT NULL AUTO_INCREMENT,
   `status_desa` int(11) NOT NULL COMMENT '2 = Desa 1 = Kelurahan',
-  `nama_desa` varchar(50) NOT NULL,
+  `nama_desa` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_zona` int(11) NOT NULL,
   PRIMARY KEY (`id_desa`) USING BTREE,
   UNIQUE KEY `id_kecamatan` (`id_kecamatan`,`kd_desa`) USING BTREE,
   CONSTRAINT `ref_desa_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.ref_dokumen
 DROP TABLE IF EXISTS `ref_dokumen`;
 CREATE TABLE IF NOT EXISTS `ref_dokumen` (
   `id_dokumen` int(255) NOT NULL,
-  `nm_dokumen` varchar(255) DEFAULT NULL,
+  `nm_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jenis_proses` int(11) NOT NULL DEFAULT '0' COMMENT '0 = rkpd 1 = renja 2 = rpjmd 3 = renstra',
   `urut_tampil` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_fungsi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_fungsi
 DROP TABLE IF EXISTS `ref_fungsi`;
 CREATE TABLE IF NOT EXISTS `ref_fungsi` (
   `kd_fungsi` int(11) NOT NULL,
-  `nm_fungsi` varchar(255) NOT NULL,
+  `nm_fungsi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_fungsi`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_group
+-- membuang struktur untuk table dbsimcan_simulasi.ref_group
 DROP TABLE IF EXISTS `ref_group`;
 CREATE TABLE IF NOT EXISTS `ref_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_roles` int(11) NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.ref_indikator
 DROP TABLE IF EXISTS `ref_indikator`;
 CREATE TABLE IF NOT EXISTS `ref_indikator` (
   `id_indikator` int(11) NOT NULL AUTO_INCREMENT,
   `type_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '0 keluaran 1 hasil 2 dampak 3 masukan',
   `jenis_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '1 positif 0 negatif',
   `sifat_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '1 Incremental 2 Absolut  3 Komulatif',
-  `nm_indikator` varchar(255) DEFAULT NULL,
+  `nm_indikator` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag_iku` int(11) NOT NULL DEFAULT '0' COMMENT '0 non iku 1 iku pemda 2 iku skpd',
   `asal_indikator` int(11) DEFAULT '0' COMMENT '0 rpjmd 1 renstra 2 rkpd 3 renja',
   `metode_penghitungan` blob COMMENT 'file image ',
-  `sumber_data_indikator` varchar(255) DEFAULT NULL,
+  `sumber_data_indikator` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_satuan_output` int(255) DEFAULT NULL,
   `kualitas_indikator` int(255) NOT NULL DEFAULT '0' COMMENT '0 kualitas 1 kuantitas 2 persentase 3 rata-rata 4 rasio',
   `id_bidang` int(11) NOT NULL DEFAULT '0',
   `id_aspek` int(11) NOT NULL DEFAULT '0',
-  `nama_file` varchar(500) DEFAULT NULL,
+  `nama_file` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_indikator`) USING BTREE,
   FULLTEXT KEY `nm_indikator` (`nm_indikator`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_jadwal
+-- membuang struktur untuk table dbsimcan_simulasi.ref_jadwal
 DROP TABLE IF EXISTS `ref_jadwal`;
 CREATE TABLE IF NOT EXISTS `ref_jadwal` (
   `tahun` int(11) NOT NULL,
   `id_proses` int(11) NOT NULL AUTO_INCREMENT,
   `id_langkah` int(11) NOT NULL,
   `jenis_proses` int(11) NOT NULL DEFAULT '0' COMMENT '0 = rkpd 1 = renja 2 = rpjmd 3 = renstra',
-  `uraian_proses` varchar(255) DEFAULT NULL,
+  `uraian_proses` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_mulai` date DEFAULT NULL,
   `tgl_akhir` date DEFAULT NULL,
   `status_proses` int(255) DEFAULT '0' COMMENT '0 = belum 1 = proses 2 = selesai 3 = kedaluwarsa 4 = batal',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_proses`) USING BTREE,
   UNIQUE KEY `idx_ref_jadwal` (`tahun`,`id_langkah`,`jenis_proses`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_jenis_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_jenis_lokasi
 DROP TABLE IF EXISTS `ref_jenis_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_jenis_lokasi` (
   `id_jenis` int(11) NOT NULL,
-  `nm_jenis` varchar(255) NOT NULL,
+  `nm_jenis` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_jenis`) USING BTREE,
   UNIQUE KEY `id_jenis` (`id_jenis`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_kabupaten
+-- membuang struktur untuk table dbsimcan_simulasi.ref_kabupaten
 DROP TABLE IF EXISTS `ref_kabupaten`;
 CREATE TABLE IF NOT EXISTS `ref_kabupaten` (
   `id_pemda` int(11) NOT NULL,
   `id_prov` int(11) NOT NULL,
   `id_kab` int(11) NOT NULL AUTO_INCREMENT,
   `kd_kab` int(11) NOT NULL,
-  `nama_kab_kota` varchar(255) DEFAULT NULL,
+  `nama_kab_kota` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kab`) USING BTREE,
   UNIQUE KEY `id_pemda` (`id_pemda`,`id_prov`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_kecamatan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_kecamatan
 DROP TABLE IF EXISTS `ref_kecamatan`;
 CREATE TABLE IF NOT EXISTS `ref_kecamatan` (
   `id_pemda` int(11) NOT NULL,
   `kd_kecamatan` int(11) NOT NULL,
   `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_kecamatan` varchar(50) NOT NULL,
+  `nama_kecamatan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kecamatan`) USING BTREE,
   KEY `id_kecamatan` (`id_pemda`) USING BTREE,
   CONSTRAINT `fk_ref_kecamatan` FOREIGN KEY (`id_pemda`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_kegiatan
 DROP TABLE IF EXISTS `ref_kegiatan`;
 CREATE TABLE IF NOT EXISTS `ref_kegiatan` (
   `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
   `id_program` int(11) NOT NULL,
   `kd_kegiatan` int(11) NOT NULL,
-  `nm_kegiatan` varchar(255) NOT NULL,
+  `nm_kegiatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan`) USING BTREE,
   UNIQUE KEY `idx_ref_kegiatan` (`id_program`,`kd_kegiatan`) USING BTREE,
   CONSTRAINT `fk_ref_kegiatan` FOREIGN KEY (`id_program`) REFERENCES `ref_program` (`id_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3982 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3982 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_kolom_tabel_dasar
+-- membuang struktur untuk table dbsimcan_simulasi.ref_kolom_tabel_dasar
 DROP TABLE IF EXISTS `ref_kolom_tabel_dasar`;
 CREATE TABLE IF NOT EXISTS `ref_kolom_tabel_dasar` (
   `id_kolom_tabel_dasar` int(11) NOT NULL,
   `id_tabel_dasar` int(11) DEFAULT NULL,
-  `nama_kolom` varchar(255) DEFAULT NULL,
+  `nama_kolom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `level` int(2) DEFAULT NULL,
   `parent_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id_kolom_tabel_dasar`) USING BTREE,
@@ -1625,59 +1656,61 @@ CREATE TABLE IF NOT EXISTS `ref_kolom_tabel_dasar` (
   KEY `id_tabel_dasar` (`id_tabel_dasar`) USING BTREE,
   CONSTRAINT `ref_kolom_tabel_dasar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ref_kolom_tabel_dasar_ibfk_2` FOREIGN KEY (`id_tabel_dasar`) REFERENCES `ref_tabel_dasar` (`id_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_langkah
+-- membuang struktur untuk table dbsimcan_simulasi.ref_langkah
 DROP TABLE IF EXISTS `ref_langkah`;
 CREATE TABLE IF NOT EXISTS `ref_langkah` (
   `id_langkah` int(255) NOT NULL,
   `jenis_dokumen` int(255) NOT NULL,
-  `nm_langkah` varchar(255) DEFAULT NULL,
+  `nm_langkah` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_langkah`,`jenis_dokumen`) USING BTREE,
   UNIQUE KEY `idx_ref_step` (`id_langkah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_log_akses
+-- membuang struktur untuk table dbsimcan_simulasi.ref_log_akses
 DROP TABLE IF EXISTS `ref_log_akses`;
 CREATE TABLE IF NOT EXISTS `ref_log_akses` (
-  `id_log` varchar(255) NOT NULL,
-  `fl1` varchar(255) DEFAULT NULL,
-  `fd1` varchar(255) DEFAULT NULL,
-  `fp2` varchar(255) DEFAULT NULL,
-  `fu3` varchar(255) DEFAULT NULL,
-  `fr4` varchar(255) DEFAULT NULL,
+  `id_log` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fl1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fd1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fp2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fu3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fr4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_log_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_log_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_log`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_lokasi
 DROP TABLE IF EXISTS `ref_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_lokasi` (
   `id_lokasi` int(11) NOT NULL AUTO_INCREMENT,
   `jenis_lokasi` int(11) NOT NULL COMMENT '0 = Kewilayahan\r\n1 = Ruas Jalan \r\n2 = Saluran Irigasi\r\n3 = Kawasan\r\n99 = Lokasi di Luar Daerah',
-  `nama_lokasi` varchar(255) NOT NULL,
+  `nama_lokasi` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_desa` int(11) DEFAULT NULL,
   `id_desa_awal` int(11) DEFAULT NULL,
   `id_desa_akhir` int(11) DEFAULT NULL,
-  `koordinat_1` varchar(100) DEFAULT NULL,
-  `koordinat_2` varchar(100) DEFAULT NULL,
-  `koordinat_3` varchar(100) DEFAULT NULL,
-  `koordinat_4` varchar(100) DEFAULT NULL,
+  `koordinat_1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `koordinat_2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `koordinat_3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `koordinat_4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `luasan_kawasan` decimal(20,2) DEFAULT '0.00',
   `satuan_luas` int(50) DEFAULT NULL,
   `panjang` decimal(20,2) DEFAULT '0.00',
   `satuan_panjang` int(50) DEFAULT NULL,
   `lebar` decimal(20,2) DEFAULT '0.00',
   `satuan_lebar` int(11) DEFAULT NULL,
-  `keterangan_lokasi` longtext,
+  `keterangan_lokasi` longtext CHARACTER SET latin1,
   PRIMARY KEY (`id_lokasi`) USING BTREE,
   UNIQUE KEY `jenis_lokasi` (`jenis_lokasi`,`nama_lokasi`,`id_desa`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_mapping_asb_renstra
+-- membuang struktur untuk table dbsimcan_simulasi.ref_mapping_asb_renstra
 DROP TABLE IF EXISTS `ref_mapping_asb_renstra`;
 CREATE TABLE IF NOT EXISTS `ref_mapping_asb_renstra` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
@@ -1686,37 +1719,37 @@ CREATE TABLE IF NOT EXISTS `ref_mapping_asb_renstra` (
   KEY `fk_ref_mapping_asb_renstra1` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `fk_ref_mapping_asb_renstra` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`),
   CONSTRAINT `fk_ref_mapping_asb_renstra1` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_menu
+-- membuang struktur untuk table dbsimcan_simulasi.ref_menu
 DROP TABLE IF EXISTS `ref_menu`;
 CREATE TABLE IF NOT EXISTS `ref_menu` (
   `id_menu` bigint(255) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
   `menu` int(11) NOT NULL,
-  `akses` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '11100' COMMENT '0 denied, 1 granted, CRUD-Posting',
+  `akses` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_menu`) USING BTREE,
   UNIQUE KEY `menu` (`menu`,`group_id`) USING BTREE,
   KEY `akses` (`akses`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pegawai
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pegawai
 DROP TABLE IF EXISTS `ref_pegawai`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai` (
   `id_pegawai` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_pegawai` varchar(255) NOT NULL,
-  `nip_pegawai` varchar(18) NOT NULL DEFAULT '199909091999091009',
+  `nama_pegawai` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_pegawai` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pegawai` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_pegawai`) USING BTREE,
   UNIQUE KEY `nip_pegawai` (`nip_pegawai`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pegawai_pangkat
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pegawai_pangkat
 DROP TABLE IF EXISTS `ref_pegawai_pangkat`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai_pangkat` (
   `id_pangkat` int(11) NOT NULL AUTO_INCREMENT,
@@ -1728,10 +1761,10 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai_pangkat` (
   PRIMARY KEY (`id_pangkat`) USING BTREE,
   UNIQUE KEY `id_pegawai` (`id_pegawai`,`pangkat_pegawai`) USING BTREE,
   CONSTRAINT `ref_pegawai_pangkat_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pegawai_unit
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pegawai_unit
 DROP TABLE IF EXISTS `ref_pegawai_unit`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai_unit` (
   `id_unit_pegawai` int(11) NOT NULL AUTO_INCREMENT,
@@ -1739,7 +1772,7 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai_unit` (
   `id_unit` int(11) NOT NULL,
   `tingkat_eselon` int(11) NOT NULL,
   `id_sotk` int(11) NOT NULL,
-  `nama_jabatan` varchar(500) NOT NULL,
+  `nama_jabatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tmt_unit` date NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1748,167 +1781,167 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai_unit` (
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `ref_pegawai_unit_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ref_pegawai_unit_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pembatalan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pembatalan
 DROP TABLE IF EXISTS `ref_pembatalan`;
 CREATE TABLE IF NOT EXISTS `ref_pembatalan` (
   `id_batal` int(255) NOT NULL AUTO_INCREMENT,
-  `uraian_batal` varchar(500) DEFAULT NULL,
+  `uraian_batal` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_batal`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pemda
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pemda
 DROP TABLE IF EXISTS `ref_pemda`;
 CREATE TABLE IF NOT EXISTS `ref_pemda` (
   `kd_prov` int(11) NOT NULL,
   `kd_kab` int(11) NOT NULL,
   `id_pemda` int(11) NOT NULL,
-  `prefix_pemda` varchar(255) NOT NULL,
-  `nm_prov` varchar(50) DEFAULT NULL,
-  `nm_kabkota` varchar(50) DEFAULT NULL,
-  `ibu_kota` varchar(50) DEFAULT NULL,
-  `nama_jabatan_kepala_daerah` varchar(50) DEFAULT NULL COMMENT 'BUPATI/WALIKOTA/GUBERNUR',
-  `nama_kepala_daerah` varchar(150) DEFAULT NULL,
-  `nama_jabatan_sekretariat_daerah` varchar(100) DEFAULT NULL,
-  `nama_sekretariat_daerah` varchar(150) DEFAULT NULL,
-  `nip_sekretariat_daerah` varchar(20) DEFAULT NULL,
+  `prefix_pemda` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nm_prov` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nm_kabkota` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ibu_kota` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_jabatan_kepala_daerah` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_kepala_daerah` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_jabatan_sekretariat_daerah` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_sekretariat_daerah` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_sekretariat_daerah` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_perencanaan` int(11) DEFAULT NULL COMMENT 'id_sub_unit koordinator perencanaan',
-  `nama_kepala_bappeda` varchar(150) DEFAULT NULL,
-  `nip_kepala_bappeda` varchar(20) DEFAULT NULL,
+  `nama_kepala_bappeda` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_kepala_bappeda` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_keuangan` int(11) DEFAULT NULL COMMENT 'id_sub_unit pengelola keuangan',
-  `nama_kepala_bpkad` varchar(150) DEFAULT NULL,
-  `nip_kepala_bpkad` varchar(20) DEFAULT NULL,
+  `nama_kepala_bpkad` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_kepala_bpkad` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `logo_pemda` mediumblob,
-  `alamat` varchar(500) DEFAULT NULL COMMENT 'alamat sekretariat daerah',
-  `no_telepon` varchar(255) NOT NULL DEFAULT '000-0000 0000' COMMENT 'nomor telepon',
-  `no_faksimili` varchar(255) NOT NULL DEFAULT '000-0000 0000' COMMENT 'nomor faksimili',
-  `email` varchar(255) NOT NULL DEFAULT 'email@pemdasimulasi.go.id',
+  `alamat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_telepon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_faksimili` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pemda`) USING BTREE,
   UNIQUE KEY `kd_prov` (`kd_prov`,`kd_kab`) USING BTREE,
   KEY `id_pemda` (`id_pemda`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_pengusul
+-- membuang struktur untuk table dbsimcan_simulasi.ref_pengusul
 DROP TABLE IF EXISTS `ref_pengusul`;
 CREATE TABLE IF NOT EXISTS `ref_pengusul` (
   `id_pengusul` int(255) NOT NULL,
-  `nm_pengusul` varchar(255) NOT NULL,
-  `keterangan` varchar(255) DEFAULT NULL,
+  `nm_pengusul` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pengusul`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_prioritas_nasional
+-- membuang struktur untuk table dbsimcan_simulasi.ref_prioritas_nasional
 DROP TABLE IF EXISTS `ref_prioritas_nasional`;
 CREATE TABLE IF NOT EXISTS `ref_prioritas_nasional` (
   `tahun` int(11) NOT NULL,
   `id_prioritas` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_prioritas` varchar(255) DEFAULT NULL,
+  `nama_prioritas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_prioritas`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_prioritas_provinsi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_prioritas_provinsi
 DROP TABLE IF EXISTS `ref_prioritas_provinsi`;
 CREATE TABLE IF NOT EXISTS `ref_prioritas_provinsi` (
   `tahun` int(11) NOT NULL,
   `id_prioritas` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_prioritas` varchar(255) DEFAULT NULL,
+  `nama_prioritas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_prioritas`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_program
+-- membuang struktur untuk table dbsimcan_simulasi.ref_program
 DROP TABLE IF EXISTS `ref_program`;
 CREATE TABLE IF NOT EXISTS `ref_program` (
   `id_bidang` int(11) NOT NULL,
   `id_program` int(11) NOT NULL AUTO_INCREMENT,
   `kd_program` int(11) NOT NULL,
-  `uraian_program` varchar(255) NOT NULL,
+  `uraian_program` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_program`) USING BTREE,
   UNIQUE KEY `idx_ref_program` (`id_bidang`,`kd_program`) USING BTREE,
   CONSTRAINT `fk_ref_program` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`)
-) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_program_nasional
+-- membuang struktur untuk table dbsimcan_simulasi.ref_program_nasional
 DROP TABLE IF EXISTS `ref_program_nasional`;
 CREATE TABLE IF NOT EXISTS `ref_program_nasional` (
   `id_prioritas` int(11) NOT NULL,
   `id_program_nasional` int(11) NOT NULL,
-  `uraian_program_nasional` varchar(500) NOT NULL,
+  `uraian_program_nasional` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_program_nasional`) USING BTREE,
   KEY `id_prioritas` (`id_prioritas`) USING BTREE,
   CONSTRAINT `ref_program_nasional_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_nasional` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_program_provinsi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_program_provinsi
 DROP TABLE IF EXISTS `ref_program_provinsi`;
 CREATE TABLE IF NOT EXISTS `ref_program_provinsi` (
   `id_prioritas` int(11) NOT NULL,
   `id_program_provinsi` int(11) NOT NULL,
-  `uraian_program_provinsi` varchar(500) NOT NULL,
+  `uraian_program_provinsi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_program_provinsi`) USING BTREE,
   KEY `id_prioritas` (`id_prioritas`) USING BTREE,
   CONSTRAINT `ref_program_provinsi_ibfk_1` FOREIGN KEY (`id_prioritas`) REFERENCES `ref_prioritas_provinsi` (`id_prioritas`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_rek_1
+-- membuang struktur untuk table dbsimcan_simulasi.ref_rek_1
 DROP TABLE IF EXISTS `ref_rek_1`;
 CREATE TABLE IF NOT EXISTS `ref_rek_1` (
   `kd_rek_1` int(11) NOT NULL,
-  `nama_kd_rek_1` varchar(150) DEFAULT NULL,
+  `nama_kd_rek_1` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_rek_1`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_rek_2
+-- membuang struktur untuk table dbsimcan_simulasi.ref_rek_2
 DROP TABLE IF EXISTS `ref_rek_2`;
 CREATE TABLE IF NOT EXISTS `ref_rek_2` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
-  `nama_kd_rek_2` varchar(150) DEFAULT NULL,
+  `nama_kd_rek_2` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_rek_1`,`kd_rek_2`) USING BTREE,
   UNIQUE KEY `kd_rek_1` (`kd_rek_1`,`kd_rek_2`) USING BTREE,
   CONSTRAINT `fk_ref_rek_2` FOREIGN KEY (`kd_rek_1`) REFERENCES `ref_rek_1` (`kd_rek_1`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_rek_3
+-- membuang struktur untuk table dbsimcan_simulasi.ref_rek_3
 DROP TABLE IF EXISTS `ref_rek_3`;
 CREATE TABLE IF NOT EXISTS `ref_rek_3` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
   `kd_rek_3` int(11) NOT NULL,
-  `nama_kd_rek_3` varchar(150) DEFAULT NULL,
-  `saldo_normal` char(1) NOT NULL,
+  `nama_kd_rek_3` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `saldo_normal` char(1) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`) USING BTREE,
   KEY `kd_rek_1` (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`) USING BTREE,
   CONSTRAINT `fk_ref_rek_3` FOREIGN KEY (`kd_rek_1`, `kd_rek_2`) REFERENCES `ref_rek_2` (`kd_rek_1`, `kd_rek_2`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_rek_4
+-- membuang struktur untuk table dbsimcan_simulasi.ref_rek_4
 DROP TABLE IF EXISTS `ref_rek_4`;
 CREATE TABLE IF NOT EXISTS `ref_rek_4` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
   `kd_rek_3` int(11) NOT NULL,
   `kd_rek_4` int(11) NOT NULL,
-  `nama_kd_rek_4` varchar(150) DEFAULT NULL,
+  `nama_kd_rek_4` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`) USING BTREE,
   UNIQUE KEY `kd_rek_1` (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`) USING BTREE,
   CONSTRAINT `fk_ref_rek_4` FOREIGN KEY (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`) REFERENCES `ref_rek_3` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_rek_5
+-- membuang struktur untuk table dbsimcan_simulasi.ref_rek_5
 DROP TABLE IF EXISTS `ref_rek_5`;
 CREATE TABLE IF NOT EXISTS `ref_rek_5` (
   `kd_rek_1` int(11) NOT NULL,
@@ -1916,38 +1949,38 @@ CREATE TABLE IF NOT EXISTS `ref_rek_5` (
   `kd_rek_3` int(11) NOT NULL,
   `kd_rek_4` int(11) NOT NULL,
   `kd_rek_5` int(11) NOT NULL,
-  `nama_kd_rek_5` varchar(150) DEFAULT NULL,
-  `peraturan` varchar(200) DEFAULT NULL,
+  `nama_kd_rek_5` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `peraturan` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_rekening` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_rekening`) USING BTREE,
   UNIQUE KEY `kd_rek_1` (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`,`kd_rek_5`) USING BTREE,
   KEY `id_rekening` (`id_rekening`) USING BTREE,
   CONSTRAINT `ref_rek_5_ibfk_1` FOREIGN KEY (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) REFERENCES `ref_rek_4` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1581 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1581 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_revisi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_revisi
 DROP TABLE IF EXISTS `ref_revisi`;
 CREATE TABLE IF NOT EXISTS `ref_revisi` (
   `id_revisi` int(255) NOT NULL,
-  `uraian_revisi` varchar(255) NOT NULL,
+  `uraian_revisi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_revisi`) USING BTREE,
   UNIQUE KEY `idx_ref_revisi` (`id_revisi`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_satuan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_satuan
 DROP TABLE IF EXISTS `ref_satuan`;
 CREATE TABLE IF NOT EXISTS `ref_satuan` (
   `id_satuan` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_satuan` varchar(50) NOT NULL,
-  `singkatan_satuan` varchar(30) NOT NULL,
-  `scope_pemakaian` varchar(20) DEFAULT NULL COMMENT ' 0 rpjmd\r\n              1 renstra\r\n             2 rkpd\r\n              3 renja\r\n              4 ssh\r\n              5 Pemicu Biaya ASB\r\n              6 Turunan Pemicu Biaya ASB\r\n              7 Rincian ASB\r\n              8 program\r\n              9 kegiatan',
+  `uraian_satuan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `singkatan_satuan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scope_pemakaian` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_satuan`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_setting
+-- membuang struktur untuk table dbsimcan_simulasi.ref_setting
 DROP TABLE IF EXISTS `ref_setting`;
 CREATE TABLE IF NOT EXISTS `ref_setting` (
   `tahun_rencana` int(11) NOT NULL COMMENT 'tahun_perencanaan',
@@ -1963,15 +1996,15 @@ CREATE TABLE IF NOT EXISTS `ref_setting` (
   `deviasi_pagu` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_setting` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`tahun_rencana`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_sotk_level_1
+-- membuang struktur untuk table dbsimcan_simulasi.ref_sotk_level_1
 DROP TABLE IF EXISTS `ref_sotk_level_1`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_1` (
   `id_sotk_es2` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit` int(11) NOT NULL,
-  `nama_eselon` varchar(255) DEFAULT NULL COMMENT 'nama_jabatan_eselon',
+  `nama_eselon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tingkat_eselon` int(11) NOT NULL COMMENT '1/2/3',
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1979,15 +2012,15 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_1` (
   PRIMARY KEY (`id_sotk_es2`) USING BTREE,
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `ref_sotk_level_1_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_sotk_level_2
+-- membuang struktur untuk table dbsimcan_simulasi.ref_sotk_level_2
 DROP TABLE IF EXISTS `ref_sotk_level_2`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_2` (
   `id_sotk_es3` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es2` int(11) NOT NULL,
-  `nama_eselon` varchar(255) DEFAULT NULL,
+  `nama_eselon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tingkat_eselon` int(11) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1995,15 +2028,15 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_2` (
   PRIMARY KEY (`id_sotk_es3`) USING BTREE,
   KEY `id_sotk_es2` (`id_sotk_es2`) USING BTREE,
   CONSTRAINT `ref_sotk_level_2_ibfk_1` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_sotk_level_3
+-- membuang struktur untuk table dbsimcan_simulasi.ref_sotk_level_3
 DROP TABLE IF EXISTS `ref_sotk_level_3`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_3` (
   `id_sotk_es4` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es3` int(11) NOT NULL,
-  `nama_eselon` varchar(255) DEFAULT NULL,
+  `nama_eselon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tingkat_eselon` int(11) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2011,44 +2044,44 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_3` (
   PRIMARY KEY (`id_sotk_es4`) USING BTREE,
   KEY `id_sotk_es2` (`id_sotk_es3`) USING BTREE,
   CONSTRAINT `ref_sotk_level_3_ibfk_1` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_golongan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_golongan
 DROP TABLE IF EXISTS `ref_ssh_golongan`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_golongan` (
   `id_golongan_ssh` int(11) NOT NULL AUTO_INCREMENT,
   `jenis_ssh` int(11) NOT NULL DEFAULT '0' COMMENT '0 = BL 1=BTL 2=Pendapatan 3=Pembiayaan ',
   `no_urut` int(11) NOT NULL,
-  `uraian_golongan_ssh` varchar(255) NOT NULL,
+  `uraian_golongan_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_golongan_ssh`) USING BTREE,
   UNIQUE KEY `idx_ref_ssh_golongan` (`id_golongan_ssh`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_kelompok
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_kelompok
 DROP TABLE IF EXISTS `ref_ssh_kelompok`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_kelompok` (
   `id_kelompok_ssh` int(11) NOT NULL AUTO_INCREMENT,
   `id_golongan_ssh` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
-  `uraian_kelompok_ssh` varchar(255) NOT NULL,
+  `uraian_kelompok_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kelompok_ssh`) USING BTREE,
   KEY `fk_ssh_kelompok` (`id_golongan_ssh`) USING BTREE,
   CONSTRAINT `fk_ssh_kelompok` FOREIGN KEY (`id_golongan_ssh`) REFERENCES `ref_ssh_golongan` (`id_golongan_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_perkada
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_perkada
 DROP TABLE IF EXISTS `ref_ssh_perkada`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada` (
   `id_perkada` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_perkada` varchar(255) NOT NULL,
+  `nomor_perkada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_perkada` date NOT NULL,
   `tahun_berlaku` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
   `id_perkada_induk` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2056,10 +2089,10 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada` (
   PRIMARY KEY (`id_perkada`) USING BTREE,
   UNIQUE KEY `idx_ref_ssh_perkada_2` (`id_perkada`,`id_perkada_induk`,`id_perubahan`) USING BTREE,
   KEY `idx_ref_ssh_perkada_1` (`id_perkada`,`created_at`,`updated_at`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_perkada_tarif
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_perkada_tarif
 DROP TABLE IF EXISTS `ref_ssh_perkada_tarif`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_tarif` (
   `id_tarif_perkada` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2077,10 +2110,10 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_tarif` (
   KEY `idx_ref_ssh_tarif_jumlah` (`id_tarif_ssh`,`id_zona_perkada`) USING BTREE,
   CONSTRAINT `fk_ref_tarif_jumlah` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`),
   CONSTRAINT `fk_ref_tarif_jumlah_1` FOREIGN KEY (`id_zona_perkada`) REFERENCES `ref_ssh_perkada_zona` (`id_zona_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1596 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1596 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_perkada_zona
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_perkada_zona
 DROP TABLE IF EXISTS `ref_ssh_perkada_zona`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_zona` (
   `id_zona_perkada` int(11) NOT NULL AUTO_INCREMENT,
@@ -2088,50 +2121,50 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_zona` (
   `id_perkada` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
   `id_zona` int(11) NOT NULL,
-  `nama_zona` varchar(255) DEFAULT NULL,
+  `nama_zona` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_zona_perkada`) USING BTREE,
   UNIQUE KEY `idx_ref_ssh_tarif_jumlah` (`id_perkada`,`id_zona`,`id_perubahan`) USING BTREE,
   KEY `fk_ref_tarif_jumlah_1` (`id_zona_perkada`,`no_urut`,`id_perkada`,`id_zona`) USING BTREE,
   KEY `ref_ssh_perkada_zona_fk` (`id_zona`) USING BTREE,
   CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`),
   CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona_1` FOREIGN KEY (`id_perkada`) REFERENCES `ref_ssh_perkada` (`id_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_rekening
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_rekening
 DROP TABLE IF EXISTS `ref_ssh_rekening`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_rekening` (
   `id_rekening_ssh` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_tarif_ssh` bigint(20) NOT NULL,
   `id_rekening` int(11) NOT NULL,
-  `uraian_tarif_ssh` varchar(255) NOT NULL,
+  `uraian_tarif_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_rekening_ssh`) USING BTREE,
   UNIQUE KEY `fk_ref_ssh_rekening` (`id_tarif_ssh`,`id_rekening`) USING BTREE,
   CONSTRAINT `fk_ref_ssh_rekening` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_sub_kelompok
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_sub_kelompok
 DROP TABLE IF EXISTS `ref_ssh_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_sub_kelompok` (
   `id_sub_kelompok_ssh` int(11) NOT NULL AUTO_INCREMENT,
   `id_kelompok_ssh` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
-  `uraian_sub_kelompok_ssh` varchar(255) NOT NULL,
+  `uraian_sub_kelompok_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_sub_kelompok_ssh`) USING BTREE,
   KEY `fk_ref_ssh_sub_kelompok` (`id_kelompok_ssh`) USING BTREE,
   CONSTRAINT `fk_ref_ssh_sub_kelompok` FOREIGN KEY (`id_kelompok_ssh`) REFERENCES `ref_ssh_kelompok` (`id_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_tarif
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_tarif
 DROP TABLE IF EXISTS `ref_ssh_tarif`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_tarif` (
   `id_tarif_ssh` bigint(11) NOT NULL AUTO_INCREMENT,
   `no_urut` int(11) NOT NULL,
   `id_sub_kelompok_ssh` int(11) NOT NULL,
-  `uraian_tarif_ssh` varchar(255) NOT NULL,
-  `keterangan_tarif_ssh` varchar(500) DEFAULT NULL,
+  `uraian_tarif_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan_tarif_ssh` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_satuan` int(11) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = aktif, 1 = non aktif',
   PRIMARY KEY (`id_tarif_ssh`) USING BTREE,
@@ -2139,74 +2172,74 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_tarif` (
   KEY `id_ref_ssh_tarif` (`id_sub_kelompok_ssh`) USING BTREE,
   FULLTEXT KEY `uraian_tarif_ssh` (`uraian_tarif_ssh`),
   CONSTRAINT `fk_ref_ssh_tarif` FOREIGN KEY (`id_sub_kelompok_ssh`) REFERENCES `ref_ssh_sub_kelompok` (`id_sub_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=491 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=491 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_zona
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_zona
 DROP TABLE IF EXISTS `ref_ssh_zona`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_zona` (
   `id_zona` int(11) NOT NULL AUTO_INCREMENT,
-  `keterangan_zona` varchar(255) NOT NULL DEFAULT '',
-  `diskripsi_zona` varchar(500) DEFAULT NULL,
+  `keterangan_zona` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diskripsi_zona` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_zona`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_ssh_zona_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.ref_ssh_zona_lokasi
 DROP TABLE IF EXISTS `ref_ssh_zona_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_zona_lokasi` (
   `id_zona_lokasi` int(11) NOT NULL AUTO_INCREMENT,
   `id_zona` int(11) NOT NULL,
   `id_lokasi` int(11) NOT NULL,
   `id_desa` int(11) DEFAULT NULL,
-  `diskripsi_lokasi` varchar(500) DEFAULT NULL,
+  `diskripsi_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_zona_lokasi`) USING BTREE,
   KEY `fk_zona_lokasi` (`id_zona`) USING BTREE,
   CONSTRAINT `fk_zona_lokasi` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_status_usul
+-- membuang struktur untuk table dbsimcan_simulasi.ref_status_usul
 DROP TABLE IF EXISTS `ref_status_usul`;
 CREATE TABLE IF NOT EXISTS `ref_status_usul` (
   `id_status_usul` int(11) NOT NULL,
-  `uraian_status_usul` varchar(255) DEFAULT NULL,
+  `uraian_status_usul` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_status_usul`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_sub_unit
+-- membuang struktur untuk table dbsimcan_simulasi.ref_sub_unit
 DROP TABLE IF EXISTS `ref_sub_unit`;
 CREATE TABLE IF NOT EXISTS `ref_sub_unit` (
   `id_sub_unit` int(255) NOT NULL AUTO_INCREMENT,
   `id_unit` int(11) NOT NULL,
   `kd_sub` int(255) NOT NULL,
-  `nm_sub` varchar(255) DEFAULT NULL,
+  `nm_sub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_sub_unit`) USING BTREE,
   UNIQUE KEY `idx_ref_sub_unit` (`id_unit`,`kd_sub`) USING BTREE,
   CONSTRAINT `fk_ref_sub_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_sumber_dana
+-- membuang struktur untuk table dbsimcan_simulasi.ref_sumber_dana
 DROP TABLE IF EXISTS `ref_sumber_dana`;
 CREATE TABLE IF NOT EXISTS `ref_sumber_dana` (
   `id_sumber_dana` int(11) NOT NULL,
-  `uraian_sumber_dana` longtext NOT NULL,
+  `uraian_sumber_dana` longtext CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id_sumber_dana`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_tabel_dasar
+-- membuang struktur untuk table dbsimcan_simulasi.ref_tabel_dasar
 DROP TABLE IF EXISTS `ref_tabel_dasar`;
 CREATE TABLE IF NOT EXISTS `ref_tabel_dasar` (
   `id_tabel_dasar` int(11) NOT NULL,
-  `nama_tabel` varchar(255) DEFAULT NULL,
+  `nama_tabel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_tabel_dasar`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_tahun
+-- membuang struktur untuk table dbsimcan_simulasi.ref_tahun
 DROP TABLE IF EXISTS `ref_tahun`;
 CREATE TABLE IF NOT EXISTS `ref_tahun` (
   `id_tahun` int(11) NOT NULL AUTO_INCREMENT,
@@ -2219,36 +2252,36 @@ CREATE TABLE IF NOT EXISTS `ref_tahun` (
   `tahun_4` int(255) NOT NULL,
   `tahun_5` int(255) NOT NULL,
   PRIMARY KEY (`id_tahun`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_unit
+-- membuang struktur untuk table dbsimcan_simulasi.ref_unit
 DROP TABLE IF EXISTS `ref_unit`;
 CREATE TABLE IF NOT EXISTS `ref_unit` (
   `id_unit` int(11) NOT NULL AUTO_INCREMENT,
   `id_bidang` int(11) NOT NULL,
   `kd_unit` int(255) NOT NULL,
-  `nm_unit` varchar(255) DEFAULT NULL,
+  `nm_unit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_unit`) USING BTREE,
   UNIQUE KEY `idx_ref_unit` (`id_bidang`,`kd_unit`) USING BTREE,
   CONSTRAINT `fk_ref_unit` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.ref_urusan
 DROP TABLE IF EXISTS `ref_urusan`;
 CREATE TABLE IF NOT EXISTS `ref_urusan` (
   `kd_urusan` int(255) NOT NULL,
-  `nm_urusan` varchar(255) NOT NULL,
+  `nm_urusan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_urusan`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.ref_user_role
+-- membuang struktur untuk table dbsimcan_simulasi.ref_user_role
 DROP TABLE IF EXISTS `ref_user_role`;
 CREATE TABLE IF NOT EXISTS `ref_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_peran` varchar(255) NOT NULL,
+  `uraian_peran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tambah` int(11) NOT NULL DEFAULT '0',
   `edit` int(11) NOT NULL DEFAULT '0',
   `hapus` int(11) NOT NULL DEFAULT '0',
@@ -2257,12 +2290,12 @@ CREATE TABLE IF NOT EXISTS `ref_user_role` (
   `posting` int(11) NOT NULL DEFAULT '0',
   `status_role` int(11) NOT NULL DEFAULT '0' COMMENT '0 aktif 1 non aktif',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk procedure dbsimcan_simulasi_1.setAutoIncrement
+-- membuang struktur untuk procedure dbsimcan_simulasi.setAutoIncrement
 DROP PROCEDURE IF EXISTS `setAutoIncrement`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `setAutoIncrement`()
@@ -2290,7 +2323,58 @@ DECLARE cur1 cursor for SELECT t.table_name FROM INFORMATION_SCHEMA.TABLES t
 END//
 DELIMITER ;
 
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_aktivitas_pd
+-- membuang struktur untuk table dbsimcan_simulasi.temp_table_info
+DROP TABLE IF EXISTS `temp_table_info`;
+CREATE TABLE IF NOT EXISTS `temp_table_info` (
+  `TBL_INDEX` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TABLE_SCHEMA` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TABLE_NAME` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COLUMN_NAME` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `COLUMN_TYPE` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `IS_NULLABLE` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `COLUMN_KEY` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `COLUMN_DEFAULT` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `EXTRA` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `INDEX_NAME` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `SEQ_IN_INDEX` int(11) DEFAULT NULL,
+  `NON_UNIQUE` int(11) DEFAULT NULL,
+  `FLAG` int(11) DEFAULT NULL,
+  KEY `TBL_INDEX` (`TBL_INDEX`,`TABLE_NAME`,`COLUMN_NAME`,`IS_NULLABLE`,`COLUMN_KEY`,`INDEX_NAME`,`FLAG`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Pengeluaran data tidak dipilih.
+-- membuang struktur untuk function dbsimcan_simulasi.TglIndonesia
+DROP FUNCTION IF EXISTS `TglIndonesia`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` FUNCTION `TglIndonesia`(tanggal DATE) RETURNS varchar(255) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci
+    DETERMINISTIC
+BEGIN
+  DECLARE varTanggal varchar(255);
+
+  SELECT CONCAT(
+    DAY(tanggal),' ',
+    CASE MONTH(tanggal) 
+      WHEN 1 THEN 'Januari' 
+      WHEN 2 THEN 'Februari' 
+      WHEN 3 THEN 'Maret' 
+      WHEN 4 THEN 'April' 
+      WHEN 5 THEN 'Mei' 
+      WHEN 6 THEN 'Juni' 
+      WHEN 7 THEN 'Juli' 
+      WHEN 8 THEN 'Agustus' 
+      WHEN 9 THEN 'September'
+      WHEN 10 THEN 'Oktober' 
+      WHEN 11 THEN 'November' 
+      WHEN 12 THEN 'Desember' 
+    END,' ',
+    YEAR(tanggal)
+  ) INTO varTanggal;
+
+  RETURN varTanggal;
+END//
+DELIMITER ;
+
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_aktivitas_pd
 DROP TABLE IF EXISTS `trx_anggaran_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2304,7 +2388,7 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd` (
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_program_nasional` int(11) DEFAULT NULL,
   `id_program_provinsi` int(11) DEFAULT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_rkpd_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_aktivitas_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -2317,20 +2401,20 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd` (
   `pagu_anggaran` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `group_keu` int(11) NOT NULL DEFAULT '0' COMMENT '0 = detail 1 = grouping',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = rkpd 1 tambahan baru',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `checksum` varchar(255) DEFAULT NULL,
+  `checksum` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   UNIQUE KEY `id_pelaksana_pd` (`id_pelaksana_pd`,`id_aktivitas_rkpd_final`,`tahun_anggaran`,`sumber_aktivitas`,`sumber_dana`,`id_perubahan`,`id_aktivitas_asb`,`sumber_data`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_aktivitas_pd_trx_anggaran_pelaksana_pd` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_anggaran_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_belanja_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_belanja_pd
 DROP TABLE IF EXISTS `trx_anggaran_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd` (
   `id_belanja_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2343,7 +2427,7 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd` (
   `id_aktivitas_asb` int(11) NOT NULL DEFAULT '0',
   `id_item_ssh` bigint(20) NOT NULL DEFAULT '0',
   `id_rekening_ssh` int(11) NOT NULL DEFAULT '0',
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
   `id_satuan_2` int(11) NOT NULL DEFAULT '0',
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -2360,15 +2444,15 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd` (
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `checksum` varchar(255) DEFAULT NULL,
+  `checksum` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_belanja_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_anggaran`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_belanja_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2083 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2083 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_dokumen
 DROP TABLE IF EXISTS `trx_anggaran_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_dokumen` (
   `id_dokumen_keu` int(11) NOT NULL AUTO_INCREMENT,
@@ -2377,23 +2461,23 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_dokumen` (
   `id_perubahan` int(11) NOT NULL DEFAULT '0' COMMENT '0 awal',
   `id_dokumen_ref` int(11) NOT NULL DEFAULT '0',
   `tahun_anggaran` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `nomor_keu` varchar(255) NOT NULL,
+  `nomor_keu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_keu` date NOT NULL,
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_ppkd` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sinkronisasi` int(11) NOT NULL DEFAULT '0',
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_keu`) USING BTREE,
-  UNIQUE KEY `tahun_ranwal` (`jns_dokumen_keu`,`kd_dokumen_keu`,`id_perubahan`,`tahun_anggaran`,`nomor_keu`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `tahun_ranwal` (`jns_dokumen_keu`,`kd_dokumen_keu`,`id_perubahan`,`tahun_anggaran`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_indikator
 DROP TABLE IF EXISTS `trx_anggaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator` (
   `id_indikator_program_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -2403,14 +2487,14 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator` (
   `no_urut` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_keuangan` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -2418,10 +2502,10 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_anggaran_pemda`,`kd_indikator`,`no_urut`,`id_indikator_rkpd_final`) USING BTREE,
   KEY `id_anggaran_pemda` (`id_anggaran_pemda`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_indikator_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_kegiatan_pd
 DROP TABLE IF EXISTS `trx_anggaran_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2436,28 +2520,28 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_kegiatan_pd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `checksum` varchar(255) DEFAULT NULL,
+  `checksum` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`,`tahun_anggaran`,`id_kegiatan_pd_rkpd_final`,`id_perubahan`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_kegiatan_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_keg_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_anggaran_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -2467,13 +2551,13 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd` (
   `tahun_anggaran` int(11) NOT NULL,
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -2483,10 +2567,10 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_indikator_rkpd_final`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_keg_indikator_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_lokasi_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_lokasi_pd
 DROP TABLE IF EXISTS `trx_anggaran_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_lokasi_pd` (
   `id_lokasi_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2507,20 +2591,20 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_lokasi_pd` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rkpd 1 anggaran',
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_anggaran`,`no_urut`,`id_lokasi_pd`,`jenis_lokasi`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_lokasi_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_pelaksana
 DROP TABLE IF EXISTS `trx_anggaran_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana` (
   `id_pelaksana_anggaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -2535,7 +2619,7 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_anggaran`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_anggaran`,`id_anggaran_pemda`,`id_unit`,`id_urusan_anggaran`,`no_urut`) USING BTREE,
@@ -2543,10 +2627,10 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_urusan_anggaran`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_pelaksana_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_pelaksana_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_pelaksana_pd
 DROP TABLE IF EXISTS `trx_anggaran_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2558,17 +2642,17 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana_pd` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   `hak_akses` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_anggaran`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_pelaksana_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_program
 DROP TABLE IF EXISTS `trx_anggaran_program`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_program` (
   `id_anggaran_pemda` int(11) NOT NULL AUTO_INCREMENT,
@@ -2585,13 +2669,13 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_program` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_keuangan` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RKPD 1 = Baru',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -2599,10 +2683,10 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_program` (
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_anggaran`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_rkpd_final`,`id_rkpd_ranwal`,`id_dokumen_keu`) USING BTREE,
   KEY `id_dokumen_keu` (`id_dokumen_keu`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_program_trx_anggaran_dokumen` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_program_pd
 DROP TABLE IF EXISTS `trx_anggaran_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2617,25 +2701,25 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_program_pd` (
   `id_unit` int(11) NOT NULL,
   `id_program_pd_rkpd_final` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_rkpd_final` decimal(20,2) DEFAULT '0.00',
   `pagu_anggaran` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RKPD 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `checksum` varchar(255) DEFAULT NULL,
+  `checksum` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`tahun_anggaran`,`kd_dokumen_keu`,`jns_dokumen_keu`,`id_perubahan`,`id_pelaksana_anggaran`,`id_program_ref`,`id_program_pd_rkpd_final`,`id_dokumen_keu`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_pelaksana_anggaran`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_program_pd_trx_anggaran_pelaksana` FOREIGN KEY (`id_pelaksana_anggaran`) REFERENCES `trx_anggaran_pelaksana` (`id_pelaksana_anggaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_prog_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_anggaran_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -2646,13 +2730,13 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd` (
   `id_program_renstra` int(11) DEFAULT NULL,
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -2662,10 +2746,10 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_prog_indikator_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_anggaran_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_anggaran_urusan
 DROP TABLE IF EXISTS `trx_anggaran_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_urusan` (
   `id_urusan_anggaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -2680,17 +2764,17 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_anggaran_pemda`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_urusan_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_aktivitas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_aktivitas
 DROP TABLE IF EXISTS `trx_asb_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_asb_aktivitas` (
   `id_aktivitas_asb` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_asb_sub_sub_kelompok` int(11) NOT NULL,
-  `nm_aktivitas_asb` varchar(255) NOT NULL,
-  `satuan_aktivitas` varchar(255) DEFAULT NULL COMMENT 'tidak ditampilkan',
-  `diskripsi_aktivitas` varchar(500) DEFAULT NULL,
+  `nm_aktivitas_asb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `satuan_aktivitas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diskripsi_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) DEFAULT '0.00',
   `id_satuan_1` int(11) DEFAULT NULL COMMENT 'cost driver',
   `sat_derivatif_1` int(11) DEFAULT NULL,
@@ -2705,37 +2789,37 @@ CREATE TABLE IF NOT EXISTS `trx_asb_aktivitas` (
   PRIMARY KEY (`id_aktivitas_asb`) USING BTREE,
   KEY `fk_trx_aktivitas_asb` (`id_asb_sub_sub_kelompok`) USING BTREE,
   CONSTRAINT `FK_trx_asb_aktivitas_trx_asb_sub_sub_kelompok` FOREIGN KEY (`id_asb_sub_sub_kelompok`) REFERENCES `trx_asb_sub_sub_kelompok` (`id_asb_sub_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_kelompok
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_kelompok
 DROP TABLE IF EXISTS `trx_asb_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_kelompok` (
   `id_asb_kelompok` int(11) NOT NULL AUTO_INCREMENT,
   `id_asb_perkada` int(11) NOT NULL,
-  `uraian_kelompok_asb` varchar(255) NOT NULL,
+  `uraian_kelompok_asb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `temp_id` float DEFAULT NULL,
   PRIMARY KEY (`id_asb_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_perkada`) USING BTREE,
   CONSTRAINT `FK_trx_asb_cluster_trx_asb_perkada` FOREIGN KEY (`id_asb_perkada`) REFERENCES `trx_asb_perkada` (`id_asb_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_komponen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_komponen
 DROP TABLE IF EXISTS `trx_asb_komponen`;
 CREATE TABLE IF NOT EXISTS `trx_asb_komponen` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
   `id_komponen_asb` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nm_komponen_asb` varchar(255) NOT NULL,
+  `nm_komponen_asb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_rekening` int(11) NOT NULL,
   `temp_id` float DEFAULT NULL,
   PRIMARY KEY (`id_komponen_asb`) USING BTREE,
   KEY `FK_trx_asb_komponen_trx_asb_aktivitas` (`id_aktivitas_asb`) USING BTREE,
   CONSTRAINT `FK_trx_asb_komponen_trx_asb_aktivitas` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=819 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=819 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_komponen_rinci
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_komponen_rinci
 DROP TABLE IF EXISTS `trx_asb_komponen_rinci`;
 CREATE TABLE IF NOT EXISTS `trx_asb_komponen_rinci` (
   `id_komponen_asb_rinci` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2750,8 +2834,8 @@ CREATE TABLE IF NOT EXISTS `trx_asb_komponen_rinci` (
   `sat_derivatif2` int(11) DEFAULT NULL,
   `koefisien3` decimal(20,4) NOT NULL DEFAULT '0.0000',
   `id_satuan3` int(11) DEFAULT NULL,
-  `satuan` varchar(255) DEFAULT NULL,
-  `ket_group` varchar(255) DEFAULT NULL COMMENT 'untuk menyimpan data grouping di rincian yang sifatnya opsional',
+  `satuan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ket_group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `hub_driver` int(11) DEFAULT '0' COMMENT '1 driver1 2 driver2 3 driver12 0 N/A',
   PRIMARY KEY (`id_komponen_asb_rinci`) USING BTREE,
   KEY `fk_ref_komponen_asb_rinc` (`id_tarif_ssh`) USING BTREE,
@@ -2762,10 +2846,10 @@ CREATE TABLE IF NOT EXISTS `trx_asb_komponen_rinci` (
   FULLTEXT KEY `ket_group` (`ket_group`),
   CONSTRAINT `FK_trx_asb_komponen_rinci_ref_ssh_tarif` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trx_asb_komponen_rinci_trx_asb_komponen` FOREIGN KEY (`id_komponen_asb`) REFERENCES `trx_asb_komponen` (`id_komponen_asb`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65238 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=65238 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_perhitungan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_perhitungan
 DROP TABLE IF EXISTS `trx_asb_perhitungan`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan` (
   `tahun_perhitungan` int(11) NOT NULL,
@@ -2774,10 +2858,10 @@ CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan` (
   `flag_aktif` int(11) NOT NULL DEFAULT '0' COMMENT '0 aktif 1 non aktif',
   PRIMARY KEY (`id_perhitungan`) USING BTREE,
   UNIQUE KEY `idx_trx_perhitungan_asb` (`tahun_perhitungan`,`id_perkada`,`flag_aktif`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_perhitungan_rinci
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_perhitungan_rinci
 DROP TABLE IF EXISTS `trx_asb_perhitungan_rinci`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan_rinci` (
   `id_perhitungan_rinci` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2804,49 +2888,49 @@ CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan_rinci` (
   PRIMARY KEY (`id_perhitungan_rinci`) USING BTREE,
   UNIQUE KEY `id_trx_perhitungan_aktivitas` (`id_perhitungan`,`id_asb_kelompok`,`id_asb_sub_kelompok`,`id_aktivitas_asb`,`id_komponen_asb`,`id_komponen_asb_rinci`,`id_zona`) USING BTREE,
   CONSTRAINT `trx_asb_perhitungan_rinci_ibfk_1` FOREIGN KEY (`id_perhitungan`) REFERENCES `trx_asb_perhitungan` (`id_perhitungan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_perkada
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_perkada
 DROP TABLE IF EXISTS `trx_asb_perkada`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perkada` (
   `id_asb_perkada` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_perkada` varchar(255) NOT NULL,
+  `nomor_perkada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_perkada` date NOT NULL,
   `tahun_berlaku` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_asb_perkada`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_sub_kelompok
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_sub_kelompok
 DROP TABLE IF EXISTS `trx_asb_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_sub_kelompok` (
   `id_asb_sub_kelompok` int(11) NOT NULL AUTO_INCREMENT,
   `id_asb_kelompok` int(11) NOT NULL,
-  `uraian_sub_kelompok_asb` varchar(255) NOT NULL,
+  `uraian_sub_kelompok_asb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `temp_id` float DEFAULT NULL,
   PRIMARY KEY (`id_asb_sub_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_kelompok`) USING BTREE,
   CONSTRAINT `trx_asb_sub_kelompok_ibfk_1` FOREIGN KEY (`id_asb_kelompok`) REFERENCES `trx_asb_kelompok` (`id_asb_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_asb_sub_sub_kelompok
+-- membuang struktur untuk table dbsimcan_simulasi.trx_asb_sub_sub_kelompok
 DROP TABLE IF EXISTS `trx_asb_sub_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_sub_sub_kelompok` (
   `id_asb_sub_sub_kelompok` int(11) NOT NULL AUTO_INCREMENT,
   `id_asb_sub_kelompok` int(11) NOT NULL,
-  `uraian_sub_sub_kelompok_asb` varchar(255) NOT NULL,
+  `uraian_sub_sub_kelompok_asb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `temp_id` float DEFAULT NULL,
   PRIMARY KEY (`id_asb_sub_sub_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_sub_kelompok`) USING BTREE,
   CONSTRAINT `FK_trx_asb_sub_sub_kelompok_trx_asb_sub_kelompok` FOREIGN KEY (`id_asb_sub_kelompok`) REFERENCES `trx_asb_sub_kelompok` (`id_asb_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd
 DROP TABLE IF EXISTS `trx_forum_skpd`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd` (
   `id_forum_skpd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2859,25 +2943,25 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_forum_skpd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_forum_program`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_trx_forum_skpd_program` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_aktivitas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_aktivitas
 DROP TABLE IF EXISTS `trx_forum_skpd_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_aktivitas` (
   `id_aktivitas_forum` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2887,7 +2971,7 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_aktivitas` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_aktivitas_renja` int(11) DEFAULT '0',
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_forum_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -2903,17 +2987,17 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_aktivitas` (
   `pagu_musren` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_musren` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 = musrenbang',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja 1 tambahan baru',
   `id_satuan_publik` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_forum`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_forum_skpd`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd_pelaksana` (`id_pelaksana_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_belanja
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_belanja
 DROP TABLE IF EXISTS `trx_forum_skpd_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_belanja` (
   `tahun_forum` int(11) NOT NULL,
@@ -2926,7 +3010,7 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_belanja` (
   `id_aktivitas_asb` int(11) NOT NULL,
   `id_item_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL,
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -2945,28 +3029,28 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_belanja` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_forum`,`id_lokasi_forum`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_lokasi_forum`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1189 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_dokumen
 DROP TABLE IF EXISTS `trx_forum_skpd_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit_renja` int(255) NOT NULL,
-  `nomor_ranwal` varchar(255) NOT NULL,
+  `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_ranwal` date NOT NULL,
   `tahun_ranwal` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_kebijakan
 DROP TABLE IF EXISTS `trx_forum_skpd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -2974,13 +3058,13 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kebijakan` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_renja` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_renja`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`uraian_kebijakan`,`no_urut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`no_urut`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_forum_skpd_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -2990,13 +3074,13 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kegiatan_indikator` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -3006,10 +3090,10 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kegiatan_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_forum_skpd`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_lokasi
 DROP TABLE IF EXISTS `trx_forum_skpd_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_lokasi` (
   `tahun_forum` int(11) NOT NULL,
@@ -3030,20 +3114,20 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_lokasi` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan 2 musrenbang 3 pokir',
   PRIMARY KEY (`id_lokasi_forum`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_pelaksana_forum`,`tahun_forum`,`no_urut`,`id_lokasi_forum`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_pelaksana
 DROP TABLE IF EXISTS `trx_forum_skpd_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_pelaksana` (
   `id_pelaksana_forum` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3054,16 +3138,16 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_pelaksana` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   PRIMARY KEY (`id_pelaksana_forum`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_aktivitas_forum`,`tahun_forum`,`no_urut`,`id_pelaksana_forum`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_pelaksana_ibfk_1` FOREIGN KEY (`id_aktivitas_forum`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_program
 DROP TABLE IF EXISTS `trx_forum_skpd_program`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program` (
   `id_forum_program` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -3074,23 +3158,23 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program` (
   `id_unit` int(11) NOT NULL,
   `id_renja_program` int(11) DEFAULT '0',
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_forum` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_forum_program`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` FOREIGN KEY (`id_forum_rkpdprog`) REFERENCES `trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_program_indikator
 DROP TABLE IF EXISTS `trx_forum_skpd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -3100,13 +3184,13 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_indikator` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -3116,10 +3200,10 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_forum_program`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_program_indikator_ibfk_1` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_program_ranwal
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_program_ranwal
 DROP TABLE IF EXISTS `trx_forum_skpd_program_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_ranwal` (
   `id_forum_rkpdprog` int(11) NOT NULL AUTO_INCREMENT,
@@ -3130,18 +3214,18 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_ranwal` (
   `id_program_rpjmd` int(11) DEFAULT NULL,
   `id_bidang` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) NOT NULL DEFAULT '0',
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   PRIMARY KEY (`id_forum_rkpdprog`) USING BTREE,
   UNIQUE KEY `id_rkpd_ranwal_id_bidang_id_unit` (`id_rkpd_ranwal`,`id_bidang`,`id_unit`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_forum_skpd_usulan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_forum_skpd_usulan
 DROP TABLE IF EXISTS `trx_forum_skpd_usulan`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_usulan` (
   `id_sumber_usulan` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3153,16 +3237,16 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_usulan` (
   `volume_1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_2_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 tanpa 1 dengan 2 digabung 3 ditolak',
-  `uraian_usulan` varchar(500) DEFAULT NULL,
-  `ket_usulan` varchar(500) DEFAULT NULL,
+  `uraian_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_sumber_usulan`) USING BTREE,
   KEY `id_trx_forum_skpd_usulan` (`id_ref_usulan`,`id_sumber_usulan`,`id_lokasi_forum`) USING BTREE,
   KEY `FK_trx_forum_skpd_usulan_trx_forum_skpd_lokasi` (`id_lokasi_forum`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_usulan_trx_forum_skpd_lokasi` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_lokasi` (`id_lokasi_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_group_menu
+-- membuang struktur untuk table dbsimcan_simulasi.trx_group_menu
 DROP TABLE IF EXISTS `trx_group_menu`;
 CREATE TABLE IF NOT EXISTS `trx_group_menu` (
   `menu` int(11) NOT NULL,
@@ -3171,7 +3255,7 @@ CREATE TABLE IF NOT EXISTS `trx_group_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_isian_data_dasar
+-- membuang struktur untuk table dbsimcan_simulasi.trx_isian_data_dasar
 DROP TABLE IF EXISTS `trx_isian_data_dasar`;
 CREATE TABLE IF NOT EXISTS `trx_isian_data_dasar` (
   `id_isian_tabel_dasar` int(11) NOT NULL AUTO_INCREMENT,
@@ -3193,22 +3277,22 @@ CREATE TABLE IF NOT EXISTS `trx_isian_data_dasar` (
   KEY `id_kecamatan` (`id_kecamatan`) USING BTREE,
   CONSTRAINT `trx_isian_data_dasar_ibfk_1` FOREIGN KEY (`id_kolom_tabel_dasar`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_isian_data_dasar_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_log_events
+-- membuang struktur untuk table dbsimcan_simulasi.trx_log_events
 DROP TABLE IF EXISTS `trx_log_events`;
 CREATE TABLE IF NOT EXISTS `trx_log_events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_events` int(11) NOT NULL DEFAULT '0',
-  `discription` varchar(255) DEFAULT NULL,
+  `discription` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `operate` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrencam
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrencam
 DROP TABLE IF EXISTS `trx_musrencam`;
 CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   `tahun_musren` int(11) NOT NULL,
@@ -3218,9 +3302,9 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   `id_kecamatan` int(11) NOT NULL,
   `id_kegiatan` int(11) NOT NULL,
   `id_asb_aktivitas` int(11) NOT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `uraian_kondisi` varchar(500) DEFAULT NULL,
-  `tolak_ukur_aktivitas` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_kondisi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolak_ukur_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output_aktivitas` decimal(20,2) DEFAULT '0.00',
   `id_satuan` int(11) DEFAULT NULL,
   `id_satuan_desa` int(11) DEFAULT NULL,
@@ -3240,10 +3324,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   PRIMARY KEY (`id_musrencam`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes` (`id_renja`,`tahun_musren`,`no_urut`,`id_musrencam`,`id_kecamatan`,`id_usulan_desa`) USING BTREE,
   CONSTRAINT `trx_musrencam_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrencam_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrencam_lokasi
 DROP TABLE IF EXISTS `trx_musrencam_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrencam_lokasi` (
   `tahun_musren` int(11) NOT NULL,
@@ -3254,10 +3338,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam_lokasi` (
   `id_desa` int(11) DEFAULT NULL,
   `rt` int(11) DEFAULT NULL,
   `rw` int(11) DEFAULT NULL,
-  `uraian_kondisi` varchar(500) DEFAULT NULL,
-  `file_foto` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT NULL,
+  `uraian_kondisi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_foto` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_musrendes` int(11) DEFAULT NULL,
   `id_lokasi_musrendes` int(255) DEFAULT NULL,
   `sumber_data` int(11) DEFAULT NULL COMMENT '0 = desa 1 = kecamatan',
@@ -3266,10 +3350,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam_lokasi` (
   PRIMARY KEY (`id_lokasi_musrencam`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes_lokasi` (`id_musrencam`,`tahun_musren`,`no_urut`,`id_lokasi_musrencam`,`id_desa`,`rt`,`rw`) USING BTREE,
   CONSTRAINT `trx_musrencam_lokasi_ibfk_1` FOREIGN KEY (`id_musrencam`) REFERENCES `trx_musrencam` (`id_musrencam`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrendes
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrendes
 DROP TABLE IF EXISTS `trx_musrendes`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes` (
   `tahun_renja` int(11) NOT NULL,
@@ -3279,9 +3363,9 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes` (
   `id_desa` int(11) NOT NULL,
   `id_kegiatan` int(11) NOT NULL,
   `id_asb_aktivitas` int(11) NOT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `uraian_kondisi` varchar(500) DEFAULT NULL,
-  `tolak_ukur_aktivitas` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_kondisi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolak_ukur_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output_aktivitas` decimal(20,2) DEFAULT '0.00',
   `id_satuan` int(11) DEFAULT NULL,
   `id_satuan_rw` int(11) DEFAULT NULL,
@@ -3299,10 +3383,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes` (
   PRIMARY KEY (`id_musrendes`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes` (`id_renja`,`tahun_renja`,`no_urut`,`id_musrendes`,`id_desa`,`id_usulan_rw`) USING BTREE,
   CONSTRAINT `fk_trx_musrendes` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrendes_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrendes_lokasi
 DROP TABLE IF EXISTS `trx_musrendes_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_lokasi` (
   `tahun_musren` int(11) NOT NULL,
@@ -3313,20 +3397,20 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_lokasi` (
   `id_desa` int(11) DEFAULT NULL,
   `rt` int(11) DEFAULT NULL,
   `rw` int(11) DEFAULT NULL,
-  `uraian_kondisi` varchar(500) DEFAULT NULL,
-  `file_foto` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT NULL,
+  `uraian_kondisi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_foto` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) DEFAULT NULL COMMENT '0 = RW 1 = Desa',
   `volume_rw` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_desa` decimal(20,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id_lokasi_musrendes`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes_lokasi` (`id_musrendes`,`tahun_musren`,`no_urut`,`id_lokasi_musrendes`,`id_desa`,`rt`,`rw`) USING BTREE,
   CONSTRAINT `fk_trx_musrendes_lokasi` FOREIGN KEY (`id_musrendes`) REFERENCES `trx_musrendes` (`id_musrendes`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrendes_rw
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrendes_rw
 DROP TABLE IF EXISTS `trx_musrendes_rw`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_rw` (
   `tahun_musren` int(11) NOT NULL,
@@ -3336,8 +3420,8 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_rw` (
   `id_desa` int(11) NOT NULL,
   `id_kegiatan` int(11) NOT NULL,
   `id_asb_aktivitas` int(11) NOT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `uraian_kondisi` varchar(1000) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_kondisi` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_satuan` int(11) NOT NULL DEFAULT '0',
   `volume` decimal(20,2) NOT NULL DEFAULT '0.00',
   `harga_satuan` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -3345,31 +3429,31 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_rw` (
   `status_usulan` int(11) NOT NULL COMMENT '0 = Proses Usulan 1 = Kirim_Musrencam',
   `rt` int(11) DEFAULT NULL,
   `rw` int(11) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_musrendes_rw`) USING BTREE,
   UNIQUE KEY `tahun_musren` (`tahun_musren`,`no_urut`,`id_renja`,`id_desa`,`id_kegiatan`,`id_asb_aktivitas`,`rt`,`rw`) USING BTREE,
   KEY `id_renja` (`id_renja`) USING BTREE,
   CONSTRAINT `trx_musrendes_rw_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrendes_rw_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrendes_rw_lokasi
 DROP TABLE IF EXISTS `trx_musrendes_rw_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_rw_lokasi` (
   `no_urut` int(11) NOT NULL,
   `id_musrendes_rw` int(11) NOT NULL,
   `id_musrendes_lokasi` int(11) NOT NULL AUTO_INCREMENT,
-  `file_foto` varchar(500) DEFAULT NULL,
-  `uraian_kondisi` varchar(1000) DEFAULT NULL,
-  `lat` varchar(100) NOT NULL DEFAULT '0',
-  `lang` varchar(100) NOT NULL DEFAULT '0.00',
+  `file_foto` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_kondisi` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_usulan` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Proses Usulan 1 = Kirim_Musrencam',
   PRIMARY KEY (`id_musrendes_lokasi`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab
 DROP TABLE IF EXISTS `trx_musrenkab`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab` (
   `id_musrenkab` int(11) NOT NULL AUTO_INCREMENT,
@@ -3385,21 +3469,21 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_musrenkab`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`id_program_rpjmd`,`id_visi_rpjmd`,`id_sasaran_rpjmd`,`thn_id_rpjmd`,`id_rkpd_rancangan`,`id_tujuan_rpjmd`,`tahun_rkpd`,`no_urut`,`id_misi_rpjmd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_aktivitas_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_aktivitas_pd
 DROP TABLE IF EXISTS `trx_musrenkab_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -3410,7 +3494,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_aktivitas_renja` int(11) DEFAULT '0',
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_forum_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -3426,17 +3510,17 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
   `pagu_musren` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_musren` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 = musrenbang',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja 1 tambahan baru',
   `id_satuan_publik` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_musrenkab_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_belanja_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_belanja_pd
 DROP TABLE IF EXISTS `trx_musrenkab_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -3450,7 +3534,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_belanja_pd` (
   `id_aktivitas_asb` int(11) NOT NULL,
   `id_item_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL,
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -3469,28 +3553,28 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_dokumen
 DROP TABLE IF EXISTS `trx_musrenkab_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_rkpd` varchar(255) NOT NULL,
+  `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_rkpd` date NOT NULL,
   `tahun_rkpd` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`tahun_rkpd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_indikator
 DROP TABLE IF EXISTS `trx_musrenkab_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3500,14 +3584,14 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_indikator` (
   `id_indikator_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -3515,10 +3599,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_musrenkab`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_musrenkab`) USING BTREE,
   CONSTRAINT `trx_musrenkab_indikator_ibfk_1` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_kebijakan
 DROP TABLE IF EXISTS `trx_musrenkab_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3526,14 +3610,14 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan` (
   `id_musrenkab` int(11) NOT NULL,
   `id_kebijakan_rancangan` int(11) NOT NULL,
   `id_kebijakan_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal_kebijakan` (`tahun_rkpd`,`id_musrenkab`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_kebijakan` (`id_musrenkab`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_kebijakan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_kebijakan_pd
 DROP TABLE IF EXISTS `trx_musrenkab_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3541,13 +3625,13 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan_pd` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_pd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_pd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`uraian_kebijakan`,`no_urut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`no_urut`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_kegiatan_pd
 DROP TABLE IF EXISTS `trx_musrenkab_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3561,25 +3645,25 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kegiatan_pd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_keg_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_musrenkab_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3589,13 +3673,13 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -3605,10 +3689,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_lokasi_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_lokasi_pd
 DROP TABLE IF EXISTS `trx_musrenkab_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -3630,20 +3714,20 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_lokasi_pd` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan 2 musrenbang 3 pokir',
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_pelaksana
 DROP TABLE IF EXISTS `trx_musrenkab_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3658,7 +3742,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_musrenkab`,`id_unit`,`id_urusan_rkpd`,`no_urut`) USING BTREE,
@@ -3667,10 +3751,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_musrenkab_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_musrenkab_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_musrenkab_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_pelaksana_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_pelaksana_pd
 DROP TABLE IF EXISTS `trx_musrenkab_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3682,16 +3766,16 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana_pd` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_musrenkab_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_program_pd
 DROP TABLE IF EXISTS `trx_musrenkab_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -3703,22 +3787,22 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_program_pd` (
   `id_rkpd_rancangan` int(11) DEFAULT NULL,
   `id_renja_program` int(11) DEFAULT '0',
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_forum` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_pelaksana_rkpd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_program_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_rkpd`) REFERENCES `trx_musrenkab_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_prog_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_musrenkab_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3729,13 +3813,13 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -3745,10 +3829,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_musrenkab_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_musrenkab_urusan
 DROP TABLE IF EXISTS `trx_musrenkab_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3763,10 +3847,10 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
   CONSTRAINT `trx_musrenkab_urusan_ibfk_2` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_pokir
+-- membuang struktur untuk table dbsimcan_simulasi.trx_pokir
 DROP TABLE IF EXISTS `trx_pokir`;
 CREATE TABLE IF NOT EXISTS `trx_pokir` (
   `id_tahun` int(11) NOT NULL,
@@ -3774,20 +3858,20 @@ CREATE TABLE IF NOT EXISTS `trx_pokir` (
   `tanggal_pengusul` date NOT NULL,
   `asal_pengusul` int(11) NOT NULL DEFAULT '0' COMMENT '0 Fraksi\r\n1 Pempinan\r\n2 Badan Musyawarah\r\n3 Komisi\r\n4 Badan Legislasi Daerah\r\n5 Badan Anggaran\r\n6 Badan Kehormatan\r\n9 Badan Lainnya',
   `jabatan_pengusul` int(11) NOT NULL DEFAULT '4' COMMENT '0 ketua 1 wakil ketua 2 sekretaris 3 bendahara 4 anggota',
-  `nama_pengusul` varchar(255) DEFAULT NULL,
-  `nomor_anggota` varchar(20) DEFAULT NULL,
-  `daerah_pemilihan` varchar(255) DEFAULT NULL,
+  `nama_pengusul` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nomor_anggota` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `daerah_pemilihan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `media_pokir` int(11) DEFAULT '0' COMMENT '1 surat 2 email 3 telepon 4 lisan 9 lainnya',
-  `bukti_dokumen` varchar(255) DEFAULT NULL,
+  `bukti_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `entried_at` varchar(255) DEFAULT NULL,
+  `entried_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pokir`) USING BTREE,
   UNIQUE KEY `id_tahun` (`id_tahun`,`tanggal_pengusul`,`asal_pengusul`,`jabatan_pengusul`,`nomor_anggota`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_pokir_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_pokir_lokasi
 DROP TABLE IF EXISTS `trx_pokir_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_lokasi` (
   `id_pokir_usulan` int(11) NOT NULL,
@@ -3800,10 +3884,10 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_lokasi` (
   PRIMARY KEY (`id_pokir_lokasi`) USING BTREE,
   UNIQUE KEY `id_pokir_usulan` (`id_pokir_usulan`,`id_kecamatan`,`id_desa`,`rw`,`rt`) USING BTREE,
   CONSTRAINT `trx_pokir_lokasi_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_pokir_tl
+-- membuang struktur untuk table dbsimcan_simulasi.trx_pokir_tl
 DROP TABLE IF EXISTS `trx_pokir_tl`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_tl` (
   `id_pokir_tl` int(11) NOT NULL AUTO_INCREMENT,
@@ -3812,16 +3896,16 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_tl` (
   `id_pokir_lokasi` int(11) NOT NULL,
   `unit_tl` int(11) DEFAULT NULL,
   `status_tl` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Belum TL, 1 = Disposisi Ke Unit, 2 = Dipending, 3 = Perlu Dibahas kembali  4 = tidak diakomodir',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_pokir_tl`) USING BTREE,
   UNIQUE KEY `id_pokir_usulan` (`id_pokir`,`id_pokir_usulan`,`id_pokir_lokasi`) USING BTREE,
   KEY `trx_pokir_tl_ibfk_1` (`id_pokir_usulan`) USING BTREE,
   CONSTRAINT `trx_pokir_tl_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_pokir_tl_unit
+-- membuang struktur untuk table dbsimcan_simulasi.trx_pokir_tl_unit
 DROP TABLE IF EXISTS `trx_pokir_tl_unit`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_tl_unit` (
   `id_pokir_unit` int(11) NOT NULL AUTO_INCREMENT,
@@ -3837,40 +3921,40 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_tl_unit` (
   `volume_tl` decimal(20,2) DEFAULT '0.00',
   `pagu_tl` decimal(20,2) DEFAULT '0.00',
   `status_tl` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Belum TL, 1 = Diakomodir Renja, 2 = Diakomodir Forum, 3 = Tidak diakomodir',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_pokir_unit`) USING BTREE,
   UNIQUE KEY `id_pokir_usulan` (`id_pokir`,`id_pokir_usulan`,`id_pokir_lokasi`) USING BTREE,
   KEY `trx_pokir_tl_ibfk_1` (`id_pokir_usulan`) USING BTREE,
   KEY `trx_pokir_tl_unit_ibfk_1` (`id_pokir_tl`) USING BTREE,
   CONSTRAINT `trx_pokir_tl_unit_ibfk_1` FOREIGN KEY (`id_pokir_tl`) REFERENCES `trx_pokir_tl` (`id_pokir_tl`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_pokir_usulan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_pokir_usulan
 DROP TABLE IF EXISTS `trx_pokir_usulan`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_usulan` (
   `id_pokir` int(11) NOT NULL,
   `id_pokir_usulan` int(11) NOT NULL AUTO_INCREMENT,
   `no_urut` int(11) NOT NULL DEFAULT '1',
-  `id_judul_usulan` varchar(150) NOT NULL,
+  `id_judul_usulan` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `diskripsi_usulan` blob,
   `id_unit` int(11) DEFAULT NULL,
   `volume` decimal(20,2) DEFAULT '0.00',
   `id_satuan` int(11) DEFAULT NULL,
   `jml_anggaran` decimal(20,2) NOT NULL DEFAULT '0.00',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `entried_at` varchar(255) DEFAULT NULL,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `entried_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pokir_usulan`) USING BTREE,
   UNIQUE KEY `id_pokir` (`id_pokir`,`no_urut`) USING BTREE,
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_pokir_usulan_ibfk_1` FOREIGN KEY (`id_pokir`) REFERENCES `trx_pokir` (`id_pokir`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_pokir_usulan_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_aktivitas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_aktivitas
 DROP TABLE IF EXISTS `trx_renja_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -3880,8 +3964,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_aktivitas` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT NULL,
   `id_satuan_publik` int(11) DEFAULT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `tolak_ukur_aktivitas` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolak_ukur_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output_aktivitas` decimal(20,2) DEFAULT '0.00',
   `id_program_nasional` int(11) DEFAULT NULL,
   `id_program_provinsi` int(11) DEFAULT NULL,
@@ -3899,10 +3983,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_aktivitas` (
   PRIMARY KEY (`id_aktivitas_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_aktivitas_renja`) USING BTREE,
   CONSTRAINT `trx_renja_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_belanja
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_belanja
 DROP TABLE IF EXISTS `trx_renja_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_renja_belanja` (
   `tahun_renja` int(11) NOT NULL,
@@ -3914,7 +3998,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_belanja` (
   `id_aktivitas_asb` bigint(20) DEFAULT NULL,
   `id_tarif_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -3925,28 +4009,28 @@ CREATE TABLE IF NOT EXISTS `trx_renja_belanja` (
   PRIMARY KEY (`id_belanja_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_renja_rancangan_belanja` (`id_lokasi_renja`,`tahun_renja`,`no_urut`,`id_belanja_renja`) USING BTREE,
   CONSTRAINT `trx_renja_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_dokumen
 DROP TABLE IF EXISTS `trx_renja_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit_renja` int(255) NOT NULL,
-  `nomor_ranwal` varchar(255) NOT NULL,
+  `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_ranwal` date NOT NULL,
   `tahun_ranwal` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_kebijakan
 DROP TABLE IF EXISTS `trx_renja_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -3955,17 +4039,17 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kebijakan` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_renja` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `status_data` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_kebijakan_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_renja_rancangan_kebijakan` (`tahun_renja`,`id_unit`,`no_urut`,`id_sasaran_renstra`,`id_kebijakan_renja`,`id_renja`) USING BTREE,
   KEY `fk_trx_renja_rancangan_kebijakan` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `trx_renja_kebijakan_ibfk_1` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_kegiatan
 DROP TABLE IF EXISTS `trx_renja_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
@@ -3980,20 +4064,20 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_kegiatan_renstra` int(11) DEFAULT NULL,
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_renstra` varchar(500) DEFAULT '0',
+  `uraian_kegiatan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_kegiatan` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_selanjutnya` decimal(20,2) DEFAULT '0.00',
   `status_pelaksanaan_kegiatan` int(11) NOT NULL DEFAULT '0' COMMENT '0 = tepat 1 = dimajukan 2 = ditunda 3 dibatalkan 4 baru',
   `pagu_musrenbang` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja skpd 1 =  tambahan baru',
-  `ket_usulan` varchar(500) DEFAULT NULL,
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 Final',
   `status_rancangan` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum selesai 1 siap kirim ke forum',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja` (`id_rkpd_renstra`,`tahun_renja`,`no_urut`,`id_renja`) USING BTREE,
   KEY `idx_trx_rancangan_renja_1` (`id_rkpd_ranwal`) USING BTREE,
@@ -4003,10 +4087,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan` (
   CONSTRAINT `trx_renja_kegiatan_ibfk_2` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_renja_kegiatan_ibfk_3` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_renja_kegiatan_ibfk_4` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renja_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4015,8 +4099,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan_indikator` (
   `id_indikator_kegiatan_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `angka_tahun` decimal(20,2) DEFAULT '0.00',
   `angka_renstra` decimal(20,2) DEFAULT '0.00',
   `id_satuan_output` int(255) DEFAULT NULL,
@@ -4026,10 +4110,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan_indikator` (
   UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_renja`) USING BTREE,
   KEY `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` (`id_renja`) USING BTREE,
   CONSTRAINT `trx_renja_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_lokasi
 DROP TABLE IF EXISTS `trx_renja_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_renja_lokasi` (
   `tahun_renja` int(11) NOT NULL,
@@ -4042,9 +4126,9 @@ CREATE TABLE IF NOT EXISTS `trx_renja_lokasi` (
   `id_desa` int(11) DEFAULT NULL,
   `rt` int(11) DEFAULT NULL,
   `rw` int(11) DEFAULT NULL,
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT NULL,
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -4052,10 +4136,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_lokasi` (
   PRIMARY KEY (`id_lokasi_renja`) USING BTREE,
   UNIQUE KEY `idx_rancangan_renja_lokasi` (`id_pelaksana_renja`,`tahun_renja`,`no_urut`,`id_lokasi_renja`) USING BTREE,
   CONSTRAINT `trx_renja_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_pelaksana
 DROP TABLE IF EXISTS `trx_renja_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -4072,10 +4156,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_pelaksana` (
   PRIMARY KEY (`id_pelaksana_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_pelaksana_renja`) USING BTREE,
   CONSTRAINT `trx_renja_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_program
 DROP TABLE IF EXISTS `trx_renja_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -4092,7 +4176,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_ranwal` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
@@ -4100,7 +4184,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program` (
   `sumber_data_rkpd` int(11) DEFAULT NULL COMMENT 'sumber usulan pelaksana unit di rkpd',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_renja_program`) USING BTREE,
@@ -4109,10 +4193,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program` (
   KEY `id_program_renstra` (`id_program_renstra`) USING BTREE,
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_ibfk_2` (`id_renja_ranwal`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_program_indikator
 DROP TABLE IF EXISTS `trx_renja_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4122,13 +4206,13 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_indikator` (
   `id_indikator_program_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -4138,10 +4222,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_program_rkpd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_program_rkpd
 DROP TABLE IF EXISTS `trx_renja_program_rkpd`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
@@ -4149,7 +4233,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_rkpd` (
   `id_renja_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `jenis_belanja` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) NOT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `jml_data` int(11) NOT NULL DEFAULT '0',
@@ -4161,10 +4245,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_rkpd` (
   `jml_batal` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_renja_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_renja_id_rkpd_ranwal_id_unit` (`tahun_renja`,`id_rkpd_ranwal`,`id_unit`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan
 DROP TABLE IF EXISTS `trx_renja_rancangan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4179,20 +4263,20 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_kegiatan_renstra` int(11) DEFAULT NULL,
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_renstra` varchar(500) DEFAULT '0',
+  `uraian_kegiatan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_kegiatan` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_selanjutnya` decimal(20,2) DEFAULT '0.00',
   `status_pelaksanaan_kegiatan` int(11) NOT NULL DEFAULT '0' COMMENT '0 = tepat 1 = dimajukan 2 = ditunda 3 dibatalkan 4 baru',
   `pagu_musrenbang` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja skpd 1 =  tambahan baru',
-  `ket_usulan` varchar(500) DEFAULT NULL,
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 Final',
   `status_rancangan` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum selesai 1 siap kirim ke forum',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja` (`id_rkpd_renstra`,`tahun_renja`,`no_urut`,`id_renja`) USING BTREE,
   KEY `idx_trx_rancangan_renja_1` (`id_rkpd_ranwal`) USING BTREE,
@@ -4200,12 +4284,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan` (
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `FK_trx_renja_rancangan_trx_renja_rancangan_program` (`id_renja_program`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_trx_renja_rancangan_program` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_trx_rancangan_renja` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_rancangan_renja_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_aktivitas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_aktivitas
 DROP TABLE IF EXISTS `trx_renja_rancangan_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -4215,8 +4298,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_aktivitas` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT NULL,
   `id_satuan_publik` int(11) DEFAULT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `tolak_ukur_aktivitas` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolak_ukur_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output_aktivitas` decimal(20,2) DEFAULT '0.00',
   `id_program_nasional` int(11) DEFAULT NULL,
   `id_program_provinsi` int(11) DEFAULT NULL,
@@ -4234,10 +4317,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_aktivitas` (
   PRIMARY KEY (`id_aktivitas_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_aktivitas_renja`) USING BTREE,
   CONSTRAINT `trx_renja_rancangan_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_belanja
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_belanja
 DROP TABLE IF EXISTS `trx_renja_rancangan_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_belanja` (
   `tahun_renja` int(11) NOT NULL,
@@ -4249,7 +4332,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_belanja` (
   `id_aktivitas_asb` bigint(20) DEFAULT NULL,
   `id_tarif_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -4260,28 +4343,28 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_belanja` (
   PRIMARY KEY (`id_belanja_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_renja_rancangan_belanja` (`id_lokasi_renja`,`tahun_renja`,`no_urut`,`id_belanja_renja`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_belanja_trx_renja_rancangan_lokasi` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_dokumen
 DROP TABLE IF EXISTS `trx_renja_rancangan_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit_renja` int(255) NOT NULL,
-  `nomor_ranwal` varchar(255) NOT NULL,
+  `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_ranwal` date NOT NULL,
   `tahun_ranwal` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_indikator
 DROP TABLE IF EXISTS `trx_renja_rancangan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4290,8 +4373,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_indikator` (
   `id_indikator_kegiatan_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `angka_tahun` decimal(20,2) DEFAULT '0.00',
   `angka_renstra` decimal(20,2) DEFAULT '0.00',
   `id_satuan_output` int(255) DEFAULT NULL,
@@ -4301,10 +4384,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_indikator` (
   UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_renja`) USING BTREE,
   KEY `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` (`id_renja`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_kebijakan
 DROP TABLE IF EXISTS `trx_renja_rancangan_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4313,17 +4396,17 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_kebijakan` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_renja` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `status_data` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_kebijakan_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_renja_rancangan_kebijakan` (`tahun_renja`,`id_unit`,`no_urut`,`id_sasaran_renstra`,`id_kebijakan_renja`,`id_renja`) USING BTREE,
   KEY `fk_trx_renja_rancangan_kebijakan` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renja_rancangan_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renja_rancangan` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_lokasi
 DROP TABLE IF EXISTS `trx_renja_rancangan_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_lokasi` (
   `tahun_renja` int(11) NOT NULL,
@@ -4336,9 +4419,9 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_lokasi` (
   `id_desa` int(11) DEFAULT NULL,
   `rt` int(11) DEFAULT NULL,
   `rw` int(11) DEFAULT NULL,
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT NULL,
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -4346,10 +4429,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_lokasi` (
   PRIMARY KEY (`id_lokasi_renja`) USING BTREE,
   UNIQUE KEY `idx_rancangan_renja_lokasi` (`id_pelaksana_renja`,`tahun_renja`,`no_urut`,`id_lokasi_renja`) USING BTREE,
   CONSTRAINT `fk_rancangan_renja_lokasi` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_pelaksana
 DROP TABLE IF EXISTS `trx_renja_rancangan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -4366,10 +4449,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_pelaksana` (
   PRIMARY KEY (`id_pelaksana_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_pelaksana_renja`) USING BTREE,
   CONSTRAINT `fk_trx_rancangan_renja_pelaksana` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_program
 DROP TABLE IF EXISTS `trx_renja_rancangan_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -4386,7 +4469,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_ranwal` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
@@ -4394,7 +4477,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   `sumber_data_rkpd` int(11) DEFAULT NULL COMMENT 'sumber usulan pelaksana unit di rkpd',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_renja_program`) USING BTREE,
@@ -4403,10 +4486,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   KEY `id_program_renstra` (`id_program_renstra`) USING BTREE,
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_ibfk_2` (`id_renja_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_program_indikator
 DROP TABLE IF EXISTS `trx_renja_rancangan_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4416,13 +4499,13 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_indikator` (
   `id_indikator_program_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -4432,10 +4515,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_rancangan_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_program_ranwal
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_program_ranwal
 DROP TABLE IF EXISTS `trx_renja_rancangan_program_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_ranwal` (
   `tahun_renja` int(11) NOT NULL,
@@ -4443,7 +4526,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_ranwal` (
   `id_renja_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `jenis_belanja` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) NOT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `jml_data` int(11) NOT NULL DEFAULT '0',
@@ -4455,10 +4538,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_ranwal` (
   `jml_batal` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_renja_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_renja_id_rkpd_ranwal_id_unit` (`tahun_renja`,`id_rkpd_ranwal`,`id_unit`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_rancangan_ref_pokir
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_rancangan_ref_pokir
 DROP TABLE IF EXISTS `trx_renja_rancangan_ref_pokir`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_ref_pokir` (
   `id_aktivitas_renja` int(11) NOT NULL,
@@ -4468,10 +4551,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_ref_pokir` (
   UNIQUE KEY `id_aktivitas_renja` (`id_aktivitas_renja`,`id_pokir_usulan`) USING BTREE,
   KEY `id_pokir_usulan` (`id_pokir_usulan`) USING BTREE,
   CONSTRAINT `trx_renja_rancangan_ref_pokir_ibfk_1` FOREIGN KEY (`id_aktivitas_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_aktivitas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_aktivitas
 DROP TABLE IF EXISTS `trx_renja_ranwal_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -4481,8 +4564,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_aktivitas` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT NULL,
   `id_satuan_publik` int(11) DEFAULT NULL,
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
-  `tolak_ukur_aktivitas` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolak_ukur_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output_aktivitas` decimal(20,2) DEFAULT '0.00',
   `id_program_nasional` int(11) DEFAULT NULL,
   `id_program_provinsi` int(11) DEFAULT NULL,
@@ -4500,28 +4583,28 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_aktivitas` (
   PRIMARY KEY (`id_aktivitas_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_aktivitas_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_dokumen
 DROP TABLE IF EXISTS `trx_renja_ranwal_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `id_unit_renja` int(255) NOT NULL,
-  `nomor_ranwal` varchar(255) NOT NULL,
+  `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_ranwal` date NOT NULL,
   `tahun_ranwal` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_kegiatan
 DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4536,20 +4619,20 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_kegiatan_renstra` int(11) DEFAULT NULL,
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_renstra` varchar(500) DEFAULT '0',
+  `uraian_kegiatan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_kegiatan` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_selanjutnya` decimal(20,2) DEFAULT '0.00',
   `status_pelaksanaan_kegiatan` int(11) NOT NULL DEFAULT '0' COMMENT '0 = tepat 1 = dimajukan 2 = ditunda 3 dibatalkan 4 baru',
   `pagu_musrenbang` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja skpd 1 =  tambahan baru',
-  `ket_usulan` varchar(500) DEFAULT NULL,
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 Final',
   `status_rancangan` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum selesai 1 siap kirim ke forum',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja` (`id_rkpd_renstra`,`tahun_renja`,`no_urut`,`id_renja`) USING BTREE,
   KEY `idx_trx_rancangan_renja_1` (`id_rkpd_ranwal`) USING BTREE,
@@ -4557,10 +4640,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan` (
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `FK_trx_renja_rancangan_trx_renja_rancangan_program` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_kegiatan_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4569,8 +4652,8 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan_indikator` (
   `id_indikator_kegiatan_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `angka_tahun` decimal(20,2) DEFAULT '0.00',
   `angka_renstra` decimal(20,2) DEFAULT '0.00',
   `id_satuan_output` int(255) DEFAULT NULL,
@@ -4580,10 +4663,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan_indikator` (
   UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_renja`) USING BTREE,
   KEY `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` (`id_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_pelaksana
 DROP TABLE IF EXISTS `trx_renja_ranwal_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -4600,10 +4683,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_pelaksana` (
   PRIMARY KEY (`id_pelaksana_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_pelaksana_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_program
 DROP TABLE IF EXISTS `trx_renja_ranwal_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -4620,7 +4703,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   `id_tujuan_renstra` int(11) DEFAULT NULL,
   `id_sasaran_renstra` int(11) DEFAULT NULL,
   `id_program_renstra` int(11) DEFAULT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_ranwal` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
@@ -4628,7 +4711,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   `sumber_data_rkpd` int(11) DEFAULT NULL COMMENT 'sumber usulan pelaksana unit di rkpd',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   PRIMARY KEY (`id_renja_program`) USING BTREE,
@@ -4638,10 +4721,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_ibfk_2` (`id_renja_ranwal`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_program_ibfk_1` FOREIGN KEY (`id_renja_ranwal`) REFERENCES `trx_renja_ranwal_program_rkpd` (`id_renja_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_program_indikator
 DROP TABLE IF EXISTS `trx_renja_ranwal_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4651,13 +4734,13 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_indikator` (
   `id_indikator_program_renja` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_renja` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_renja` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -4667,10 +4750,10 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_ranwal_program_indikator_ibfk_1` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renja_ranwal_program_rkpd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renja_ranwal_program_rkpd
 DROP TABLE IF EXISTS `trx_renja_ranwal_program_rkpd`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
@@ -4678,7 +4761,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_rkpd` (
   `id_renja_ranwal` int(11) NOT NULL AUTO_INCREMENT,
   `jenis_belanja` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) NOT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `jml_data` int(11) NOT NULL DEFAULT '0',
@@ -4691,21 +4774,21 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_rkpd` (
   PRIMARY KEY (`id_renja_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_renja_id_rkpd_ranwal_id_unit` (`tahun_renja`,`id_rkpd_ranwal`,`id_unit`) USING BTREE,
   KEY `id_rkpd_ranwal` (`id_rkpd_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_dokumen
 DROP TABLE IF EXISTS `trx_renstra_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_dokumen` (
   `id_rpjmd` int(11) NOT NULL,
   `id_renstra` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
-  `nomor_renstra` varchar(255) DEFAULT NULL,
+  `nomor_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_renstra` date DEFAULT NULL,
-  `uraian_renstra` varchar(500) DEFAULT NULL,
-  `nm_pimpinan` varchar(255) DEFAULT NULL,
-  `nip_pimpinan` varchar(255) DEFAULT NULL,
-  `jabatan_pimpinan` varchar(255) DEFAULT NULL,
+  `uraian_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nm_pimpinan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_pimpinan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan_pimpinan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4714,10 +4797,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_dokumen` (
   KEY `fk_trx_renstra_dokumen_1` (`id_unit`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_dokumen` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_renstra_dokumen_1` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_kebijakan
 DROP TABLE IF EXISTS `trx_renstra_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kebijakan` (
   `thn_id` int(11) NOT NULL,
@@ -4725,7 +4808,7 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kebijakan` (
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_kebijakan_renstra` varchar(500) DEFAULT NULL,
+  `uraian_kebijakan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4733,10 +4816,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kebijakan` (
   UNIQUE KEY `idx_trx_renstra_kebijakan` (`thn_id`,`id_sasaran_renstra`,`id_kebijakan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kebijakan` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_kegiatan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_kegiatan
 DROP TABLE IF EXISTS `trx_renstra_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan` (
   `thn_id` int(11) NOT NULL,
@@ -4745,8 +4828,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan` (
   `id_kegiatan_renstra` int(11) NOT NULL AUTO_INCREMENT,
   `id_kegiatan_ref` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_kegiatan_renstra` varchar(255) DEFAULT NULL,
-  `uraian_sasaran_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_sasaran_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun1` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun2` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun3` decimal(20,2) DEFAULT '0.00',
@@ -4760,10 +4843,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan` (
   UNIQUE KEY `idx_trx_renstra_kegiatan` (`thn_id`,`id_program_renstra`,`id_kegiatan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_kegiatan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renstra_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4772,8 +4855,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_indikator` (
   `id_indikator_kegiatan_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan_renstra` varchar(255) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(255) DEFAULT NULL,
+  `uraian_indikator_kegiatan_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -4788,10 +4871,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_indikator` (
   UNIQUE KEY `idx_trx_renstra_kegiatan_indikator` (`thn_id`,`id_kegiatan_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan_indikator` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan_indikator` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_kegiatan_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_kegiatan_pelaksana
 DROP TABLE IF EXISTS `trx_renstra_kegiatan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_pelaksana` (
   `thn_id` int(11) NOT NULL,
@@ -4807,10 +4890,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_pelaksana` (
   UNIQUE KEY `idx_trx_renstra_kegiatan_pelaksana` (`thn_id`,`id_kegiatan_renstra`,`id_perubahan`,`id_sub_unit`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan_pelaksana` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan_pelaksana` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_misi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_misi
 DROP TABLE IF EXISTS `trx_renstra_misi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_misi` (
   `thn_id` int(11) NOT NULL,
@@ -4818,17 +4901,17 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_misi` (
   `id_visi_renstra` int(11) NOT NULL,
   `id_misi_renstra` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_misi_renstra` varchar(255) NOT NULL,
+  `uraian_misi_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_misi_renstra`) USING BTREE,
   UNIQUE KEY `idx_trx_renstra_misi` (`id_visi_renstra`,`thn_id`,`no_urut`,`id_misi_renstra`,`id_perubahan`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_misi` FOREIGN KEY (`id_visi_renstra`) REFERENCES `trx_renstra_visi` (`id_visi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_program
 DROP TABLE IF EXISTS `trx_renstra_program`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_program` (
   `thn_id` int(11) NOT NULL,
@@ -4838,8 +4921,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program` (
   `id_program_rpjmd` int(11) NOT NULL,
   `id_program_ref` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_program_renstra` varchar(255) DEFAULT NULL,
-  `uraian_sasaran_program` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_sasaran_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun1` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun2` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun3` decimal(20,2) DEFAULT '0.00',
@@ -4853,11 +4936,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program` (
   KEY `fk_trx_renstra_program` (`id_sasaran_renstra`) USING BTREE,
   KEY `fk_trx_renstra_program_1` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_program` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_trx_renstra_program_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_trx_renstra_program_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_program_indikator
 DROP TABLE IF EXISTS `trx_renstra_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_program_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4867,8 +4950,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program_indikator` (
   `id_indikator_program_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_renstra` varchar(255) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(255) DEFAULT NULL,
+  `uraian_indikator_program_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -4883,10 +4966,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program_indikator` (
   UNIQUE KEY `idx_trx_renstra_program_indikator` (`thn_id`,`id_program_renstra`,`id_indikator_program_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_program_indikator` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_program_indikator` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_sasaran
 DROP TABLE IF EXISTS `trx_renstra_sasaran`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran` (
   `thn_id` int(11) NOT NULL,
@@ -4895,7 +4978,7 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran` (
   `id_sasaran_rpjmd` int(11) NOT NULL DEFAULT '0',
   `id_sasaran_renstra` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_sasaran_renstra` varchar(255) DEFAULT NULL,
+  `uraian_sasaran_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4903,10 +4986,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran` (
   UNIQUE KEY `idx_trx_renstra_sasaran` (`thn_id`,`id_tujuan_renstra`,`id_sasaran_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran` (`id_tujuan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_sasaran` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_sasaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_sasaran_indikator
 DROP TABLE IF EXISTS `trx_renstra_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4916,8 +4999,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran_indikator` (
   `id_indikator_sasaran_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_renstra` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `uraian_indikator_sasaran_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -4932,10 +5015,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_sasaran_renstra`,`id_indikator_sasaran_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran_indikator` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_sasaran_indikator` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_strategi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_strategi
 DROP TABLE IF EXISTS `trx_renstra_strategi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_strategi` (
   `thn_id` int(11) NOT NULL,
@@ -4943,7 +5026,7 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_strategi` (
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_strategi_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_strategi_renstra` varchar(500) DEFAULT NULL,
+  `uraian_strategi_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4951,10 +5034,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_strategi` (
   UNIQUE KEY `idx_trx_renstra_kebijakan` (`thn_id`,`id_sasaran_renstra`,`id_perubahan`,`id_strategi_renstra`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_strategi` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_strategi` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_tujuan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_tujuan
 DROP TABLE IF EXISTS `trx_renstra_tujuan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan` (
   `thn_id` int(11) NOT NULL,
@@ -4962,7 +5045,7 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan` (
   `id_misi_renstra` int(11) NOT NULL,
   `id_tujuan_renstra` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_tujuan_renstra` varchar(255) NOT NULL,
+  `uraian_tujuan_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4970,10 +5053,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan` (
   UNIQUE KEY `idx_trx_renstra_tujuan` (`thn_id`,`id_misi_renstra`,`id_tujuan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_tujuan` (`id_misi_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_tujuan` FOREIGN KEY (`id_misi_renstra`) REFERENCES `trx_renstra_misi` (`id_misi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_tujuan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_tujuan_indikator
 DROP TABLE IF EXISTS `trx_renstra_tujuan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4982,8 +5065,8 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan_indikator` (
   `id_indikator_tujuan_renstra` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_renstra` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `uraian_indikator_sasaran_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -4998,10 +5081,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_tujuan_renstra`,`id_indikator_tujuan_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran_indikator` (`id_tujuan_renstra`) USING BTREE,
   CONSTRAINT `trx_renstra_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_renstra_visi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_renstra_visi
 DROP TABLE IF EXISTS `trx_renstra_visi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
   `thn_id` int(11) NOT NULL,
@@ -5012,7 +5095,7 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
   `thn_awal_renstra` int(11) NOT NULL,
   `thn_akhir_renstra` int(11) NOT NULL,
-  `uraian_visi_renstra` varchar(255) NOT NULL,
+  `uraian_visi_renstra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_status_dokumen` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -5021,10 +5104,10 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
   UNIQUE KEY `idx_ta_visi_rpjmd` (`thn_id`,`id_visi_renstra`,`thn_awal_renstra`,`thn_akhir_renstra`,`id_perubahan`,`id_unit`,`no_urut`) USING BTREE,
   KEY `FK_trx_renstra_visi_ref_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `FK_trx_renstra_visi_ref_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final
 DROP TABLE IF EXISTS `trx_rkpd_final`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -5040,21 +5123,21 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`thn_id_rpjmd`,`id_misi_rpjmd`,`id_sasaran_rpjmd`,`no_urut`,`tahun_rkpd`,`id_visi_rpjmd`,`id_tujuan_rpjmd`,`id_program_rpjmd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_aktivitas_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5065,7 +5148,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_aktivitas_renja` int(11) DEFAULT '0',
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_forum_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -5081,17 +5164,17 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
   `pagu_musren` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_musren` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 = musrenbang',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja 1 tambahan baru',
   `id_satuan_publik` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_final_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_belanja_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5105,7 +5188,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_pd` (
   `id_aktivitas_asb` int(11) NOT NULL,
   `id_item_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL,
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -5124,27 +5207,27 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=736 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=736 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_final_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_rkpd` varchar(255) NOT NULL,
+  `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_rkpd` date NOT NULL,
   `tahun_rkpd` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_indikator
 DROP TABLE IF EXISTS `trx_rkpd_final_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5154,14 +5237,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
   `id_indikator_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -5169,10 +5252,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5180,14 +5263,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_kebijakan_rancangan` int(11) NOT NULL,
   `id_kebijakan_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal_kebijakan` (`tahun_rkpd`,`id_rkpd_rancangan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_kebijakan` (`id_rkpd_rancangan`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_kebijakan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5195,13 +5278,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan_pd` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_pd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_pd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`uraian_kebijakan`,`no_urut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`no_urut`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5215,25 +5298,25 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kegiatan_pd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_keg_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5243,13 +5326,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -5259,10 +5342,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_lokasi_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5284,20 +5367,20 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_lokasi_pd` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan 2 musrenbang 3 pokir',
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5312,7 +5395,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_unit`,`id_urusan_rkpd`,`no_urut`) USING BTREE,
@@ -5321,10 +5404,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_final_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_pelaksana_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5336,16 +5419,16 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana_pd` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5357,23 +5440,23 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_program_pd` (
   `id_forum_program` int(11) DEFAULT NULL,
   `id_renja_program` int(11) DEFAULT '0',
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_forum` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_prog_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5384,13 +5467,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -5400,10 +5483,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_final_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_final_urusan
 DROP TABLE IF EXISTS `trx_rkpd_final_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5418,10 +5501,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_final_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_identifikasi_masalah
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_identifikasi_masalah
 DROP TABLE IF EXISTS `trx_rkpd_identifikasi_masalah`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -5430,17 +5513,17 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_identifikasi_masalah` (
   `interpretasi` int(11) NOT NULL COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
   `angka_target` decimal(20,2) DEFAULT NULL,
   `angka_capaian` decimal(20,2) DEFAULT NULL,
-  `uraian_target` varchar(255) DEFAULT NULL,
-  `uraian_capaian` varchar(255) DEFAULT NULL,
-  `uraian_masalah` varchar(500) DEFAULT NULL,
-  `uraian_keberhasilan` varchar(500) DEFAULT NULL,
+  `uraian_target` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_capaian` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_masalah` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_keberhasilan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -5456,21 +5539,21 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_forum_rkpdprog`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_aktivitas_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5481,7 +5564,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_aktivitas_pd` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_aktivitas_renja` int(11) DEFAULT '0',
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_forum_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -5497,17 +5580,17 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_aktivitas_pd` (
   `pagu_musren` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_musren` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 = musrenbang',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja 1 tambahan baru',
   `id_satuan_publik` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_rancangan_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_belanja_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5521,7 +5604,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_belanja_pd` (
   `id_aktivitas_asb` int(11) NOT NULL,
   `id_item_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL,
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -5540,28 +5623,28 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1120 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_rkpd` varchar(255) NOT NULL,
+  `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_rkpd` date NOT NULL,
   `tahun_rkpd` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`tahun_rkpd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_indikator
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5571,14 +5654,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_indikator` (
   `id_indikator_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -5586,10 +5669,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5597,14 +5680,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_kebijakan_rancangan` int(11) NOT NULL,
   `id_kebijakan_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal_kebijakan` (`tahun_rkpd`,`id_rkpd_rancangan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_kebijakan` (`id_rkpd_rancangan`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_kebijakan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5612,13 +5695,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan_pd` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_pd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_pd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`uraian_kebijakan`,`no_urut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`no_urut`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5632,25 +5715,25 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kegiatan_pd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_rancangan_kegiatan_pd_trx_rkpd_rancangan_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_keg_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5660,13 +5743,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -5676,10 +5759,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_lokasi_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5701,20 +5784,20 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_lokasi_pd` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan 2 musrenbang 3 pokir',
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5729,7 +5812,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_unit`,`id_urusan_rkpd`,`no_urut`) USING BTREE,
@@ -5738,10 +5821,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_rancangan_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_pelaksana_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5753,16 +5836,16 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana_pd` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5774,23 +5857,23 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_program_pd` (
   `id_forum_program` int(11) DEFAULT NULL,
   `id_renja_program` int(11) DEFAULT '0',
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_forum` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_prog_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5801,13 +5884,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -5817,10 +5900,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rancangan_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rancangan_urusan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5835,10 +5918,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_3` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir
 DROP TABLE IF EXISTS `trx_rkpd_ranhir`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -5854,21 +5937,21 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_forum_rkpdprog`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_aktivitas_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5879,7 +5962,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_aktivitas_pd` (
   `sumber_aktivitas` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari ASB 1 Bukan ASB',
   `id_aktivitas_asb` int(11) DEFAULT '0',
   `id_aktivitas_renja` int(11) DEFAULT '0',
-  `uraian_aktivitas_kegiatan` varchar(500) DEFAULT NULL,
+  `uraian_aktivitas_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `volume_forum_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL DEFAULT '0',
@@ -5895,17 +5978,17 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_aktivitas_pd` (
   `pagu_musren` decimal(20,2) NOT NULL DEFAULT '0.00',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 final',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal',
-  `keterangan_aktivitas` varchar(500) DEFAULT '0',
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_musren` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 = musrenbang',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renja 1 tambahan baru',
   `id_satuan_publik` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_ranhir_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_belanja_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5919,7 +6002,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_belanja_pd` (
   `id_aktivitas_asb` int(11) NOT NULL,
   `id_item_ssh` bigint(20) NOT NULL,
   `id_rekening_ssh` int(11) NOT NULL,
-  `uraian_belanja` varchar(500) DEFAULT NULL,
+  `uraian_belanja` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_1` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_1` int(11) NOT NULL,
   `volume_2` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -5938,28 +6021,28 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_rkpd` varchar(255) NOT NULL,
+  `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_rkpd` date NOT NULL,
   `tahun_rkpd` int(11) NOT NULL COMMENT 'tahun perencanaan',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`tahun_rkpd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_indikator
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5969,14 +6052,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_indikator` (
   `id_indikator_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -5984,10 +6067,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5995,14 +6078,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_kebijakan_rancangan` int(11) NOT NULL,
   `id_kebijakan_rkpd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal_kebijakan` (`tahun_rkpd`,`id_rkpd_rancangan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_kebijakan` (`id_rkpd_rancangan`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_kebijakan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -6010,13 +6093,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan_pd` (
   `id_unit` int(11) NOT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
   `id_kebijakan_pd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_pd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`uraian_kebijakan`,`no_urut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_renja`,`id_unit`,`no_urut`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_kegiatan_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -6030,25 +6113,25 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kegiatan_pd` (
   `id_program_renstra` int(11) DEFAULT '0',
   `id_kegiatan_renstra` int(11) DEFAULT '0',
   `id_kegiatan_ref` int(11) NOT NULL,
-  `uraian_kegiatan_forum` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_forum` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_kegiatan_renstra` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_renja` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_plus1_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_forum` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_status` varchar(500) DEFAULT NULL,
+  `keterangan_status` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = non musrenbang 1 =  musrenbang',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal dilaksanakan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 dari renja 1 baru tambahan',
-  `kelompok_sasaran` varchar(500) DEFAULT NULL,
+  `kelompok_sasaran` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kegiatan_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_keg_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -6058,13 +6141,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_kegiatan` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_kegiatan` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -6074,10 +6157,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_lokasi_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -6099,20 +6182,20 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_lokasi_pd` (
   `id_kecamatan` int(11) DEFAULT '0',
   `rt` int(11) DEFAULT '0',
   `rw` int(11) DEFAULT '0',
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
-  `lat` varchar(500) DEFAULT NULL,
-  `lang` varchar(500) DEFAULT '0',
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_lokasi` varchar(500) DEFAULT '0',
+  `ket_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan 2 musrenbang 3 pokir',
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6127,7 +6210,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_rkpd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_unit`,`id_urusan_rkpd`,`no_urut`) USING BTREE,
@@ -6136,10 +6219,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranhir_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_pelaksana_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -6151,16 +6234,16 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana_pd` (
   `id_pelaksana_renja` int(11) DEFAULT '0',
   `id_lokasi` int(11) DEFAULT '0' COMMENT 'lokasi penyelenggaraan',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 renja 1 tambahan',
-  `ket_pelaksana` varchar(500) DEFAULT NULL,
+  `ket_pelaksana` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 batal 2 baru',
   `status_data` int(11) NOT NULL COMMENT '0 draft 1 final',
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_program_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -6172,23 +6255,23 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_program_pd` (
   `id_forum_program` int(11) DEFAULT NULL,
   `id_renja_program` int(11) DEFAULT '0',
   `id_program_renstra` int(11) DEFAULT '0',
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_ref` int(11) NOT NULL,
   `pagu_tahun_renstra` decimal(20,2) DEFAULT '0.00',
   `pagu_forum` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0',
-  `ket_usulan` varchar(250) DEFAULT '0',
+  `ket_usulan` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
   `id_dokumen` int(255) DEFAULT NULL,
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_prog_indikator_pd
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -6199,13 +6282,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) DEFAULT '0',
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_renstra` decimal(20,2) DEFAULT '0.00',
   `target_renja` decimal(20,2) DEFAULT '0.00',
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_ouput` int(255) DEFAULT NULL,
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 posting',
@@ -6215,10 +6298,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranhir_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranhir_urusan
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6233,10 +6316,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal
 DROP TABLE IF EXISTS `trx_rkpd_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal` (
   `id_rkpd_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -6250,39 +6333,39 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal` (
   `id_tujuan_rpjmd` int(11) DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) DEFAULT NULL,
   `id_program_rpjmd` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_ranwal` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_program` varchar(500) DEFAULT NULL,
+  `keterangan_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pelaksanaan` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd\\r\\n9 = dibatalkan pelaksanaanya\\r\\n8 = ditunda dilaksanakan\\r\\n',
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = Draft 1 = Posting Renja 2 = Posting Musren',
-  `ket_usulan` varchar(500) DEFAULT NULL COMMENT 'Keterangan / alasan status usulan',
+  `ket_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_ranwal`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
-  `nomor_ranwal` varchar(255) NOT NULL,
+  `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal_ranwal` date NOT NULL,
   `tahun_ranwal` int(11) NOT NULL COMMENT 'tahun berlakuknya perkada',
-  `uraian_perkada` varchar(500) DEFAULT NULL,
+  `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit_perencana` int(11) DEFAULT NULL,
-  `jabatan_tandatangan` varchar(255) DEFAULT NULL,
-  `nama_tandatangan` varchar(255) DEFAULT NULL,
-  `nip_tandatangan` varchar(255) DEFAULT NULL,
+  `jabatan_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal_indikator
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6291,14 +6374,14 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_indikator` (
   `id_indikator_program_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rkpd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rkpd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `target_rpjmd` decimal(20,2) NOT NULL DEFAULT '0.00',
   `target_rkpd` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `indikator_input` text,
+  `indikator_input` text CHARACTER SET latin1,
   `target_input` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan_input` int(255) DEFAULT NULL,
-  `indikator_output` text,
+  `indikator_output` text CHARACTER SET latin1,
   `id_satuan_output` int(255) DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 data rpjmd 1 data baru',
@@ -6306,25 +6389,25 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_ranwal`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_ranwal`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_ranwal_indikator` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL,
   `id_kebijakan_ranwal` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_ranwal`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal_kebijakan` (`tahun_rkpd`,`id_rkpd_ranwal`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_kebijakan` (`id_rkpd_ranwal`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_ranwal_kebijakan` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6338,7 +6421,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_pelaksana` (
   `hak_akses` int(11) NOT NULL DEFAULT '0' COMMENT '0 tidak dapat menambah data 1 dapat menambah data',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 rpjmd 1 baru',
   `status_pelaksanaan` int(11) NOT NULL DEFAULT '0' COMMENT '0 dilaksanakan 1 dibatalkan',
-  `ket_pelaksanaan` varchar(500) DEFAULT NULL COMMENT 'menjelaskan status pelaksanaan',
+  `ket_pelaksanaan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 belum direviu 1 sudah direviu',
   PRIMARY KEY (`id_pelaksana_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_ranwal`,`id_unit`,`id_urusan_rkpd`,`no_urut`) USING BTREE,
@@ -6347,10 +6430,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_ranwal_pelaksana_trx_rkpd_ranwal_urusan` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranwal_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_rkpd_ranwal_pelaksana_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_ranwal_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_ranwal_urusan
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6365,10 +6448,10 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_renstra
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_renstra
 DROP TABLE IF EXISTS `trx_rkpd_renstra`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6378,44 +6461,44 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra` (
   `pagu_tahun_rpjmd` decimal(20,2) DEFAULT '0.00',
   `id_unit` int(11) NOT NULL,
   `id_visi_renstra` int(11) NOT NULL,
-  `uraian_visi_renstra` varchar(500) DEFAULT NULL,
+  `uraian_visi_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_misi_renstra` int(11) NOT NULL,
-  `uraian_misi_renstra` varchar(500) DEFAULT NULL,
+  `uraian_misi_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_tujuan_renstra` int(11) NOT NULL,
-  `uraian_tujuan_renstra` varchar(500) DEFAULT NULL,
+  `uraian_tujuan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_sasaran_renstra` int(11) NOT NULL,
-  `uraian_sasaran_renstra` varchar(500) DEFAULT NULL,
+  `uraian_sasaran_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_renstra` int(11) NOT NULL,
-  `uraian_program_renstra` varchar(500) DEFAULT NULL,
+  `uraian_program_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_program` decimal(20,2) DEFAULT '0.00',
   `id_kegiatan_renstra` int(11) NOT NULL,
-  `uraian_kegiatan_renstra` varchar(500) DEFAULT NULL,
+  `uraian_kegiatan_renstra` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun_kegiatan` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = renstra 1 = insidentil',
   PRIMARY KEY (`id_rkpd_renstra`) USING BTREE,
   KEY `idx_trx_rkpd_renstra` (`id_rkpd_rpjmd`,`tahun_rkpd`,`id_rkpd_renstra`,`id_program_rpjmd`,`id_unit`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_renstra` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_renstra_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_renstra_indikator
 DROP TABLE IF EXISTS `trx_rkpd_renstra_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_renstra` int(11) NOT NULL,
   `id_indikator_renstra` int(11) NOT NULL AUTO_INCREMENT,
   `kd_indikator` int(11) DEFAULT NULL,
-  `uraian_indikator_kegiatan` varchar(500) DEFAULT '0',
-  `tolokukur_kegiatan` varchar(500) DEFAULT '0',
+  `uraian_indikator_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolokukur_kegiatan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target_output` decimal(20,2) DEFAULT '0.00',
   PRIMARY KEY (`id_indikator_renstra`) USING BTREE,
   KEY `fk_trx_rkpd_renstra_pelaksana` (`id_rkpd_renstra`) USING BTREE,
   KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_renstra`,`kd_indikator`) USING BTREE,
   CONSTRAINT `trx_rkpd_renstra_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_renstra_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_renstra_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_renstra_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6427,24 +6510,24 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_pelaksana` (
   UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_renstra`,`id_sub_unit`) USING BTREE,
   KEY `fk_trx_rkpd_renstra_pelaksana` (`id_rkpd_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_renstra_pelaksana` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rpjmd_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rpjmd_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_rpjmd` int(11) NOT NULL,
   `id_kebijakan_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
-  `uraian_kebijakan` varchar(500) NOT NULL,
+  `uraian_kebijakan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kebijakan_rpjmd`) USING BTREE,
-  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rpjmd`,`uraian_kebijakan`) USING BTREE,
+  UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rpjmd`) USING BTREE,
   KEY `fk_trx_rkpd_rpjmd_kebijakan` (`id_rkpd_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_rpjmd_kebijakan` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rpjmd_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rpjmd_program_indikator
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6452,17 +6535,17 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_indikator` (
   `id_indikator_program_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_program_rpjmd` text,
-  `tolok_ukur_indikator` text,
+  `uraian_indikator_program_rpjmd` text CHARACTER SET latin1,
+  `tolok_ukur_indikator` text CHARACTER SET latin1,
   `angka_tahun` decimal(20,2) DEFAULT '0.00',
   PRIMARY KEY (`id_indikator_program_rpjmd`) USING BTREE,
   KEY `fk_rkpd_rpjmd_indikator` (`id_rkpd_rpjmd`) USING BTREE,
   KEY `idx_trx_rkpd_rpjmd_program_indikator` (`tahun_rkpd`,`id_rkpd_rpjmd`,`kd_indikator`) USING BTREE,
   CONSTRAINT `fk_rkpd_rpjmd_indikator` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rpjmd_program_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rpjmd_program_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6476,35 +6559,35 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_pelaksana` (
   UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rpjmd`,`id_urbid_rpjmd`,`id_unit`) USING BTREE,
   KEY `fk_rkpd_rpjmd_pelaksana` (`id_rkpd_rpjmd`) USING BTREE,
   CONSTRAINT `fk_rkpd_rpjmd_pelaksana` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rkpd_rpjmd_ranwal
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rkpd_rpjmd_ranwal
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_ranwal` (
   `id_rkpd_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
   `tahun_rkpd` int(11) NOT NULL,
   `thn_id_rpjmd` int(11) NOT NULL,
   `id_visi_rpjmd` int(11) NOT NULL,
-  `uraian_visi_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_visi_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_misi_rpjmd` int(11) NOT NULL,
-  `uraian_misi_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_misi_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_tujuan_rpjmd` int(11) NOT NULL,
-  `uraian_tujuan_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_tujuan_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL,
-  `uraian_sasaran_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_program_rpjmd` int(11) NOT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_program_rpjmd` decimal(20,2) DEFAULT '0.00',
   `status_data` int(11) NOT NULL COMMENT '0 = data tepat waktu sesuai renstra/rpjmd\\r\\n1 = data pergeseran waktu renstra/rpjmd\\r\\n2 = data baru yang belum ada di renstra/rpjmd',
   PRIMARY KEY (`id_rkpd_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`,`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`) USING BTREE,
   KEY `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` (`id_visi_rpjmd`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_analisa_ikk
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_analisa_ikk
 DROP TABLE IF EXISTS `trx_rpjmd_analisa_ikk`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_analisa_ikk` (
   `id_capaian_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
@@ -6517,38 +6600,42 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_analisa_ikk` (
   `capaian_min5` decimal(20,4) NOT NULL DEFAULT '0.0000',
   `capaian_standard` decimal(20,4) NOT NULL DEFAULT '0.0000',
   `interpretasi` int(11) NOT NULL DEFAULT '0' COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
-  `keterangan_capaian` varchar(500) DEFAULT NULL,
+  `keterangan_capaian` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_capaian_rpjmd`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_dokumen
 DROP TABLE IF EXISTS `trx_rpjmd_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_dokumen` (
   `id_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
+  `id_pemda` int(11) NOT NULL DEFAULT '1',
   `id_rpjmd_old` int(11) NOT NULL DEFAULT '1',
+  `id_rpjmd_ref` int(11) NOT NULL DEFAULT '-1',
   `thn_dasar` int(11) NOT NULL,
   `tahun_1` int(11) NOT NULL,
   `tahun_2` int(11) NOT NULL,
   `tahun_3` int(11) NOT NULL,
   `tahun_4` int(11) NOT NULL,
   `tahun_5` int(11) NOT NULL,
-  `no_perda` varchar(255) DEFAULT NULL,
+  `no_perda` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_perda` date DEFAULT NULL,
-  `id_revisi` int(11) DEFAULT NULL,
+  `keterangan_dokumen` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jns_dokumen` int(11) NOT NULL DEFAULT '5',
+  `id_revisi` int(11) NOT NULL DEFAULT '0',
   `id_status_dokumen` int(11) NOT NULL DEFAULT '1' COMMENT '0 = draft , 1 = aktif  2 = direvisi',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_rpjmd`) USING BTREE,
   KEY `id_rpjmd_old` (`id_rpjmd_old`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_identifikasi_masalah
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_identifikasi_masalah
 DROP TABLE IF EXISTS `trx_rpjmd_identifikasi_masalah`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -6557,60 +6644,66 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_identifikasi_masalah` (
   `interpretasi` int(11) NOT NULL COMMENT '0 = belum tercapai, 1= sesuai, 2= melampaui',
   `angka_target` decimal(20,4) NOT NULL DEFAULT '0.0000',
   `angka_capaian` decimal(20,4) NOT NULL DEFAULT '0.0000',
-  `uraian_masalah` varchar(500) DEFAULT NULL,
-  `uraian_keberhasilan` varchar(500) DEFAULT NULL,
+  `uraian_masalah` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_keberhasilan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_kebijakan
 DROP TABLE IF EXISTS `trx_rpjmd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_kebijakan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL,
+  `id_sasaran_old` int(11) NOT NULL DEFAULT '0',
   `id_kebijakan_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_kebijakan_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_kebijakan_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_kebijakan_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_kebijakan_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_kebijakan` (`thn_id`,`id_sasaran_rpjmd`,`id_kebijakan_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_kebijakan` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_kebijakan` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_misi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_misi
 DROP TABLE IF EXISTS `trx_rpjmd_misi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_misi` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_visi_rpjmd` int(11) NOT NULL,
+  `id_visi_old` int(11) NOT NULL DEFAULT '0',
   `id_misi_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_misi_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_misi_rpjmd` varchar(550) NOT NULL,
+  `uraian_misi_rpjmd` varchar(550) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_misi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_ta_misi_rpjmd` (`thn_id_rpjmd`,`id_visi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_misi` (`id_visi_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_misi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_prioritas
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_prioritas
 DROP TABLE IF EXISTS `trx_rpjmd_prioritas`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_prioritas` (
   `id_masalah` int(11) NOT NULL AUTO_INCREMENT,
   `id_pemda` int(11) NOT NULL DEFAULT '1',
-  `uraian_masalah` varchar(1000) DEFAULT NULL,
-  `faktor_keberhasilan` varchar(1000) DEFAULT NULL,
+  `uraian_masalah` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `faktor_keberhasilan` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tingkatan_masalah` int(11) NOT NULL DEFAULT '4' COMMENT '1=Internasional, 2=Nasional, 3=Provinsi, 4=Kab/Kota',
   `skor_prioritas` decimal(20,4) NOT NULL DEFAULT '0.0000',
   `urutan_prioritas` int(11) NOT NULL DEFAULT '1',
@@ -6618,24 +6711,27 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_prioritas` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_program
 DROP TABLE IF EXISTS `trx_rpjmd_program`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL,
+  `id_sasaran_old` int(11) NOT NULL DEFAULT '0',
   `id_program_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_program_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun1` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun2` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun3` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun4` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun5` decimal(20,2) DEFAULT '0.00',
   `total_pagu` decimal(20,2) DEFAULT '0.00',
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -6643,21 +6739,25 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program` (
   UNIQUE KEY `idx_trx_rpjmd_program` (`thn_id`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_program_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_program_rpjmd` int(11) NOT NULL,
+  `id_program_old` int(11) NOT NULL DEFAULT '0',
   `id_indikator_program_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_indikator_rpjmd_old` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
+  `id_indikator_old` int(11) NOT NULL,
   `id_indikator_sasaran_rpjmd` int(11) NOT NULL DEFAULT '0',
-  `uraian_indikator_program_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `id_indikator_sasaran_old` int(11) NOT NULL DEFAULT '0',
+  `uraian_indikator_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -6665,6 +6765,7 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_indikator` (
   `angka_tahun4` decimal(20,2) DEFAULT '0.00',
   `angka_tahun5` decimal(20,2) DEFAULT '0.00',
   `angka_akhir_periode` decimal(20,2) DEFAULT '0.00',
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -6672,23 +6773,27 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_program_indikator` (`thn_id`,`id_program_rpjmd`,`id_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_indikator` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_indikator` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_program_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_program_pelaksana
 DROP TABLE IF EXISTS `trx_rpjmd_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_pelaksana` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_urbid_rpjmd` int(11) NOT NULL,
+  `id_urbid_old` int(11) NOT NULL DEFAULT '0',
   `id_pelaksana_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pelaksana_old` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) NOT NULL,
+  `id_unit_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
   `pagu_tahun1` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun2` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun3` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun4` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun5` decimal(20,2) DEFAULT '0.00',
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -6696,17 +6801,21 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_pelaksana` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_urbid_rpjmd`,`id_unit`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_pelaksana` (`id_urbid_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_pelaksana` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_program_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_program_urusan
 DROP TABLE IF EXISTS `trx_rpjmd_program_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_urusan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_urbid_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_urbid_old` int(11) NOT NULL DEFAULT '0',
   `id_program_rpjmd` int(11) NOT NULL,
+  `id_program_old` int(11) NOT NULL DEFAULT '0',
   `id_bidang` int(11) NOT NULL,
+  `id_bidang_old` int(11) NOT NULL DEFAULT '0',
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -6714,27 +6823,30 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_urusan` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_program_rpjmd`,`id_bidang`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_urusan` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_urusan` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_dokumen
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_dokumen
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_dokumen` (
   `id_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
+  `id_pemda` int(11) NOT NULL,
   `periode_awal` int(11) NOT NULL,
   `periode_akhir` int(11) NOT NULL,
-  `no_perda` varchar(255) DEFAULT NULL,
-  `keterangan_dokumen` varchar(500) DEFAULT NULL,
+  `no_perda` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan_dokumen` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_perda` date DEFAULT NULL,
+  `jns_dokumen` int(11) NOT NULL DEFAULT '0' COMMENT '0 = tekno',
   `id_revisi` int(11) NOT NULL DEFAULT '1' COMMENT '0 = tekno, 1 = induk, 2= revisi1, 3=revisi2, 4=revisi4',
   `id_status_dokumen` int(11) NOT NULL DEFAULT '1' COMMENT '0 = draft , 1 = aktif  2 = direvisi',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `sml_check` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_rpjmd`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_kebijakan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_kebijakan
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_kebijakan` (
   `thn_id` int(11) NOT NULL,
@@ -6742,17 +6854,17 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_kebijakan` (
   `id_strategi_rpjmd` int(11) NOT NULL,
   `id_kebijakan_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_kebijakan_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_kebijakan_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_kebijakan_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_kebijakan` (`thn_id`,`id_strategi_rpjmd`,`id_kebijakan_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_kebijakan` (`id_strategi_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_kebijakan_ibfk_1` FOREIGN KEY (`id_strategi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_strategi` (`id_strategi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_misi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_misi
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_misi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_misi` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6760,17 +6872,17 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_misi` (
   `id_visi_rpjmd` int(11) NOT NULL,
   `id_misi_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_misi_rpjmd` varchar(550) NOT NULL,
+  `uraian_misi_rpjmd` varchar(550) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_misi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_ta_misi_rpjmd` (`thn_id_rpjmd`,`id_visi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_misi` (`id_visi_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_misi_ibfk_1` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_program
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_program
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_program`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program` (
   `thn_id` int(11) NOT NULL,
@@ -6778,7 +6890,7 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program` (
   `id_sasaran_rpjmd` int(11) NOT NULL,
   `id_program_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) DEFAULT NULL,
-  `uraian_program_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pagu_tahun1` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun2` decimal(20,2) DEFAULT '0.00',
   `pagu_tahun3` decimal(20,2) DEFAULT '0.00',
@@ -6786,15 +6898,15 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program` (
   `pagu_tahun5` decimal(20,2) DEFAULT '0.00',
   `total_pagu` decimal(20,2) DEFAULT '0.00',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_program_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_program` (`thn_id`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_program_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_program_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_program_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6804,8 +6916,8 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_indikator` (
   `id_perubahan` int(11) NOT NULL,
   `id_indikator` int(11) NOT NULL,
   `id_indikator_sasaran_rpjmd` int(11) NOT NULL DEFAULT '0',
-  `uraian_indikator_program_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `uraian_indikator_program_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -6819,10 +6931,10 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_program_indikator` (`thn_id`,`id_program_rpjmd`,`id_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_indikator` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_program_pelaksana
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_program_pelaksana
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_pelaksana` (
   `thn_id` int(11) NOT NULL,
@@ -6842,10 +6954,10 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_pelaksana` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_urbid_rpjmd`,`id_unit`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_pelaksana` (`id_urbid_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_program_pelaksana_ibfk_1` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_program_urusan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_program_urusan
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_program_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_urusan` (
   `thn_id` int(11) NOT NULL,
@@ -6859,10 +6971,10 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_program_urusan` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_program_rpjmd`,`id_bidang`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_urusan` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_program_urusan_ibfk_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_ranwal_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_sasaran
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_sasaran`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_sasaran` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6870,17 +6982,17 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_sasaran` (
   `id_tujuan_rpjmd` int(11) NOT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_sasaran_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_sasaran_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_sasaran` (`thn_id_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_sasaran_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_sasaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_sasaran_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6889,8 +7001,8 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_sasaran_indikator` (
   `id_indikator_sasaran_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `uraian_indikator_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -6902,10 +7014,10 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_sasaran_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_sasaran_rpjmd`,`id_indikator_sasaran_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran_indikator` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_strategi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_strategi
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_strategi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_strategi` (
   `thn_id` int(11) NOT NULL,
@@ -6913,17 +7025,17 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_strategi` (
   `id_sasaran_rpjmd` int(11) NOT NULL,
   `id_strategi_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_strategi_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_strategi_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_strategi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_strategi` (`thn_id`,`id_sasaran_rpjmd`,`id_strategi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_strategi` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_strategi_ibfk_1` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_ranwal_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_tujuan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_tujuan
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_tujuan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_tujuan` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6931,17 +7043,17 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_tujuan` (
   `id_misi_rpjmd` int(11) NOT NULL,
   `id_tujuan_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_tujuan_rpjmd` varchar(500) NOT NULL,
+  `uraian_tujuan_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tujuan_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_tujuan` (`thn_id_rpjmd`,`id_misi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan` (`id_misi_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_tujuan_ibfk_1` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_ranwal_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_tujuan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_tujuan_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_tujuan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6950,8 +7062,8 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_tujuan_indikator` (
   `id_indikator_tujuan_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `uraian_indikator_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -6963,10 +7075,10 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_tujuan_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_tujuan_indikator` (`thn_id`,`id_tujuan_rpjmd`,`id_indikator_tujuan_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan_indikator` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_ranwal_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_ranwal_visi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_ranwal_visi
 DROP TABLE IF EXISTS `trx_rpjmd_ranwal_visi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_visi` (
   `thn_id` int(11) NOT NULL,
@@ -6974,45 +7086,51 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_ranwal_visi` (
   `id_rpjmd` int(11) NOT NULL,
   `id_visi_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
-  `uraian_visi_rpjmd` varchar(255) NOT NULL,
+  `uraian_visi_rpjmd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_visi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_visi` (`id_rpjmd`,`no_urut`,`thn_id`,`id_visi_rpjmd`,`id_perubahan`) USING BTREE,
   CONSTRAINT `trx_rpjmd_ranwal_visi_ibfk_1` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_ranwal_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_sasaran
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_sasaran
 DROP TABLE IF EXISTS `trx_rpjmd_sasaran`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_tujuan_rpjmd` int(11) NOT NULL,
+  `id_tujuan_old` int(11) NOT NULL DEFAULT '0',
   `id_sasaran_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_sasaran_old` int(11) NOT NULL,
   `id_perubahan` int(11) NOT NULL,
-  `uraian_sasaran_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_sasaran_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_sasaran` (`thn_id_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `FK_trx_rpjmd_sasaran_trx_rpjmd_tujuan` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_sasaran_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_sasaran_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL,
+  `id_sasaran_old` int(11) NOT NULL DEFAULT '0',
   `id_indikator_sasaran_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_indikator_rpjmd_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `kd_indikator_old` int(11) NOT NULL DEFAULT '0',
+  `uraian_indikator_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -7022,63 +7140,72 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran_indikator` (
   `angka_akhir_periode` decimal(20,2) DEFAULT '0.00',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_indikator_sasaran_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_sasaran_rpjmd`,`id_indikator_sasaran_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran_indikator` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_sasaran_indikator` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_strategi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_strategi
 DROP TABLE IF EXISTS `trx_rpjmd_strategi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_strategi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_sasaran_rpjmd` int(11) NOT NULL,
+  `id_sasaran_old` int(11) NOT NULL DEFAULT '0',
   `id_strategi_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_strategi_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_strategi_rpjmd` varchar(500) DEFAULT NULL,
+  `uraian_strategi_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_strategi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_strategi` (`thn_id`,`id_sasaran_rpjmd`,`id_strategi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_strategi` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_strategi` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_tujuan
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_tujuan
 DROP TABLE IF EXISTS `trx_rpjmd_tujuan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_misi_rpjmd` int(11) NOT NULL,
+  `id_misi_old` int(11) NOT NULL DEFAULT '0',
   `id_tujuan_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
+  `id_tujuan_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
-  `uraian_tujuan_rpjmd` varchar(500) NOT NULL,
+  `uraian_tujuan_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tujuan_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_tujuan` (`thn_id_rpjmd`,`id_misi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan` (`id_misi_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_tujuan` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_tujuan_indikator
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_tujuan_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_tujuan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_tujuan_rpjmd` int(11) NOT NULL,
+  `id_tujuan_old` int(11) NOT NULL DEFAULT '0',
   `id_indikator_tujuan_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
+  `id_indikator_rpjmd_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL,
   `kd_indikator` int(11) NOT NULL,
-  `uraian_indikator_sasaran_rpjmd` varchar(500) DEFAULT NULL,
-  `tolok_ukur_indikator` varchar(500) DEFAULT NULL,
+  `kd_indikator_old` int(11) NOT NULL DEFAULT '0',
+  `uraian_indikator_sasaran_rpjmd` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tolok_ukur_indikator` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `angka_awal_periode` decimal(20,2) DEFAULT '0.00',
   `angka_tahun1` decimal(20,2) DEFAULT '0.00',
   `angka_tahun2` decimal(20,2) DEFAULT '0.00',
@@ -7086,35 +7213,38 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan_indikator` (
   `angka_tahun4` decimal(20,2) DEFAULT '0.00',
   `angka_tahun5` decimal(20,2) DEFAULT '0.00',
   `angka_akhir_periode` decimal(20,2) DEFAULT '0.00',
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_indikator_tujuan_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_tujuan_indikator` (`thn_id`,`id_tujuan_rpjmd`,`id_indikator_tujuan_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan_indikator` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_rpjmd_visi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_rpjmd_visi
 DROP TABLE IF EXISTS `trx_rpjmd_visi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_visi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
   `id_rpjmd` int(11) NOT NULL,
   `id_visi_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
+  `id_visi_old` int(11) NOT NULL DEFAULT '0',
   `id_perubahan` int(11) NOT NULL DEFAULT '0',
-  `uraian_visi_rpjmd` varchar(255) NOT NULL,
+  `uraian_visi_rpjmd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_data` int(11) NOT NULL DEFAULT '0',
   `sumber_data` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_visi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_visi` (`id_rpjmd`,`no_urut`,`thn_id`,`id_visi_rpjmd`,`id_perubahan`) USING BTREE,
-  CONSTRAINT `fk_trx_rpjmd_visi` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd_old`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_trx_rpjmd_visi` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_usulan_kab
+-- membuang struktur untuk table dbsimcan_simulasi.trx_usulan_kab
 DROP TABLE IF EXISTS `trx_usulan_kab`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_kab` (
   `id_usulan_kab` int(11) NOT NULL AUTO_INCREMENT,
@@ -7123,8 +7253,8 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_kab` (
   `id_unit` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL DEFAULT '0',
   `sumber_usulan` int(11) NOT NULL DEFAULT '0',
-  `judul_usulan` varchar(255) DEFAULT NULL,
-  `uraian_usulan` varchar(500) DEFAULT NULL,
+  `judul_usulan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uraian_usulan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume` decimal(20,2) NOT NULL DEFAULT '0.00',
   `id_satuan` int(11) DEFAULT NULL,
   `pagu` decimal(20,2) NOT NULL DEFAULT '0.00',
@@ -7137,10 +7267,10 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_kab` (
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_usulan_kab_ibfk_1` FOREIGN KEY (`id_kab`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_usulan_kab_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_usulan_kab_lokasi
+-- membuang struktur untuk table dbsimcan_simulasi.trx_usulan_kab_lokasi
 DROP TABLE IF EXISTS `trx_usulan_kab_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_kab_lokasi` (
   `id_usulan_kab` int(11) NOT NULL,
@@ -7149,16 +7279,16 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_kab_lokasi` (
   `id_lokasi` int(11) NOT NULL,
   `volume` decimal(20,2) DEFAULT '0.00',
   `id_satuan` int(11) DEFAULT NULL,
-  `uraian_lokasi` varchar(500) DEFAULT NULL,
+  `uraian_lokasi` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_usulan_kab_lokasi`) USING BTREE,
   UNIQUE KEY `id_usulan_kab` (`id_usulan_kab`,`no_urut`,`id_lokasi`) USING BTREE,
   KEY `id_lokasi` (`id_lokasi`) USING BTREE,
   CONSTRAINT `trx_usulan_kab_lokasi_ibfk_1` FOREIGN KEY (`id_usulan_kab`) REFERENCES `trx_usulan_kab` (`id_usulan_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_usulan_kab_lokasi_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `ref_lokasi` (`id_lokasi`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.trx_usulan_rw
+-- membuang struktur untuk table dbsimcan_simulasi.trx_usulan_rw
 DROP TABLE IF EXISTS `trx_usulan_rw`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_rw` (
   `id_usulan_rw` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -7167,34 +7297,34 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_rw` (
   `id_rw` int(11) NOT NULL,
   `id_renja` bigint(20) NOT NULL,
   `id_asb_aktivitas` bigint(20) NOT NULL,
-  `uraian_aktivitas` varchar(500) NOT NULL,
+  `uraian_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `volume_aktivitas` decimal(20,2) NOT NULL DEFAULT '0.00',
   `pagu_aktivitas` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `keterangan_aktivitas` varchar(500) DEFAULT NULL,
+  `keterangan_aktivitas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_usulan` int(11) NOT NULL COMMENT '0 = draft 1 = musrendes 2 = setuju musrendes',
   PRIMARY KEY (`id_usulan_rw`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.users
+-- membuang struktur untuk table dbsimcan_simulasi.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_unit` int(11) DEFAULT NULL COMMENT 'Diisi dengan kode unit asal operator',
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status_user` int(11) NOT NULL DEFAULT '1' COMMENT '0 non aktif 1 aktif',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `group_id` (`group_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.user_app
+-- membuang struktur untuk table dbsimcan_simulasi.user_app
 DROP TABLE IF EXISTS `user_app`;
 CREATE TABLE IF NOT EXISTS `user_app` (
   `id_app_user` int(11) NOT NULL AUTO_INCREMENT,
@@ -7203,30 +7333,30 @@ CREATE TABLE IF NOT EXISTS `user_app` (
   `app_id` int(11) NOT NULL COMMENT '0',
   `status_app` int(11) NOT NULL COMMENT '1',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_app_user`) USING BTREE,
   UNIQUE KEY `user_id` (`user_id`,`group_id`,`app_id`) USING BTREE,
   KEY `group_id` (`group_id`) USING BTREE,
   CONSTRAINT `user_app_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_app_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `ref_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.user_desa
+-- membuang struktur untuk table dbsimcan_simulasi.user_desa
 DROP TABLE IF EXISTS `user_desa`;
 CREATE TABLE IF NOT EXISTS `user_desa` (
   `id_user_wil` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `kd_kecamatan` int(11) NOT NULL COMMENT 'prov',
   `kd_desa` int(11) NOT NULL COMMENT 'kab/kota',
-  `rw` varchar(255) DEFAULT NULL,
+  `rw` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_user_wil`) USING BTREE,
   UNIQUE KEY `user_id` (`user_id`,`kd_kecamatan`,`kd_desa`) USING BTREE,
   CONSTRAINT `user_desa_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.user_level_sakip
+-- membuang struktur untuk table dbsimcan_simulasi.user_level_sakip
 DROP TABLE IF EXISTS `user_level_sakip`;
 CREATE TABLE IF NOT EXISTS `user_level_sakip` (
   `id_user_level` int(11) NOT NULL AUTO_INCREMENT,
@@ -7237,10 +7367,10 @@ CREATE TABLE IF NOT EXISTS `user_level_sakip` (
   PRIMARY KEY (`id_user_level`) USING BTREE,
   UNIQUE KEY `kd_unit` (`user_id`,`id_sotk_level_1`,`id_sotk_level_2`,`id_sotk_level_3`) USING BTREE,
   CONSTRAINT `user_level_sakip_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk table dbsimcan_simulasi_1.user_sub_unit
+-- membuang struktur untuk table dbsimcan_simulasi.user_sub_unit
 DROP TABLE IF EXISTS `user_sub_unit`;
 CREATE TABLE IF NOT EXISTS `user_sub_unit` (
   `id_user_unit` int(11) NOT NULL AUTO_INCREMENT,
@@ -7250,10 +7380,10 @@ CREATE TABLE IF NOT EXISTS `user_sub_unit` (
   PRIMARY KEY (`id_user_unit`) USING BTREE,
   UNIQUE KEY `kd_unit` (`user_id`,`kd_unit`,`kd_sub`) USING BTREE,
   CONSTRAINT `user_sub_unit_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Pengeluaran data tidak dipilih.
--- membuang struktur untuk function dbsimcan_simulasi_1.XML_Encode
+-- membuang struktur untuk function dbsimcan_simulasi.XML_Encode
 DROP FUNCTION IF EXISTS `XML_Encode`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `XML_Encode`(
@@ -7320,7 +7450,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_agroup_menu
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_agroup_menu
 DROP TRIGGER IF EXISTS `trg_agroup_menu`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7331,7 +7461,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_egroup_menu
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_egroup_menu
 DROP TRIGGER IF EXISTS `trg_egroup_menu`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7342,7 +7472,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_group_menu
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_group_menu
 DROP TRIGGER IF EXISTS `trg_group_menu`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7353,7 +7483,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_ref_menu_c
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_ref_menu_c
 DROP TRIGGER IF EXISTS `trg_ref_menu_c`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7364,7 +7494,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_ref_menu_d
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_ref_menu_d
 DROP TRIGGER IF EXISTS `trg_ref_menu_d`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7375,7 +7505,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_ref_menu_u
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_ref_menu_u
 DROP TRIGGER IF EXISTS `trg_ref_menu_u`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -7386,7 +7516,7 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger dbsimcan_simulasi_1.trg_user
+-- membuang struktur untuk trigger dbsimcan_simulasi.trg_user
 DROP TRIGGER IF EXISTS `trg_user`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //

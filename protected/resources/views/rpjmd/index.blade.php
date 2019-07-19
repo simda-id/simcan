@@ -307,10 +307,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
             <div role="tabpanel" class="tab-pane" id="btl">
               <br>
-                  <div class="add">
-                    <button class="btnAddBtl btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus-square-o fa-fw fa-lg"></i></span>Tambah Belanja Non Program</button>
-              </div>
-            <br>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#uraianBtl" aria-controls="visi" role="tab" data-toggle="tab">Belanja</a></li>
                 <li><a href="#urusanBtl" aria-controls="urusanBtl" role="tab" data-toggle="tab">Urusan</a></li>
@@ -318,6 +314,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="uraianBtl">
+              <br>
+                <div class="add">
+                      <button class="btnAddBtl btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus-square-o fa-fw fa-lg"></i></span>Tambah Belanja Non Program</button>
+                </div>
               <br>
                 <table id="tblBtl" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                   <thead>
@@ -365,6 +365,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="add">
                 <button class="add-pelaksanabtl btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus-square-o fa-fw fa-lg"></i></span>Tambah Pelaksana</button>
               </div>
+              <br>
                 <table id="tblPelaksanaBtl" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
@@ -383,10 +384,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
             <div role="tabpanel" class="tab-pane" id="pendapatan">
               <br>
-                  <div class="add">
-                    <button class="btnAddDapat btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus-square-o fa-fw fa-lg"></i></span>Tambah Pendapatan</button>
-              </div>
-            <br>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#sumberdana" aria-controls="visi" role="tab" data-toggle="tab">Sumber Dana</a></li>
                 <li><a href="#urusanpdt" aria-controls="urusanpdt" role="tab" data-toggle="tab">Urusan</a></li>
@@ -395,6 +392,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="sumberdana">
               <br>
+                  <div class="add">
+                    <button class="btnAddDapat btn-labeled btn btn-sm btn-success"><span class="btn-label"><i class="fa fa-plus-square-o fa-fw fa-lg"></i></span>Tambah Pendapatan</button>
+              </div>
+            <br>
                 <table id="tblPendapatan" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
                   <thead>
                       <tr>

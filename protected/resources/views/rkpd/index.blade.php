@@ -10,7 +10,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Data Musrenbang RKPD';
+                $this->title = 'Data RKPD Final';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
@@ -26,7 +26,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h2 class="panel-title">Daftar Usulan Program Musrenbang RKPD</h2>
+            <h2 class="panel-title">Daftar Usulan Program RKPD Final</h2>
           </div>
           <div class="panel-body">
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>

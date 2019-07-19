@@ -98,13 +98,13 @@ vars = "?tahun=" + {{Session::get('tahun')}};
         "columns": [
               { data: 'urut', sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
-              { data: 'pagu_keuangan',
-                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
-                sClass: "dt-right" },
               { data: 'pagu_rkpd',
                 render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
               { data: 'pagu_keuangan',
+                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
+                sClass: "dt-right" },
+              { data: 'pagu_prog_renja',
                 render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
               { data: 'jml_indikator', sClass: "dt-center"},
@@ -186,8 +186,9 @@ function LoadIndikatorProg(id_program){
                   { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                 ],
             "order": [[0, 'asc']],
-                    "bDestroy": true
-    } );}
+            "bDestroy": true
+    });
+  };
 
   $('#tblUrusanRKPD tbody').on( 'dblclick', 'tr', function () {
     var data = UrusanTable.row(this).data();
@@ -215,7 +216,6 @@ function LoadIndikatorProg(id_program){
 
       $('.nav-tabs a[href="#pelaksana"]').tab('show');
       LoadPelaksana(temp_rkpd_ranwal,temp_urusan_rkpd);
-
   });
 
 
@@ -257,17 +257,18 @@ function LoadIndikatorProg(id_program){
                 ],
             "order": [[0, 'asc']],
             "bDestroy": true,
-    } );}
+    });
+  };
 
 $('#tblPelaksanaRKPD tbody').on( 'mousedown', 'td', function (e) {
      if( e.button == 2 ) { 
         alert('Klik Kanan....!'); 
         return false; 
-     } 
+     }; 
      return true; 
 }); 
 
-  $(document).on('click', '.view-indikator', function() {
+$(document).on('click', '.view-indikator', function() {
       var data = progrkpd.row( $(this).parents('tr') ).data();
 
       temp_rkpd_ranwal =  data.id_anggaran_pemda;
@@ -287,13 +288,12 @@ $('#tblPelaksanaRKPD tbody').on( 'mousedown', 'td', function (e) {
       };
 
       document.getElementById("nm_program_rkpd_indikator").innerHTML = data.uraian_program_rpjmd;
-      // document.getElementById("nm_program_rpjmd_indikator").innerHTML = data.program_pemda;
 
       $('.nav-tabs a[href="#indikator"]').tab('show');
       LoadIndikatorProg(temp_rkpd_ranwal);
-    });
+});
 
-  $(document).on('click', '.view-pelaksana', function() {
+$(document).on('click', '.view-pelaksana', function() {
       var data = progrkpd.row( $(this).parents('tr') ).data();
 
       temp_rkpd_ranwal =  data.id_anggaran_pemda;
@@ -310,19 +310,17 @@ $('#tblPelaksanaRKPD tbody').on( 'mousedown', 'td', function (e) {
       };
 
       document.getElementById("nm_program_rkpd_urusan").innerHTML = data.uraian_program_rpjmd;
-      // temp_ur_program_rkpd = data.uraian_program_rpjmd
-      // document.getElementById("nm_program_rpjmd_urusan").innerHTML = data.program_pemda;
-      temp_ur_program_rpjmd = data.program_pemda
+      temp_ur_program_rpjmd = data.program_pemda;
 
       $('.nav-tabs a[href="#urusan"]').tab('show');
       LoadUrusan(temp_rkpd_ranwal);
-    });
+});
 
-  $(document).on('click', '#btnBackUrusan', function() {
+$(document).on('click', '#btnBackUrusan', function() {
       $('#divAddUrusan').show();
       $('.nav-tabs a[href="#urusan"]').tab('show');
       LoadUrusan(temp_rkpd_ranwal);
-    });
+});
 
 function back2Urusan(){  
   $('#divAddUrusan').show();
@@ -334,7 +332,7 @@ $(document).on('click', '.backUrusan', function() {
   back2Urusan();
 });
 
-  $(document).on('click', '.view-unit', function() {
+$(document).on('click', '.view-unit', function() {
     var data = UrusanTable.row( $(this).parents('tr') ).data();
 
       temp_urusan_rkpd = data.id_urusan_anggaran;
@@ -355,16 +353,14 @@ $(document).on('click', '.backUrusan', function() {
       };
 
       document.getElementById("nm_program_rkpd_pelaksana").innerHTML = temp_ur_program_rkpd;
-      // document.getElementById("nm_program_rpjmd_pelaksana").innerHTML = temp_ur_program_rpjmd;
       document.getElementById("nm_bidang_pelaksana").innerHTML = data.nm_bidang;
       document.getElementById("nm_urusan_pelaksana").innerHTML = data.nm_urusan;
 
       $('.nav-tabs a[href="#pelaksana"]').tab('show');
       LoadPelaksana(temp_rkpd_ranwal,temp_urusan_rkpd);
-      // $('#tblPelaksanaRKPD').DataTable().ajax.url("./rkpd/getPelaksanaRKPD/"+temp_rkpd_ranwal+"/"+temp_urusan_rkpd).load();
-    });
+});
 
-  $(document).on('click', '.add-pelaksana', function() {
+$(document).on('click', '.add-pelaksana', function() {
       $('.btnAddPelaksana').removeClass('editPelaksana');
       $('.btnAddPelaksana').addClass('addPelaksana');
       $('.modal-title').text('Tambah Unit Pelaksana Program RKPD');
@@ -391,14 +387,14 @@ $(document).on('click', '.backUrusan', function() {
       $('.checkPelaksana').prop('checked',false);
 
       $('#EditPelaksana').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.addPelaksana', function() {
+$('.modal-footer').on('click', '.addPelaksana', function() {
       if (document.getElementById("checkPelaksana").checked){
         check_data = 1
       } else {
         check_data = 0
-      }
+      };
 
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -406,12 +402,12 @@ $(document).on('click', '.backUrusan', function() {
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/addPelaksanaRKPD',
+          url: 'addPelaksanaRKPD',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_pelaksana').val(),
-              'id_rkpd_rancangan': $('#id_rkpd_ranwal_pelaksana').val(),
-              'id_urusan_rkpd': $('#id_urusan_rkpd_pelaksana').val(),
+              'id_anggaran_pemda': $('#id_rkpd_ranwal_pelaksana').val(),
+              'id_urusan_anggaran': $('#id_urusan_rkpd_pelaksana').val(),
               'id_unit': $('#id_unit_rkpd').val(),
               'ket_pelaksanaan': $('#keterangan_status_unit').val(),
               'status_pelaksanaan': getStatusPelaksanaanUnit(),
@@ -429,19 +425,19 @@ $(document).on('click', '.backUrusan', function() {
               }
           }
       });
-  });
+});
 
-  $(document).on('click', '.edit-pelaksana', function() {
+$(document).on('click', '.edit-pelaksana', function() {
     var data = PelaksanaTable.row( $(this).parents('tr') ).data();
 
       $('.btnAddPelaksana').removeClass('addPelaksana');
       $('.btnAddPelaksana').addClass('editPelaksana');
       $('.modal-title').text('Edit dan Reviu Pelaksana Program RKPD');
       $('.form-horizontal').show();
-      $('#id_pelaksana_rkpd').val(data.id_pelaksana_rkpd);
-      $('#id_urusan_rkpd_pelaksana').val(data.id_urusan_rkpd);
+      $('#id_pelaksana_rkpd').val(data.id_pelaksana_anggaran);
+      $('#id_urusan_rkpd_pelaksana').val(data.id_urusan_anggaran);
       $('#id_unit_rkpd').val(data.id_unit);
-      $('#id_rkpd_ranwal_pelaksana').val(data.id_rkpd_rancangan);
+      $('#id_rkpd_ranwal_pelaksana').val(data.id_anggaran_pemda);
       $('#no_urut_pelaksana').val(data.no_urut);
       $('#unit_pelaksana_rkpd').val(data.nm_unit);
       
@@ -451,14 +447,14 @@ $(document).on('click', '.backUrusan', function() {
       } else {
         document.getElementById("no_urut_pelaksana").setAttribute("disabled","disabled");
         $('.btnCariUnit').hide();
-      }
+      };
 
       $('.chkPelaksana').show();
       if(data.status_data==1){
         $('.checkPelaksana').prop('checked',true);
       } else {
         $('.checkPelaksana').prop('checked',false);
-      }
+      };
 
       document.frmEditPelaksana.ophak_akses[data.hak_akses].checked=true;
 
@@ -475,7 +471,7 @@ $(document).on('click', '.backUrusan', function() {
             document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
             $('.idStatusPelaksanaUnit').show();
             $('.btnCariUnit').hide();
-        }      
+        };     
 
       if(data.status_pelaksanaan==0){
           document.getElementById("keterangan_status_unit").setAttribute("disabled","disabled");
@@ -483,20 +479,20 @@ $(document).on('click', '.backUrusan', function() {
         } else {
             document.getElementById("keterangan_status_unit").removeAttribute("disabled");
             $('.KetPelaksanaanUnit').show();
-        }
+        };
 
       $('#keterangan_status_unit').val(data.ket_pelaksanaan);
 
       $('#EditPelaksana').modal('show');
-    });
+});
 
-  $('.modal-footer').on('click', '.editPelaksana', function() {
+$('.modal-footer').on('click', '.editPelaksana', function() {
 
       if (document.getElementById("checkPelaksana").checked){
         check_data = 1
       } else {
         check_data = 0
-      }
+      };
 
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -504,13 +500,13 @@ $(document).on('click', '.backUrusan', function() {
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/editPelaksanaRKPD',
+          url: 'editPelaksanaRKPD',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_pelaksana').val(),
-              'id_pelaksana_rkpd': $('#id_pelaksana_rkpd').val(),
-              'id_rkpd_rancangan': $('#id_rkpd_ranwal_pelaksana').val(),
-              'id_urusan_rkpd': $('#id_urusan_rkpd_pelaksana').val(),
+              'id_pelaksana_anggaran': $('#id_pelaksana_rkpd').val(),
+              'id_anggaran_pemda': $('#id_rkpd_ranwal_pelaksana').val(),
+              'id_urusan_anggaran': $('#id_urusan_rkpd_pelaksana').val(),
               'id_unit': $('#id_unit_rkpd').val(),
               'ket_pelaksanaan': $('#keterangan_status_unit').val(),
               'status_pelaksanaan': getStatusPelaksanaanUnit(),
@@ -528,31 +524,31 @@ $(document).on('click', '.backUrusan', function() {
               } 
           }
       });
-  });
+});
 
-  $(document).on('click', '.hapus-pelaksana', function() {
+$(document).on('click', '.hapus-pelaksana', function() {
 
     var data = PelaksanaTable.row( $(this).parents('tr') ).data();
 
     $('.btnDelUnit').addClass('delUnitRKPD');
     $('.modal-title').text('Hapus Unit Pelaksana RKPD');
-    $('#id_pelaksana_rkpd_hapus').val(data.id_pelaksana_rkpd);
+    $('#id_pelaksana_rkpd_hapus').val(data.id_pelaksana_anggaran);
     $('.ur_unit_del').html(data.nm_unit);
 
     $('#HapusPelaksana').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.delUnitRKPD', function() {
+$('.modal-footer').on('click', '.delUnitRKPD', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
     $.ajax({
       type: 'post',
-      url: 'rkpd/hapusPelaksanaRKPD',
+      url: 'hapusPelaksanaRKPD',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_pelaksana_rkpd': $('#id_pelaksana_rkpd_hapus').val()
+        'id_pelaksana_anggaran': $('#id_pelaksana_rkpd_hapus').val()
       },
       success: function(data) {
         $('#tblPelaksanaRKPD').DataTable().ajax.reload(null,false);
@@ -561,9 +557,9 @@ $(document).on('click', '.backUrusan', function() {
         createPesan(data.pesan,"success");
       }
     });
-  });
+});
 
-  $('.sUnit').change(function() {
+$('.sUnit').change(function() {
     if(document.frmEditPelaksana.status_pelaksanaan_unit.value==0){
       document.getElementById("keterangan_status_unit").setAttribute("disabled","disabled");
       $('.KetPelaksanaanUnit').hide();
@@ -571,10 +567,9 @@ $(document).on('click', '.backUrusan', function() {
       document.getElementById("keterangan_status_unit").removeAttribute("disabled");
       $('.KetPelaksanaanUnit').show();
     }
+});
 
-  });
-
-  $(document).on('click', '.add-urusan', function() {
+$(document).on('click', '.add-urusan', function() {
       $('.btnUrusan').addClass('addUrusan');
       $('.modal-title').text('Tambah Urusan dan Bidang Pemerintahan RKPD');
       $('.form-horizontal').show();
@@ -585,7 +580,7 @@ $(document).on('click', '.backUrusan', function() {
       $.ajax({
 
           type: "GET",
-          url: './admin/parameter/getUrusan',
+          url: '../admin/parameter/getUrusan',
           dataType: "json",
 
           success: function(data) {
@@ -602,20 +597,20 @@ $(document).on('click', '.backUrusan', function() {
           }
           }
       });
-  });
+});
 
-  $('.modal-footer').on('click', '.addUrusan', function() {
+$('.modal-footer').on('click', '.addUrusan', function() {
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/addUrusanRKPD',
+          url: 'addUrusanRKPD',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': null,
-              'id_rkpd_ranwal': $('#id_rkpd_ranwal_urusan').val(),
+              'id_anggaran_pemda': $('#id_rkpd_ranwal_urusan').val(),
               'id_bidang': $('#kd_bidang').val(),
           },
           success: function(data) {             
@@ -627,31 +622,31 @@ $(document).on('click', '.backUrusan', function() {
               }             
           }
       });
-  });
+});
 
-  $(document).on('click', '.hapus-urusan', function() {
+$(document).on('click', '.hapus-urusan', function() {
     var data = UrusanTable.row( $(this).parents('tr') ).data();
 
     $('.btnDelUrusan').addClass('delUrusanRKPD');
     $('.modal-title').text('Hapus Urusan - Bidang pada RKPD');
-    $('#id_urusan_rkpd_hapus').val(data.id_urusan_rkpd);
+    $('#id_urusan_rkpd_hapus').val(data.id_urusan_anggaran);
     $('.ur_bidang_del').html(data.nm_bidang);
     $('.ur_urusan_del').html(data.nm_urusan);
 
     $('#HapusUrusan').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.delUrusanRKPD', function() {
+$('.modal-footer').on('click', '.delUrusanRKPD', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
     $.ajax({
       type: 'post',
-      url: 'rkpd/hapusUrusanRKPD',
+      url: 'hapusUrusanRKPD',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_urusan_rkpd': $('#id_urusan_rkpd_hapus').val()
+        'id_urusan_anggaran': $('#id_urusan_rkpd_hapus').val()
       },
       success: function(data) {
         // $('#ModalIndikator').modal('hide');
@@ -664,9 +659,9 @@ $(document).on('click', '.backUrusan', function() {
         } 
       }
     });
-  });
+});
 
-  $(document).on('click', '.add-indikator', function() {
+$(document).on('click', '.add-indikator', function() {
       $('.btnIndikator').removeClass('editIndikator');
       $('.btnIndikator').addClass('addIndikator');
       $('.modal-title').text('Tambah Target Capaian Program RKPD');
@@ -681,7 +676,6 @@ $(document).on('click', '.backUrusan', function() {
       $('#target_indikator_rkpd').val(0);
       $('#id_satuan_output').val(null);
 
-
       document.getElementById("no_urut_indikator").removeAttribute("disabled");
       document.getElementById("ur_tolokukur_rkpd").removeAttribute("disabled");
 
@@ -690,16 +684,16 @@ $(document).on('click', '.backUrusan', function() {
       $('.chkIndikator').hide();
 
       $('#ModalIndikator').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.addIndikator', function() {
+$('.modal-footer').on('click', '.addIndikator', function() {
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/addIndikatorRKPD',
+          url: 'addIndikatorRKPD',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_indikator').val(),
@@ -721,9 +715,9 @@ $(document).on('click', '.backUrusan', function() {
               
           }
       });
-  });
+});
 
-  $(document).on('click', '.edit-indikator', function() {
+$(document).on('click', '.edit-indikator', function() {
     var data = indiProg_tbl.row( $(this).parents('tr') ).data();
 
       $('.btnIndikator').removeClass('addIndikator');
@@ -742,35 +736,32 @@ $(document).on('click', '.backUrusan', function() {
       
       if($(this).data('sumber_data')==1){
         document.getElementById("no_urut_indikator").removeAttribute("disabled");
-        // document.getElementById("ur_indikator_rkpd").removeAttribute("disabled");
         $('.btnCariIndi').show();
         $('.btnHapusIndikator').show();
         document.getElementById("ur_tolokukur_rkpd").removeAttribute("disabled");
       } else {
         document.getElementById("no_urut_indikator").setAttribute("disabled","disabled");
-        // document.getElementById("ur_indikator_rkpd").setAttribute("disabled","disabled");
         $('.btnCariIndi').hide();
         $('.btnHapusIndikator').hide();
         document.getElementById("ur_tolokukur_rkpd").setAttribute("disabled","disabled");
-      }
+      };
 
       $('.chkIndikator').show();
       if($(this).data('status_data')==1){
         $('.checkIndikator').prop('checked',true);
       } else {
         $('.checkIndikator').prop('checked',false);
-      }
+      };
 
       $('#ModalIndikator').modal('show');
-    });
+});
 
-  $('.modal-footer').on('click', '.editIndikator', function() {
-
+$('.modal-footer').on('click', '.editIndikator', function() {
       if (document.getElementById("checkIndikator").checked){
         check_data = 1
       } else {
         check_data = 0
-      }
+      };
 
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -778,7 +769,7 @@ $(document).on('click', '.backUrusan', function() {
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/editIndikatorRKPD',
+          url: 'editIndikatorRKPD',
           data: {
               '_token': $('input[name=_token]').val(),
               'no_urut': $('#no_urut_indikator').val(),
@@ -801,24 +792,24 @@ $(document).on('click', '.backUrusan', function() {
               }
           }
       });
-  });
+});
 
-  $(document).on('click', '.btnHapusIndikator', function() {
+$(document).on('click', '.btnHapusIndikator', function() {
     $('.btnDelIndikator').addClass('delIndikatorRKPD');
     $('.modal-title').text('Hapus Data Indikator RKPD Tambahan');
     $('#id_indikator_hapus').val($('#id_indikator_rkpd').val());
     $('.ur_indikator_rkpd_del').html($('#ur_indikator_rkpd').val());
     $('#HapusIndikator').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.delIndikatorRKPD', function() {
+$('.modal-footer').on('click', '.delIndikatorRKPD', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
     $.ajax({
       type: 'post',
-      url: 'rkpd/hapusIndikatorRKPD',
+      url: 'hapusIndikatorRKPD',
       data: {
         '_token': $('input[name=_token]').val(),
         'id_indikator_program_rkpd': $('#id_indikator_hapus').val()
@@ -830,11 +821,9 @@ $(document).on('click', '.backUrusan', function() {
         createPesan(data.pesan,"success");
       }
     });
-  });
+});
 
-
-
-  $(document).on('click', '.add-programrkpd', function() {    
+$(document).on('click', '.add-programrkpd', function() {    
       $('.btnProgram').removeClass('editProgramRKPD');
       $('.btnProgram').addClass('addProgramRkpd');
       $('.modal-title').text('Tambah Data Program RKPD');
@@ -871,17 +860,16 @@ $(document).on('click', '.backUrusan', function() {
       document.frmEditProgram.status_pelaksanaan_program[5].checked=true;
 
       $('#EditProgram').modal('show');
+});
 
-  });
-
-  $('.modal-footer').on('click', '.addProgramRkpd', function() {
+$('.modal-footer').on('click', '.addProgramRkpd', function() {
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/addProgramRkpd',
+          url: 'addProgramRkpd',
           data: {
               '_token': $('input[name=_token]').val(),
               'id_dokumen_keu':$('#id_dokumen_keu').val(),
@@ -906,10 +894,9 @@ $(document).on('click', '.backUrusan', function() {
               }
           }
       });
-  });
+});
 
-  $(document).on('click', '.edit-program', function() {
-        
+$(document).on('click', '.edit-program', function() {
     var data = progrkpd.row( $(this).parents('tr') ).data();
         
       $('.btnProgram').removeClass('addProgramRkpd');
@@ -917,7 +904,7 @@ $(document).on('click', '.backUrusan', function() {
       $('.modal-title').text('Edit dan Reviu Program Musrenbang RKPD');
       $('.idStatusUsulan').hide();
       $('.form-horizontal').show();
-      $('#id_rkpd_ranwal_program').val(data.id_rkpd_rancangan);
+      $('#id_rkpd_ranwal_program').val(data.id_anggaran_pemda);
       $('#jns_belanja').val(data.jenis_belanja);
       $('#thn_id_rpjmd').val(data.thn_id_rpjmd);
       $('#id_visi_rpjmd').val(data.id_visi_rpjmd);
@@ -935,12 +922,12 @@ $(document).on('click', '.backUrusan', function() {
         document.getElementById("no_urut_program").setAttribute("disabled","disabled");
         document.getElementById("ur_program_rkpd").setAttribute("disabled","disabled");
         document.getElementById("jns_belanja").setAttribute("disabled","disabled");
-      }
+      };
 
        $('#no_urut_program').val(data.urut);
       $('#ur_program_rkpd').val(data.uraian_program_rpjmd);
-      $('#pagu_rpjmd_program').val(data.pagu_rpjmd);
-      $('#pagu_rkpd_program').val(data.pagu_ranwal);
+      $('#pagu_rpjmd_program').val(data.pagu_rkpd);
+      $('#pagu_rkpd_program').val(data.pagu_keuangan);
       $('#pagu_opd_program').val(data.pagu_prog_renja);
       $('#keterangan_status_program').val(data.ket_usulan);
 
@@ -978,37 +965,37 @@ $(document).on('click', '.backUrusan', function() {
       $(".usulan").attr('disabled', false);
 
       $('#EditProgram').modal('show');
-  });
+});
 
 $('.modal-footer').on('click', '.editProgramRKPD', function(){
     if ((getStatusData() == 0 || getStatusData() == 1)  && $('#pagu_rkpd_program').val() <= 0) {
       createPesan("Maaf Pagu RKPD Program tidak boleh 0 (Nol)","danger");
       return;
-    } 
+    };
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
     $.ajax({
         type: 'post',
-        url: 'rkpd/editProgramRKPD',
+        url: 'editProgramRKPD',
         data: {
-            '_token': $('input[name=_token]').val(),
-            'no_urut': $('#no_urut_program').val(),                          
-            'jenis_belanja': $('#jns_belanja').val(),
-            'id_rkpd_rancangan': $('#id_rkpd_ranwal_program').val(),
+            '_token': $('input[name=_token]').val(),            
+            'id_anggaran_pemda': $('#id_rkpd_ranwal_program').val(),
+            'id_dokumen_keu':$('#id_dokumen_keu').val(),
+            'no_urut': $('#no_urut_program').val(),
             'uraian_program_rpjmd': $('#ur_program_rkpd').val(),
-            'pagu_rpjmd' : $('#pagu_rpjmd_program').val(),
-            'pagu_ranwal': $('#pagu_rkpd_program').val(),
+            'pagu_keuangan': $('#pagu_rkpd_program').val(),
+            'jenis_belanja': $('#jns_belanja').val(),
             'ket_usulan': $('#keterangan_status_program').val(),
-            'status_data' : getStatusUsul(),
-            'status_pelaksanaan' : getStatusData(),
             'thn_id_rpjmd':$('#thn_id_rpjmd').val(),
             'id_visi_rpjmd':$('#id_visi_rpjmd').val(),
             'id_misi_rpjmd':$('#id_misi_rpjmd').val(),
             'id_tujuan_rpjmd':$('#id_tujuan_rpjmd').val(),
             'id_sasaran_rpjmd':$('#id_sasaran_rpjmd').val(),
             'id_program_rpjmd':$('#id_program_rpjmd').val(),
+            'status_data' : getStatusUsul(),
+            'status_pelaksanaan' : getStatusData(),
         },
         success: function(data) {
             $('#tblProgramRKPD').DataTable().ajax.reload(null,false);
@@ -1017,31 +1004,29 @@ $('.modal-footer').on('click', '.editProgramRKPD', function(){
               } else {
               createPesan(data.pesan,"danger"); 
               }
-        }
-      
+        }      
   });
+});
 
-  });
-
-  $(document).on('click', '.btnHapus', function() {
+$(document).on('click', '.btnHapus', function() {
     $('.btnDelProgram').addClass('delProgramRKPD');
     $('.modal-title').text('Hapus Data Program RKPD Tambahan');
     $('#id_program_hapus').val($('#id_rkpd_ranwal_program').val());
     $('.ur_program_del').html($('#ur_program_rkpd').val());
     $('#HapusProgram').modal('show');
-  });
+});
 
-  $('.modal-footer').on('click', '.delProgramRKPD', function() {
+$('.modal-footer').on('click', '.delProgramRKPD', function() {
     $.ajaxSetup({
        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
     $.ajax({
       type: 'post',
-      url: 'rkpd/hapusProgramRKPD',
+      url: 'hapusProgramRKPD',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_rkpd_rancangan': $('#id_program_hapus').val()
+        'id_anggaran_pemda': $('#id_program_hapus').val()
       },
       success: function(data) {
         $('#EditProgram').modal('hide');
@@ -1049,9 +1034,9 @@ $('.modal-footer').on('click', '.editProgramRKPD', function(){
         createPesan(data.pesan,"success");
       }
     });
-  });
+});
 
-  $('.skegiatan').change(function() {
+$('.skegiatan').change(function() {
     if(document.frmEditProgram.status_pelaksanaan_program.value==0){
       document.getElementById("keterangan_status_program").setAttribute("disabled","disabled");
       document.getElementById("pagu_rkpd_program").removeAttribute("disabled");
@@ -1066,56 +1051,48 @@ $('.modal-footer').on('click', '.editProgramRKPD', function(){
         document.getElementById("pagu_rkpd_program").removeAttribute("disabled");
       }
     }
+});
 
-  });
-
-  function getStatusData(){
-
+function getStatusData(){
     var xCheck = document.querySelectorAll('input[name="status_pelaksanaan_program"]:checked');
     var xyz = [];
     for(var x = 0, l = xCheck.length; x < l;  x++)
       { xyz.push(xCheck[x].value); }
     var xvalues = xyz.join('');
     return xvalues;
-  }
+};
 
-  function getStatusPelaksanaanUnit(){
-
+function getStatusPelaksanaanUnit(){
     var xCheck = document.querySelectorAll('input[name="status_pelaksanaan_unit"]:checked');
     var xyz = [];
     for(var x = 0, l = xCheck.length; x < l;  x++)
       { xyz.push(xCheck[x].value); }
     var xvalues = xyz.join('');
     return xvalues;
-  }
+};
 
-  function getHakAkses(){
-
+function getHakAkses(){
     var xCheck = document.querySelectorAll('input[name="ophak_akses"]:checked');
     var xyz = [];
     for(var x = 0, l = xCheck.length; x < l;  x++)
       { xyz.push(xCheck[x].value); }
     var xvalues = xyz.join('');
     return xvalues;
-  }
+};
 
-
-  function getStatusUsul(){
-
+function getStatusUsul(){
     var xCheck = document.querySelectorAll('input[name="status_usulan_program"]:checked');
     var xyz = [];
     for(var x = 0, l = xCheck.length; x < l;  x++)
       { xyz.push(xCheck[x].value); }
     var xvalues = xyz.join('');
     return xvalues;
-  }
+};
 
-  $(document).on('click', '.btnCariUnit', function() { 
+$(document).on('click', '.btnCariUnit', function() { 
     LoadCariUnit();   
     $('#cariRefUnit').modal('show');
-
-    // $('#tblCariUnit').DataTable().ajax.reload(null,false);
-  });
+});
 
 var cariunit;
 function LoadCariUnit(){
@@ -1123,7 +1100,7 @@ function LoadCariUnit(){
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
-        "ajax": {"url": "./rkpd/getRefUnit"},
+        "ajax": {"url": "./getRefUnit"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_unit', sClass: "dt-center"},
@@ -1134,23 +1111,19 @@ function LoadCariUnit(){
     });
 };
 
-  $('#tblCariUnit tbody').on( 'dblclick', 'tr', function () {
+$('#tblCariUnit tbody').on( 'dblclick', 'tr', function () {
 
     var data = cariunit.row(this).data();
 
     document.getElementById("unit_pelaksana_rkpd").value = data.nm_unit;
     document.getElementById("id_unit_rkpd").value = data.id_unit;
-    $('#cariRefUnit').modal('hide');    
+    $('#cariRefUnit').modal('hide');  
+});
 
-  } );
-
-  $(document).on('click', '.btnCariIndi', function() {    
-    
+$(document).on('click', '.btnCariIndi', function() { 
     LoadCariIndikator();
     $('#cariIndikator').modal('show');
-
-    // $('#tblCariIndikator').DataTable().ajax.reload(null,false);
-  });
+});
 
 var cariindikator;
 function LoadCariIndikator(){
@@ -1170,29 +1143,26 @@ function LoadCariIndikator(){
     });
 };
 
-  $('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
+$('#tblCariIndikator tbody').on( 'dblclick', 'tr', function () {
     var data = cariindikator.row(this).data();
     document.getElementById("ur_indikator_rkpd").value = data.nm_indikator;
     document.getElementById("kd_indikator_rkpd").value = data.id_indikator;
     document.getElementById("id_satuan_output").value = data.id_satuan_output;
     $('#cariIndikator').modal('hide');
-  });
+});
 
-$(document).on('click', '.btnCariProgram', function() {    
-    
+$(document).on('click', '.btnCariProgram', function() {   
   LoadCariProgram();
   $('#cariProgramRPJMD').modal('show');
-    // $('#tblCariProgramRPJMD').DataTable().ajax.reload(null,false);
-  });
+});
 
 var cariprogram;
-
 function LoadCariProgram(){
   cariprogram = $('#tblCariProgramRPJMD').DataTable( {
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
-        "ajax": {"url": "./rkpd/getRefProgramRPJMD"},
+        "ajax": {"url": "./getRefProgramRPJMD"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_program_rpjmd', sClass: "dt-center"},
@@ -1203,8 +1173,7 @@ function LoadCariProgram(){
     });
 };
 
-  $('#tblCariProgramRPJMD tbody').on( 'dblclick', 'tr', function () {
-
+$('#tblCariProgramRPJMD tbody').on( 'dblclick', 'tr', function () {
     var data = cariprogram.row(this).data();
 
     document.getElementById("thn_id_rpjmd").value = data.thn_id;
@@ -1215,14 +1184,13 @@ function LoadCariProgram(){
     document.getElementById("id_program_rpjmd").value = data.id_program_rpjmd;
     document.getElementById("ur_program_rpjmd").value = data.uraian_program_rpjmd;
     $('#cariProgramRPJMD').modal('hide');    
+});
 
-  });
-
-  $( ".kd_urusan" ).change(function() {      
+$( ".kd_urusan" ).change(function() {      
       $.ajax({
 
           type: "GET",
-          url: './admin/parameter/getBidang/'+$('.kd_urusan').val(),
+          url: '../admin/parameter/getBidang/'+$('.kd_urusan').val(),
           dataType: "json",
 
           success: function(data) {
@@ -1239,15 +1207,14 @@ function LoadCariProgram(){
           }
           }
       });
-    });
+});
 
 $(document).on('click', '#btnUnProgram', function() {
-
   var data = progrkpd.row( $(this).parents('tr') ).data();
 
-    $('#id_program_ranwal_posting').val(data.id_rkpd_rancangan);
+    $('#id_program_ranwal_posting').val(data.id_anggaran_pemda);
     $('#status_program_ranwal_posting').val(data.status_data);
-    $('#tahun_ranwal_posting').val(data.tahun_rkpd);
+    $('#tahun_ranwal_posting').val(data.tahun_anggaran);
 
     document.getElementById("ur_program_ranwal_posting").innerHTML = data.uraian_program_rpjmd;
 
@@ -1255,7 +1222,7 @@ $(document).on('click', '#btnUnProgram', function() {
         document.getElementById("ur_status_ranwal_posting").innerHTML = "Posting";
     } else {
         document.getElementById("ur_status_ranwal_posting").innerHTML = "Un-Posting";
-    }
+    };
 
     $('#StatusProgram').modal('show');
 });
@@ -1274,7 +1241,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
 
       $.ajax({
           type: 'post',
-          url: 'rkpd/postProgram',
+          url: 'postProgram',
           data: {
               '_token': $('input[name=_token]').val(),
               'tahun_rkpd': $('#tahun_ranwal_posting').val(),
@@ -1291,7 +1258,7 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
               $('#StatusProgram').modal('hide');
           }
       });
-    });
+});
 
 $(document).on('click', '#btnReviuPelaksana', function() {
   var rows_selected = PelaksanaTable.column(0).checkboxes.selected();
@@ -1309,7 +1276,7 @@ $(document).on('click', '#btnReviuPelaksana', function() {
     });         
     $.ajax({
             type: 'POST',
-            url: 'rkpd/postPelaksanaRKPD',
+            url: 'postPelaksanaRKPD',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'status_data':rows_data[index].status_data,
@@ -1336,7 +1303,7 @@ $(document).on('click', '#btnReviuPelaksana', function() {
 });
 
 $(document).on('click', '#btnReviuIndikator', function() {
-   var rows_selected = indiProg_tbl.column(0).checkboxes.selected();
+  var rows_selected = indiProg_tbl.column(0).checkboxes.selected();
   var counts_selected = rows_selected.count(); 
   var rows_data = indiProg_tbl.rows({ selected: true }).data(); 
   var counts_data = indiProg_tbl.rows({ selected: true }).count();  
@@ -1351,7 +1318,7 @@ $(document).on('click', '#btnReviuIndikator', function() {
     });         
     $.ajax({
             type: 'POST',
-            url: 'rkpd/postIndikatorRKPD',
+            url: 'postIndikatorRKPD',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'status_data':rows_data[index].status_data,
@@ -1373,13 +1340,11 @@ $(document).on('click', '#btnReviuIndikator', function() {
 });
 
 $(function(){
-        $.ajax({
+      $.ajax({
           type: "GET",
           url: '../admin/parameter/getRefSatuan',
           dataType: "json",
           success: function(data) {
-
-          // console.log(data)  
 
           var j = data.length;
           var post, i;
@@ -1394,7 +1359,7 @@ $(function(){
               
           }
       });
-  });
+});
 
 $( ".id_dokumen_keu" ).change(function() {   
   LoadProgramRkpd($( ".id_dokumen_keu" ).val());
@@ -1402,5 +1367,4 @@ $( ".id_dokumen_keu" ).change(function() {
 });
 
 });
-
 </script>

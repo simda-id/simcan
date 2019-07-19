@@ -99,7 +99,7 @@
                         <tbody>
                           <tr>
                               <td style="text-align: center; vertical-align:middle;">
-                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Forum</label>
+                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">PPAS</label>
                               </td>
                               <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renstra" name="pagu_renstra" style="text-align: right; vertical-align:middle" disabled ></td>
                           
@@ -109,7 +109,7 @@
                           </tr>
                           <tr>
                               <td style="text-align: center; vertical-align:middle;">
-                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">Rancangan</label>
+                                <label for="pagu_renstra" class="control-label" align='left' style="text-align: center; vertical-align:middle;">APBD</label>
                               </td>
                               <td style="text-align: center; vertical-align:middle;"><input type="text" class="form-control number" id="pagu_renstra_forum" name="pagu_renstra_forum" style="text-align: right; vertical-align:middle" disabled></td>
                           
@@ -143,6 +143,12 @@
                     <input type="text" class="form-control number" id="pagu_musren" name="pagu_musren" disabled >
                   </div>
                 </div>
+                <div class="form-group lblKelompokSasaran">
+                    <label class="control-label col-sm-3" for="title">Uraian Kelompok Sasaran:</label>
+                    <div class="col-sm-8">
+                      <textarea type="name" class="form-control" id="ur_kelompok_sasaran" rows="3"></textarea>
+                    </div>
+                  </div>
               </form>
             </div>
               <div class="modal-footer">
@@ -152,7 +158,7 @@
                     </div>
                     <div class="col-sm-10 text-right">
                       <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnKegiatan btn-labeled" data-dismiss="modal">
+                        <button type="button" id="btnKegiatan" class="btn btn-sm btn-success btnKegiatan btn-labeled" data-dismiss="modal">
                             <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
                         <div class="or"></div>
                         <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">

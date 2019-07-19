@@ -230,10 +230,10 @@ use hoaaah\LaravelMenu\Menu;
                                                 'label' => 'RKPD', 
                                                 'visible' => $akses->get(40),
                                                 'items' => [
-                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpdranwal', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpdrancangan', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdakhir', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
                                                 ]
                                             ],
                                             [   
@@ -242,7 +242,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(50)],
                                                     ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
-                                                    ['label' => 'Renja', 'url' => '/cetak/rkpd', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja', 'url' => '/cetak/renjafinal', 'visible' => $akses->get(50)],
                                                 ]
                                             ],
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
@@ -401,10 +401,10 @@ use hoaaah\LaravelMenu\Menu;
                                                 'label' => 'RKPD', 
                                                 'visible' => $akses->get(40),
                                                 'items' => [
-                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
-                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpd', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpdranwal', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpdrancangan', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdakhir', 'visible' => $akses->get(40)],
+                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(40)],
                                                 ]
                                             ],
                                             [   
@@ -413,7 +413,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(50)],
                                                     ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
-                                                    ['label' => 'Renja', 'url' => '/cetak/rkpd', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja', 'url' => '/cetak/renjafinal', 'visible' => $akses->get(50)],
                                                 ]
                                             ],
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            

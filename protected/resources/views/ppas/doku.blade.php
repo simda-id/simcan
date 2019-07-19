@@ -28,15 +28,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <p><h2 class="panel-title">Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</h2></p>
           </div>
 
-          <div class="panel-body">
-                <form class="form-horizontal" role="form" autocomplete='off' action="#" method="" >
+          <div class="panel-body">                
+                <div class='tabs-x tabs-above tab-bordered tabs-krajee'>                    
+                  <div id="judul" class="alert alert-info col-md-12" ><b>Daftar Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</b></div>
+                  <form class="form-horizontal" role="form" autocomplete='off' action="#" method="" >
                     <div>
                       <a type="button" id="btnAddDokumen" class="btn btn-labeled btn-sm btn-success" data-dismiss="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Dokumen</a>
                       <a type="button" id="btnPostingApi" class="btn btn-labeled btn-sm btn-success hidden" data-dismiss="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Posting Dokumen</a>
                     </div>                    
                 </form>
-                <div class='tabs-x tabs-above tab-bordered tabs-krajee'>                    
-                  <div id="judul" class="alert alert-info col-md-12" ><b>Daftar Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)</b></div>
                   <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#dokumen" aria-controls="dokumen" role="tab" data-toggle="tab">Dokumen PPAS</a></li>
                       <li><a href="#rekap" aria-controls="rekap" role="tab-kv" data-toggle="tab">Rekapitulasi PPAS</a></li>
@@ -141,13 +141,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="form-group">
             <label for="nama_tandatangan" class="col-sm-3 control-label" align='left'>Nama Kepala Unit PPKD :</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="nama_tandatangan" name="nama_tandatangan">
+              <input type="text" class="form-control" id="nama_tandatangan" name="nama_tandatangan" disabled>
             </div>
           </div>
           <div class="form-group">
             <label for="nip_tandatangan" class="col-sm-3 control-label" align='left'>NIP Kepala Unit PPKD :</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control nip" id="nip_tandatangan_display" name="nip_tandatangan_display" maxlength="18" style="text-align: center;">
+              <input type="text" class="form-control nip" id="nip_tandatangan_display" name="nip_tandatangan_display" maxlength="18" style="text-align: center;" disabled>
               <input type="hidden" class="form-control" id="nip_tandatangan" name="nip_tandatangan">
             </div>
           </div>    
@@ -208,6 +208,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
         <div class="modal-body">
             <input type="hidden" id="id_dokumen_posting" name="id_dokumen_posting">
+            <input type="hidden" id="id_dokumen_referensi" name="id_dokumen_referensi">
             <input type="hidden" id="status_dokumen_posting" name="status_dokumen_posting">
             <input type="hidden" id="tahun_dokumen_posting" name="tahun_dokumen_posting">
             <div class="alert alert-success">
@@ -255,5 +256,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-  @include('ppas.js_doku_ppas')
+  {{-- @include('ppas.js_doku_ppas') --}}
+  <script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/ppas/js/js_doku.js')}}"> </script>
 @endsection

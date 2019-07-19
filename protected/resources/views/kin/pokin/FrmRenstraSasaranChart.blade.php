@@ -56,26 +56,26 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
     var datascource = {
       @foreach($data as $datas)
-        'name': 'Visi',
+        'name': 'Visi Perangkat Daerah',
         'title': '{{ $datas->uraian_visi_renstra }}',
         'className': 'level1',
         'nodeTitle': 'name',
         'nodeContent': 'title',
         'children': [
             @foreach($datas->TrxRenstraMisis as $misi)
-                {'name': 'Misi','title': '{{ $misi->uraian_misi_renstra}}','className': 'level2',
+                {'name': 'Misi Perangkat Daerah','title': '{{ $misi->uraian_misi_renstra}}','className': 'level2',
                 'children': [
                     @foreach($misi->TrxRenstraTujuans as $tujuan)
-                        {'name': 'Tujuan','title': '{{ $tujuan->uraian_tujuan_renstra}}','className': 'level3',
+                        {'name': 'Tujuan Perangkat Daerah','title': '{{ $tujuan->uraian_tujuan_renstra}}','className': 'level3',
                         'children': [
                             @foreach($tujuan->TrxRenstraSasarans as $sasaran)
-                                {'name': 'Sasaran Strategis','title': '{{ $sasaran->uraian_sasaran_renstra}}','className': 'level4',
+                                {'name': 'Sasaran Strategis Perangkat Daerah','title': '{{ $sasaran->uraian_sasaran_renstra}}','className': 'level4',
                                 'children': [
                                     @foreach($sasaran->KinTrxCascadingProgramOpds as $program)
-                                        {'name': 'Sasaran Program','title': '{{ $program->uraian_hasil_program}}','className': 'level5',
+                                        {'name': 'Sasaran Program Perangkat Daerah','title': '{{ $program->uraian_hasil_program}}','className': 'level5',
                                         'children': [
                                             @foreach($program->KinTrxCascadingKegiatanOpds as $kegiatan)
-                                                {'name': 'Sasaran Kegiatan','title': '{{ $kegiatan->uraian_hasil_kegiatan}}',},
+                                                {'name': 'Sasaran Kegiatan Perangkat Daerah','title': '{{ $kegiatan->uraian_hasil_kegiatan}}',},
                                             @endforeach
                                         ]
                                     },

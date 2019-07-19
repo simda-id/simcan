@@ -2140,6 +2140,7 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
       });
 });
 
+
   var UrusanProg;
   function loadTblUrusan(id_program_rpjmd){
    UrusanProg= $('#tblUrusan').DataTable( {
@@ -2347,7 +2348,6 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
   });
 
   $(document).on('click', '.repivot-renstra', function() {
-    // var data = UrusanProg.row(this).data();
     var data = Program.row( $(this).parents('tr') ).data();
 
     $('#ModalProgress').modal('show');
@@ -2424,6 +2424,7 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
   });
 
   var id_bidang_temp;
+
   $('#tblUrusan tbody').on( 'dblclick', 'tr', function () {
     var data = UrusanProg.row(this).data();
     id_urusan_program =  data.id_urbid_rpjmd;
@@ -2630,6 +2631,7 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
       $('.nav-tabs a[href="#program1"]').tab('show');
       loadTblProgram(id_sasaran_rpjmd);
     });
+
   $(document).on('click', '.view-rpjmdurusan', function() {
       var data = tblProgram.row( $(this).parents('tr') ).data();
       id_program_rpjmd =  data.id_program_rpjmd;      
@@ -2637,6 +2639,7 @@ $('#tblProgram tbody').on( 'dblclick', 'tr', function () {
       $('.nav-tabs a[href="#urusan"]').tab('show');
       loadTblUrusan(id_program_rpjmd);
     });
+
   $(document).on('click', '.view-rpjmdpelaksana', function() {
       var data = UrusanProg.row( $(this).parents('tr') ).data();
       id_urusan_program =  data.id_urbid_rpjmd;
@@ -3075,6 +3078,162 @@ $.ajax({
     }
   });
 });
+
+$('#tblBtl tbody').on( 'dblclick', 'tr', function () {
+
+  var data = tblBtl.row(this).data();
+  id_program_rpjmd =  data.id_program_rpjmd;
+  $('.nav-tabs a[href="#urusanBtl"]').tab('show');
+  loadTblUrusanBtl(id_program_rpjmd);
+
+  $.ajax({
+          type: "GET",
+          url: './admin/parameter/getUrusan',
+          dataType: "json",
+
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="kd_urusan"]').empty();
+          $('select[name="kd_urusan"]').append('<option value="-1">---Pilih Urusan Pemerintahan---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="kd_urusan"]').append('<option value="'+ post.kd_urusan +'">'+ post.nm_urusan +'</option>');
+          }
+          }
+      });
+});
+
+var UrusanBtl;
+  function loadTblUrusanBtl(id_program_rpjmd){
+   UrusanBtl= $('#tblUrusanBtl').DataTable( {
+        processing: true,
+        serverSide: true,
+          dom: 'BFrtip',
+          responsive: true,                
+          autoWidth : false,
+          order: [[0, 'asc']],
+          bDestroy: true,
+          language: {
+              "decimal": ",",
+              "thousands": ".",
+              "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+              "sProcessing":   "Sedang memproses...",
+              "sLengthMenu":   "Tampilkan _MENU_ entri",
+              "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+              "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+              "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+              "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+              "sInfoPostFix":  "",
+              "sSearch":       "Cari:",
+              "sUrl":          "",
+              "oPaginate": {
+                  "sFirst":    "Pertama",
+                  "sPrevious": "Sebelumnya",
+                  "sNext":     "Selanjutnya",
+                  "sLast":     "Terakhir"
+              }
+            },
+        "ajax": {"url": "./rpjmd/getUrusanBtl/"+id_program_rpjmd},
+        "columns": [
+                { data: 'kd_program', sClass: "dt-center"},
+                { data: 'kode_bid', sClass: "dt-center"},
+                { data: 'nm_urusan'},
+                { data: 'nm_bidang'},
+                { data: 'action', 'searchable': false, 'orderable':false }
+              ]
+        });
+  };
+
+  $(document).on('click', '.add-urbidbtl', function() {
+     
+      $('select[name="kd_bidang"]').empty();
+      $('select[name="kd_bidang"]').append('<option value="-1">---Pilih Kode Bidang---</option>');
+
+      $('.btnUrusan').addClass('addUrusan');
+      $('.btnUrusan').removeClass('editUrusan');
+      $('.modal-title').text('Tambah Urusan dan Bidang Pemerintahan RPJMD');
+      $('.form-horizontal').show();
+      $('#id_urbid_rpjmd_edit').val(null);
+      $('#thn_urbid_rpjmd_edit').val(tahun_rpjmd);
+      $('#no_urbid_rpjmd_edit').val(99);
+      $('#id_prog_urbid_rpjmd_edit').val(id_program_rpjmd);
+      $('#kd_urusan option[value="-1"]').attr("selected",true);
+
+      $('#ModalUrusan').modal('show');
+    });
+  
+
+  $( ".kd_urusan" ).change(function() {      
+      $.ajax({
+          type: "GET",
+          url: './admin/parameter/getBidang/'+$('.kd_urusan').val(),
+          dataType: "json",
+
+          success: function(data) {
+            var j = data.length;
+            var post, i;
+
+            $('select[name="kd_bidang"]').empty();
+            $('select[name="kd_bidang"]').append('<option value="-1">---Pilih Kode Bidang---</option>');
+
+            for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="kd_bidang"]').append('<option value="'+ post.id_bidang +'">'+ post.nm_bidang +'</option>');
+            }
+          }
+      });
+  });
+
+  $(document).on('click', '.edit-urbidprog-btl', function() {
+
+      var data = UrusanBtl.row( $(this).parents('tr') ).data();
+      $.ajax({
+          type: "GET",
+          url: './rpjmd/getBidang/'+data.kd_urusan,
+          dataType: "json",
+
+          success: function(data) {
+            var j = data.length;
+            var post, i;
+
+            $('select[name="kd_bidang"]').empty();
+            $('select[name="kd_bidang"]').append('<option value="-1">---Pilih Kode Bidang---</option>');
+
+            for (i = 0; i < j; i++) {
+              post = data[i];
+              $('select[name="kd_bidang"]').append('<option value="'+ post.id_bidang +'">'+ post.nm_bidang +'</option>');
+            }
+          }
+      });
+
+      $('.btnUrusan').addClass('editUrusan');
+      $('.btnUrusan').removeClass('addUrusan');
+      $('.modal-title').text('Tambah Urusan dan Bidang Pemerintahan RPJMD');
+      $('.form-horizontal').show();
+      $('#id_urbid_rpjmd_edit').val(data.id_urbid_rpjmd);
+      $('#thn_urbid_rpjmd_edit').val(data.thn_id);
+      $('#no_urbid_rpjmd_edit').val(data.no_urut);
+      $('#id_prog_urbid_rpjmd_edit').val(data.id_program_rpjmd);
+      $('#kd_urusan option[value="'+data.kd_urusan+'"]').attr("selected",true);
+      $('#kd_bidang option[value="'+data.id_bidang+'"]').attr("selected",true);
+
+      $('#ModalUrusan').modal('show');
+  });
+
+  $(document).on('click', '.del-urbidprog-btl', function() {
+    var data = UrusanBtl.row( $(this).parents('tr') ).data();
+
+    $('.btnDelUrusan').addClass('delUrusanRPJMD');
+    $('.modal-title').text('Hapus Urusan - Bidang pada RPJMD');
+    $('#id_urusan_rkpd_hapus').val(data.id_urbid_rpjmd);
+    $('.ur_bidang_del').html(data.nm_bidang);
+    $('.ur_urusan_del').html(data.nm_urusan);
+    $('#HapusUrusan').modal('show');
+  });
 
 $(document).on('click', '.btnAddDapat', function() {
 

@@ -60,7 +60,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblProgram" class="table table-striped display compact table-bordered table-responsive" width="100%">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                                {{-- <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th> --}}
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
@@ -141,7 +141,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
                                                 <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
                                                 <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
@@ -158,7 +158,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade in" id="aktivitas">
                                   <div id="divTambahAktivitas">
-                                    <button id="btnTambahAktivitas" type="button" class="add-aktivitas btn btn-labeled btn-success">
+                                    <button id="btnTambahAktivitas" type="button" class="add-aktivitas btn btn-labeled btn-success hidden">
                                       <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Aktivitas</button>
                                   </div>            
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
@@ -187,7 +187,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Ativitas</th>
                                                 <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Pelaksana</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Belanja</th>
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Musrenbang</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
@@ -238,7 +238,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <tr>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Lokasi</th>
-                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th>
+                                                {{-- <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Pagu Anggaran</th> --}}
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
@@ -284,7 +284,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                           <td width="15%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_aktivitas_belanja" align='left'></label></td>
                                         </tr>
-                                        <tr class="backLokasi">
+                                        <tr class="backLokasi hidden">
                                           <td width="15%" style="text-align: left; vertical-align:top;">Lokasi</td>
                                           <td style="text-align: left; vertical-align:top;"><label id="nm_lokasi_belanja" align='left'></label></td>
                                         </tr>
@@ -355,93 +355,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </table>
 </script>
 
-<div id="ModalKegiatan" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <p><h4 class="modal-title" style="text-align: center;"></h4></p>
-            </div>
-            <div class="modal-body">
-              <form name="frmModalKegiatan" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_renja_kegiatan" name="id_renja_kegiatan">
-                <input type="hidden" id="id_rkpd_ranwal_kegiatan" name="id_rkpd_ranwal_kegiatan">
-                <input type="hidden" id="id_renja_program_kegiatan" name="id_renja_program_kegiatan">
-                <input type="hidden" id="tahun_renja_kegiatan" name="tahun_renja_kegiatan">
-                <input type="hidden" id="id_unit_kegiatan" name="id_unit_kegiatan">
-                <input type="hidden" id="status_pelaksanaan_kegiatan" name="status_pelaksanaan_kegiatan">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="id">No Urut :</label>
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control number" name="no_urut_kegiatan" id="no_urut_kegiatan" disabled>
-                  </div>
-                  <div class="col-sm-3 chkKegiatan">
-                    <label class="checkbox-inline">
-                    <input class="checkKegiatan" type="checkbox" name="checkKegiatan" id="checkKegiatan" value="1"> Telah Direviu</label>
-                </div>
-                  </div>
-                  <div class="form-group lblKegiatanRenja">
-                    <label class="control-label col-sm-3" for="title">Uraian Kegiatan Renstra:</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_kegiatan_renstra" rows="3" disabled></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group urKegiatanRef">
-                    <label class="control-label col-sm-3" for="title">Uraian Kegiatan Referensi:</label>
-                    <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_kegiatan_ref" rows="3" disabled></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Kegiatan Renja:</label>
-                  <div class="col-sm-8">
-                    <textarea type="name" class="form-control ur_kegiatan_renja" name="ur_kegiatan_renja" id="ur_kegiatan_renja" rows="3" disabled></textarea>
-                  </div>
-                </div>
-                <div class="form-group KetPelaksanaan_keg">
-                  <label for="keterangan_status_kegiatan" class="col-sm-3 control-label" align='left'>Keterangan Pelaksanaan :</label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control keterangan_status_kegiatan" name="keterangan_status_kegiatan" id="keterangan_status_kegiatan" rows="3" disabled></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="pagu_renja_kegiatan" class="col-sm-3 control-label" align='left'>Pagu Tahun ini :</label>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_renja_kegiatan" name="pagu_renja_kegiatan" disabled >
-                  </div>
-                </div>
-                <div class="form-group hidden">
-                  <label for="pagu_musren" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
-                  <div class="col-sm-2">
-                    <div class="input-group">
-                      <input type="text" class="form-control number" id="persen_musren" name="persen_musren">
-                      <span class="input-group-addon" text-align="center"><strong>%</strong></span>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_musren" name="pagu_musren" disabled >
-                  </div>
-                </div>
-              </form>
-            </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-success btnKegiatan btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Proses Posting</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
 <div id="ModalAktivitas" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog modal-lg">
@@ -458,71 +372,71 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="id">No Urut :</label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control number" name="no_urut_aktivitas" id="no_urut_aktivitas">
+                    <input type="text" class="form-control number" name="no_urut_aktivitas" id="no_urut_aktivitas" disabled>
                   </div>
                   <div class="col-sm-3 chkAktivitas">
                     <label class="checkbox-inline">
                     <input class="checkAktivitas" type="checkbox" name="checkAktivitas" id="checkAktivitas" value="1"> Telah Direviu</label>
                   </div>
                 </div>
-                <div class="form-group rbSumberAktivitas"> 
+                <div class="form-group rbSumberAktivitas" > 
                   <label for="sumber_aktivitas" class="col-sm-3 control-label" align='left'>Asal Aktivitas :</label>
                   <div class="col-sm-6">
                     <label>
-                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="0"> Analisis Standar Belanja (ASB) 
+                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="0" disabled> Analisis Standar Belanja (ASB) 
                     </label>
                     <label>
-                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="1"> Non Analisis Standar Belanja (ASB)
+                      <input type="radio" class="sumber_aktivitas" name="sumber_aktivitas" id="sumber_aktivitas" value="1" disabled> Non Analisis Standar Belanja (ASB)
                     </label>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" >
                     <label class="control-label col-sm-3" for="title">Uraian Aktivitas :</label>
                     <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3"></textarea>
+                      <textarea type="name" class="form-control" id="ur_aktivitas_kegiatan" rows="3" disabled></textarea>
                     </div>
                     <input type="hidden" id="id_aktivitas_asb" name="id_aktivitas_asb">
-                    <span class="btn btn-primary btnCariASB" id="btnCariASB" name="btnCariASB"><i class="fa fa-search fa-fw fa-lg"></i></span>
+                    <span class="btn btn-primary btnCariASB hidden" id="btnCariASB" name="btnCariASB"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>
-                <div class="form-group rbJenisAktivitas"> 
+                <div class="form-group rbJenisAktivitas" > 
                   <label for="jenis_aktivitas" class="col-sm-3 control-label" align='left'>Jenis Aktivitas :</label>                 
                   <div class="col-sm-6">
                     <label class="radio-inline">
-                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="0"> Baru 
+                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="0" disabled> Baru 
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="1"> Lanjutan
+                      <input type="radio" class="jenis_aktivitas" name="jenis_aktivitas" id="jenis_aktivitas" value="1" disabled> Lanjutan
                     </label>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" >
                     <label class="control-label col-sm-3" for="title">Sumber Dana :</label>
                     <div class="col-sm-6">
-                        <select type="text" class="form-control sumber_dana" id="sumber_dana" name="sumber_dana"></select>
+                        <select type="text" class="form-control sumber_dana" id="sumber_dana" name="sumber_dana" disabled></select>
                     </div>
                 </div>
                 <div class="form-group">
                   <label for="pagu_aktivitas" class="col-sm-3 control-label" align='left'>Pagu Aktivitas :</label>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control number" id="pagu_aktivitas" name="pagu_aktivitas">
+                    <input type="text" class="form-control number" id="pagu_aktivitas" name="pagu_aktivitas" disabled>
                   </div>
                 </div>
-                <div class="form-group rbJenisPembahasan"> 
+                <div class="form-group rbJenisPembahasan" > 
                   <label for="jenis_pembahasan" class="col-sm-3 control-label" align='left'>Jenis Pembahasan :</label>                 
                   <div class="col-sm-6">
                     <label class="radio-inline">
-                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="0"> Non Musrenbang 
+                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="0" disabled> Non Musrenbang 
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="1"> Musrenbang
+                      <input type="radio" class="jenis_pembahasan" name="jenis_pembahasan" id="jenis_pembahasan" value="1" disabled> Musrenbang
                     </label>
                   </div>
                 </div>
-                <div class="form-group inMusrenbang">
+                <div class="form-group inMusrenbang" >
                   <label for="pagu_musren_aktivitas" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
                   <div class="col-sm-2">
                   <div class="input-group">
-                    <input type="text" class="form-control number" id="persen_musren_aktivitas" name="persen_musren_aktivitas">
+                    <input type="text" class="form-control number" id="persen_musren_aktivitas" name="persen_musren_aktivitas" disabled>
                     <span class="input-group-addon" text-align="center"><strong>%</strong></span>
                   </div>
                   </div>
@@ -533,7 +447,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="title">Satuan Musrenbang :</label>
                     <div class="col-sm-4">
-                        <select type="text" class="form-control" id="id_satuan_publik" name="id_satuan_publik"></select>
+                        <select type="text" class="form-control" id="id_satuan_publik" name="id_satuan_publik" disabled></select>
                     </div>
                 </div>
               </form>
@@ -541,7 +455,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="modal-footer">
                 <div class="row">
                     <div class="col-sm-2 text-left idHapusAktivitas">
-                        <button type="button" class="btn btn-danger btnHapusAktivitas btn-labeled">
+                        <button type="button" class="btn btn-danger btnHapusAktivitas btn-labeled hidden">
                             <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
                     </div>
                     <div class="col-sm-10 text-right">
@@ -559,76 +473,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
 
-<div id="ModalPelaksana" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form name="frmModalPelaksana" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" id="id_pelaksana_renja" name="id_pelaksana_renja">
-            <input type="hidden" id="id_renja_pelaksana" name="id_renja_pelaksana">
-            <input type="hidden" id="id_aktivitas_pelaksana" name="id_aktivitas_pelaksana">
-            <input type="hidden" id="tahun_renja_pelaksana" name="tahun_renja_pelaksana">
-            <div class="form-group">
-              <label class="control-label col-sm-3" for="id">No Urut :</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control number" id="no_urut_pelaksana">
-              </div>
-              <div class="col-sm-3 chkPelaksana">
-                    <label class="checkbox-inline">
-                    <input class="checkPelaksana" type="checkbox" name="checkPelaksana" id="checkPelaksana" value="1"> Telah Direviu</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-3" for="title">Sub Unit Pelaksana :</label>
-              <div class="col-sm-8">
-              <div class="input-group">
-                <input type="hidden" id="id_subunit_pelaksana" name="id_subunit_pelaksana">
-                <input type="name" class="form-control" id="subunit_pelaksana" rows="2" disabled>
-                <div class="input-group-btn">
-                <btn class="btn btn-primary btnCariSubUnit" id="btnCariSubUnit" name="btnCariSubUnit"><i class="fa fa-search fa-fw fa-lg"></i></btn>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Lokasi Penyelenggaraan:</label>
-                <div class="col-sm-8">
-                  <div class="input-group">
-                    <input type="hidden" id="id_lokasi_pelaksana" name="id_lokasi_pelaksana">
-                    <input type="name" class="form-control" id="nm_lokasi_penyelenggara" rows="2" disabled>
-                    <div class="input-group-btn">
-                      <btn class="btn btn-primary btnCariLokasi" id="btnCariLokasi" name="btnCariLokasi"><i class="fa fa-search fa-fw fa-lg"></i></btn>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </form>
-        </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idHapusPelaksana">
-                        <button type="button" class="btn  btn-danger btnHapusPelaksana btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash-o fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn  btn-success btnPelaksana btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
 <div id="ModalLokasi" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -1214,6 +1058,126 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
 
+  <div id="StatusProgram" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Program Renja</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_program_renja_posting" name="id_program_renja_posting">
+            <input type="hidden" id="status_program_renja_posting" name="status_program_renja_posting">
+            <input type="hidden" id="tahun_renja_posting" name="tahun_renja_posting">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_status_posting"></span></i></strong> pada program : <strong><span id="ur_program_renja_posting"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnPostProgram" class="btn btn-success btn-labeled btnPostProgram" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+<div id="StatusKegiatan" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Kegiatan Renja</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_renja_kegiatan" name="id_renja_kegiatan">
+            <input type="hidden" id="tahun_renja_kegiatan" name="tahun_renja_kegiatan">
+            <input type="hidden" id="id_checkKegiatan" name="id_checkKegiatan">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_kegiatan_status_posting"></span></i></strong> pada kegiatan : <strong><span id="ur_kegiatan_ref"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnKegiatan" class="btn btn-success btn-labeled btnKegiatan" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+<div id="StatusPelaksana" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 style="text-align: center;">Perubahan Status Pelaksana Renja</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="id_pelaksana_renja" name="id_pelaksana_renja">
+            <input type="hidden" id="tahun_renja_pelaksana" name="tahun_renja_pelaksana">
+            <input type="hidden" id="id_checkPelaksana" name="id_checkPelaksana">
+            <div class="alert alert-success">
+                <div>
+                  <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-info"  aria-hidden="true"></i>
+                  <p>Yakin akan melakukan proses <strong><i><span id="ur_pelaksana_status_posting"></span></i></strong> pada kegiatan : <strong><span id="ur_pelaksana_ref"></span></strong> ?</p>
+                </div>
+                <hr>
+                <div>
+                  <strong>Catatan : Proses ini mempengaruhi data selanjutnya.....!!!!</strong>
+                </div> 
+          </div>
+        </div>
+          <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" id="btnPelaksana" class="btn btn-success btn-labeled btnPelaksana" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
+                        <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -1476,14 +1440,14 @@ function loadTblProgRenja(tahun,unit){
                       "decimal": ",",
                       "thousands": "."},
                   "columns": [
-                        {
-                            "className":      'details-control',
-                            "orderable":      false,
-                            "searchable":      false,
-                            "data":           null,
-                            "defaultContent": '',
-                            "width" : "5px"
-                        },
+                        // {
+                        //     "className":      'details-control',
+                        //     "orderable":      false,
+                        //     "searchable":      false,
+                        //     "data":           null,
+                        //     "defaultContent": '',
+                        //     "width" : "5px"
+                        // },
                         { data: 'urut', sClass: "dt-center"},
                         { data: 'uraian_program_renja'},
                         { data: 'jml_indikator', sClass: "dt-center"},
@@ -1675,8 +1639,8 @@ function loadTblLokasi(id_pelaksana){
                   "columns": [
                         { data: 'no_urut', sClass: "dt-center"},
                         { data: 'nama_lokasi'},
-                        { data: 'jml_pagu', sClass: "dt-right",
-                            render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+                        // { data: 'jml_pagu', sClass: "dt-right",
+                        //     render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'volume_1', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'volume_2', sClass: "dt-right",
@@ -2174,60 +2138,16 @@ $(document).on('click', '.view-lokasi', function() {
     back2lokasi();
 });
 
-$('#tblLokasi tbody').on( 'dblclick', 'tr', function () {
-
-    var data = lokasi_tbl.row(this).data();
-
-    nm_lokasi_temp = data.nama_lokasi;
-    id_lokasi_temp = data.id_lokasi_renja;
-    id_asb_temp = data.id_aktivitas_asb;
-    ur_asb_temp = data.uraian_aktivitas_kegiatan;
-    vol1_temp=data.volume_1;
-    vol2_temp=data.volume_2;
-    id_sat_lok1=data.id_satuan_1;
-    id_sat_lok2=data.id_satuan_2;
-    nm_sat_lok1=data.sat1_display;
-    nm_sat_lok2=data.sat2_display;
-    tahun_temp = $('#tahun_rkpd').val();
-    unit_temp = $('#id_unit').val();
-
-    document.getElementById("nm_program_belanja").innerHTML =prog_renja;
-    document.getElementById("nm_kegiatan_belanja").innerHTML =keg_renja;
-    document.getElementById("nm_aktivitas_belanja").innerHTML =aktivitas_renja;
-    document.getElementById("nm_sub_belanja").innerHTML =nm_sub_temp;
-    document.getElementById("nm_lokasi_belanja").innerHTML =nm_lokasi_temp;
-
-    $('#divTambahAktivitas').hide();
-    $('#divTambahPelaksana').hide();
-    $('#divTambahLokasi').hide();
-
-    if(data.sumber_aktivitas == 0){
-      $('#divAddSSH').hide();
-      $('#divImportASB').show();
-    } else {
-      $('#divAddSSH').show();
-      $('#divImportASB').hide();
-    }    
-
-    $('.nav-tabs a[href="#belanja"]').tab('show');
-    loadTblBelanja(id_lokasi_temp);
-
-});
-
 $(document).on('click', '.view-belanja', function() {
 
-  var data = lokasi_tbl.row( $(this).parents('tr') ).data();
+ 
+    var data = aktivitas_tbl.row( $(this).parents('tr') ).data();   
 
-    nm_lokasi_temp = data.nama_lokasi;
-    id_lokasi_temp = data.id_lokasi_renja;
-    id_asb_temp = data.id_aktivitas_asb;
-    ur_asb_temp = data.uraian_aktivitas_kegiatan;
-    vol1_temp=data.volume_1;
-    vol2_temp=data.volume_2;
-    id_sat_lok1=data.id_satuan_1;
-    id_sat_lok2=data.id_satuan_2;
-    nm_sat_lok1=data.sat1_display;
-    nm_sat_lok2=data.sat2_display;
+    aktivitas_renja = data.uraian_aktivitas_kegiatan;
+    id_aktivitas_temp = data.id_aktivitas_renja; 
+    id_sat_asb1 = data.id_satuan_1;
+    id_sat_asb2 = data.id_satuan_2; 
+    sbr_aktivitas=data.sumber_aktivitas; 
     tahun_temp = $('#tahun_rkpd').val();
     unit_temp = $('#id_unit').val();
 
@@ -2235,7 +2155,6 @@ $(document).on('click', '.view-belanja', function() {
     document.getElementById("nm_kegiatan_belanja").innerHTML =keg_renja;
     document.getElementById("nm_aktivitas_belanja").innerHTML =aktivitas_renja;
     document.getElementById("nm_sub_belanja").innerHTML =nm_sub_temp;
-    document.getElementById("nm_lokasi_belanja").innerHTML =nm_lokasi_temp;
 
     $('#divTambahAktivitas').hide();
     $('#divTambahPelaksana').hide();
@@ -2250,7 +2169,7 @@ $(document).on('click', '.view-belanja', function() {
     }
 
     $('.nav-tabs a[href="#belanja"]').tab('show');
-    loadTblBelanja(id_lokasi_temp);
+    loadTblBelanja(id_aktivitas_temp);
 });
 
 $( "#id_unit" ).change(function() {
@@ -2288,35 +2207,24 @@ $( "#pagu_renja_kegiatan" ).change(function() {
       $('.btnKegiatan').removeClass('addKegiatanRenja');
       $('.btnKegiatan').addClass('editKegiatanRenja');      
       $('.form-horizontal').show();
-      $('.modal-title').text('Edit dan Reviu Kegiatan Renja pada '+data.nm_unit);
+      $('.modal-title').text('Reviu Kegiatan Renja pada '+data.nm_unit);
       $('#id_renja_kegiatan').val(data.id_renja);
-      $('#id_rkpd_ranwal_kegiatan').val(data.id_rkpd_ranwal);
       $('#tahun_renja_kegiatan').val(data.tahun_renja);
-      $('#id_renja_program_kegiatan').val(data.id_renja_program);
-      $('#id_unit_kegiatan').val(data.id_unit);
-      $('#ur_kegiatan_renstra').val(data.uraian_kegiatan_renstra);
-      $('#ur_kegiatan_renja').val(data.uraian_kegiatan_renja);
-      $('#ur_kegiatan_ref').val(data.kd_kegiatan +" -" +data.nm_kegiatan);
-      $('#no_urut_kegiatan').val(data.no_urut);
-      $('#pagu_renja_kegiatan').val(data.pagu_tahun_kegiatan);
-      $('#persen_musren').val(data.persen_musren);
-      $('#pagu_musren').val(data.pagu_musrenbang);
-      $('#keterangan_status_kegiatan').val(data.ket_usulan);
-      $('#status_pelaksanaan_kegiatan').val(data.status_pelaksanaan_kegiatan);
+      $('#id_checkKegiatan').val(data.status_rancangan);
+      document.getElementById("ur_kegiatan_ref").innerHTML = data.kd_kegiatan +" -" +data.nm_kegiatan;
 
-      $('.chkKegiatan').show();
-      if(data.status_rancangan==1){
-        $('.checkKegiatan').prop('checked',true);
+      if(data.status_rancangan==0){
+          document.getElementById("ur_kegiatan_status_posting").innerHTML = "Posting";
       } else {
-        $('.checkKegiatan').prop('checked',false);
+          document.getElementById("ur_kegiatan_status_posting").innerHTML = "Un-Posting";
       }
 
-      $('#ModalKegiatan').modal('show');
+      $('#StatusKegiatan').modal('show');
   });
 
 $('.modal-footer').on('click', '.editKegiatanRenja', function() {
 
-    if (document.getElementById("checkKegiatan").checked){
+    if ($('#id_checkKegiatan').val()==0){
         check_data = 1
       } else {
         check_data = 0
@@ -2333,16 +2241,64 @@ $('.modal-footer').on('click', '.editKegiatanRenja', function() {
                           '_token': $('input[name=_token]').val(),
                           'id_renja': $('#id_renja_kegiatan').val(),
                           'tahun_renja': $('#tahun_renja_kegiatan').val(),
-                          'pagu_kegiatan' : $('#pagu_renja_kegiatan').val(),
-                          'pagu_musrenbang' : $('#persen_musren').val(),
-                          'pagu_musren' : $('#pagu_musren').val(),
-                          'ket_usulan': $('#keterangan_status_kegiatan').val(),
-                          'status_pelaksanaan_kegiatan': $('#status_pelaksanaan_kegiatan').val(),
                           'status_rancangan' : check_data,
                       },
                       success: function(data) {
-                          console.log(data);
                           $('#tblKegiatanRenja').DataTable().ajax.reload();
+                          $('#tblProgram').DataTable().ajax.reload();
+                          if(data.status_pesan==1){
+                              createPesan(data.pesan,"success");
+                              } else {
+                              createPesan(data.pesan,"danger"); 
+                              } 
+                      }
+                  });    
+  });
+
+$(document).on('click', '.btnUnProgram', function() {
+
+    var data = prog_renja_tbl.row( $(this).parents('tr') ).data();   
+
+      $('.btnPostProgram').removeClass('addProgramRenja');
+      $('.btnPostProgram').addClass('editProgramRenja');      
+      $('.form-horizontal').show();
+      $('.modal-title').text('Reviu Program Renja pada '+data.nm_unit);
+      $('#id_program_renja_posting').val(data.id_renja_program);
+      $('#status_program_renja_posting').val(data.status_data);
+      $('#tahun_renja_posting').val(data.tahun_renja);
+      document.getElementById("ur_program_renja_posting").innerHTML = data.uraian_program;
+
+      if(data.status_data==0){
+          document.getElementById("ur_status_posting").innerHTML = "Posting";
+      } else {
+          document.getElementById("ur_status_posting").innerHTML = "Un-Posting";
+      }
+
+      $('#StatusProgram').modal('show');
+  });
+
+$('.modal-footer').on('click', '.editProgramRenja', function() {
+
+    if ($('#status_program_renja_posting').val()==0){
+        check_data_x = 1
+      } else {
+        check_data_x = 0
+      }
+
+                    $.ajaxSetup({
+                       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+                    });
+
+                    $.ajax({
+                      type: 'post',
+                      url: 'renja/blang/postProgram',
+                      data: {
+                          '_token': $('input[name=_token]').val(),
+                          'tahun_renja': $('#tahun_renja_posting').val(),
+                          'id_renja_program': $('#id_program_renja_posting').val(),
+                          'status_data' : check_data_x,
+                      },
+                      success: function(data) {
                           $('#tblProgram').DataTable().ajax.reload();
                           if(data.status_pesan==1){
                               createPesan(data.pesan,"success");
@@ -2432,75 +2388,6 @@ function getJenisPembahasan(){
     return xvalues;
   }
 
-$(document).on('click', '.add-aktivitas', function() {
-        
-      $('.btnAktivitas').addClass('addAktivitas');
-      $('.btnAktivitas').removeClass('editAktivitas');      
-      $('.form-horizontal').show();
-      $('.modal-title').text('Tambah Aktivitas untuk kegiatan '+keg_renja);
-      $('#id_renja_aktivitas').val(id_renja_temp);
-      $('#id_aktivitas').val(null);
-      $('#tahun_renja_aktivitas').val(tahun_temp);
-      $('#no_urut_aktivitas').val(1);
-      $('#ur_aktivitas_kegiatan').val(null);
-      $('#id_aktivitas_asb').val(null);
-      document.frmModalAktivitas.jenis_aktivitas[0].checked=true;
-      $('#sumber_dana').val(0);
-      $('#pagu_aktivitas').val(0);      
-      document.frmModalAktivitas.jenis_pembahasan[0].checked=true;
-      $('#persen_musren_aktivitas').val(0);
-      $('#pagu_musren_aktivitas').val(0);
-
-      document.frmModalAktivitas.sumber_aktivitas[0].checked=true;
-      document.getElementById("ur_aktivitas_kegiatan").setAttribute("disabled","disabled");
-      $('.btnCariASB').show();
-
-      $('#id_satuan_publik').val(-1);
-
-      $('#persen_musren_aktivitas').attr("disabled","disabled");
-      $('#id_satuan_publik').attr("disabled","disabled");
-
-      $('#ModalAktivitas').modal('show');
-
-  });
-
-  $('.modal-footer').on('click', '.addAktivitas', function() {
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-
-
-
-      $.ajax({
-          type: 'post',
-          url: 'renja/blang/addAktivitas',
-          data: {
-              '_token': $('input[name=_token]').val(),
-              'no_urut': $('#no_urut_aktivitas').val(),
-              'id_renja': $('#id_renja_aktivitas').val(),
-              'tahun_renja': $('#tahun_renja_aktivitas').val(),
-              'id_aktivitas_asb' : $('#id_aktivitas_asb').val() ,
-              'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan').val() ,
-              'sumber_dana' : $('#sumber_dana').val() ,
-              'pagu_musren' : $('#persen_musren_aktivitas').val(),
-              'pagu_aktivitas' : $('#pagu_aktivitas').val() ,
-              'id_satuan_publik' : $('#id_satuan_publik').val(), 
-              'sumber_aktivitas' : getSumberASB() ,
-              'jenis_kegiatan' : getJenisKegiatan() ,
-              'status_musren': getJenisPembahasan(),
-          },
-          success: function(data) {
-              $('#tblAktivitas').DataTable().ajax.reload();
-              $('#tblKegiatanRenja').DataTable().ajax.reload();
-              $('#tblProgram').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              } 
-          }
-      });
-  });
 
 $('#ModalAktivitas').on('hidden.bs.modal', function () {
     $.ajax({
@@ -2582,8 +2469,7 @@ $(document).on('click', '.edit-aktivitas', function() {
         $('#jenis_pembahasan').attr("disabled","disabled");
         $('#persen_musren_aktivitas').attr("disabled","disabled");
         $('#id_satuan_publik').attr("disabled","disabled");
-      }
-      
+      }      
 
       $('#ModalAktivitas').modal('show');
     });
@@ -2600,33 +2486,20 @@ $(document).on('click', '.edit-aktivitas', function() {
       });
           $.ajax({
               type: 'post',
-              url: 'renja/blang/editAktivitas',
+              url: 'renja/blang/postAktivitas',
               data: {
                   '_token': $('input[name=_token]').val(),
                   'id_aktivitas_renja': $('#id_aktivitas').val(),
-                  'no_urut': $('#no_urut_aktivitas').val(),
-                  'id_renja': $('#id_renja_aktivitas').val(),
-                  'tahun_renja': $('#tahun_renja_aktivitas').val(),
-                  'id_aktivitas_asb' : $('#id_aktivitas_asb').val() ,
-                  'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan').val() ,
-                  'sumber_dana' : $('#sumber_dana').val() ,
-                  'pagu_musren' : $('#persen_musren_aktivitas').val(),
-                  'pagu_aktivitas' : $('#pagu_aktivitas').val() ,
-                  // 'pagu_pelaksana' : pagu.jml_pagu ,               
-                  'id_satuan_publik' : $('#id_satuan_publik').val(), 
-                  'sumber_aktivitas' : getSumberASB() ,
-                  'jenis_kegiatan' : getJenisKegiatan() ,
                   'status_data': check_data,
-                  'status_musren': getJenisPembahasan(),
               },
               success: function(data) {
                   $('#tblAktivitas').DataTable().ajax.reload();
                   $('#tblKegiatanRenja').DataTable().ajax.reload();
                   $('#tblProgram').DataTable().ajax.reload();
                   if(data.status_pesan==1){
-                  createPesan(data.pesan,"success");
+                    createPesan(data.pesan,"success");
                   } else {
-                  createPesan(data.pesan,"danger"); 
+                    createPesan(data.pesan,"danger"); 
                   }
               }
           });
@@ -2663,93 +2536,32 @@ $(document).on('click', '.btnHapusAktivitas', function() {
   }
 });
 
-$(document).on('click', '.add-pelaksana', function() {
-        
-      $('.btnPelaksana').addClass('addPelaksana');
-      $('.btnPelaksana').removeClass('editPelaksana');      
-      $('.form-horizontal').show();
-      $('.modal-title').text('Tambah Pelaksana aktivitas '+keg_renja);
-      $('#id_renja_pelaksana').val(id_renja_temp);
-      $('#id_pelaksana_renja').val(null);
-      $('#tahun_renja_pelaksana').val(tahun_temp);
-      $('#no_urut_pelaksana').val(0);
-      $('#id_aktivitas_pelaksana').val(id_aktivitas_temp);
-      $('#id_subunit_pelaksana').val(null);
-      $('#id_lokasi_pelaksana').val(null);
-      $('#nm_lokasi_penyelenggara').val(null);
-      $('#subunit_pelaksana').val(null);
-
-      $('.idbtnHapusPelaksana').hide();
-
-      $('#ModalPelaksana').modal('show');
-
-  });
-
-  $('.modal-footer').on('click', '.addPelaksana', function() {
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-
-      $.ajax({
-          type: 'post',
-          url: 'renja/blang/addPelaksana',
-          data: {
-              '_token': $('input[name=_token]').val(),
-              'no_urut': $('#no_urut_pelaksana').val(),
-              'id_renja': $('#id_renja_pelaksana').val(),
-              'tahun_renja': $('#tahun_renja_pelaksana').val(),
-              'id_aktivitas_renja' : $('#id_aktivitas_pelaksana').val() ,
-              'id_sub_unit' : $('#id_subunit_pelaksana').val(),
-              'id_lokasi' : $('#id_lokasi_pelaksana').val(),
-          },
-          success: function(data) {
-              $('#tblPelaksana').DataTable().ajax.reload();
-              if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              } 
-          }
-      });
-  });
-
 $(document).on('click', '.edit-pelaksana', function() {
 
   var data = pelaksana_tbl.row( $(this).parents('tr') ).data();
-
-    // alert(data.nama_lokasi);
         
       $('.btnPelaksana').addClass('editPelaksana');
       $('.btnPelaksana').removeClass('addPelaksana');      
       $('.form-horizontal').show();
       $('.modal-title').text('Ubah Pelaksana aktivitas '+keg_renja);
-      $('#id_renja_pelaksana').val(data.id_renja);
+      $('#id_checkPelaksana').val(data.status_data);
       $('#id_pelaksana_renja').val(data.id_pelaksana_renja);
       $('#tahun_renja_pelaksana').val(data.tahun_renja);
-      $('#no_urut_pelaksana').val(data.no_urut);
-      $('#id_aktivitas_pelaksana').val(data.id_aktivitas_renja);
-      $('#id_subunit_pelaksana').val(data.id_sub_unit);
-      $('#id_lokasi_pelaksana').val(data.id_lokasi);
-      $('#nm_lokasi_penyelenggara').val(data.nama_lokasi);
-      $('#subunit_pelaksana').val(data.nm_sub);
 
-      $('.idbtnHapusPelaksana').show();
+       document.getElementById("ur_pelaksana_ref").innerHTML = data.nm_sub;
 
-      $('.chkPelaksana').show();
-
-      if(data.status_data==1){
-        $('.checkPelaksana').prop('checked',true);
+      if(data.status_data==0){
+          document.getElementById("ur_pelaksana_status_posting").innerHTML = "Posting";
       } else {
-        $('.checkPelaksana').prop('checked',false);
+          document.getElementById("ur_pelaksana_status_posting").innerHTML = "Un-Posting";
       }
 
-      $('#ModalPelaksana').modal('show');
-
+      $('#StatusPelaksana').modal('show');
   });
 
   $('.modal-footer').on('click', '.editPelaksana', function() {
 
-      if (document.getElementById("checkPelaksana").checked){
+      if ($('#id_checkPelaksana').val()==0){
         check_data = 1
       } else {
         check_data = 0
@@ -2764,13 +2576,8 @@ $(document).on('click', '.edit-pelaksana', function() {
           url: 'renja/blang/editPelaksana',
           data: {
               '_token': $('input[name=_token]').val(),
-              'no_urut': $('#no_urut_pelaksana').val(),
-              'id_renja': $('#id_renja_pelaksana').val(),
               'tahun_renja': $('#tahun_renja_pelaksana').val(),
               'id_pelaksana_renja' : $('#id_pelaksana_renja').val() ,
-              'id_aktivitas_renja' : $('#id_aktivitas_pelaksana').val() ,
-              'id_sub_unit' : $('#id_subunit_pelaksana').val(),
-              'id_lokasi' : $('#id_lokasi_pelaksana').val(),
               'status_data' : check_data,
           },
           success: function(data) {
@@ -2831,7 +2638,7 @@ $(document).on('click', '.add-lokasi', function() {
       $('.btnLokasi').removeClass('editLokasi');      
       $('.form-horizontal').show();
       $('.modal-title').text('Tambah Lokasi Pelaksanaan Aktivitas : '+aktivitas_renja);
-      $('#id_pelaksana_lokasi').val(id_pelaksana_temp);
+      $('#id_pelaksana_lokasi').val(id_aktivitas_temp);
       $('#id_lokasi_renja').val(null);
       $('#tahun_renja_lokasi').val(tahun_temp);
       $('#no_urut_lokasi').val(0);
@@ -3097,7 +2904,7 @@ $(document).on('click', '.add-belanja', function() {
       $('.btnBelanja').removeClass('editBelanja');      
       $('.form-horizontal').show();
       $('.modal-title').text('Tambah Uraian Belanja : '+aktivitas_renja);
-      $('#id_lokasi_belanja').val(id_lokasi_temp);
+      $('#id_lokasi_belanja').val(id_aktivitas_temp);
       $('#id_belanja').val(null);
       $('#tahun_renja_belanja').val(tahun_temp);
       $('#no_urut_belanja').val(0);
@@ -3107,10 +2914,10 @@ $(document).on('click', '.add-belanja', function() {
       $('#ur_item_ssh').val(null);
       $('#id_rekening').val(null);
       $('#ur_rekening').val(null);
-      $('#volume1').val(vol1_temp);
-      $('#id_satuan1').val(id_sat_lok1);
-      $('#satuan1').text(nm_sat_lok1);
-      $('#volume2').val(vol2_temp);
+      $('#volume1').val(0);
+      $('#id_satuan1').val(-1);
+      $('#satuan1').text(-1);
+      $('#volume2').val(0);
       $('#harga_satuan').val(1);
       $('#jumlah_belanja').val(1);
       $('#uraian_belanja').val(null);

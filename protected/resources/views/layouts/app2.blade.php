@@ -134,7 +134,7 @@ use hoaaah\LaravelMenu\Menu;
                                             [
                                                 'label' => 'Dokumen PPAS Perubahan',
                                                 'visible' => $akses->get(701),
-                                                'url' => '/ppas',
+                                                'url' => '/ppasubah',
                                             ],
                                             [
                                                 'label' => 'Penyusunan PPAS Perubahan',
@@ -143,12 +143,12 @@ use hoaaah\LaravelMenu\Menu;
                                                     [
                                                         'label' => 'Program RKPD',
                                                         'visible' => $akses->get(702),
-                                                        'url' => '#',
+                                                        'url' => '/ppasubah/progpemda',
                                                     ],
                                                     [
                                                         'label' => 'Program RENJA',
                                                         'visible' => $akses->get(703),
-                                                        'url' => '#',
+                                                        'url' => '/ppasubah/progpemda',
                                                     ],
                                                 /*    [
                                                         'label' => 'Pagu Anggaran',
@@ -294,7 +294,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'label' => 'PPAS', 
                                                 'visible' => $akses->get(70),
                                                 'items' => [
-                                                    ['label' => 'PPAS', 'url' => '#', 'visible' => $akses->get(70)],
+                                                    ['label' => 'PPAS', 'url' => '/cetak/ppas', 'visible' => $akses->get(70)],
                                                     ['label' => 'PPAS Perubahan', 'url' => '#', 'visible' => $akses->get(70)],
                                                 ]
                                             ],

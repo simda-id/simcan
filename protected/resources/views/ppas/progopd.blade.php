@@ -9,9 +9,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Data Program Renja OPD';
+                $this->title = 'Data Program Renja - PPAS';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = 'modul3';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => 'PPAS']);
                 $breadcrumb->add(['label' => $this->title]);
@@ -33,6 +33,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
                         <div class="col-sm-2">                            
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
+                        </div>                        
+                        <button id="btnPostUnit" type="button" class="btnPostUnit btn-labeled btn-sm btn-success hidden">
+                          <span class="btn-label"><i class="glyphicon glyphicon-upload"></i></span>Posting Unit</button>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen PPAS :</label>
+                        <div class="col-sm-5">
+                            <select class="form-control id_dokumen_keu" name="id_dokumen_keu" id="id_dokumen_keu"></select>
                         </div>
                 </div>
                 <div class="form-group">
@@ -44,7 +52,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </form>
                 <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                      <li class="active"><a href="#programrkpd" aria-controls="programrkpd" role="tab" data-toggle="tab">Program RKPD</a></li>
+                      <li class="active"><a href="#programrkpd" aria-controls="programrkpd" role="tab" data-toggle="tab">Program RKPD - PPAS</a></li>
                       <li class="disabled"><a href="#program" aria-controls="program" role="tab-kv" data-toggle="tab">Program PD</a></li>
                       <li class="disabled"><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan PD</a></li>
                       <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana</a></li>
@@ -58,7 +66,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <div role="tabpanel" class="tab-pane fade in active" id="programrkpd">
                                 <div class="col-md-12">
                                   <div class="add hidden">
-                                    <button id="btnPostingProgRKPD" type="button" class="post-ProgRKPD btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Posting Program RKPD</button>
+                                    <button id="btnPostingProgRKPD" type="button" class="post-ProgRKPD btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Posting Program RKPD - PPAS</button>
                                   </div>
                                     <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                                     <thead>
@@ -71,14 +79,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             {{-- <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th> --}}
                                         </tr>
                                         <tr>
-                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Program SKPD</th>  
-                                            <th colspan="2" style="text-align: center; vertical-align:middle">Kegiatan SKPD</th>
-                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Aktivitas SKPD</th>
+                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Program OPD</th>  
+                                            <th colspan="2" style="text-align: center; vertical-align:middle">Kegiatan OPD</th>
+                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Aktivitas OPD</th>
                                         </tr>
                                         <tr>                                            
                                             <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
                                             <th width="50px" style="text-align: center; vertical-align:middle">Pagu Total</th>
-                                            {{-- <th width="50px" style="text-align: center; vertical-align:middle">Pagu Musrenbang</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>                                        
@@ -97,7 +104,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                       <table class="table table-striped table-bordered">
                                         <tbody>
                                           <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD - PPAS</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_program_progrenja" align='left'></label></td>
                                           </tr>
                                         </tbody>
@@ -136,7 +143,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table class="table table-striped table-bordered">
                                       <tbody>
                                         <tr>
-                                            <td width="20%%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                                            <td width="20%%" style="text-align: left; vertical-align:top;">Program RKPD - PPAS</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_kegrenja" align='left'></label></td>
                                         </tr>
                                         <tr>
@@ -159,8 +166,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Ranhir RKPD</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">RKPD Final</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">RKPD</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">PPAS</th>
                                                 <th width='5%' style="text-align: center; vertical-align:middle">Jumlah</th>
                                                 <th width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
                                                 {{-- <th width='10%' style="text-align: center; vertical-align:middle">Pagu Musrenbang</th> --}}
@@ -180,7 +187,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table class="table table-striped table-bordered">
                                       <tbody>
                                         <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD - PPAS</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_pelaksana" align='left'></label></td>
                                           </tr>
                                         <tr>
@@ -270,7 +277,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table class="table table-striped table-bordered">
                                       <tbody>
                                         <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD - PPAS</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_lokasi" align='left'></label></td>
                                           </tr>
                                         <tr>
@@ -313,24 +320,29 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>   
                                 </div>
                             <div role="tabpanel" class="tab-pane fade in" id="belanja">
+                                  
                                   <div id="divAddSSH">
                                     <a id="btnTambahBelanja" type="button" class="add-belanja btn btn-labeled btn-success">
                                       <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah dari SSH</a>
                                      <a id="btnCopyBelanja" type="button" class="btn btn-labeled btn-primary">
                                       <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Copy dari Aktivitas Lain</a>
+                                      <a id="btnCetakRKA" type="button" class="btnCetakRKA btn btn-labeled btn-default">
+                                          <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RKA 2.2.1</a>
                                   </div>
                                   <div id="divImportASB">
                                     <a id="btnTambahBelanjaASB" type="button" class="add-belanjaASB btn btn-labeled btn-info">
                                       <span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span>Tambah dari ASB</a>
                                     <a id="btnUnLoadAsb" type="button" class="btnUnLoadAsb btn btn-labeled btn-danger">
                                       <span class="btn-label"><i class="fa fa-stack-overflow fa-fw fa-lg"></i></span>Unload Belanja</a>
+                                    <a id="btnCetakRKA1" type="button" class="btnCetakRKA1 btn btn-labeled btn-default">
+                                          <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RKA 2.2.1</a>
                                   </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
                                         <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD - PPAS</td>
                                             <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_belanja" align='left'></label></td>
                                           </tr>
                                         <tr>
@@ -383,7 +395,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </div>
 
 <script id="details-template" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="bidang-@{{id_unit}}@{{id_rkpd_rancangan}}">
+        <table class="table table-striped table-bordered table-responsive compact details-table" id="bidang-@{{id_unit}}@{{id_anggaran_pemda}}">
             <thead>
               <tr>
                   <th width="15%" style="text-align: center; vertical-align:middle;">Kd Bidang</th>
@@ -451,31 +463,32 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </table>
 </script>
 
-  @include('ranhirrkpd.program_pd')
-  @include('ranhirrkpd.program_indikator_pd')
-  @include('ranhirrkpd.kegiatan_pd')
-  @include('ranhirrkpd.kegiatan_indikator_pd')
-  @include('ranhirrkpd.pelaksana_pd')
-  @include('ranhirrkpd.aktivitas_pd')
-  @include('ranhirrkpd.lokasi_pd')
-  @include('ranhirrkpd.belanja_pd')
+  @include('ppas.program_pd')
+  @include('ppas.program_indikator_pd')
+  @include('ppas.kegiatan_pd')
+  @include('ppas.kegiatan_indikator_pd')
+  @include('ppas.pelaksana_pd')
+  @include('ppas.aktivitas_pd')
+  @include('ppas.lokasi_pd')
+  @include('ppas.belanja_pd')
 
-  @include('ranhirrkpd.cariProgramRenstra')
-  @include('ranhirrkpd.cariKegiatanRenstra')
-  @include('ranhirrkpd.cariProgramRef')
-  @include('ranhirrkpd.cariKegiatanRef')
-  @include('ranhirrkpd.cariIndikator')
-  @include('ranhirrkpd.cariSubUnit')
-  @include('ranhirrkpd.cariAktivitasASB')
-  @include('ranhirrkpd.cariLokasiModal')
-  @include('ranhirrkpd.cariLokasiTeknisModal')
-  @include('ranhirrkpd.cariItemSSH')
-  @include('ranhirrkpd.cariRekening')
-  @include('ranhirrkpd.ModalCopyBelanja')
-  @include('ranhirrkpd.loadBelanjaASB')
+  @include('ppas.cariProgramRenstra')
+  @include('ppas.cariKegiatanRenstra')
+  @include('ppas.cariProgramRef')
+  @include('ppas.cariKegiatanRef')
+  @include('ppas.cariIndikator')
+  @include('ppas.cariSubUnit')
+  @include('ppas.cariAktivitasASB')
+  @include('ppas.cariLokasiModal')
+  @include('ppas.cariLokasiTeknisModal')
+  @include('ppas.cariItemSSH')
+  @include('ppas.cariRekening')
+  @include('ppas.ModalCopyBelanja')
+  @include('ppas.loadBelanjaASB')
 
 @endsection
 
 @section('scripts')
-  @include('ranhirrkpd.js_penyesuaian_pd')
+  {{-- @include('ppas.js_penyesuaian_pd') --}}
+  <script src="{{ asset('/protected/resources/views/ppas/js/js_penyesuaian_pd.js')}}"></script>
 @endsection

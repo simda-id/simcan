@@ -155,9 +155,8 @@ $('#tblDokumen tbody').on( 'dblclick', 'tr', function () {
 
   });
 
-$(document).on('click', '#btnLihatRekap', function() {
-  
-  var data = dokumen_tbl.row( $(this).parents('tr') ).data();  
+$(document).on('click', '#btnLihatRekap', function() {  
+    var data = dokumen_tbl.row( $(this).parents('tr') ).data();  
     loadTblRekapPPAS(data.id_dokumen_keu);
     $('.nav-tabs a[href="#rekap"]').tab('show');
 });
@@ -172,7 +171,6 @@ $(document).on('click', '#btnAddDokumen', function() {
       $('#btnDokumen').addClass('addDokumen');
       $('.modal-title').text('Tambah Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)');
       $('.form-horizontal').show();
-
       $('#id_dokumen_rkpd').val(null);
       $('#tahun_rkpd').val({{Session::get('tahun')}});
       $('#id_dokumen_ref').val(0);
@@ -237,16 +235,17 @@ $(document).on('click', '#btnEditDokumen', function() {
       $('.modal-title').text('Ubah Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)');
       $('.form-horizontal').show();
 
-      $('#id_dokumen_rkpd').val(data.id_dokumen_rkpd);
-      $('#tahun_rkpd').val(data.tahun_rkpd);
-      $('#tanggal_rkpd').val(data.tanggal_rkpd);
-      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_rkpd));
-      $('#nomor_rkpd').val(data.nomor_rkpd);
+      $('#id_dokumen_rkpd').val(data.id_dokumen_keu);
+      $('#tahun_rkpd').val(data.tahun_anggaran);
+      $('#tanggal_rkpd').val(data.tanggal_keu);
+      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_keu));
+      $('#nomor_rkpd').val(data.nomor_keu);
       $('#uraian_perkada').val(data.uraian_perkada);
-      $('#id_unit_perencana').val(data.id_unit_perencana);
+      $('#id_unit_perencana').val(data.id_unit_ppkd);
       $('#id_unit_perencana_display').val(data.nm_unit);
       $('#nama_tandatangan').val(data.nama_tandatangan);      
       $('#nip_tandatangan').val(data.nip_tandatangan);
+      $('#id_dokumen_ref').val(data.id_dokumen_ref);
       
       if(data.nip_tandatangan==null){
         $('#nip_tandatangan_display').val(null);
@@ -275,14 +274,15 @@ $('.modal-footer').on('click', '.editDokumen', function() {
       url: 'ppas/editDokumen',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_rkpd').val(),
-        'tahun_rkpd': $('#tahun_rkpd').val(),
-        'tanggal_rkpd': $('#tanggal_rkpd').val(),
-        'nomor_rkpd': $('#nomor_rkpd').val(),
+        'id_dokumen_keu': $('#id_dokumen_rkpd').val(),
+        'id_dokumen_ref': $('#id_dokumen_ref').val(),
+        'nomor_keu': $('#nomor_rkpd').val(),
+        'tanggal_keu': $('#tanggal_rkpd').val(),
         'uraian_perkada': $('#uraian_perkada').val(),
-        'id_unit_perencana': $('#id_unit_perencana').val(),
+        'id_unit_ppkd': $('#id_unit_perencana').val(),
         'nama_tandatangan': $('#nama_tandatangan').val(),
         'nip_tandatangan': $('#nip_tandatangan').val(),
+
       },
       success: function(data) {
         dokumen_tbl.ajax.reload(null,false);
@@ -317,7 +317,7 @@ $('.modal-footer').on('click', '.delDokumen', function() {
       url: 'ppas/hapusDokumen',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
+        'id_dokumen_keu': $('#id_dokumen_hapus').val(),
       },
       success: function(data) {
         dokumen_tbl.ajax.reload(null,false);
@@ -336,10 +336,11 @@ $(document).on('click', '#btnPostingRkpd', function() {
   var data = dokumen_tbl.row( $(this).parents('tr') ).data();
       $('.form-horizontal').show();
 
-      $('#id_dokumen_posting').val(data.id_dokumen_rkpd);
+      $('#id_dokumen_posting').val(data.id_dokumen_keu);
+      $('#id_dokumen_referensi').val(data.id_dokumen_ref);
       $('#status_dokumen_posting').val(data.flag);
-      $('#tahun_dokumen_posting').val(data.tahun_rkpd);      
-      $('#ur_tahun_posting').html(data.tahun_rkpd);
+      $('#tahun_dokumen_posting').val(data.tahun_anggaran);      
+      $('#ur_tahun_posting').html(data.tahun_anggaran);
 
       if(data.flag==0){
         $('#ur_status_dokumen_posting').html("Posting");
@@ -374,8 +375,9 @@ $('.modal-footer').on('click', '#btnPostProgram', function() {
           url: 'ppas/postDokumen',
           data: {
               '_token': $('input[name=_token]').val(),
-              'tahun_rkpd': $('#tahun_dokumen_posting').val(),
-              'id_dokumen_rkpd': $('#id_dokumen_posting').val(),
+              'tahun_anggaran': $('#tahun_dokumen_posting').val(),
+              'id_dokumen_keu': $('#id_dokumen_posting').val(),
+              'id_dokumen_ref': $('#id_dokumen_referensi').val(),
               'flag': status_post,
               'status': status_temp,
               'status_awal': status_awal,

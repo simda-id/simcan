@@ -47,7 +47,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="pagu_rpjmd_program" class="col-sm-2 control-label" align='left'>Pagu RPJMD</label>
+                  <label for="pagu_rpjmd_program" class="col-sm-2 control-label" align='left'>Pagu RKPD</label>
                   <div class="col-sm-2">
                     <input type="text" class="form-control number" id="pagu_rpjmd_program" name="pagu_rpjmd_program" disabled >
                   </div>
@@ -55,7 +55,7 @@
                   <div class="col-sm-2">
                     <input type="text" class="form-control number" id="pagu_opd_program" name="pagu_opd_program" disabled >
                   </div>
-                  <label for="pagu_rkpd_program" class="col-sm-1 control-label" align='left'>Pagu RKPD</label>
+                  <label for="pagu_rkpd_program" class="col-sm-1 control-label" align='left'>Pagu PPAS</label>
                   <div class="col-sm-2">
                       <input type="text" class="form-control number" id="pagu_rkpd_program" name="pagu_rkpd_program" required="required" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="Diisi dengan jumlah pagu yang akan dianggarkan pada tahun berjalan, jumlahnya bisa lebih besar maupun lebih kecil dari pagu di RPJMD">
                   </div>
@@ -127,7 +127,6 @@
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-          {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">

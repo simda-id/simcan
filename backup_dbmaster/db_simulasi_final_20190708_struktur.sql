@@ -1672,17 +1672,15 @@ CREATE TABLE IF NOT EXISTS `ref_langkah` (
 -- Pengeluaran data tidak dipilih.
 -- membuang struktur untuk table dbsimcan_simulasi.ref_log_akses
 DROP TABLE IF EXISTS `ref_log_akses`;
-CREATE TABLE IF NOT EXISTS `ref_log_akses` (
-  `id_log` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fl1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fd1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fp2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fu3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fr4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_log_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_log_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `ref_log_akses`  (
+  `id_log` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `fl1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fd1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fp2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fu3` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fr4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_log`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- Pengeluaran data tidak dipilih.
 -- membuang struktur untuk table dbsimcan_simulasi.ref_lokasi

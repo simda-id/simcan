@@ -1,5 +1,5 @@
 <div id="ModalBelanja" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"></h4>
@@ -66,51 +66,54 @@
                         <thead style="background-color: #428bca; color: #fff">
                           <tr>
                             <td width="5%" style="text-align: center; vertical-align:middle;">Sumber</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Volume 1</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Volume 2</td>
+                            <td width="20%" style="text-align: center; vertical-align:middle;">Volume 1</td>
+                            <td width="20%" style="text-align: center; vertical-align:middle;">Volume 2</td>
+                            <td width="15%" style="text-align: center; vertical-align:middle;">Koefisien</td>
                             <td width="20%" style="text-align: center; vertical-align:middle;">Harga Satuan</td>
-                            <td width="25%" style="text-align: center; vertical-align:middle;">Jumlah Total</td>
+                            <td width="20%" style="text-align: center; vertical-align:middle;">Jumlah Total</td>
                           </tr>
                         </thead>
                         <tbody style="background-color: #fff">
                           <tr>
-                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">Ranhir</td>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">PPAS</td>
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <input type="text" class="form-control number" id="volume1" name="volume1" disabled>
                               </td>
                           
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <input type="text" class="form-control number" id="volume2" name="volume2" disabled>
-                              </td>                          
+                              </td> 
+                              <td rowspan="2" width="15%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="koefisien_rkpd" name="koefisien_rkpd" disabled></td>                         
                               <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="harga_satuan" name="harga_satuan" disabled></td>
-                              <td rowspan="2" width="25%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" disabled></td>
+                              <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja" name="jumlah_belanja" disabled></td>
                           </tr>
                           <tr>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <select type="text" class="form-control" id="id_satuan1" name="id_satuan1" disabled></select>
                               </td>
                           
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <select type="text" class="form-control" id="id_satuan2" name="id_satuan2" disabled></select>
                               </td>
                           </tr>
                           <tr>
-                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">Final</td>
-                              <td width="25%" style="text-align: left; vertical-align:top;">
+                              <td rowspan="2" width="5%" style="text-align: center; vertical-align:middle;">APBD</td>
+                              <td width="20%" style="text-align: left; vertical-align:top;">
                                 <input type="text" class="form-control number" id="volume1_forum" name="volume1_forum">
                               </td>                          
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <input type="text" class="form-control number" id="volume2_forum" name="volume2_forum">
-                              </td>                          
+                              </td> 
+                              <td rowspan="2" width="15%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="koefisien_anggaran" name="koefisien_anggaran"></td>                          
                               <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="harga_satuan_forum" name="harga_satuan_forum" disabled></td>
-                              <td rowspan="2" width="25%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja_forum" name="jumlah_belanja_forum" disabled></td>
+                              <td rowspan="2" width="20%" style="text-align: left; vertical-align:middle;"><input type="text" class="form-control number" id="jumlah_belanja_forum" name="jumlah_belanja_forum" disabled></td>
                           </tr>
                           <tr>
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <select type="text" class="form-control" id="id_satuan1_forum" name="id_satuan1_forum"></select>
                               </td>
                           
-                              <td width="25%" style="text-align: left; vertical-align:middle;">
+                              <td width="20%" style="text-align: left; vertical-align:middle;">
                                 <select type="text" class="form-control" id="id_satuan2_forum" name="id_satuan2_forum"></select>
                               </td>
                           </tr>

@@ -2,18 +2,18 @@
 use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Musrenbang RKPD';
+                $this->title = 'Penyesuaian Pagu OPD';
                 $breadcrumb = new Breadcrumb();
-                $breadcrumb->homeUrl = 'modul2';
+                $breadcrumb->homeUrl = 'modul3';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'RKPD']);
+                $breadcrumb->add(['label' => 'APBD']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -24,7 +24,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <p><h2 id="judul" class="panel-title"> {{ $this->title }} :: Penyesuaian Perangkat Daerah</h2></p>
+                    <p><h2 id="judul" class="panel-title"> {{ $this->title }} :: Penyesuaian Pagu Perangkat Daerah</h2></p>
                 </div>
             <div class="panel-body">
                 <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
@@ -36,16 +36,27 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renstra :</label>
+                    <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen Keuangan :</label>
                         <div class="col-sm-5">
-                            <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
+                            <select class="form-control id_dokumen_keu" name="id_dokumen_keu" id="id_dokumen_keu"></select>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3 text-left" for="cb_unit">Unit Penyusun Renstra :</label>
+                        <div class="col-sm-5">
+                            <select class="form-control cb_unit" name="cb_unit" id="cb_unit"></select>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3 text-left" for="cb_sub_unit">Sub Unit Penyusun RKA :</label>
+                        <div class="col-sm-5">
+                            <select class="form-control cb_sub_unit" name="cb_sub_unit" id="cb_sub_unit"></select>
                         </div>
                 </div>
                 </form>
                 <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                      <li class="active"><a href="#programrkpd" aria-controls="programrkpd" role="tab" data-toggle="tab">Program RKPD</a></li>
-                      <li class="disabled"><a href="#program" aria-controls="program" role="tab-kv" data-toggle="tab">Program PD</a></li>
+                      <li class="active"><a href="#program" aria-controls="program" role="tab-kv" data-toggle="tab">Program PD</a></li>
                       <li class="disabled"><a href="#kegiatan" aria-controls="kegiatan" role="tab-kv" data-toggle="tab">Kegiatan PD</a></li>
                       <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv" data-toggle="tab">Pelaksana</a></li>
                       <li class="disabled"><a href="#aktivitas" aria-controls="aktivitas" role="tab-kv" data-toggle="tab">Aktivitas</a></li>
@@ -55,70 +66,21 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     
                     <div class="tab-content">
                     <br>
-                    <div role="tabpanel" class="tab-pane fade in active" id="programrkpd">
+                    <div role="tabpanel" class="tab-pane fade in active" id="program">
                                 <div class="col-md-12">
-                                  <div class="add hidden">
-                                    <button id="btnPostingProgRKPD" type="button" class="post-ProgRKPD btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Posting Program RKPD</button>
-                                  </div>
-                                    <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle"></th>
-                                            <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">No Urut</th>
-                                            <th rowspan="3" style="text-align: center; vertical-align:middle">Nama Program</th>
-                                            <th colspan="4" style="text-align: center; vertical-align:middle">Rincian Data</th>
-                                            <th width="15px" rowspan="3" style="text-align: center; vertical-align:middle">Status</th>
-                                            {{-- <th width="5px" rowspan="3" style="text-align: center; vertical-align:middle">Aksi</th> --}}
-                                        </tr>
-                                        <tr>
-                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Program SKPD</th>  
-                                            <th colspan="2" style="text-align: center; vertical-align:middle">Kegiatan SKPD</th>
-                                            <th width="15px" rowspan="2" style="text-align: center; vertical-align:middle">Aktivitas SKPD</th>
-                                        </tr>
-                                        <tr>                                            
-                                            <th width="15px" style="text-align: center; vertical-align:middle">Jumlah</th>
-                                            <th width="50px" style="text-align: center; vertical-align:middle">Pagu Total</th>
-                                            {{-- <th width="50px" style="text-align: center; vertical-align:middle">Pagu Musrenbang</th> --}}
-                                        </tr>
-                                    </thead>
-                                    <tbody>                                        
-                                    </tbody>
-                                </table>  
-                                </div>  
-                            </div>  
-                            <div role="tabpanel" class="tab-pane fade in" id="program">
-                                <div class="col-md-12">
-                                  <div id="divTambahProg">
-                                    <button id="btnTambahProgRenja" type="button" class="add-ProgRenja btn btn-labeled btn-success">
-                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Program</button>
-                                  </div>
-                                    <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-                                    <div class="table-responsive">
-                                      <table class="table table-striped table-bordered">
-                                        <tbody>
-                                          <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_program_progrenja" align='left'></label></td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                    </form>
                                     <table id="tblProgram" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th width="5px" rowspan="2" style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Kode Program</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Perangkat Daerah</th>
-                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Program</th>
-                                                <th colspan="3" style="text-align: center; vertical-align:middle">Kegiatan</th>
-                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                                <th colspan="3" width='45%' style="text-align: center; vertical-align:middle">Rekapitulasi Pagu</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
-                                              <th width='5%' style="text-align: center; vertical-align:middle">Jumlah</th>
-                                              <th width='5%' style="text-align: center; vertical-align:middle">Reviu</th>
-                                              <th width='10%' style="text-align: center; vertical-align:middle">Pagu</th>
+                                              <th width='15%' style="text-align: center; vertical-align:middle">Pendapatan</th>
+                                              <th width='15%' style="text-align: center; vertical-align:middle">Belanja</th>
+                                              <th width='15%' style="text-align: center; vertical-align:middle">Pembiayaan</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                        
@@ -127,18 +89,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                 </div>  
                             </div>                            
                             <div role="tabpanel" class="tab-pane fade in" id="kegiatan">
-                                  <div id="divTambahKegiatan">
-                                    <button id="btnTambahKegiatan" type="button" class="add-Kegiatan btn btn-labeled btn-success">
-                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kegiatan</button>
-                                  </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
-                                            <td width="20%%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_kegrenja" align='left'></label></td>
-                                        </tr>
                                         <tr>
                                           <td width="20%%" style="text-align: left; vertical-align:top;">Program Perangkat Daerah</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_kegrenja" align='left'></label></td>
@@ -150,7 +104,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblKegiatanRenja" class="table table-striped table-bordered table-responsive compact" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width="5px" rowspan="2" style="text-align: center; vertical-align:middle"></th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Kegiatan Perangkat Daerah</th>
                                                 <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Pagu Kegiatan</th>
@@ -159,11 +112,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Ranhir RKPD</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">RKPD Final</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">PPAS</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">APBD</th>
                                                 <th width='5%' style="text-align: center; vertical-align:middle">Jumlah</th>
                                                 <th width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
-                                                {{-- <th width='10%' style="text-align: center; vertical-align:middle">Pagu Musrenbang</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>                                        
@@ -171,18 +123,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     </table>   
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade in" id="pelaksana">
-                                  <div id="divTambahPelaksana">
-                                    <button id="btnTambahPelaksana" type="button" class="add-pelaksana btn btn-labeled btn-success">
-                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Pelaksana</button>
-                                  </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_pelaksana" align='left'></label></td>
-                                          </tr>
                                         <tr>
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Perangkat Daerah</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_pelaksana" align='left'></label></td>
@@ -198,14 +142,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblPelaksana" class="table table-striped table-bordered table-responsive compact" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
-                                                <th width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Belanja</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
+                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
+                                                <th colspan="3" width='45%' style="text-align: center; vertical-align:middle">Rekapitulasi Pagu</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
+                                            <tr>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Pendapatan</th>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Belanja</th>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Pembiayaan</th>
+                                              </tr>
                                         </thead>
                                         <tbody>                                        
                                         </tbody>
@@ -220,10 +168,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_aktivitas" align='left'></label></td>
-                                          </tr>
                                         <tr>
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Perangkat Daerah</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_aktivitas" align='left'></label></td>
@@ -269,10 +213,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                   <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                       <tbody>
-                                        <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_lokasi" align='left'></label></td>
-                                          </tr>
                                         <tr>
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Perangkat Daerah</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_lokasi" align='left'></label></td>
@@ -330,10 +270,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table class="table table-striped table-bordered">
                                       <tbody>
                                         <tr>
-                                            <td width="20%" style="text-align: left; vertical-align:top;">Program RKPD</td>
-                                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="nm_progrkpd_belanja" align='left'></label></td>
-                                          </tr>
-                                        <tr>
                                           <td width="20%" style="text-align: left; vertical-align:top;">Program Perangkat Daerah</td>
                                           <td style="text-align: left; vertical-align:top;"><label class="backRenja" id="nm_progrenja_belanja" align='left'></label></td>
                                         </tr>
@@ -382,100 +318,31 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
 </div>
 
-<script id="details-template" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="bidang-@{{id_unit}}@{{id_rkpd_rancangan}}">
-            <thead>
-              <tr>
-                  <th width="15%" style="text-align: center; vertical-align:middle;">Kd Bidang</th>
-                  <th style="text-align: center; vertical-align:middle;">Nama Bidang</th>
-                  <th width="20px" style="text-align: center; vertical-align:middle;">Aksi</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-</script>
+  @include('apbd.program_pd')
+  @include('apbd.program_indikator_pd')
+  @include('apbd.kegiatan_pd')
+  @include('apbd.kegiatan_indikator_pd')
+  @include('apbd.pelaksana_pd')
+  @include('apbd.aktivitas_pd')
+  @include('apbd.lokasi_pd')
+  @include('apbd.belanja_pd')
 
-<script id="details-usulan" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="usulan-@{{id_lokasi_forum}}@{{id_pelaksana_forum}}">
-            <thead>
-              <tr>
-                  <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle;">No Urut</th>
-                  <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle;">No Ref</th>
-                  <th rowspan="2" width="30%" style="text-align: center; vertical-align:middle;">Asal Referensi</th>
-                  <th colspan="2" width="15%" style="text-align: center; vertical-align:middle;">Volume Usulan</th>
-                  <th colspan="2" width="15%" style="text-align: center; vertical-align:middle;">Volume Forum</th>
-                  <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle;">Status</th>
-                  <th rowspan="2" width="10px" style="text-align: center; vertical-align:middle;">Aksi</th>
-              </tr>
-              <tr>
-                  
-                  <th style="text-align: center; vertical-align:middle;">1</th>
-                  <th style="text-align: center; vertical-align:middle;">2</th>
-                  <th style="text-align: center; vertical-align:middle;">1</th>
-                  <th style="text-align: center; vertical-align:middle;">2</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-</script>
-
-<script id="details-inProg" type="text/x-handlebars-template">
-        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inProg-@{{id_program_pd}}">
-            <thead>
-              <tr>
-                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
-                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
-                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-</script>
-
-<script id="details-inKeg" type="text/x-handlebars-template">
-        <table class="table table-striped display table-bordered table-responsive compact details-table" id="inKeg-@{{id_kegiatan_pd}}">
-            <thead>
-              <tr>
-                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                <th width="5%" style="text-align: center; vertical-align:middle">Target Renstra</th>
-                <th width="5%" style="text-align: center; vertical-align:middle">Target Renja</th>
-                <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-</script>
-
-  @include('ranhirrkpd.program_pd')
-  @include('ranhirrkpd.program_indikator_pd')
-  @include('ranhirrkpd.kegiatan_pd')
-  @include('ranhirrkpd.kegiatan_indikator_pd')
-  @include('ranhirrkpd.pelaksana_pd')
-  @include('ranhirrkpd.aktivitas_pd')
-  @include('ranhirrkpd.lokasi_pd')
-  @include('ranhirrkpd.belanja_pd')
-
-  @include('ranhirrkpd.cariProgramRenstra')
-  @include('ranhirrkpd.cariKegiatanRenstra')
-  @include('ranhirrkpd.cariProgramRef')
-  @include('ranhirrkpd.cariKegiatanRef')
-  @include('ranhirrkpd.cariIndikator')
-  @include('ranhirrkpd.cariSubUnit')
-  @include('ranhirrkpd.cariAktivitasASB')
-  @include('ranhirrkpd.cariLokasiModal')
-  @include('ranhirrkpd.cariLokasiTeknisModal')
-  @include('ranhirrkpd.cariItemSSH')
-  @include('ranhirrkpd.cariRekening')
-  @include('ranhirrkpd.ModalCopyBelanja')
-  @include('ranhirrkpd.loadBelanjaASB')
+  @include('apbd.cariProgramRenstra')
+  @include('apbd.cariKegiatanRenstra')
+  @include('apbd.cariProgramRef')
+  @include('apbd.cariKegiatanRef')
+  @include('apbd.cariIndikator')
+  @include('apbd.cariSubUnit')
+  @include('apbd.cariAktivitasASB')
+  @include('apbd.cariLokasiModal')
+  @include('apbd.cariLokasiTeknisModal')
+  @include('apbd.cariItemSSH')
+  @include('apbd.cariRekening')
+  @include('apbd.ModalCopyBelanja')
+  @include('apbd.loadBelanjaASB')
 
 @endsection
 
 @section('scripts')
-  @include('ranhirrkpd.js_penyesuaian_pd')
+  @include('apbd.js_pagu_pd')
 @endsection

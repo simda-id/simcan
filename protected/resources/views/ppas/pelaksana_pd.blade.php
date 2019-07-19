@@ -33,6 +33,17 @@
               </div>
               </div>
             </div>
+            <div class="form-group" >
+                <label for="ophak_akses" class="col-sm-3 control-label" align='left'>Akses Edit Aktivitas/Lokasi/Belanja :</label>
+                <div class="col-sm-8">
+                  <label class="radio-inline" >
+                    <input type="radio" name="ophak_akses" id="ophak_akses" value="0">Tidak Diperbolehkan
+                  </label>
+                  <label class="radio-inline"  >
+                    <input type="radio" name="ophak_akses" id="ophak_akses" value="1">Diperbolehkan
+                  </label>
+                </div>
+              </div>
             <div class="form-group" id="idStatusPelaksanaanPelaksana">
                   <label for="status_pelaksanaan_pelaksana" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
                   <div class="col-sm-8" id="myRadio">

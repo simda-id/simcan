@@ -8,6 +8,10 @@
         <div class="modal-body">
           <form name="frmProgRenja" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" id="id_dokumen_program" name="id_dokumen_program">                
+                <input type="hidden" id="jns_dokumen_program" name="jns_dokumen_program"> 
+                <input type="hidden" id="kd_dokumen_program" name="kd_dokumen_program"> 
+                <input type="hidden" id="ubah_dokumen_program" name="ubah_dokumen_program">  
                 <input type="hidden" id="id_forum_program" name="id_forum_program">                
                 <input type="hidden" id="id_pelaksana_prog_pd" name="id_pelaksana_prog_pd">
                 <input type="hidden" id="id_rancangan_prog_pd" name="id_rancangan_prog_pd">
@@ -51,17 +55,17 @@
                   <span class="btn btn-sm btn-primary btnCariProgRef" id="btnCariProgRef" name="btnCariProgRef"><i class="fa fa-search fa-fw fa-lg"></i></span>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3" for="title">Uraian Program Rancangan:</label>
+                  <label class="control-label col-sm-3" for="title">Uraian Program Renja:</label>
                   <div class="col-sm-8">
                     <textarea type="name" class="form-control ur_program_renja" name="ur_program_renja" id="ur_program_renja" rows="3" disabled></textarea>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu Forum :</label>
+                  <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu PPAS :</label>
                   <div class="col-sm-3">
                     <input type="text" class="form-control number" id="pagu_renja_program" name="pagu_renja_program" disabled >
                   </div>
-                  <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu Rancangan :</label>
+                  <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu APBD :</label>
                   <div class="col-sm-3">
                       <input type="text" class="form-control number" id="pagu_forum_progrenja" name="pagu_forum_progrenja" required="required" >                    
                   </div>

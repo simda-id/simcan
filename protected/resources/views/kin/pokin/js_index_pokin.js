@@ -126,7 +126,10 @@ $(document).on('click', '.btnProses', function() {
     };      
     if($('#jns_laporan').val()==4){
         window.location.replace("pokin/getRenstraSasaranChart/"+$('#cb_no_renstra').val()+"/"+$('#cb_unit_renstra').val()); 
-    }; 
+    };   
+    if($('#jns_laporan').val()==5){
+        window.location.replace("pokin/indexPokinPemda/"+$('#cb_no_perda').val());
+    };   
 });
 
 

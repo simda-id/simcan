@@ -9,9 +9,10 @@ var detInProg = Handlebars.compile($("#details-inProg").html());
 var detInKeg = Handlebars.compile($("#details-inKeg").html());
 
 var tahun_temp,unit_temp, sub_unit_temp,ProgRkpd_temp,PelaksanaRkpd_temp, bidang_temp,jenis_belanja_temp,Akses_temp;
-var id_progref_temp,id_progrenja_temp,id_kegrenja_temp,id_aktivitas_temp,id_pelaksana_temp,id_lokasi_temp;
+var id_progref_temp,id_progrenja_temp,id_kegrenja_temp,id_aktivitas_temp,id_pelaksana_temp,id_lokasi_temp,id_sub_unit_temp;
 var id_asb_temp, ur_asb_temp, id_program_renstra_temp, id_satuan_1_aktiv_temp,id_satuan_2_aktiv_temp,vol1_temp,
 vol2_temp,nm_sat_asb1,nm_sat_asb2;
+var dokumen_temp, jns_dokumen_temp, kd_dokumen_temp, ubah_dokumen_temp;
 
 $('[data-toggle="popover"]').popover();
 
@@ -150,10 +151,29 @@ $(document).on('click', '.backLokasi', function() {
   back2lokasi();
 });
 
+vars = "?tahun=" + {{Session::get('tahun')}};
+  $.ajax({
+          type: "GET",
+          url: 'getDokumenKeuangan'+ vars,
+          dataType: "json",
+          success: function(data) {
+
+          var j = data.length;
+          var post, i;
+
+          $('select[name="id_dokumen_keu"]').empty();
+          $('select[name="id_dokumen_keu"]').append('<option value="0">---Pilih Dokumen Referensi---</option>');
+
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="id_dokumen_keu"]').append('<option value="'+ post.id_dokumen_keu +'">'+ post.nomor_display +'</option>');
+          }
+          }
+      });
 
 $.ajax({
     type: "GET",
-    url: '../admin/parameter/getUnit',
+    url: '../admin/parameter/getUnitUser',
     dataType: "json",
 
     success: function(data) {
@@ -170,6 +190,46 @@ $.ajax({
           }
           }
 });
+
+// $.ajax({
+//     type: "GET",
+//     url: '../admin/parameter/getUnitUser',
+//     dataType: "json",
+
+//     success: function(data) {
+
+//           var j = data.length;
+//           var post, i;
+
+//           $('select[name="cb_unit"]').empty();
+//           $('select[name="cb_unit"]').append('<option value="-1">---Pilih Unit---</option>');
+
+//           for (i = 0; i < j; i++) {
+//             post = data[i];
+//             $('select[name="cb_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nama_display +'</option>');
+//           }
+//           }
+// });
+
+// $.ajax({
+//     type: "GET",
+//     url: '../admin/parameter/getUnit',
+//     dataType: "json",
+
+//     success: function(data) {
+
+//           var j = data.length;
+//           var post, i;
+
+//           $('select[name="id_unit"]').empty();
+//           $('select[name="id_unit"]').append('<option value="-1">---Pilih Unit---</option>');
+
+//           for (i = 0; i < j; i++) {
+//             post = data[i];
+//             $('select[name="id_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
+//           }
+//           }
+// });
 
 $.ajax({
           type: "GET",
@@ -300,7 +360,7 @@ $(document).on('click', '.btnCariProgramRenstra', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../ranwalrenja/sesuai/getProgRenstra/"+unit_temp},
+        "ajax": {"url": "../admin/parameter/getProgRenstra/"+unit_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               // { data: 'kd_program', sClass: "dt-center"},
@@ -335,7 +395,7 @@ $(document).on('click', '.btnCariKegiatanRenstra', function() {
           serverSide: true,
           dom: 'bfrtIp',
           autoWidth : false,
-          "ajax": {"url": "../ranwalrenja/sesuai/getKegRenstra/"+unit_temp+"/"+id_program_renstra_temp},
+          "ajax": {"url": "../admin/parameter/getKegRenstra/"+unit_temp+"/"+id_program_renstra_temp},
           "columns": [
                 { data: 'no_urut', sClass: "dt-center"},
                 { data: 'uraian_kegiatan_renstra'}
@@ -375,7 +435,7 @@ $(document).on('click', '#btnparam_cari', function() {
         serverSide: true,
         dom: 'BfrtIp',
         "autoWidth": false,
-        "ajax": {"url": "../renja/blang/getItemSSH/"+zona_temp+"/"+ param.toLowerCase()},
+        "ajax": {"url": "../admin/parameter/getItemSSH/"+zona_temp+"/"+ param.toLowerCase()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
@@ -431,12 +491,12 @@ $(document).on('click', '#btnCariRekening', function() {
         $('#rekening_ssh').val()==undefined ||
         $('#rekening_ssh').val() == ""){
         if(jenis_belanja_temp == 0){ x = 0 }
-        if(jenis_belanja_temp == 1){ x = 2 }
-        if(jenis_belanja_temp == 2){ x = 3 }
+        if(jenis_belanja_temp == 1){ x = 3 }
+        if(jenis_belanja_temp == 2){ x = 2 }
         if(jenis_belanja_temp == 3){ x = 4 }
         if(jenis_belanja_temp == 4){ x = 4 }
       } else {
-          x = 1
+        x = 1
       }
 
       $('#cariRekening').modal('show');
@@ -475,7 +535,7 @@ $( "#kecamatan" ).change(function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiDesa/"+$('#kecamatan').val()},
+        "ajax": {"url": "../admin/parameter/getLokasiDesa/"+$('#kecamatan').val()},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -493,7 +553,7 @@ $(document).on('click', '#btnCariLokasi', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiDesa/0"},
+        "ajax": {"url": "../admin/parameter/getLokasiDesa/0"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -507,7 +567,7 @@ $(document).on('click', '#btnCariLokasi', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiLuarDaerah"},
+        "ajax": {"url": "../admin/parameter/getLokasiLuarDaerah"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -526,7 +586,7 @@ $(document).on('click', '#btnCariLokasiTeknis', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getLokasiTeknis"},
+        "ajax": {"url": "../admin/parameter/getLokasiTeknis"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nama_lokasi'}
@@ -590,7 +650,7 @@ $(document).on('click', '#btnCariSubUnit', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/blang/getSubUnit/"+unit_temp},
+        "ajax": {"url": "../admin/parameter/getSubUnitTable/"+unit_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nm_sub'}
@@ -653,7 +713,7 @@ $(document).on('click', '.btnCariProgRef', function() {
         serverSide: true,
         dom: 'BfRtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/sesuai/getProgRef/"+bidang_temp},
+        "ajax": {"url": "../admin/parameter/getProgRef/"+bidang_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_program', sClass: "dt-center"},
@@ -683,7 +743,7 @@ $(document).on('click', '.btnCariKegiatanRef', function() {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth : false,
-        "ajax": {"url": "../renja/sesuai/getKegRef/"+id_progref_temp},
+        "ajax": {"url": "../admin/parameter/getKegRef/"+id_progref_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'kd_kegiatan', sClass: "dt-center"},
@@ -713,13 +773,16 @@ $('#tblProgramRKPD').DataTable({
   bDestroy: true
 });
 
-function loadTblProgRkpd(tahun,unit){
+function loadTblProgRkpd(tahun,unit,dokumen){
+  pars = "?tahun=" + tahun;
+  pars += "&unit=" + unit;
+  pars += "&dokumen=" + dokumen;
   prog_rkpd_tbl = $('#tblProgramRKPD').DataTable({
                   processing: true,
                   serverSide: true,
                   dom : 'BfRtip',
                   "autoWidth": false,
-                  "ajax": {"url": "./getProgramRkpd/"+tahun+"/"+unit},
+                  "ajax": {"url": "./getProgramRkpd"+pars},
                   "columns": [
                         {
                             "className":      'details-control',
@@ -770,12 +833,16 @@ function initTableBidang(tableId, data) {
 
         var data = tblChildBidang.row(this).data();
 
-        tahun_temp = data.tahun_forum;
+        tahun_temp = data.tahun_anggaran;
         unit_temp = data.id_unit;
-        PelaksanaRkpd_temp = data.id_pelaksana_rkpd;
+        PelaksanaRkpd_temp = data.id_pelaksana_anggaran;
         bidang_temp = data.id_bidang;
-        ProgRkpd_temp = data.id_rkpd_rancangan;
+        ProgRkpd_temp = data.id_anggaran_pemda;
         Akses_temp = data.hak_akses;
+        dokumen_temp = data.id_dokumen_keu;
+        jns_dokumen_temp = data.jns_dokumen_keu;
+        kd_dokumen_temp = data.kd_dokumen_keu;
+        ubah_dokumen_temp = data.id_perubahan;
 
         $('#nm_program_progrenja').text(data.uraian_program_rpjmd);
         if(Akses_temp==0){
@@ -797,7 +864,7 @@ $('#tblProgramRKPD tbody').on('click', 'td.details-control', function () {
 
         var tr = $(this).closest('tr');
         var row = prog_rkpd_tbl.row( tr );
-        var tableId = 'bidang-' + row.data().id_unit+row.data().id_rkpd_rancangan;
+        var tableId = 'bidang-' + row.data().id_unit+row.data().id_anggaran_pemda;
 
         if (row.child.isShown()) {
             row.child.hide();
@@ -814,12 +881,16 @@ $(document).on('click', '.btnViewProgSkpd', function() {
 
   var data = tblChildBidang.row( $(this).parents('tr') ).data();
 
-        tahun_temp = data.tahun_forum;
+        tahun_temp = data.tahun_anggaran;
         unit_temp = data.id_unit;
-        PelaksanaRkpd_temp = data.id_pelaksana_rkpd;
+        PelaksanaRkpd_temp = data.id_pelaksana_anggaran;
         bidang_temp = data.id_bidang;
-        ProgRkpd_temp = data.id_rkpd_rancangan;
+        ProgRkpd_temp = data.id_anggaran_pemda;
         Akses_temp = data.hak_akses;
+        dokumen_temp = data.id_dokumen_keu;
+        jns_dokumen_temp = data.jns_dokumen_keu;
+        kd_dokumen_temp = data.kd_dokumen_keu;
+        ubah_dokumen_temp = data.id_perubahan;
 
         $('#nm_program_progrenja').text(data.uraian_program_rpjmd);
         if(Akses_temp==0){
@@ -831,8 +902,7 @@ $(document).on('click', '.btnViewProgSkpd', function() {
         }
 
         $('.nav-tabs a[href="#program"]').tab('show');
-        loadTblProgRenja(unit_temp,PelaksanaRkpd_temp);
-        
+        loadTblProgRenja(unit_temp,PelaksanaRkpd_temp);        
         back2renja();
 });
 
@@ -866,7 +936,7 @@ function loadTblProgRenja(unit,id_forum){
                         },
                         { data: 'urut', sClass: "dt-center", width:"5px"},
                         { data: 'uraian_program_renstra'},
-                        { data: 'pagu_forum', sClass: "dt-right",
+                        { data: 'pagu_anggaran', sClass: "dt-right",
                           render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_kegiatan', sClass: "dt-center"},
                         { data: 'jml_0k', sClass: "dt-center"},
@@ -1045,7 +1115,7 @@ function loadTblAktivitas(id_forum){
                             render: function(data, type, row,meta) {
                             return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
                           }},
-                        { data: 'pagu_aktivitas_forum', sClass: "dt-right",
+                        { data: 'pagu_anggaran', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_belanja', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1201,13 +1271,13 @@ function loadTblBelanja(lokasi){
                   "columns": [
                         { data: 'no_urut', sClass: "dt-center"},
                         { data: 'uraian_tarif_ssh'},
-                        { data: 'volume_1_forum', sClass: "dt-right",
+                        { data: 'volume_1', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'volume_2_forum', sClass: "dt-right",
+                        { data: 'volume_2', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'harga_satuan_forum', sClass: "dt-right",
+                        { data: 'harga_satuan', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-                        { data: 'jml_belanja_forum', sClass: "dt-right",
+                        { data: 'jml_belanja', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'action', 'searchable': false, 'orderable':false }
                       ],
@@ -1308,6 +1378,7 @@ $(document).on('click', '#view-aktivitas', function() {
 
     sub_unit_temp = data.nm_sub;
     id_pelaksana_temp = data.id_pelaksana_pd;
+    id_sub_unit_temp = data.id_sub_unit;
 
     $('#nm_progrkpd_aktivitas').text($('#nm_program_progrenja').text());
     $('#nm_progrenja_aktivitas').text($('#nm_progrenja_kegrenja').text());
@@ -1384,6 +1455,7 @@ $('#tblPelaksana tbody').on( 'dblclick', 'tr', function () {
 
     sub_unit_temp = data.nm_sub;
     id_pelaksana_temp = data.id_pelaksana_pd;
+    id_sub_unit_temp = data.id_sub_unit;
 
     $('#nm_progrkpd_aktivitas').text($('#nm_program_progrenja').text());
     $('#nm_progrenja_aktivitas').text($('#nm_progrenja_kegrenja').text());
@@ -1467,13 +1539,21 @@ $(document).on('click', '#btnViewBelanja', function() {
     loadTblBelanja(id_aktivitas_temp);
 });
 
+$( "#id_dokumen_keu" ).change(function() {
+  tahun_temp = $('#tahun_rkpd').val();
+  dokumen_temp = $('#id_dokumen_keu').val();
+});
+
+
+
+
 $( "#id_unit" ).change(function() {
   tahun_temp = $('#tahun_rkpd').val();
   unit_temp = $('#id_unit').val();
+  dokumen_temp = $('#id_dokumen_keu').val();
 
   $('.nav-tabs a[href="#programrkpd"]').tab('show');
-  loadTblProgRkpd(tahun_temp,unit_temp);
-
+  loadTblProgRkpd(tahun_temp,unit_temp,dokumen_temp);
 });
 
 function getStatusPelaksanaanProgRenja(){
@@ -1490,6 +1570,10 @@ $(document).on('click', '.add-ProgRenja', function() {
   $('.btnProgRenja').addClass('addProgRenja');
   $('.btnProgRenja').removeClass('editProgRenja');
   $('#id_forum_program').val(null);
+  $('#id_dokumen_program').val($('#id_dokumen_keu').val());
+  $('#jns_dokumen_program').val(jns_dokumen_temp);
+  $('#kd_dokumen_program').val(kd_dokumen_temp);
+  $('#ubah_dokumen_program').val(ubah_dokumen_temp);
   $('#id_pelaksana_prog_pd').val(PelaksanaRkpd_temp);
   $('#id_rancangan_prog_pd').val(ProgRkpd_temp);
   $('#tahun_forum_progrenja').val(tahun_temp);
@@ -1511,6 +1595,7 @@ $(document).on('click', '.add-ProgRenja', function() {
   $('#idStatusProgRenja').attr('style', 'display:none;');
 
   $('.btnHapusProgRenja').hide();
+  $('.btnProgRenja').show();
   $('.btnCariProgramRenstra').show();
   $('.btnCariProgRef').show();
   $('.ur_program_renja').removeAttr("disabled");
@@ -1529,16 +1614,18 @@ $('.modal-footer').on('click', '.addProgRenja', function() {
           url: './AddProgRenja',
           data: {
               '_token': $('input[name=_token]').val(),
-              'id_pelaksana_rkpd' : $('#id_pelaksana_prog_pd').val(),
-              'tahun_forum' : $('#tahun_forum_progrenja').val(),
+              'id_pelaksana_anggaran' : $('#id_pelaksana_prog_pd').val(),
               'no_urut' : $('#no_urut_progrenja').val(),
               'id_unit' : $('#id_unit_progrenja').val(),
               'jenis_belanja' : $('#jenis_belanja').val(),
-              'id_renja_program' : $('#id_renja_program').val(),
+              'id_dokumen_keu' : $('#id_dokumen_program').val(),
+              'jns_dokumen_keu' : $('#jns_dokumen_program').val(),
+              'kd_dokumen_keu' : $('#kd_dokumen_program').val(),
+              'id_perubahan' : $('#ubah_dokumen_program').val(),
               'id_program_renstra' : $('#id_program_renstra').val(),
               'uraian_program_renstra' : $('#ur_program_renja').val(),
               'id_program_ref' : $('#id_program_ref').val(),
-              'pagu_forum' : $('#pagu_forum_progrenja').val(),
+              'pagu_anggaran' : $('#pagu_forum_progrenja').val(),
               'status_pelaksanaan' : getStatusPelaksanaanProgRenja(),
               'ket_usulan' : $('#keterangan_status_progrenja').val(),
           },
@@ -1557,21 +1644,25 @@ $(document).on('click', '.edit-ProgRenja', function() {
   var data = prog_renja_tbl.row( $(this).parents('tr') ).data();
   $('.btnProgRenja').removeClass('addProgRenja');
   $('.btnProgRenja').addClass('editProgRenja');
+  $('#id_dokumen_program').val(data.id_dokumen_keu);
+  $('#jns_dokumen_program').val(data.jns_dokumen_keu);
+  $('#kd_dokumen_program').val(data.kd_dokumen_keu);
+  $('#ubah_dokumen_program').val(data.id_perubahan);
   $('#id_forum_program').val(data.id_program_pd);
-  $('#id_pelaksana_prog_pd').val(data.id_pelaksana_rkpd);  
-  $('#id_rancangan_prog_pd').val(data.id_rkpd_rancangan);
-  $('#tahun_forum_progrenja').val(data.tahun_forum);
+  $('#id_pelaksana_prog_pd').val(data.id_pelaksana_anggaran);  
+  $('#id_rancangan_prog_pd').val(data.id_anggaran_pemda);
+  $('#tahun_forum_progrenja').val(data.tahun_anggaran);
   $('#jenis_belanja').val(data.jenis_belanja);
   $('#id_unit_progrenja').val(data.id_unit);
   $('#no_urut_progrenja').val(data.no_urut);
   $('#id_program_renstra').val(data.id_program_renstra);
   $('#uraian_program_renstra').val(data.program_renstra);
   $('#ur_program_renja').val(data.uraian_program_renstra);
-  $('#id_renja_program').val(data.id_renja_program);
+  $('#id_renja_program').val(data.id_program_pd_rkpd_final);
   $('#ur_program_ref').val(data.uraian_program);
   $('#id_program_ref').val(data.id_program_ref);
-  $('#pagu_renja_program').val(data.pagu_tahun_renstra);
-  $('#pagu_forum_progrenja').val(data.pagu_forum);
+  $('#pagu_renja_program').val(data.pagu_rkpd_final);
+  $('#pagu_forum_progrenja').val(data.pagu_anggaran);
   $('#keterangan_status_progrenja').val(data.ket_usulan);
   document.frmProgRenja.status_pelaksanaan_progrenja[data.status_pelaksanaan].checked=true;
   $('#sumber_data_progrenja').val(data.sumber_data);
@@ -1592,6 +1683,18 @@ $(document).on('click', '.edit-ProgRenja', function() {
     $('#idStatusProgRenja').attr('style', 'display:none;');
   }
 
+  if(data.status_data==0){
+    if(data.sumber_data==0){
+      $('.btnHapusProgRenja').hide();
+    } else{
+      $('.btnHapusProgRenja').show();
+    }
+    $('.btnProgRenja').show();
+  } else {
+    $('.btnHapusProgRenja').hide();
+    $('.btnProgRenja').hide();
+  }
+
   $('#ModalProgRenja').modal('show');
 });
 
@@ -1606,18 +1709,18 @@ $('.modal-footer').on('click', '.editProgRenja', function() {
           data: {
               '_token': $('input[name=_token]').val(),
               'id_program_pd' : $('#id_forum_program').val(),
-              'id_pelaksana_rkpd' : $('#id_pelaksana_prog_pd').val(),
-              'tahun_forum' : $('#tahun_forum_progrenja').val(),
+              'id_pelaksana_anggaran' : $('#id_pelaksana_prog_pd').val(),
               'no_urut' : $('#no_urut_progrenja').val(),
-              'id_unit' : $('#id_unit_progrenja').val(),              
+              'id_unit' : $('#id_unit_progrenja').val(),
               'jenis_belanja' : $('#jenis_belanja').val(),
-              'id_renja_program' : $('#id_renja_program').val(),
+              'id_dokumen_keu' : $('#id_dokumen_program').val(),
+              'jns_dokumen_keu' : $('#jns_dokumen_program').val(),
+              'kd_dokumen_keu' : $('#kd_dokumen_program').val(),
+              'id_perubahan' : $('#ubah_dokumen_program').val(),
               'id_program_renstra' : $('#id_program_renstra').val(),
               'uraian_program_renstra' : $('#ur_program_renja').val(),
               'id_program_ref' : $('#id_program_ref').val(),
-              'pagu_tahun_renstra' : $('#pagu_renja_program').val(),
-              'pagu_forum' : $('#pagu_forum_progrenja').val(),
-              'sumber_data' : $('#sumber_data_progrenja').val(),
+              'pagu_anggaran' : $('#pagu_forum_progrenja').val(),
               'status_pelaksanaan' : getStatusPelaksanaanProgRenja(),
               'ket_usulan' : $('#keterangan_status_progrenja').val(),
               'status_data' : $('#status_data_progrenja').val(),
@@ -1743,6 +1846,7 @@ $(document).on('click','#btnTambahKegiatan', function() {
   $('#btnCariKegiatanRef').show();
   $('#btnCariKegiatanRenstra').show();  
   $('#btnHapusKegRenja').hide();
+  $('#btnKegiatan').show();
   $('#idStatuskegrenja').hide();
 
   $('.modal-title').text("Tambah Kegiatan SKPD");
@@ -1773,7 +1877,8 @@ $('.modal-footer').on('click', '.addKegRenja', function() {
               'pagu_plus1_forum' : $('#pagu_selanjutnya_forum').val(),
               'pagu_forum' : $('#pagu_renja_kegiatan_forum').val(),
               'keterangan_status' : $('#keterangan_status_kegiatan').val(),
-              'status_pelaksanaan' : getStatusPelaksanaanKegRenja(),
+              'status_pelaksanaan' : getStatusPelaksanaanKegRenja(),              
+              'kelompok_sasaran' : $('#ur_kelompok_sasaran').val(),
           },
           success: function(data) {
               $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
@@ -1803,6 +1908,7 @@ $(document).on('click','#edit-kegiatan', function() {
   $('#id_kegiatan_renstra').val(data.id_kegiatan_renstra);
   $('#id_kegiatan_ref').val(data.id_kegiatan_ref);
   $('#ur_kegiatan_forum').val(data.uraian_kegiatan_forum);
+  $('#ur_kelompok_sasaran').val(data.kelompok_sasaran);
   $('#ur_kegiatan_ref').val(data.kd_kegiatan +" - "+data.nm_kegiatan);
   $('#pagu_tahun_kegiatan').val(data.pagu_tahun_kegiatan);
   $('#persen_musren').val(data.persen_musren);
@@ -1836,6 +1942,19 @@ $('.sp_kegrenja').change(function() {
     }
 
   });
+
+  
+  if(data.status_data==0){
+        $('#btnKegiatan').show();
+        if(data.sumber_data == 0){
+          $('#btnHapusKegRenja').hide();
+        } else {
+          $('#btnHapusKegRenja').show();
+        }
+      } else {
+        $('#btnHapusKegRenja').hide();
+        $('#btnKegiatan').hide();
+      }
 
   if(data.sumber_data==0){
     $('#btnHapusKegRenja').hide();
@@ -1897,7 +2016,8 @@ $('.modal-footer').on('click', '.editKegRenja', function() {
               'pagu_forum' : $('#pagu_renja_kegiatan_forum').val(),
               'keterangan_status' : $('#keterangan_status_kegiatan').val(),
               'status_data' : check_data,
-              'status_pelaksanaan' : getStatusPelaksanaanKegRenja(),
+              'status_pelaksanaan' : getStatusPelaksanaanKegRenja(),             
+              'kelompok_sasaran' : $('#ur_kelompok_sasaran').val(),
           },
           success: function(data) {
               $('#tblKegiatanRenja').DataTable().ajax.reload(null,false);
@@ -2020,6 +2140,15 @@ function getJenisKegiatan(){
     var xvalues = xyz.join('');
     return xvalues;
   }
+  
+  function getGroupKeu(){
+    var xCheck = document.querySelectorAll('input[name="rbGroupKeu"]:checked');
+    var xyz = [];
+    for(var x = 0, l = xCheck.length; x < l;  x++)
+      { xyz.push(xCheck[x].value); }
+    var xvalues = xyz.join('');
+    return xvalues;
+  }
 
 function getJenisPembahasan(){
 
@@ -2076,6 +2205,7 @@ $(document).on('click', '#btnTambahAktivitas', function() {
       $('#keterangan_status_aktivitas').val(null);
       $('#persen_musren_aktivitas').attr('disabled', 'disabled');
       $('#id_satuan_publik').attr("disabled","disabled");
+      document.frmModalAktivitas.rbGroupKeu[0].checked=true;
 
       $('#id_satuan_1_aktivitas').val(-1);
       $('#id_satuan_2_aktivitas').val(-1);
@@ -2084,17 +2214,14 @@ $(document).on('click', '#btnTambahAktivitas', function() {
       $('#no_urut_aktivitas').removeAttr("disabled");
       $('#keterangan_status_aktivitas').removeAttr("disabled");
       $('#btnCariASB').show();
-      $('#btnHapusAktivitas').hide();
+      $('#btnHapusAktivitas').hide();      
+      $('#btnAktivitas').show();
 
       $('#divJenisPembahasan').hide();
       $('#divPaguMusrenbang').hide();
       $('#divSatuanPublik').hide();
       $('#idStatusPelaksanaanAktivitas').hide();
 
-      $(':radio[name=jenis_pembahasan]:not(:checked)').attr('disabled', false);
-      $(':radio[name=sumber_aktivitas]:not(:checked)').attr('disabled', false);
-      $(':radio[name=jenis_aktivitas]:not(:checked)').attr('disabled', false);
-      $(':radio[name=satuan_utama]:not(:checked)').attr('disabled', false);
       $('#id_satuan_1_aktivitas').removeAttr("disabled");
       $('#id_satuan_2_aktivitas').removeAttr("disabled");
 
@@ -2119,24 +2246,20 @@ $('.modal-footer').on('click', '.addAktivitas', function() {
           data: {
               '_token': $('input[name=_token]').val(),
               'id_pelaksana_pd' : $('#id_forum_aktivitas').val(),
-              'tahun_forum' : $('#tahun_forum_aktivitas').val(),
               'no_urut' : $('#no_urut_aktivitas').val(),
               'sumber_aktivitas' : getSumberASB(),
               'id_aktivitas_asb' : $('#id_aktivitas_asb').val(),
-              'id_aktivitas_renja' : $('#id_renja_aktivitas').val(),
               'uraian_aktivitas_kegiatan' : $('#ur_aktivitas_kegiatan').val(),
               'jenis_kegiatan' : getJenisKegiatan(),
               'sumber_dana' : $('#sumber_dana').val(),
-              'pagu_aktivitas_renja' : $('#pagu_aktivitas_renja').val(),
-              'pagu_aktivitas_forum' : $('#pagu_aktivitas').val(),
-              'pagu_musren' : $('#persen_musren_aktivitas').val(),
+              'pagu_anggaran' : $('#pagu_aktivitas').val(),
               'id_satuan_publik' : getSatuanUtamaAktivitas(),
               'id_satuan_1' : $('#id_satuan_1_aktivitas').val(),
               'id_satuan_2' : $('#id_satuan_2_aktivitas').val(), 
               'status_data' : check_data,
               'status_pelaksanaan' : getStatusPelaksanaanAktivitas(),
               'keterangan_aktivitas' : $('#keterangan_status_aktivitas').val(),
-              'status_musren' : getJenisPembahasan(),
+              'group_keu' : getGroupKeu(),
           },
           success: function(data) {
               $('#tblAktivitas').DataTable().ajax.reload(null,false);
@@ -2158,9 +2281,9 @@ var data = aktivitas_tbl.row( $(this).parents('tr') ).data();
       $('.form-horizontal').show();
       $('#id_forum_aktivitas').val(data.id_pelaksana_pd);
       $('#id_aktivitas').val(data.id_aktivitas_pd);
-      $('#tahun_forum_aktivitas').val(data.tahun_forum);
+      $('#tahun_forum_aktivitas').val(data.tahun_anggaran);
       $('#no_urut_aktivitas').val(data.no_urut);
-      $('#id_renja_aktivitas').val(data.id_aktivitas_renja);
+      $('#id_renja_aktivitas').val(data.id_aktivitas_rkpd_final);
       document.frmModalAktivitas.sumber_aktivitas[data.sumber_aktivitas].checked=true;
       $('#ur_aktivitas_kegiatan').val(data.uraian_aktivitas_kegiatan);
       $('#id_aktivitas_asb').val(data.id_aktivitas_asb);
@@ -2168,20 +2291,13 @@ var data = aktivitas_tbl.row( $(this).parents('tr') ).data();
       $('#sumber_dana').val(data.sumber_dana);
       $('#id_satuan_1_aktivitas').val(data.id_satuan_1);
       $('#id_satuan_2_aktivitas').val(data.id_satuan_2);
-      $('#pagu_aktivitas').val(data.pagu_aktivitas_forum);   
-      $('#pagu_aktivitas_renja').val(data.pagu_aktivitas_renja);   
-      document.frmModalAktivitas.jenis_pembahasan[data.status_musren].checked=true;
-      $('#persen_musren_aktivitas').val(data.pagu_musren);
-      $('#pagu_musren_aktivitas').val(data.jml_musren_aktivitas);
+      $('#pagu_aktivitas').val(data.pagu_anggaran);   
+      $('#pagu_aktivitas_renja').val(data.pagu_rkpd);
       document.frmModalAktivitas.status_pelaksanaan_aktivitas[data.status_pelaksanaan].checked=true;
+      document.frmModalAktivitas.rbGroupKeu[data.group_keu].checked=true;
+      document.frmModalAktivitas.satuan_utama[data.id_satuan_publik].checked=true;
       $('#keterangan_status_aktivitas').val(data.keterangan_aktivitas);
       $('#persen_musren_aktivitas').attr('disabled', 'disabled');
-
-      if(data.id_satuan_publik != null || data.id_satuan_publik != undefined || data.id_satuan_publik != -1){
-        document.frmModalAktivitas.satuan_utama[data.id_satuan_publik].checked=true;
-      } else {
-        document.frmModalAktivitas.satuan_utama[0].checked=true;
-      }
       
       $('#ur_sat_utama1').text(data.ur_satuan_1);
       $('#ur_sat_utama2').text(data.ur_satuan_2); 
@@ -2219,7 +2335,6 @@ var data = aktivitas_tbl.row( $(this).parents('tr') ).data();
         $(':radio[name=jenis_aktivitas]:not(:checked)').attr('disabled', false);
         $('#id_satuan_1_aktivitas').removeAttr("disabled");
         $('#id_satuan_2_aktivitas').removeAttr("disabled");
-
       }
 
       if($(this).data('status_musren') == 1){
@@ -2232,6 +2347,17 @@ var data = aktivitas_tbl.row( $(this).parents('tr') ).data();
         $('#id_satuan_publik').attr("disabled","disabled");
       }
       
+      if(data.status_data == 0){
+        $('#btnAktivitas').show();
+        if(data.sumber_data == 0){
+          $('#btnHapusAktivitas').hide();
+        } else {
+          $('#btnHapusAktivitas').show();
+        }
+      } else {
+        $('#btnHapusAktivitas').hide();
+        $('#btnAktivitas').hide();
+      }
 
       if($(this).data('sumber_aktivitas')==0){
         $('#id_satuan_publik').removeAttr("disabled");
@@ -2269,7 +2395,6 @@ $('.modal-footer').on('click', '.editAktivitas', function() {
               '_token': $('input[name=_token]').val(),
               'id_aktivitas_pd' : $('#id_aktivitas').val(),
               'id_pelaksana_pd' : $('#id_forum_aktivitas').val(),
-              'tahun_forum' : $('#tahun_forum_aktivitas').val(),
               'no_urut' : $('#no_urut_aktivitas').val(),
               'sumber_aktivitas' : getSumberASB(),
               'id_aktivitas_asb' : $('#id_aktivitas_asb').val(),
@@ -2280,13 +2405,11 @@ $('.modal-footer').on('click', '.editAktivitas', function() {
               'id_satuan_1' : $('#id_satuan_1_aktivitas').val(),
               'id_satuan_2' : $('#id_satuan_2_aktivitas').val(), 
               'sumber_dana' : $('#sumber_dana').val(),
-              'pagu_aktivitas_renja' : $('#pagu_aktivitas_renja').val(),
-              'pagu_aktivitas_forum' : $('#pagu_aktivitas').val(),
-              'pagu_musren' : $('#persen_musren_aktivitas').val(),
+              'pagu_anggaran' : $('#pagu_aktivitas').val(),
               'status_data' : check_data,
               'status_pelaksanaan' : getStatusPelaksanaanAktivitas(),
               'keterangan_aktivitas' : $('#keterangan_status_aktivitas').val(),
-              'status_musren' : getJenisPembahasan(),
+              'group_keu' : getGroupKeu(),
           },
           success: function(data) {
               $('#tblAktivitas').DataTable().ajax.reload(null,false);
@@ -2354,6 +2477,7 @@ $(document).on('click', '#btnTambahPelaksana', function() {
       $('#id_subunit_pelaksana').val(null),
       $('#subunit_pelaksana').val(null),
       document.frmModalPelaksana.status_pelaksanaan_pelaksana[0].checked=true;
+      document.frmModalPelaksana.ophak_akses[0].checked=true;
       $('#keterangan_status_pelaksana').val(null),
       $('#id_lokasi_pelaksana').val(null),
       $('#nm_lokasi_pelaksana').val(null),      
@@ -2361,11 +2485,21 @@ $(document).on('click', '#btnTambahPelaksana', function() {
       $('#no_urut_pelaksana').removeAttr("disabled");
       $('#keterangan_status_pelaksana').removeAttr("disabled");
       $('#btnHapusPelaksana').hide();
+      $('#btnPelaksana').show();
       $('#idStatusPelaksanaanPelaksana').hide();
 
       $('#ModalPelaksana').modal('show');
 
   });
+
+function getHakAkses(){
+  var xCheck = document.querySelectorAll('input[name="ophak_akses"]:checked');
+  var xyz = [];
+  for(var x = 0, l = xCheck.length; x < l;  x++)
+    { xyz.push(xCheck[x].value); }
+  var xvalues = xyz.join('');
+  return xvalues;
+}
 
 $('.modal-footer').on('click', '.addPelaksana', function() {
       if (document.getElementById("checkPelaksana").checked){
@@ -2390,6 +2524,7 @@ $('.modal-footer').on('click', '.addPelaksana', function() {
               'id_lokasi' : $('#id_lokasi_pelaksana').val(),
               'ket_pelaksana' : $('#keterangan_status_pelaksana').val(),
               'status_pelaksanaan' : getStatusPelaksanaanPelaksana(),
+              'hak_akses' : getHakAkses(),
               'status_data' : check_data,
 
           },
@@ -2412,18 +2547,25 @@ $(document).on('click', '#btnEditPelaksana', function() {
       $('.form-horizontal').show();
       $('.modal-title').text('Edit Pelaksana Kegiatan SKPD');
 
-      $('#id_pelaksana_forum').val(data.id_pelaksana_pd),
-      $('#id_aktivitas_pelaksana').val(data.id_kegiatan_pd),
-      $('#tahun_forum_pelaksana').val(data.tahun_forum),
-      $('#no_urut_pelaksana').val(data.no_urut),
-      $('#id_subunit_pelaksana').val(data.id_sub_unit),
-      $('#subunit_pelaksana').val(data.nm_sub),
+      $('#id_pelaksana_forum').val(data.id_pelaksana_pd);
+      $('#id_aktivitas_pelaksana').val(data.id_kegiatan_pd);
+      $('#tahun_forum_pelaksana').val(data.tahun_forum);
+      $('#no_urut_pelaksana').val(data.no_urut);
+      $('#id_subunit_pelaksana').val(data.id_sub_unit);
+      $('#subunit_pelaksana').val(data.nm_sub);
       document.frmModalPelaksana.status_pelaksanaan_pelaksana[data.status_pelaksanaan].checked=true;
-      $('#keterangan_status_pelaksana').val(data.ket_pelaksana),
-      $('#id_lokasi_pelaksana').val(data.id_lokasi),
-      $('#nm_lokasi_pelaksana').val(data.nama_lokasi),      
+      document.frmModalPelaksana.ophak_akses[data.hak_akses].checked=true;
+      $('#keterangan_status_pelaksana').val(data.ket_pelaksana);
+      $('#id_lokasi_pelaksana').val(data.id_lokasi);
+      $('#nm_lokasi_pelaksana').val(data.nama_lokasi);      
 
-     
+      if(data.status_kegiatan==0){
+        $('#btnHapusPelaksana').show();
+        $('#btnPelaksana').show();
+      } else {
+        $('#btnHapusPelaksana').hide();
+        $('#btnPelaksana').hide();
+      };
 
       $('.chkPelaksana').show();
           if(data.status_data==1){
@@ -2472,6 +2614,7 @@ $('.modal-footer').on('click', '.editPelaksana', function() {
               'id_lokasi' : $('#id_lokasi_pelaksana').val(),
               'ket_pelaksana' : $('#keterangan_status_pelaksana').val(),
               'status_pelaksanaan' : getStatusPelaksanaanPelaksana(),
+              'hak_akses' : getHakAkses(),
               'status_data' : check_data,
 
           },
@@ -2609,7 +2752,7 @@ $(document).on('click', '#btnEditLokasi', function() {
       $('.modal-title').text('Edit Data Lokasi Aktivitas');
       $('#id_pelaksana_lokasi').val(data.id_aktivitas_pd);
       $('#id_lokasi_forum').val(data.id_lokasi_pd);
-      $('#tahun_forum_lokasi').val(data.tahun_forum);
+      $('#tahun_forum_lokasi').val(data.tahun_anggaran);
       $('#sumber_data_lokasi').val(data.sumber_data);
       $('#no_urut_lokasi').val(data.no_urut);
       $('#id_lokasi').val(data.id_lokasi);
@@ -2732,9 +2875,10 @@ function hitungsatuan(){
 
   var x = $('#volume1_forum').val();
   var y = $('#volume2_forum').val();
+  var r = $('#koefisien_anggaran').val();
   var z = $('#harga_satuan_forum').val();
   
-  var nilai_musren = x*y*z;
+  var nilai_musren = x*y*z*r;
   return nilai_musren;
 
 }
@@ -2748,6 +2892,10 @@ $( "#volume2_forum" ).change(function() {
 });
 
 $( "#harga_satuan_forum" ).change(function() {
+  $('#jumlah_belanja_forum').val(hitungsatuan()); 
+});
+
+$( "#koefisien_anggaran" ).change(function() {
   $('#jumlah_belanja_forum').val(hitungsatuan()); 
 });
 
@@ -2780,7 +2928,7 @@ $(document).on('click', '.add-belanja', function() {
       $('.btnBelanja').addClass('addBelanja');
       $('.btnBelanja').removeClass('editBelanja');      
       $('.form-horizontal').show();
-      $('.modal-title').text('Tambah Rincian Belanja RKPD');
+      $('.modal-title').text('Tambah Rincian Belanja APBD');
       $('#id_lokasi_belanja').val(id_aktivitas_temp);
       $('#id_belanja_forum').val(null);
       $('#tahun_forum_belanja').val(tahun_temp);
@@ -2799,6 +2947,8 @@ $(document).on('click', '.add-belanja', function() {
       $('#volume1_forum').val(1);
       $('#id_satuan1_forum').val(0);
       $('#volume2_forum').val(1);
+      $('#koefisien_rkpd').val(1);
+      $('#koefisien_anggaran').val(1);
       $('#harga_satuan_forum').val(1);
       $('#jumlah_belanja_forum').val(1);
       $('#uraian_belanja').val(null);
@@ -2825,7 +2975,7 @@ $('.modal-footer').on('click', '.addBelanja', function() {
           url: './addBelanja',
           data: {
               '_token': $('input[name=_token]').val(),
-              'tahun_forum' : tahun_temp,
+              'tahun_anggaran' : tahun_temp,
               'no_urut' : $('#no_urut_belanja').val(),
               'id_aktivitas_pd' : id_aktivitas_temp,
               'id_zona_ssh' : $('#zona_ssh').val(),
@@ -2833,21 +2983,15 @@ $('.modal-footer').on('click', '.addBelanja', function() {
               'id_aktivitas_asb' : $('#id_aktivitas_asb_belanja').val(),
               'id_item_ssh' : $('#id_item_ssh').val(),
               'id_rekening_ssh' : $('#id_rekening').val(),
-              'uraian_belanja' : $('#uraian_belanja').val(),
-              'volume_1' : $('#volume1').val(),
-              'id_satuan_1' : $('#id_satuan1').val(),
-              'volume_2' : $('#volume2').val(),
-              'id_satuan_2' : $('#id_satuan2').val(),
-              'harga_satuan' : $('#harga_satuan').val(),
-              'jml_belanja' : $('#jumlah_belanja').val(),
-              'volume_1_forum' : $('#volume1_forum').val(),
-              'id_satuan_1_forum' : $('#id_satuan1_forum').val(),
-              'volume_2_forum' : $('#volume2_forum').val(),
-              'id_satuan_2_forum' : $('#id_satuan2_forum').val(),
-              'harga_satuan_forum' : $('#harga_satuan_forum').val(),
-              'jml_belanja_forum' : $('#jumlah_belanja_forum').val(),
+              'uraian_belanja' : $('#uraian_belanja').val(),              
+              'koefisien' : $('#koefisien_anggaran').val(),              
+              'volume_1' : $('#volume1_forum').val(),
+              'id_satuan_1' : $('#id_satuan1_forum').val(),
+              'volume_2' : $('#volume2_forum').val(),
+              'id_satuan_2' : $('#id_satuan2_forum').val(),
+              'harga_satuan' : $('#harga_satuan_forum').val(),
+              'jml_belanja' : $('#jumlah_belanja_forum').val(),
               'status_data' : 0,
-
           },
           success: function(data) {
               belanja_renja_tbl.ajax.reload(null,false);
@@ -2864,38 +3008,39 @@ $('.modal-footer').on('click', '.addBelanja', function() {
 
 $(document).on('click', '#btnEditBelanja', function() {
 
-  var data = belanja_renja_tbl.row( $(this).parents('tr') ).data();
-        
+  var data = belanja_renja_tbl.row( $(this).parents('tr') ).data();        
       $('.btnBelanja').addClass('editBelanja');
       $('.btnBelanja').removeClass('addBelanja');      
       $('.form-horizontal').show();
-      $('.modal-title').text('Edit Uraian Belanja Musrenbang RKPD');
+      $('.modal-title').text('Edit Uraian Belanja APBD');
       $('#id_lokasi_belanja').val(data.id_aktivitas_pd);
       $('#id_belanja_forum').val(data.id_belanja_pd);
       $('#tahun_forum_belanja').val(data.tahun_forum);
       $('#no_urut_belanja').val(data.no_urut);
       $('#zona_ssh').val(data.id_zona_ssh);
       $('#id_item_ssh').val(data.id_item_ssh);
-      $('#rekening_ssh').val();
+      $('#rekening_ssh').val(data.id_rekening_ssh);
       $('#ur_item_ssh').val(data.uraian_tarif_ssh);
       $('#id_rekening').val(data.id_rekening_ssh);
       $('#ur_rekening').val(data.kd_rekening +' - '+data.nm_rekening);
-      $('#volume1').val(data.volume_1);
-      $('#id_satuan1').val(data.id_satuan_1);
-      $('#volume2').val(data.volume_2);
-      $('#harga_satuan').val(data.harga_satuan);
-      $('#jumlah_belanja').val(data.jml_belanja);
-      $('#volume1_forum').val(data.volume_1_forum);
-      $('#id_satuan1_forum').val(data.id_satuan_1_forum);
-      $('#volume2_forum').val(data.volume_2_forum);
-      $('#harga_satuan_forum').val(data.harga_satuan_forum);
-      $('#jumlah_belanja_forum').val(data.jml_belanja_forum);
+      $('#volume1').val(data.volume_1_rkpd);
+      $('#id_satuan1').val(data.id_satuan_1_rkpd);
+      $('#volume2').val(data.volume_2_rkpd);
+      $('#harga_satuan').val(data.harga_satuan_rkpd);
+      $('#jumlah_belanja').val(data.jml_belanja_rkpd);
+      $('#volume1_forum').val(data.volume_1);
+      $('#id_satuan1_forum').val(data.id_satuan_1);
+      $('#koefisien_rkpd').val(data.koefisien_rkpd);
+      $('#koefisien_anggaran').val(data.koefisien);
+      $('#volume2_forum').val(data.volume_2);
+      $('#harga_satuan_forum').val(data.harga_satuan);
+      $('#jumlah_belanja_forum').val(data.jml_belanja);
       $('#uraian_belanja').val(data.uraian_belanja);
       $('#uraian_aktivitas_asb').val(data.nm_aktivitas_asb);
       $('#id_aktivitas_asb_belanja').val(data.id_aktivitas_asb);
       $('#sumber_belanja').val(data.sumber_belanja);
-      $('#id_satuan2').val(data.id_satuan_2);
-      $('#id_satuan2_forum').val(data.id_satuan_2_forum);
+      $('#id_satuan2').val(data.id_satuan_2_rkpd);
+      $('#id_satuan2_forum').val(data.id_satuan_2);
       $('#sumber_data_belanja').val(data.sumber_data);
       
       checkAsalbelanja(data.sumber_data);
@@ -2937,7 +3082,7 @@ $('.modal-footer').on('click', '.editBelanja', function() {
           data: {
               '_token': $('input[name=_token]').val(),
               'id_belanja_pd' : $('#id_belanja_forum').val(),
-              'tahun_forum' : $('#tahun_forum_belanja').val(),
+              'tahun_anggaran' : $('#tahun_forum_belanja').val(),
               'no_urut' : $('#no_urut_belanja').val(),
               'id_aktivitas_pd' : $('#id_lokasi_belanja').val(),
               'id_zona_ssh' : $('#zona_ssh').val(),
@@ -2945,12 +3090,13 @@ $('.modal-footer').on('click', '.editBelanja', function() {
               'id_item_ssh' : $('#id_item_ssh').val(),
               'id_rekening_ssh' : $('#id_rekening').val(),
               'uraian_belanja' : $('#uraian_belanja').val(),
-              'volume_1_forum' : $('#volume1_forum').val(),
-              'id_satuan_1_forum' : $('#id_satuan1_forum').val(),
-              'volume_2_forum' : $('#volume2_forum').val(),
-              'id_satuan_2_forum' : $('#id_satuan2_forum').val(),
-              'harga_satuan_forum' : $('#harga_satuan_forum').val(),
-              'jml_belanja_forum' : $('#jumlah_belanja_forum').val(),
+              'koefisien' : $('#koefisien_anggaran').val(),              
+              'volume_1' : $('#volume1_forum').val(),
+              'id_satuan_1' : $('#id_satuan1_forum').val(),
+              'volume_2' : $('#volume2_forum').val(),
+              'id_satuan_2' : $('#id_satuan2_forum').val(),
+              'harga_satuan' : $('#harga_satuan_forum').val(),
+              'jml_belanja' : $('#jumlah_belanja_forum').val(),
               'status_data' : check_data,
 
           },
@@ -2969,7 +3115,7 @@ $('.modal-footer').on('click', '.editBelanja', function() {
 
 $(document).on('click', '.btnHapusBelanja', function() {
 
-  if($('#sumber_data_belanja').val()==4){
+  if($('#sumber_belanja').val()==1){
 
   var x = confirm("Anda yakin akan menghapus item belanja "+$('#ur_item_ssh').val()+" ini ?");
 
@@ -2997,7 +3143,6 @@ $(document).on('click', '.btnHapusBelanja', function() {
     else {    
         return false;
       }
-
     } else {
        alert('Maaf Item dari ASB tidak dapat dihapus');
     }
@@ -3185,7 +3330,7 @@ $(document).on('click', '.add-indikator', function() {
 
       $('.btnIndikator').removeClass('editIndikator');
       $('.btnIndikator').addClass('addIndikator');
-      $('.modal-title').text('Tambah Target Capaian Program Forum SKPD');
+      $('.modal-title').text('Tambah Target Capaian Program Renja SKPD');
       $('.form-horizontal').show();
       $('#id_renja_program_1').val(data.id_program_pd);
       $('#kd_indikator_renja').val(null);
@@ -3197,12 +3342,12 @@ $(document).on('click', '.add-indikator', function() {
       $('#target_indikator_renja').val(0);
       $('#id_satuan_output').val(-1);
 
-
       document.getElementById("no_urut_indikator").removeAttribute("disabled");
       document.getElementById("ur_tolokukur_renja").removeAttribute("disabled");
 
       $('.btnCariIndi').show();
       $('.btnHapusIndikator').hide();
+      $('.btnIndikator').show();
       $('.chkIndikator').hide();
 
       $('#ModalIndikator').modal('show');
@@ -3225,7 +3370,7 @@ $('.modal-footer').on('click', '.addIndikator', function() {
               'uraian_indikator_program': $('#ur_indikator_renja').val(),
               'tolok_ukur_indikator': $('#ur_tolokukur_renja').val(),
               'target_renja': $('#target_indikator_renja').val(),
-              'id_satuan_ouput':$('#id_satuan_output').val(),
+              'id_satuan_output':$('#id_satuan_output').val(),
           },
           success: function(data) {
               prog_renja_tbl.ajax.reload(null,false);
@@ -3256,7 +3401,7 @@ $('.modal-footer').on('click', '.addIndikator', function() {
       $('#ur_tolokukur_renja').val(data.tolok_ukur_indikator);
       $('#target_indikator_renstra').val(data.target_renstra);
       $('#target_indikator_renja').val(data.target_renja);
-      $('#id_satuan_output').val(data.id_satuan_ouput);
+      $('#id_satuan_output').val(data.id_satuan_output);
       
       if(data.sumber_data==1){
         document.getElementById("no_urut_indikator").removeAttribute("disabled");
@@ -3275,6 +3420,18 @@ $('.modal-footer').on('click', '.addIndikator', function() {
         $('.checkIndikator').prop('checked',true);
       } else {
         $('.checkIndikator').prop('checked',false);
+      }
+
+      if(data.status_kegiatan==0){
+        if(data.sumber_data==0){
+          $('.btnHapusIndikator').show();
+        } else {
+          $('.btnHapusIndikator').hide();
+        }
+        $('.btnIndikator').show();
+      } else {
+        $('.btnHapusIndikator').hide();
+        $('.btnIndikator').hide();
       }
 
       $('#ModalIndikator').modal('show');
@@ -3402,6 +3559,7 @@ $(document).on('click', '.add-indikatorKeg', function() {
 
       $('.btnCariIndiKeg').show();
       $('.btnHapusIndikatorKeg').hide();
+      $('.btnIndikatorKeg').show();
       $('.chkIndikatorKeg').hide();
 
       $('#ModalIndikatorKeg').modal('show');
@@ -3424,7 +3582,7 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
               'uraian_indikator_kegiatan': $('#ur_indikatorKeg_renja').val(),
               'tolok_ukur_indikator': $('#ur_tolokukur_keg').val(),
               'target_renja': $('#target_indikatorKeg_renja').val(),
-              'id_satuan_ouput':$('#id_satuan_output_keg').val(),
+              'id_satuan_output':$('#id_satuan_output_keg').val(),
           },
           success: function(data) {  
               prog_renja_tbl.ajax.reload(null,false);            
@@ -3455,8 +3613,7 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
       $('#ur_tolokukur_keg').val(data.tolok_ukur_indikator);
       $('#target_indikatorKeg_renstra').val(data.target_renstra);
       $('#target_indikatorKeg_renja').val(data.target_renja);
-      $('#id_satuan_output_keg').val(data.id_satuan_ouput);
-
+      $('#id_satuan_output_keg').val(data.id_satuan_output);
 
       if(data.sumber_data==1){
         document.getElementById("no_urut_indikatorKeg").removeAttribute("disabled");
@@ -3476,6 +3633,18 @@ $('.modal-footer').on('click', '.addIndikatorKeg', function() {
       } else {
         $('.checkIndikatorKeg').prop('checked',false);
       };
+
+      if(data.status_kegiatan==0){ 
+        if(data.sumber_data==0){       
+          $('.btnHapusIndikatorKeg').hide();
+        } else {
+          $('.btnHapusIndikatorKeg').show();
+        }
+        $('.btnIndikatorKeg').show();
+      } else {        
+        $('.btnHapusIndikatorKeg').hide();
+        $('.btnIndikatorKeg').hide();
+      }
     
       $('#ModalIndikatorKeg').modal('show');
     });
@@ -3680,6 +3849,25 @@ $( "#jenis_belanja" ).change(function() {
   jenis_belanja_temp = $('#jenis_belanja').val();
 });
 
+$(document).on('click', '.btnCetakRKA', function() {
+  window.open('../PrintPraRKAAP/'+id_kegrenja_temp+'/'+id_sub_unit_temp); 
+});
+$(document).on('click', '.btnCetakRKA1', function() {
+  window.open('../PrintPraRKAAP/'+id_kegrenja_temp+'/'+id_sub_unit_temp); 
+});
+
+$(document).on('click', '.btnPostUnit', function() {
+    $.ajax({
+        type: 'get',
+        url: './PostUnit/'+unit_temp,
+
+		dataType: 'json',
+        success: function(data) {
+          createPesan(data.pesan,"success");
+          move();
+        }
+      });
+});
 
 });
 </script>

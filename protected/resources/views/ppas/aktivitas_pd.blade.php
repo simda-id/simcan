@@ -1,5 +1,5 @@
 <div id="ModalAktivitas" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"></h4>
@@ -58,11 +58,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="pagu_aktivitas_renja" class="col-sm-3 control-label" align='left'>Pagu Ranhir :</label>
+                  <label for="pagu_aktivitas_renja" class="col-sm-3 control-label" align='left'>Pagu PPAS :</label>
                   <div class="col-sm-3">
                     <input type="text" class="form-control number" id="pagu_aktivitas_renja" name="pagu_aktivitas_renja" disabled>
                   </div>
-                  <label for="pagu_aktivitas" class="col-sm-2 control-label" align='left'>Pagu Final :</label>
+                  <label for="pagu_aktivitas" class="col-sm-2 control-label" align='left'>Pagu APBD :</label>
                   <div class="col-sm-3">
                     <input type="text" class="form-control number" id="pagu_aktivitas" name="pagu_aktivitas">
                   </div>
@@ -101,7 +101,7 @@
                     </label>
                   </div>
                 </div>
-                <div class="form-group" id="divPaguMusrenbang">
+                <div class="form-group hidden" id="divPaguMusrenbang">
                   <label for="pagu_musren_aktivitas" class="col-sm-3 control-label" align='left'>Pagu Musrenbang :</label>
                   <div class="col-sm-2">
                   <div class="input-group">
@@ -112,7 +112,21 @@
                   <div class="col-sm-3">
                     <input type="text" class="form-control number" id="pagu_musren_aktivitas" name="pagu_musren_aktivitas" disabled >
                   </div>
-                </div>  
+                </div> 
+                <div class="form-group"> 
+                    <label for="rbGroupKeu" class="col-sm-3 control-label" align='left'>Group Aktivitas Keuangan :</label>                 
+                    <div class="col-sm-9">
+                      <label>
+                        <input type="radio" class="rbGroupKeu" name="rbGroupKeu" id="rbGroupKeu" value="0"> Tidak di-Grouping 
+                      </label>
+                      <label>
+                        <input type="radio" class="rbGroupKeu" name="rbGroupKeu" id="rbGroupKeu" value="1"> Di-Grouping per Aktivitas
+                      </label>
+                      <label>
+                        <input type="radio" class="rbGroupKeu" name="rbGroupKeu" id="rbGroupKeu" value="2"> Di-Grouping per Lokasi
+                      </label>
+                    </div>
+                </div> 
                 <div class="form-group" id="idStatusPelaksanaanAktivitas">
                   <label for="status_pelaksanaan_aktivitas" class="col-sm-3 control-label" align='left'>Status Pelaksanaan :</label>
                   <div class="col-sm-8" id="myRadio">

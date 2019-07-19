@@ -20,7 +20,7 @@
                     <input class="checkLokasi" type="checkbox" name="checkLokasi" id="checkLokasi" value="1"> Telah Direviu</label>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group hidden">
                     <label class="control-label col-sm-3" for="sumber_data_lokasi">Sumber Usulan :</label>
                     <div class="col-sm-5">
                         <select type="text" class="form-control" id="sumber_data_lokasi" name="sumber_data_lokasi" disabled>

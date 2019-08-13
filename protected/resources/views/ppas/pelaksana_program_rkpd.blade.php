@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="form-group">
-              <label class="control-label col-sm-3" for="title">Unit Pelaksana RKPD:</label>
+              <label class="control-label col-sm-3" for="title">Unit Pelaksana PPAS:</label>
               <div class="col-sm-8">
                 <textarea type="name" class="form-control" id="unit_pelaksana_rkpd" rows="2" disabled></textarea>
               </div>
@@ -32,10 +32,10 @@
             <div class="form-group" >
               <label for="ophak_akses" class="col-sm-3 control-label" align='left'>Tambah Program/Kegiatan :</label>
               <div class="col-sm-8">
-                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="SKPD tidak dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
+                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Penyusunan PPAS" data-trigger="hover" data-content="SKPD tidak dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
                   <input type="radio" name="ophak_akses" id="ophak_akses" value="0">Tidak Diperbolehkan
                 </label>
-                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover" data-content="SKPD dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
+                <label class="radio-inline"  data-placement="bottom" data-toggle="popover" data-html="true" data-container="body" title="Penyusunan PPAS" data-trigger="hover" data-content="SKPD dapat menambah program/kegiatan di Renja selain di Renstra untuk Program RPJMD ini">
                   <input type="radio" name="ophak_akses" id="ophak_akses" value="1">Diperbolehkan 
                 </label>
               </div>

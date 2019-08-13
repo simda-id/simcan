@@ -105,7 +105,7 @@ use hoaaah\LaravelMenu\Menu;
                                         'url' => '/rkpd/dash'],
                                     [
                                         'label' => 'RKPD', 
-                                        'visible' => $akses->get(4) || $akses->get(5),
+                                        'visible' => $akses->get(40) || $akses->get(502),
                                         'items' => [
                                             [
                                                 'label' => 'Rancangan Awal RKPD',
@@ -150,7 +150,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ],                                    
                                     [
                                         'label' => 'Renja Perangkat Daerah',
-                                        'visible' => $akses->get(5),
+                                        'visible' => $akses->get(501) || $akses->get(502) || $akses->get(504),
                                         'items' => [
                                             [
                                                 'label' => 'Rancangan Awal Renja',
@@ -172,18 +172,16 @@ use hoaaah\LaravelMenu\Menu;
                                             ],
                                             [
                                                 'label' => 'Renja Final',
-                                                'visible' => $akses->get(503) || $akses->get(401) || $akses->get(504),
+                                                'visible' => $akses->get(502),
                                                 'items' => [
-                                                    ['label' => 'Load Data RKPD Final', 'url' => '/renjafinal/loadData', 'visible' => $akses->get(503)],
-                                                    ['label' => 'Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
-                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal/dokumen', 'visible' => $akses->get(504)],
+                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(502)],
                                                 ]
                                             ],
                                             
                                         ]
                                     ],
                                     ['label' => 'Pokok Pikiran DPRD',
-                                        'visible' => $akses->get(5) || $akses->get(4), 
+                                        'visible' => $akses->get(503) || $akses->get(401) || $akses->get(502), 
                                         'items' => [
                                             ['label' => 'Pokok Pikiran DPRD', 'url' => '/pokir', 'visible' => $akses->get(503)],
                                             ['label' => 'Verifikasi Pokir', 'url' => '/pokir/verpokir', 'visible' => $akses->get(401)],
@@ -192,10 +190,9 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                     [ 'label' => 'Forum Perangkat Daerah', 'visible' => $akses->get(606) || $akses->get(607) || $akses->get(401),
                                        'items' => [
-                                            ['label' => 'Load Data Rancangan Renja', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
+                                            ['label' => 'Load Rancangan Renja', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
-                                            // ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
-                                            ['label' => 'Dokumen Forum Perangkat Daerah', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
+                                            ['label' => 'Dokumen Forum', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
                                         ]
                                     ],
                                     
@@ -248,7 +245,6 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            // ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]
@@ -273,7 +269,7 @@ use hoaaah\LaravelMenu\Menu;
                                         'url' => '/rkpd/dash'],
                                     [
                                         'label' => 'RKPD', 
-                                        'visible' => $akses->get(4) || $akses->get(5),
+                                        'visible' => $akses->get(40) || $akses->get(502),
                                         'items' => [
                                             [
                                                 'label' => 'Rancangan Awal RKPD',
@@ -318,7 +314,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ],                                    
                                     [
                                         'label' => 'Renja Perangkat Daerah',
-                                        'visible' => $akses->get(5),
+                                        'visible' => $akses->get(501) || $akses->get(502) || $akses->get(504),
                                         'items' => [
                                             [
                                                 'label' => 'Rancangan Awal Renja',
@@ -340,18 +336,16 @@ use hoaaah\LaravelMenu\Menu;
                                             ],
                                             [
                                                 'label' => 'Renja Final',
-                                                'visible' => $akses->get(503) || $akses->get(401) || $akses->get(504),
+                                                'visible' => $akses->get(502),
                                                 'items' => [
-                                                    ['label' => 'Load Data RKPD Final', 'url' => '/renjafinal/loadData', 'visible' => $akses->get(503)],
-                                                    ['label' => 'Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(504)],
-                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal/dokumen', 'visible' => $akses->get(504)],
+                                                    ['label' => 'Dokumen Renja Final', 'url' => '/renjafinal', 'visible' => $akses->get(502)],
                                                 ]
                                             ],
                                             
                                         ]
                                     ],
                                     ['label' => 'Pokok Pikiran DPRD',
-                                        'visible' => $akses->get(5) || $akses->get(4), 
+                                        'visible' => $akses->get(503) || $akses->get(401) || $akses->get(502), 
                                         'items' => [
                                             ['label' => 'Pokok Pikiran DPRD', 'url' => '/pokir', 'visible' => $akses->get(503)],
                                             ['label' => 'Verifikasi Pokir', 'url' => '/pokir/verpokir', 'visible' => $akses->get(401)],
@@ -362,7 +356,6 @@ use hoaaah\LaravelMenu\Menu;
                                        'items' => [
                                             ['label' => 'Load Rancangan Renja', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
-                                            // ['label' => 'Verifikasi Bappeda', 'url' => '/forumskpd/verifikasi', 'visible' => $akses->get(401)],
                                             ['label' => 'Dokumen Forum', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(607)],
                                         ]
                                     ],
@@ -411,15 +404,14 @@ use hoaaah\LaravelMenu\Menu;
                                                 'label' => 'Renja', 
                                                 'visible' => $akses->get(50),
                                                 'items' => [
-                                                    ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(50)],
-                                                    ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(50)],
-                                                    ['label' => 'Renja', 'url' => '/cetak/renjafinal', 'visible' => $akses->get(50)],
+                                                    ['label' => 'Renja Ranwal', 'url' => '/cetak/ranwalrenja', 'visible' => $akses->get(501)],
+                                                    ['label' => 'Renja Rancangan', 'url' => '/cetak/renja', 'visible' => $akses->get(502)],
+                                                    ['label' => 'Renja', 'url' => '/cetak/renjafinal', 'visible' => $akses->get(503)],
                                                 ]
                                             ],
                                             ['label' => 'Musrenbang', 'url' => '/cetak/musren', 'visible' => $akses->get(60)],                                            
                                             ['label' => 'Forum OPD', 'url' => '/cetak/forum', 'visible' => $akses->get(60) || $akses->get(40) ],                                            
                                             ['label' => 'Pokir Dewan', 'url' => '/cetak/pokir', 'visible' => $akses->get(50)],
-                                            // ['label' => 'Draft-RKA', 'url' => '/cetak/prarka', 'visible' => $akses->get(50)],
                                         ]
                                     ],
                                 ]

@@ -129,7 +129,7 @@ use hoaaah\LaravelMenu\Menu;
                                           //  ['label' => 'RPJMD Rancangan', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
                                           //  ['label' => 'RPJMD Musrenbang', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
                                           //  ['label' => 'RPJMD Rancangan Akhir', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
-                                            ['label' => 'RPJMD Final', 'url' => '/rpjmd', 'visible' => $akses->get(20)],
+                                            ['label' => 'RPJMD', 'url' => '/rpjmd', 'visible' => $akses->get(20)],
                                         ]
                                     ],                                    
                                     [
@@ -139,7 +139,7 @@ use hoaaah\LaravelMenu\Menu;
                                            // ['label' => 'Renstra Rancangan Awal', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                           //  ['label' => 'Renstra Rancangan', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                            // ['label' => 'Renstra Rancangan Akhir', 'url' => '/renstra', 'visible' => $akses->get(30)],
-                                            ['label' => 'Renstra Final', 'url' => '/renstra', 'visible' => $akses->get(30)],
+                                            ['label' => 'Renstra', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                         ]
                                     ],
                                     [
@@ -195,11 +195,10 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
+        <script src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
-        <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('/js/datepicker-id.js')}}"></script>
 
 

@@ -9,12 +9,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Rancangan Renja';
+                $this->title = 'Renja Final';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
                 $breadcrumb->add(['url' => '/modul2','label' => 'Renja Perangkat Daerah']);
-                $breadcrumb->add(['url' => '/renja', 'label' => 'Rancangan Renja x']);
+                $breadcrumb->add(['url' => '/renja', 'label' => 'Renja Final']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -32,20 +32,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
-                        <div class="col-sm-2">                            
-                            <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" style="text-align: center; vertical-align:middle" disabled>
-                        </div>
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Pencetakan Penyesuaian Renja <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiProgramdanPagu dropdown-item"><i class="fa fa-bullseye fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Program dan Pagu</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btnPrintKompilasiKegiatandanPaguRenja dropdown-item"><i class="fa fa-male fa-fw fa-lg" aria-hidden="true"></i> Kompilasi Kegiatan dan Pagu</a>
-                                    </li>                       
-                                </ul>
-                        </div>
+                    <div class="col-sm-2">                            
+                        <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" style="text-align: center; vertical-align:middle" disabled>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renstra :</label>

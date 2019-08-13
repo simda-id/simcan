@@ -1258,7 +1258,7 @@ $(document).on('click', '.view-kegiatan', function() {
     jenis_belanja_temp = data.jenis_belanja;
 
     $('#nm_progrkpd_kegrenja').text($('#nm_program_progrenja').text());
-    $('#nm_progrenja_kegrenja').text(data.uraian_program_renstra);
+    $('#nm_progrenja_kegrenja').text(data.uraian_program_forum);
     if(Akses_temp==0){
           $('#btnTambahKegiatan').hide();
           $('#divTambahKegiatan').hide();

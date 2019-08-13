@@ -15,7 +15,7 @@
                 <label for="id_misi_renstra_edit" class="col-sm-3 control-label" align='left'>ID Misi renstra :</label>
                 <div class="col-sm-6">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="id_misi_tujuan_edit" name="id_misi_tujuan_edit" readonly >
+                    <input type="text" class="form-control number no_urut" id="id_misi_tujuan_edit" name="id_misi_tujuan_edit" readonly >
                   </div>
                 </div>
               </div>
@@ -23,7 +23,7 @@
                 <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
                 <div class="col-sm-2">
                 <div class="input-group">
-                  <input type="text" class="form-control" id="no_urut_tujuan_edit" name="no_urut_tujuan_edit" required="required" >                  
+                  <input type="text" class="form-control number id_revisi" id="no_urut_tujuan_edit" name="no_urut_tujuan_edit" required="required" >                  
                 </div>
                 </div>
               </div>

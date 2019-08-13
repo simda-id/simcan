@@ -31,7 +31,7 @@ $(document).ready(function() {
         || e.keyCode == 190)) {
           return false;
       }
-  }
+  };
 
   $('.number').number(true,0,'','.');
   $('#thn_perkada').number(true,0,'', '');
@@ -61,7 +61,10 @@ $(document).ready(function() {
 
     var tgl= d + " " + m_names[m] + " " + y;
     return tgl;
-  }
+  };
+
+  var id_sk_ssh,no_sk_ssh,id_zonassh,nm_zonassh,id_zona,nm_zona,flag_perkada,
+  id_gol_ssh, nm_gol_ssh, id_kel_ssh, nm_kel_ssh, id_skel_ssh, nm_skel_ssh;
 
   var perkada = $('#tblPerkada').DataTable( {
       processing: true,
@@ -85,7 +88,7 @@ $(document).ready(function() {
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  } );
+  });
 
   var detailzona = $('#tblDetailZona').DataTable( {
         deferRender: true,
@@ -128,7 +131,8 @@ function LoadGolongan(id_zona){
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  });}
+  });
+};
 
 var kel_tbl;
 function LoadKelompok(id_zona,id_gol){
@@ -151,7 +155,8 @@ function LoadKelompok(id_zona,id_gol){
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  });}
+  });
+};
 
 var skel_tbl;
 function LoadSKelompok(id_zona,id_gol,id_kel){
@@ -174,7 +179,8 @@ function LoadSKelompok(id_zona,id_gol,id_kel){
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  });}
+  });
+};
 
 var detailtarif_tbl;
 function LoadItemSSH(id_zona,id_gol,id_kel,id_skel){
@@ -202,15 +208,16 @@ function LoadItemSSH(id_zona,id_gol,id_kel,id_skel){
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  });}
+  });
+};
 
 var itemSSH
-function LoadCariItem(param){
+function LoadCariItem(param,param2){
   itemSSH = $('#tblItemSSH').DataTable( {
         processing: true,
         serverSide: true,
         // dom: 'BFrtIp',
-        "ajax": {"url": "./cariItemSSH/"+param},
+        "ajax": {"url": "./cariItemSSH/"+param+'/'+param2},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'uraian_sub_kelompok_ssh'},
@@ -221,7 +228,8 @@ function LoadCariItem(param){
         "order": [[0, 'asc']],
         "bDestroy": true,
         "autoWidth": false
-  });}
+  });
+};
 
 
 
@@ -232,11 +240,11 @@ $(document).on('click', '#btnparam_cari', function() {
     param=$('#param_cari').val();
   }
 
-  LoadCariItem(param.toLowerCase());
+  LoadCariItem(param.toLowerCase(),status_dokumen_temp);
 
 });
 
-  $('#tblItemSSH tbody').on( 'dblclick', 'tr', function () {
+$('#tblItemSSH tbody').on( 'dblclick', 'tr', function () {
 
     var data = itemSSH.row(this).data();
 
@@ -245,9 +253,9 @@ $(document).on('click', '#btnparam_cari', function() {
 
     $('#cariItemSSH').modal('hide');    
 
-  } );  
+  });  
 
-  $(function () {
+$(function () {
         $('#tgl_perkada').datepicker({
           // changeMonth: true,
           // changeYear: true,
@@ -257,7 +265,7 @@ $(document).on('click', '#btnparam_cari', function() {
         $( "#tgl_perkada" ).datepicker( "option", "dateFormat", "dd MM yy" );
       });
 
-  $(function () {
+$(function () {
       $('#tgl_perkada_edit').datepicker({
         altField: "#tgl_perkada1_edit",
         altFormat: "yy-mm-dd"
@@ -265,14 +273,12 @@ $(document).on('click', '#btnparam_cari', function() {
       $( "#tgl_perkada_edit" ).datepicker( "option", "dateFormat", "dd MM yy" );
   });
 
-  var id_sk_ssh,no_sk_ssh,id_zonassh,nm_zonassh,id_zona,nm_zona,flag_perkada,
-  id_gol_ssh, nm_gol_ssh, id_kel_ssh, nm_kel_ssh, id_skel_ssh, nm_skel_ssh;
 
   if (flag_perkada == null && flag_perkada === undefined ){
     document.getElementById("divAddZona").style.visibility='hidden';
     document.getElementById("btnAddTarif").style.visibility='hidden';
     document.getElementById("btnCopyTarif").style.visibility='hidden';
-  }
+  };
 
   $('#tblPerkada tbody').on('dblclick', 'tr', function () {
       
@@ -675,8 +681,30 @@ $(document).on('click', '#btnparam_cari', function() {
     });
   });
 
-  $(document).on('click', '.btntambah-item', function() {
+var status_dokumen_temp; 
+$(document).on('click', '.btntambah-item', function() {
     var data = detailzona.row($(this).parents('tr') ).data();
+    status_dokumen_temp=0;
+    $('.btnTarif').addClass('btn-success');
+    $('.btnTarif').removeClass('edittarif');
+    $('.btnTarif').addClass('addtarif');
+    $('.modal-title').text('Tambah Data Tarif Item SSH a');
+    $('.form-horizontal').show();
+    $('#id_perkada_tarif'). val(id_sk_ssh);
+    document.getElementById("idperkada_tarif").innerHTML = no_sk_ssh;
+    $('#id_zona_perkada'). val(data.id_zona_perkada);
+    $('#id_zona_tarif'). val(data.id_zona);
+    document.getElementById("idzona_tarif").innerHTML = data.ur_zona;
+    $('#id_item_perkada'). val(null);
+    $('#ur_item_perkada'). val(null);
+    $('#no_urut_tarif').val(null);
+    $('#rupiah_tarif').val(0);
+    $('#ModalTarifPerkada').modal('show');
+  });
+
+$(document).on('click', '.btntambahsup', function() {
+    var data = detailzona.row($(this).parents('tr') ).data();
+    status_dokumen_temp=1;
     $('.btnTarif').addClass('btn-success');
     $('.btnTarif').removeClass('edittarif');
     $('.btnTarif').addClass('addtarif');
@@ -910,13 +938,9 @@ $(document).on('click', '#btnparam_cari', function() {
       }
 
     }
-
-    
-
   });
 
-  $( ".pilih_perkada" ).change(function() {
-      
+  $( ".pilih_perkada" ).change(function() {      
       $.ajax({
 
           type: "GET",
@@ -939,4 +963,58 @@ $(document).on('click', '#btnparam_cari', function() {
       });
     });
 
-});
+
+$(document).on('click', '.btnUpdateSSH', function() {
+    var data = perkada.row($(this).parents('tr') ).data();
+    // $('.btnTarif').addClass('btn-success');
+    // $('.btnTarif').removeClass('edittarif');
+    // $('.btnTarif').addClass('addtarif');
+    // $('.modal-title').text('Tambah Data Tarif Item SSH a');
+    $.ajax({
+          type: "GET",
+          url: './getDokumenTransaksi',
+          dataType: "json",
+          success: function(data) {
+          var j = data.length;
+          var post, i;
+          $('select[name="no_dokumen_trans"]').empty();
+          $('select[name="no_dokumen_trans"]').append('<option value="-1">---Pilih Nomor Dokumen Transaksi---</option>');
+          for (i = 0; i < j; i++) {
+            post = data[i];
+            $('select[name="no_dokumen_trans"]').append('<option value="'+ post.id_dokumen_keu +'">'+ post.uraian_display +'</option>');
+          }
+          }
+      });
+
+    $('.form-horizontal').show();
+    $('#nomor_perkada_update'). val(data.nomor_perkada);
+    $('#id_perkada_update'). val(data.id_perkada);
+    $('#ModalUpdateItem').modal('show');
+  });
+
+$('.modal-footer').on('click', '.btnUpdateItem', function() {
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+
+      $.ajax({
+          type: 'post',
+          url: './UpdateItemSSH',
+          data: {
+              '_token': $('input[name=_token]').val(),
+              'id_dokumen_ssh': $('#id_perkada_update').val(),
+              'id_dokumen_keu': $('#no_dokumen_trans').val(),
+          },
+          success: function(data) {
+              $('#ModalUpdateItem').modal('hide');
+              if(data.status_pesan==1){
+                createPesan(data.pesan,"success");
+              } else {
+                createPesan(data.pesan,"alert"); 
+              } 
+          }
+      });
+  });
+
+
+}); //end file

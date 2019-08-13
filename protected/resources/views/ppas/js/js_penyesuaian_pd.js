@@ -3422,11 +3422,11 @@ $('.modal-footer').on('click', '.addIndikator', function() {
         $('.checkIndikator').prop('checked',false);
       }
 
-      if(data.status_kegiatan==0){
+      if(data.status_program==0){
         if(data.sumber_data==0){
-          $('.btnHapusIndikator').show();
-        } else {
           $('.btnHapusIndikator').hide();
+        } else {
+          $('.btnHapusIndikator').show();
         }
         $('.btnIndikator').show();
       } else {

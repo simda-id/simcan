@@ -1235,15 +1235,15 @@ $('#tblPelaksanaRKPD tbody').on( 'mousedown', 'td', function (e) {
       document.frmEditPelaksana.ophak_akses[$(this).data('hak_akses')].checked=true;
 
       if($(this).data('status_pelaksanaan')==4 || $(this).data('sumber_data')==1){
-          document.frmEditPelaksana.status_pelaksanaan_unit[5].checked=true;
-          document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
+          document.frmEditPelaksana.status_pelaksanaan_unit[4].checked=true;
+          document.frmEditPelaksana.status_pelaksanaan_unit[4].style.visibility='hidden';        
           document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
           $('.idStatusPelaksanaUnit').hide();
           $('.btnCariUnit').show();          
         } else {
             $('.idStatusPelaksanaanUnit').show();
             document.frmEditPelaksana.status_pelaksanaan_unit[$(this).data('status_pelaksanaan')].checked=true;
-            document.frmEditPelaksana.status_pelaksanaan_unit[5].style.visibility='hidden';        
+            document.frmEditPelaksana.status_pelaksanaan_unit[4].style.visibility='hidden';        
             document.getElementById("status_pelaksanaan_unit4").style.visibility='hidden';
             $('.idStatusPelaksanaUnit').show();
             $('.btnCariUnit').hide();

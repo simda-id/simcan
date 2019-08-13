@@ -161,8 +161,20 @@ $(document).on('click', '.btnProses', function() {
      
        window.open('../PPASPembiayaan'+ vars, '_blank'); 
     };
+    if($('#jns_laporan').val()==5){
+      vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+     
+       window.open('../PPASDapat'+ vars, '_blank'); 
+    };
+    if($('#jns_laporan').val()==6){
+      vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+     
+       window.open('../PPASSumberDana'+ vars, '_blank'); 
+    };
     
          
-});
+});//End File
 
 

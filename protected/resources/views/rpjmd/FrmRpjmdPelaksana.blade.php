@@ -50,6 +50,7 @@
         <h4 class="modal-title"></h4>
     </div>
     <div class="modal-body">
+        <input type="hidden" id="id_urusan_rkpd_hapus" name="id_urusan_rkpd_hapus">
         <input type="hidden" id="id_pelaksana_hapus" name="id_pelaksana_hapus">
         <input type="hidden" id="no_urut_hapus" name="no_urut_hapus">
         <div class="alert alert-danger">

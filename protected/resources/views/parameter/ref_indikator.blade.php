@@ -68,13 +68,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <form name="frmModalIndikator" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_indikator" id="id_indikator">                                  
-            <div class="form-group">
+            <div class="form-group hidden">
               <label class="control-label col-sm-2" for="id_aspek">Aspek Pembangunan</label>
                 <div class="col-sm-10">
                   <select type="text" class="form-control id_aspek" id="id_aspek" name="id_aspek"></select>
                 </div>
             </div>                                    
-            <div class="form-group">
+            <div class="form-group hidden">
               <label class="control-label col-sm-2" for="id_bidang">Bidang Pembangunan</label>
                 <div class="col-sm-10">
                   <select type="text" class="form-control id_bidang" id="id_bidang" name="id_bidang"></select>
@@ -92,7 +92,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <select type="text" class="form-control id_satuan_output" id="id_satuan_output" name="id_satuan_output"></select>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group hidden">
               <label class="control-label col-sm-2" for="metode_hitung">File Metode Perhitungan </label>
               <label class="btn col-sm-10">
                   <input type="file" name="metode_hitung" id="metode_hitung" class="validate metode_hitung" accept=".png, .jpg, .jpeg" placeholder="Pilih File Image *.png,*.jpg,*.jpeg" >
@@ -141,7 +141,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
-              <label for="tipe_indikator" class="col-sm-2" align='left'>Tipe Indikator</label>
+              <label for="tipe_indikator" class="col-sm-2" align='left'>Kualitas Indikator</label>
               <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">

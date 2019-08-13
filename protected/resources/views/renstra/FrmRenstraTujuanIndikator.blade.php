@@ -14,13 +14,13 @@
                   <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control number" id="no_urut_indikator_tujuan_edit" name="no_urut_indikator_tujuan_edit" required="required" >                  
+                        <input type="text" class="form-control number no_urut" id="no_urut_indikator_tujuan_edit" name="no_urut_indikator_tujuan_edit" required="required" >                  
                     </div>
                   </div>
                   <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control number" id="id_perubahan_indikator_tujuan_edit" name="id_perubahan_indikator_tujuan_edit" required="required" >                  
+                        <input type="text" class="form-control number id_revisi" id="id_perubahan_indikator_tujuan_edit" name="id_perubahan_indikator_tujuan_edit" required="required" >                  
                     </div>
                   </div>
                 </div> 

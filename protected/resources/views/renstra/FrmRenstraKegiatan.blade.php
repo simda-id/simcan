@@ -19,11 +19,11 @@
                 <div class="form-group">
                   <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control" id="no_urut_kegiatan_edit" name="no_urut_kegiatan_edit" required="required">   
+                    <input type="text" class="form-control number no_urut" id="no_urut_kegiatan_edit" name="no_urut_kegiatan_edit" required="required">   
                   </div>
                   <label for="id_perubahan_kegiatan_edit" class="col-sm-2 control-label" style="text-align: right;">ID Perubahan :</label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control" id="id_perubahan_kegiatan_edit" name="id_perubahan_kegiatan_edit" required="required" >  
+                    <input type="text" class="form-control number id_revisi" id="id_perubahan_kegiatan_edit" name="id_perubahan_kegiatan_edit" required="required" >  
                   </div>
                 </div>
                 <div class="form-group">

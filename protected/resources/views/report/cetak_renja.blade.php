@@ -398,16 +398,16 @@ $(document).on('click', '.btnProses', function() {
     };
     if($('#jns_laporan').val()==8){
        window.open('../PrintRingkasanRenjaUrusan1/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==10){
-       window.open('../PrintKompilasiProgramRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
-    };
+    }; 
     if($('#jns_laporan').val()==9){
-       window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+       window.open('../PrintPrakiraanMaju/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
     };
-    if($('#jns_laporan').val()==11){
-       window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
-    };    
+    // if($('#jns_laporan').val()==10){
+    //    window.open('../PrintBandingPaguBelanja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    // };   
+    // if($('#jns_laporan').val()==11){
+    //    window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
+    // };    
 });
 
 

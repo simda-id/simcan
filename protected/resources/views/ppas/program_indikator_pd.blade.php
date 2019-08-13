@@ -34,11 +34,11 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="target_indikator_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut Renstra :</label>
+                <label for="target_indikator_renstra" class="col-sm-3 control-label" align='left'>Target Capaian Menurut RKPD :</label>
                 <div class="col-sm-2">
                   <input type="text" class="form-control number" id="target_indikator_renstra" name="target_indikator_renstra" disabled >
                 </div>
-                <label for="target_indikator_renja" class="col-sm-3 control-label" align='left'>Target Capaian Rancangan RKPD :</label>
+                <label for="target_indikator_renja" class="col-sm-3 control-label" align='left'>Target Capaian Rancangan PPAS :</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control number" id="target_indikator_renja" name="target_indikator_renja" required="required" >
                 </div>

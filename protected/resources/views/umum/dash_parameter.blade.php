@@ -285,7 +285,7 @@ use hoaaah\LaravelMenu\Menu;
                         <div class="col-sm-3 col-md-3 col-lg-3">
                             <div class="feature-block bootdey" style="visibility: visible;">
                                 @if($akses->get(108)) 
-                                <a href="{{ url('/admin/parameter/indikator') }}">
+                                <a title="Menu Indikator Pindah ke Modul RPJMD-Renstra">
                                     <div class="ico-success fa fa-tachometer fa-fw"></div>
                                     <div class="name">
                                         Indikator

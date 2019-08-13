@@ -48,6 +48,7 @@
             <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
+            <input type="hidden" id="id_program_rpjmd_hapus" name="id_program_rpjmd_hapus">
             <input type="hidden" id="id_urusan_rkpd_hapus" name="id_urusan_rkpd_hapus">
             <div class="alert alert-danger">
               <i class="fa fa-exclamation-triangle fa-2x fa-pull-left text-danger"  aria-hidden="true"></i>

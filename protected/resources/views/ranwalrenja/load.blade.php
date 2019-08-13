@@ -281,7 +281,7 @@ function loadReProses($id_unit,$tahun){
             "order": [[0, 'asc']],
             "bDestroy": true
       });
-}
+};
 
 var programrkpd;
 function loadProgramRKPD(tahun,unit){

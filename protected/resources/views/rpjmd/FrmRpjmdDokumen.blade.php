@@ -16,7 +16,7 @@
                   </div>
                   <label for="id_revisi_dok" class="col-sm-2 control-label" style="text-align: right;">Revisi ke-</label>
                   <div class="col-sm-2">
-                      <input type="text" class="form-control" id="id_revisi_dok" name="id_revisi_dok" required="required">
+                      <input type="text" class="form-control" id="id_revisi_dok" name="id_revisi_dok" style="text-align: center;" required="required">
                   </div>
                 </div> 
                 <div class="form-group">
@@ -28,12 +28,18 @@
                 <div class="form-group">
                   <label for="thn_1_dok" class="col-sm-3 control-label" align='left'>Periode RPJMD </label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control number" id="thn_1_dok" name="thn_1_dok" required="required">
+                    <input type="text" class="form-control number" id="thn_1_dok" name="thn_1_dok" style="text-align: center;" required="required" disabled>
                   </div>
                   <label for="thn_5_dok" class="col-sm-1 control-label" style="text-align: center;"> s.d </label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control number" id="thn_5_dok" name="thn_5_dok" required="required">
+                    <input type="text" class="form-control number" id="thn_5_dok" name="thn_5_dok" style="text-align: center;" required="required" disabled>
                   </div>
+                </div>
+                <div class="form-group">
+                    <label for="no_perda_dok" class="col-sm-3 control-label" align='left'></label>
+                    <div class="col-sm-8">
+                        <label for="thn_5_dok" class="control-label" style="text-align: left;">(Untuk Dokumen Baru, Periode akan terisi otomatis saat sukses menyimpan)</label>
+                    </div>
                 </div>               
                 <div class="form-group">
                     <label for="no_perda_dok" class="col-sm-3 control-label" align='left'>Nomor Dokumen </label>

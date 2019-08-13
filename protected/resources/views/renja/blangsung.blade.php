@@ -1340,7 +1340,7 @@ $.ajax({
           var post, i;
 
           $('select[name="zona_ssh"]').empty();
-          $('select[name="zona_ssh"]').append('<option value="0">---Pilih Sumber Dana---</option>');
+          $('select[name="zona_ssh"]').append('<option value="0">---Pilih Zona SSH---</option>');
 
           for (i = 0; i < j; i++) {
             post = data[i];
@@ -1867,8 +1867,8 @@ $('#tblLokasiWilayah').on( 'dblclick', 'tr', function () {
     document.getElementById("nm_lokasi").value = data.nama_lokasi;
 
 
-    document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
+    // document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
+    // document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
 
     $('#cariLokasiModal').modal('hide');    
@@ -1882,8 +1882,8 @@ $('#tblLokasiTeknis').on( 'dblclick', 'tr', function () {
     document.getElementById("jenis_lokasi").value = data.jenis_lokasi;
     document.getElementById("nm_lokasi").value = data.nama_lokasi;
 
-    document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
+    // document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
+    // document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
     $('#cariLokasiModal').modal('hide');    
 
@@ -1896,8 +1896,8 @@ $('#tblLokasiLuar').on( 'dblclick', 'tr', function () {
     document.getElementById("jenis_lokasi").value = data.jenis_lokasi;
     document.getElementById("nm_lokasi").value = data.nama_lokasi;
 
-    document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
-    document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
+    // document.getElementById("id_lokasi_pelaksana").value = data.id_lokasi;
+    // document.getElementById("nm_lokasi_penyelenggara").value = data.nama_lokasi;
 
     $('#cariLokasiModal').modal('hide');    
 
@@ -2914,18 +2914,18 @@ $(document).on('click', '.add-belanja', function() {
       $('#ur_item_ssh').val(null);
       $('#id_rekening').val(null);
       $('#ur_rekening').val(null);
-      $('#volume1').val(0);
+      $('#volume1').val(1);
       $('#id_satuan1').val(-1);
       $('#satuan1').text(-1);
-      $('#volume2').val(0);
+      $('#volume2').val(1);
       $('#harga_satuan').val(1);
       $('#jumlah_belanja').val(1);
       $('#uraian_belanja').val(null);
       $('#uraian_aktivitas_asb').val(null);
       $('#id_aktivitas_asb_belanja').val(0);
       $('#sumber_belanja').val(1);
-      $('#id_satuan2').val(id_sat_lok2);
-      $('#satuan2').text(nm_sat_lok2);
+      $('#id_satuan2').val(-1);
+      $('#satuan2').text();
 
       checkAsalbelanja(1);
 
@@ -2963,8 +2963,7 @@ $('.modal-footer').on('click', '.addBelanja', function() {
           },
           success: function(data) {
               $('#tblBelanja').DataTable().ajax.reload();
-              $('#tblLokasi').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload();
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -3058,8 +3057,7 @@ $('.modal-footer').on('click', '.editBelanja', function() {
           },
           success: function(data) {
               $('#tblBelanja').DataTable().ajax.reload();
-              $('#tblLokasi').DataTable().ajax.reload();
-              $('#tblPelaksana').DataTable().ajax.reload();
+              $('#tblAktivitas').DataTable().ajax.reload();
               if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {
@@ -3089,8 +3087,7 @@ $(document).on('click', '.btnHapusBelanja', function() {
       },
       success: function(data) {
         $('#tblBelanja').DataTable().ajax.reload();
-        $('#tblLokasi').DataTable().ajax.reload();
-        $('#tblPelaksana').DataTable().ajax.reload();
+        $('#tblAktivitas').DataTable().ajax.reload();
         $('#ModalBelanja').modal('hide');
         if(data.status_pesan==1){
               createPesan(data.pesan,"success");
@@ -3158,8 +3155,7 @@ $(document).on('click', '.btnUnLoadAsb', function() {
           },
           success: function(data) {
             $('#tblBelanja').DataTable().ajax.reload();
-            $('#tblLokasi').DataTable().ajax.reload();
-            $('#tblPelaksana').DataTable().ajax.reload();
+            $('#tblAktivitas').DataTable().ajax.reload();
             if(data.status_pesan==1){
               createPesan(data.pesan,"success");
               } else {

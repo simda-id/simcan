@@ -173,6 +173,15 @@ $(document).on('click', '.btnProses', function() {
     // 	window.open('../PrintPrakiraanMajuF/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
  
     //  };
+
+    if($('#jns_laporan').val()==6){
+         vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+        vars += "&unit="   + $('#unit_prarka').val();
+
+        window.open('../RekapSumberDana' + vars, '_blank');
+   
+       };
   
      if($('#jns_laporan').val()==11){
        window.open('../PrintMatrikForm2/'+$('#tahun_prarka').val()); 

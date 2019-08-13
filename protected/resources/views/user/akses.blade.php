@@ -222,11 +222,9 @@
                                         <li> Musrenbang Kecamatan
                                             <ul>
                                                 <li data-value ="601"> Usulan RW</li>
-                                                {{-- <li data-value ="602">Load Usulan RW</li> --}}
                                                 <li data-value ="603"> Usulan Desa/Kelurahan</li>
                                                 <li data-value ="604"> Load Usulan Desa</li>
                                                 <li data-value ="605"> Musrenbang Kecamatan</li>
-                                                {{-- <li data-value ="605"> Posting Musrenbang Kecamatan</li> --}}
                                             </ul>
                                         </li>                               
                             </ul>
@@ -259,7 +257,7 @@
                                      <ul>
                                                 <li data-value="503"> Pokok Pikiran DPRD</li>
                                                 <li data-value="409"> Verifikasi Pokir</li>
-                                                <li data-value="501"> Tindak Lanjut Pokir</li>
+                                                <li data-value="502"> Tindak Lanjut Pokir</li>
                                             </ul>   
                                 </li>
                             </ul>

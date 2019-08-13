@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-xs-9">
                             <h1 class="text-center" style="color: #fff; margin-top:10px; font-size:40px; font-weight:900; vertical-align:middle;">
-                                simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated X</strong>
+                                simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated</strong>
                             </h1>
                         </div>
                     </span>                                    

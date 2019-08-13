@@ -9,12 +9,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
       <div class="col-md-12">
         <?php
-                $this->title = 'Dokumen Rancangan Awal Renja';
+                $this->title = 'Penyusunan Renja Final';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => 'Renja']);
-                $breadcrumb->add(['label' => 'Rancangan Awal Renja']);
+                $breadcrumb->add(['label' => 'Penyusunan Renja Final']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?> 
@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <p><h2 class="panel-title">Dokumen Rancangan Awal Renja</h2></p>
+            <p><h2 class="panel-title">Penyusunan Renja Final</h2></p>
           </div>
 
           <div class="panel-body">
@@ -49,20 +49,277 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </div>
                   </div>
                 </form>
-                <table id="tblDokumen" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
-                  <thead>
-                      <tr>
-                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Tahun Renja</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Nomor Dokumen</th>
-                        <th style="text-align: center; vertical-align:middle">Uraian Dokumen</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Status</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
+                  <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
+                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                      <li class="active">
+                        <a href="#dokumenrenja" aria-controls="dokumenrenja" role="tab-kv" data-toggle="tab">Dokumen Renja Final</a>
+                      </li>
+                      <li class="disabled">
+                        <a href="#programrenja" aria-controls="programrenja" role="tab-kv" data-toggle="tab">Program Renja</a>
+                      </li>
+                      <li class="disabled">
+                        <a href="#kegiatanrenja" aria-controls="kegiatanrenja" role="tab-kv" data-toggle="tab">Kegiatan Renja</a>
+                      </li>
+                      <li class="disabled">
+                        <a href="#pelaksanarenja" aria-controls="pelaksanarenja" role="tab-kv" data-toggle="tab">Pelaksana Renja</a>
+                      </li>
+                      <li class="disabled">
+                        <a href="#aktivitasrenja" aria-controls="aktivitasrenja" role="tab-kv" data-toggle="tab">Aktivitas Renja</a>
+                      </li>
+                      <li class="disabled">
+                        <a href="#belanja" aria-controls="belanja" role="tab-kv" data-toggle="tab">Rincian Belanja</a>
+                      </li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="dokumenrenja">
+                              <br>
+                              <div class="">
+                                <a type="button" id="btnAddDokumen" class="btn btn-labeled btn-sm btn-success" data-dismiss="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Dokumen</a>m</a>
+                              </div>
+                              <div class="col-md-12">
+                                <table id="tblDokumen" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+                                  <thead>
+                                      <tr>
+                                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                                        <th width="10%" style="text-align: center; vertical-align:middle">Tahun Renja</th>
+                                        <th width="10%" style="text-align: center; vertical-align:middle">Nomor Dokumen</th>
+                                        <th style="text-align: center; vertical-align:middle">Uraian Dokumen</th>
+                                        <th width="10%" style="text-align: center; vertical-align:middle">Status</th>
+                                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                                </table> 
+                              </div>  
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade in" id="programrenja">
+                              <br>
+                              <div class="col-md-12">
+                                <table id="tblProgramRenja" class="table display table-striped compact table-bordered table-responsive">
+                                  <thead>
+                                    <tr>
+                                      <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                      <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                      <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Renja</th>
+                                      <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
+                                      <th colspan="3" width='15%' style="text-align: center; vertical-align:middle">Jumlah Kegiatan</th>
+                                      <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                      <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                    </tr>
+                                    <tr>
+                                      <th width="50px" style="text-align: center; vertical-align:middle">Jml</th>
+                                      <th width="50px" style="text-align: center; vertical-align:middle">Reviu</th>
+                                      <th width='150px' style="text-align: center; vertical-align:middle">Pagu</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>                                        
+                                  </tbody>
+                                </table> 
+                              </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade in" id="kegiatanrenja">
+                                <br>
+                                  <div id="divTambahKegiatan" class="hidden">
+                                    <p><a id="btnTambahKegiatan" class="add-kegiatan btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Kegiatan</a></p>
+                                  </div>
+                                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                                  <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                      <tbody>
+                                        <tr class="backRenja">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Program Renstra</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_renstra_kegrenja" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backRenja">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_renja_kegrenja" align='left'></label></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  </form>
+                                    {{-- <div class="table-responsive"> --}}
+                                    <table id="tblKegiatanRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" width='3%' style="text-align: center; vertical-align:middle"></th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Kegiatan Renja</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Indikator</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Jumlah Pelaksana</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                {{-- <th width="5%" style="text-align: center; vertical-align:middle">Jml</th>
+                                                <th width="5%" style="text-align: center; vertical-align:middle">Reviu</th> --}}
+                                                <th width="5%" style="text-align: center; vertical-align:middle">Kegiatan</th>
+                                                <th width="5%" style="text-align: center; vertical-align:middle">Aktivitas</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                        
+                                        </tbody>
+                                    </table>   
+                                {{-- </div> --}}
+                              </div>
+
+                              <div role="tabpanel" class="tab-pane fade in" id="pelaksanarenja">
+                                <br>
+                                  <div id="divTambahPelaksana" class="hidden">
+                                    <button id="btnTambahPelaksana" type="button" class="add-pelaksana btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Pelaksana</button>
+                                  </div>
+                                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                                  <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                      <tbody>
+                                        <tr class="backRenja">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_pelaksana" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backKegiatan">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_pelaksana" align='left'></label></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  </form>
+                                  {{-- <div class="table-responsive"> --}}
+                                    <table id="tblPelaksanaRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Pagu</th>
+                                                <th  width='10%' style="text-align: center; vertical-align:middle">Jumlah Aktivitas</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                        
+                                        </tbody>
+                                    </table>   
+                                {{-- </div>                                      --}}
+                                </div>
+                            <div role="tabpanel" class="tab-pane fade in" id="aktivitasrenja">
+                                <br>
+                                  <div id="divTambahAktivitas" class="hidden">
+                                    <button id="btnTambahAktivitas" type="button" class="add-aktivitas btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Aktivitas</button>
+                                  </div>            
+                                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                                  <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                      <tbody>
+                                        <tr class="backRenja">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_aktivitas" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backKegiatan">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_aktivitas" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backPelaksana">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_pelaksana" align='left'></label></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  </form>
+                                  {{-- <div class="table-responsive"> --}}
+                                    <table id="tblAktivitasRenja" class="table display table-striped compact table-bordered table-responsive" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Lokasi</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Aktivitas</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Pagu Belanja</th>
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
+                                                {{-- <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Musrenbang</th> --}}
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <th width='7%' style="text-align: center; vertical-align:middle">Ranwal</th>
+                                                {{-- <th width='3%' style="text-align: center; vertical-align:middle">%</th> --}}
+                                                <th width='7%' style="text-align: center; vertical-align:middle">Rancangan</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 1</th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle">Vol 2</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                        
+                                        </tbody>
+                                    </table>   
+                                {{-- </div>   --}}
+                                </div>
+                            <div role="tabpanel" class="tab-pane fade in" id="belanja">
+                              <br>
+                                  <div id="divAddSSH">
+                                    <a id="btnTambahBelanja" type="button" class="add-belanja btn btn-labeled btn-success">
+                                      <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah dari SSH</a>
+                                     <a id="btnCopyBelanja" type="button" class="btn btn-labeled btn-primary">
+                                      <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Copy dari Aktivitas Lain</a>
+                                  </div>
+                                  <div id="divImportASB">
+                                    <a id="btnTambahBelanjaASB" type="button" class="add-belanjaASB btn btn-labeled btn-info">
+                                      <span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span>Tambah dari ASB</a>
+                                    <a id="btnUnLoadAsb" type="button" class="btnUnLoadAsb btn btn-labeled btn-danger">
+                                      <span class="btn-label"><i class="fa fa-stack-overflow fa-fw fa-lg"></i></span>Unload Belanja</a>
+                                  </div>
+                                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
+                                  <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                      <tbody>
+                                        <tr class="backRenja">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Program Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_program_belanja" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backKegiatan">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Kegiatan Renja</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_kegiatan_belanja" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backPelaksana">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Pelaksana Kegiatan</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_sub_belanja" align='left'></label></td>
+                                        </tr>
+                                        <tr class="backAktivitas">
+                                          <td width="15%" style="text-align: left; vertical-align:top;">Aktivitas Kegiatan</td>
+                                          <td style="text-align: left; vertical-align:top;"><label id="nm_aktivitas_belanja" align='left'></label></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  </form>
+                                    <table id="tblBelanja" class="table table-striped display compact table-bordered table-responsive" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Item Belanja</th>
+                                                {{-- <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Kode Rekening</th> --}}
+                                                <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Volume</th>
+                                                <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Jumlah Belanja</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <th width='5%' style="text-align: center; vertical-align:middle"> 1 </th>
+                                                <th width='5%' style="text-align: center; vertical-align:middle"> 2 </th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">Satuan</th>
+                                                <th width='10%' style="text-align: center; vertical-align:middle">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                        
+                                        </tbody>
+                                    </table>   
+                                </div>
+                        </div>
+                    </div>
+                
           </div>
         </div>
       </div>
@@ -231,437 +488,5 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-<script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {
-
-function createPesan(message, type) {
-    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += message;
-    html += '</div>';    
-    $(html).hide().prependTo('#pesan').slideDown();    
-
-    setTimeout(function() {
-            $('#pesanx').removeClass('in');
-         }, 3500);
-};
-
-function formatTgl(val_tanggal){
-  var formattedDate = new Date(val_tanggal);
-  var d = formattedDate.getDate();
-  var m = formattedDate.getMonth();
-  var y = formattedDate.getFullYear();
-  var m_names = new Array("Januari", "Februari", "Maret", 
-    "April", "Mei", "Juni", "Juli", "Agustus", "September", 
-    "Oktober", "November", "Desember")
-
-  var tgl= d + " " + m_names[m] + " " + y;
-  return tgl;
-};
-
-$('.page-alert .close').click(function(e) {
-  e.preventDefault();
-  $(this).closest('.page-alert').slideUp();
-});
-
-$('#tahun_rkpd').number(true,0,',','');
-
-$('#tanggal_rkpd_x').datepicker({
-  altField: "#tanggal_rkpd",
-  altFormat: "yy-mm-dd", 
-  dateFormat: "dd MM yy"
-});
-
-$('#btn').click(function() {
-    $("#tanggal_rkpd_x").focus();
-  });
-
-function buatNip(string){
-  return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
-};
-
-function nilaiNip(string){
-  return string.replace(/\D/g,'').substring(0, 20);
-};
-
-var angkaNip = document.getElementsByClassName('nip');
-
-angkaNip.onkeydown = function(e) {
-  if(!((e.keyCode > 95 && e.keyCode < 106)
-    || (e.keyCode > 47 && e.keyCode < 58) 
-    )) { return false; }
-};
-
-$("input[name='nip_tandatangan_display']").on("keyup", function(){
-    $("input[name='nip_tandatangan']").val(nilaiNip(this.value));
-    this.value = buatNip($("input[name='nip_tandatangan']").val());
-});
-
-$.ajax({
-
-    type: "GET",
-    url: './getUnitRenja',
-    dataType: "json",
-
-    success: function(data) {
-
-          var j = data.length;
-          var post, i;
-
-          $('select[name="id_unit"]').empty();
-          $('select[name="id_unit"]').append('<option value="-1">---Pilih Unit---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="id_unit"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
-          }
-          }
-});
-
-var dokumen_tbl;
-dokumen_tbl = $('#tblDokumen').DataTable({    
-  "autoWidth": false,
-  "bDestroy": true
-});
-
-function LoadDokumen(id_unit){
-dokumen_tbl = $('#tblDokumen').DataTable({
-        processing: true,
-        serverSide: true,
-        "autoWidth": false,
-        "ajax": {"url": "./getDataDokumen/"+id_unit},
-        "language": {
-                "decimal": ",",
-                "thousands": "."},
-        "columns": [
-              { data: 'no_urut', sClass: "dt-center"},
-              { data: 'tahun_ranwal', sClass: "dt-center"},
-              { data: 'nomor_ranwal'},
-              { data: 'uraian_perkada'},
-              { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",width:"15px",
-                render: function(data, type, row,meta) {
-                return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
-              }},
-              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
-            ],
-            "order": [[0, 'asc']],
-            "bDestroy": true
-      });
-};
-
-var id_dokumen_temp, tahun_rkpd_temp;
-$('#tblDokumen tbody').on( 'dblclick', 'tr', function () {
-    var data = dokumen_tbl.row(this).data();
-    id_dokumen_temp=data.id_dokumen_rkpd;
-    tahun_rkpd_temp=data.tahun_rkpd;
-
-    if (data.flag == 1){
-      document.getElementById("btnProses").style.visibility='hidden';
-    } else {
-      document.getElementById("btnProses").style.visibility='visible';
-    }
-
-    document.getElementById("tahun_rkpd_display").innerHTML = data.tahun_rkpd;
-    document.getElementById("no_dokumen_display").innerHTML = data.nomor_rkpd;
-
-    $('.nav-tabs a[href="#loaddata"]').tab('show');
-    // LoadRekapLoad(id_dokumen_temp);
-
-  });
-
-$( "#id_unit" ).change(function() {
-  LoadDokumen($('#id_unit').val());
-});
-
-
-$(document).on('click', '.btnProses', function() {
-
-$.ajaxSetup({
-    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-});
-
-$('#ModalProgress').modal('show');
-
-$.ajax({
-        type: 'POST',
-        url: './prosesTransferData',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'tahun_rkpd' : $('#tahun_rkpd').val(),
-        },
-        success: function(data) {
-          createPesan("Data Berhasil di Load","success");
-          $('#tblProgramRKPD').DataTable().ajax.url("./getDataRekap/"+$('#tahun_rkpd').val());
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        },
-        error: function(data){
-          createPesan("Data Gagal di Load","danger");
-          $('#tblProgramRKPD').DataTable().ajax.reload();
-          $('#ModalProgress').modal('hide');
-        }
-});
-});
-
-$(document).on('click', '.btnUnload', function() {
-    $.ajaxSetup({
-        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $('#ModalProgress').modal('show');
-
-    $.ajax({
-        type: 'POST',
-        url: './unLoadProgramRkpd',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'tahun' : $(this).data('tahun_rkpd'),
-            'id_ranwal' : $(this).data('id_rkpd_ranwal'),
-        },
-        success: function(data) {
-            createPesan(data.pesan,"success");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
-            $('#ModalProgress').modal('hide');
-        },
-        error: function(data){
-            createPesan(data.pesan,"danger");
-            $('#tblProgramRKPD').DataTable().ajax.reload();
-            $('#ModalProgress').modal('hide');
-        }
-    });
-});
-
-$(document).on('click', '#btnAddDokumen', function() {
-
-  if($('#id_unit').val()== -1){
-    createPesan("Unit Penyusun Rancangan Awal Renja Belum dipilih..!!!","danger");
-  } else {
-    $('#btnDokumen').removeClass('editDokumen');
-     $('#btnDokumen').addClass('addDokumen');
-     $('.modal-title').text('Tambah Dokumen Penyusunan Rancangan Awal Renja');
-     $('.form-horizontal').show();
-
-     $('#id_dokumen_rkpd').val(null);
-     $('#tahun_rkpd').val({{Session::get('tahun')}});
-     $('#tanggal_rkpd').val(null);
-     $('#tanggal_rkpd_x').val(null);
-     $('#nomor_rkpd').val(null);
-     $('#uraian_perkada').val();
-     $('#id_unit_perencana').val($('#id_unit').val());
-     $('#id_unit_perencana_display').val($('#id_unit option:selected').text());
-     $('#nama_tandatangan').val(null);
-
-     $('#nip_tandatangan_display').val(null);
-      
-     $('#nip_tandatangan').val(null);
-
-     $('#btnDelDokumen').hide();
-     $('#btnDokumen').show();
-     $('#TambahDokumen').modal('show');
-  }
-
-});
-
-$('.modal-footer').on('click', '.addDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './addDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'tahun_rkpd': $('#tahun_rkpd').val(),
-        'tanggal_rkpd': $('#tanggal_rkpd').val(),
-        'nomor_rkpd': $('#nomor_rkpd').val(),
-        'uraian_perkada': $('#uraian_perkada').val(),
-        'id_unit_perencana': $('#id_unit_perencana').val(),
-        'nama_tandatangan': $('#nama_tandatangan').val(),
-        'nip_tandatangan': $('#nip_tandatangan').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-$(document).on('click', '#btnEditDokumen', function() {
-
-  var data = dokumen_tbl.row( $(this).parents('tr') ).data();
-
-      $('#btnDokumen').removeClass('addDokumen');
-      $('#btnDokumen').addClass('editDokumen');
-      $('.modal-title').text('Ubah Dokumen Penyusunan Rancangan Awal Renja');
-      $('.form-horizontal').show();
-
-      $('#id_dokumen_rkpd').val(data.id_dokumen_ranwal);
-      $('#tahun_rkpd').val(data.tahun_ranwal);
-      $('#tanggal_rkpd').val(data.tanggal_ranwal);
-      $('#tanggal_rkpd_x').val(formatTgl(data.tanggal_ranwal));
-      $('#nomor_rkpd').val(data.nomor_ranwal);
-      $('#uraian_perkada').val(data.uraian_perkada);
-      $('#id_unit_perencana').val(data.id_unit_renja);
-      $('#id_unit_perencana_display').val(data.nm_unit);
-      $('#nama_tandatangan').val(data.nama_tandatangan);      
-      $('#nip_tandatangan').val(data.nip_tandatangan);
-      
-      if(data.nip_tandatangan==null){
-        $('#nip_tandatangan_display').val(null);
-      } else {
-        $('#nip_tandatangan_display').val(buatNip(data.nip_tandatangan));
-      };
-
-      if(data.flag==1){
-        $('#btnDelDokumen').hide();
-        $('#btnDokumen').hide();
-      } else {
-        $('#btnDelDokumen').show();
-        $('#btnDokumen').show();
-      };
-
-      $('#TambahDokumen').modal('show');
-});
-
-$('.modal-footer').on('click', '.editDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './editDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_rkpd').val(),
-        'tahun_rkpd': $('#tahun_rkpd').val(),
-        'tanggal_rkpd': $('#tanggal_rkpd').val(),
-        'nomor_rkpd': $('#nomor_rkpd').val(),
-        'uraian_perkada': $('#uraian_perkada').val(),
-        'id_unit_perencana': $('#id_unit_perencana').val(),
-        'nama_tandatangan': $('#nama_tandatangan').val(),
-        'nip_tandatangan': $('#nip_tandatangan').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-$(document).on('click', '#btnDelDokumen', function() {
-  
-  $('#btnDelDokumen1').removeClass('delDokumen');
-  $('#btnDelDokumen1').addClass('delDokumen');
-  $('.form-horizontal').show();
-
-  $('#id_dokumen_hapus').val($('#id_dokumen_rkpd').val());
-  $('.ur_dokumen_del').html($('#nomor_rkpd').val());
-
-  $('#HapusDokumen').modal('show');
-});
-
-$('.modal-footer').on('click', '.delDokumen', function() {
-  $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-    $.ajax({
-      type: 'post',
-      url: './hapusDokumen',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'id_dokumen_rkpd': $('#id_dokumen_hapus').val(),
-      },
-      success: function(data) {
-        dokumen_tbl.ajax.reload();
-        $('#TambahDokumen').modal('hide');
-        if(data.status_pesan==1){
-          createPesan(data.pesan,"success");
-        } else {
-          createPesan(data.pesan,"danger"); 
-        }
-      }
-    });
-});
-
-$(document).on('click', '#btnPostingRkpd', function() {
-
-  var data = dokumen_tbl.row( $(this).parents('tr') ).data();
-      $('.form-horizontal').show();
-
-      $('#id_dokumen_posting').val(data.id_dokumen_ranwal);
-      $('#status_dokumen_posting').val(data.flag);
-      $('#tahun_dokumen_posting').val(data.tahun_ranwal);      
-      $('#ur_tahun_posting').html(data.tahun_ranwal);
-      $('#unit_posting').val(data.id_unit_renja);
-
-      if(data.flag==0){
-        $('#ur_status_dokumen_posting').html("Posting");
-      } else {
-        $('#ur_status_dokumen_posting').html("Un-Posting");
-      };
-
-      $('#StatusProgram').modal('show');
-});
-
-$('.modal-footer').on('click', '#btnPostProgram', function() {
-      var status_post, status_temp, status_awal;
-      if($('#status_dokumen_posting').val()==0){
-          status_post = 1;
-          status_temp = 2;
-          status_awal = 1;
-      } else {
-          status_post = 0;
-          status_temp = 1;
-          status_awal = 2;
-      };
-
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-      
-      $('#StatusProgram').modal('hide');
-      $('#ModalProgress').modal('show');
-
-      $.ajax({
-          type: 'post',
-          url: './postDokumen',
-          data: {
-              '_token': $('input[name=_token]').val(),
-              'tahun_rkpd': $('#tahun_dokumen_posting').val(),
-              'id_dokumen_rkpd': $('#id_dokumen_posting').val(),
-              'id_unit': $('#unit_posting').val(),
-              'flag': status_post,
-              'status': status_temp,
-              'status_awal': status_awal,
-          },
-          success: function(data) {
-              dokumen_tbl.ajax.reload();
-              if(data.status_pesan==1){
-              createPesan(data.pesan,"success");
-              } else {
-              createPesan(data.pesan,"danger"); 
-              }
-              $('#ModalProgress').modal('hide');
-          },
-          error: function(data){
-          dokumen_tbl.ajax.reload();
-          $('#ModalProgress').modal('hide');
-          createPesan("Data Gagal Diposting (0vdrPD)","danger");
-        }
-      });
-    });
-
-});
-</script>
+  <script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/renja/js_doku_renja.js')}}"></script>
 @endsection

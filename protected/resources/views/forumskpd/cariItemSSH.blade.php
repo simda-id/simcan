@@ -24,10 +24,11 @@
           <thead>
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th style="text-align: center; vertical-align:middle">Uraian Item SSH</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
-                  <th width="10%" style="text-align: right; vertical-align:middle">Harga Satuan</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                  <th width="30%" style="text-align: center; vertical-align:middle">Keterangan SSH</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Satuan Item</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Harga Satuan</th>
                 </tr>
           </thead>
           <tbody>

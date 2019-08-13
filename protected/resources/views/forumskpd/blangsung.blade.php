@@ -900,6 +900,7 @@ $(document).on('click', '#btnparam_cari', function() {
               { data: 'no_urut', sClass: "dt-center",width:"10px"},
               { data: 'uraian_sub_kelompok_ssh'},
               { data: 'uraian_tarif_ssh'},
+              { data: 'keterangan_tarif_ssh'},
               { data: 'uraian_satuan', sClass: "dt-center",width:"100px"},
               { data: 'jml_rupiah', sClass: "dt-right",
                   render: $.fn.dataTable.render.number( '.', ',', 2, '' )},

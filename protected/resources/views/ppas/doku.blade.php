@@ -102,7 +102,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="form-group">
             <label for="tahun_rkpd" class="col-sm-3 control-label" align='left'>Tahun Anggaran :</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control" id="tahun_rkpd" name="tahun_rkpd" required="required" disabled style="text-align: center;">
+              <input type="text" class="form-control" id="tahun_rkpd" name="tahun_rkpd" required="required" disabled style="text-align: center;" value="{{Session::get('tahun')}}">
             </div> 
           </div>
           <div class="form-group has-feedback">

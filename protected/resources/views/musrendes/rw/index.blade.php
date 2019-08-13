@@ -646,9 +646,9 @@ $(document).on('click','#btnEditUsulanRw', function(){
   });
 
 $(document).on('click', '#btnHapusUsulanRW', function() {
-
-  $('#id_musrenrw_hapus').val($('#id_musrendes_rw').val());
-  $('#ur_musrenrw_hapus').text($('#ur_aktivitas_kegiatan').val());  
+var data = usulan_tbl.row( $(this).parents('tr') ).data();
+  $('#id_musrenrw_hapus').val(data.id_musrendes_rw);
+  $('#ur_musrenrw_hapus').text(data.uraian_asb);  
 
   $('#HapusUsulanRW').modal('show');
 

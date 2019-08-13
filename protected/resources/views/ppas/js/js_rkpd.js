@@ -88,7 +88,12 @@ vars = "?tahun=" + tahun_session;
         processing: true,
         serverSide: true,
         deferRender: true,
-        "autoWidth": false,
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 2, targets: -1 },
+        ],
+        "autoWidth": true,
         "ajax": {"url": "getData"+pars},
         "language": {
                 "decimal": ",",
@@ -128,6 +133,11 @@ function LoadIndikatorProg(id_program){
     processing: true,
     serverSide: true,
     deferRender: true,
+    responsive: true,
+    columnDefs: [
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 2, targets: -1 },
+        ],
     "autoWidth": false,
     "ajax": {"url": "getIndikatorRKPD/"+id_program},
     "language": {
@@ -170,6 +180,11 @@ function LoadIndikatorProg(id_program){
             processing: true,
             serverSide: true,
             deferRender: true,
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 1, targets: 1 },
+                { responsivePriority: 2, targets: -1 },
+            ],
           "autoWidth": false,
             "ajax": {"url": "getUrusanRKPD/"+id_program},
             "language": {
@@ -222,7 +237,12 @@ function LoadIndikatorProg(id_program){
     PelaksanaTable = $('#tblPelaksanaRKPD').DataTable( {
             processing: true,
             serverSide: true,
-            deferRender: true,
+            deferRender: true,            
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 1, targets: 1 },
+                { responsivePriority: 2, targets: -1 },
+            ],
             "autoWidth": false,
             "ajax": {"url": "getPelaksanaRKPD/"+id_ranwal+"/"+id_urusan},
             "language": {
@@ -295,6 +315,7 @@ $(document).on('click', '.view-pelaksana', function() {
       var data = progrkpd.row( $(this).parents('tr') ).data();
 
       temp_rkpd_ranwal =  data.id_anggaran_pemda;
+      temp_ur_program_rkpd = data.uraian_program_rpjmd
       $('#divAddUrusan').show();
 
       if (data.status_data == 0){
@@ -334,6 +355,7 @@ $(document).on('click', '.view-unit', function() {
     var data = UrusanTable.row( $(this).parents('tr') ).data();
 
       temp_urusan_rkpd = data.id_urusan_anggaran;
+      // temp_ur_program_rkpd = $('#nm_program_rkpd_urusan').text;
 
       $('#divAddPelaksana').show();
 

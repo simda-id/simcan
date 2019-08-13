@@ -61,11 +61,11 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu PPAS :</label>
+                  <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu RKPD :</label>
                   <div class="col-sm-3">
                     <input type="text" class="form-control number" id="pagu_renja_program" name="pagu_renja_program" disabled >
                   </div>
-                  <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu APBD :</label>
+                  <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu PPAS :</label>
                   <div class="col-sm-3">
                       <input type="text" class="form-control number" id="pagu_forum_progrenja" name="pagu_forum_progrenja" required="required" >                    
                   </div>

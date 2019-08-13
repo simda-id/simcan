@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Rancangan Awal Renja x';
+                $this->title = 'Rancangan Awal Renja';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
@@ -35,7 +35,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <div class="col-sm-1">                            
                             <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd" value="{{Session::get('tahun')}}" disabled>
                         </div>
-                        <div class="btn-group">
+                        <div class="btn-group hidden">
                                 <button type="button" class="btn btn-success dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Pencetakan Penyesuaian Renja <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>

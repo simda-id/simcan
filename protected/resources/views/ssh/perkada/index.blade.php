@@ -48,8 +48,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Perkada</a>
                   </p>
               </div>
-              <div class="table-responsive">
-              <table id='tblPerkada' class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <div class="">
+              <table id='tblPerkada' class="table display table-striped compact table-bordered table-responsive" cellspacing="0" width="100%">
                   <thead>
                       <tr>
                           <th width="30px" style="text-align: center; vertical-align:middle">No Perkada</th>
@@ -85,7 +85,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
               </form>
               <div id=divDetailZona>
-              <table id="tblDetailZona" class="table table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
+              <table id="tblDetailZona" class="table display table-striped compact table-bordered table-responsive"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th width="30px" style="text-align: center; vertical-align:middle">No Urut</th>
@@ -822,57 +822,127 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
   {{-- Cari Item Tarif SSH --}}
   <div id="cariItemSSH" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
-  <div class="modal-content">
-  <div class="modal-header">
-    <h3>Daftar Item yang terdapat di SSH</h3>
-  </div>
-  <div class="modal-body">
-  <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
-  <div class="form-group">
-      <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
-        <div class="col-sm-7">
-          <div class="input-group">
-            <input type="text" class="form-control" id="param_cari" name="param_cari">
-            <div class="input-group-btn">
-              <button class="btn btn-primary" id="btnparam_cari" name="btnparam_cari"><i class="fa fa-search fa-fw fa-lg"></i></button>
-            </div>
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+      <div class="modal-header">
+        <h3>Daftar Item yang terdapat di SSH</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="id_item_perkada">Item SSH :</label>
+              <div class="col-sm-7">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="param_cari" name="param_cari">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary" id="btnparam_cari" name="btnparam_cari"><i class="fa fa-search fa-fw fa-lg"></i></button>
+                  </div>
+                </div>
+              </div>
           </div>
+         <div class="form-group">
+         <div class="col-sm-12">
+            <table id='tblItemSSH' class="table display table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                      <tr>
+                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
+                        <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
+                        <th width="35%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
+                        <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
+                      </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-sm-2 text-left idbtnHapusKeg">
+            </div>
+            <div class="col-sm-10 text-right">
+                <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                    <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+            </div>
         </div>
+      </div>  
     </div>
-   <div class="form-group">
-   <div class="col-sm-12">
-      <table id='tblItemSSH' class="table display table-striped table-bordered" cellspacing="0" width="100%">
-          <thead>
-                <tr>
-                  <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                  <th width="20%" style="text-align: center; vertical-align:middle">Sub Sub Kelompok</th>
-                  <th width="30%" style="text-align: center; vertical-align:middle">Item SSH</th>
-                  <th width="35%" style="text-align: center; vertical-align:middle">Merk/Spesifikasi/Keterangan Lainnya</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Satuan Item</th>
-                </tr>
-          </thead>
-          <tbody>
-          </tbody>
-      </table>
-    </div>
-    </div>
-  </form>
+  </div>
 </div>
-  <div class="modal-footer">
+
+<div id="ModalUpdateItem" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"> UPDATE ITEM SSH YANG TELAH DIGUNAKAN DI TRANSAKSI </h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="form-group">
+                  <label class="control-label col-sm-3" for="title">Nomor Perkada SSH:</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="nomor_perkada_update" name="nomor_perkada_update" class="form-control"  readonly>
+                    <input type="hidden" id="id_perkada_update" name="id_perkada_update" class="form-control"  readonly>
+                  </div>
+              </div>
+              <div class="form-group hidden" >
+                <label for="jns_dokumen" class="col-sm-3 control-label" align='left'>Jenis Dokumen :</label>
+                <div class="col-sm-9">
+                  <label class="radio-inline">
+                    <input type="radio" class="jns_dokumen" name="jns_dokumen" id="jns_dokumen" value="0">Forum Perangkat Daerah
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" class="jns_dokumen" name="jns_dokumen" id="jns_dokumen" value="1">Rancangan RKPD
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" class="jns_dokumen" name="jns_dokumen" id="jns_dokumen" value="2">RKPD Final
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" class="jns_dokumen" name="jns_dokumen" id="jns_dokumen" value="3">PPAS
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" class="jns_dokumen" name="jns_dokumen" id="jns_dokumen" value="4">APBD
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-3" for="no_dokumen_trans">Nomor Dokumen :</label> 
+                  <div class="col-sm-9">                                  
+                    <select class="form-control no_dokumen_trans" name="no_dokumen_trans" id="no_dokumen_trans">
+                    </select>
+                  </div>
+              </div>
+              <hr>
+              <h4 style="color: #b94743">Catatan :</h4>
+              <label>1. <span style="color: #b94743; font-style: italic;">Update</span> Item SSH hanya dapat dilakukan saat <span style="color: #b94743">tahap penganggaran</span> </label><br>
+              <label>2. Dokumen Penganggaran yang dapat di-<span style="color: #b94743; font-style: italic;">update</span> yang statusnya <span style="color: #b94743">belum terposting</span> </label><br>
+              <label>3. Item SSH yang di-<span style="color: #b94743; font-style: italic;">update</span>-kan untuk aktivitas <span style="color: #b94743">NON ASB</span> </label><br>
+              <label>4. Jangan Lupa <span style="color: #b94743">Backup Database</span> sebelum <span style="color: #b94743; font-style: italic;">update</span>...</label><br>
+          </form>
+        </div>
+          <div class="modal-footer">
                 <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
+                    <div class="col-sm-2 text-left">
                     </div>
                     <div class="col-sm-10 text-right">
+                      <div class="ui-group-buttons">
+                        <button type="button" class="btn btn-success btnUpdateItem btn-labeled" data-dismiss="modal" >
+                            <span class="btn-label"><i class="fa fa-paper-plane-o fa-fw fa-lg"></i></span>Proses</button>
+                        <div class="or"></div>
                         <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                      </div>
                     </div>
                 </div>
-              </div>  
-  </div>
-  </div>
-  </div>
-
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
 
 @endsection
 

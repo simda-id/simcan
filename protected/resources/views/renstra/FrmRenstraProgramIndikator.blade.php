@@ -14,17 +14,17 @@
                 <label for="no_urut_edit" class="col-sm-3 control-label" align='left'>Nomor Urut :</label>
                 <div class="col-sm-2">
                   <div class="input-group">
-                      <input type="text" class="form-control number" id="no_urut_indikator_program_edit" name="no_urut_indikator_program_edit" required="required" >                  
+                      <input type="text" class="form-control number no_urut" id="no_urut_indikator_program_edit" name="no_urut_indikator_program_edit" required="required" >                  
                   </div>
                 </div>
                 <label for="id_perubahan_edit" class="col-sm-3 control-label" align='left'>ID Perubahan :</label>
                 <div class="col-sm-2">
                   <div class="input-group">
-                      <input type="text" class="form-control number" id="id_perubahan_indikator_program_edit" name="id_perubahan_indikator_program_edit" required="required" >                  
+                      <input type="text" class="form-control number id_revisi" id="id_perubahan_indikator_program_edit" name="id_perubahan_indikator_program_edit" required="required" >                  
                   </div>
                 </div>
               </div> 
-              <div class="form-group">
+              <div class="form-group hidden">
                   <label class="control-label col-sm-3" for="title">Uraian Indikator Sasaran Renstra :</label>
                   <div class="col-sm-8">
                     <textarea type="name" class="form-control" id="ur_indikator_sasaran_program_renstra" rows="3" disabled></textarea>

@@ -50,12 +50,12 @@
       }
       .box-icon {
           /*background-color: #57a544;*/
-          border: 2px solid #57a544;
-          border-radius: 50%;
+          /*border: 2px solid #57a544;*/
+          /*border-radius: 50%;*/
           display: table;
-          height: 150px;
+          height: 60%;
           margin: 0 auto;
-          width: 150px;
+          width: 40%;
           margin-top: -61px;
       }
       .box-icon span {

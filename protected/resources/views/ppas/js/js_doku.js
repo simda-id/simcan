@@ -65,7 +65,8 @@ $("input[name='nip_tandatangan_display']").on("keyup", function(){
 
 
   // vars = "?token="     + {{ csrf_token() }};
-  vars = "?tahun=" + '<%= Session["tahun"] %>';
+  var thn_session = $('#tahun_rkpd').val();
+  vars = "?tahun=" + thn_session;
   $.ajax({
           type: "GET",
           url: 'ppas/getDataDokReferensi'+ vars,
@@ -171,7 +172,7 @@ $(document).on('click', '#btnAddDokumen', function() {
       $('.modal-title').text('Tambah Dokumen Proritas dan Plafond Anggaran Sementara (PPAS)');
       $('.form-horizontal').show();
       $('#id_dokumen_rkpd').val(null);
-      $('#tahun_rkpd').val('<%= Session["tahun"] %>');
+      // $('#tahun_rkpd').val('<%= Session["tahun"] %>');
       $('#id_dokumen_ref').val(0);
       $('#tanggal_rkpd').val(null);
       $('#tanggal_rkpd_x').val(null);

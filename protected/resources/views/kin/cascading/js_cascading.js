@@ -80,16 +80,33 @@ $(document).ready(function() {
 
   function loadTblSasaran($data) {
     tbl_Sasaran = $('#tblSasaran').DataTable( {
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            dom : 'bfrtip',                  
-            autoWidth : false,
-            order: [[0, 'asc']],
-            bDestroy: true,
-            language: {
-                  "decimal": ",",
-                  "thousands": "."},
+          processing: true,
+          serverSide: true,
+          responsive: true,
+          dom : 'bfrtip',                  
+          autoWidth : false,
+          order: [[0, 'asc']],
+          bDestroy: true,
+          language: {
+              "decimal": ",",
+              "thousands": ".",
+              "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+              "sProcessing":   "Sedang memproses...",
+              "sLengthMenu":   "Tampilkan _MENU_ entri",
+              "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+              "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+              "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+              "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+              "sInfoPostFix":  "",
+              "sSearch":       "Cari:",
+              "sUrl":          "",
+              "oPaginate": {
+                  "sFirst":    "Pertama",
+                  "sPrevious": "Sebelumnya",
+                  "sNext":     "Selanjutnya",
+                  "sLast":     "Terakhir"
+              }
+            },
             "ajax": {"url": "cascading/getSasaranRenstra/"+$data},
             "columns": [
                   {
@@ -108,17 +125,39 @@ $(document).ready(function() {
                   { data: 'jml_mapping',
                       render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right"},
                 ],
-                    "bDestroy": true
       });
     };
 
     function initInSasaran(tableId, data) {
         tblInSasaran=$('#' + tableId).DataTable({
-                processing: true,
-                serverSide: true,
+              processing: true,
+              serverSide: true,
+              responsive: true,
+              dom : 'bfrtip',                  
+              autoWidth : false,
+              order: [[0, 'asc']],
+              bDestroy: true,
+              language: {
+                  "decimal": ",",
+                  "thousands": ".",
+                  "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+                  "sProcessing":   "Sedang memproses...",
+                  "sLengthMenu":   "Tampilkan _MENU_ entri",
+                  "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+                  "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                  "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+                  "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                  "sInfoPostFix":  "",
+                  "sSearch":       "Cari:",
+                  "sUrl":          "",
+                  "oPaginate": {
+                      "sFirst":    "Pertama",
+                      "sPrevious": "Sebelumnya",
+                      "sNext":     "Selanjutnya",
+                      "sLast":     "Terakhir"
+                  }
+                },
                 ajax: data.details_url,
-                dom : 'bfrtip',
-                autoWidth: false,
                 "language": {
                           "decimal": ",",
                           "thousands": "."},
@@ -126,8 +165,6 @@ $(document).ready(function() {
                             { data: 'urut', sClass: "dt-center"},
                             { data: 'nm_indikator'}
                           ],
-                "order": [[0, 'asc']],
-                "bDestroy": true
             })
     };
 
@@ -141,8 +178,25 @@ $(document).ready(function() {
             order: [[0, 'asc']],
             bDestroy: true,
             language: {
-                  "decimal": ",",
-                  "thousands": "."},
+                "decimal": ",",
+                "thousands": ".",
+                "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+                "sProcessing":   "Sedang memproses...",
+                "sLengthMenu":   "Tampilkan _MENU_ entri",
+                "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+                "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix":  "",
+                "sSearch":       "Cari:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext":     "Selanjutnya",
+                    "sLast":     "Terakhir"
+                }
+              },
             "ajax": {"url": "cascading/getSasaranProgram/"+$data},
             "columns": [
                   {
@@ -162,17 +216,39 @@ $(document).ready(function() {
                       render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right"},                  
                   { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                 ],
-                    "bDestroy": true
       });
     };
 
     function initInProgram(tableId, data) {
         tblInProgram=$('#' + tableId).DataTable({
-                processing: true,
-                serverSide: true,
+              processing: true,
+              serverSide: true,
+              responsive: true,
+              dom : 'bfrtip',                  
+              autoWidth : false,
+              order: [[0, 'asc']],
+              bDestroy: true,
+              language: {
+                  "decimal": ",",
+                  "thousands": ".",
+                  "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+                  "sProcessing":   "Sedang memproses...",
+                  "sLengthMenu":   "Tampilkan _MENU_ entri",
+                  "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+                  "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                  "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+                  "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                  "sInfoPostFix":  "",
+                  "sSearch":       "Cari:",
+                  "sUrl":          "",
+                  "oPaginate": {
+                      "sFirst":    "Pertama",
+                      "sPrevious": "Sebelumnya",
+                      "sNext":     "Selanjutnya",
+                      "sLast":     "Terakhir"
+                  }
+                },
                 ajax: data.details_url,
-                dom : 'bfrtip',
-                autoWidth: false,
                 "language": {
                           "decimal": ",",
                           "thousands": "."},
@@ -181,23 +257,38 @@ $(document).ready(function() {
                             { data: 'nm_indikator'},
                             { data: 'action'}
                           ],
-                "order": [[0, 'asc']],
-                "bDestroy": true
             })
     };
 
     function loadTblSasaranKegiatan($data) {
     tbl_SasaranKegiatan = $('#tblSasaranKegiatan').DataTable( {
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            dom : 'bfrtip',                  
-            autoWidth : false,
-            order: [[0, 'asc']],
-            bDestroy: true,
-            language: {
-                  "decimal": ",",
-                  "thousands": "."},
+          processing: true,
+          serverSide: true,
+          responsive: true,
+          dom : 'bfrtip',                  
+          autoWidth : false,
+          order: [[0, 'asc']],
+          bDestroy: true,
+          language: {
+              "decimal": ",",
+              "thousands": ".",
+              "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+              "sProcessing":   "Sedang memproses...",
+              "sLengthMenu":   "Tampilkan _MENU_ entri",
+              "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+              "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+              "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+              "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+              "sInfoPostFix":  "",
+              "sSearch":       "Cari:",
+              "sUrl":          "",
+              "oPaginate": {
+                  "sFirst":    "Pertama",
+                  "sPrevious": "Sebelumnya",
+                  "sNext":     "Selanjutnya",
+                  "sLast":     "Terakhir"
+              }
+            },
             "ajax": {"url": "cascading/getSasaranKegiatan/"+$data},
             "columns": [
                   {
@@ -217,7 +308,6 @@ $(document).ready(function() {
                       render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right"},                  
                   { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                 ],
-                    "bDestroy": true
       });
     };
 
@@ -225,9 +315,32 @@ $(document).ready(function() {
         tblInKegiatan=$('#' + tableId).DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                dom : 'bfrtip',                  
+                autoWidth : false,
+                order: [[0, 'asc']],
+                bDestroy: true,
+                language: {
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+                    "sProcessing":   "Sedang memproses...",
+                    "sLengthMenu":   "Tampilkan _MENU_ entri",
+                    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+                    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+                    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "Cari:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "Pertama",
+                        "sPrevious": "Sebelumnya",
+                        "sNext":     "Selanjutnya",
+                        "sLast":     "Terakhir"
+                    }
+                  },
                 ajax: data.details_url,
-                dom : 'bfrtip',
-                autoWidth: false,
                 "language": {
                           "decimal": ",",
                           "thousands": "."},
@@ -236,8 +349,6 @@ $(document).ready(function() {
                             { data: 'nm_indikator'},
                             { data: 'action'}
                           ],
-                "order": [[0, 'asc']],
-                "bDestroy": true
             })
     };
 
@@ -319,8 +430,31 @@ $(document).on('click', '.btnCariProgramRenstra', function() {
     cariItemRenstra = $('#tblCariItemRenstra').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'bfrtIp',
+        responsive: true,
+        dom : 'bfrtip',                  
         autoWidth : false,
+        order: [[0, 'asc']],
+        bDestroy: true,
+        language: {
+            "decimal": ",",
+            "thousands": ".",
+            "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+            "sProcessing":   "Sedang memproses...",
+            "sLengthMenu":   "Tampilkan _MENU_ entri",
+            "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+            "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+            "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+            "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+            "sInfoPostFix":  "",
+            "sSearch":       "Cari:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "Pertama",
+                "sPrevious": "Sebelumnya",
+                "sNext":     "Selanjutnya",
+                "sLast":     "Terakhir"
+            }
+          },
         "ajax": {"url": "./cascading/getProgramRenstra/"+id_sasaran_renstra},
         "columns": [
               { data: 'no_urut'},
@@ -328,8 +462,6 @@ $(document).on('click', '.btnCariProgramRenstra', function() {
               { data: 'kd_program_ref'},
               { data: 'uraian_program_renstra'},
             ],
-        "order": [[0, 'asc']],
-        "bDestroy": true
     });
 });
 
@@ -340,8 +472,31 @@ $(document).on('click', '.btnCariKegiatanRenstra', function() {
     cariItemRenstra = $('#tblCariItemRenstra').DataTable( {
         processing: true,
         serverSide: true,
-        dom: 'bfrtIp',
+        responsive: true,
+        dom : 'bfrtip',                  
         autoWidth : false,
+        order: [[0, 'asc']],
+        bDestroy: true,
+        language: {
+            "decimal": ",",
+            "thousands": ".",
+            "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+            "sProcessing":   "Sedang memproses...",
+            "sLengthMenu":   "Tampilkan _MENU_ entri",
+            "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+            "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+            "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+            "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+            "sInfoPostFix":  "",
+            "sSearch":       "Cari:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "Pertama",
+                "sPrevious": "Sebelumnya",
+                "sNext":     "Selanjutnya",
+                "sLast":     "Terakhir"
+            }
+          },
         "ajax": {"url": "./cascading/getKegiatanRenstra/"+id_program_renstra},
         "columns": [
               { data: 'no_urut'},
@@ -349,8 +504,6 @@ $(document).on('click', '.btnCariKegiatanRenstra', function() {
               { data: 'kd_kegiatan_ref'},
               { data: 'uraian_kegiatan_renstra'},
             ],
-        "order": [[0, 'asc']],
-        "bDestroy": true
     });
 });
 

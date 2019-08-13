@@ -338,7 +338,7 @@
         
         <div class="wrapper fadeInDown">
             <div id="formContent">
-              <img class="profile-img-card" src="{{ asset('vendor/default.png') }}"  style="padding:20px;"/>
+              <img  src="{{ asset('vendor/default.png') }}"  style="padding:20px;"/>
               <h1 class="active"> 
                   simd<span style="color:#DF7401; text-shadow: 2px 2px #44506B; ">@</span><strong> Integrated</strong>
               </h1>
@@ -358,8 +358,8 @@
                 <input type="submit" class="fadeIn fifth" value="Log In">
               </form>              
               <div id="formFooter">                
-                by <img class="profile-img-card" src="{{ asset('vendor/bpkp_logo.png') }}" style="width:15%;" /> 
-                @2018
+                by <img  src="{{ asset('vendor/bpkp_logo.png') }}" style="width:15%;" /> 
+                @2019
               </div>
 
             </div>

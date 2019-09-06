@@ -1023,7 +1023,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                           <tr>
                             <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                             <th style="text-align: center; vertical-align:middle">Nama Aktivitas</th>
-                            <th style="text-align: center; vertical-align:middle">Uraian Lokasi Pelaksanaan</th>
+                            {{-- <th style="text-align: center; vertical-align:middle">Uraian Lokasi Pelaksanaan</th> --}}
                             <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                           </tr>
                     </thead>
@@ -1569,7 +1569,8 @@ function loadTblAktivitas(id_renja){
                         // { data: 'uraian_aktivitas_kegiatan'},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
                           }},
                         { data: 'pagu_aktivitas', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1696,11 +1697,10 @@ $(document).on('click', '#btnCopyBelanja', function() {
         serverSide: true,
         autoWidth : false,
         dom: 'bfrtIp',
-        "ajax": {"url": "./renja/blang/getLokasiCopy/"+id_aktivitas_temp+"/"+id_pelaksana_temp+"/"+id_lokasi_temp},
+        "ajax": {"url": "./renja/blang/getLokasiCopy/"+unit_temp},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'uraian_aktivitas_kegiatan'},
-              { data: 'nama_lokasi'},
               { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
 
             ],
@@ -1725,13 +1725,11 @@ $(document).on('click', '#btnProsesCopyBelanja', function() {
       url: './renja/blang/getBelanjaCopy',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_lokasi': data.id_lokasi_renja,
-        'id_lokasi_new': id_lokasi_temp,
+        'id_lokasi': data.id_aktivitas_renja,
+        'id_lokasi_new': id_aktivitas_temp,
       },    
       success: function(data) {
         $('#tblBelanja').DataTable().ajax.reload();
-        $('#tblLokasi').DataTable().ajax.reload();
-        $('#tblPelaksana').DataTable().ajax.reload();
         createPesan(data.pesan,"success");
         $('#ModalProgress').modal('hide');
       }

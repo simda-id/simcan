@@ -1564,7 +1564,8 @@ function loadTblAktivitas(id_renja){
                         // { data: 'uraian_aktivitas_kegiatan'},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
                           }},
                         { data: 'pagu_aktivitas', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1581,8 +1582,9 @@ function loadTblAktivitas(id_renja){
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'icon','searchable': false, 'orderable':false, sClass: "dt-center",
                             render: function(data, type, row,meta) {
-                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
-                          }},
+                            return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';                            
+                          }
+                        },
                         { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
                       ],
                   "order": [[0, 'asc']],

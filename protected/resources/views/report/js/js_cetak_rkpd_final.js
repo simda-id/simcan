@@ -168,9 +168,18 @@ $(document).on('click', '.btnProses', function() {
     if($('#jns_laporan').val()==5){
        window.open('../PrintPraRKARF/'+$('#keg_prarka').val()+'/'+$('#sub_prarka2').val()); 
     };
-    if($('#jns_laporan').val()==6){
-    	window.open('../PrintPrakiraanMajuF/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val());  
-     };
+    // if($('#jns_laporan').val()==6){
+    // 	window.open('../PrintPrakiraanMajuRkpdFinal/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val());  
+    //  };
+
+     if($('#jns_laporan').val()==6){
+         vars = "?token="     + $('input[name=_token]').val();
+        vars += "&tahun="     + $('#tahun_prarka').val();
+        vars += "&unit="   + $('#unit_prarka').val();
+
+        window.open('../PrintPrakiraanMajuRkpdF' + vars, '_blank');
+   
+       };
   
      if($('#jns_laporan').val()==11){
        window.open('../PrintMatrikForm2/'+$('#tahun_prarka').val()); 

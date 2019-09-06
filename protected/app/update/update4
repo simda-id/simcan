@@ -173,7 +173,6 @@ kin_trx_perkin_es3_program_indikator= "CREATE TABLE IF NOT EXISTS `kin_trx_perki
   KEY `id_program` (`id_indikator_program_renstra`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;"
 
-
 kin_trx_perkin_es4_dok= "CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
   `id_sotk_es4` int(11) NOT NULL,

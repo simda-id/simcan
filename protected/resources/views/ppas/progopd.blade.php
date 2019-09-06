@@ -326,7 +326,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                       <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah dari SSH</a>
                                      <a id="btnCopyBelanja" type="button" class="btn btn-labeled btn-primary">
                                       <span class="btn-label"><i class="fa fa-exchange fa-fw fa-lg"></i></span>Copy dari Aktivitas Lain</a>
-                                      <a id="btnCetakRKA" type="button" class="btnCetakRKA btn btn-labeled btn-default">
+                                      <a id="btnCetakRKA" type="button" class="btnCetakRKA btn btn-labeled btn-default hidden">
                                           <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RKA 2.2.1</a>
                                   </div>
                                   <div id="divImportASB">
@@ -334,7 +334,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                       <span class="btn-label"><i class="fa fa-download fa-fw fa-lg"></i></span>Tambah dari ASB</a>
                                     <a id="btnUnLoadAsb" type="button" class="btnUnLoadAsb btn btn-labeled btn-danger">
                                       <span class="btn-label"><i class="fa fa-stack-overflow fa-fw fa-lg"></i></span>Unload Belanja</a>
-                                    <a id="btnCetakRKA1" type="button" class="btnCetakRKA1 btn btn-labeled btn-default">
+                                    <a id="btnCetakRKA1" type="button" class="btnCetakRKA1 btn btn-labeled btn-default hidden">
                                           <span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak RKA 2.2.1</a>
                                   </div>
                                   <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >

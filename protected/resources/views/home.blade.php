@@ -106,9 +106,9 @@ use hoaaah\LaravelMenu\Menu;
                         <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Integrated</strong> 
                         :: {{Session::get('xPemda')}}
                         @if ( Session::get('AppType') === 0 )
-                        <span class="badge" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
                         @else
-                            <span class="badge" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
+                            <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
                         @endif 
                     </div>
                 </a>                

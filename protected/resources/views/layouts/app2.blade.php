@@ -42,7 +42,12 @@ use hoaaah\LaravelMenu\Menu;
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
                     </span>
-                    <span style="color:#fff"> simd@<strong>Anggaran</strong> ver <strong>1.0 </strong></span>
+                    <span style="color:#fff"> simd@<strong>Anggaran</strong></span>
+                    @if ( Session::get('AppType') === 0 )
+                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                        @else
+                            <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
+                        @endif
                     </a>
                 </div>
 
@@ -302,6 +307,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'label' => 'APBD', 
                                                 'visible' => $akses->get(71),
                                                 'items' => [
+                                                   // ['label' => 'RAPBD', 'url' => '/cetak/rapbd', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD', 'url' => '/cetak/apbd', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD Pergeseran', 'url' => '#', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD Perubahan', 'url' => '#', 'visible' => $akses->get(71)],

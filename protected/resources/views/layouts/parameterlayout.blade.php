@@ -12,8 +12,12 @@ use hoaaah\LaravelMenu\Menu;
                  <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x text-info" style="color:#fff"></i>
-                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong><i><sub>{{Session::get('versiApp')}}</sub></i></strong>
-                    </span>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong></span>
+                    @if ( Session::get('AppType') === 0 )
+                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                        @else
+                            <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
+                        @endif
                     </a>
             </div>
             <ul class="nav navbar-top-links pull-right">

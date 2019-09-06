@@ -552,22 +552,44 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
       <div class="modal-body">
       <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
-        <div class="form-group">
-        <div class="col-sm-12">
-          <table id='tblLoadData' class="table display compact table-striped table-bordered" width="100%">
-              <thead>
-                    <tr>
-                      {{-- <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th> --}}
-                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                      <th style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
-                      <th style="text-align: center; vertical-align:middle">Nama Program Renja</th>
-                      <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
-                    </tr>
-              </thead>
-              <tbody>
-              </tbody>
-          </table>
-        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#dataLoad" aria-controls="dataLoad" role="tab" data-toggle="tab">Program Belum di-Load</a></li>
+            <li ><a href="#dataUnload" aria-controls="dataUnload" role="tab" data-toggle="tab">Program Telah di-Load</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="dataLoad">
+            <br>
+            <table id='tblLoadData' class="table display compact table-striped table-bordered" width="100%">
+                <thead>
+                      <tr>
+                        {{-- <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th> --}}
+                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
+                        <th style="text-align: center; vertical-align:middle">Nama Program Renja</th>
+                        <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
+                      </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="dataUnload">
+            <br>
+            <table id='tblUnLoadData' class="table display compact table-striped table-bordered" width="100%">
+                <thead>
+                      <tr>
+                        {{-- <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th> --}}
+                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th style="text-align: center; vertical-align:middle">Nama Program RKPD</th>
+                        <th style="text-align: center; vertical-align:middle">Nama Program Renja</th>
+                        <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
+                      </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+          </div>
+
         </div>
       </form>
       </div>

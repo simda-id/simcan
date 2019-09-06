@@ -265,7 +265,7 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
         <a class="navbar-brand navbar-right" href="{{ url('/') }}">
           <div class="row">
             <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> 
-            <span class="badge" style="background-color: #006AC7; color:#fff;"> {{Session::get('versiApp')}} </span>
+            <span class="label" style="background-color: #006AC7; color:#fff;"> {{Session::get('versiApp')}} </span>
           </div>        
         </a>
       </div>

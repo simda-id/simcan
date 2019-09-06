@@ -19,7 +19,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul2';
                 $breadcrumb->begin();
-                $breadcrumb->add(['label' => 'Musrenbang']);
+                $breadcrumb->add(['label' => 'Forum OPD']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
             ?>          
@@ -469,32 +469,32 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 
-@include('forumskpd.program');
-@include('forumskpd.indikatorprogram');
-@include('forumskpd.kegiatan');
-@include('forumskpd.indikatorkegiatan');
-@include('forumskpd.pelaksana');
-@include('forumskpd.aktivitas');
-@include('forumskpd.lokasi');
-@include('forumskpd.belanja');
+@include('forumskpd.program')
+@include('forumskpd.indikatorprogram')
+@include('forumskpd.kegiatan')
+@include('forumskpd.indikatorkegiatan')
+@include('forumskpd.pelaksana')
+@include('forumskpd.aktivitas')
+@include('forumskpd.lokasi')
+@include('forumskpd.belanja')
 
-@include('forumskpd.loadBelanjaASB');
-@include('forumskpd.modalcopybelanja');
-@include('forumskpd.hapus');
+@include('forumskpd.loadBelanjaASB')
+@include('forumskpd.modalcopybelanja')
+@include('forumskpd.hapus')
 
-@include('forumskpd.cariProgramRenstra');
-@include('forumskpd.cariKegiatanRenstra');
-@include('forumskpd.CariSubUnit');
-@include('forumskpd.cariIndikator');
-@include('forumskpd.cariMusren');
-@include('forumskpd.cariLokasiModal');
-@include('forumskpd.cariLokasiTeknisModal');
-@include('forumskpd.cariAktivitasASB');
-@include('forumskpd.cariProgramRef');
-@include('forumskpd.cariKegiatanRef');
-@include('forumskpd.cariItemSSH');
-@include('forumskpd.cariRekening');
-@include('forumskpd.cari');
+@include('forumskpd.cariProgramRenstra')
+@include('forumskpd.cariKegiatanRenstra')
+@include('forumskpd.CariSubUnit')
+@include('forumskpd.cariIndikator')
+@include('forumskpd.cariMusren')
+@include('forumskpd.cariLokasiModal')
+@include('forumskpd.cariLokasiTeknisModal')
+@include('forumskpd.cariAktivitasASB')
+@include('forumskpd.cariProgramRef')
+@include('forumskpd.cariKegiatanRef')
+@include('forumskpd.cariItemSSH')
+@include('forumskpd.cariRekening')
+@include('forumskpd.cari')
 
 
 
@@ -1549,7 +1549,8 @@ function loadTblAktivitas(id_forum){
                         { data: 'no_urut', sClass: "dt-center", width :"5px"},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
                           }},
                         { data: 'pagu_aktivitas_forum', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},

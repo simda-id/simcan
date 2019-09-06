@@ -92,8 +92,8 @@
                             <ul>
                                 <li> RPJMD
                                     <ul>
-                                        <li data-value ="20"> RPJMD</li>
-                                        <li data-value ="20"> Cetak RPJMD </li>
+                                        <li data-value ="201"> RPJMD</li>
+                                        <li data-value ="202"> Cetak RPJMD </li>
                                     </ul>
                                 </li>
                         </div><!--col-->
@@ -101,8 +101,8 @@
                             <ul>
                                 <li> Renstra Perangkat Daerah
                                     <ul>
-                                        <li data-value ="30"> Renstra</li>
-                                        <li data-value ="30"> Cetak Renstra </li>
+                                        <li data-value ="301"> Renstra</li>
+                                        <li data-value ="302"> Cetak Renstra </li>
                                     </ul>
                                 </li>
                             </ul>

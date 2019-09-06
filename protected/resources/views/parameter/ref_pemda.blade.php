@@ -192,11 +192,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-sm-2 text-left">
-                      <button type="button" id="btnEditPemda" class="btn btn-sm btn-primary btn-labeled">
-                            <span class="btn-label"><i id="fooHapusRek" class="fa fa-pencil-square-o fa-lg fa-fw"></i></span>Edit Data Pemda</button>
+                    <div class="col-sm-6 text-left">
+                        <button type="button" id="btnRegPemda" class="btn btn-sm btn-success btn-labeled">
+                            <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Registrasi Pemda</button>
+                        <button type="button" id="btnEditPemda" class="btn btn-sm btn-primary btn-labeled" aria-hidden="true">
+                            <span class="btn-label"><i class="fa fa-pencil-square-o fa-lg fa-fw"></i></span>Edit Data Pemda</button>
                     </div>
-                    <div class="col-sm-10 text-right">
+                    <div class="col-sm-6 text-right">
                       <div class="ui-group-buttons idbtnSimpanPemda">
                         <button type="button" id="btnSimpanPemda" class="btn btn-sm btn-success btn-labeled">
                             <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Simpan</button>
@@ -278,9 +280,9 @@ function createPesan(message, type) {
     html += '</div>';    
     $(html).hide().prependTo('#pesan').slideDown();
     
-    // setTimeout(function() {
-    //         $('#pesanx').removeClass('in');
-    //      }, 3500);
+    setTimeout(function() {
+            $('#pesanx').removeClass('in');
+         }, 3500);
   };
 
 $('.page-alert .close').click(function(e) {
@@ -517,6 +519,32 @@ $(document).on('click', "#btnBatalPemda" , function() {
   $('#btnEditPemda').show();
   LoadPemda();   
 
+});
+
+$(document).on('click', "#btnRegPemda" , function() {
+ 
+  $.ajax({
+      type: 'get',
+      url: 'pemda/regPemda',
+      data: {
+            '_token': $('input[name=_token]').val(),
+            'id_bidang' : 1,
+            'kd_unit' : 1,
+            'nm_unit' : 'test data',
+      },
+      success: function(data) {
+              LoadPemda(); 
+              if(data.status_pesan==1){
+              createPesan(data.pesan,"success");
+              } else {
+              createPesan(data.pesan,"danger"); 
+              }
+          },
+      error: function(data) {
+              LoadPemda(); 
+              createPesan('Gagal Koneksi Registrasi',"danger");
+          }
+    });
 });
 
 

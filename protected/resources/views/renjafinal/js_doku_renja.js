@@ -275,6 +275,45 @@ function LoadTabelData($unit,$rkpd){
       });
 };
 
+var UnLoadDataTbl
+function UnLoadTabelData($unit,$rkpd){
+  UnLoadDataTbl = $('#tblUnLoadData').DataTable({
+        processing: true,
+          serverSide: true,
+          responsive: true,
+          dom : '<"top"l>bfrtip',                  
+          autoWidth : false,
+          order: [[0, 'asc']],
+          bDestroy: true,
+          language: {
+              "decimal": ",",
+              "thousands": ".",
+              "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+              "sProcessing":   "Sedang memproses...",
+              "sLengthMenu":   "Tampilkan _MENU_ entri",
+              "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+              "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+              "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+              "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+              "sInfoPostFix":  "",
+              "sSearch":       "Cari:",
+              "sUrl":          "",
+              "oPaginate": {
+                  "sFirst":    "Pertama",
+                  "sPrevious": "Sebelumnya",
+                  "sNext":     "Selanjutnya",
+                  "sLast":     "Terakhir"
+              }
+            },
+        "ajax" : {"url": 'renjafinal/getUnLoadData?id_unit='+$unit+'&rkpd='+$rkpd},
+        "columns": [
+              { data: 'no_urut',sClass: "dt-center"},
+              { data: 'uraian_program_rpjmd'},
+              { data: 'uraian_program'},
+              { data: 'action', 'searchable': false, 'orderable':false,sClass: "dt-center" }
+            ],
+      });
+};
 var LoadRekapRkpd
 function LoadTabelRekapRkpd($unit,$rkpd){
   LoadRekapRkpd = $('#tblProgramRKPD').DataTable({
@@ -641,7 +680,8 @@ function loadTblAktivitas(id_forum){
                         { data: 'urut', sClass: "dt-center", width :"5px"},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
                           }},
                         { data: 'pagu_aktivitas_forum', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1161,6 +1201,7 @@ $(document).on('click', '#btnLoadData', function() {
   id_dokumen_temp = data.id_dokumen_ranwal;
 
   LoadTabelData(x,y);
+  UnLoadTabelData(x,y);
   $('#modalLoadData').modal('show');
 });
 
@@ -1184,18 +1225,20 @@ $(document).on('click', '.btnLoad', function() {
             success: function(data) {
                 createPesan(data.pesan,"success");
                 LoadDataTbl.ajax.reload(null,false);
+                UnLoadDataTbl.ajax.reload(null,false);
                 $('#ModalProgress').modal('hide'); 
             },
             error: function(data){
                 createPesan(data.pesan,"danger");
                 LoadDataTbl.ajax.reload(null,false);
+                UnLoadDataTbl.ajax.reload(null,false);
                 $('#ModalProgress').modal('hide');
             }
     });
 });
 
 $(document).on('click', '.btnUnload', function() {
-  var data = LoadDataTbl.row( $(this).parents('tr') ).data();
+  var data = UnLoadDataTbl.row( $(this).parents('tr') ).data();
 
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
@@ -1213,11 +1256,13 @@ $(document).on('click', '.btnUnload', function() {
         success: function(data) {
             createPesan(data.pesan,"success");
             LoadDataTbl.ajax.reload(null,false);
+            UnLoadDataTbl.ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         },
         error: function(data){
             createPesan(data.pesan,"danger");
             LoadDataTbl.ajax.reload(null,false);
+            UnLoadDataTbl.ajax.reload(null,false);
             $('#ModalProgress').modal('hide');
         }
     });

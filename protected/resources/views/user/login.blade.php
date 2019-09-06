@@ -351,15 +351,15 @@
                 <input type="text" id="email" class="fadeIn second" name="email" placeholder="Username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
                 <select id="id_tahun" class="fadeIn fourth" name="id_tahun" placeholder="Tahun Anggaran/Perencanaan">
-                  @foreach($tahun as $tahuns)   
+                  @foreach($tahun as $tahuns) 
                     <option value="{{ $tahuns->tahun_rencana}}">{{ $tahuns->tahun_rencana}}</option>
                   @endforeach
                 </select>
                 <input type="submit" class="fadeIn fifth" value="Log In">
               </form>              
               <div id="formFooter">                
-                by <img  src="{{ asset('vendor/bpkp_logo.png') }}" style="width:15%;" /> 
-                @2019
+                <img  src="{{ asset('vendor/bpkp_logo.png') }}" style="width:15%;" /> <br>
+                <span class="label"> {{Session::get('versiApp')}} </span>
               </div>
 
             </div>

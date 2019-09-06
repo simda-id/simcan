@@ -37,12 +37,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <div class="tab-content">  
             <div role="tabpanel" class="tab-pane active" id="sasaran">
               <br>
+              <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="id_unit">Unit Penyusun Renstra :</label>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                   <select class="form-control cbUnit" name="id_unit" id="id_unit"></select>
                 </div>
               </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="cb_no_renstra">Nomor Dokumen Renstra :</label>
+                <div class="col-sm-5">
+                  <select class="form-control cb_no_renstra" name="cb_no_renstra" id="cb_no_renstra"></select>
+                </div>
+              </div>
+              </form>
               <div>
                 <table id="tblSasaran" class="table compact table-responsive table-striped table-bordered display"  cellspacing="0" width="100%">
                       <thead>

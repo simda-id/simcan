@@ -1151,7 +1151,7 @@ function LoadCariIndikator(){
         processing: true,
         serverSide: true,
         dom: 'bfrtIp',
-        "ajax": {"url": "./admin/parameter/getRefIndikator"},
+        "ajax": {"url": "../admin/parameter/getRefIndikator"},
         "columns": [
               { data: 'no_urut', sClass: "dt-center"},
               { data: 'nm_indikator'},

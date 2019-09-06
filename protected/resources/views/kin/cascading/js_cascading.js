@@ -78,7 +78,7 @@ $(document).ready(function() {
             }
   });
 
-  function loadTblSasaran($data) {
+  function loadTblSasaran($id_dok,$data) {
     tbl_Sasaran = $('#tblSasaran').DataTable( {
           processing: true,
           serverSide: true,
@@ -107,7 +107,7 @@ $(document).ready(function() {
                   "sLast":     "Terakhir"
               }
             },
-            "ajax": {"url": "cascading/getSasaranRenstra/"+$data},
+            "ajax": {"url": "cascading/getSasaranRenstra?id_dokumen="+$id_dok+'&id_unit='+$data},
             "columns": [
                   {
                     "className":      'details-control',
@@ -402,7 +402,31 @@ $('#tblSasaranKegiatan tbody').on('click', 'td.details-control', function () {
 
 $( ".cbUnit" ).change(function() {
       id_unit_renstra =  $('.cbUnit').val();
-      loadTblSasaran(id_unit_renstra);
+      // loadTblSasaran(id_unit_renstra);
+      $.ajax({
+          type: "GET",
+          url: 'kin/getDokumenRenstra/'+ $('.cbUnit').val(),
+          dataType: "json",
+          success: function(data) {
+
+                var j = data.length;
+                var post, i;
+
+                $('select[name="cb_no_renstra"]').empty();
+                $('select[name="cb_no_renstra"]').append('<option value="-1">---Pilih Nomor Renstra---</option>');
+
+                for (i = 0; i < j; i++) {
+                  post = data[i];
+                  $('select[name="cb_no_renstra"]').append('<option value="'+ post.id_renstra +'">'+ post.nomor_renstra +'</option>');
+                }
+          }
+      });
+
+});
+
+$( ".cb_no_renstra" ).change(function() {
+      // id_unit_renstra =  $('.cbUnit').val();
+      loadTblSasaran($('.cb_no_renstra').val(), $('.cbUnit').val());
 });
 
 $('#tblSasaran tbody').on( 'dblclick', 'tr', function () {

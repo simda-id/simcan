@@ -1113,7 +1113,8 @@ function loadTblAktivitas(id_forum){
                         { data: 'urut', sClass: "dt-center", width :"5px"},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
                           }},
                         { data: 'pagu_anggaran', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},

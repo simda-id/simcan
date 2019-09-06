@@ -44,7 +44,12 @@ use hoaaah\LaravelMenu\Menu;
                     <span class="fa-stack">
                       <i class="fa fa-square-o fa-stack-2x text-info"></i>
                       <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
-                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></span>
+                    </span><span style="color:#fff"> simd@<strong>Perencanaan</strong></span>
+                    @if ( Session::get('AppType') === 0 )
+                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                        @else
+                            <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
+                        @endif
                     </a>
                 </div>
 
@@ -129,7 +134,7 @@ use hoaaah\LaravelMenu\Menu;
                                           //  ['label' => 'RPJMD Rancangan', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
                                           //  ['label' => 'RPJMD Musrenbang', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
                                           //  ['label' => 'RPJMD Rancangan Akhir', 'url' => '/rpjmd/rancangan', 'visible' => $akses->get(20)],
-                                            ['label' => 'RPJMD', 'url' => '/rpjmd', 'visible' => $akses->get(20)],
+                                            ['label' => 'RPJMD', 'url' => '/rpjmd', 'visible' => $akses->get(201)],
                                         ]
                                     ],                                    
                                     [
@@ -139,7 +144,7 @@ use hoaaah\LaravelMenu\Menu;
                                            // ['label' => 'Renstra Rancangan Awal', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                           //  ['label' => 'Renstra Rancangan', 'url' => '/renstra', 'visible' => $akses->get(30)],
                                            // ['label' => 'Renstra Rancangan Akhir', 'url' => '/renstra', 'visible' => $akses->get(30)],
-                                            ['label' => 'Renstra', 'url' => '/renstra', 'visible' => $akses->get(30)],
+                                            ['label' => 'Renstra', 'url' => '/renstra', 'visible' => $akses->get(301)],
                                         ]
                                     ],
                                     [
@@ -168,8 +173,8 @@ use hoaaah\LaravelMenu\Menu;
                                         'label' => 'Pencetakan RPJMD & Renstra',
                                         'visible' => $akses->get(30) || $akses->get(20),
                                         'items' => [
-                                            ['label' => 'Cetak RPJMD', 'url' => '/cetak/rpjmd', 'visible' => $akses->get(20)],
-                                            ['label' => 'Cetak Renstra', 'url' => '/cetak/renstra', 'visible' => $akses->get(30)],
+                                            ['label' => 'Cetak RPJMD', 'url' => '/cetak/rpjmd', 'visible' => $akses->get(202)],
+                                            ['label' => 'Cetak Renstra', 'url' => '/cetak/renstra', 'visible' => $akses->get(302)],
                                         ]
                                     ],
                                 ]

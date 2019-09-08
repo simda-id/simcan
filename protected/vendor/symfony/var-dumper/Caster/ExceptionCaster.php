@@ -12,8 +12,8 @@
 namespace Symfony\Component\VarDumper\Caster;
 
 use Symfony\Component\Debug\Exception\SilencedErrorContext;
-use Symfony\Component\VarDumper\Exception\ThrowingCasterException;
 use Symfony\Component\VarDumper\Cloner\Stub;
+use Symfony\Component\VarDumper\Exception\ThrowingCasterException;
 
 /**
  * Casts common Exception classes to array representation.
@@ -24,7 +24,7 @@ class ExceptionCaster
 {
     public static $srcContext = 1;
     public static $traceArgs = true;
-    public static $errorTypes = array(
+    public static $errorTypes = [
         E_DEPRECATED => 'E_DEPRECATED',
         E_USER_DEPRECATED => 'E_USER_DEPRECATED',
         E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
@@ -40,9 +40,9 @@ class ExceptionCaster
         E_USER_WARNING => 'E_USER_WARNING',
         E_USER_NOTICE => 'E_USER_NOTICE',
         E_STRICT => 'E_STRICT',
-    );
+    ];
 
-    private static $framesCache = array();
+    private static $framesCache = [];
 
     public static function castError(\Error $e, array $a, Stub $stub, $isNested, $filter = 0)
     {
@@ -71,8 +71,8 @@ class ExceptionCaster
 
         if (isset($a[$xPrefix.'previous'], $a[$trace]) && $a[$xPrefix.'previous'] instanceof \Exception) {
             $b = (array) $a[$xPrefix.'previous'];
-            self::traceUnshift($b[$xPrefix.'trace'], get_class($a[$xPrefix.'previous']), $b[$prefix.'file'], $b[$prefix.'line']);
-            $a[$trace] = new TraceStub($b[$xPrefix.'trace'], false, 0, -count($a[$trace]->value));
+            self::traceUnshift($b[$xPrefix.'trace'], \get_class($a[$xPrefix.'previous']), $b[$prefix.'file'], $b[$prefix.'line']);
+            $a[$trace] = new TraceStub($b[$xPrefix.'trace'], false, 0, -\count($a[$trace]->value));
         }
 
         unset($a[$xPrefix.'previous'], $a[$prefix.'code'], $a[$prefix.'file'], $a[$prefix.'line']);
@@ -92,10 +92,10 @@ class ExceptionCaster
             $a[$s] = new ConstStub(self::$errorTypes[$a[$s]], $a[$s]);
         }
 
-        $trace = array(array(
+        $trace = [[
             'file' => $a[$sPrefix.'file'],
             'line' => $a[$sPrefix.'line'],
-        ));
+        ]];
 
         if (isset($a[$sPrefix.'trace'])) {
             $trace = array_merge($trace, $a[$sPrefix.'trace']);
@@ -117,34 +117,42 @@ class ExceptionCaster
         $frames = $trace->value;
         $prefix = Caster::PREFIX_VIRTUAL;
 
-        $a = array();
-        $j = count($frames);
+        $a = [];
+        $j = \count($frames);
         if (0 > $i = $trace->sliceOffset) {
             $i = max(0, $j + $i);
         }
         if (!isset($trace->value[$i])) {
-            return array();
+            return [];
         }
         $lastCall = isset($frames[$i]['function']) ? (isset($frames[$i]['class']) ? $frames[0]['class'].$frames[$i]['type'] : '').$frames[$i]['function'].'()' : '';
-        $frames[] = array('function' => '');
+        $frames[] = ['function' => ''];
+        $collapse = false;
 
         for ($j += $trace->numberingOffset - $i++; isset($frames[$i]); ++$i, --$j) {
             $f = $frames[$i];
             $call = isset($f['function']) ? (isset($f['class']) ? $f['class'].$f['type'] : '').$f['function'] : '???';
 
             $frame = new FrameStub(
-                array(
+                [
                     'object' => isset($f['object']) ? $f['object'] : null,
                     'class' => isset($f['class']) ? $f['class'] : null,
                     'type' => isset($f['type']) ? $f['type'] : null,
                     'function' => isset($f['function']) ? $f['function'] : null,
-                ) + $frames[$i - 1],
+                ] + $frames[$i - 1],
                 false,
                 true
             );
-            $f = self::castFrameStub($frame, array(), $frame, true);
+            $f = self::castFrameStub($frame, [], $frame, true);
             if (isset($f[$prefix.'src'])) {
                 foreach ($f[$prefix.'src']->value as $label => $frame) {
+                    if (0 === strpos($label, "\0~collapse=0")) {
+                        if ($collapse) {
+                            $label = substr_replace($label, '1', 11, 1);
+                        } else {
+                            $collapse = true;
+                        }
+                    }
                     $label = substr_replace($label, "title=Stack level $j.&", 2, 0);
                 }
                 $f = $frames[$i - 1];
@@ -162,12 +170,12 @@ class ExceptionCaster
             } else {
                 $label = substr_replace($prefix, "title=Stack level $j.", 2, 0).$lastCall;
             }
-            $a[$label] = $frame;
+            $a[substr_replace($label, sprintf('separator=%s&', $frame instanceof EnumStub ? ' ' : ':'), 2, 0)] = $frame;
 
             $lastCall = $call;
         }
         if (null !== $trace->sliceLength) {
-            $a = array_slice($a, 0, $trace->sliceLength, true);
+            $a = \array_slice($a, 0, $trace->sliceLength, true);
         }
 
         return $a;
@@ -191,19 +199,20 @@ class ExceptionCaster
                 $a[$prefix.'src'] = self::$framesCache[$cacheKey];
             } else {
                 if (preg_match('/\((\d+)\)(?:\([\da-f]{32}\))? : (?:eval\(\)\'d code|runtime-created function)$/', $f['file'], $match)) {
-                    $f['file'] = substr($f['file'], 0, -strlen($match[0]));
+                    $f['file'] = substr($f['file'], 0, -\strlen($match[0]));
                     $f['line'] = (int) $match[1];
                 }
                 $caller = isset($f['function']) ? sprintf('in %s() on line %d', (isset($f['class']) ? $f['class'].$f['type'] : '').$f['function'], $f['line']) : null;
                 $src = $f['line'];
                 $srcKey = $f['file'];
-                $ellipsis = (new LinkStub($srcKey, 0))->attr;
-                $ellipsisTail = isset($ellipsis['ellipsis-tail']) ? $ellipsis['ellipsis-tail'] : 0;
-                $ellipsis = isset($ellipsis['ellipsis']) ? $ellipsis['ellipsis'] : 0;
+                $ellipsis = new LinkStub($srcKey, 0);
+                $srcAttr = 'collapse='.(int) $ellipsis->inVendor;
+                $ellipsisTail = isset($ellipsis->attr['ellipsis-tail']) ? $ellipsis->attr['ellipsis-tail'] : 0;
+                $ellipsis = isset($ellipsis->attr['ellipsis']) ? $ellipsis->attr['ellipsis'] : 0;
 
                 if (file_exists($f['file']) && 0 <= self::$srcContext) {
                     if (!empty($f['class']) && (is_subclass_of($f['class'], 'Twig\Template') || is_subclass_of($f['class'], 'Twig_Template')) && method_exists($f['class'], 'getDebugInfo')) {
-                        $template = isset($f['object']) ? $f['object'] : unserialize(sprintf('O:%d:"%s":0:{}', strlen($f['class']), $f['class']));
+                        $template = isset($f['object']) ? $f['object'] : unserialize(sprintf('O:%d:"%s":0:{}', \strlen($f['class']), $f['class']));
 
                         $ellipsis = 0;
                         $templateSrc = method_exists($template, 'getSourceContext') ? $template->getSourceContext()->getCode() : (method_exists($template, 'getSource') ? $template->getSource() : '');
@@ -222,12 +231,15 @@ class ExceptionCaster
                         $src = self::extractSource(file_get_contents($f['file']), $f['line'], self::$srcContext, $caller, 'php', $f['file']);
                         $srcKey .= ':'.$f['line'];
                         if ($ellipsis) {
-                            $ellipsis += 1 + strlen($f['line']);
+                            $ellipsis += 1 + \strlen($f['line']);
                         }
                     }
+                    $srcAttr .= '&separator= ';
+                } else {
+                    $srcAttr .= '&separator=:';
                 }
-                $srcAttr = $ellipsis ? 'ellipsis-type=path&ellipsis='.$ellipsis.'&ellipsis-tail='.$ellipsisTail : '';
-                self::$framesCache[$cacheKey] = $a[$prefix.'src'] = new EnumStub(array("\0~$srcAttr\0$srcKey" => $src));
+                $srcAttr .= $ellipsis ? '&ellipsis-type=path&ellipsis='.$ellipsis.'&ellipsis-tail='.$ellipsisTail : '';
+                self::$framesCache[$cacheKey] = $a[$prefix.'src'] = new EnumStub(["\0~$srcAttr\0$srcKey" => $src]);
             }
         }
 
@@ -253,7 +265,7 @@ class ExceptionCaster
             $trace = $a[$xPrefix.'trace'];
             unset($a[$xPrefix.'trace']); // Ensures the trace is always last
         } else {
-            $trace = array();
+            $trace = [];
         }
 
         if (!($filter & Caster::EXCLUDE_VERBOSE) && $trace) {
@@ -279,23 +291,23 @@ class ExceptionCaster
         if (isset($trace[0]['file'], $trace[0]['line']) && $trace[0]['file'] === $file && $trace[0]['line'] === $line) {
             return;
         }
-        array_unshift($trace, array(
+        array_unshift($trace, [
             'function' => $class ? 'new '.$class : null,
             'file' => $file,
             'line' => $line,
-        ));
+        ]);
     }
 
     private static function extractSource($srcLines, $line, $srcContext, $title, $lang, $file = null)
     {
         $srcLines = explode("\n", $srcLines);
-        $src = array();
+        $src = [];
 
         for ($i = $line - 1 - $srcContext; $i <= $line - 1 + $srcContext; ++$i) {
             $src[] = (isset($srcLines[$i]) ? $srcLines[$i] : '')."\n";
         }
 
-        $srcLines = array();
+        $srcLines = [];
         $ltrim = 0;
         do {
             $pad = null;
@@ -329,7 +341,7 @@ class ExceptionCaster
                 }
             }
             $c->attr['lang'] = $lang;
-            $srcLines[sprintf("\0~%d\0", $i + $line - $srcContext)] = $c;
+            $srcLines[sprintf("\0~separator=› &%d\0", $i + $line - $srcContext)] = $c;
         }
 
         return new EnumStub($srcLines);

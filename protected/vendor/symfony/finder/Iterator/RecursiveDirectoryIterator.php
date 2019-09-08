@@ -37,8 +37,6 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     private $directorySeparator = '/';
 
     /**
-     * Constructor.
-     *
      * @param string $path
      * @param int    $flags
      * @param bool   $ignoreUnreadableDirs
@@ -54,8 +52,8 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
         parent::__construct($path, $flags);
         $this->ignoreUnreadableDirs = $ignoreUnreadableDirs;
         $this->rootPath = $path;
-        if ('/' !== DIRECTORY_SEPARATOR && !($flags & self::UNIX_PATHS)) {
-            $this->directorySeparator = DIRECTORY_SEPARATOR;
+        if ('/' !== \DIRECTORY_SEPARATOR && !($flags & self::UNIX_PATHS)) {
+            $this->directorySeparator = \DIRECTORY_SEPARATOR;
         }
     }
 
@@ -102,7 +100,7 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
         } catch (\UnexpectedValueException $e) {
             if ($this->ignoreUnreadableDirs) {
                 // If directory is unreadable and finder is set to ignore it, a fake empty content is returned.
-                return new \RecursiveArrayIterator(array());
+                return new \RecursiveArrayIterator([]);
             } else {
                 throw new AccessDeniedException($e->getMessage(), $e->getCode(), $e);
             }

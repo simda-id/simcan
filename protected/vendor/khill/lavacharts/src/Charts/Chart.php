@@ -6,6 +6,7 @@ use Khill\Lavacharts\Support\Customizable;
 use Khill\Lavacharts\DataTables\DataTable;
 use Khill\Lavacharts\Values\ElementId;
 use Khill\Lavacharts\Values\Label;
+use Khill\Lavacharts\Support\Traits\ElementIdTrait as HasElementId;
 use Khill\Lavacharts\Support\Traits\DataTableTrait as HasDataTable;
 use Khill\Lavacharts\Support\Traits\RenderableTrait as IsRenderable;
 use Khill\Lavacharts\Support\Contracts\JsonableInterface as Jsonable;
@@ -50,10 +51,39 @@ class Chart extends Customizable implements Renderable, Wrappable, Jsonable, Vis
         $this->label = $chartLabel;
         $this->datatable = $datatable;
 
-        if (array_key_exists('elementId', $options)) {
-            $this->elementId = new ElementId($options['elementId']);
-        }
+        $this->setExtendedAttributes();
     }
+
+    /**
+     * Set extended chart attributes from the assigned options, if present.
+     *
+     * @since 3.1.9
+     */
+    protected function setExtendedAttributes()
+    {
+        if (array_key_exists('elementId', $this->options)) {
+            $this->setElementId($this->options['elementId']);
+
+            unset($this->options['elementId']);
+        }
+
+        if (method_exists($this, 'setPngOutput') &&
+            array_key_exists('png', $this->options))
+            {
+                $this->setPngOutput($this->options['png']);
+
+                unset($this->options['png']);
+            }
+
+        if (method_exists($this, 'setMaterialOutput') &&
+            array_key_exists('material', $this->options))
+            {
+                $this->setMaterialOutput($this->options['material']);
+
+                unset($this->options['material']);
+            }
+    }
+
 
     /**
      * Returns the chart type.

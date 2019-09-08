@@ -1,10 +1,10 @@
-# Lavacharts 3.1.7
+# Lavacharts 3.1.10
 
 [![Total Downloads](https://img.shields.io/packagist/dt/khill/lavacharts.svg?style=plastic)](https://packagist.org/packages/khill/lavacharts)
 [![License](https://img.shields.io/packagist/l/khill/lavacharts.svg?style=plastic)](http://opensource.org/licenses/MIT)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg?style=plastic)](https://php.net/)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kevinkhill/lavacharts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![PayPayl](https://img.shields.io/badge/paypal-donate-yellow.svg?style=plastic)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FLP6MYY3PYSFQ)
+[![PayPal](https://img.shields.io/badge/paypal-donate-yellow.svg?style=plastic)](https://www.paypal.me/kevinkhill/)
 
 Lavacharts is a graphing / chart library for PHP5.4+ that wraps the Google Chart API.
 
@@ -14,13 +14,14 @@ Stable:
 [![Coverage Status](https://img.shields.io/coveralls/kevinkhill/lavacharts/3.1.svg?style=plastic)](https://coveralls.io/r/kevinkhill/lavacharts?branch=3.1)
 
 Dev:
-[![Development Release](https://img.shields.io/badge/release-3.2.x--dev-brightgreen.svg?style=plastic)](https://github.com/kevinkhill/lavacharts/tree/master)
+[![Development Release](https://img.shields.io/badge/release-dev--master-brightgreen.svg?style=plastic)](https://github.com/kevinkhill/lavacharts/tree/master)
 [![Build Status](https://img.shields.io/travis/kevinkhill/lavacharts/master.svg?style=plastic)](https://travis-ci.org/kevinkhill/lavacharts)
 [![Coverage Status](https://img.shields.io/coveralls/kevinkhill/lavacharts/master.svg?style=plastic)](https://coveralls.io/r/kevinkhill/lavacharts?branch=master)
 
 
 ## Package Features
-- **Updated!** Any option for customizing charts that Google supports, Lavacharts should as well. Just use the chart constructor to assign any customization options you wish!
+- **Updated!** Laravel 5.5+ auto-discovery
+- Any option for customizing charts that Google supports, Lavacharts should as well. Just use the chart constructor to assign any customization options you wish!
  - Visit [Google's Chart Gallery](https://developers.google.com/chart/interactive/docs/gallery) for details on available options
 - Custom JavaScript module for interacting with charts client-side
   - AJAX data reloading
@@ -34,7 +35,8 @@ Dev:
   - Annotation, Area, Bar, Bubble, Calendar, Candlestick, Column, Combo, Gantt, Gauge, Geo, Histogram, Line, Org, Pie, Sankey, Scatter, SteppedArea, Table, Timeline, TreeMap, and WordTree!
 
 
-#### For complete documentation, please visit [lavacharts.com](http://lavacharts.com/)
+### For complete documentation, please visit [lavacharts.com](http://lavacharts.com/)
+
 #### Upgrade guide: [Migrating from 2.5.x to 3.0.x](https://github.com/kevinkhill/lavacharts/wiki/Upgrading-from-2.5-to-3.0)
 #### For contributing, a handy guide [can be found here](https://github.com/kevinkhill/lavacharts/blob/master/.github/CONTRIBUTING.md)
 
@@ -43,7 +45,7 @@ Dev:
 ## Installing
 In your project's main `composer.json` file, add this line to the requirements:
 ```json
-"khill/lavacharts": "~3.1"
+"khill/lavacharts": "^3.1"
 ```
 
 Run Composer to install Lavacharts:
@@ -59,7 +61,15 @@ If you are using Lavacharts with Silex, Lumen or your own Composer project, that
 ## Laravel
 To integrate Lavacharts into Laravel, a ServiceProvider has been included.
 
-### Laravel 5.x
+
+### Laravel ~5.5
+Thanks to the fantastic new [Package Auto-Discovery](https://laravel-news.com/package-auto-discovery) feature added in 5.5, you're ready to go, no registration required :+1:
+
+#### Configuration
+To modify the default configuration of Lavacharts, datetime formats for datatables or adding your maps api key...
+Publish the configuration with `php artisan vendor:publish --tag=lavacharts`
+
+### Laravel ~5.4
 Register Lavacharts in your app by adding these lines to the respective arrays found in `config/app.php`:
 ```php
 <?php
@@ -75,7 +85,7 @@ Register Lavacharts in your app by adding these lines to the respective arrays f
 // ...
 'aliases' => [
     // ...
-    
+
     'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
 ]
 ```
@@ -84,7 +94,7 @@ To modify the default configuration of Lavacharts, datetime formats for datatabl
 Publish the configuration with `php artisan vendor:publish --tag=lavacharts`
 
 
-### Laravel 4.x
+### Laravel ~4
 Register Lavacharts in your app by adding these lines to the respective arrays found in `app/config/app.php`:
 
 ```php
@@ -101,7 +111,7 @@ Register Lavacharts in your app by adding these lines to the respective arrays f
 // ...
 'aliases' => array(
     // ...
-    
+
     'Lava' => "Khill\Lavacharts\Laravel\LavachartsFacade",
 )
 ```
@@ -122,7 +132,7 @@ Add the bundle to the registerBundles method in the AppKernel, found at `app/App
 class AppKernel extends Kernel
 {
     // ..
-    
+
     public function registerBundles()
     {
         $bundles = array(

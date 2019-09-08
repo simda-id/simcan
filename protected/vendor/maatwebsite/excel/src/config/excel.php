@@ -367,7 +367,7 @@ return array(
         |
         | The sheet has a heading (first) row which we can use as attribute names
         |
-        | Options: true|false|slugged|slugged_with_count|ascii|numeric|hashed|trans|original
+        | Options: true|false|slugged|slugged_with_count|ascii|numeric|hashed|hashed_with_lower|trans|original
         |
         */
 
@@ -626,7 +626,7 @@ return array(
 
             /*
             |--------------------------------------------------------------------------
-            | Heading 2
+            | Heading 3
             |--------------------------------------------------------------------------
             */
             'h3'     => [

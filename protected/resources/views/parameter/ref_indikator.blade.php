@@ -39,9 +39,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Type</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Jenis</th>
-                          <th width="10%" style="text-align: center; vertical-align:middle">Sifat</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Jenis Indikator</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Kualitas Indikator</th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Sifat Indikator</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Teknik Pengukuran</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
@@ -183,7 +183,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
-              <label for="sifat_indikator" class="col-sm-2" align='left'>Type Pengukuran</label>
+              <label for="sifat_indikator" class="col-sm-2" align='left'>Tehnik Pengukuran</label>
               <div class="col-sm-10">
                   <div class="col-sm-2">
                       <label class="radio-inline">

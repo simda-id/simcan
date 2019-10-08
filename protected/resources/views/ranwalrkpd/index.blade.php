@@ -64,9 +64,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <thead>
                             <tr>
                                 <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                                <th rowspan="2" width="6%" style="text-align: center; vertical-align:middle">Kode RPJMD</th>
                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
-                                <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RPJMD</th>
-                                <th rowspan="2" width="15%" style="text-align: center; vertical-align:middle">Pagu RKPD</th>
+                                <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu RPJMD</th>
+                                <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu RKPD</th>
                                 <th colspan="2" width="5%" style="text-align: center; vertical-align:middle">Indikator</th>
                                 <th colspan="2" width="5%" style="text-align: center; vertical-align:middle">Pelaksana</th>
                                 <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Status Pelaksanaan</th>
@@ -879,14 +880,11 @@ $('#no_urut_program').number(true,0,',', '.');
                 "decimal": ",",
                 "thousands": "."},
         "columns": [
-              { data: 'urut', sClass: "dt-center"},
+              { data: 'urut', sClass: "dt-center"},              
+              { data: 'kd_program_rpjmd', sClass: "dt-center"},
               { data: 'uraian_program_rpjmd'},
-              { data: 'pagu_rpjmd',
-                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
-                sClass: "dt-right" },
-              { data: 'pagu_ranwal',
-                render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
-                sClass: "dt-right" },
+              { data: 'pagu_rpjmd', render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
+              { data: 'pagu_ranwal', render: $.fn.dataTable.render.number( '.', ',', 0, '' ), sClass: "dt-right" },
               { data: 'jml_indikator', sClass: "dt-center"},
               { data: 'indikator_0', sClass: "dt-center"},
               { data: 'jml_unit', sClass: "dt-center"},
@@ -894,10 +892,7 @@ $('#no_urut_program').number(true,0,',', '.');
               { data: 'pelaksanaan_display', sClass: "dt-center"},
               { data: 'icon','searchable': false, 'orderable':false,
                   render: function(data, type, row,meta) {
-                    // if ( type === 'display' ) {
                       return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';
-                    // }
-                    // return data
                   }, 
                   sClass: "dt-center"},
               { data: 'action', 'searchable': false, 'orderable':false , sClass: "dt-center"}

@@ -64,7 +64,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                 <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu OPD</th>
                                 <th colspan="2" width="3%" style="text-align: center; vertical-align:middle">Indikator</th>
                                 <th colspan="2" width="3%" style="text-align: center; vertical-align:middle">Pelaksana</th>
-                                <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Status Pelaksanaan</th>
+                                {{-- <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Status Pelaksanaan</th> --}}
                                 <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">Status Usulan</th>
                                 <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Aksi</th>
                             </tr>

@@ -41,8 +41,8 @@ var indikator_tbl=$('#tblIndikator').DataTable({
                   "columns": [
                         { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
                         { data: 'nm_indikator', sClass: "dt-left"},
-                        { data: 'kualitas_display', sClass: "dt-center", width :"10%"},
                         { data: 'type_display', sClass: "dt-center", width :"10%"},
+                        { data: 'kualitas_display', sClass: "dt-center", width :"10%"},
                         { data: 'sifat_display', sClass: "dt-center", width :"10%"},
                         { data: 'teknik_display', sClass: "dt-center", width :"10%"},
                         { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }

@@ -17,22 +17,29 @@ use hoaaah\LaravelMenu\Menu;
 
     <title>simd@Perencanaan</title>
 
-    <!-- Styles -->
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/1417cae13b.css"> --}}
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <style>
+    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
+    
+    @yield('css')
+
+    @yield('head')
+    <style>        
         h1.padding {
-        padding-right: 1cm;
+            padding-right: 1cm;
+        }
+        #radioBtn .notActive{
+            color: #b5b6b7;
+            background-color: #fff;
         }
     </style>
 </head>
-<body>
+<body >
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             {{-- <div class="container"> --}}
@@ -148,12 +155,53 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
+        <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
+        <script src="{{ asset('/js/input.js')}}"></script>
         <script src="{{ asset('/js/jquery.number.js')}}"></script>
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
         <script src="{{ asset('/js/datepicker-id.js')}}"></script>
+        <script type="text/javascript">
+            function formatTgl(val_tanggal){
+                var formattedDate = new Date(val_tanggal);
+                var d = formattedDate.getDate();
+                var m = formattedDate.getMonth();
+                var y = formattedDate.getFullYear();
+                var m_names = new Array("Januari", "Februari", "Maret", 
+                  "April", "Mei", "Juni", "Juli", "Agustus", "September", 
+                  "Oktober", "November", "Desember")
+    
+                var tgl= d + " " + m_names[m] + " " + y;
+                return tgl;
+            };
 
+            function hariIni(){
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+                var yyyy = today.getFullYear();
+
+                var hariIni = yyyy + '-' + mm + '-' + dd;
+                return hariIni;
+            };
+
+            function buatNip(string){
+              return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
+            }
+
+            function nilaiNip(string){
+              return string.replace(/\D/g,'').substring(0, 20);
+            }
+
+            $('#radioBtn a').on('click', function(){
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#'+tog).prop('value', sel);
+                
+                $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+                $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+            });
+        </script>
 
         @yield('scripts')
 

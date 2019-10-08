@@ -9,87 +9,90 @@ use hoaaah\LaravelMenu\Menu;
 
 <style>
     h2 {
-    font-size: 50px;
-    font-weight: 300;
-    margin-bottom: 10px;
-    line-height: 50px;
+        font-size: 50px;
+        font-weight: 300;
+        margin-bottom: 10px;
+        line-height: 50px;
     }
+
     .highlight {
         color: #2ac5ed;
     }
+
     #content {
         padding: 70px 0;
     }
-    
-                
 </style>
 
 @section('content')
 <div class="container-fluid">
-<section id="content" class="current">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2 style="font-size: 40px;line-height: 60px;margin-bottom: 10px;font-weight: 900;"><span class="highlight">Pencetakan Ananlisis Standar Belanja</span></h2>
-                <br>
-            </div>
-        </div>
-        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="form-group">
-                <label for="cb_no_perda" class="col-sm-3 control-label" align='left'>Nomor Perkada ASB :</label>
-                <div class="col-sm-8">
-                    <select class="form-control cb_no_perda" name="cb_no_perda" id="cb_no_perda"></select>
+    <section id="content" class="current">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2 style="font-size: 40px;line-height: 60px;margin-bottom: 10px;font-weight: 900;"><span
+                            class="highlight">Pencetakan Ananlisis Standar Belanja</span></h2>
+                    <br>
                 </div>
             </div>
-            <div class="form-group hidden">
-                <label for="cb_zona" class="col-sm-3 control-label" align='left'>Zona SSH :</label>
-                <div class="col-sm-8">
-                    <select class="form-control cb_zona" name="cb_zona" id="cb_zona"></select>
+            <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="cb_no_perda" class="col-sm-3 control-label" align='left'>Nomor Perkada ASB :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 cb_no_perda" name="cb_no_perda" id="cb_no_perda"></select>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div class="form-group hidden">
-                <label for="cb_golongan" class="col-sm-3 control-label" align='left'>Golongan SSH :</label>
-                <div class="col-sm-8">
-                    <select class="form-control cb_golongan" name="cb_golongan" id="cb_golongan"></select>
+                <div class="form-group hidden">
+                    <label for="cb_zona" class="col-sm-3 control-label" align='left'>Zona SSH :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 cb_zona" name="cb_zona" id="cb_zona"></select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group hidden">
-                <label for="cb_kelompok" class="col-sm-3 control-label" align='left'>Kelompok SSH :</label>
-                <div class="col-sm-8">
-                    <select class="form-control cb_kelompok" name="cb_kelompok" id="cb_kelompok"></select>
+                <hr>
+                <div class="form-group hidden">
+                    <label for="cb_golongan" class="col-sm-3 control-label" align='left'>Golongan SSH :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 cb_golongan" name="cb_golongan" id="cb_golongan"></select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group hidden">
-                <label for="cb_subkelompok" class="col-sm-3 control-label" align='left'>Sub Kelompok SSH :</label>
-                <div class="col-sm-8">
-                    <select class="form-control cb_subkelompok" name="cb_subkelompok" id="cb_subkelompok"></select>
+                <div class="form-group hidden">
+                    <label for="cb_kelompok" class="col-sm-3 control-label" align='left'>Kelompok SSH :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 cb_kelompok" name="cb_kelompok" id="cb_kelompok"></select>
+                    </div>
                 </div>
-            </div>
-            {{-- <hr> --}}
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
-                <div class="col-sm-8">
-                    <select class="form-control jns_laporan" name="jns_laporan" id="jns_laporan"></select>
+                <div class="form-group hidden">
+                    <label for="cb_subkelompok" class="col-sm-3 control-label" align='left'>Sub Kelompok SSH :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 cb_subkelompok" name="cb_subkelompok"
+                            id="cb_subkelompok"></select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3"></label>
-                <div class="col-sm-8 text-left">
-                    <button type="button" class="btn btn-labeled btn-success btnProses"><span class="btn-label"><i class="fa fa-print fa-lg fa-fw"></i></span> Proses</button>  
+                {{-- <hr> --}}
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control select2 jns_laporan" name="jns_laporan" id="jns_laporan"></select>
+                    </div>
                 </div>
-            </div>                            
-        </form>
+                <div class="form-group">
+                    <label class="control-label col-sm-3"></label>
+                    <div class="col-sm-8 text-left">
+                        <button type="button" class="btn btn-labeled btn-success btnProses"><span class="btn-label"><i
+                                    class="fa fa-print fa-lg fa-fw"></i></span> Proses</button>
+                    </div>
+                </div>
+            </form>
 
-    </div>
-</section>
-</div> 
+        </div>
+    </section>
+</div>
 @endsection
 
 @section('scripts')
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
 $.ajax({
     type: "GET",
@@ -226,4 +229,3 @@ $(document).on('click', '.btnProses', function() {
 });
 </script>
 @endsection
-

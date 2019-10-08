@@ -3,33 +3,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 
 @extends('layouts.app0')
-<style>
-    .loader {
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid #3498db;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite; /* Safari */
-      animation: spin 2s linear infinite;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -16px;
-      z-index:1;
-    }
-    
-    /* Safari */
-    @-webkit-keyframes spin {
-      0% { -webkit-transform: rotate(0deg); }
-      100% { -webkit-transform: rotate(360deg); }
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
 @section('content')
   <div class="container-fluid">
         <div class="row">
@@ -83,7 +56,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 
 <!--Modal Tambah -->
-
 <div id="ModalZona" class="modal fade" role="dialog" data-backdrop="static">
   <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
@@ -98,23 +70,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label for="keterangan_zona" class="col-sm-3 control-label" align='left'>Nama Zona SSH :</label>
               <div class="col-sm-8">
-                {{-- <div class="input-group"> --}}
                 <textarea type="text" class="form-control" rows="2" id="ket_zona" name="ket_zona" required="required" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan nama akan dibaca di sepanjang aplikasi"></textarea>
-                {{-- <span class="input-group-addon">
-                    <a href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan nama akan dibaca di sepanjang aplikasi"><i class="glyphicon glyphicon-question-sign"></i></a>
-                </span>
-                </div> --}}
               </div>
             </div>
             <div class="form-group">
               <label for="diskripsi_zona" class="col-sm-3 control-label" align='left'>Deskripsi Zona SSH :</label>
               <div class="col-sm-8">
-                {{-- <div class="input-group"> --}}
                 <textarea type="text" class="form-control" rows="5" id="diskripsi_zona" name="diskripsi_zona" required="required" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan penjelasan cakupan zona yang dimaksud: lokasi, jarak, dsb"></textarea>
-                {{-- <span class="input-group-addon">
-                    <a href="#" data-toggle="popover" data-container="body" title="Zona SSH" data-trigger="hover" data-content="Diisi dengan penjelasan cakupan zona yang dimaksud: lokasi, jarak, dsb"><i class="glyphicon glyphicon-question-sign"></i></a>
-                </span>
-                </div> --}}
               </div>
             </div>
         </form>
@@ -175,158 +137,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-<script type="text/javascript" language="javascript" class="init">
-
-$(document).ready(function() {
-
-  $('[data-toggle="popover"]').popover();
-  $('#proses').hide();
-
-  var tzona = $('#tblzona').DataTable( {
-        processing: true,
-        serverSide: true,
-        "ajax": "{{url('/zonassh/getdata')}}",
-        "columns": [
-              { data: 'DT_Row_Index', orderable: false, searchable: false, sClass: "dt-center"},
-              { data: 'keterangan_zona'},
-              { data: 'diskripsi_zona'},
-              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" }
-            ]
-      } );
-
-  $('#tblzona tbody').on('dblclick', 'tr', function () {
-      
-    var data = tzona.row( this ).data();
-
-    // $('#nmAddZona').text("Update");
-    // $('#nmAddZona').addClass('glyphicon-save');
-    // $('.btnAddZona').addClass('btn-success'); 
-    $('.btnAddZona').removeClass('addZona');
-    $('.btnAddZona').addClass('editZona');
-    $('.modal-title').text('Edit Data Zona SSH');
-    $('.form-horizontal').show();
-    $('#id_zona').val(data.id_zona);
-    $('#ket_zona').val(data.keterangan_zona);
-    $('#diskripsi_zona').val(data.diskripsi_zona);
-    $('#ModalZona').modal('show');
-                  
-
-    } );  
-
-$(document).on('click', '.add-modal', function() {
-  $('.btnAddZona').removeClass('editZona');
-  $('.btnAddZona').addClass('addZona');
-  $('.modal-title').text('Tambah Data Zona SSH');
-  $('.form-horizontal').show();
-  $('#id_zona').val(null);
-  $('#ket_zona').val(null);
-  $('#diskripsi_zona').val(null);
-  $('#ModalZona').modal('show');
-});
-
-//edit function
-$(document).on('click', '.edit-modal', function() {
-  // $('#nmAddZona').text(" Update");
-  // $('#nmAddZona').addClass('glyphicon-save');
-  // $('.btnAddZona').addClass('btn-success'); 
-  $('.btnAddZona').removeClass('addZona');
-  $('.btnAddZona').addClass('editZona');
-  $('.modal-title').text('Edit Data Zona SSH');
-  $('.form-horizontal').show();
-  $('#id_zona').val($(this).data('id_zona'));
-  $('#ket_zona').val($(this).data('keterangan_zona'));
-  $('#diskripsi_zona').val($(this).data('diskripsi_zona'));
-  $('#ModalZona').modal('show');
-});
-
-//delete function
-$(document).on('click', '.delete-modal', function() {
-  // $('#footer_action_button').removeClass('glyphicon-check');
-  // $('#footer_action_button').addClass('glyphicon-trash');
-  // $('.actionBtn').removeClass('btn-success');
-  // $('.actionBtn').addClass('btn-danger');
-  $('.actionBtn').addClass('deleteZona');
-  $('.modal-title').text('Hapus Data');
-  $('.id_zona').text($(this).data('id_zona'));
-  // $('.deleteContent').show();
-  $('.form-horizontal').hide();
-  $('.title').html($(this).data('keterangan_zona'));
-  $('#HapusModal').modal('show');
-});
-
-$('.modal-footer').on('click', '.addZona', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './zonassh/tambah',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'ket_zona': $('#ket_zona').val(),
-            'diskripsi_zona': $('#diskripsi_zona').val()
-        },
-        success: function(data) {
-                $('#tblzona').DataTable().ajax.reload();
-                if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
-              } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
-              } 
-        },
-    });
-
-    $('#tblzona').DataTable().ajax.reload();
-});
-
-$('.modal-footer').on('click', '.editZona', function() {
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: './zonassh/update',
-        data: {
-            '_token': $('input[name=_token]').val(),
-            'id': $("#id_zona").val(),
-            'ket_zona': $('#ket_zona').val(),
-            'diskripsi_zona': $('#diskripsi_zona').val()
-        },
-        success: function(data) {
-            $('#tblzona').DataTable().ajax.reload();
-            if(data.status_pesan==1){
-              $('#pesan').html('<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
-              } else {
-              $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');  
-              } 
-        }
-    });
-
-
-});
-
-$('.modal-footer').on('click', '.deleteZona', function() {
-  $.ajaxSetup({
-     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-
-  $.ajax({
-    type: 'post',
-    url: './zonassh/delete',
-    data: {
-      '_token': $('input[name=_token]').val(),
-      'id_zona': $('.id_zona').text()
-    },
-    success: function(data) {
-      $('.item' + $('.id_zona').text()).remove();
-      $('#tblzona').DataTable().ajax.reload();
-      $('#pesan').html('<div class="alert alert-danger col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.pesan+'</div>');
-    }
-  });
-
-  });
-});
+<script type="text/javascript" language="javascript" class="init" src="{{ asset('/protected/resources/views/ssh/zona/js_zona_ssh.js')}}">
 </script>
 @endsection

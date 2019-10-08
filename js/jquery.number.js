@@ -122,7 +122,7 @@
 			39 : "\"",
 			44 : "<",
 			46 : ">",
-			47 : "?"
+			47 : "?",
 		}
 	};
 
@@ -214,7 +214,8 @@
 
 
 						// Stop executing if the user didn't type a number key, a decimal character, backspace, or delete.
-						if( code != 8 && code != 45 && code != 127 && chara != dec_point && !chara.match(/[0-9]/) )
+						// && code != 45
+						if( code != 8  && code != 127 && chara != dec_point && !chara.match(/[0-9]/) )
 						{
 							// We need the original keycode now...
 							var key = (e.keyCode ? e.keyCode : e.which);

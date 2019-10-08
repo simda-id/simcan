@@ -491,8 +491,8 @@ $(document).on('click', '#btnCariRekening', function() {
         $('#rekening_ssh').val()==undefined ||
         $('#rekening_ssh').val() == ""){
         if(jenis_belanja_temp == 0){ x = 0 }
-        if(jenis_belanja_temp == 1){ x = 3 }
-        if(jenis_belanja_temp == 2){ x = 2 }
+        if(jenis_belanja_temp == 1){ x = 2 }
+        if(jenis_belanja_temp == 2){ x = 3 }
         if(jenis_belanja_temp == 3){ x = 4 }
         if(jenis_belanja_temp == 4){ x = 4 }
       } else {
@@ -1111,7 +1111,7 @@ function loadTblAktivitas(id_forum){
                       "thousands": "."},
                   "columns": [
                         { data: 'urut', sClass: "dt-center", width :"5px"},
-                        { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
+                        { data: 'uraian','searchable': true, 'orderable':true, sClass: "dt-left",
                             render: function(data, type, row,meta) {
                             // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
                             return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';

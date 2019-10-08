@@ -100,7 +100,12 @@ vars = "?tahun=" + tahun_session;
                 "thousands": "."},
         "columns": [
               { data: 'urut', sClass: "dt-center"},
-              { data: 'uraian_program_rpjmd'},
+              // { data: 'uraian_program_rpjmd'},
+              { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
+                  render: function(data, type, row,meta) {                           
+                  return row.uraian_program_rpjmd + 
+                  '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>'
+                }},
               { data: 'pagu_rkpd',
                 render: $.fn.dataTable.render.number( '.', ',', 0, '' ),
                 sClass: "dt-right" },
@@ -114,7 +119,7 @@ vars = "?tahun=" + tahun_session;
               { data: 'indikator_0', sClass: "dt-center"},
               { data: 'jml_unit', sClass: "dt-center"},
               { data: 'unit_0', sClass: "dt-center"},              
-              { data: 'pelaksanaan_display', sClass: "dt-center"},
+              // { data: 'pelaksanaan_display', sClass: "dt-center"},
               { data: 'icon','searchable': false, 'orderable':false,
                   render: function(data, type, row,meta) {
                       return '<i class="'+row.status_icon+'" style="font-size:16px;color:'+row.warna+';"/>';

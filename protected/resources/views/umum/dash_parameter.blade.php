@@ -244,6 +244,25 @@ use hoaaah\LaravelMenu\Menu;
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-lg-3">
                             <div class="feature-block bootdey" style="visibility: visible;">
+                                @if($akses->get(112)) 
+                                <a href="{{ url('/') }}">
+                                    <div class="ico-success fa fa-users fa-fw"></div>
+                                    <div class="name">
+                                        Pegawai
+                                    </div>
+                                </a> 
+                                @else
+                                <a title="Maaf Anda Tidak Memiliki Akses">
+                                    <div class="ico-success fa fa-users fa-fw"></div>
+                                    <div class="name">
+                                        Pegawai
+                                    </div>
+                                </a>
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <div class="feature-block bootdey" style="visibility: visible;">
                                 @if($akses->get(106)) 
                                 <a href="{{ url('/admin/parameter/program') }}">
                                     <div class="ico-danger fa fa-briefcase fa-fw"></div>
@@ -259,7 +278,6 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Satuan biaya berupa harga satuan, tarif yang ditetapkan untuk digunakan dalam penyusunan rencana kerja </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-3 col-lg-3">
@@ -279,27 +297,6 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Instrumen untuk mengukur kewajaran antara beban kerja dan belanja dan sebuah aktifitas atau kegiatan </div> --}}
-                            </div>
-                        </div> 
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(108)) 
-                                <a title="Menu Indikator Pindah ke Modul RPJMD-Renstra">
-                                    <div class="ico-success fa fa-tachometer fa-fw"></div>
-                                    <div class="name">
-                                        Indikator
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-success fa fa-tachometer fa-fw"></div>
-                                    <div class="name">
-                                        Indikator
-                                    </div>
-                                </a>
-                                @endif
-                                {{-- <div class="text">Instrumen untuk mengukur kewajaran antara beban kerja dan belanja dan sebuah aktifitas atau kegiatan </div> --}}
                             </div>
                         </div> 
                         <div class="col-sm-3 col-md-3 col-lg-3">
@@ -319,11 +316,29 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Instrumen untuk mengukur kewajaran antara beban kerja dan belanja dan sebuah aktifitas atau kegiatan </div> --}}
                             </div>
                         </div>                        
                     </div>
                     <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="feature-block bootdey" style="visibility: visible;">
+                                @if($akses->get(104)) 
+                                <a href="{{ url('/admin/parameter/sbrDana') }}">
+                                    <div class="ico-danger fa fa-money fa-fw"></div>
+                                    <div class="name">
+                                        Sumber Dana
+                                    </div>
+                                </a> 
+                                @else
+                                <a title="Maaf Anda Tidak Memiliki Akses">
+                                    <div class="ico-danger fa fa-money fa-fw"></div>
+                                    <div class="name">
+                                        Sumber Daba
+                                    </div>
+                                </a>
+                                @endif
+                            </div>
+                        </div> 
                         <div class="col-sm-6 col-md-3 col-lg-3">
                             <div class="feature-block bootdey" style="visibility: visible;">
                                 @if($akses->get(101)) 
@@ -341,7 +356,6 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Satuan biaya berupa harga satuan, tarif yang ditetapkan untuk digunakan dalam penyusunan rencana kerja </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-3 col-lg-3">
@@ -361,7 +375,6 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Satuan biaya berupa harga satuan, tarif yang ditetapkan untuk digunakan dalam penyusunan rencana kerja </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-3 col-lg-3">
@@ -381,29 +394,8 @@ use hoaaah\LaravelMenu\Menu;
                                     </div>
                                 </a>
                                 @endif
-                                {{-- <div class="text">Satuan biaya berupa harga satuan, tarif yang ditetapkan untuk digunakan dalam penyusunan rencana kerja </div> --}}
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3">
-                            <div class="feature-block bootdey" style="visibility: visible;">
-                                @if($akses->get(109)) 
-                                <a href="{{ url('/admin/parameter/others') }}">
-                                    <div class="ico-danger fa fa-life-ring fa-fw"></div>
-                                    <div class="name">
-                                        Parameter Lainnya
-                                    </div>
-                                </a> 
-                                @else
-                                <a title="Maaf Anda Tidak Memiliki Akses">
-                                    <div class="ico-danger fa fa-life-ring fa-fw"></div>
-                                    <div class="name">
-                                        Parameter Lainnya
-                                    </div>
-                                </a>
-                                @endif
-                                {{-- <div class="text">Instrumen untuk mengukur kewajaran antara beban kerja dan belanja dan sebuah aktifitas atau kegiatan </div> --}}
-                            </div>
-                        </div>                       
+                        </div>                      
                     </div>
                 </div>
             </div>

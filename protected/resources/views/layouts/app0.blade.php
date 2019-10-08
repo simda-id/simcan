@@ -1,41 +1,10 @@
+@extends('layouts.baselineLayout')
 <?php
 use App\CekAkses;
 use hoaaah\LaravelMenu\Menu;
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_token" content="{!! csrf_token() !!}"/>
-
-    <meta name="description" content="Sistem Perencanaan yang dikembangkan oleh Tim Simda BPKP">
-    <meta name="author" content="Tim Simda BPKP">
-    <link rel="icon" href="{{asset('simda-favicon.ico')}}">
-
-    <title>simd@Perencanaan</title>
-
-    <!-- Styles -->
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/1417cae13b.css"> --}}
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
-    
-    @yield('head')
-    <style>
-        h1.padding {
-        padding-right: 1cm;
-        }
-    </style>
-</head>
-<body>
+@section('layoutBody')
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
             {{-- <div class="container"> --}}
@@ -108,18 +77,18 @@ use hoaaah\LaravelMenu\Menu;
                                     [
                                         'label' => 'Standard Satuan Harga',
                                         'icon' => 'fa fa-book fa-fw', 
-                                        'visible' => $akses->get(801)||$akses->get(802)||$akses->get(803)||$akses->get(807),
+                                        'visible' => $akses->getMulti([801,802,803,804]),
                                         'items' => [
                                             ['label' => 'Zona SSH','url' => '/zonassh', 'visible' => $akses->get(801)],
                                             ['label' => 'Struktur SSH', 'url' => '/ssh', 'visible' => $akses->get(802)],
                                             ['label' => 'Perkada SSH', 'url' => '/sshperkada/perkada','visible' => $akses->get(803)],
-                                            ['label' => 'Pencetakan SSH','url' => '/printSsh','visible' => $akses->get(803)],
+                                            ['label' => 'Pencetakan SSH','url' => '/printSsh','visible' => $akses->get(804)],
                                         ]
                                     ],                                    
                                     [
                                         'label' => 'Analisis Standar Belanja',
                                         'icon' => 'fa fa-bookmark fa-fw', 
-                                        'visible' => $akses->get(804)||$akses->get(805)||$akses->get(806)||$akses->get(808),
+                                        'visible' => $akses->getMulti([805,806]),
                                         'items' => [
                                             ['label' => 'Perkada & Struktur ASB','url' => '/asb/aktivitas','visible' => $akses->get(805)],
                                             ['label' => 'Perhitungan ASB','url' => '/asb/hitungasb','visible' => $akses->get(806)],
@@ -142,28 +111,10 @@ use hoaaah\LaravelMenu\Menu;
         </nav>
 
         <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
-        background-repeat: no-repeat; background-attachment: fixed;">
+            background-repeat: no-repeat; background-attachment: fixed;">
             <br>
             @yield('content')
         </div>
-
+    
     </div>
-
-        <script type="text/javascript" src="{{ asset('/js/jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/js/jquery-ui.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
-        <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/input.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>        
-        <script type="text/javascript" src="{{ asset('/js/jquery.number.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/js/sb-admin-2.js')}}"></script>
-        <script src="{{ asset('/js/datepicker-id.js')}}"></script>
-
-
-        @yield('scripts')
-
-</body>
-</html>
+    @endsection

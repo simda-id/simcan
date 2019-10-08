@@ -261,9 +261,10 @@ use hoaaah\LaravelMenu\Menu;
                     <ul class="dropdown-menu" role="menu" style="color:#fff">
                         <li><a href="{{ url('/') }}"><i class="fa fa-cubes fa-fw text-info"></i> Dashboard</a></li>
                         <li class="divider"></li>
-                        <li>@if($akses->get(110)) <a href="{{ url('/admin/parameter/user') }}"><i class="fa fa-user fa-fw text-info"></i> User Management</a> @endif</li>
                         <li>@if($akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109])) <a href="{{ url('/parameter/dash') }}"><i class="fa fa-cogs fa-fw text-info"></i> Parameter</a> @endif</li>
-                        <li>@if($akses->get(9)) <a href="{{ url('/admin/update') }}"><i class="fa fa-refresh fa-fw text-info"></i> Cek Update</a> @endif</li>
+                        <li>@if($akses->getMulti([890, 891, 892, 893])) <a href="{{ url('/transfer') }}"><i class="fa fa-exchange fa-fw text-danger"></i> API Management</a> @endif</li>
+                        <li>@if($akses->get(110)) <a href="{{ url('/admin/parameter/user') }}"><i class="fa fa-user fa-fw text-info"></i> User Management</a> @endif</li>
+                        <li>@if($akses->get(9)) <a href="{{ url('/admin/update') }}"><i class="fa fa-refresh fa-fw text-success"></i> Cek Update</a> @endif</li>
                     </ul>
                 </li>
         </div>

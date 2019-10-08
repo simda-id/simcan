@@ -53,8 +53,8 @@
                   <textarea type="text" class="form-control" rows="3" id="ur_program_renstra_edit" name="ur_program_renstra_edit" required="required" readonly></textarea>
                 </div>
               </div>
-              <div class="form-group">
-                  <label for="ur_sasaran_program_renstra_edit" class="col-sm-3 control-label" align='left'>Kegiatan Program Renstra :</label>
+              <div class="form-group ">
+                  <label for="ur_sasaran_program_renstra_edit" class="col-sm-3 control-label" align='left'>Keterangan Program Renstra :</label>
                   <div class="col-sm-8">
                     <textarea type="text" class="form-control" rows="3" id="ur_sasaran_program_renstra_edit" name="ur_sasaran_program_renstra_edit" required="required"></textarea>
                   </div>
@@ -63,37 +63,63 @@
               <table id="tblPaguProgram" class="table display table-striped table-bordered"  cellspacing="0" width="100%">
                       <thead>
                           <tr>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
+                            <th width="10%" style="text-align: center; vertical-align:middle">Uraian</th>
+                            <th width="18%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
+                            <th width="18%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
+                            <th width="18%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
+                            <th width="18%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
+                            <th width="18%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
                           </tr>
                       </thead>
                       <tbody>
                         <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu1_edit" name="pagu1_edit" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu2_edit" name="pagu2_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu3_edit" name="pagu3_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu4_edit" name="pagu4_edit" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu5_edit" name="pagu5_edit" style="text-align: right; " >
-                            </td>
-                          </tr>
-                          <tr>
-                              <td colspan="3" style="text-align: center; vertical-align:middle">TOTAL PAGU</td>
-                              <td colspan="2" style="text-align: center; vertical-align:middle">
-                                <input type="text" class="form-control number" id="pagu6_edit" name="pagu6_edit" style="text-align: right; " readonly>
-                              </td>
-                            </tr>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Program</th>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu1_edit" name="pagu1_edit" style="text-align: right; ">
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu2_edit" name="pagu2_edit" style="text-align: right; " >
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu3_edit" name="pagu3_edit" style="text-align: right; " >
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu4_edit" name="pagu4_edit" style="text-align: right; " >
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu5_edit" name="pagu5_edit" style="text-align: right; " >
+                          </td>
+                        </tr>
+                        <tr>
+                          <th width="10%" style="text-align: center; vertical-align:middle">Kegiatan</th>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu1_cekkeg" name="pagu1_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu2_cekkeg" name="pagu2_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu3_cekkeg" name="pagu3_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu4_cekkeg" name="pagu4_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                          <td width="18%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu5_cekkeg" name="pagu5_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="4" style="text-align: right; vertical-align:middle">TOTAL PAGU PROGRAM</td>
+                          <td colspan="2" style="text-align: right; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu6_edit" name="pagu6_edit" style="text-align: right; " disabled readonly>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="4" style="text-align: right; vertical-align:middle">TOTAL PAGU KEGIATAN</td>
+                          <td colspan="2" style="text-align: right; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu6_cekkeg" name="pagu6_cekkeg" style="text-align: right; " disabled readonly>
+                          </td>
+                        </tr>
                       </tbody>
                 </table>
           </form>

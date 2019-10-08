@@ -61,28 +61,28 @@
                       </thead>
                       <tbody>
                         <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu1_edit_kegiatan" name="pagu1_edit_kegiatan" style="text-align: right; ">
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu2_edit_kegiatan" name="pagu2_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu3_edit_kegiatan" name="pagu3_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu4_edit_kegiatan" name="pagu4_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
-                              <input type="text" class="form-control number" id="pagu5_edit_kegiatan" name="pagu5_edit_kegiatan" style="text-align: right; " >
-                            </td>
-                          </tr>
-                          <tr>
-                              <td colspan="3" style="text-align: center; vertical-align:middle">TOTAL PAGU</td>
-                              <td colspan="2" style="text-align: center; vertical-align:middle">
-                                <input type="text" class="form-control number" id="pagu6_edit_kegiatan" name="pagu6_edit_kegiatan" style="text-align: right; " readonly >
-                              </td>
-                            </tr>
+                          <td width="20%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu1_edit_kegiatan" name="pagu1_edit_kegiatan" style="text-align: right; ">
+                          </td>
+                          <td width="20%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu2_edit_kegiatan" name="pagu2_edit_kegiatan" style="text-align: right; " >
+                          </td>
+                          <td width="20%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu3_edit_kegiatan" name="pagu3_edit_kegiatan" style="text-align: right; " >
+                          </td>
+                          <td width="20%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu4_edit_kegiatan" name="pagu4_edit_kegiatan" style="text-align: right; " >
+                          </td>
+                          <td width="20%" style="text-align: center; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu5_edit_kegiatan" name="pagu5_edit_kegiatan" style="text-align: right; " >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" style="text-align: right; vertical-align:middle">TOTAL PAGU KEGIATAN</td>
+                          <td colspan="2" style="text-align: right; vertical-align:middle">
+                            <input type="text" class="form-control number" id="pagu6_edit_kegiatan" name="pagu6_edit_kegiatan" style="text-align: right; " readonly >
+                          </td>
+                        </tr>
                       </tbody>
                 </table>
           </form>

@@ -73,9 +73,18 @@ use hoaaah\LaravelMenu\Menu;
                                 'visible' => $akses->get(110),
                                 'icon' => 'fa fa-users fa-fw',
                                 'items' => [
-                                    ['label' => 'Daftar User', 'url' => '/admin/parameter/user','visible' => $akses->get(110)],
-                                    ['label' => 'Group User', 'url' => '/admin/parameter/user/group','visible' => $akses->get(110)],
-                                    ['label' => 'Peran Group User', 'url' => '/admin/parameter/user/peran','visible' => $akses->get(110)],
+                                    [   'label' => 'Daftar User', 
+                                        'url' => '/admin/parameter/user',
+                                        'visible' => $akses->get(110)
+                                    ],
+                                    [   'label' => 'Group User', 
+                                        'url' => '/admin/parameter/user/group',
+                                        'visible' => $akses->get(110)
+                                    ],
+                                    [   'label' => 'Peran Group User', 
+                                        'url' => '/admin/parameter/user/peran',
+                                        'visible' => $akses->get(110)
+                                    ],
                                 ]
                             ],                        
                             [
@@ -83,20 +92,68 @@ use hoaaah\LaravelMenu\Menu;
                                 'icon' => 'fa fa-cog fa-fw',
                                 'visible' => $akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109, 111]),
                                 'items' => [
-                                    ['label' => 'Pemda', 'icon' => 'fa fa-bank fa-fw', 'url' => '/pemda','visible' => $akses->get(101)],
-                                    ['label' => 'Wilayah Pemerintahan', 'icon' => 'fa fa-map-o fa-fw','url' => '/admin/parameter/kecamatan','visible' => $akses->get(102)],
-                                    ['label' => 'Unit Organisasi', 'icon' => 'fa fa-building-o fa-fw','url' => '/admin/parameter/unit','visible' => $akses->get(103)],
-                                    // ['label' => 'Urusan Bidang', 'url' => '/','visible' => $akses->get(104)],
-                                    ['label' => 'Rekening Anggaran', 'icon' => 'fa fa-money fa-fw','url' => '/admin/parameter/rekening','visible' => $akses->get(105)],
-                                    ['label' => 'Program Kegiatan', 'icon' => 'fa fa-briefcase fa-fw','url' => '/admin/parameter/program','visible' => $akses->get(106)],
-                                    // ['label' => 'Prioritas & Program Nasional', 'url' => '/admin/parameter/prognas','visible' => $akses->get(106)],
-                                    // ['label' => 'Prioritas & Program Provinsi', 'url' => '/admin/parameter/progprov','visible' => $akses->get(106)],
-                                    ['label' => 'Lokasi', 'icon' => 'fa fa-location-arrow fa-fw','url' => '/admin/parameter/lokasi','visible' => $akses->get(107)],
-                                    // ['label' => 'Indikator', 'icon' => 'fa fa-tachometer fa-fw','url' => '/admin/parameter/indikator','visible' => $akses->get(108)],
-                                    ['label' => 'Satuan', 'icon' => 'fa fa-cube fa-fw','url' => '/satuan','visible' => $akses->get(111)],
-                                    ['label' => 'Agenda Tahunan', 'icon' => 'fa fa-calendar fa-fw','url' => '/agenda','visible' => $akses->get(101)],
-                                    ['label' => 'Setting Aplikasi', 'icon' => 'fa fa-wrench fa-fw','url' => '/setting','visible' => $akses->get(101)],
-                                    ['label' => 'Parameter Lainnya', 'icon' => 'fa fa-life-ring fa-fw','url' => '/admin/parameter/others','visible' => $akses->get(109)],
+                                    [   'label' => 'Pemda', 
+                                        'icon' => 'fa fa-bank fa-fw', 
+                                        'url' => '/pemda',
+                                        'visible' => $akses->get(101)
+                                    ],
+                                    [
+                                        'label' => 'Wilayah Pemerintahan', 
+                                        'icon' => 'fa fa-map-o fa-fw',
+                                        'url' => '/admin/parameter/kecamatan',
+                                        'visible' => $akses->get(102)
+                                    ],
+                                    [   'label' => 'Rekening Anggaran', 
+                                        'icon' => 'fa fa-money fa-fw',
+                                        'url' => '/admin/parameter/rekening',
+                                        'visible' => $akses->get(105)
+                                    ],
+                                    [   'label' => 'Program Kegiatan', 
+                                        'icon' => 'fa fa-briefcase fa-fw',
+                                        'url' => '/admin/parameter/program',
+                                        'visible' => $akses->get(106)
+                                    ],
+                                    [   'label' => 'Unit Organisasi', 
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->get(103),
+                                        'items' => [
+                                            ['label' => 'Unit & Sub Unit', 'url' => '/admin/parameter/unit','visible' => $akses->get(103)],
+                                            ['label' => 'Struktur Organisasi', 'url' => '/','visible' => $akses->get(103)],
+                                        ]
+                                    ],
+                                    [   'label' => 'Sumber Dana', 
+                                        'icon' => 'fa fa-money fa-fw',
+                                        'url' => '/admin/parameter/sbrDana',
+                                        'visible' => $akses->get(104)
+                                    ],
+                                    [   'label' => 'Satuan', 
+                                        'icon' => 'fa fa-cube fa-fw',
+                                        'url' => '/satuan',
+                                        'visible' => $akses->get(111)
+                                    ],
+                                    [   'label' => 'Pegawai', 
+                                        'icon' => 'fa fa-users fa-fw',
+                                        'url' => '/',
+                                        'visible' => $akses->get(112)
+                                    ],
+                                    [   'label' => 'Lokasi', 
+                                        'icon' => 'fa fa-location-arrow fa-fw',
+                                        'visible' => $akses->get(107),
+                                        'items' => [
+                                            ['label' => 'Jenis Lokasi', 'url' => '/admin/parameter/jnsLokasi','visible' => $akses->get(107)],
+                                            ['label' => 'Daftar Lokasi', 'url' => '/admin/parameter/lokasi','visible' => $akses->get(107)],
+                                        ]
+                                    ],
+                                    [   'label' => 'Agenda Tahunan', 
+                                        'icon' => 'fa fa-calendar fa-fw',
+                                        'url' => '/agenda',
+                                        'visible' => $akses->get(106)
+                                    ],
+                                    [   'label' => 'Setting Aplikasi', 
+                                        'icon' => 'fa fa-wrench fa-fw',
+                                        'url' => '/setting',
+                                        'visible' => $akses->get(109)
+                                    ],
                                 ]
                             ],
                             ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw', 'url' => '/admin/update','visible' => $akses->get(9)],
@@ -107,7 +164,8 @@ use hoaaah\LaravelMenu\Menu;
             </div>
     </nav>
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+        background-repeat: no-repeat; background-attachment: fixed;">
         <br>
         @yield('content')
     </div>

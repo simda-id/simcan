@@ -348,7 +348,7 @@ function loadRekeningSsh(id,tarif){
         "order": [[0, 'asc']],
         "bDestroy": true
   });
-}
+};
 
 var cariProgramRen;
 $(document).on('click', '.btnCariProgramRenstra', function() {    
@@ -491,8 +491,8 @@ $(document).on('click', '#btnCariRekening', function() {
         $('#rekening_ssh').val()==undefined ||
         $('#rekening_ssh').val() == ""){
         if(jenis_belanja_temp == 0){ x = 0 }
-        if(jenis_belanja_temp == 1){ x = 3 }
-        if(jenis_belanja_temp == 2){ x = 2 }
+        if(jenis_belanja_temp == 1){ x = 2 }
+        if(jenis_belanja_temp == 2){ x = 3 }
         if(jenis_belanja_temp == 3){ x = 4 }
         if(jenis_belanja_temp == 4){ x = 4 }
       } else {
@@ -935,7 +935,12 @@ function loadTblProgRenja(unit,id_forum){
                             "width" : "5px"
                         },
                         { data: 'urut', sClass: "dt-center", width:"5px"},
-                        { data: 'uraian_program_renstra'},
+                        // { data: 'uraian_program_renstra'},
+                        { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
+                            render: function(data, type, row,meta) {
+                            return row.uraian_program_renstra + 
+                            '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
+                          }},
                         { data: 'pagu_anggaran', sClass: "dt-right",
                           render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'jml_kegiatan', sClass: "dt-center"},
@@ -1028,7 +1033,11 @@ function loadTblKegiatanRenja(id_program){
                             "width" : "5px"
                         },
                         { data: 'urut', sClass: "dt-center", width:"5px"},
-                        { data: 'uraian_kegiatan_forum'},
+                        { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
+                            render: function(data, type, row,meta) {
+                            return row.uraian_kegiatan_forum + 
+                            '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
+                          }},
                         { data: 'pagu_tahun_kegiatan', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'pagu_forum', sClass: "dt-right",
@@ -1113,8 +1122,7 @@ function loadTblAktivitas(id_forum){
                         { data: 'urut', sClass: "dt-center", width :"5px"},
                         { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
                             render: function(data, type, row,meta) {
-                            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
-                            return row.uraian_aktivitas_kegiatan + '  <span class="badge" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
+                            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span> <span class="label" style="background-color: '+row.status_warna_1+'; color:#fff;">'+row.status_label_1+'</span>';
                           }},
                         { data: 'pagu_anggaran', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
@@ -1546,12 +1554,31 @@ $( "#id_dokumen_keu" ).change(function() {
 });
 
 
-
-
 $( "#id_unit" ).change(function() {
   tahun_temp = $('#tahun_rkpd').val();
   unit_temp = $('#id_unit').val();
   dokumen_temp = $('#id_dokumen_keu').val();
+  vars = "?id_unit=" + unit_temp +'&id_dokumen_keu='+dokumen_temp;
+  $.ajax({
+          type: "GET",
+          url: 'getDataUnitPa'+ vars,
+          dataType: "json",
+          success: function(data) {
+          var post;
+          post = data[0];
+          document.getElementById("nip_tapd").value = post.nip_pegawai;
+          document.getElementById("nama_tapd").value = post.nama_pegawai;
+          document.getElementById("jabatan_tapd").value = post.nama_jabatan;
+          document.getElementById("id_pegawai_tapd").value = post.id_pegawai;
+          document.getElementById("id_unit_pegawai_tapd").value = post.id_unit_pegawai;
+          if(post.nip_pegawai==null){
+            $('#nip_tapd_display').val(null);
+          } else {
+            $('#nip_tapd_display').val(buatNip(post.nip_pegawai));
+          };
+
+          }
+      });
 
   $('.nav-tabs a[href="#programrkpd"]').tab('show');
   loadTblProgRkpd(tahun_temp,unit_temp,dokumen_temp);
@@ -3870,5 +3897,95 @@ $(document).on('click', '.btnPostUnit', function() {
       });
 });
 
+var tblPegawai;
+function loadTblPegawai(){
+  tblPegawai = $('#tblCariPegawai').DataTable( {
+        processing: true,
+        serverSide: true,
+        autoWidth : false,
+        language: {
+          "decimal": ",",
+          "thousands": ".",
+          "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+          "sProcessing":   "Sedang memproses...",
+          "sLengthMenu":   "Tampilkan _MENU_ entri",
+          "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+          "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+          "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+          "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+          "sInfoPostFix":  "",
+          "sSearch":       "Cari:",
+          "sUrl":          "",
+          "oPaginate": {
+              "sFirst":    "Pertama",
+              "sPrevious": "Sebelumnya",
+              "sNext":     "Selanjutnya",
+              "sLast":     "Terakhir"
+          }
+        },
+        "pageLength": 10,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "bDestroy": true,
+        dom : 'BfRtip',
+        "ajax": {"url": "../admin/parameter/getDataPegawai"},
+        "columns": [
+              { data: 'no_urut', sClass: "dt-center"},
+              { data: 'nip_pegawai', 'searchable': true, 'orderable':true, sClass: "dt-center"},
+              { data: 'nama_pegawai', 'searchable': true, 'orderable':true, sClass: "dt-left"},
+              { data: 'nama_jabatan', 'searchable': true, 'orderable':true, sClass: "dt-left"}, 
+              { data: 'action', 'searchable': false, 'orderable':false, sClass: "dt-center" },             
+            ],
+  });
+};
+
+$(document).on('click', '#btnPegawai', function() {
+    $('#cariPegawai').modal('show');
+    loadTblPegawai();
 });
+
+$('#tblCariPegawai tbody').on( 'dblclick', 'tr', function () {
+  var data = tblPegawai.row(this).data();
+
+  document.getElementById("nip_tapd").value = data.nip_pegawai;
+  document.getElementById("nama_tapd").value = data.nama_pegawai;
+  document.getElementById("jabatan_tapd").value = data.nama_jabatan;
+  document.getElementById("id_pegawai_tapd").value = data.id_pegawai;
+  document.getElementById("id_unit_pegawai_tapd").value = data.id_unit_pegawai;
+  if(data.nip_pegawai==null){
+    $('#nip_tapd_display').val(null);
+  } else {
+    $('#nip_tapd_display').val(buatNip(data.nip_pegawai));
+  };
+
+  $('#cariPegawai').modal('hide');
+});
+
+$(document).on('click', '#btnSimpanPA', function() {
+  $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
+
+    $.ajax({
+      type: 'post',
+      url: 'addPa',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_dokumen_keu': $('#id_dokumen_keu').val(),
+        'id_pegawai': $('#id_pegawai_tapd').val(),
+        'id_unit_pegawai': $('#id_unit_pegawai_tapd').val(),
+        'id_unit': $('#id_unit').val(),
+      },
+      success: function(data) {
+        TblTAPDUnit.ajax.reload(null,false);
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger"); 
+        }
+      }
+    });
+});
+
+
+}); // end file
 </script>

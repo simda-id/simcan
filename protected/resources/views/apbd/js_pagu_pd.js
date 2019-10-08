@@ -873,7 +873,11 @@ function loadTblKegiatanRenja(id_program){
                       "thousands": "."},
                   "columns": [
                         { data: 'urut', sClass: "dt-center", width:"5px"},
-                        { data: 'uraian_kegiatan_forum'},
+                        { data: 'uraian','searchable': false, 'orderable':false, sClass: "dt-left",
+                            render: function(data, type, row,meta) {
+                            return row.uraian_kegiatan_forum + 
+                            '  <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>';
+                          }},
                         { data: 'pagu_tahun_kegiatan', sClass: "dt-right",
                             render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
                         { data: 'pagu_forum', sClass: "dt-right",

@@ -32,13 +32,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
 
           <div class="panel-body"><br>
-            <div class="form-group">
+            <div class="form-group hidden">
               <button type="button" class="btn btn-success btn-labeled btnLoadUrbid" data-dismiss="modal" aria-hidden="true">
-                <span class="btn-label hidden"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Urusan-Bidang</button>
+                <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Urusan-Bidang</button>
               <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
-                <span class="btn-label hidden"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Unit-Sub Unit</button>
+                <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Unit-Sub Unit</button>
                 <button type="button" class="btn btn-danger btn-labeled btnTestApi" data-dismiss="modal" aria-hidden="true">
-                  <span class="btn-label hidden"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Test Api</button>
+                  <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Test Api</button>
             </div>
             <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
               <ul class="nav nav-tabs nav-justified" role="tablist">

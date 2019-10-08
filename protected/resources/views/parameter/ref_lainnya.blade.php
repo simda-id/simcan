@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Parameter Lainnya';
+                $this->title = 'Sumber Dana';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'admin/parameter';
                 $breadcrumb->begin();
@@ -23,7 +23,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <p><h2 class="panel-title">Referensi Jenis Lokasi, Sumber Dana dan lainnya</h2></p>
+            <p><h2 class="panel-title">Referensi Sumber Dana</h2></p>
           </div>
 
           <div class="panel-body">
@@ -55,7 +55,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                               <tr>
                                 <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                                 <th style="text-align: center; vertical-align:middle">Uraian Jenis Lokasi</th>
-                                <th width="10%" style="text-align: right; vertical-align:middle">Aksi</th>
+                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                               </tr>
                         </thead>
                         <tbody>
@@ -177,22 +177,40 @@ $('.display').DataTable({
   });
 
 var jenis_tbl=$('#tblJenisLokasi').DataTable({
-                  processing: true,
-                  serverSide: true,
-                  // dom : 'BfRtip',                  
-                  autoWidth : false,
-                  "ajax": {"url": "./others/getDataJenis"},
-                  "language": {
-                      "decimal": ",",
-                      "thousands": "."},
-                  "columns": [
-                        { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
-                        { data: 'nm_jenis', sClass: "dt-left"},
-                        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
-                      ],
-                  "order": [[0, 'asc']],
-                  "bDestroy": true
-        });
+  processing: true,
+  serverSide: true,
+  autoWidth : false,
+  language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing":   "Sedang memproses...",
+        "sLengthMenu":   "Tampilkan _MENU_ entri",
+        "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+        "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix":  "",
+        "sSearch":       "Cari:",
+        "sUrl":          "",
+        "oPaginate": {
+            "sFirst":    "Pertama",
+            "sPrevious": "Sebelumnya",
+            "sNext":     "Selanjutnya",
+            "sLast":     "Terakhir"
+        }
+  },
+  "pageLength": 50,
+  "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+  "bDestroy": true,
+  "ajax": {"url": "./sbrDana/getDataJenis"},
+  "columns": [
+        { data: 'no_urut','searchable': false, 'orderable':true, sClass: "dt-center", width :"5%"},
+        { data: 'nm_jenis', sClass: "dt-left"},
+        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
+      ],
+  "order": [[0, 'asc']],
+});
 //delete function
 
 $(document).on('click', '#btnHapusJenis', function() {
@@ -205,7 +223,7 @@ $(document).on('click', '#btnHapusJenis', function() {
 
   $.ajax({
     type: 'post',
-    url: './others/hapusJenisLokasi',
+    url: './sbrDana/hapusJenisLokasi',
     data: {
       '_token': $('input[name=_token]').val(),
       'id_jenis': data.id_jenis,
@@ -231,7 +249,7 @@ $(document).on('click', '#btnJenis', function() {
   if($.trim($('#uraian_jenis').val()).length > 5){
     $.ajax({
       type: 'post',
-      url: './others/addJenisLokasi',
+      url: './sbrDana/addJenisLokasi',
       data: {
         '_token': $('input[name=_token]').val(),
         'nm_jenis': $('#uraian_jenis').val(),
@@ -251,21 +269,39 @@ $(document).on('click', '#btnJenis', function() {
 });
 
 var dana_tbl=$('#tblSumberDana').DataTable({
-    processing: true,
-    serverSide: true,
-                  // dom : 'BfRtip',                  
-    autoWidth : false,
-    "ajax": {"url": "./others/getSumberDana"},
-    "language": {
+  processing: true,
+  serverSide: true,
+  autoWidth : false,
+  language: {
         "decimal": ",",
-        "thousands": "."},
-    "columns": [
-          { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
-          { data: 'uraian_sumber_dana', sClass: "dt-left"},
-          { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
-        ],
-    "order": [[0, 'asc']],
-    "bDestroy": true
+        "thousands": ".",
+        "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing":   "Sedang memproses...",
+        "sLengthMenu":   "Tampilkan _MENU_ entri",
+        "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+        "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix":  "",
+        "sSearch":       "Cari:",
+        "sUrl":          "",
+        "oPaginate": {
+            "sFirst":    "Pertama",
+            "sPrevious": "Sebelumnya",
+            "sNext":     "Selanjutnya",
+            "sLast":     "Terakhir"
+        }
+  },
+  "pageLength": 50,
+  "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+  "bDestroy": true,
+  "ajax": {"url": "./sbrDana/getSumberDana"},
+  "columns": [
+        { data: 'no_urut','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
+        { data: 'uraian_sumber_dana', sClass: "dt-left"},
+        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center" }
+      ],
+  "order": [[0, 'asc']],
 });
 
 $(document).on('click', '#btnHapusSumber', function() {
@@ -278,7 +314,7 @@ $(document).on('click', '#btnHapusSumber', function() {
 
   $.ajax({
     type: 'post',
-    url: './others/hapusSumberDana',
+    url: './sbrDana/hapusSumberDana',
     data: {
       '_token': $('input[name=_token]').val(),
       'id_sumber_dana': data.id_sumber_dana,
@@ -302,7 +338,7 @@ $(document).on('click', '#btnSumberDana', function() {
   if($.trim($('#uraian_sumber').val()).length > 5 ){
     $.ajax({
     type: 'post',
-    url: './others/addSumberDana',
+    url: './sbrDana/addSumberDana',
     data: {
       '_token': $('input[name=_token]').val(),
       'uraian_sumber_dana': $('#uraian_sumber').val(),

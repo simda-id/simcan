@@ -1,7 +1,7 @@
 
 
 <div id="Editprogram" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg"  >
+    <div class="modal-dialog modal-xl"  >
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title"></h4>
@@ -46,36 +46,63 @@
               <table id="tblPaguProgram" class="table table-bordered"  cellspacing="0" width="100%">
                       <thead style="background: #428bca; color: #fff">
                           <tr>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
-                            <th width="20%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
+                            <th width="5%" style="text-align: center; vertical-align:middle">Uraian</th>
+                            <th width="19%" style="text-align: center; vertical-align:middle">Pagu Tahun 1</th>
+                            <th width="19%" style="text-align: center; vertical-align:middle">Pagu Tahun 2</th>
+                            <th width="19%" style="text-align: center; vertical-align:middle">Pagu Tahun 3</th>
+                            <th width="19%" style="text-align: center; vertical-align:middle">Pagu Tahun 4</th>
+                            <th width="19%" style="text-align: center; vertical-align:middle">Pagu Tahun 5</th>
                           </tr>
                       </thead>
                       <tbody>
                         <tr>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
+                            <th width="5%" style="text-align: center; vertical-align:middle">RPJMD</th>
+                            <td width="19%" style="text-align: center; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu1_edit" name="pagu1_edit" style="text-align: right; vertical-align:middle">
                             </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
+                            <td width="19%" style="text-align: center; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu2_edit" name="pagu2_edit" style="text-align: right; vertical-align:middle" >
                             </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
+                            <td width="19%" style="text-align: center; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu3_edit" name="pagu3_edit" style="text-align: right; vertical-align:middle" >
                             </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
+                            <td width="19%" style="text-align: center; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu4_edit" name="pagu4_edit" style="text-align: right; vertical-align:middle" >
                             </td>
-                            <td width="20%" style="text-align: center; vertical-align:middle">
+                            <td width="19%" style="text-align: center; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu5_edit" name="pagu5_edit" style="text-align: right; vertical-align:middle" >
                             </td>
                           </tr>
                           <tr>
-                            <td colspan="3" style="text-align: center; vertical-align:middle; font-weight: bold;">Pagu Total :
+                            <th width="5%" style="text-align: center; vertical-align:middle">Renstra</th>
+                            <td width="19%" style="text-align: center; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu1_opd" name="pagu1_opd" style="text-align: right; vertical-align:middle" disabled readonly>
                             </td>
-                            <td colspan="2" style="text-align: center; vertical-align:middle">
+                            <td width="19%" style="text-align: center; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu2_opd" name="pagu2_opd" style="text-align: right; vertical-align:middle" disabled readonly>
+                            </td>
+                            <td width="19%" style="text-align: center; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu3_opd" name="pagu3_opd" style="text-align: right; vertical-align:middle" disabled readonly>
+                            </td>
+                            <td width="19%" style="text-align: center; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu4_opd" name="pagu4_opd" style="text-align: right; vertical-align:middle" disabled readonly>
+                            </td>
+                            <td width="19%" style="text-align: center; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu5_opd" name="pagu5_opd" style="text-align: right; vertical-align:middle" disabled readonly>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="4" style="text-align: right; vertical-align:middle; font-weight: bold;">Pagu Total RPJMD 
+                            </td>
+                            <td colspan="2" style="text-align: right; vertical-align:middle">
                               <input type="text" class="form-control number" id="pagu_total_edit" name="pagu_total_edit" style="text-align: right; vertical-align:middle" disabled readonly>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="4" style="text-align: right; vertical-align:middle; font-weight: bold;">Pagu Total Renstra 
+                            </td>
+                            <td colspan="2" style="text-align: right; vertical-align:middle">
+                              <input type="text" class="form-control number" id="pagu_total_opd" name="pagu_total_opd" style="text-align: right; vertical-align:middle" disabled readonly>
                             </td>
                           </tr>
                       </tbody>

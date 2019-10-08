@@ -1,34 +1,10 @@
 $(document).ready(function() {
   
-  
   var detInSasaran = Handlebars.compile($("#details-inSasaran").html());
 
   var id_dokumen_temp;
   var id_rpjmd_temp;
   var id_iku_sasaran_temp;
-  
-  function formatTgl(val_tanggal){
-      var formattedDate = new Date(val_tanggal);
-      var d = formattedDate.getDate();
-      var m = formattedDate.getMonth();
-      var y = formattedDate.getFullYear();
-      var m_names = new Array("Januari", "Februari", "Maret", 
-        "April", "Mei", "Juni", "Juli", "Agustus", "September", 
-        "Oktober", "November", "Desember")
-
-      var tgl= d + " " + m_names[m] + " " + y;
-      return tgl;
-  }
-
-  function hariIni(){
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    var hariIni = yyyy + '-' + mm + '-' + dd;
-    return hariIni;
-  }
 
   function createPesan(message, type) {
     var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';    
@@ -50,15 +26,6 @@ $(document).ready(function() {
           e.preventDefault();
           $(this).closest('.page-alert').slideUp();
   });
-      
-    
-function buatNip(string){
-  return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
-}
-
-function nilaiNip(string){
-  return string.replace(/\D/g,'').substring(0, 20);
-}
 
 function loadgetUnit($id_rpjmd){
   vars = "?id="     + $id_rpjmd;
@@ -392,8 +359,8 @@ var data = tblInSasaran.row( $(this).parents('tr') ).data();
     };    
     $('.btnSimpanSasaranIndikator').removeClass('addSasaranIndikator');
     $('.btnSimpanSasaranIndikator').addClass('editSasaranIndikator');
-  $('.modal-title').text('Data Indikator Sasaran Perangkat Daerah');
-  $('.form-horizontal').show();
+    $('.modal-title').text('Data Indikator Sasaran Perangkat Daerah');
+    $('.form-horizontal').show();
     $('#id_iku_pemda_rinci').val(data.id_iku_pemda);
     $('#id_dokumen_rinci').val(data.id_dokumen);
     $('#id_indikator_sasaran_rpjmd_rinci').val(data.id_indikator_sasaran_rpjmd);

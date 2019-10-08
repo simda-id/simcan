@@ -40,6 +40,7 @@ return [
 
     'debug' => false,
 
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -164,11 +165,18 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /*
+         * Package Service Providers...
+         */
         Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
 
+        /*
+         * Application Service Providers...
+         */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -177,9 +185,11 @@ return [
         Yajra\Datatables\HtmlServiceProvider::class,
         Yajra\Datatables\ButtonsServiceProvider::class,
         Elibyy\TCPDF\ServiceProvider::class,
-        Codedge\Fpdf\FpdfServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Way\Generators\GeneratorsServiceProvider::class,
+        // Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+
 
     ],
 
@@ -234,10 +244,11 @@ return [
         
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
         'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        
+
     ],
 
 ];

@@ -37,7 +37,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                       <tr>
                           <th width="5%" style="text-align: center; vertical-align:middle">Id Satuan</th>
                           <th style="text-align: center; vertical-align:middle">Uraian Satuan</th>
-                          <th width="30%" style="text-align: center; vertical-align:middle">Singkatan Satuan</th>
+                          <th width="25%" style="text-align: center; vertical-align:middle">Singkatan Satuan</th>
                           <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                   </thead>
@@ -207,22 +207,43 @@ $('.display').DataTable({
   });
 
 var satuan_tbl = $('#tblsatuan').DataTable( {
-        processing: true,
-        serverSide: true,
-        // dom: 'Bfrtip',
-        autoWidth : false,
-        // "pagingType": "full_numbers",
-        "pagingType": "input",
-        "ajax": "{{url('./satuan/getdata')}}",
-        "columns": [
-              { data: 'id_satuan','searchable': false, 'orderable':false, sClass: "dt-center", width :"5%"},
-              { data: 'uraian_satuan', sClass: "dt-left"},
-              { data: 'singkatan_satuan', sClass: "dt-center", width :"30%"},
-              { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"}
-            ],
-                  "order": [[0, 'asc']],
-                  "bDestroy": true
-      } );
+    processing: true,
+    serverSide: true,
+    autoWidth : false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing":   "Sedang memproses...",
+      "sLengthMenu":   "Tampilkan _MENU_ entri",
+      "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+      "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix":  "",
+      "sSearch":       "Cari:",
+      "sUrl":          "",
+      "oPaginate": {
+          "sFirst":    "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext":     "Selanjutnya",
+          "sLast":     "Terakhir"
+      }
+    },
+    "pageLength": 50,
+    "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+    // "pagingType": "full_numbers",
+    "order": [[0, 'asc']],
+    "bDestroy": true,
+    "pagingType": "input",
+    "ajax": "{{url('./satuan/getdata')}}",
+    "columns": [
+        { data: 'id_satuan','searchable': false, 'orderable':true, sClass: "dt-center"},
+        { data: 'uraian_satuan', sClass: "dt-left"},
+        { data: 'singkatan_satuan', sClass: "dt-center"},
+        { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"}
+      ],
+    });
 
 $(document).on('click', '.add-satuan', function() {
   $('.btnSatuan').addClass('btn-success');

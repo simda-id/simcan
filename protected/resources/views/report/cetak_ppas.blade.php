@@ -214,9 +214,18 @@ use hoaaah\LaravelMenu\Menu;
                 <div class="form-group has-feedback">
                     <label for="tgl_laporan" class="col-sm-3 control-label" style="color:#fff;">Tanggal Laporan </label>
                     <input type="hidden" name="tgl_laporan" id="tgl_laporan">
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control datepicker" id="tgl_laporan_x" name="tgl_laporan_x" style="text-align: center;">
                         <i class="fa fa-calendar fa-fw fa-lg text-primary form-control-feedback"></i>              
+                    </div>
+                    <label class="control-label col-sm-2" for="hal_mulai" style="color:#fff; text-align: right;">Halaman Mulai</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control number" id="hal_mulai" name="hal_mulai" value="1" style="text-align: center;">
+                    </div>
+                    <div class="col-sm-2 chkTandatangan">
+                        <label class="checkbox-inline">
+                            <input class="checkTandatangan" type="checkbox" name="checkTandatangan" id="checkTandatangan" value="1" checked><span style="color:#fff;"> Pakai Tanda Tangan</span>
+                        </label>
                     </div>
                 </div>
               <div class="form-group">

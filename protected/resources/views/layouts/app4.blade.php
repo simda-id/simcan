@@ -39,6 +39,10 @@ use hoaaah\LaravelMenu\Menu;
         h1.padding {
             padding-right: 1cm;
         }
+        #radioBtn .notActive{
+            color: #b5b6b7;
+            background-color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -109,64 +113,64 @@ use hoaaah\LaravelMenu\Menu;
                                 ],
                                 'items' => [
                                     [   'label' => 'Parameter AKIP', 
-                                        'visible' => $akses->get(20),
+                                        'visible' => $akses->getMulti([910,911]),
                                         'items' => [
                                             [
                                                 'label' => 'Struktur Organisasi',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(910),
                                                 'url' => '/kinparam/sotk',
                                             ],
                                             [
                                                 'label' => 'Daftar Pegawai',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(911),
                                                 'url' => '/kinparam/pegawai',
                                             ]
                                         ]
                                         
                                     ],[
                                         'label' => 'Indikator Kinerja Utama',
-                                        'visible' => $akses->get(20),
+                                        'visible' => $akses->getMulti([920,921]),
                                         'items' => [
-                                            ['label' => 'IKU Pemerintah Daerah', 'visible' => $akses->get(20), 'url' => '/iku',],
-                                            ['label' => 'IKU Perangkat Daerah', 'visible' => $akses->get(20), 'url' => '/iku/opd',],
+                                            ['label' => 'IKU Pemerintah Daerah', 'visible' => $akses->get(920), 'url' => '/iku',],
+                                            ['label' => 'IKU Perangkat Daerah', 'visible' => $akses->get(921), 'url' => '/iku/opd',],
                                         ]
                                     ],
                                     [
                                         'label' => 'Perencanaan Kinerja',
-                                        'visible' => $akses->get(20),
+                                        'visible' => $akses->getMulti([930,931,935,932,933,934]),
                                         'items' => [
                                             [
                                                 'label' => 'Cascading Hasil Program-Kegiatan',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(930),
                                                 'url' => '/cascading',
                                             ],
                                             [
                                                 'label' => 'Pohon Kinerja RPJMD & Renstra',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(931),
                                                 'url' => '/pokin',
                                             ],                                    
                                             [
                                                 'label' => 'Penetapan Kinerja',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->getMulti([935,932,933,934]),
                                                 'items' => [
                                                     [
                                                         'label' => 'Penetapan Kinerja Pemda',
-                                                        'visible' => $akses->get(20),
+                                                        'visible' => $akses->get(935),
                                                         'url' => '/perkin/pemda',
                                                     ],
                                                     [
                                                         'label' => 'Penetapan Kinerja Level 1',
-                                                        'visible' => $akses->get(20),
+                                                        'visible' => $akses->get(932),
                                                         'url' => '/perkin',
                                                     ],
                                                     [
                                                         'label' => 'Penetapan Kinerja Level 2',
-                                                        'visible' => $akses->get(20),
+                                                        'visible' => $akses->get(933),
                                                         'url' => '/perkin/es3',
                                                     ],
                                                     [
                                                         'label' => 'Penetapan Kinerja Level 3',
-                                                        'visible' => $akses->get(20),
+                                                        'visible' => $akses->get(934),
                                                         'url' => '/perkin/es4',
                                                     ]
                                                 ]
@@ -175,33 +179,33 @@ use hoaaah\LaravelMenu\Menu;
                                     ],                                                                       
                                     [
                                         'label' => 'Pengukuran Kinerja',
-                                        'visible' => $akses->get(20),
+                                        'visible' => $akses->getMulti([942,941,940,943]),
                                         'items' => [
                                             [
                                                 'label' => 'Realisasi Kinerja Level 3',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(942),
                                                 'url' => '/real/es4',
                                             ],
                                             [
                                                 'label' => 'Realisasi Kinerja Level 2',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(941),
                                                 'url' => '/real/es3',
                                             ],
                                             [
                                                 'label' => 'Realisasi Kinerja Level 1',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(940),
                                                 'url' => '/real',
                                             ],
                                             [
                                                 'label' => 'Realisasi Kinerja Pemda',
-                                                'visible' => $akses->get(20),
+                                                'visible' => $akses->get(943),
                                                 'url' => '/real/pemda',
                                             ]
                                         ]
                                     ],                                                                        
                                     [
                                         'label' => 'Pelaporan Kinerja',
-                                        'visible' => $akses->get(20),
+                                        'visible' => $akses->get(950),
                                         'url' => '/lapor',
                                         // 'items' => [
                                         //     [
@@ -257,8 +261,50 @@ use hoaaah\LaravelMenu\Menu;
         <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
         <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
         <script src="{{ asset('/js/datepicker-id.js')}}"></script>
+        <script type="text/javascript">
+            function formatTgl(val_tanggal){
+                var formattedDate = new Date(val_tanggal);
+                var d = formattedDate.getDate();
+                var m = formattedDate.getMonth();
+                var y = formattedDate.getFullYear();
+                var m_names = new Array("Januari", "Februari", "Maret", 
+                  "April", "Mei", "Juni", "Juli", "Agustus", "September", 
+                  "Oktober", "November", "Desember")
+    
+                var tgl= d + " " + m_names[m] + " " + y;
+                return tgl;
+            };
+
+            function hariIni(){
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+                var yyyy = today.getFullYear();
+
+                var hariIni = yyyy + '-' + mm + '-' + dd;
+                return hariIni;
+            };
+
+            function buatNip(string){
+              return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
+            }
+
+            function nilaiNip(string){
+              return string.replace(/\D/g,'').substring(0, 20);
+            }
+
+            $('#radioBtn a').on('click', function(){
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#'+tog).prop('value', sel);
+                
+                $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+                $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+            });
+        </script>
 
         @yield('scripts')
+
 
 </body>
 </html>

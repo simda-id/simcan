@@ -1,15 +1,11 @@
-<?php
-// use App\CekAkses;
-// use hoaaah\LaravelMenu\Menu;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_token" content="{!! csrf_token() !!}"/>
+    <meta name="_token" content="{!! csrf_token() !!}" />
 
     <meta name="description" content="Sistem Perencanaan yang dikembangkan oleh Tim Simda BPKP">
     <meta name="author" content="Tim Simda BPKP">
@@ -20,73 +16,134 @@
     <!-- Styles -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
 
     <style>
-    nav.navbar-well { background: #269abc; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
-    nav.navbar-well a { color: #fff; }
-    nav.navbar-well ul.navbar-nav a { color: #fff; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
-    nav.navbar-well ul.navbar-nav a:hover,
-    nav.navbar-well ul.navbar-nav a:visited,
-    nav.navbar-well ul.navbar-nav a:focus,
-    nav.navbar-well ul.navbar-nav a:active { background: #fff;}
-    nav.navbar-well ul.navbar-nav a:hover { border-color: #fff; color: #269abc }
-    nav.navbar-well li.divider { background: #ccc; }
-    nav.navbar-well button.navbar-toggle { background: #fff; border-radius: 2px; }
-    nav.navbar-well button.navbar-toggle:hover { background: #999; color: #269abc}
-    nav.navbar-well button.navbar-toggle > span.icon-bar { background: #fff; }
-    nav.navbar-well ul.dropdown-menu { border: 0; background: #fff; border-radius: 4px; margin: 4px 0; box-shadow: 0 0 4px 0 #ccc; }
-    nav.navbar-well ul.dropdown-menu > li > a { color: #444; }
-    nav.navbar-well ul.dropdown-menu > li > a:hover { background: #fff; color: #269abc; }
-    nav.navbar-well span.badge { background: #fff; font-weight: normal; font-size: 11px; margin: 0 4px; color: #269abc }
+      nav.navbar-well {
+        background: #269abc;
+        border-color: #ccc;
+        box-shadow: 0 0 2px 0 #ccc;
+      }
+
+      nav.navbar-well a {
+        color: #fff;
+      }
+
+      nav.navbar-well ul.navbar-nav a {
+        color: #fff;
+        border-style: solid;
+        border-width: 0 0 2px 0;
+        border-color: #fff;
+      }
+
+      nav.navbar-well ul.navbar-nav a:hover,
+      nav.navbar-well ul.navbar-nav a:visited,
+      nav.navbar-well ul.navbar-nav a:focus,
+      nav.navbar-well ul.navbar-nav a:active {
+        background: #fff;
+      }
+
+      nav.navbar-well ul.navbar-nav a:hover {
+        border-color: #fff;
+        color: #269abc
+      }
+
+      nav.navbar-well li.divider {
+        background: #ccc;
+      }
+
+      nav.navbar-well button.navbar-toggle {
+        background: #fff;
+        border-radius: 2px;
+      }
+
+      nav.navbar-well button.navbar-toggle:hover {
+        background: #999;
+        color: #269abc
+      }
+
+      nav.navbar-well button.navbar-toggle>span.icon-bar {
+        background: #fff;
+      }
+
+      nav.navbar-well ul.dropdown-menu {
+        border: 0;
+        background: #fff;
+        border-radius: 4px;
+        margin: 4px 0;
+        box-shadow: 0 0 4px 0 #ccc;
+      }
+
+      nav.navbar-well ul.dropdown-menu>li>a {
+        color: #444;
+      }
+
+      nav.navbar-well ul.dropdown-menu>li>a:hover {
+        background: #fff;
+        color: #269abc;
+      }
+
+      nav.navbar-well span.badge {
+        background: #fff;
+        font-weight: normal;
+        font-size: 11px;
+        margin: 0 4px;
+        color: #269abc
+      }
 
       .box {
-          border-radius: 3px;
-          /*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
-          padding: 10px 25px;
-          text-align: right;
-          display: block;
-          margin-top: 60px;
+        border-radius: 3px;
+        /*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
+        padding: 10px 25px;
+        text-align: right;
+        display: block;
+        margin-top: 60px;
       }
+
       .box-icon {
-          /*background-color: #57a544;*/
-          /*border: 2px solid #57a544;*/
-          /*border-radius: 50%;*/
-          display: table;
-          height: 60%;
-          margin: 0 auto;
-          width: 40%;
-          margin-top: -61px;
+        /*background-color: #57a544;*/
+        /*border: 2px solid #57a544;*/
+        /*border-radius: 50%;*/
+        display: table;
+        height: 60%;
+        margin: 0 auto;
+        width: 40%;
+        margin-top: -61px;
       }
+
       .box-icon span {
-          color: #fff;
-          display: table-cell;
-          text-align: center;
-          vertical-align: middle;
+        color: #fff;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
       }
+
       .info h4 {
-          font-size: 26px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
+        font-size: 26px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
       }
-      .info > p {
-          color: #717171;
-          font-size: 16px;
-          padding-top: 10px;
-          text-align: center;
+
+      .info>p {
+        color: #717171;
+        font-size: 16px;
+        padding-top: 10px;
+        text-align: center;
       }
-      .info > a {
-          background-color: #03a9f4;
-          border-radius: 2px;
-          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-          color: #fff;
-          transition: all 0.5s ease 0s;
+
+      .info>a {
+        background-color: #03a9f4;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        color: #fff;
+        transition: all 0.5s ease 0s;
       }
-      .info > a:hover {
-          background-color: #0288d1;
-          box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
-          color: #fff;
-          transition: all 0.5s ease 0s;
+
+      .info>a:hover {
+        background-color: #0288d1;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
+        color: #fff;
+        transition: all 0.5s ease 0s;
       }
 
       .Timeline {
@@ -96,7 +153,8 @@
       }
 
       .event1,
-      .event2, .event3 {
+      .event2,
+      .event3 {
         position: relative;
       }
 
@@ -216,133 +274,134 @@
         color: #9E9E9E;
       }
 
-      .now{
-          background-color: #004165;
-          color: white;
-          border-radius: 8px;
-          margin: 5px;
-          padding: 4px;
-          font-size: 10px;
-          font-family: Arial, Helvetica, sans-serif;
-          border: 2px solid white;
-          font-weight: bold;
-          box-shadow: 0 0 0 2px #004165
+      .now {
+        background-color: #004165;
+        color: white;
+        border-radius: 8px;
+        margin: 5px;
+        padding: 4px;
+        font-size: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        border: 2px solid white;
+        font-weight: bold;
+        box-shadow: 0 0 0 2px #004165
       }
 
-      .start{
-          background-color: #2ecc40;
-          color: white;
-          border-radius: 6px;
-          margin: 5px;
-          padding: 5px;
-          font-size: 16px;
-          font-family: Arial, Helvetica, sans-serif;
-          border: 2px solid white;
-          font-weight: bold;
-          box-shadow: 0 0 0 1px #2ecc40
+      .start {
+        background-color: #2ecc40;
+        color: white;
+        border-radius: 6px;
+        margin: 5px;
+        padding: 5px;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        border: 2px solid white;
+        font-weight: bold;
+        box-shadow: 0 0 0 1px #2ecc40
       }
 
-      .stop{
-          background-color: #ff4136;
-          color: white;
-          border-radius: 6px;
-          margin: 5px;
-          padding: 5px;
-          font-size: 16px;
-          font-family: Arial, Helvetica, sans-serif;
-          border: 2px solid white;
-          font-weight: bold;
-          box-shadow: 0 0 0 1px #ff4136
+      .stop {
+        background-color: #ff4136;
+        color: white;
+        border-radius: 6px;
+        margin: 5px;
+        padding: 5px;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        border: 2px solid white;
+        font-weight: bold;
+        box-shadow: 0 0 0 1px #ff4136
       }
     </style>
-</head>
+  </head>
 
-<body style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+  <body style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
 height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fixed;">
 
     <nav class="navbar navbar-findcond navbar-fixed-top" role="navigation">
       <div class="navbar-header">
         <a class="navbar-brand navbar-right" href="{{ url('/') }}">
           <div class="row">
-            <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;" src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong> 
+            <img style="margin-top: -5px; margin-left: 10px; max-height: 40px; max-width: 30px;"
+              src="{{asset('vendor/default.png')}}"> simd@<strong>Perencanaan </strong>
             <span class="label" style="background-color: #006AC7; color:#fff;"> {{Session::get('versiApp')}} </span>
-          </div>        
+          </div>
         </a>
       </div>
       <ul class="nav navbar-top-links pull-right">
         @if (Auth::guest())
-          <li><a href="{{ route('login') }}" role="button" ><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span class="sr-only">(current)</span></a></li>
+        <li><a href="{{ route('login') }}" role="button"><i class="fa fa-sign-in fa-fw fa-lg"></i> Login<span
+              class="sr-only">(current)</span></a></li>
         @else
-          <li>
-            <a href="{{ url('/home') }}" role="button"><i class="fa fa-user fa-fw fa-lg"></i> {{ Auth::user()->name }}</a>
-          </li>
+        <li>
+          <a href="{{ url('/home') }}" role="button"><i class="fa fa-user fa-fw fa-lg"></i> {{ Auth::user()->name }}</a>
+        </li>
         @endif
       </ul>
     </nav>
-    
+
     <div class="container-fluid">
       <div class="row" style="padding: 70px">
-      <div class="col-sm-3 col-sm-push-9">
-        <div class="col-md-12">
-          @foreach($trxVisi as $dataVisi)
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">{{$rPemda}}</h3>
-            </div>
-            <div class="panel-body">
-              <div class="box" >
-                      <div id="iPemda">
-                          <img id="profile-img" class="box-icon" src="{{ asset('vendor/default.png') }}" />
-                      </div>
-                      <div class="">                        
-                          <h4 class="text-center">PEMERINTAH {{$rPemda}}</h4>
-                          <h4 class="text-center">Periode : {{$dataVisi->tahun_1}} s/d {{$dataVisi->tahun_5}}</h4>
-                      </div>
-                  </div>
-            </div>
-          </div>
-          @endforeach
-        </div>
-        <div class="col-md-12">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Menu Utama</h3>
-            </div>
-            <div class="panel-body">
-              <dd><a href="#" target="_blank">RKPD</a></dd>
-              <dd><a href="#" target="_blank">Renja</a></dd>
-              <dd><a href="#" target="_blank">Usulan Musrenbang</a></dd>
-              <dd><a href="#" target="_blank">Pokir DPRD</a></dd>
-              <dd class="last"></dd>
-            </div>
-          </div>
-        </div>  
-      </div>
-      <div class="col-sm-9 col-sm-pull-3">
-            <div class="col-sm-12">
-              <div class="panel panel-warning">
+        <div class="col-sm-3 col-sm-push-9">
+          <div class="col-md-12">
+            <div class="panel panel-info">
               <div class="panel-heading">
-                <h3 class="panel-title">Rincian Rencana Pembangunan Jangka Menengah <a id="" class="pull-right"> &raquo;</a></h3>
+                <h3 class="panel-title">{{$rPemda}}</h3>
+              </div>
+              <div class="panel-body">
+                <div class="box">
+                  <div id="iPemda">
+                    <img id="profile-img" class="box-icon" src="{{ asset('vendor/default.png') }}" />
+                  </div>
+                  <div class="">
+                    <h4 class="text-center">PEMERINTAH {{$rPemda}}</h4>
+                    <h4 class="text-center">Periode : {{$tahun1}} s/d {{$tahun5}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Menu Utama</h3>
+              </div>
+              <div class="panel-body">
+                <dd><a href="#" target="_blank">RKPD</a></dd>
+                <dd><a href="#" target="_blank">Renja</a></dd>
+                <dd><a href="#" target="_blank">Usulan Musrenbang</a></dd>
+                <dd><a href="#" target="_blank">Pokir DPRD</a></dd>
+                <dd class="last"></dd>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 col-sm-pull-3">
+          <div class="col-sm-12">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <h3 class="panel-title">Rincian Rencana Pembangunan Jangka Menengah <a id="" class="pull-right">
+                    &raquo;</a></h3>
               </div>
               <div class="panel-body">
                 @foreach($trxVisi as $dataVisi)
-                  <p><strong>Visi :</strong> {{$dataVisi->uraian_visi_rpjmd}}</p>
+                <p><strong>Visi :</strong> {{$dataVisi->uraian_visi_rpjmd}}</p>
                 <table id="tblRincianRpjmd" class="table-responsive" border="0">
                   <thead>
-                      <tr>
-                          <th width="5%" style="text-align: left; vertical-align:middle">Misi :</th>
-                          <th style="text-align: left; vertical-align:middle"></th>
-                      </tr>
+                    <tr>
+                      <th width="5%" style="text-align: left; vertical-align:middle">Misi :</th>
+                      <th style="text-align: left; vertical-align:middle"></th>
+                    </tr>
                   </thead>
                   <tbody>
                     @foreach($trxRpjmd as $data)
-                      <tr>
-                          <td width="5%" style="text-align: center">{{$data->no_misi}}</td>
-                          <td style="text-align: left">{{$data->uraian_misi_rpjmd}}</td>
-                      </tr>
+                    <tr>
+                      <td width="5%" style="text-align: center">{{$data->no_misi}}</td>
+                      <td style="text-align: left">{{$data->uraian_misi_rpjmd}}</td>
+                    </tr>
                     @endforeach
                   </tbody>
-                </table>                
+                </table>
                 @endforeach
               </div>
             </div>
@@ -350,262 +409,263 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
 
           <div class="col-sm-6">
             <div class="panel panel-success">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Misi Pemda selama 5 tahun </h3>
+              <div class="panel-heading">
+                <h3 class="panel-title">Misi Pemda selama 5 tahun </h3>
               </div>
-                <div class="panel-body">
-                  <canvas id="canvasMisi5" height="300" width="600"></canvas>
-              </div>                
+              <div class="panel-body">
+                <canvas id="canvasMisi5" height="300" width="600"></canvas>
+              </div>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Urusan 5 Tahun</h3>
-              </div>
-                <div class="panel-body">
-                  <canvas id="canvasUrusan5" height="300" width="600"></canvas>
-              </div>                
-            </div>
-          </div>
-
-        <div class="col-sm-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-danger">
               <div class="panel-heading">
-                <h3 class="panel-title" style="color:#d9534f;">Jadwal dan Alur Proses Penyusunan RKPD-Renja 
-                  <select id="" class="col-sm-2 pull-right hidden" name="id_tahun" id="id_tahun"></select>                  
-                </h3>
+                <h3 class="panel-title">Urusan 5 Tahun</h3>
               </div>
               <div class="panel-body">
-                <div class="Timeline">
-                  <div class="start">
-                      Mulai
-                  </div>
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl1"></span></div>                            
-                        </div>
-                        <div class="eventTitle"><span id="ur1"></span></div>
-                        <div class="MonthYear"><span id="tglA1"></span></div>
-                      </div>
-                      <div id="ico1"></div>
-                    </div>
-                    
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event2">                      
-                      <div class="event2Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl2"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur2"></span></div>
-                        <div class="MonthYear"><span id="tglA2"></span></div>
-                      </div>
-                      <div id="ico2"></div>
-                    </div>
-                    
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl3"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur3"></span></div>
-                        <div class="MonthYear"><span id="tglA3"></span></div>
-                      </div>
-                      <div id="ico3"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event2">                      
-                      <div class="event2Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl4"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur4"></span></div>
-                        <div class="MonthYear"><span id="tglA4"></span></div>
-                      </div>
-                    <div id="ico4"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl5"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur5"></span></div>
-                        <div class="MonthYear"><span id="tglA5"></span></div>
-                      </div>
-                      <div id="ico5"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event2">                      
-                      <div class="event2Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl6"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur6"></span></div>
-                        <div class="MonthYear"><span id="tglA6"></span></div>
-                      </div>
-                    <div id="ico6"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl7"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur7"></span></div>
-                        <div class="MonthYear"><span id="tglA7"></span></div>
-                      </div>
-                      <div id="ico7"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event2">                      
-                      <div class="event2Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl8"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur8"></span></div>
-                        <div class="MonthYear"><span id="tglA8"></span></div>
-                      </div>
-                    <div id="ico8"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                        <div class="eventTime">
-                          <div class="MonthYear"><span id="tgl9"></span></div>
-                        </div>
-                        <div class="eventTitle"><span id="ur9"></span></div>
-                        <div class="MonthYear"><span id="tglA9"></span></div>
-                      </div>
-                      <div id="ico9"></div>
-                    </div>
-
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-
-                    <div class="event2">                      
-                      <div class="event2Bubble">
-                          <div class="MonthYear"><span id="tgl10"></span></div>
-                        <div class="eventTitle"><span id="ur10"></span></div>
-                        <div class="MonthYear"><span id="tglA10"></span></div>
-                      </div>
-                    <div id="ico10"></div>
-                    </div>
-                  <svg height="5" width="70">
-                    <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
-                  </svg>
-                    <div class="event1">                      
-                      <div class="event1Bubble">
-                          <div class="MonthYear"><span id="tgl11"></span></div>
-                        <div class="eventTitle"><span id="ur11"></span></div>
-                        <div class="MonthYear"><span id="tglA11"></span></div>
-                      </div>
-                      <div id="ico11"></div>
-                    </div>
-
-                    <div class="stop">
-                      Selesai
-                    </div>                     
-                  </div>
+                <canvas id="canvasUrusan5" height="300" width="600"></canvas>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title" style="color:#d9534f;">Jadwal dan Alur Proses Penyusunan RKPD-Renja
+                      <select id="" class="col-sm-2 pull-right hidden" name="id_tahun" id="id_tahun"></select>
+                    </h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="Timeline">
+                      <div class="start">
+                        Mulai
+                      </div>
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl1"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur1"></span></div>
+                          <div class="MonthYear"><span id="tglA1"></span></div>
+                        </div>
+                        <div id="ico1"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event2">
+                        <div class="event2Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl2"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur2"></span></div>
+                          <div class="MonthYear"><span id="tglA2"></span></div>
+                        </div>
+                        <div id="ico2"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl3"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur3"></span></div>
+                          <div class="MonthYear"><span id="tglA3"></span></div>
+                        </div>
+                        <div id="ico3"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event2">
+                        <div class="event2Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl4"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur4"></span></div>
+                          <div class="MonthYear"><span id="tglA4"></span></div>
+                        </div>
+                        <div id="ico4"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl5"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur5"></span></div>
+                          <div class="MonthYear"><span id="tglA5"></span></div>
+                        </div>
+                        <div id="ico5"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event2">
+                        <div class="event2Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl6"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur6"></span></div>
+                          <div class="MonthYear"><span id="tglA6"></span></div>
+                        </div>
+                        <div id="ico6"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl7"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur7"></span></div>
+                          <div class="MonthYear"><span id="tglA7"></span></div>
+                        </div>
+                        <div id="ico7"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event2">
+                        <div class="event2Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl8"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur8"></span></div>
+                          <div class="MonthYear"><span id="tglA8"></span></div>
+                        </div>
+                        <div id="ico8"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="eventTime">
+                            <div class="MonthYear"><span id="tgl9"></span></div>
+                          </div>
+                          <div class="eventTitle"><span id="ur9"></span></div>
+                          <div class="MonthYear"><span id="tglA9"></span></div>
+                        </div>
+                        <div id="ico9"></div>
+                      </div>
+
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+
+                      <div class="event2">
+                        <div class="event2Bubble">
+                          <div class="MonthYear"><span id="tgl10"></span></div>
+                          <div class="eventTitle"><span id="ur10"></span></div>
+                          <div class="MonthYear"><span id="tglA10"></span></div>
+                        </div>
+                        <div id="ico10"></div>
+                      </div>
+                      <svg height="5" width="70">
+                        <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+                      </svg>
+                      <div class="event1">
+                        <div class="event1Bubble">
+                          <div class="MonthYear"><span id="tgl11"></span></div>
+                          <div class="eventTitle"><span id="ur11"></span></div>
+                          <div class="MonthYear"><span id="tglA11"></span></div>
+                        </div>
+                        <div id="ico11"></div>
+                      </div>
+
+                      <div class="stop">
+                        Selesai
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </div>
+
 
       </div>
-    
-
-    </div>
-    <hr>
+      <hr>
       <footer id="bottom">
-      <div class="pull-right wrapper footer">
-              <p style="color:#F6F6F6">
-                  <b><a HREF="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan" style="color:#5CD1FF; text-decoration: none; ">Badan Pengawasan Keuangan dan Pembangunan</a></b>
-                  | <b>Tim Satgas Simda</b> | <span style="color:#F2DEDE">Copyright &copy; 2018</span>  
-      </div>
-              </p>
-    </footer>
-</body>
+        <div class="pull-right wrapper footer">
+          <p style="color:#F6F6F6">
+            <b><a HREF="http://www.bpkp.go.id" title="Badan Pengawasan Keuangan dan Pembangunan"
+                style="color:#5CD1FF; text-decoration: none; ">Badan Pengawasan Keuangan dan Pembangunan</a></b>
+            | <b>Tim Satgas Simda</b> | <span style="color:#F2DEDE">Copyright &copy; 2018</span>
+        </div>
+        </p>
+      </footer>
+  </body>
 
 
-<script src="{{ asset('/js/jquery.min.js')}}"></script>
-<script src="{{ asset('/js/jquery-ui.js')}}"></script>
-<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
-<script src="{{ asset('/js/Chart.bundle.js') }}"></script>
+  <script src="{{ asset('/js/jquery.min.js')}}"></script>
+  <script src="{{ asset('/js/jquery-ui.js')}}"></script>
+  <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+  <script src="{{ asset('/js/Chart.bundle.js') }}"></script>
 
-<script  type="text/javascript" language="javascript" class="init">
-$(document).ready( function() {
+  <script type="text/javascript" language="javascript" class="init">
+    $(document).ready( function() {
   
-var d = new Date();
-var n = d.getFullYear() + 1;
+  var d = new Date();
+  var n = d.getFullYear() + 1;
 
-function formatTgl(val_tanggal){
-      var formattedDate = new Date(val_tanggal);
-      var d = formattedDate.getDate();
-      var m = formattedDate.getMonth()+1;
-      var y = formattedDate.getFullYear();
-      var m_names = new Array("Jan", "Feb", "Mar", 
-        "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", 
-        "Okt", "Nov", "Des");
-      var tgl= d + "-" + m + "-" + y;
+  function formatTgl(val_tanggal){
+        var formattedDate = new Date(val_tanggal);
+        var d = formattedDate.getDate();
+        var m = formattedDate.getMonth()+1;
+        var y = formattedDate.getFullYear();
+        var m_names = new Array("Jan", "Feb", "Mar", 
+          "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", 
+          "Okt", "Nov", "Des");
+        var tgl= d + "-" + m + "-" + y;
 
-      return tgl;
-};
-$.ajax({
-    type: "GET",
-    url: './agenda/tlJadwal/'+n,
-    dataType: "json",
-    success: function(data) {
-      var j = data.length;
-          var post, i, k;
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            k = i+1;
-            $('#tgl'+k).text('M : '+ formatTgl(data[i].tgl_mulai));
-            $('#tglA'+k).text('S : '+formatTgl(data[i].tgl_akhir));
-            $('#ur'+k).text(data[i].nm_langkah);
-            $('#ico'+k).html('<i class="'+data[i].status_real+'"></i>');
-          }
-    }
-});
+        return tgl;
+  };
+  $.ajax({
+      type: "GET",
+      url: './agenda/tlJadwal/'+n,
+      dataType: "json",
+      success: function(data) {
+        var j = data.length;
+            var post, i, k;
+            for (i = 0; i < j; i++) {
+              post = data[i];
+              k = i+1;
+              $('#tgl'+k).text('M : '+ formatTgl(data[i].tgl_mulai));
+              $('#tglA'+k).text('S : '+formatTgl(data[i].tgl_akhir));
+              $('#ur'+k).text(data[i].nm_langkah);
+              $('#ico'+k).html('<i class="'+data[i].status_real+'"></i>');
+            }
+      }
+  });
 
-$.ajax({
+  $.ajax({
           type: "GET",
           url: './getTahunSetting',
           dataType: "json",
@@ -720,14 +780,14 @@ $(function(){
                           fontSize: 7
                       }
                   },                
-                  responsive: true,
+                  responsive: true
               }
       });
     });  
 });
 
 });
-</script>
+  </script>
 
 
 

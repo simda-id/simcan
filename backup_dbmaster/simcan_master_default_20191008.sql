@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 06, 2019 at 11:15 AM
+-- Generation Time: Oct 08, 2019 at 11:08 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.31
 
@@ -23,803 +23,13 @@ SET time_zone = "+00:00";
 -- Database: `dbsimcan_simulasi_merah`
 --
 
-DELIMITER $$
---
--- Procedures
---
-CREATE  PROCEDURE `setAutoIncrement` ()  BEGIN
-DECLARE done int default false;
-    DECLARE table_name CHAR(255);
-DECLARE cur1 cursor for SELECT t.table_name FROM INFORMATION_SCHEMA.TABLES t 
-        WHERE t.table_schema = "dbsimcan_master";
-
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-    open cur1;
-
-    myloop: loop
-        fetch cur1 into table_name;
-        if done then
-            leave myloop;
-        end if;
-        set @sql = CONCAT('ALTER TABLE ',table_name, ' AUTO_INCREMENT = 1');
-        prepare stmt from @sql;
-        execute stmt;
-        drop prepare stmt;
-    end loop;
-
-    close cur1;
-END$$
-
---
--- Functions
---
-CREATE  FUNCTION `GantiEnter` (`uraian` VARCHAR(1000)) RETURNS VARCHAR(1000) CHARSET latin1 BEGIN 
-  DECLARE xUraian VARCHAR(1000); 
-  SET xUraian = TRIM(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uraian, CHAR(9), ''), CHAR(10), ''),CHAR(11),''),CHAR(12),''),CHAR(13),'')); 
-	WHILE INSTR(xUraian,'  ')>0 DO
-		SET xUraian = REPLACE(xUraian,'  ',' ');
-	END WHILE;
-  RETURN (xUraian); 
-END$$
-
-CREATE  FUNCTION `HTML_UnEncode` (`X` VARCHAR(1000)) RETURNS VARCHAR(1000) CHARSET latin1 BEGIN 
-
-    DECLARE TextString VARCHAR(1000) ; 
-    SET TextString = X ; 
-
-    #quotation mark 
-    IF INSTR( X , '&quot;' ) 
-    THEN SET TextString = REPLACE(TextString, '&quot;',') ; 
-    END IF ; 
-
-    #apostrophe  
-    IF INSTR( X , &apos; ) 
-    THEN SET TextString = REPLACE(TextString, &apos;,') ; 
-    END IF ; 
-
-    #ampersand 
-    IF INSTR( X , '&amp;' ) 
-    THEN SET TextString = REPLACE(TextString, '&amp;','&') ; 
-    END IF ; 
-
-    #less-than 
-    IF INSTR( X , '&lt;' ) 
-    THEN SET TextString = REPLACE(TextString, '&lt;','<') ; 
-    END IF ; 
-
-    #greater-than 
-    IF INSTR( X , '&gt;' ) 
-    THEN SET TextString = REPLACE(TextString, '&gt;','>') ; 
-    END IF ; 
-
-    #non-breaking space 
-    IF INSTR( X , '&nbsp;' ) 
-    THEN SET TextString = REPLACE(TextString, '&nbsp;',' ') ; 
-    END IF ; 
-
-    #inverted exclamation mark 
-    IF INSTR( X , '&iexcl;' ) 
-    THEN SET TextString = REPLACE(TextString, '&iexcl;','¡') ; 
-    END IF ; 
-
-    #cent 
-    IF INSTR( X , '&cent;' ) 
-    THEN SET TextString = REPLACE(TextString, '&cent;','¢') ; 
-    END IF ; 
-
-    #pound 
-    IF INSTR( X , '&pound;' ) 
-    THEN SET TextString = REPLACE(TextString, '&pound;','£') ; 
-    END IF ; 
-
-    #currency 
-    IF INSTR( X , '&curren;' ) 
-    THEN SET TextString = REPLACE(TextString, '&curren;','¤') ; 
-    END IF ; 
-
-    #yen 
-    IF INSTR( X , '&yen;' ) 
-    THEN SET TextString = REPLACE(TextString, '&yen;','¥') ; 
-    END IF ; 
-
-    #broken vertical bar 
-    IF INSTR( X , '&brvbar;' ) 
-    THEN SET TextString = REPLACE(TextString, '&brvbar;','¦') ; 
-    END IF ; 
-
-    #section 
-    IF INSTR( X , '&sect;' ) 
-    THEN SET TextString = REPLACE(TextString, '&sect;','§') ; 
-    END IF ; 
-
-    #spacing diaeresis 
-    IF INSTR( X , '&uml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&uml;','¨') ; 
-    END IF ; 
-
-    #copyright 
-    IF INSTR( X , '&copy;' ) 
-    THEN SET TextString = REPLACE(TextString, '&copy;','©') ; 
-    END IF ; 
-
-    #feminine ordinal indicator 
-    IF INSTR( X , '&ordf;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ordf;','ª') ; 
-    END IF ; 
-
-    #angle quotation mark (left) 
-    IF INSTR( X , '&laquo;' ) 
-    THEN SET TextString = REPLACE(TextString, '&laquo;','«') ; 
-    END IF ; 
-
-    #negation 
-    IF INSTR( X , '&not;' ) 
-    THEN SET TextString = REPLACE(TextString, '&not;','¬') ; 
-    END IF ; 
-
-    #soft hyphen 
-    IF INSTR( X , '&shy;' ) 
-    THEN SET TextString = REPLACE(TextString, '&shy;','­') ; 
-    END IF ; 
-
-    #registered trademark 
-    IF INSTR( X , '&reg;' ) 
-    THEN SET TextString = REPLACE(TextString, '&reg;','®') ; 
-    END IF ; 
-
-    #spacing macron 
-    IF INSTR( X , '&macr;' ) 
-    THEN SET TextString = REPLACE(TextString, '&macr;','¯') ; 
-    END IF ; 
-
-    #degree 
-    IF INSTR( X , '&deg;' ) 
-    THEN SET TextString = REPLACE(TextString, '&deg;','°') ; 
-    END IF ; 
-
-    #plus-or-minus  
-    IF INSTR( X , '&plusmn;' ) 
-    THEN SET TextString = REPLACE(TextString, '&plusmn;','±') ; 
-    END IF ; 
-
-    #superscript 2 
-    IF INSTR( X , '&sup2;' ) 
-    THEN SET TextString = REPLACE(TextString, '&sup2;','²') ; 
-    END IF ; 
-
-    #superscript 3 
-    IF INSTR( X , '&sup3;' ) 
-    THEN SET TextString = REPLACE(TextString, '&sup3;','³') ; 
-    END IF ; 
-
-    #spacing acute 
-    IF INSTR( X , '&acute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&acute;','´') ; 
-    END IF ; 
-
-    #micro 
-    IF INSTR( X , '&micro;' ) 
-    THEN SET TextString = REPLACE(TextString, '&micro;','µ') ; 
-    END IF ; 
-
-    #paragraph 
-    IF INSTR( X , '&para;' ) 
-    THEN SET TextString = REPLACE(TextString, '&para;','¶') ; 
-    END IF ; 
-
-    #middle dot 
-    IF INSTR( X , '&middot;' ) 
-    THEN SET TextString = REPLACE(TextString, '&middot;','·') ; 
-    END IF ; 
-
-    #spacing cedilla 
-    IF INSTR( X , '&cedil;' ) 
-    THEN SET TextString = REPLACE(TextString, '&cedil;','¸') ; 
-    END IF ; 
-
-    #superscript 1 
-    IF INSTR( X , '&sup1;' ) 
-    THEN SET TextString = REPLACE(TextString, '&sup1;','¹') ; 
-    END IF ; 
-
-    #masculine ordinal indicator 
-    IF INSTR( X , '&ordm;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ordm;','º') ; 
-    END IF ; 
-
-    #angle quotation mark (right) 
-    IF INSTR( X , '&raquo;' ) 
-    THEN SET TextString = REPLACE(TextString, '&raquo;','»') ; 
-    END IF ; 
-
-    #fraction 1/4 
-    IF INSTR( X , '&frac14;' ) 
-    THEN SET TextString = REPLACE(TextString, '&frac14;','¼') ; 
-    END IF ; 
-
-    #fraction 1/2 
-    IF INSTR( X , '&frac12;' ) 
-    THEN SET TextString = REPLACE(TextString, '&frac12;','½') ; 
-    END IF ; 
-
-    #fraction 3/4 
-    IF INSTR( X , '&frac34;' ) 
-    THEN SET TextString = REPLACE(TextString, '&frac34;','¾') ; 
-    END IF ; 
-
-    #inverted question mark 
-    IF INSTR( X , '&iquest;' ) 
-    THEN SET TextString = REPLACE(TextString, '&iquest;','¿') ; 
-    END IF ; 
-
-    #multiplication 
-    IF INSTR( X , '&times;' ) 
-    THEN SET TextString = REPLACE(TextString, '&times;','×') ; 
-    END IF ; 
-
-    #division 
-    IF INSTR( X , '&divide;' ) 
-    THEN SET TextString = REPLACE(TextString, '&divide;','÷') ; 
-    END IF ; 
-
-    #capital a, grave accent 
-    IF INSTR( X , '&Agrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Agrave;','À') ; 
-    END IF ; 
-
-    #capital a, acute accent 
-    IF INSTR( X , '&Aacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Aacute;','Á') ; 
-    END IF ; 
-
-    #capital a, circumflex accent 
-    IF INSTR( X , '&Acirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Acirc;','Â') ; 
-    END IF ; 
-
-    #capital a, tilde 
-    IF INSTR( X , '&Atilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Atilde;','Ã') ; 
-    END IF ; 
-
-    #capital a, umlaut mark 
-    IF INSTR( X , '&Auml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Auml;','Ä') ; 
-    END IF ; 
-
-    #capital a, ring 
-    IF INSTR( X , '&Aring;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Aring;','Å') ; 
-    END IF ; 
-
-    #capital ae 
-    IF INSTR( X , '&AElig;' ) 
-    THEN SET TextString = REPLACE(TextString, '&AElig;','Æ') ; 
-    END IF ; 
-
-    #capital c, cedilla 
-    IF INSTR( X , '&Ccedil;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ccedil;','Ç') ; 
-    END IF ; 
-
-    #capital e, grave accent 
-    IF INSTR( X , '&Egrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Egrave;','È') ; 
-    END IF ; 
-
-    #capital e, acute accent 
-    IF INSTR( X , '&Eacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Eacute;','É') ; 
-    END IF ; 
-
-    #capital e, circumflex accent 
-    IF INSTR( X , '&Ecirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ecirc;','Ê') ; 
-    END IF ; 
-
-    #capital e, umlaut mark 
-    IF INSTR( X , '&Euml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Euml;','Ë') ; 
-    END IF ; 
-
-    #capital i, grave accent 
-    IF INSTR( X , '&Igrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Igrave;','Ì') ; 
-    END IF ; 
-
-    #capital i, acute accent 
-    IF INSTR( X , '&Iacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Iacute;','Í') ; 
-    END IF ; 
-
-    #capital i, circumflex accent 
-    IF INSTR( X , '&Icirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Icirc;','Î') ; 
-    END IF ; 
-
-    #capital i, umlaut mark 
-    IF INSTR( X , '&Iuml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Iuml;','Ï') ; 
-    END IF ; 
-
-    #capital eth, Icelandic 
-    IF INSTR( X , '&ETH;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ETH;','Ð') ; 
-    END IF ; 
-
-    #capital n, tilde 
-    IF INSTR( X , '&Ntilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ntilde;','Ñ') ; 
-    END IF ; 
-
-    #capital o, grave accent 
-    IF INSTR( X , '&Ograve;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ograve;','Ò') ; 
-    END IF ; 
-
-    #capital o, acute accent 
-    IF INSTR( X , '&Oacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Oacute;','Ó') ; 
-    END IF ; 
-
-    #capital o, circumflex accent 
-    IF INSTR( X , '&Ocirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ocirc;','Ô') ; 
-    END IF ; 
-
-    #capital o, tilde 
-    IF INSTR( X , '&Otilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Otilde;','Õ') ; 
-    END IF ; 
-
-    #capital o, umlaut mark 
-    IF INSTR( X , '&Ouml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ouml;','Ö') ; 
-    END IF ; 
-
-    #capital o, slash 
-    IF INSTR( X , '&Oslash;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Oslash;','Ø') ; 
-    END IF ; 
-
-    #capital u, grave accent 
-    IF INSTR( X , '&Ugrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ugrave;','Ù') ; 
-    END IF ; 
-
-    #capital u, acute accent 
-    IF INSTR( X , '&Uacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Uacute;','Ú') ; 
-    END IF ; 
-
-    #capital u, circumflex accent 
-    IF INSTR( X , '&Ucirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Ucirc;','Û') ; 
-    END IF ; 
-
-    #capital u, umlaut mark 
-    IF INSTR( X , '&Uuml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Uuml;','Ü') ; 
-    END IF ; 
-
-    #capital y, acute accent 
-    IF INSTR( X , '&Yacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&Yacute;','Ý') ; 
-    END IF ; 
-
-    #capital THORN, Icelandic 
-    IF INSTR( X , '&THORN;' ) 
-    THEN SET TextString = REPLACE(TextString, '&THORN;','Þ') ; 
-    END IF ; 
-
-    #small sharp s, German 
-    IF INSTR( X , '&szlig;' ) 
-    THEN SET TextString = REPLACE(TextString, '&szlig;','ß') ; 
-    END IF ; 
-
-    #small a, grave accent 
-    IF INSTR( X , '&agrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&agrave;','à') ; 
-    END IF ; 
-
-    #small a, acute accent 
-    IF INSTR( X , '&aacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&aacute;','á') ; 
-    END IF ; 
-
-    #small a, circumflex accent 
-    IF INSTR( X , '&acirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&acirc;','â') ; 
-    END IF ; 
-
-    #small a, tilde 
-    IF INSTR( X , '&atilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&atilde;','ã') ; 
-    END IF ; 
-
-    #small a, umlaut mark 
-    IF INSTR( X , '&auml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&auml;','ä') ; 
-    END IF ; 
-
-    #small a, ring 
-    IF INSTR( X , '&aring;' ) 
-    THEN SET TextString = REPLACE(TextString, '&aring;','å') ; 
-    END IF ; 
-
-    #small ae 
-    IF INSTR( X , '&aelig;' ) 
-    THEN SET TextString = REPLACE(TextString, '&aelig;','æ') ; 
-    END IF ; 
-
-    #small c, cedilla 
-    IF INSTR( X , '&ccedil;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ccedil;','ç') ; 
-    END IF ; 
-
-    #small e, grave accent 
-    IF INSTR( X , '&egrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&egrave;','è') ; 
-    END IF ; 
-
-    #small e, acute accent 
-    IF INSTR( X , '&eacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&eacute;','é') ; 
-    END IF ; 
-
-    #small e, circumflex accent 
-    IF INSTR( X , '&ecirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ecirc;','ê') ; 
-    END IF ; 
-
-    #small e, umlaut mark 
-    IF INSTR( X , '&euml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&euml;','ë') ; 
-    END IF ; 
-
-    #small i, grave accent 
-    IF INSTR( X , '&igrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&igrave;','ì') ; 
-    END IF ; 
-
-    #small i, acute accent 
-    IF INSTR( X , '&iacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&iacute;','í') ; 
-    END IF ; 
-
-    #small i, circumflex accent 
-    IF INSTR( X , '&icirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&icirc;','î') ; 
-    END IF ; 
-
-    #small i, umlaut mark 
-    IF INSTR( X , '&iuml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&iuml;','ï') ; 
-    END IF ; 
-
-    #small eth, Icelandic 
-    IF INSTR( X , '&eth;' ) 
-    THEN SET TextString = REPLACE(TextString, '&eth;','ð') ; 
-    END IF ; 
-
-    #small n, tilde 
-    IF INSTR( X , '&ntilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ntilde;','ñ') ; 
-    END IF ; 
-
-    #small o, grave accent 
-    IF INSTR( X , '&ograve;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ograve;','ò') ; 
-    END IF ; 
-
-    #small o, acute accent 
-    IF INSTR( X , '&oacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&oacute;','ó') ; 
-    END IF ; 
-
-    #small o, circumflex accent 
-    IF INSTR( X , '&ocirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ocirc;','ô') ; 
-    END IF ; 
-
-    #small o, tilde 
-    IF INSTR( X , '&otilde;' ) 
-    THEN SET TextString = REPLACE(TextString, '&otilde;','õ') ; 
-    END IF ; 
-
-    #small o, umlaut mark 
-    IF INSTR( X , '&ouml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ouml;','ö') ; 
-    END IF ; 
-
-    #small o, slash 
-    IF INSTR( X , '&oslash;' ) 
-    THEN SET TextString = REPLACE(TextString, '&oslash;','ø') ; 
-    END IF ; 
-
-    #small u, grave accent 
-    IF INSTR( X , '&ugrave;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ugrave;','ù') ; 
-    END IF ; 
-
-    #small u, acute accent 
-    IF INSTR( X , '&uacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&uacute;','ú') ; 
-    END IF ; 
-
-    #small u, circumflex accent 
-    IF INSTR( X , '&ucirc;' ) 
-    THEN SET TextString = REPLACE(TextString, '&ucirc;','û') ; 
-    END IF ; 
-
-    #small u, umlaut mark 
-    IF INSTR( X , '&uuml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&uuml;','ü') ; 
-    END IF ; 
-
-    #small y, acute accent 
-    IF INSTR( X , '&yacute;' ) 
-    THEN SET TextString = REPLACE(TextString, '&yacute;','ý') ; 
-    END IF ; 
-
-    #small thorn, Icelandic 
-    IF INSTR( X , '&thorn;' ) 
-    THEN SET TextString = REPLACE(TextString, '&thorn;','þ') ; 
-    END IF ; 
-
-    #small y, umlaut mark 
-    IF INSTR( X , '&yuml;' ) 
-    THEN SET TextString = REPLACE(TextString, '&yuml;','ÿ') ; 
-    END IF ; 
-
-    RETURN TextString ; 
-
-END$$
-
-CREATE  FUNCTION `PaguASB` (`jns_biaya` INT, `hub_driver` INT, `vol1` DECIMAL(15,4), `vol2` DECIMAL(15,4), `r1` DECIMAL(15,4), `r2` DECIMAL(15,4), `m1` DECIMAL(15,4), `m2` DECIMAL(15,4), `k1` DECIMAL(15,4), `k2` DECIMAL(15,4), `k3` DECIMAL(15,4), `harga` DECIMAL(15,4)) RETURNS DECIMAL(15,4) BEGIN
-    DECLARE hargax DECIMAL(15,4);
-    DECLARE kmax DECIMAL(15,4);
-    DECLARE rx1 DECIMAL(15,4);
-    DECLARE rx2 DECIMAL(15,4);
-    DECLARE koef DECIMAL(15,4);
-    
-    SET koef = (k1*k2*k3);
-    
-    IF m1 = 1 THEN
-      IF m2 = 1 THEN
-        SET kmax = 1;
-      ELSE
-        IF m1 <= m2 THEN
-              SET kmax = CEILING(vol1/m1);
-            ELSE
-              SET kmax = CEILING(vol2/m2);
-            END IF;
-      END IF;
-    ELSE
-      IF m1 <= m2 THEN
-        SET kmax = CEILING(vol2/m2);
-      ELSE
-        SET kmax = CEILING(vol1/m1);
-      END IF;
-    END IF;
-
-    IF r1 <= 1 THEN 
-      SET rx1= CEILING(vol1/vol1); 
-    ELSE 
-      SET rx1= CEILING(vol1/r1); 
-    END IF;
-    
-    IF r2 <= 1 THEN 
-      SET rx2= CEILING(vol2/vol2); 
-    ELSE 
-      SET rx2= CEILING(vol2/r2); 
-    END IF;
-
-    IF jns_biaya =1 THEN 
-      SET hargax = (koef*kmax*harga);
-    ELSE      
-      IF hub_driver=1 THEN 
-        SET hargax = (vol1*koef*harga); 
-      END IF;
-      
-      IF hub_driver=2 THEN 
-        SET hargax = (vol2*koef*harga); 
-      END IF;
-      
-      IF hub_driver=3 THEN 
-        SET hargax = (vol1*vol2*koef*harga); 
-      END IF;
-      
-      IF hub_driver=4 THEN 
-        SET hargax = (koef*rx1*harga); 
-      END IF;
-      
-      IF hub_driver=5 THEN 
-        SET hargax = (koef*rx2*harga); 
-      END IF;
-      
-      IF hub_driver=6 THEN 
-        SET hargax = (koef*rx1*rx2*harga); 
-      END IF;
-      
-      IF hub_driver=7 THEN 
-        SET hargax = (vol2*koef*rx1*harga); 
-      END IF;
-      
-      IF hub_driver=8 THEN 
-        SET hargax = (vol1*koef*rx2*harga); 
-      END IF;
-      
-    END IF;
- 
- RETURN (hargax);
-END$$
-
-CREATE  FUNCTION `PaguASBDistribusi` (`jns_biaya` INT, `hub_driver` INT, `vol1` DECIMAL(15,4), `vol2` DECIMAL(15,4), `r1` DECIMAL(15,4), `r2` DECIMAL(15,4), `m1` DECIMAL(15,4), `m2` DECIMAL(15,4), `k1` DECIMAL(15,4), `k2` DECIMAL(15,4), `k3` DECIMAL(15,4), `harga` DECIMAL(15,4), `persen` DECIMAL(15,4)) RETURNS DECIMAL(15,4) BEGIN
-		DECLARE hargax DECIMAL(15,4);
-		DECLARE kmax DECIMAL(15,4);
-		DECLARE rx1 DECIMAL(15,4);
-		DECLARE rx2 DECIMAL(15,4);
-		DECLARE koef DECIMAL(15,4);
-		DECLARE koef_dis DECIMAL(15,4);
-		
-		SET koef = (k1*k2*k3);
-		
-		IF persen <= 0 OR persen > 100 THEN 
-			SET koef_dis = 1;
-		ELSE
-			SET koef_dis = persen/100;
-		END IF;
-		
-		IF m1 = 1 THEN
-			IF m2 = 1 THEN
-				SET kmax = 1;
-			ELSE
-				IF m1 <= m2 THEN
-							SET kmax = CEILING(vol1/m1);
-						ELSE
-							SET kmax = CEILING(vol2/m2);
-						END IF;
-			END IF;
-		ELSE
-			IF m1 <= m2 THEN
-				SET kmax = CEILING(vol1/m1);
-			ELSE
-				SET kmax = CEILING(vol2/m2);
-			END IF;
-		END IF;
-
-    IF r1 <= 1 THEN 
-			SET rx1= CEILING(vol1/vol1); 
-		ELSE 
-			SET rx1= CEILING(vol1/r1); 
-		END IF;
-		
-		IF r2 <= 1 THEN 
-			SET rx2= CEILING(vol2/vol2); 
-		ELSE 
-			SET rx2= CEILING(vol2/r2); 
-		END IF;
-
-		IF jns_biaya =1 THEN 
-			SET hargax = (koef*kmax*harga*koef_dis); 
-		END IF;
-		
-		IF jns_biaya =2 AND hub_driver=1 THEN 
-			SET hargax = (vol1*koef*rx1*harga); 
-		END IF;
-		
-		IF jns_biaya =2 AND hub_driver=2 THEN 
-			SET hargax = (vol2*koef*rx2*harga); 
-		END IF;
-		
-		IF jns_biaya =3 AND hub_driver=1 THEN 
-			SET hargax = (vol1*koef*harga); 
-		END IF;
-		
-		IF jns_biaya =3 AND hub_driver=2 THEN 
-			SET hargax = (vol2*koef*harga); 
-		END IF;
-		
-		IF jns_biaya =3 AND hub_driver=3 THEN 
-			SET hargax = (vol1*vol2*koef*harga); 
-		END IF;
- 
- RETURN (hargax);
-END$$
-
-CREATE  FUNCTION `TglIndonesia` (`tanggal` DATE) RETURNS VARCHAR(255) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci BEGIN
-  DECLARE varTanggal varchar(255);
-
-  SELECT CONCAT(
-    DAY(tanggal),' ',
-    CASE MONTH(tanggal) 
-      WHEN 1 THEN 'Januari' 
-      WHEN 2 THEN 'Februari' 
-      WHEN 3 THEN 'Maret' 
-      WHEN 4 THEN 'April' 
-      WHEN 5 THEN 'Mei' 
-      WHEN 6 THEN 'Juni' 
-      WHEN 7 THEN 'Juli' 
-      WHEN 8 THEN 'Agustus' 
-      WHEN 9 THEN 'September'
-      WHEN 10 THEN 'Oktober' 
-      WHEN 11 THEN 'November' 
-      WHEN 12 THEN 'Desember' 
-    END,' ',
-    YEAR(tanggal)
-  ) INTO varTanggal;
-
-  RETURN varTanggal;
-END$$
-
-CREATE  FUNCTION `XML_Encode` (`X` VARCHAR(1000)) RETURNS VARCHAR(1000) CHARSET latin1 BEGIN 
-
-    DECLARE TextString VARCHAR(1000) ; 
-    SET TextString = X ; 
-
-    #quotation mark 
-    IF INSTR( X , '"' ) 
-    THEN SET TextString = REPLACE(TextString,'"' , '&quot;') ; 
-    END IF ; 
-
-    #apostrophe  
-    IF INSTR( X , "'" ) 
-    THEN SET TextString = REPLACE(TextString,"'" , '&apos;') ; 
-    END IF ; 
-
-    #ampersand 
-    IF INSTR( X , '&' ) 
-    THEN SET TextString = REPLACE(TextString, '&', '&amp;') ; 
-    END IF ; 
-
-    #less-than 
-    IF INSTR( X , '<' ) 
-    THEN SET TextString = REPLACE(TextString, '<', '&lt;') ; 
-    END IF ; 
-
-    #greater-than 
-    IF INSTR( X , '>' ) 
-    THEN SET TextString = REPLACE(TextString, '>', '&gt;') ; 
-    END IF ; 
-		
-		#remove-horizontal-tab
-    IF INSTR( X , CHAR(9)) 
-    THEN SET TextString = REPLACE(TextString, CHAR(9), '') ;
-    END IF ; 
-		
-		#remove-new-line
-    IF INSTR( X , CHAR(10) ) 
-    THEN SET TextString = REPLACE(TextString,CHAR(10) , '') ; 
-    END IF ; 
-		
-		#remove-vertical-tab
-		IF INSTR( X , CHAR(11)) 
-    THEN SET TextString = REPLACE(TextString, CHAR(11), '') ; 
-    END IF ; 
-		
-		#remove-new-page
-    IF INSTR( X , CHAR(12)) 
-    THEN SET TextString = REPLACE(TextString, CHAR(12), '') ;
-    END IF ;  
-		
-		#remove-carriage-return
-		IF INSTR( X , CHAR(13) ) 
-    THEN SET TextString = REPLACE(TextString,CHAR(13) , '') ; 
-    END IF ;
-		
-		RETURN TextString ; 
-
-END$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `kin_trx_cascading_indikator_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `kin_trx_cascading_indikator_kegiatan_pd`;
 CREATE TABLE `kin_trx_cascading_indikator_kegiatan_pd` (
   `id_indikator_kegiatan_pd` int(11) NOT NULL,
   `id_hasil_kegiatan` int(11) NOT NULL DEFAULT '0',
@@ -832,6 +42,7 @@ CREATE TABLE `kin_trx_cascading_indikator_kegiatan_pd` (
 -- Table structure for table `kin_trx_cascading_indikator_program_pd`
 --
 
+DROP TABLE IF EXISTS `kin_trx_cascading_indikator_program_pd`;
 CREATE TABLE `kin_trx_cascading_indikator_program_pd` (
   `id_indikator_program_pd` int(11) NOT NULL,
   `id_hasil_program` int(11) NOT NULL DEFAULT '0',
@@ -844,6 +55,7 @@ CREATE TABLE `kin_trx_cascading_indikator_program_pd` (
 -- Table structure for table `kin_trx_cascading_kegiatan_opd`
 --
 
+DROP TABLE IF EXISTS `kin_trx_cascading_kegiatan_opd`;
 CREATE TABLE `kin_trx_cascading_kegiatan_opd` (
   `id_hasil_kegiatan` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL DEFAULT '0',
@@ -858,6 +70,7 @@ CREATE TABLE `kin_trx_cascading_kegiatan_opd` (
 -- Table structure for table `kin_trx_cascading_program_opd`
 --
 
+DROP TABLE IF EXISTS `kin_trx_cascading_program_opd`;
 CREATE TABLE `kin_trx_cascading_program_opd` (
   `id_hasil_program` int(11) NOT NULL,
   `tahun` int(11) NOT NULL DEFAULT '2019',
@@ -873,6 +86,7 @@ CREATE TABLE `kin_trx_cascading_program_opd` (
 -- Table structure for table `kin_trx_iku_opd_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_opd_dok`;
 CREATE TABLE `kin_trx_iku_opd_dok` (
   `id_dokumen` int(11) NOT NULL,
   `no_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -892,6 +106,7 @@ CREATE TABLE `kin_trx_iku_opd_dok` (
 -- Table structure for table `kin_trx_iku_opd_kegiatan`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_opd_kegiatan`;
 CREATE TABLE `kin_trx_iku_opd_kegiatan` (
   `id_iku_opd_kegiatan` int(11) NOT NULL,
   `id_iku_opd_program` int(11) NOT NULL,
@@ -911,6 +126,7 @@ CREATE TABLE `kin_trx_iku_opd_kegiatan` (
 -- Table structure for table `kin_trx_iku_opd_program`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_opd_program`;
 CREATE TABLE `kin_trx_iku_opd_program` (
   `id_iku_opd_program` int(11) NOT NULL,
   `id_iku_opd_sasaran` int(11) NOT NULL,
@@ -930,6 +146,7 @@ CREATE TABLE `kin_trx_iku_opd_program` (
 -- Table structure for table `kin_trx_iku_opd_sasaran`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_opd_sasaran`;
 CREATE TABLE `kin_trx_iku_opd_sasaran` (
   `id_iku_opd_sasaran` int(11) NOT NULL,
   `id_dokumen` int(11) NOT NULL,
@@ -948,6 +165,7 @@ CREATE TABLE `kin_trx_iku_opd_sasaran` (
 -- Table structure for table `kin_trx_iku_pemda_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_pemda_dok`;
 CREATE TABLE `kin_trx_iku_pemda_dok` (
   `id_dokumen` int(11) NOT NULL,
   `no_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -966,6 +184,7 @@ CREATE TABLE `kin_trx_iku_pemda_dok` (
 -- Table structure for table `kin_trx_iku_pemda_rinci`
 --
 
+DROP TABLE IF EXISTS `kin_trx_iku_pemda_rinci`;
 CREATE TABLE `kin_trx_iku_pemda_rinci` (
   `id_iku_pemda` int(11) NOT NULL,
   `id_dokumen` int(11) NOT NULL,
@@ -984,6 +203,7 @@ CREATE TABLE `kin_trx_iku_pemda_rinci` (
 -- Table structure for table `kin_trx_perkin_es3_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es3_dok`;
 CREATE TABLE `kin_trx_perkin_es3_dok` (
   `id_dokumen_perkin` int(11) NOT NULL,
   `id_sotk_es3` int(11) NOT NULL,
@@ -1008,6 +228,7 @@ CREATE TABLE `kin_trx_perkin_es3_dok` (
 -- Table structure for table `kin_trx_perkin_es3_kegiatan`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es3_kegiatan`;
 CREATE TABLE `kin_trx_perkin_es3_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL,
   `id_perkin_program` int(11) DEFAULT NULL,
@@ -1025,6 +246,7 @@ CREATE TABLE `kin_trx_perkin_es3_kegiatan` (
 -- Table structure for table `kin_trx_perkin_es3_program`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es3_program`;
 CREATE TABLE `kin_trx_perkin_es3_program` (
   `id_perkin_program` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) NOT NULL DEFAULT '0',
@@ -1046,6 +268,7 @@ CREATE TABLE `kin_trx_perkin_es3_program` (
 -- Table structure for table `kin_trx_perkin_es3_program_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es3_program_indikator`;
 CREATE TABLE `kin_trx_perkin_es3_program_indikator` (
   `id_perkin_indikator` int(11) NOT NULL,
   `id_perkin_program` int(11) DEFAULT NULL,
@@ -1066,6 +289,7 @@ CREATE TABLE `kin_trx_perkin_es3_program_indikator` (
 -- Table structure for table `kin_trx_perkin_es4_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es4_dok`;
 CREATE TABLE `kin_trx_perkin_es4_dok` (
   `id_dokumen_perkin` int(11) NOT NULL,
   `id_sotk_es4` int(11) NOT NULL,
@@ -1090,6 +314,7 @@ CREATE TABLE `kin_trx_perkin_es4_dok` (
 -- Table structure for table `kin_trx_perkin_es4_kegiatan`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan`;
 CREATE TABLE `kin_trx_perkin_es4_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) NOT NULL DEFAULT '0',
@@ -1111,6 +336,7 @@ CREATE TABLE `kin_trx_perkin_es4_kegiatan` (
 -- Table structure for table `kin_trx_perkin_es4_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan_indikator`;
 CREATE TABLE `kin_trx_perkin_es4_kegiatan_indikator` (
   `id_perkin_indikator` int(11) NOT NULL,
   `id_perkin_kegiatan` int(11) DEFAULT NULL,
@@ -1131,6 +357,7 @@ CREATE TABLE `kin_trx_perkin_es4_kegiatan_indikator` (
 -- Table structure for table `kin_trx_perkin_opd_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_dok`;
 CREATE TABLE `kin_trx_perkin_opd_dok` (
   `id_dokumen_perkin` int(11) NOT NULL,
   `id_sotk_es2` int(11) NOT NULL,
@@ -1155,6 +382,7 @@ CREATE TABLE `kin_trx_perkin_opd_dok` (
 -- Table structure for table `kin_trx_perkin_opd_program`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_program`;
 CREATE TABLE `kin_trx_perkin_opd_program` (
   `id_perkin_program` int(11) NOT NULL,
   `id_perkin_sasaran` int(11) NOT NULL,
@@ -1173,6 +401,7 @@ CREATE TABLE `kin_trx_perkin_opd_program` (
 -- Table structure for table `kin_trx_perkin_opd_program_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_indikator`;
 CREATE TABLE `kin_trx_perkin_opd_program_indikator` (
   `id_perkin_indikator` bigint(255) NOT NULL,
   `id_perkin_program` bigint(255) NOT NULL,
@@ -1189,6 +418,7 @@ CREATE TABLE `kin_trx_perkin_opd_program_indikator` (
 -- Table structure for table `kin_trx_perkin_opd_program_pelaksana`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_pelaksana`;
 CREATE TABLE `kin_trx_perkin_opd_program_pelaksana` (
   `id_perkin_pelaksana` bigint(255) NOT NULL,
   `id_perkin_indikator` bigint(255) NOT NULL,
@@ -1204,6 +434,7 @@ CREATE TABLE `kin_trx_perkin_opd_program_pelaksana` (
 -- Table structure for table `kin_trx_perkin_opd_sasaran`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran`;
 CREATE TABLE `kin_trx_perkin_opd_sasaran` (
   `id_perkin_sasaran` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) DEFAULT NULL,
@@ -1219,6 +450,7 @@ CREATE TABLE `kin_trx_perkin_opd_sasaran` (
 -- Table structure for table `kin_trx_perkin_opd_sasaran_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran_indikator`;
 CREATE TABLE `kin_trx_perkin_opd_sasaran_indikator` (
   `id_perkin_indikator` int(11) NOT NULL,
   `id_perkin_sasaran` int(11) DEFAULT NULL,
@@ -1239,6 +471,7 @@ CREATE TABLE `kin_trx_perkin_opd_sasaran_indikator` (
 -- Table structure for table `kin_trx_real_es2_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es2_dok`;
 CREATE TABLE `kin_trx_real_es2_dok` (
   `id_dokumen_real` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) DEFAULT NULL,
@@ -1264,6 +497,7 @@ CREATE TABLE `kin_trx_real_es2_dok` (
 -- Table structure for table `kin_trx_real_es2_program`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es2_program`;
 CREATE TABLE `kin_trx_real_es2_program` (
   `id_real_program` int(11) NOT NULL,
   `id_real_sasaran` int(11) NOT NULL DEFAULT '0',
@@ -1290,6 +524,7 @@ CREATE TABLE `kin_trx_real_es2_program` (
 -- Table structure for table `kin_trx_real_es2_sasaran`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran`;
 CREATE TABLE `kin_trx_real_es2_sasaran` (
   `id_real_sasaran` int(11) NOT NULL,
   `id_dokumen_real` int(11) DEFAULT NULL,
@@ -1306,6 +541,7 @@ CREATE TABLE `kin_trx_real_es2_sasaran` (
 -- Table structure for table `kin_trx_real_es2_sasaran_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran_indikator`;
 CREATE TABLE `kin_trx_real_es2_sasaran_indikator` (
   `id_real_indikator` int(11) NOT NULL,
   `id_real_sasaran` int(11) DEFAULT NULL,
@@ -1334,6 +570,7 @@ CREATE TABLE `kin_trx_real_es2_sasaran_indikator` (
 -- Table structure for table `kin_trx_real_es3_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es3_dok`;
 CREATE TABLE `kin_trx_real_es3_dok` (
   `id_dokumen_real` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) DEFAULT NULL,
@@ -1359,6 +596,7 @@ CREATE TABLE `kin_trx_real_es3_dok` (
 -- Table structure for table `kin_trx_real_es3_kegiatan`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es3_kegiatan`;
 CREATE TABLE `kin_trx_real_es3_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL,
   `id_real_program` int(11) NOT NULL DEFAULT '0',
@@ -1386,6 +624,7 @@ CREATE TABLE `kin_trx_real_es3_kegiatan` (
 -- Table structure for table `kin_trx_real_es3_program`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es3_program`;
 CREATE TABLE `kin_trx_real_es3_program` (
   `id_real_program` int(11) NOT NULL,
   `id_dokumen_real` int(11) NOT NULL DEFAULT '0',
@@ -1413,6 +652,7 @@ CREATE TABLE `kin_trx_real_es3_program` (
 -- Table structure for table `kin_trx_real_es3_program_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es3_program_indikator`;
 CREATE TABLE `kin_trx_real_es3_program_indikator` (
   `id_real_indikator` int(11) NOT NULL,
   `id_real_program` int(11) NOT NULL,
@@ -1444,6 +684,7 @@ CREATE TABLE `kin_trx_real_es3_program_indikator` (
 -- Table structure for table `kin_trx_real_es4_dok`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es4_dok`;
 CREATE TABLE `kin_trx_real_es4_dok` (
   `id_dokumen_real` int(11) NOT NULL,
   `id_dokumen_perkin` int(11) DEFAULT NULL,
@@ -1469,6 +710,7 @@ CREATE TABLE `kin_trx_real_es4_dok` (
 -- Table structure for table `kin_trx_real_es4_kegiatan`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan`;
 CREATE TABLE `kin_trx_real_es4_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL,
   `id_dokumen_real` int(11) NOT NULL DEFAULT '0',
@@ -1496,6 +738,7 @@ CREATE TABLE `kin_trx_real_es4_kegiatan` (
 -- Table structure for table `kin_trx_real_es4_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan_indikator`;
 CREATE TABLE `kin_trx_real_es4_kegiatan_indikator` (
   `id_real_indikator` int(11) NOT NULL,
   `id_real_kegiatan` int(11) DEFAULT NULL,
@@ -1527,6 +770,7 @@ CREATE TABLE `kin_trx_real_es4_kegiatan_indikator` (
 -- Table structure for table `migrations`
 --
 
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1539,6 +783,7 @@ CREATE TABLE `migrations` (
 -- Table structure for table `password_resets`
 --
 
+DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1548,9 +793,26 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ref_api_manajemen`
+--
+
+DROP TABLE IF EXISTS `ref_api_manajemen`;
+CREATE TABLE `ref_api_manajemen` (
+  `id_setting` int(11) NOT NULL,
+  `id_app` int(11) NOT NULL,
+  `url_api` varchar(255) DEFAULT NULL,
+  `key_barrier` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ref_aspek_pembangunan`
 --
 
+DROP TABLE IF EXISTS `ref_aspek_pembangunan`;
 CREATE TABLE `ref_aspek_pembangunan` (
   `id_aspek` int(11) NOT NULL,
   `uraian_aspek_pembangunan` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1575,6 +837,7 @@ INSERT INTO `ref_aspek_pembangunan` (`id_aspek`, `uraian_aspek_pembangunan`, `st
 -- Table structure for table `ref_bidang`
 --
 
+DROP TABLE IF EXISTS `ref_bidang`;
 CREATE TABLE `ref_bidang` (
   `id_bidang` int(11) NOT NULL,
   `kd_urusan` int(255) NOT NULL,
@@ -1634,6 +897,7 @@ INSERT INTO `ref_bidang` (`id_bidang`, `kd_urusan`, `kd_bidang`, `nm_bidang`, `k
 -- Table structure for table `ref_data_sub_unit`
 --
 
+DROP TABLE IF EXISTS `ref_data_sub_unit`;
 CREATE TABLE `ref_data_sub_unit` (
   `tahun` int(11) NOT NULL,
   `id_rincian_unit` int(11) NOT NULL,
@@ -1651,6 +915,7 @@ CREATE TABLE `ref_data_sub_unit` (
 -- Table structure for table `ref_desa`
 --
 
+DROP TABLE IF EXISTS `ref_desa`;
 CREATE TABLE `ref_desa` (
   `id_kecamatan` int(11) NOT NULL,
   `kd_desa` int(11) NOT NULL COMMENT 'kode desa / kelurahan',
@@ -1666,6 +931,7 @@ CREATE TABLE `ref_desa` (
 -- Table structure for table `ref_dokumen`
 --
 
+DROP TABLE IF EXISTS `ref_dokumen`;
 CREATE TABLE `ref_dokumen` (
   `id_dokumen` int(255) NOT NULL,
   `nm_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1705,7 +971,18 @@ INSERT INTO `ref_dokumen` (`id_dokumen`, `nm_dokumen`, `jenis_proses`, `urut_tam
 (25, 'Penyesuaian Musrenbang RPJMD', 2, 5),
 (26, 'Rancangan Renstra Perangkat Daerah', 2, 4),
 (27, 'Forum Perangkat Daerah/Lintas PD', 2, 3),
-(28, 'RPJMD Teknokratik', 1, 0);
+(28, 'RPJMD Teknokratik', 1, 0),
+(50, 'PPAS Murni', 7, 1),
+(51, 'PPAS Perubahan', 7, 2),
+(52, 'RAPBD Murni', 7, 3),
+(53, 'APBD Murni', 7, 4),
+(54, 'APBD Pergeseran 1', 7, 5),
+(55, 'RAPBD Perubahan 1', 7, 6),
+(56, 'APBD Perubahan 1', 7, 7),
+(57, 'APBD Pergeseran 2', 7, 8),
+(58, 'Parameter', 0, 1),
+(59, 'SSH', 0, 2),
+(60, 'ASB', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -1713,6 +990,7 @@ INSERT INTO `ref_dokumen` (`id_dokumen`, `nm_dokumen`, `jenis_proses`, `urut_tam
 -- Table structure for table `ref_fungsi`
 --
 
+DROP TABLE IF EXISTS `ref_fungsi`;
 CREATE TABLE `ref_fungsi` (
   `kd_fungsi` int(11) NOT NULL,
   `nm_fungsi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -1741,6 +1019,7 @@ INSERT INTO `ref_fungsi` (`kd_fungsi`, `nm_fungsi`) VALUES
 -- Table structure for table `ref_group`
 --
 
+DROP TABLE IF EXISTS `ref_group`;
 CREATE TABLE `ref_group` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1754,13 +1033,7 @@ CREATE TABLE `ref_group` (
 
 INSERT INTO `ref_group` (`id`, `name`, `id_roles`, `keterangan`) VALUES
 (1, 'super_admin', 0, 'Group user yang memiliki kewenangan super admin'),
-(2, 'Admin', 0, 'Administrator SKPD'),
-(3, 'Operator', 0, 'Operator SKPD'),
-(7, 'Simulasi', 0, 'User Simulasi'),
-(8, 'User RW', 0, 'User untuk operator RW'),
-(9, 'Desa', 0, 'User untuk Desa/Kelurahan'),
-(10, 'Kecamatan', 0, 'User untuk Musren Kecamatan'),
-(11, 'DPRD', 0, 'User untuk DPRD');
+(2, 'Admin', 0, 'Administrator SKPD');
 
 -- --------------------------------------------------------
 
@@ -1768,6 +1041,7 @@ INSERT INTO `ref_group` (`id`, `name`, `id_roles`, `keterangan`) VALUES
 -- Table structure for table `ref_indikator`
 --
 
+DROP TABLE IF EXISTS `ref_indikator`;
 CREATE TABLE `ref_indikator` (
   `id_indikator` int(11) NOT NULL,
   `type_indikator` int(11) NOT NULL DEFAULT '0' COMMENT '0 keluaran 1 hasil 2 dampak 3 masukan',
@@ -1794,6 +1068,7 @@ CREATE TABLE `ref_indikator` (
 -- Table structure for table `ref_jadwal`
 --
 
+DROP TABLE IF EXISTS `ref_jadwal`;
 CREATE TABLE `ref_jadwal` (
   `tahun` int(11) NOT NULL,
   `id_proses` int(11) NOT NULL,
@@ -1813,6 +1088,7 @@ CREATE TABLE `ref_jadwal` (
 -- Table structure for table `ref_jenis_lokasi`
 --
 
+DROP TABLE IF EXISTS `ref_jenis_lokasi`;
 CREATE TABLE `ref_jenis_lokasi` (
   `id_jenis` int(11) NOT NULL,
   `nm_jenis` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -1838,6 +1114,7 @@ INSERT INTO `ref_jenis_lokasi` (`id_jenis`, `nm_jenis`) VALUES
 -- Table structure for table `ref_kabupaten`
 --
 
+DROP TABLE IF EXISTS `ref_kabupaten`;
 CREATE TABLE `ref_kabupaten` (
   `id_pemda` int(11) NOT NULL,
   `id_prov` int(11) NOT NULL,
@@ -1852,6 +1129,7 @@ CREATE TABLE `ref_kabupaten` (
 -- Table structure for table `ref_kecamatan`
 --
 
+DROP TABLE IF EXISTS `ref_kecamatan`;
 CREATE TABLE `ref_kecamatan` (
   `id_pemda` int(11) NOT NULL,
   `kd_kecamatan` int(11) NOT NULL,
@@ -1865,6 +1143,7 @@ CREATE TABLE `ref_kecamatan` (
 -- Table structure for table `ref_kegiatan`
 --
 
+DROP TABLE IF EXISTS `ref_kegiatan`;
 CREATE TABLE `ref_kegiatan` (
   `id_kegiatan` int(11) NOT NULL,
   `id_program` int(11) NOT NULL,
@@ -1872,4003 +1151,13 @@ CREATE TABLE `ref_kegiatan` (
   `nm_kegiatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `ref_kegiatan`
---
-
-INSERT INTO `ref_kegiatan` (`id_kegiatan`, `id_program`, `kd_kegiatan`, `nm_kegiatan`) VALUES
-(1, 1, 0, 'Non Kegiatan'),
-(2, 2, 1, 'Penyediaan jasa surat menyurat'),
-(3, 2, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(4, 2, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(5, 2, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(6, 2, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(7, 2, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(8, 2, 7, 'Penyediaan jasa administrasi keuangan'),
-(9, 2, 8, 'Penyediaan jasa kebersihan kantor'),
-(10, 2, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(11, 2, 10, 'Penyediaan alat tulis kantor'),
-(12, 2, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(13, 2, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(14, 2, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(15, 2, 14, 'Penyediaan peralatan rumah tangga'),
-(16, 2, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(17, 2, 16, 'Penyediaan bahan logistik kantor'),
-(18, 2, 17, 'Penyediaan makanan dan minuman'),
-(19, 2, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(20, 2, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(21, 3, 1, 'Pembangunan rumah jabatan'),
-(22, 3, 2, 'Pembangunan rumah dinas'),
-(23, 3, 3, 'Pembangunan gedung kantor'),
-(24, 3, 4, 'Pengadaan mobil jabatan'),
-(25, 3, 5, 'pengadaan Kendaraan dinas/operasional'),
-(26, 3, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(27, 3, 7, 'Pengadaan perlengkapan gedung kantor'),
-(28, 3, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(29, 3, 9, 'Pengadaan peralatan gedung kantor'),
-(30, 3, 10, 'Pengadaan mebeleur'),
-(31, 3, 11, 'Pengadaan ……'),
-(32, 3, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(33, 3, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(34, 3, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(35, 3, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(36, 3, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(37, 3, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(38, 3, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(39, 3, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(40, 3, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(41, 3, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(42, 3, 30, 'Pemeliharaan rutin/berkala …..'),
-(43, 3, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(44, 3, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(45, 3, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(46, 3, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(47, 3, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(48, 4, 1, 'Pengadaan mesin/kartu absensi'),
-(49, 4, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(50, 4, 3, 'Pengadaan pakaian kerja lapangan'),
-(51, 4, 4, 'Pengadaan pakaian KORPRI'),
-(52, 4, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(53, 5, 1, 'Pemulangan pegawai yang pensiun'),
-(54, 5, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(55, 5, 3, 'Pemindahan tugas PNS'),
-(56, 6, 1, 'Pendidikan dan pelatihan formal'),
-(57, 6, 2, 'Sosialisasi peraturan perundang-undangan'),
-(58, 6, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(59, 7, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(60, 7, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(61, 7, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(62, 7, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(63, 8, 1, 'Pembangunan gedung sekolah'),
-(64, 8, 2, 'Pembangunan rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(65, 8, 3, 'Penambahan ruang kelas sekolah'),
-(66, 8, 4, 'Penambahan ruang guru sekolah'),
-(67, 8, 5, 'Pembangunan ruang locker siswa'),
-(68, 8, 6, 'Pembangunan sarana dan prasarana olahraga'),
-(69, 8, 7, 'pembangunan sarana dan Prasarana bermain'),
-(70, 8, 8, 'Pembangunan ruang serba guna/aula'),
-(71, 8, 9, 'Pembangunan taman, lapangan upacara dan fasilitas parkir'),
-(72, 8, 10, 'Pembangunan ruang unit kesehatan sekolah'),
-(73, 8, 11, 'Pembangunan ruang ibadah'),
-(74, 8, 12, 'Pembangunan perpustakaan sekolah'),
-(75, 8, 13, 'Pembangunan jaringan instalasi listrik sekolah dan perlengkapannya'),
-(76, 8, 14, 'Pembangunan sarana air bersih dan sanitary'),
-(77, 8, 15, 'Pengadaan buku-buku dan alat tulis siswa'),
-(78, 8, 16, 'Pengadan pakaian seragam sekolah'),
-(79, 8, 17, 'Pengadaan pakaian olahraga'),
-(80, 8, 18, 'Pengadaan alat praktik dan peraga siswa'),
-(81, 8, 19, 'Pengadaan mebeluer sekolah'),
-(82, 8, 20, 'Pengadaan perlengkapan sekolah'),
-(83, 8, 21, 'Pengadaan alat rumah tangga sekolah'),
-(84, 8, 22, 'Pengadaan sarana mobilitas sekolah'),
-(85, 8, 23, 'Pemeliharaan rutin/berkala bangunan sekolah'),
-(86, 8, 24, 'Pemeliharaan rutin/berkala rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(87, 8, 25, 'Pemeliharaan rutin/berkala ruang kelas sekolah'),
-(88, 8, 26, 'Pemeliharaan rutin/berkala ruang guru sekolah'),
-(89, 8, 27, 'Pemeliharaan rutin/berkala ruang locker siswa'),
-(90, 8, 28, 'Pemeliharaan rutin/berkala sarana dan prasarana olahraga'),
-(91, 8, 29, 'Pemeliharaan rutin/berkala sarana dan prasarana bermain'),
-(92, 8, 30, 'Pemeliharaan rutin/berkala ruang serba guna/aula'),
-(93, 8, 31, 'Pemeliharaan rutin/berkala taman, lapangan upacara dan fasilitas parkir'),
-(94, 8, 32, 'Pemeliharaan rutin/berkala ruang unit kesehatan sekolah'),
-(95, 8, 33, 'Pemeliharaan rutin/berkala ruang ibadah'),
-(96, 8, 34, 'Pemeliharaan rutin/berkala perpustakaan sekolah'),
-(97, 8, 35, 'Pemeliharaan rutin/berkala jaringan instalasi listrik sekolah dan perlengkapannya'),
-(98, 8, 36, 'Pemeliharaan rutin/berkala sarana air bersih dan sanitary'),
-(99, 8, 37, 'Pemeliharaan rutin/berkala alat praktik dan peraga siswa'),
-(100, 8, 38, 'Pemeliharaan rutin/berkala mebeluer sekolah'),
-(101, 8, 39, 'Pemeliharaan rutin/berkala perlengkapan sekolah'),
-(102, 8, 40, 'Pemeliharaan rutin/berkala alat rumah tangga sekolah'),
-(103, 8, 41, 'Pemeliharaan rutin/berkala sarana mobilitas sekolah'),
-(104, 8, 42, 'Rehabilitasi sedang/berat bangunan sekolah'),
-(105, 8, 43, 'Rehabilitasi sedang/berat rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(106, 8, 44, 'Rehabilitasi sedang/berat asrama siswa'),
-(107, 8, 45, 'Rehabilitasi sedang/berat ruang kelas sekolah'),
-(108, 8, 46, 'Rehabilitasi sedang/berat ruang guru sekolah'),
-(109, 8, 47, 'Rehabilitasi sedang/berat ruang locker siswa'),
-(110, 8, 48, 'Rehabilitasi sedang/berat sarana olahraga'),
-(111, 8, 49, 'Rehabilitasi sedang/berat sarana bermain'),
-(112, 8, 50, 'Rehabilitasi sedang/berat ruang serba guna/aula'),
-(113, 8, 51, 'Rehabilitasi sedang/berat taman, lapangan upacara dan fasilitas parkir'),
-(114, 8, 52, 'Rehabilitasi sedang/berat ruang unit kesehatan sekolah'),
-(115, 8, 53, 'Rehabilitasi sedang/berat ruang ibadah'),
-(116, 8, 54, 'Rehabilitasi sedang/berat perpustakaan sekolah'),
-(117, 8, 55, 'Rehabilitasi sedang/berat jaringan instalasi sekolah dan perlengkapannya'),
-(118, 8, 56, 'Rehabilitasi sedang/berat sarana air bersih dan sanitary'),
-(119, 8, 57, 'Pelatihan kompetensi tenaga pendidik'),
-(120, 8, 58, 'Pengembangan Pendidikan Anak Usia Dini'),
-(121, 8, 59, 'Penyelenggaraan Pendidikan Anak Usia Dini'),
-(122, 8, 60, 'Pengembangan data dan informasi Pendidikan Anak Usia Dini'),
-(123, 8, 61, 'Penyusunan kebijakan Pendidikan Anak Usia Dini'),
-(124, 8, 62, 'Pengembangan kurikulum, bahan ajar dan model pembelajaran Pendidikan Anak Usia Dini'),
-(125, 8, 63, 'Penyelenggaraan koordinasi dan kerjasama Pendidikan Anak Usia Dini'),
-(126, 8, 64, 'Perencanaan dan penyusunan program Pendidikan Anak Usia Dini'),
-(127, 8, 65, 'Publikasi dan sosialisasi Pendidikan Anak Usia Dini'),
-(128, 8, 66, 'Monitoring, evaluasi Pendidikan Anak Usia Dini'),
-(129, 9, 1, 'Pembangunan gedung sekolah'),
-(130, 9, 2, 'Pembangunan rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(131, 9, 3, 'Penambahan ruang kelas sekolah'),
-(132, 9, 4, 'Penambahan ruang guru sekolah'),
-(133, 9, 5, 'Pembangunan laboratorium dan ruang pratikum sekolah'),
-(134, 9, 6, 'Pembangunan ruang locker siswa'),
-(135, 9, 7, 'Pembangunan sarana dan prasarana olahraga'),
-(136, 9, 8, 'Pembangunan ruang serba guna/aula'),
-(137, 9, 9, 'Pembangunan taman, lapangan upacara dan fasilitas parkir'),
-(138, 9, 10, 'Pembangunan ruang unit kesehatan sekolah'),
-(139, 9, 11, 'Pembangunan ruang ibadah'),
-(140, 9, 12, 'Pembangunan pepustakaan sekolah'),
-(141, 9, 13, 'Pembangunan jaringan instalasi listrik sekolah dan perlengkapannya'),
-(142, 9, 14, 'Pembanguna sarana air bersih dan sanitary'),
-(143, 9, 15, 'Pengadaan buku-buku dan alat tulis siswa'),
-(144, 9, 16, 'Pengadan pakaian seragam sekolah'),
-(145, 9, 17, 'Pengadaan pakaian olahraga'),
-(146, 9, 18, 'Pengadaan alat praktik dan peraga siswa'),
-(147, 9, 19, 'Pengadaan mebeluer sekolah'),
-(148, 9, 20, 'Pengadaan perlengkapan sekolah'),
-(149, 9, 21, 'Pengadaan alat rumah tangga sekolah'),
-(150, 9, 22, 'Pengadaan sarana mobilitas sekolah'),
-(151, 9, 23, 'Pemeliharaan rutin/berkala bangunan sekolah'),
-(152, 9, 24, 'Pemeliharaan rutin/berkala rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(153, 9, 25, 'Pemeliharaan rutin/berkala ruang kelas sekolah'),
-(154, 9, 26, 'Pemeliharaan rutin/berkala ruang guru sekolah'),
-(155, 9, 27, 'Pemeliharaan rutin/berkala ruang locker siswa'),
-(156, 9, 28, 'Pemeliharaan rutin/berkala sarana dan prasarana olahraga'),
-(157, 9, 29, 'Pemeliharaan rutin/berkala ruang serba guna/aula'),
-(158, 9, 30, 'Pemeliharaan rutin/berkala taman, lapangan upacara dan fasilitas parkir'),
-(159, 9, 31, 'Pemeliharaan rutin/berkala ruang unit kesehatan sekolah'),
-(160, 9, 32, 'Pemeliharaan rutin/berkala ruang ibadah'),
-(161, 9, 33, 'Pemeliharaan rutin/berkala perpustakaan sekolah'),
-(162, 9, 34, 'Pemeliharaan rutin/berkala jaringan instalasi listrik sekolah dan perlengkapannya'),
-(163, 9, 35, 'Pemeliharaan rutin/berkala sarana air bersih dan sanitary'),
-(164, 9, 36, 'Pemeliharaan rutin/berkala alat praktik dan peraga siswa'),
-(165, 9, 37, 'Pemeliharaan rutin/berkala mebeluer sekolah'),
-(166, 9, 38, 'Pemeliharaan rutin/berkala perlengkapan sekolah'),
-(167, 9, 39, 'Pemeliharaan rutin/berkala alat rumah tangga sekolah'),
-(168, 9, 40, 'Pemeliharaan rutin/berkala sarana mobilitas sekolah'),
-(169, 9, 41, 'Rehabilitasi sedang/berat bangunan sekolah'),
-(170, 9, 42, 'Rehabilitasi sedang/berat rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(171, 9, 43, 'Rehabilitasi sedang/berat asrama siswa'),
-(172, 9, 44, 'Rehabilitasi sedang/berat ruang kelas sekolah'),
-(173, 9, 45, 'Rehabilitasi sedang/berat ruang guru sekolah'),
-(174, 9, 46, 'Rehabilitasi sedang/berat laboratorium dan ruang pratikum sekolah'),
-(175, 9, 47, 'Rehabilitasi sedang/berat sarana mobilitas sekolah'),
-(176, 9, 48, 'Rehabilitasi sedang/berat ruang locker siswa'),
-(177, 9, 49, 'Rehabilitasi sedang/berat sarana olahraga'),
-(178, 9, 50, 'Rehabilitasi sedang/berat ruang serba guna/aula'),
-(179, 9, 51, 'Rehabilitasi sedang/berat taman, lapangan upacara dan fasilitas parkir'),
-(180, 9, 52, 'Rehabilitasi sedang/berat ruang unit kesehatan sekolah'),
-(181, 9, 53, 'Rehabilitasi sedang/berat ruang ibadah'),
-(182, 9, 54, 'Rehabilitasi sedang/berat perpustakaan sekolah'),
-(183, 9, 55, 'Rehabilitasi sedang/berat jaringan instalasi sekolah dan perlengkapannya'),
-(184, 9, 56, 'Rehabilitasi sedang/berat sarana air bersih dan sanitary'),
-(185, 9, 57, 'Pelatihan kompetensi tenaga pendidik'),
-(186, 9, 58, 'Pelatihan kompetensi siswa berprestasi'),
-(187, 9, 59, 'Pelatihan Penyusunan kurikulum'),
-(188, 9, 60, 'Pembinaan forum masyarakat peduli pendidikan'),
-(189, 9, 61, 'Pembinaan SMP Terbuka'),
-(190, 9, 62, 'Penambahan ruang kelas baru SMP/MTS/SMPLB'),
-(191, 9, 63, 'Penyediaan Bantuan Operasional Sekolah (BOS) jenjang SD/MI/SDLB dan SMP/MTS serta pesantren Salafiyah dan Satuan Pendidikan Non-Islam Setara SD dan SMP'),
-(192, 9, 64, 'Penyediaan Biaya Operasional Madrasah'),
-(193, 9, 65, 'Penyediaan buku pelajaran untuk SD/MI/SDLB dan SMP/MTS'),
-(194, 9, 66, 'Penyediaan dana pengembangansekolah Untuk SD/MI/SDLB dan SMP/MTS'),
-(195, 9, 67, 'Penyelenggaraan Paket A Setara SD'),
-(196, 9, 68, 'Penyelenggaraan Paket B Setara SMP'),
-(197, 9, 69, 'Pembinaan kelembagaan dan manajemen sekolah dengan penerapan Manajemen Berbasis Sekolah (MBS) di Satuan Pendidikan Dasar'),
-(198, 9, 70, 'Pembinaaan minat, bakat, dan kreativitas siswa'),
-(199, 9, 71, 'Pengembangan Comprehensive Teaching And Learning (CTL)'),
-(200, 9, 72, 'Pengembangan materi belajar mengajar dan metode pembelajaran dengan menggunakan teknologi informasi dan komunikasi'),
-(201, 9, 73, 'Penyebarluasan dan sosialisasi berbagai informasi pendidikan dasar'),
-(202, 9, 74, 'Penyediaan beasiswa retrieval untuk anak putus sekolah'),
-(203, 9, 75, 'Penyediaan beasiswa transisi'),
-(204, 9, 76, 'Penyelenggaraan akreditasi sekolah dasar'),
-(205, 9, 77, 'Penyelenggaraan Multi-Grade Teaching di daerah terpencil'),
-(206, 9, 78, 'Monitoring, evaluasi dan pelaporan'),
-(207, 10, 1, 'Pembangunan gedung sekolah'),
-(208, 10, 2, 'Pembangunan rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(209, 10, 3, 'Penambahan ruang kelas sekolah'),
-(210, 10, 4, 'Penambahan ruang guru sekolah'),
-(211, 10, 5, 'Pembangunan laboratorium dan ruang pratikum sekolah (labotatorium bahasa, komputer, IPA, IPS dan lain-lain)'),
-(212, 10, 6, 'Pembangunan ruang locker siswa'),
-(213, 10, 7, 'Pembangunan sarana dan prasarana olahraga'),
-(214, 10, 8, 'Pembangunan ruang serba guna/aula'),
-(215, 10, 9, 'Pembangunan taman, lapangan upacara dan fasilitas parkir'),
-(216, 10, 10, 'Pembangunan ruang unit kesehatan sekolah'),
-(217, 10, 11, 'Pembangunan ruang ibadah'),
-(218, 10, 12, 'Pembangunan pepustakaan sekolah'),
-(219, 10, 13, 'Pembangunan jaringan instalasi listrik sekolah dan perlengkapannya'),
-(220, 10, 14, 'Pembanguna sarana air bersih dan sanitary'),
-(221, 10, 15, 'Pengadaan buku-buku dan alat tulis siswa'),
-(222, 10, 16, 'Pengadan pakaian seragam sekolah'),
-(223, 10, 17, 'Pengadaan pakaian olahraga'),
-(224, 10, 18, 'Pengadaan alat praktik dan peraga siswa'),
-(225, 10, 19, 'Pengadaan mebeluer sekolah'),
-(226, 10, 20, 'Pengadaan perlengkapan sekolah'),
-(227, 10, 21, 'Pengadaan alat rumah tangga sekolah'),
-(228, 10, 22, 'Pengadaan sarana mobilitas sekolah'),
-(229, 10, 23, 'Pemeliharaan rutin/berkala bangunan sekolah'),
-(230, 10, 24, 'Pemeliharaan rutin/berkala rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(231, 10, 25, 'Pemeliharaan rutin/berkala ruang kelas sekolah'),
-(232, 10, 26, 'Pemeliharaan rutin/berkala ruang guru sekolah'),
-(233, 10, 27, 'Pemeliharaan rutin/berkala ruang locker siswa'),
-(234, 10, 28, 'Pemeliharaan rutin/berkala sarana dan prasarana olahraga'),
-(235, 10, 29, 'Pemeliharaan rutin/berkala ruang serba guna/aula'),
-(236, 10, 30, 'Pemeliharaan rutin/berkala taman, lapangan upacara dan fasilitas parkir'),
-(237, 10, 31, 'Pemeliharaan rutin/berkala ruang unit kesehatan sekolah'),
-(238, 10, 32, 'Pemeliharaan rutin/berkala ruang ibadah'),
-(239, 10, 33, 'Pemeliharaan rutin/berkala perpustakaan sekolah'),
-(240, 10, 34, 'Pemeliharaan rutin/berkala jaringan instalasi listrik sekolah dan perlengkapannya'),
-(241, 10, 35, 'Pemeliharaan rutin/berkala sarana air bersih dan sanitary'),
-(242, 10, 36, 'Pemeliharaan rutin/berkala alat praktik dan peraga siswa'),
-(243, 10, 37, 'Pemeliharaan rutin/berkala mebeluer sekolah'),
-(244, 10, 38, 'Pemeliharaan rutin/berkala perlengkapan sekolah'),
-(245, 10, 39, 'Pemeliharaan rutin/berkala alat rumah tangga sekolah'),
-(246, 10, 40, 'Pemeliharaan rutin/berkala sarana mobilitas sekolah'),
-(247, 10, 41, 'Rehabilitasi sedang/berat bangunan sekolah'),
-(248, 10, 42, 'Rehabilitasi sedang/berat rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(249, 10, 43, 'Rehabilitasi sedang/berat asrama siswa'),
-(250, 10, 44, 'Rehabilitasi sedang/berat ruang kelas sekolah'),
-(251, 10, 45, 'Rehabilitasi sedang/berat ruang guru sekolah'),
-(252, 10, 46, 'Rehabilitasi sedang/berat laboratorium dan ruang pratikum sekolah'),
-(253, 10, 47, 'Rehabilitasi sedang/berat ruang locker siswa'),
-(254, 10, 48, 'Rehabilitasi sedang/berat sarana olahraga'),
-(255, 10, 49, 'Rehabilitasi sedang/berat ruang serba guna/aula'),
-(256, 10, 50, 'Rehabilitasi sedang/berat taman, lapangan upacara dan fasilitas parkir'),
-(257, 10, 51, 'Rehabilitasi sedang/berat ruang unit kesehatan sekolah'),
-(258, 10, 52, 'Rehabilitasi sedang/berat ruang ibadah'),
-(259, 10, 53, 'Rehabilitasi sedang/berat perpustakaan sekolah'),
-(260, 10, 54, 'Rehabilitasi sedang/berat jaringan instalasi sekolah dan perlengkapannya'),
-(261, 10, 55, 'Rehabilitasi sedang/berat sarana air bersih dan sanitary'),
-(262, 10, 56, 'Rehabilitasi sedang/berat sarana mobilitas sekolah'),
-(263, 10, 57, 'Pelatihan kompetensi tenaga pendidik'),
-(264, 10, 58, 'Pelatihan Penyusunan kurikulum'),
-(265, 10, 59, 'Pembinaan forum masyarakat peduli pendidikan'),
-(266, 10, 60, 'Pengembangan alternatif layanan pendidikan menengah untuk daerah-daerah perdesaan, terpencil dan kepulauan'),
-(267, 10, 61, 'Penyediaan Bantuan Operasional Manajemen Mutu (BOMM)'),
-(268, 10, 62, 'Penyediaan beasiswa bagi keluarga tidak mampu'),
-(269, 10, 63, 'Penyelenggaraan paket C setara SMU'),
-(270, 10, 64, 'Pembinaan kelembagaan dan manajemen sekolah dengan penerapan Manajemen Berbasis Sekolah (MBS)'),
-(271, 10, 65, 'Pengembangan metode belajar dan mengajar dengan menggunakan teknologi informasi dan komunikasi'),
-(272, 10, 66, 'Peningkatan Kerjasama dengan dunia usaha dan dunia indutri'),
-(273, 10, 67, 'Penyebarluasan dan sosialisasi berbagai informasi pendidikan menengah'),
-(274, 10, 68, 'Penyelenggaraan akreditasi sekolah menengah'),
-(275, 10, 69, 'Monitoring, evaluasi dan pelaporan'),
-(276, 11, 1, 'Pemberdayaan tenaga pendidik non formal'),
-(277, 11, 2, 'Pemberian bantuan operasional pendidikan non formal'),
-(278, 11, 3, 'Pembinaan pendidikan kursus dan kelembagaan'),
-(279, 11, 4, 'Pengembangan pendidikan keaksaraan'),
-(280, 11, 5, 'Pengembangan pendidikan kecakapan hidup'),
-(281, 11, 6, 'Penyediaan sarana dan prasarana pendidikan non formal'),
-(282, 11, 7, 'Pengembangan data dan informasi pendidikan non formal'),
-(283, 11, 8, 'Pengembangan kebijakan pendidikan non formal'),
-(284, 11, 9, 'Pengembangan kurikulum, bahan ajar dan model pembelajaran pendidikan non formal'),
-(285, 11, 10, 'Pengembangan sertifikasi pendidikan non formal'),
-(286, 11, 11, 'Perencanaan dan penyusunan program pendidikan non format'),
-(287, 11, 12, 'Publikasi dan sosialisasi pendidikan non formal'),
-(288, 11, 13, 'Monitoring, evaluasi dan pelaporan'),
-(289, 12, 1, 'Pembangunan gedung sekolah'),
-(290, 12, 2, 'Pembangunan rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(291, 12, 3, 'Penambahan ruang kelas sekolah'),
-(292, 12, 4, 'Penambahan ruang guru sekolah'),
-(293, 12, 5, 'Pembangunan laboratorium dan ruang pratikum sekolah (labotatorium bahasa, komputer, IPA, IPS dan lain-lain)'),
-(294, 12, 6, 'Pembangunan ruang locker siswa'),
-(295, 12, 7, 'Pembangunan sarana dan prasarana olahraga'),
-(296, 12, 8, 'Pembangunan ruang serba guna/aula'),
-(297, 12, 9, 'Pembangunan taman, lapangan upacara dan fasilitas parkir'),
-(298, 12, 10, 'Pembangunan ruang unit kesehatan sekolah'),
-(299, 12, 11, 'Pembangunan ruang ibadah'),
-(300, 12, 12, 'Pembangunan pepustakaan sekolah'),
-(301, 12, 13, 'Pembangunan jaringan instalasi listrik sekolah dan perlengkapannya'),
-(302, 12, 14, 'Pembangunan sarana air bersih dan sanitary'),
-(303, 12, 15, 'Pengadaan buku-buku dan alat tulis siswa'),
-(304, 12, 16, 'Pengadan pakaian seragam sekolah dan kelengkapannya serta pakaian olahraga'),
-(305, 12, 17, 'Pengadaan alat praktik dan peraga siswa'),
-(306, 12, 18, 'Pengadaan mebeluer sekolah'),
-(307, 12, 19, 'Pengadaan perlengkapan sekolah'),
-(308, 12, 20, 'Pengadaan alat rumah tangga sekolah'),
-(309, 12, 21, 'Pengadaan sarana mobilitas sekolah'),
-(310, 12, 22, 'Pemeliharaan rutin/berkala bangunan sekolah'),
-(311, 12, 23, 'Pemeliharaan rutin/berkala rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(312, 12, 24, 'Pemeliharaan rutin/berkala ruang kelas sekolah'),
-(313, 12, 25, 'Pemeliharaan rutin/berkala ruang guru sekolah'),
-(314, 12, 26, 'Pemeliharaan rutin/berkala ruang locker siswa'),
-(315, 12, 27, 'Pemeliharaan rutin/berkala sarana dan prasarana olahraga'),
-(316, 12, 28, 'Pemeliharaan rutin/berkala ruang serba guna/aula'),
-(317, 12, 29, 'Pemeliharaan rutin/berkala taman, lapangan upacara dan fasilitas parkir'),
-(318, 12, 30, 'Pemeliharaan rutin/berkala ruang unit kesehatan sekolah'),
-(319, 12, 31, 'Pemeliharaan rutin/berkala ruang ibadah'),
-(320, 12, 32, 'Pemeliharaan rutin/berkala perpustakaan sekolah'),
-(321, 12, 33, 'Pemeliharaan rutin/berkala jaringan instalasi listrik sekolah dan perlengkapannya'),
-(322, 12, 34, 'Pemeliharaan rutin/berkala sarana air bersih dan sanitary'),
-(323, 12, 35, 'Pemeliharaan rutin/berkala buku-buku ajar'),
-(324, 12, 36, 'Pemeliharaan rutin/berkala alat praktik dan peraga siswa'),
-(325, 12, 37, 'Pemeliharaan rutin/berkala mebeluer sekolah'),
-(326, 12, 38, 'Pemeliharaan rutin/berkala perlengkapan sekolah'),
-(327, 12, 39, 'Pemeliharaan rutin/berkala alat rumah tangga sekolah'),
-(328, 12, 40, 'Pemeliharaan rutin/berkala sarana mobilitas sekolah'),
-(329, 12, 41, 'Rehabilitasi sedang/berat bangunan sekolah'),
-(330, 12, 42, 'Rehabilitasi sedang/berat rumah dinas kepala sekolah, guru, penjaga sekolah'),
-(331, 12, 43, 'Rehabilitasi sedang/berat asrama siswa'),
-(332, 12, 44, 'Rehabilitasi sedang/berat ruang kelas sekolah'),
-(333, 12, 45, 'Rehabilitasi sedang/berat ruang guru sekolah'),
-(334, 12, 46, 'Rehabilitasi sedang/berat laboratorium dan ruang pratikum sekolah'),
-(335, 12, 47, 'Rehabilitasi sedang/berat ruang locker siswa'),
-(336, 12, 48, 'Rehabilitasi sedang/berat sarana olahraga'),
-(337, 12, 49, 'Rehabilitasi sedang/berat ruang serba guna/aula'),
-(338, 12, 50, 'Rehabilitasi sedang/berat taman, lapangan upacara dan fasilitas parkir'),
-(339, 12, 51, 'Rehabilitasi sedang/berat ruang unit kesehatan sekolah'),
-(340, 12, 52, 'Rehabilitasi sedang/berat ruang ibadah'),
-(341, 12, 53, 'Rehabilitasi sedang/berat perpustakaan sekolah'),
-(342, 12, 54, 'Rehabilitasi sedang/berat jaringan instalasi sekolah dan perlengkapannya'),
-(343, 12, 55, 'Rehabilitasi sedang/berat sarana air bersih dan sanitary'),
-(344, 12, 56, 'Pelatihan kompetensi tenaga pendidik'),
-(345, 12, 57, 'Pelatihan Penyusunan kurikulum'),
-(346, 12, 58, 'Pembinaan forum masyarakat peduli pendidikan'),
-(347, 12, 59, 'Monitoring, evaluasi dan pelaporan'),
-(348, 13, 1, 'Pelaksanaan Sertifikasi pendidik'),
-(349, 13, 2, 'Pelaksanaan uji kompetensi pendidik dan tenaga kependidikan'),
-(350, 13, 3, 'pelatihan bagi pendidik untuk memenuhi standar kompetensi'),
-(351, 13, 4, 'Pembinaan Kelompok Kerja Guru (KKG)'),
-(352, 13, 5, 'Pembinaan Lembaga Penjamin Mutu Pendidikan (LPMP)'),
-(353, 13, 6, 'Pembinaan Pusat Pendidikan dan Pelatihan Guru (PPPG)'),
-(354, 13, 7, 'Pendidikan lanjutan bagi pendidik untuk memenuhi standar kualifikasi'),
-(355, 13, 8, 'Pengembangan mutu dan kualitas program pendidikan dan pelatihan bagi pendidik dan tenaga kependidikan'),
-(356, 13, 9, 'Pengembangan sistem pendataan dan pemetaan pendidik dan tenaga kependidikan'),
-(357, 13, 10, 'Pengembangan sistem penghargaan dan perlindungan terhadap profesi pendidik'),
-(358, 13, 11, 'Pengembangan sistem perencanaan dan pengendalian program profesi pendidik dan tenaga kependidikan'),
-(359, 13, 12, 'Monitoring, evaluasi dan pelaporan'),
-(360, 14, 1, 'Pemasyarakatan minat dan kebiasaan membaca untuk mendorong terwujudnya masyarakat pembelajar'),
-(361, 14, 2, 'Pengembangan minat dan budaya baca'),
-(362, 14, 3, 'Supervisi, pembinaan dan stimulasi pada perpustakaan umum, perpustakaan khusus, perpustakaan sekolah dan perpustakaan masyarakat'),
-(363, 14, 4, 'Pelaksanaan koordinasi pengembangan perpustakaan'),
-(364, 14, 5, 'Penyediaan bantuan pengembangan perpustakaan dan minat baca di daerah'),
-(365, 14, 6, 'Penyelenggaraan koordinasi pengembangan budaya baca'),
-(366, 14, 7, 'Perencanaan dan penyusunan program budaya baca'),
-(367, 14, 8, 'Publikasi dan sosialisasi minat dan budaya baca'),
-(368, 14, 9, 'Penyediaan bahan pustaka perpustakaan umum daerah'),
-(369, 14, 10, 'Monitoring, evaluasi dan pelaporan'),
-(370, 15, 1, 'Pelaksanaan evaluasi hasil kinerja bidang pendidikan'),
-(371, 15, 2, 'Pelaksanaan kerjasama secara kelembagaan di bidang pendidikan'),
-(372, 15, 3, 'Pengendalian dan pengawasan penerapan azas efisiensi dan efektivitas penggunaan dana dekonsentrasi dan dana pembantuan'),
-(373, 15, 4, 'Sosialisasi dan advokasi berbagai Peraturan Pemerintah di bidang pendidikan'),
-(374, 15, 5, 'Pembinaan Dewan Pendidikan'),
-(375, 15, 6, 'Pembinaan Komite Sekolah'),
-(376, 15, 7, 'Penerapan sistem dan informasi manajemen pendidikan'),
-(377, 15, 8, 'Penyelenggaraan pelatihan, seminar dan lokakarya, serta diskusi ilmiah tentang berbagai isu pendidikan'),
-(378, 15, 9, 'Monitoring, evaluasi dan pelaporan'),
-(379, 16, 0, 'Non Kegiatan'),
-(380, 17, 1, 'Penyediaan jasa surat menyurat'),
-(381, 17, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(382, 17, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(383, 17, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(384, 17, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(385, 17, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(386, 17, 7, 'Penyediaan jasa administrasi keuangan'),
-(387, 17, 8, 'Penyediaan jasa kebersihan kantor'),
-(388, 17, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(389, 17, 10, 'Penyediaan alat tulis kantor'),
-(390, 17, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(391, 17, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(392, 17, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(393, 17, 14, 'Penyediaan peralatan rumah tangga'),
-(394, 17, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(395, 17, 16, 'Penyediaan bahan logistik kantor'),
-(396, 17, 17, 'Penyediaan makanan dan minuman'),
-(397, 17, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(398, 17, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(399, 18, 1, 'Pembangunan rumah jabatan'),
-(400, 18, 2, 'Pembangunan rumah dinas'),
-(401, 18, 3, 'Pembangunan gedung kantor'),
-(402, 18, 4, 'Pengadaan mobil jabatan'),
-(403, 18, 5, 'pengadaan Kendaraan dinas/operasional'),
-(404, 18, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(405, 18, 7, 'Pengadaan perlengkapan gedung kantor'),
-(406, 18, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(407, 18, 9, 'Pengadaan peralatan gedung kantor'),
-(408, 18, 10, 'Pengadaan mebeleur'),
-(409, 18, 11, 'Pengadaan ……'),
-(410, 18, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(411, 18, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(412, 18, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(413, 18, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(414, 18, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(415, 18, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(416, 18, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(417, 18, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(418, 18, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(419, 18, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(420, 18, 30, 'Pemeliharaan rutin/berkala …..'),
-(421, 18, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(422, 18, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(423, 18, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(424, 18, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(425, 18, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(426, 19, 1, 'Pengadaan mesin/kartu absensi'),
-(427, 19, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(428, 19, 3, 'Pengadaan pakaian kerja lapangan'),
-(429, 19, 4, 'Pengadaan pakaian KORPRI'),
-(430, 19, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(431, 20, 1, 'Pemulangan pegawai yang pensiun'),
-(432, 20, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(433, 20, 3, 'Pemindahan tugas PNS'),
-(434, 21, 1, 'Pendidikan dan pelatihan formal'),
-(435, 21, 2, 'Sosialisasi peraturan perundang-undangan'),
-(436, 21, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(437, 22, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(438, 22, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(439, 22, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(440, 22, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(441, 23, 1, 'Pengadaaan Obat dan Perbekalan Kesehatan'),
-(442, 23, 2, 'Peningkatan pemerataan obat dan perbekalan kesehatan'),
-(443, 23, 3, 'Peningkatan keterjangkauan harga obat dan perbekalan kesehatan terutama untuk penduduk miskin'),
-(444, 23, 4, 'Peningkatan mutu pelayanan farmasi komunitas dan rumah sakit'),
-(445, 23, 5, 'Peningkatan Mutu Penggunaan Obat dan Perbekalan Kesehatan'),
-(446, 23, 6, 'Monitoring, evaluasi dan pelaporan'),
-(447, 24, 1, 'Pelayanan kesehatan penduduk miskin di puskesmas jaringannya'),
-(448, 24, 2, 'Pemeliharaan dan pemulihan kesehatan'),
-(449, 24, 3, 'Pengadaan, peningkatan, dan perbaikan sarana dan prasarana puskesmas dan jaringannya'),
-(450, 24, 4, 'Penyelenggaraan pencegahan dan pemberantasan penyakit menular dan wabah'),
-(451, 24, 5, 'Perbaikan gizi masyarakat'),
-(452, 24, 6, 'Revitalisasi sistem kesehatan'),
-(453, 24, 7, 'Pelayanan kefarmasian dan alat kesehatan'),
-(454, 24, 8, 'Pengadaan peralatan dan perbakalan kesehatan termasuk obat generik esensial'),
-(455, 24, 9, 'Peningkatan kesehatan masyarakat'),
-(456, 24, 11, 'Peningkatan pelayanan kesehatan bagi pengungsi korban bencana'),
-(457, 24, 12, 'Peningkatan pelayanan dan penanggulangan masalah kesehatan'),
-(458, 24, 13, 'Penyediaan biaya operasional dan pemeliharaan'),
-(459, 24, 14, 'Penyelenggaraan penyehatan lingkungan'),
-(460, 24, 15, 'Monitoring, evaluasi dan pelaporan'),
-(461, 25, 1, 'Peningkatan pemberdayaan konsumen/masyarakat di bidang obat dan makanan'),
-(462, 25, 2, 'Peningkatan pengawasan keaman pangan dan bahan berbahaya'),
-(463, 25, 3, 'Peningkatan kapasitas laboratorium pengawasan obat dan makanan'),
-(464, 25, 4, 'Peningkatan penyidikan dan penegakan hukum di bidang obat dan makanan'),
-(465, 25, 5, 'Monitoring, evaluasi dan pelaporan'),
-(466, 26, 1, 'Fasilitasi pengembangan dan penelitian teknologi produksi tanaman obat'),
-(467, 26, 2, 'Pengembangan standarisasi tanaman obat bahan alam indonesia'),
-(468, 26, 3, 'Peningkatan promosi obat bahan alam indonesia di dalam dan di luar negeri'),
-(469, 26, 4, 'Pengembangan sistem dan layanan informasi terpadu'),
-(470, 26, 5, 'Peningkatan kerjasama antar lembaga penelitian dan industri terkait'),
-(471, 26, 6, 'Monitoring, evaluasi dan pelaporan'),
-(472, 27, 1, 'Pengembangan media promosi dan informasi sadar hidup sehat'),
-(473, 27, 2, 'Penyuluhan masyarakat pola hidup sehat'),
-(474, 27, 3, 'Peningkatan pemanfaatan sarana kesehatan'),
-(475, 27, 4, 'Peningkatan pendidikan tenaga penyuluh kesehatan'),
-(476, 27, 5, 'Monitoring, evaluasi dan pelaporan'),
-(477, 28, 1, 'Penyusunan peta informasi masyarakat kurang gizi'),
-(478, 28, 2, 'Pemberian tambahan makanan dan vitamin'),
-(479, 28, 3, 'Penanggulangan Kurang Energi Protein (KEP), Anemia Gizi Besi, Gangguan Akibat kurang Yodium (GAKY), Kurang Vitamin A, dan Kekurangan Zat Gizi Mikro Lainnya'),
-(480, 28, 4, 'Pemberdayaan masyarakat untuk pencapaian keluarga sadar gizi'),
-(481, 28, 5, 'Penanggulangan Gizi-Lebih'),
-(482, 28, 6, 'Monitoring, evaluasi dan pelaporan'),
-(483, 29, 1, 'Pengkajian pengembangan lingkungan sehat'),
-(484, 29, 2, 'Penyuluhan menciptakan lingkungan sehat'),
-(485, 29, 3, 'Sosialisasi kebijakan lingkungan sehat'),
-(486, 29, 4, 'Monitoring, evaluasi dan pelaporan'),
-(487, 30, 1, 'Penyemprotan/fogging sarang nyamuk'),
-(488, 30, 2, 'Pengadaan alat fogging dan bahan-bahan fogging'),
-(489, 30, 3, 'Pengadaan vaksin penyakit menular'),
-(490, 30, 4, 'Pelayanan vaksinasi bagi balita dan anak sekolah'),
-(491, 30, 5, 'Pelayanan pencegahan dan penanggulangan penyakit menular'),
-(492, 30, 6, 'Pencegahan penularan penyakit Endemik/Epidemik'),
-(493, 30, 7, 'Pemusnahan/karantina sumber penyebab penyakit menular'),
-(494, 30, 8, 'Peningkatan imuniasasi'),
-(495, 30, 9, 'Peningkatan survellance Epidemiologi dan penanggulangan wabah'),
-(496, 30, 10, 'Peningkatam komunikasi, informasi dan edukasi (ide) pencegahan dan pemberantasan penyakit'),
-(497, 30, 11, 'Monitoring, evaluasi dan pelaporan'),
-(498, 31, 1, 'Penyusunan standar pelayanan kesehatan'),
-(499, 31, 2, 'Evaluasi dan pengembangan standar pelayanan kesehatan'),
-(500, 31, 3, 'Pembangunan dan pemutakhiran data dasar standar pelayanan kesehatan'),
-(501, 31, 4, 'Penyusunan naskah akademis standar pelayanan kesehatan'),
-(502, 31, 5, 'Penyusunan standar analisis belanja pelayanan kesehatan'),
-(503, 31, 6, 'Monitoring, evaluasi dan pelaporan'),
-(504, 32, 1, 'Pelayanan operasi katarak'),
-(505, 32, 2, 'Pelayanan kesehatan THT'),
-(506, 32, 3, 'Pelayanan operasi bibir sumbing'),
-(507, 32, 4, 'Pelayanan sunatan masal'),
-(508, 32, 5, 'Penanggulangan ISPA'),
-(509, 32, 6, 'Penanggulangan penyakit cacingan'),
-(510, 32, 7, 'Pelayanan kesehatan kulit dan kelamin'),
-(511, 32, 8, 'Pelayanan kesehatan akibat gizi buruk/busung lapar'),
-(512, 32, 9, 'pelayanan kesehatan akibat lumpuh layu'),
-(513, 32, 10, 'Monitoring, evaluasi dan pelaporan'),
-(514, 33, 1, 'Pembangunan puskesmas'),
-(515, 33, 2, 'Pembangunan puskesmas pembantu'),
-(516, 33, 3, 'Pengadaan puskesmas perairan'),
-(517, 33, 4, 'Pengadaan puskesmas keliling'),
-(518, 33, 5, 'Pembangunan Posyandu'),
-(519, 33, 7, 'Pengadaan sarana dan prasarana puskesmas'),
-(520, 33, 8, 'Pengadaan sarana dan prasarana puskesmas pembantu'),
-(521, 33, 9, 'Pengadaan sarana dan prasarana puskesmas perairan'),
-(522, 33, 10, 'Pengadaan sarana dan prasarana puskesmas keliling'),
-(523, 33, 11, 'Pengadaan sarana dan prasarana posyandu'),
-(524, 33, 12, 'Peningkatan puskesmas menjadi puskesmas rawat inap'),
-(525, 33, 13, 'Peningkatan puskesmas pembantu menjadi puskesmas'),
-(526, 33, 14, 'Pemeliharaan rutin/berkala sarana dan prasarana puskesmas'),
-(527, 33, 15, 'Pemeliharaan rutin/berkala sarana dan prasarana puskesmas pembantu'),
-(528, 33, 16, 'Pemeliharaan rutin/berkala sarana dan prasarana puskesmas perairan'),
-(529, 33, 17, 'Pemeliharaan rutin/berkala sarana dan prasarana puskesmas keliling'),
-(530, 33, 18, 'Pemeliharaan rutin/berkala sarana dan prasarana posyandu'),
-(531, 33, 19, 'Peningkatan puskesmas menjadi puskesmas rawat inap'),
-(532, 33, 20, 'Peningkatan puskesmas pembantu menjadi puskesmas'),
-(533, 33, 21, 'Rehabilitasi sedang/berat puskesmas pembantu'),
-(534, 33, 22, 'Rehabilitasi sedang/berat puskesmas perairan'),
-(535, 33, 23, 'Monitoring, evaluasi dan pelaporan'),
-(536, 34, 1, 'Pembangunan rumah sakit'),
-(537, 34, 2, 'Pembangunan ruang poliklinik rumah sakit'),
-(538, 34, 3, 'pembangunan gudang obat/apotik'),
-(539, 34, 4, 'penambahan ruang rawat inap rumah sakit (VVIP, VIP, Kelas I, II dan III)'),
-(540, 34, 5, 'Pengembangan ruang gawat darurat'),
-(541, 34, 6, 'Pengembangan ruang ICU, ICCU, NICU'),
-(542, 34, 7, 'Pengembangan ruang operasi'),
-(543, 34, 8, 'Pengembangan ruang terapi'),
-(544, 34, 9, 'Pengembangan ruang isolasi'),
-(545, 34, 10, 'Pengembangan ruang bersalin'),
-(546, 34, 11, 'Pengembangan ruang inkubator'),
-(547, 34, 12, 'Pengembangan ruang bayi'),
-(548, 34, 13, 'Pengembangan ruang rontgen'),
-(549, 34, 14, 'Pengembangan ruang laboratorium rumah sakit'),
-(550, 34, 15, 'Pembangunan kamar jenazah'),
-(551, 34, 16, 'Pembangunan instalasi pengolahan limbah rumah sakit'),
-(552, 34, 17, 'Rehabilitasi bangunan rumah sakit'),
-(553, 34, 18, 'Pengadaan alat-alat kesehatan rumah sakit'),
-(554, 34, 19, 'Pengadaan obat-obatan rumah sakit'),
-(555, 34, 20, 'Pengadaan ambulance/mobil jenazah'),
-(556, 34, 21, 'Pengadaan mebeuleur rumah sakit'),
-(557, 34, 22, 'Pengadaan perlengkapan rumah tangga rumah sakit (dapur, ruang pasien, laundry, ruang tunggu dan lain-lain)'),
-(558, 34, 23, 'Pengadaan bahan-bahan logistik rumah sakit'),
-(559, 34, 24, 'Pengadaan pencetakan administrasi dan surat menyurat rumah sakit'),
-(560, 34, 25, 'Pengembangan tipe rumah sakit'),
-(561, 34, 26, 'Monitoring, evaluasi dan pelaporan'),
-(562, 35, 1, 'Pemeliharaan rutin/berkala rumah sakit'),
-(563, 35, 2, 'Pemeliharaan rutin/berkala ruang poliklinik rumah sakit'),
-(564, 35, 3, 'Pemeliharaan rutin/berkala gudang obat/apotik'),
-(565, 35, 4, 'Pemeliharaan rutin/berkala ruang rawat inap rumah sakit (VVIP, VIP, Kelas I, II dan III)'),
-(566, 35, 5, 'Pemeliharaan rutin/berkala ruang gawat darurat'),
-(567, 35, 6, 'Pemeliharaan rutin/berkala ruang ICU, ICCU, NICU'),
-(568, 35, 7, 'Pemeliharaan rutin/berkala ruang operasi'),
-(569, 35, 8, 'Pemeliharaan rutin/berkala ruang terapi'),
-(570, 35, 9, 'Pemeliharaan rutin/berkala ruang isolasi'),
-(571, 35, 10, 'Pemeliharaan rutin/berkala ruang bersalin'),
-(572, 35, 11, 'Pemeliharaan rutin/berkala ruang inkubator'),
-(573, 35, 12, 'Pemeliharaan rutin/berkala ruang bayi'),
-(574, 35, 13, 'Pemeliharaan rutin/berkala ruang rontgen'),
-(575, 35, 14, 'Pemeliharaan rutin/berkala ruang laboratorium rumah sakit'),
-(576, 35, 15, 'Pemeliharaan rutin/berkala kamar jenazah'),
-(577, 35, 16, 'Pemeliharaan rutin/berkala instalasi pengolahan limbah rumah sakit'),
-(578, 35, 17, 'Pemeliharaan rutin/berkala alat-alat kesehatan rumah sakit'),
-(579, 35, 18, 'Pemeliharaan rutin/berkala mobil ambulance/jenazah'),
-(580, 35, 19, 'Pemeliharaan rutin/berkala mebeuleur rumah sakit'),
-(581, 35, 20, 'Pemeliharaan rutin/berkala perlengkapan rumah sakit'),
-(582, 35, 21, 'Monitoring, evaluasi dan pelaporan'),
-(583, 36, 1, 'Kemitraan asuransi kesehatan masyarakat'),
-(584, 36, 2, 'Kemitraan pencegahan dan pemberantasan penyakit menular'),
-(585, 36, 3, 'Kemitraan pengolahan limbah rumah sakit'),
-(586, 36, 4, 'Kemitraan alih teknologi kedokteran dan kesehatan'),
-(587, 36, 5, 'Kemitraan peningkatan kualitas dokter dan paramedis'),
-(588, 36, 6, 'Kemitraan pengobatan lanjutan bagi pasien rujukan'),
-(589, 36, 7, 'Kemitraan pengobatan bagi pasien kurang mampu'),
-(590, 36, 8, 'Monitoring, evaluasi dan pelaporan'),
-(591, 37, 1, 'Penyuluhan kesehatan anak balita'),
-(592, 37, 2, 'Immunisasi bagi anak balita'),
-(593, 37, 3, 'Rekrutmen tenaga pelayanan kesehatan anak balita'),
-(594, 37, 4, 'Pelatihan dan pendidikan perawatan anak balita'),
-(595, 37, 5, 'Pembangunan sarana dan prasarana khusus pelayanan perawatan anak balita'),
-(596, 37, 6, 'Pembangunan panti asuhan anak terlantar balita'),
-(597, 37, 7, 'Monitoring, evaluasi dan pelaporan'),
-(598, 38, 1, 'Pelayanan pemeliharaan kesehatan'),
-(599, 38, 2, 'Rekrutmen tenaga perawat kesehatan'),
-(600, 38, 3, 'Pendidikan dan pelatihan perawatan kesehatan'),
-(601, 38, 4, 'Pembangunan pusat-pusat pelayanan kesehatan'),
-(602, 38, 5, 'Pembangunan panti asuhan'),
-(603, 38, 6, 'Pelayanan kesehatan'),
-(604, 38, 7, 'Monitoring, evaluasi dan pelaporan'),
-(605, 39, 1, 'Pengawasan keamanan dan kesehatan makanan hasil industri'),
-(606, 39, 2, 'Pengawasan dan pengendalian keamanan dan kesehatan makanan hasil produksi rumah tangga'),
-(607, 39, 3, 'Pengawasan dan pengendalian keamanan dan kesehatan makanan restaurant'),
-(608, 39, 4, 'Monitoring, evaluasi dan pelaporan'),
-(609, 40, 1, 'Penyuluhan kesehatan bagi ibu hamil dari keluarga kurang mampu'),
-(610, 40, 2, 'Perawatan secara berkala bagi ibu hamil bagi keluarga kurang mampu'),
-(611, 40, 3, 'Pertolongan persalinan bagi ibu dari keluarga kurang mampu'),
-(612, 41, 0, 'Non Kegiatan'),
-(613, 42, 1, 'Penyediaan jasa surat menyurat'),
-(614, 42, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(615, 42, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(616, 42, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(617, 42, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(618, 42, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(619, 42, 7, 'Penyediaan jasa administrasi keuangan'),
-(620, 42, 8, 'Penyediaan jasa kebersihan kantor'),
-(621, 42, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(622, 42, 10, 'Penyediaan alat tulis kantor'),
-(623, 42, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(624, 42, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(625, 42, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(626, 42, 14, 'Penyediaan peralatan rumah tangga'),
-(627, 42, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(628, 42, 16, 'Penyediaan bahan logistik kantor'),
-(629, 42, 17, 'Penyediaan makanan dan minuman'),
-(630, 42, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(631, 42, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(632, 43, 1, 'Pembangunan rumah jabatan'),
-(633, 43, 2, 'Pembangunan rumah dinas'),
-(634, 43, 3, 'Pembangunan gedung kantor'),
-(635, 43, 4, 'Pengadaan mobil jabatan'),
-(636, 43, 5, 'pengadaan Kendaraan dinas/operasional'),
-(637, 43, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(638, 43, 7, 'Pengadaan perlengkapan gedung kantor'),
-(639, 43, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(640, 43, 9, 'Pengadaan peralatan gedung kantor'),
-(641, 43, 10, 'Pengadaan mebeleur'),
-(642, 43, 11, 'Pengadaan ……'),
-(643, 43, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(644, 43, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(645, 43, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(646, 43, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(647, 43, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(648, 43, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(649, 43, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(650, 43, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(651, 43, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(652, 43, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(653, 43, 30, 'Pemeliharaan rutin/berkala …..'),
-(654, 43, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(655, 43, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(656, 43, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(657, 43, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(658, 43, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(659, 44, 1, 'Pengadaan mesin/kartu absensi'),
-(660, 44, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(661, 44, 3, 'Pengadaan pakaian kerja lapangan'),
-(662, 44, 4, 'Pengadaan pakaian KORPRI'),
-(663, 44, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(664, 45, 1, 'Pemulangan pegawai yang pensiun'),
-(665, 45, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(666, 45, 3, 'Pemindahan tugas PNS'),
-(667, 46, 1, 'Pendidikan dan pelatihan formal'),
-(668, 46, 2, 'Sosialisasi peraturan perundang-undangan'),
-(669, 46, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(670, 47, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(671, 47, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(672, 47, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(673, 47, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(674, 48, 1, 'Perencanaan pembangunan jalan'),
-(675, 48, 2, 'Survei kontur jalan dan jembatan'),
-(676, 48, 3, 'Pembangunan jalan'),
-(677, 48, 4, 'Perencanaan pembangunan jembatan'),
-(678, 48, 5, 'Pembangunan jembatan'),
-(679, 48, 6, 'Monitoring, evaluasi dan pelaporan'),
-(680, 49, 1, 'Perencanaan pembangunan saluran drainase/gorong-gorong'),
-(681, 49, 2, 'Survei kontur saluran drainase/gorong-gorong'),
-(682, 49, 3, 'Pembangunan saluran drainase/gorong-gorong'),
-(683, 49, 4, 'Monitoring, evaluasi dan pelaporan'),
-(684, 50, 1, 'Perencanaan turap/talud/bronjong'),
-(685, 50, 2, 'Survei kemiringan lereng turap/talud/bronjong'),
-(686, 50, 3, 'Pembangunan turap/talud/bronjong'),
-(687, 50, 4, 'Monitoring, evaluasi dan pelaporan'),
-(688, 51, 1, 'Perencanaan rehabilitasi/pemeliharaan jalan'),
-(689, 51, 2, 'Perencanaan rehabilitasi/pemeliharaan jembatan'),
-(690, 51, 3, 'Rehabilitasi/pemeliharaan jalan'),
-(691, 51, 4, 'Rehabilitasi/pemeliharaan jembatan'),
-(692, 51, 5, 'Monitoring, evaluasi dan pelaporan'),
-(693, 52, 1, 'Perencanaan rehabilitasi/pemeliharaan talud/bronjong'),
-(694, 52, 2, 'Perencanaan rehabilitasi/pemeliharaan talud/bronjong'),
-(695, 52, 3, 'Monitoring, evaluasi dan pelaporan'),
-(696, 53, 1, 'Inspeksi kondisi jalan'),
-(697, 53, 2, 'Inspeksi kondisi jembatan'),
-(698, 53, 3, 'Evaluasi dan pelaporan'),
-(699, 54, 1, 'Rehabilitasi jalan dalam kondisi tanggap darurat'),
-(700, 54, 2, 'Rehabilitasi jembatan dalam kondisi tanggap darurat'),
-(701, 54, 3, 'Monitoring, evaluasi dan pelaporan'),
-(702, 55, 1, 'Penyusunan sistem informasi/data base jalan'),
-(703, 55, 2, 'Penyusunan sistem informasi/data base jembatan'),
-(704, 55, 3, 'Monitoring, evaluasi dan pelaporan'),
-(705, 56, 1, 'Pembangunan gedung balai latihan kebinamargaan'),
-(706, 56, 2, 'Pembangunan gedung workshop'),
-(707, 56, 3, 'Pembangunan laboratorium kebinamargaan'),
-(708, 56, 4, 'Pengadaan alat-alat berat'),
-(709, 56, 5, 'Pengadaan peralatan dan perlengkapan bengkel alat-alat berat'),
-(710, 56, 6, 'Pengadaan alat-alat ukur dan bahan laboratorium kebinamargaan'),
-(711, 56, 7, 'Rehabilitasi/pemeliharaan gedung balai latihan kebinamargaan'),
-(712, 56, 8, 'Rehabilitasi/pemeliharaan gedung workshop'),
-(713, 56, 9, 'Rehabilitasi/pemeliharaan laboratorium kebinamargaan'),
-(714, 56, 10, 'Rehabilitasi/pemeliharaan alat-alat berat'),
-(715, 56, 11, 'Rehabilitasi/pemeliharaan peralatan dan perlengkapan bengkel alat-alat berat'),
-(716, 56, 12, 'Rehabilitasi/pemeliharaan alat-alat ukur dan bahan laboratorium kebinamargaan'),
-(717, 56, 13, 'Monitoring, evaluasi dan pelaporan'),
-(718, 57, 1, 'Perencanaan pembangunan jaringan irigasi'),
-(719, 57, 2, 'Perencanaan pembangunan jaringan air bersih/air minum'),
-(720, 57, 3, 'Perencanaan pembangunan reservoir'),
-(721, 57, 4, 'Perencanaan pembangunan pintu air'),
-(722, 57, 5, 'Perencanaan normalisasi saluran sungai'),
-(723, 57, 6, 'Pembangunan jaringan air bersih/air minum'),
-(724, 57, 7, 'Pembangunan reservoir'),
-(725, 57, 8, 'Pembangunan pintu air'),
-(726, 57, 9, 'Pelaksanaan normalisasi saluran sungai'),
-(727, 57, 10, 'Rehabilitasi/pemeliharaan jaringan irigasi'),
-(728, 57, 11, 'Rehabilitasi/pemeliharaan jaringan air bersih/air minum'),
-(729, 57, 12, 'Rehabilitasi/pemeliharaan reservoir'),
-(730, 57, 13, 'Rehabilitasi/pemeliharaan pintu air'),
-(731, 57, 14, 'Rehabilitasi/pemeliharaan normalisasi saluran sungai'),
-(732, 57, 15, 'Optimalisasi fungsi jaringan irigasi yang telah dibangun'),
-(733, 57, 16, 'Pemberdayaan petani pemakai air'),
-(734, 57, 17, 'Monitoring, evaluasi dan pelaporan'),
-(735, 58, 1, 'Pembangunan prasarana pengambilan dan saluran pembawa'),
-(736, 58, 2, 'Rehabilitasi prasarana pengambilan dan saluran pembawa'),
-(737, 58, 3, 'Pemeliharaan prasarana pengambilan dan saluran pembawa'),
-(738, 58, 4, 'Pembangunan sumur-sumur air tanah'),
-(739, 58, 5, 'Peningkatan partisipasi masyarakat dalam pengelolaan air'),
-(740, 58, 6, 'Peningkatan distribusi penyediaan air baku'),
-(741, 58, 7, 'Monitoring, evaluasi dan pelaporan'),
-(742, 59, 1, 'Pembangunan embung, dan bangunan penampung air lainnya'),
-(743, 59, 2, 'Pemeliharaan dan rehabilitasi embung, dan bangunan penampung air lainnya'),
-(744, 59, 3, 'Rehabilitasi kawasan kritis daerah tangkapan sungai dan danau'),
-(745, 59, 4, 'Rehabilitasi kawasan lindung daerah tangkapan sungai dan danau'),
-(746, 59, 5, 'Peningkatan partisipasi masyarakat dalam pengelolaan sungai, danau, dan sumber daya air lainnya'),
-(747, 59, 6, 'Peningkatan konservasi air tanah'),
-(748, 59, 7, 'Monitoring, evaluasi dan pelaporan'),
-(749, 60, 1, 'Penyediaan prasarana dan sarana air minum bagi masyarakat berpenghasilan rendah'),
-(750, 60, 2, 'Penyediaan prasarana dan sarana air limbah'),
-(751, 60, 3, 'Pengembangan teknologi pengolahan air minum dan air limbah'),
-(752, 60, 4, 'Fasilitasi pembinaan teknik pengolahan air limbah'),
-(753, 60, 5, 'Fasilitasi pembinaan teknik pengolahan air minum'),
-(754, 60, 6, 'Pengembangan sistem distribusi air minum'),
-(755, 60, 7, 'Rehabilitasi/pemeliharaan sarana dan prasarana air minum'),
-(756, 60, 8, 'Rehabilitasi/pemeliharaan sarana dan prasarana air limbah'),
-(757, 60, 9, 'Monitoring, evaluasi dan pelaporan'),
-(758, 61, 1, 'Pembangunan reservoir pengendali banjir'),
-(759, 61, 2, 'Rehabilitasi dan pemeliharaan reservoir pengendali banjir'),
-(760, 61, 3, 'Rehabilitasi dan pemeliharaan bantaran dan tanggul sungai'),
-(761, 61, 4, 'Pengembangan pengelolaan daerah rawa dalam rangka pengendalian banjir'),
-(762, 61, 5, 'Peningkatan partisipasi masyarakat dalam penanggulangan banjir'),
-(763, 61, 6, 'Mengendalikan banjir pada daerah tangkapan air dan badan-badan sungai'),
-(764, 61, 7, 'Peningkatan pembersihan dan pengerukan sungai/kali'),
-(765, 61, 8, 'Peningkatan pembangunan pusat-pusat pengendali banjir'),
-(766, 61, 9, 'Pembangunan prasarana pengaman pantai'),
-(767, 61, 10, 'Pembangunan tanggul pemecah ombak'),
-(768, 61, 11, 'Monitoring, evaluasi dan pelaporan'),
-(769, 62, 1, 'Perencanaan pengembangan infrastruktur'),
-(770, 62, 2, 'Pembangunan/peningkatan infrastruktur'),
-(771, 62, 3, 'Monitoring, evaluasi dan pelaporan'),
-(772, 63, 1, 'Penataan lingkungan pemukiman penduduk perdesaan'),
-(773, 63, 2, 'Pembangunan jalan dan jembatan perdesaan'),
-(774, 63, 3, 'Pembangunan sarana dan prasarana air bersih perdesaan'),
-(775, 63, 4, 'Pembangunan pasar perdesaan'),
-(776, 63, 5, 'Rehabilitasi/pemeliharaan jalan dan jembatan perdesaan'),
-(777, 63, 6, 'Rehabilitasi/pemeliharaan sarana dan prasarana air bersih perdesaan'),
-(778, 63, 7, 'Rehabilitasi/pemeliharaan pasar perdesaan'),
-(779, 63, 8, 'Monitoring, evaluasi dan pelaporan'),
-(780, 64, 1, 'Penyusunan kebijakan tentang penyusunan rencana tata ruang'),
-(781, 64, 2, 'Penetapan kebijakan tentang RDTRK, RTRK, dan RTBL'),
-(782, 64, 3, 'Sosialisasi peraturan perundang-undangan tentang rencana tata ruang'),
-(783, 64, 4, 'Penyusunan Rencana Tata Ruang Wilayah'),
-(784, 64, 5, 'Penyusunan Rencana Detail Tata Ruang Kawasan'),
-(785, 64, 6, 'Penyusunan Rencana Teknis Ruang Kawasan'),
-(786, 64, 7, 'Penyusunan Rencana tata Bangunan dan Lingkungan'),
-(787, 64, 8, 'Penyusunan rancangan peraturan daerah tentang RTRW'),
-(788, 64, 9, 'Fasilitasi peningkatan peran serta masyarakat dalam perencanaan tata ruang'),
-(789, 64, 10, 'Rapat koordinasi tentang rencana tata ruang'),
-(790, 64, 11, 'Revisi rencana tata ruang'),
-(791, 64, 12, 'Pelatihan aparat dalam perencanaan tata ruang'),
-(792, 64, 13, 'Survey dan pemetaan'),
-(793, 64, 14, 'Koordinasi dan fasilitasi penyusunan rencana tata ruang lintas kabupaten/kota'),
-(794, 64, 15, 'Monitoring, evaluasi dan pelaporan'),
-(795, 65, 1, 'Penyusunan kebijakan peizinan pemanfaatan ruang'),
-(796, 65, 2, 'Penyusunan norma, standar, dan kriteria pemanfaatan ruang'),
-(797, 65, 3, 'Penyusunan kebijakan pengendalian pemanfaatan ruang'),
-(798, 65, 4, 'Fasilitasi peningkatan peran serta masyarakat dalam pemanfaatan ruang'),
-(799, 65, 5, 'Survey dan pemetaan'),
-(800, 65, 6, 'Pelatihan aparat dalam pemanfaatan ruang'),
-(801, 65, 7, 'Sosialisasi kebijakan, norma, standar, prosedur dan manual pemanfaatan ruang'),
-(802, 65, 8, 'Koordinasi dan fasilitasi penyusunan pemanfaatan ruang lintas kabupaten/kota'),
-(803, 65, 9, 'Monitoring, evaluasi dan pelaporan'),
-(804, 66, 1, 'Penyusunan kebijakan pengendalian pemanfaatan ruang'),
-(805, 66, 2, 'Penyusunan prosedur dan manual pengendalian pemanfaatan ruang'),
-(806, 66, 3, 'Fasilitasi peningkatan peran serta masyarakat dalam pengendalian pemanfaatan ruang'),
-(807, 66, 4, 'Pelatihan aparat dalam pengendalian pemanfaatan ruang');
-INSERT INTO `ref_kegiatan` (`id_kegiatan`, `id_program`, `kd_kegiatan`, `nm_kegiatan`) VALUES
-(808, 66, 5, 'Pengawasan pemanfaatan ruang'),
-(809, 66, 6, 'Koordinasi dan fasilitasi pengendalian pemanfaatan ruang lintas kabupaten/kota'),
-(810, 66, 7, 'Sosialisasi kebijakan pengendalian pemanfaatan ruang'),
-(811, 66, 8, 'Monitoring, evaluasi dan pelaporan'),
-(812, 67, 0, 'Non Kegiatan'),
-(813, 68, 1, 'Penyediaan jasa surat menyurat'),
-(814, 68, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(815, 68, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(816, 68, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(817, 68, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(818, 68, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(819, 68, 7, 'Penyediaan jasa administrasi keuangan'),
-(820, 68, 8, 'Penyediaan jasa kebersihan kantor'),
-(821, 68, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(822, 68, 10, 'Penyediaan alat tulis kantor'),
-(823, 68, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(824, 68, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(825, 68, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(826, 68, 14, 'Penyediaan peralatan rumah tangga'),
-(827, 68, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(828, 68, 16, 'Penyediaan bahan logistik kantor'),
-(829, 68, 17, 'Penyediaan makanan dan minuman'),
-(830, 68, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(831, 68, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(832, 69, 1, 'Pembangunan rumah jabatan'),
-(833, 69, 2, 'Pembangunan rumah dinas'),
-(834, 69, 3, 'Pembangunan gedung kantor'),
-(835, 69, 4, 'Pengadaan mobil jabatan'),
-(836, 69, 5, 'pengadaan Kendaraan dinas/operasional'),
-(837, 69, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(838, 69, 7, 'Pengadaan perlengkapan gedung kantor'),
-(839, 69, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(840, 69, 9, 'Pengadaan peralatan gedung kantor'),
-(841, 69, 10, 'Pengadaan mebeleur'),
-(842, 69, 11, 'Pengadaan ……'),
-(843, 69, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(844, 69, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(845, 69, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(846, 69, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(847, 69, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(848, 69, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(849, 69, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(850, 69, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(851, 69, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(852, 69, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(853, 69, 30, 'Pemeliharaan rutin/berkala …..'),
-(854, 69, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(855, 69, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(856, 69, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(857, 69, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(858, 69, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(859, 70, 1, 'Pengadaan mesin/kartu absensi'),
-(860, 70, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(861, 70, 3, 'Pengadaan pakaian kerja lapangan'),
-(862, 70, 4, 'Pengadaan pakaian KORPRI'),
-(863, 70, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(864, 71, 1, 'Pemulangan pegawai yang pensiun'),
-(865, 71, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(866, 71, 3, 'Pemindahan tugas PNS'),
-(867, 72, 1, 'Pendidikan dan pelatihan formal'),
-(868, 72, 2, 'Sosialisasi peraturan perundang-undangan'),
-(869, 72, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(870, 73, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(871, 73, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(872, 73, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(873, 73, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(874, 74, 1, 'Penetapan kebijakan, strategi, dan program perumahan'),
-(875, 74, 2, 'Penyusunan Norma, Standar, Pedoman, dan Manual (NSPM)'),
-(876, 74, 3, 'Koordinasi penyelenggaraan pengembangan perumahan'),
-(877, 74, 4, 'Sosialisasi peraturan perundang-undangan di bidang perumahan'),
-(878, 74, 5, 'Koordinasi pembangunan perumahan dengan lembaga/badan usaha'),
-(879, 74, 6, 'Fasilitasi dan stimulasi pembangunan perumahan masyarakat kurang mampu'),
-(880, 74, 7, 'Pembangunan sarana dan prasarana rumah sederhana sehat'),
-(881, 74, 8, 'Monitoring, evaluasi dan pelaporan'),
-(882, 75, 1, 'Koordinasi pengawasan dan pengendalian pelaksanaan kebijakan tentang pembangunan perumahan'),
-(883, 75, 2, 'Penyediaan sarana air bersih dan sanitasi dasar terutama bagi masyarakat miskin'),
-(884, 75, 3, 'Penyuluhan dan pengawasan kualitas lingkungan sehat perumahan'),
-(885, 75, 4, 'Pengendalian dampak resiko pencemaran lingkungan'),
-(886, 75, 5, 'Penetapan kebijakan dan strategi penyelenggaraan keserasian kawasan dan lingkungan hunian berimbang'),
-(887, 75, 6, 'Monitoring, evaluasi dan pelaporan'),
-(888, 76, 1, 'Fasilitasi pemberian kredit mikro untuk pembangunan dan perbaikan perumahan'),
-(889, 76, 2, 'Fasilitasi pembangunan prasarana dan sarana dasar pemukiman berbasis masyarakat'),
-(890, 76, 3, 'Peningkatan peran serta masyarakat dalam pelestarian lingkungan perumahan'),
-(891, 76, 4, 'Peningkatan sistem pemberian kredit pemilikan rumah'),
-(892, 76, 5, 'Sosialisasi dan fasilitasi jaminan kepastian hukum dan perlindungan hukum'),
-(893, 76, 6, 'Koordinasi pengawasan dan pengendalian pelaksanaan peraturan perundang-undangan bidang perumahan'),
-(894, 76, 7, 'Monitoring, evaluasi dan pelaporan'),
-(895, 77, 1, 'Fasilitasi dan stimulasi rehabilitasi rumah akibat bencana alam'),
-(896, 77, 2, 'Fasilitasi dan stimulasi rehabilitasi rumah akibat bencana sosial'),
-(897, 77, 3, 'Monitoring, evaluasi dan pelaporan'),
-(898, 78, 1, 'Penyusunan norma, standar, prosedur, dan manual pencegahan bahaya kebakaran'),
-(899, 78, 2, 'Sosialisasi norma, standar, prosedur, dan manual pencegahan bahaya kebakaran'),
-(900, 78, 3, 'Koordinasi peijinan pemanfaatan gedung'),
-(901, 78, 4, 'Pengawasan pelaksanaan kebijakan pencegahan kebakaran'),
-(902, 78, 5, 'Kegiatan pendidikan dan pelatihan pertolongan dan pencegahan kebakaran'),
-(903, 78, 6, 'Kegiatan rekrutmen tenaga sukarela pertolongan bencana kebakaran'),
-(904, 78, 7, 'Kegiatan penyuluhan pencegahan bencana kebakaran'),
-(905, 78, 8, 'Pengadaan sarana dan prasarana pencegahan bahaya kebakaran'),
-(906, 78, 9, 'Pemeliharaan sarana dan prasarana pencegahan bahaya kebakaran'),
-(907, 78, 10, 'Rehabilitasi sarana dan prasarana pencegahan bahaya kebakaran'),
-(908, 78, 11, 'Kegiatan pencegahan dan pengendalian bahaya kebakaran'),
-(909, 78, 12, 'Peningkatan pelayanan penanggulangan bahaya kebakaran'),
-(910, 78, 13, 'Monitoring, evaluasi dan pelaporan'),
-(911, 79, 1, 'Penyusunan kebijakan, norma, standar, prosedur dan manual pengelolaan areal pemakaman'),
-(912, 79, 2, 'Pengumpulan dan analisis data base jumlah jiwa yang meninggal'),
-(913, 79, 3, 'Koordinasi pengelolaan areal pemakaman'),
-(914, 79, 4, 'Koordinasi penataan areal pemakaman'),
-(915, 79, 5, 'Pemberian perijinan pemakaman'),
-(916, 79, 6, 'Pembangunan sarana dan prasarana pemakaman'),
-(917, 79, 7, 'Pemeliharaan sarana dan prasarana pemakaman'),
-(918, 79, 8, 'Monitoring, evaluasi dan pelaporan'),
-(919, 80, 0, 'Non Kegiatan'),
-(920, 81, 1, 'Penyediaan jasa surat menyurat'),
-(921, 81, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(922, 81, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(923, 81, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(924, 81, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(925, 81, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(926, 81, 7, 'Penyediaan jasa administrasi keuangan'),
-(927, 81, 8, 'Penyediaan jasa kebersihan kantor'),
-(928, 81, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(929, 81, 10, 'Penyediaan alat tulis kantor'),
-(930, 81, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(931, 81, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(932, 81, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(933, 81, 14, 'Penyediaan peralatan rumah tangga'),
-(934, 81, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(935, 81, 16, 'Penyediaan bahan logistik kantor'),
-(936, 81, 17, 'Penyediaan makanan dan minuman'),
-(937, 81, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(938, 81, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(939, 82, 1, 'Pembangunan rumah jabatan'),
-(940, 82, 2, 'Pembangunan rumah dinas'),
-(941, 82, 3, 'Pembangunan gedung kantor'),
-(942, 82, 4, 'Pengadaan mobil jabatan'),
-(943, 82, 5, 'pengadaan Kendaraan dinas/operasional'),
-(944, 82, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(945, 82, 7, 'Pengadaan perlengkapan gedung kantor'),
-(946, 82, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(947, 82, 9, 'Pengadaan peralatan gedung kantor'),
-(948, 82, 10, 'Pengadaan mebeleur'),
-(949, 82, 11, 'Pengadaan ……'),
-(950, 82, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(951, 82, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(952, 82, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(953, 82, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(954, 82, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(955, 82, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(956, 82, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(957, 82, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(958, 82, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(959, 82, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(960, 82, 30, 'Pemeliharaan rutin/berkala …..'),
-(961, 82, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(962, 82, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(963, 82, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(964, 82, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(965, 82, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(966, 83, 1, 'Pengadaan mesin/kartu absensi'),
-(967, 83, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(968, 83, 3, 'Pengadaan pakaian kerja lapangan'),
-(969, 83, 4, 'Pengadaan pakaian KORPRI'),
-(970, 83, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(971, 84, 1, 'Pemulangan pegawai yang pensiun'),
-(972, 84, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(973, 84, 3, 'Pemindahan tugas PNS'),
-(974, 85, 1, 'Pendidikan dan pelatihan formal'),
-(975, 85, 2, 'Sosialisasi peraturan perundang-undangan'),
-(976, 85, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(977, 86, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(978, 86, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(979, 86, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(980, 86, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(981, 87, 1, 'Penyiapan tenaga pengendali kemanan dan kenyamanan lingkungan'),
-(982, 87, 2, 'Pembangunan pos jaga/ronda'),
-(983, 87, 3, 'Pelatihan pengendalian keamanan dan kenyamanan lingkungan'),
-(984, 87, 4, 'Pengendalian kebisingan, dan gangguan dari kegiatan masyarakat'),
-(985, 87, 5, 'Pengendalian keamanan lingkungan'),
-(986, 87, 6, 'Monitoring, evaluasi dan pelaporan'),
-(987, 88, 1, 'Pengawasan pengendalian dan evaluasi kegiatan polisi pamong praja'),
-(988, 88, 2, 'Peningkatan kerjasama dengan aparat keamanan dalam teknik pencegahan kejahatan'),
-(989, 88, 3, 'Kerjasama pengembangan kemampuan aparat polisi pamong praja dengan TNI/POLRI dan kejaksaan'),
-(990, 88, 4, 'Peningkatan kapasitas aparat dalam rangka pelaksanaan siskamswakarsa di daerah'),
-(991, 88, 5, 'Monitoring, evaluasi dan pelaporan'),
-(992, 89, 1, 'Peningkatan toleransi dan kerukunan dalam kehidupan beragama'),
-(993, 89, 2, 'Peningkatan rasa solidaritas dan ikatan sosial dikalangan masyarakat'),
-(994, 89, 3, 'Peningkatan kesadaran masyarakat akan nilai-nilai luhur budaya bangsa'),
-(995, 90, 1, 'Fasilitasi pencapaian Halaqoh dan berbagai forum keagamaan lainnya dalam upaya peningkatan wawasan kebangsaan'),
-(996, 90, 2, 'Seminar, talk show, diskusi peningkatan wawasan kebangsaan'),
-(997, 90, 3, 'Pentas seni dan budaya, festival, lomba cipta dalam upaya peningkatan wawasan kebangsaan'),
-(998, 91, 1, 'Pembentukan satuan keamanan lingkungan di masyarakat'),
-(999, 92, 1, 'Penyuluhan pencegahan peredaran/penggunaan minuman keras dan narkoba'),
-(1000, 92, 2, 'Penyuluhan pencegahan berkembangnya praktek prostitusi'),
-(1001, 92, 3, 'Penyuluhan pencegahan peredaran uang palsu'),
-(1002, 92, 4, 'Penyuluhan pencegahan dan penertiban aksi premanisme'),
-(1003, 92, 5, 'Penyuluhan pencegahan dan penertiban tindak penyelundupan'),
-(1004, 92, 6, 'Penyuluhan pencegahan praktek penjudian'),
-(1005, 92, 7, 'Penyuluhan pencegahan eksploitasi anak bawah umur'),
-(1006, 92, 8, 'Monitoring, evaluasi dan pelaporan'),
-(1007, 93, 1, 'Penyuluhan kepada masyarakat'),
-(1008, 93, 2, 'fasilitasi penyelesaian perselisihan partai politik'),
-(1009, 93, 3, 'Koordinasi forum-forum diskusi politik'),
-(1010, 93, 4, 'Penyusunan data base partai politik'),
-(1011, 93, 5, 'Monitoring, evaluasi dan pelaporan'),
-(1012, 94, 1, 'Pemantauan dan penyebarluasan informasi potensi bencana alam'),
-(1013, 94, 2, 'Pengadaan tempat penampungan sementara dan evakuasi penduduk dari ancaman/korban bancana alam'),
-(1014, 94, 3, 'Pengadaan sarana dan prasarana evakuasi penduduk dari ancaman/korban bencana alam'),
-(1015, 94, 4, 'Pengadaan logistik dan obat-obatab bagi penduduk di tempat penampungan sampah'),
-(1016, 95, 0, 'Non Kegiatan'),
-(1017, 96, 1, 'Penyediaan jasa surat menyurat'),
-(1018, 96, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1019, 96, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1020, 96, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1021, 96, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1022, 96, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1023, 96, 7, 'Penyediaan jasa administrasi keuangan'),
-(1024, 96, 8, 'Penyediaan jasa kebersihan kantor'),
-(1025, 96, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1026, 96, 10, 'Penyediaan alat tulis kantor'),
-(1027, 96, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1028, 96, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1029, 96, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1030, 96, 14, 'Penyediaan peralatan rumah tangga'),
-(1031, 96, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1032, 96, 16, 'Penyediaan bahan logistik kantor'),
-(1033, 96, 17, 'Penyediaan makanan dan minuman'),
-(1034, 96, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1035, 96, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1036, 97, 1, 'Pembangunan rumah jabatan'),
-(1037, 97, 2, 'Pembangunan rumah dinas'),
-(1038, 97, 3, 'Pembangunan gedung kantor'),
-(1039, 97, 4, 'Pengadaan mobil jabatan'),
-(1040, 97, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1041, 97, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1042, 97, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1043, 97, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1044, 97, 9, 'Pengadaan peralatan gedung kantor'),
-(1045, 97, 10, 'Pengadaan mebeleur'),
-(1046, 97, 11, 'Pengadaan ……'),
-(1047, 97, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1048, 97, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1049, 97, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1050, 97, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1051, 97, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1052, 97, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1053, 97, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1054, 97, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1055, 97, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1056, 97, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1057, 97, 30, 'Pemeliharaan rutin/berkala …..'),
-(1058, 97, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1059, 97, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1060, 97, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1061, 97, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1062, 97, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1063, 98, 1, 'Pengadaan mesin/kartu absensi'),
-(1064, 98, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1065, 98, 3, 'Pengadaan pakaian kerja lapangan'),
-(1066, 98, 4, 'Pengadaan pakaian KORPRI'),
-(1067, 98, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1068, 99, 1, 'Pemulangan pegawai yang pensiun'),
-(1069, 99, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1070, 99, 3, 'Pemindahan tugas PNS'),
-(1071, 100, 1, 'Pendidikan dan pelatihan formal'),
-(1072, 100, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1073, 100, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1074, 101, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1075, 101, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1076, 101, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1077, 101, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1078, 102, 1, 'Peningkatan Kemampuan (Capacity Building) petugas dan pedamping sosial pemberdayaan fakir miskin, KAT dan PMKS lainnya'),
-(1079, 102, 2, 'Pelatihan ketrampilan berusaha bagi keluarga miskin'),
-(1080, 102, 3, 'Fasilitasi manajemen usaha bagi keluarga miskin'),
-(1081, 102, 4, 'Pengadaan sarana dan prasarana pendukung usaha bagi keluarga miskin'),
-(1082, 102, 5, 'Pelatihan ketrampilan bagi penyandang masalah kesejahteraan sosial'),
-(1083, 103, 1, 'Pengembangan kebijakan tentang akses sarana dan prasarana publik bagi penyandang cacat dan lansia'),
-(1084, 103, 2, 'Pelayanan dan perlindungan sosial, hukum bagi korban eksploitasi, perdagangan perempuan dan anak'),
-(1085, 103, 3, 'Pelaksanaan KIE konseling dan kampanye sosial bagi Penyandang Masalah Kesejahteraan Sosial (PMKS)'),
-(1086, 103, 4, 'Pelatihan keterampilan dan praktek belajar kerja bagi anak terlantar termasuk anak jalanan, anak cacat, dan anak nakal'),
-(1087, 103, 5, 'Pelayanan psikososial bagi PMKS di trauma centre termasuk bagi korban bencana'),
-(1088, 103, 6, 'Pembentukan pusat informasi penyandang cacat dan trauma center'),
-(1089, 103, 7, 'Peningkatan kualitas pelayanan, sarana, dan prasarana rehabilitasi kesejahteraan sosial bagi PMKS'),
-(1090, 103, 8, 'Penyusunan kebijakan pelayanan dan rehabilitasi sosial bagi Penyandang Masalah Kesejahteraan Sosial'),
-(1091, 103, 9, 'Koordinasi perumusan kebijakan dan sikronisasi pelaksanaan upaya-upaya penanggulangan kemiskinan dan penurunan kesenjangan'),
-(1092, 103, 10, 'Penanganan masalah-masalah strategis yang menyangkut tanggap cepat darurat dan kejadian luar biasa'),
-(1093, 103, 11, 'Monitoring, evaluasi dan pelaporan'),
-(1094, 104, 1, 'Pembangunan sarana dan prasarana tempat penampungan anak terlantar'),
-(1095, 104, 2, 'Pelatihan ketrampilan dan praktek belajar kerja bagi anak terlantar'),
-(1096, 104, 3, 'Penyusunan data dan analisis permasalahan anak terlantar'),
-(1097, 104, 4, 'Pengembangan bakat dan ketrampilan anak terlantar'),
-(1098, 104, 5, 'Peningkatan keterampilan tenaga pembinaan anak terlantar'),
-(1099, 104, 6, 'Monitoring, evaluasi dan pelaporan'),
-(1100, 105, 1, 'Pendataan penyandang cacat dan penyakit kejiwaan'),
-(1101, 105, 2, 'Pembangunan sarana dan prasarana perawatan para penyandang cacat dan trauma'),
-(1102, 105, 3, 'Pendidikan dan pelatihan bagi penyandang cacat dan eks trauma'),
-(1103, 105, 4, 'Pendayagunaan para penyandang cacat dan eks trauma'),
-(1104, 105, 5, 'Peningkatan keterampilan tenaga pelatih dan pendidik'),
-(1105, 106, 1, 'Pembangunan sarana dan prasarana panti asuhan/jompo'),
-(1106, 106, 2, 'Rehabilitasi sedang/berat bangunan panti asuhan/jompo'),
-(1107, 106, 3, 'Operasi dan pemeliharaan sarana dan prasarana panti asuhan/jompo'),
-(1108, 106, 4, 'Pendidikan dan pelatihan bagi penghuni panti asuhan/jompo'),
-(1109, 106, 5, 'Peningkatan keterampilan tenaga pelatih dan pendidik'),
-(1110, 106, 6, 'Monitoring, evaluasi dan pelaporan'),
-(1111, 107, 1, 'Pendidikan dan pelatihan ketrampilan berusaha bagi eks penyandang penyakit sosial'),
-(1112, 107, 2, 'Pembangunan pusat bimbingan/konseling bagi eks penyandang penyakit sosial'),
-(1113, 107, 3, 'Pemantauan kemajuan perubahan sikap mental eks penyandang penyakit sosial'),
-(1114, 107, 4, 'Pemberdayaan eks penyandang penyakit sosial'),
-(1115, 107, 5, 'Monitoring, evaluasi dan pelaporan'),
-(1116, 108, 1, 'Peningkatan peran aktif masyarakat dan dunia usaha'),
-(1117, 108, 2, 'Peningkatan jenjang kerjasama pelaku-pelaku usaha kesejahteraan sosial masyarakat'),
-(1118, 108, 3, 'Peningkatan kualitas SDM kesejahteraan sosial masyarakat'),
-(1119, 108, 4, 'Pengembangan model kelembagaan perlindungan sosial'),
-(1120, 109, 0, 'Non Kegiatan'),
-(1121, 110, 1, 'Penyediaan jasa surat menyurat'),
-(1122, 110, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1123, 110, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1124, 110, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1125, 110, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1126, 110, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1127, 110, 7, 'Penyediaan jasa administrasi keuangan'),
-(1128, 110, 8, 'Penyediaan jasa kebersihan kantor'),
-(1129, 110, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1130, 110, 10, 'Penyediaan alat tulis kantor'),
-(1131, 110, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1132, 110, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1133, 110, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1134, 110, 14, 'Penyediaan peralatan rumah tangga'),
-(1135, 110, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1136, 110, 16, 'Penyediaan bahan logistik kantor'),
-(1137, 110, 17, 'Penyediaan makanan dan minuman'),
-(1138, 110, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1139, 110, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1140, 111, 1, 'Pembangunan rumah jabatan'),
-(1141, 111, 2, 'Pembangunan rumah dinas'),
-(1142, 111, 3, 'Pembangunan gedung kantor'),
-(1143, 111, 4, 'Pengadaan mobil jabatan'),
-(1144, 111, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1145, 111, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1146, 111, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1147, 111, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1148, 111, 9, 'Pengadaan peralatan gedung kantor'),
-(1149, 111, 10, 'Pengadaan mebeleur'),
-(1150, 111, 11, 'Pengadaan ……'),
-(1151, 111, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1152, 111, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1153, 111, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1154, 111, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1155, 111, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1156, 111, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1157, 111, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1158, 111, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1159, 111, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1160, 111, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1161, 111, 30, 'Pemeliharaan rutin/berkala …..'),
-(1162, 111, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1163, 111, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1164, 111, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1165, 111, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1166, 111, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1167, 112, 1, 'Pengadaan mesin/kartu absensi'),
-(1168, 112, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1169, 112, 3, 'Pengadaan pakaian kerja lapangan'),
-(1170, 112, 4, 'Pengadaan pakaian KORPRI'),
-(1171, 112, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1172, 113, 1, 'Pemulangan pegawai yang pensiun'),
-(1173, 113, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1174, 113, 3, 'Pemindahan tugas PNS'),
-(1175, 114, 1, 'Pendidikan dan pelatihan formal'),
-(1176, 114, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1177, 114, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1178, 115, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1179, 115, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1180, 115, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1181, 115, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1182, 116, 1, 'Penyusunan data base tenaga kerja daerah'),
-(1183, 116, 2, 'Pembangunan balai latihan kerja'),
-(1184, 116, 3, 'Pengadaan peralatan pendidikan dan ketrampilan bagi pencari kerja'),
-(1185, 116, 4, 'Peningkatan profesionalisme tenaga kepelatihan dan instruktur BLK'),
-(1186, 116, 5, 'Pengadaan bahan dan materi pendidikan dan ketrampilan kerja'),
-(1187, 116, 6, 'Pendidikan dan pelatihan ketrampilan bagi pencari kerja'),
-(1188, 116, 7, 'Pemeliharaan rutin/berkala sarana dan prasarana BLK'),
-(1189, 116, 8, 'Rehabilitasi sedang/berat sarana dan prasarana BLK'),
-(1190, 116, 9, 'Monitoring, evaluasi dan pelaporan'),
-(1191, 117, 1, 'Penyusunan informasi bursa tenaga kerja'),
-(1192, 117, 2, 'Penyebarluasan informasi bursa tenaga kerja'),
-(1193, 117, 3, 'Kerjasama pendidikan dan pelatihan'),
-(1194, 117, 4, 'Penyiapan tenaga kerja siap pakai'),
-(1195, 117, 5, 'Pengembangan kelembagaan produktivitas dan pelatihan kewirausahaan'),
-(1196, 117, 6, 'Pemberian fasilitasi dan mendorong sistem pendanaan pelatihan berbasis masyarakat'),
-(1197, 117, 7, 'Monitoring, evaluasi dan pelaporan'),
-(1198, 118, 1, 'Pengendalian dan pembinaan lembaga penyalur tenaga kerja'),
-(1199, 118, 2, 'Fasilitasi penyelesaian prosedur, penyelesaian perselisihan hubungan industrial'),
-(1200, 118, 3, 'Fasilitasi penyelesaian prosedur pemberian perlindungan hukum dan jaminan sosial ketenagakerjaan'),
-(1201, 118, 4, 'Sosialisasi berbagai peraturan pelaksanaan tentang ketenagakerjaan'),
-(1202, 118, 5, 'Peningkatan pengawasan, perlindungan dan penegakkan hukum terhadap keselamatan dan kesehatan kerja'),
-(1203, 118, 6, 'Penyusunan kebijakan standarisasi lembaga penyalur tenaga kerja'),
-(1204, 118, 7, 'Pemantauan kinerja lembaga penyalur tenaga kerja'),
-(1205, 118, 8, 'Monitoring, evaluasi dan pelaporan'),
-(1206, 119, 0, 'Non Kegiatan'),
-(1207, 120, 1, 'Penyediaan jasa surat menyurat'),
-(1208, 120, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1209, 120, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1210, 120, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1211, 120, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1212, 120, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1213, 120, 7, 'Penyediaan jasa administrasi keuangan'),
-(1214, 120, 8, 'Penyediaan jasa kebersihan kantor'),
-(1215, 120, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1216, 120, 10, 'Penyediaan alat tulis kantor'),
-(1217, 120, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1218, 120, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1219, 120, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1220, 120, 14, 'Penyediaan peralatan rumah tangga'),
-(1221, 120, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1222, 120, 16, 'Penyediaan bahan logistik kantor'),
-(1223, 120, 17, 'Penyediaan makanan dan minuman'),
-(1224, 120, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1225, 120, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1226, 121, 1, 'Pembangunan rumah jabatan'),
-(1227, 121, 2, 'Pembangunan rumah dinas'),
-(1228, 121, 3, 'Pembangunan gedung kantor'),
-(1229, 121, 4, 'Pengadaan mobil jabatan'),
-(1230, 121, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1231, 121, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1232, 121, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1233, 121, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1234, 121, 9, 'Pengadaan peralatan gedung kantor'),
-(1235, 121, 10, 'Pengadaan mebeleur'),
-(1236, 121, 11, 'Pengadaan ……'),
-(1237, 121, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1238, 121, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1239, 121, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1240, 121, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1241, 121, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1242, 121, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1243, 121, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1244, 121, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1245, 121, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1246, 121, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1247, 121, 30, 'Pemeliharaan rutin/berkala …..'),
-(1248, 121, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1249, 121, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1250, 121, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1251, 121, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1252, 121, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1253, 122, 1, 'Pengadaan mesin/kartu absensi'),
-(1254, 122, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1255, 122, 3, 'Pengadaan pakaian kerja lapangan'),
-(1256, 122, 4, 'Pengadaan pakaian KORPRI'),
-(1257, 122, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1258, 123, 1, 'Pemulangan pegawai yang pensiun'),
-(1259, 123, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1260, 123, 3, 'Pemindahan tugas PNS'),
-(1261, 124, 1, 'Pendidikan dan pelatihan formal'),
-(1262, 124, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1263, 124, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1264, 125, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1265, 125, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1266, 125, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1267, 125, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1268, 126, 1, 'Perumusan kebijakan peningkatan kualitas hidup perempuan di bidang ilmu pengetahuan dan teknologi'),
-(1269, 126, 2, 'Perumusan kebijakan peningkatan peran dan posisi perempuan di bidang politik dan jabatan publik'),
-(1270, 126, 3, 'Pelaksanaan sosilaisasi yang terkait dengan kesetaraan gender, pemberdayaan perempuan dan perlindungan anak'),
-(1271, 126, 4, 'Monitoring, evaluasi dan pelaporan'),
-(1272, 127, 1, 'Advokasi dan fasilitasi PUG bagi perempuan'),
-(1273, 127, 2, 'Fasilitasi pengembangan pusat pelayanan terpadu pemberdayaan perempuan (P2TP2)'),
-(1274, 127, 3, 'Pemetaan potensi organisasi dan lembaga masyarakat yang berperan dalam pemberdayaan perempuan dan anak'),
-(1275, 127, 4, 'Pengembangan materi dan pelaksanaan KIE tentang kesetaraan dan keadilan gender (KKG)'),
-(1276, 127, 5, 'Penguatan kelembagaan pengarusutamaan gender dan anak'),
-(1277, 127, 6, 'Peningkatan kapasitas dan jaringan kelembagaan pemberdayaan perempuan dan anak'),
-(1278, 127, 7, 'Evaluasi pelaksanaan PUG'),
-(1279, 127, 8, 'Pengembangan Sistem Informasi Gender dan Anak'),
-(1280, 127, 9, 'Monitoring, evaluasi dan pelaporan'),
-(1281, 128, 1, 'Pelaksanaan kebijakan perlindungan perempuan di daerah'),
-(1282, 128, 2, 'Pelatihan bagi pelatih (TOT) SDM pelayanan dan pedampingan korban KDRT'),
-(1283, 128, 3, 'Penyusunan sistem perlindungan bagi perempuan'),
-(1284, 128, 4, 'Sosialisasi dan advokasi kebijakan penghapusan buta aksara perempuan (PBAP)'),
-(1285, 128, 5, 'Sosialisasi dan advokasi kebijakan perlindungan tenaga kerja perempuan'),
-(1286, 128, 6, 'Sosialisasi sistem pencatatan dan pelaporan KDRT'),
-(1287, 128, 7, 'Penyusunan profil perlindungan perempuan terhadap tindak kekerasan'),
-(1288, 128, 8, 'Fasilitasi upaya perlindungan perempuan terhadap tindak kekerasan'),
-(1289, 128, 9, 'Monitoring, evaluasi dan pelaporan'),
-(1290, 129, 1, 'Kegiatan pembinaan organisasi perempuan'),
-(1291, 129, 2, 'Kegiatan pendidikan dan pelatihan peningkatan peran serta dan kesetaraan jender'),
-(1292, 129, 3, 'Kegiatan penyuluhan bagi ibu rumah tangga dalam membangun keluarga sejahtera'),
-(1293, 129, 4, 'Kegiatan bimbingan manajemen usah abagi perempuan dalam mengelola usaha'),
-(1294, 129, 5, 'Kegiatan pameran hasil karya perempuan dibidang pembangunan'),
-(1295, 129, 6, 'Monitoring, evaluasi dan pelaporan'),
-(1296, 130, 1, 'Workshop peningkatan peran perempuan dalam pengambilan keputusan'),
-(1297, 130, 2, 'Pemberdayaan lembaga yang berbasis gender'),
-(1298, 131, 0, 'Non Kegiatan'),
-(1299, 132, 1, 'Penyediaan jasa surat menyurat'),
-(1300, 132, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1301, 132, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1302, 132, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1303, 132, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1304, 132, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1305, 132, 7, 'Penyediaan jasa administrasi keuangan'),
-(1306, 132, 8, 'Penyediaan jasa kebersihan kantor'),
-(1307, 132, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1308, 132, 10, 'Penyediaan alat tulis kantor'),
-(1309, 132, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1310, 132, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1311, 132, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1312, 132, 14, 'Penyediaan peralatan rumah tangga'),
-(1313, 132, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1314, 132, 16, 'Penyediaan bahan logistik kantor'),
-(1315, 132, 17, 'Penyediaan makanan dan minuman'),
-(1316, 132, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1317, 132, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1318, 133, 1, 'Pembangunan rumah jabatan'),
-(1319, 133, 2, 'Pembangunan rumah dinas'),
-(1320, 133, 3, 'Pembangunan gedung kantor'),
-(1321, 133, 4, 'Pengadaan mobil jabatan'),
-(1322, 133, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1323, 133, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1324, 133, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1325, 133, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1326, 133, 9, 'Pengadaan peralatan gedung kantor'),
-(1327, 133, 10, 'Pengadaan mebeleur'),
-(1328, 133, 11, 'Pengadaan ……'),
-(1329, 133, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1330, 133, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1331, 133, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1332, 133, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1333, 133, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1334, 133, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1335, 133, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1336, 133, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1337, 133, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1338, 133, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1339, 133, 30, 'Pemeliharaan rutin/berkala …..'),
-(1340, 133, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1341, 133, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1342, 133, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1343, 133, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1344, 133, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1345, 134, 1, 'Pengadaan mesin/kartu absensi'),
-(1346, 134, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1347, 134, 3, 'Pengadaan pakaian kerja lapangan'),
-(1348, 134, 4, 'Pengadaan pakaian KORPRI'),
-(1349, 134, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1350, 135, 1, 'Pemulangan pegawai yang pensiun'),
-(1351, 135, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1352, 135, 3, 'Pemindahan tugas PNS'),
-(1353, 136, 1, 'Pendidikan dan pelatihan formal'),
-(1354, 136, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1355, 136, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1356, 137, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1357, 137, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1358, 137, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1359, 137, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1360, 138, 1, 'Penanganan daerah rawan pangan'),
-(1361, 138, 2, 'Penyusunan data base potensi produksi pangan'),
-(1362, 138, 3, 'Analisis dan penyusunan pola konsumsi dan suplai pangan'),
-(1363, 138, 4, 'Analisis rasio jumlah penduduk terhadap jumlah kebutuhan pangan'),
-(1364, 138, 5, 'Laporan berkala kondisi ketahanan pangan daerah'),
-(1365, 138, 6, 'Kajian rantai pasokan dan pemasaran pangan'),
-(1366, 138, 7, 'Monitoring, evaluasi dan pelaporan kebijakan pemberasan'),
-(1367, 138, 8, 'Monitoring, evaluasi dan pelaporan kebijakan subsidi pertanian'),
-(1368, 138, 9, 'Pemanfaatan pekarangan untuk pengembangan pangan'),
-(1369, 138, 10, 'Pemantauan dan analisis akses pangan masyarakat'),
-(1370, 138, 11, 'Pemantauan dan analisis harga pangan pokok'),
-(1371, 138, 12, 'Penanganan pasca panen dan pengolahan hasil pertanian'),
-(1372, 138, 13, 'Pengembangan cadangan pangan daerah'),
-(1373, 138, 14, 'Pengembangan desa mandiri pangan'),
-(1374, 138, 15, 'Pengembangan intensifikasi tanaman padi, palawija'),
-(1375, 138, 16, 'Pengembangan diversifikasi tanaman'),
-(1376, 138, 17, 'Pengembangan pertanian pada lahan kering'),
-(1377, 138, 18, 'Pengembangan lumbung pangan desa'),
-(1378, 138, 19, 'Pengembangan model distribusi pangan yang efisien'),
-(1379, 138, 20, 'Pengembangan perbenihan/perbibitan'),
-(1380, 138, 21, 'Pengembangan sistem informasi pasar'),
-(1381, 138, 22, 'Peningkatan mutu dan keamanan pangan'),
-(1382, 138, 23, 'Koordinasi kebijakan perberasan'),
-(1383, 138, 24, 'Koordinasi perumusan kebijakan pertanahan dan infrastruktur pertanian dan perdesaan'),
-(1384, 138, 25, 'Penelitian dan pengembangan sumberdaya pertanian'),
-(1385, 138, 26, 'Penelitian dan pengembangan teknologi bioteknologi'),
-(1386, 138, 27, 'Penelitian dan pengembangan teknologi budidaya'),
-(1387, 138, 28, 'Penelitian dan pengembangan teknologi pasca panen'),
-(1388, 138, 29, 'Peningkatan produksi, produktivitas dab mutu produk perkebunan, produk pertanian'),
-(1389, 138, 30, 'Penyuluhan sumber pangan alternatif'),
-(1390, 138, 31, 'Monitoring, evaluasi dan pelaporan'),
-(1391, 139, 0, 'Non Kegiatan'),
-(1392, 140, 1, 'Penyediaan jasa surat menyurat'),
-(1393, 140, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1394, 140, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1395, 140, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1396, 140, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1397, 140, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1398, 140, 7, 'Penyediaan jasa administrasi keuangan'),
-(1399, 140, 8, 'Penyediaan jasa kebersihan kantor'),
-(1400, 140, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1401, 140, 10, 'Penyediaan alat tulis kantor'),
-(1402, 140, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1403, 140, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1404, 140, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1405, 140, 14, 'Penyediaan peralatan rumah tangga'),
-(1406, 140, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1407, 140, 16, 'Penyediaan bahan logistik kantor'),
-(1408, 140, 17, 'Penyediaan makanan dan minuman'),
-(1409, 140, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1410, 141, 1, 'Pembangunan rumah jabatan'),
-(1411, 141, 2, 'Pembangunan rumah dinas'),
-(1412, 141, 3, 'Pembangunan gedung kantor'),
-(1413, 141, 4, 'Pengadaan mobil jabatan'),
-(1414, 141, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1415, 141, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1416, 141, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1417, 141, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1418, 141, 9, 'Pengadaan peralatan gedung kantor'),
-(1419, 141, 10, 'Pengadaan mebeleur'),
-(1420, 141, 11, 'Pengadaan ……'),
-(1421, 141, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1422, 141, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1423, 141, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1424, 141, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1425, 141, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1426, 141, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1427, 141, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1428, 141, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1429, 141, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1430, 141, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1431, 141, 30, 'Pemeliharaan rutin/berkala …..'),
-(1432, 141, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1433, 141, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1434, 141, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1435, 141, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1436, 141, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1437, 142, 1, 'Pengadaan mesin/kartu absensi'),
-(1438, 142, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1439, 142, 3, 'Pengadaan pakaian kerja lapangan'),
-(1440, 142, 4, 'Pengadaan pakaian KORPRI'),
-(1441, 142, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1442, 143, 1, 'Pemulangan pegawai yang pensiun'),
-(1443, 143, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1444, 143, 3, 'Pemindahan tugas PNS'),
-(1445, 144, 1, 'Pendidikan dan pelatihan formal'),
-(1446, 144, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1447, 144, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1448, 145, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1449, 145, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1450, 145, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1451, 145, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1452, 146, 1, 'Penyusunan sistem pendaftaran tanah'),
-(1453, 146, 2, 'Sosialisasi sistem pendaftaran tanah'),
-(1454, 147, 1, 'Penataan penguasaan, pemilikan, penggunaan dan pemanfaatan tanah'),
-(1455, 147, 2, 'Penyuluhan hukum pertanahan'),
-(1456, 148, 1, 'Fasilitasi penyelesaian konflik-konflik pertanahan'),
-(1457, 149, 1, 'Penyusunan sistem informasi pertanahan yang handal'),
-(1458, 150, 0, 'Non Kegiatan'),
-(1459, 151, 1, 'Penyediaan jasa surat menyurat'),
-(1460, 151, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1461, 151, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1462, 151, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1463, 151, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1464, 151, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1465, 151, 7, 'Penyediaan jasa administrasi keuangan'),
-(1466, 151, 8, 'Penyediaan jasa kebersihan kantor'),
-(1467, 151, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1468, 151, 10, 'Penyediaan alat tulis kantor'),
-(1469, 151, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1470, 151, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1471, 151, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1472, 151, 14, 'Penyediaan peralatan rumah tangga'),
-(1473, 151, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1474, 151, 16, 'Penyediaan bahan logistik kantor'),
-(1475, 151, 17, 'Penyediaan makanan dan minuman'),
-(1476, 151, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1477, 151, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1478, 152, 1, 'Pembangunan rumah jabatan'),
-(1479, 152, 2, 'Pembangunan rumah dinas'),
-(1480, 152, 3, 'Pembangunan gedung kantor'),
-(1481, 152, 4, 'Pengadaan mobil jabatan'),
-(1482, 152, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1483, 152, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1484, 152, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1485, 152, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1486, 152, 9, 'Pengadaan peralatan gedung kantor'),
-(1487, 152, 10, 'Pengadaan mebeleur'),
-(1488, 152, 11, 'Pengadaan ……'),
-(1489, 152, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1490, 152, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1491, 152, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1492, 152, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1493, 152, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1494, 152, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1495, 152, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1496, 152, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1497, 152, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1498, 152, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1499, 152, 30, 'Pemeliharaan rutin/berkala …..'),
-(1500, 152, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1501, 152, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1502, 152, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1503, 152, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1504, 152, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1505, 153, 1, 'Pengadaan mesin/kartu absensi'),
-(1506, 153, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1507, 153, 3, 'Pengadaan pakaian kerja lapangan'),
-(1508, 153, 4, 'Pengadaan pakaian KORPRI'),
-(1509, 153, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1510, 154, 1, 'Pemulangan pegawai yang pensiun'),
-(1511, 154, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1512, 154, 3, 'Pemindahan tugas PNS'),
-(1513, 155, 1, 'Pendidikan dan pelatihan formal'),
-(1514, 155, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1515, 155, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1516, 156, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1517, 156, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1518, 156, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1519, 156, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1520, 157, 1, 'Penyusunan kebijakan manajemen pengelolaan sampah'),
-(1521, 157, 2, 'Penyediaan prasarana dan sarana pengelolaaan persampahan'),
-(1522, 157, 3, 'Penyusunan kebijakan kerjasama pengelolaan sampah'),
-(1523, 157, 4, 'Peningkatan operasi dan pemeliharaan prasarana dan sarana persampahan'),
-(1524, 157, 5, 'Pengembangan teknologi pengolahan persampahan'),
-(1525, 157, 6, 'Bimbingan teknis persampahan'),
-(1526, 157, 7, 'Peningkatan kemampuan aparat pengelolaan persampahan'),
-(1527, 157, 8, 'Kerjasama pengelolaan sampah'),
-(1528, 157, 9, 'Kerjasama pengelolaan sampah antar daerah'),
-(1529, 157, 10, 'Sosialisasi kebijakan pengelolaan persampahan'),
-(1530, 157, 11, 'Peningkatan peran serta masyarakat dalam pengelolaan persampahan'),
-(1531, 157, 12, 'Monitoring, evaluasi dan pelaporan'),
-(1532, 158, 1, 'Koordinasi penilaian Kota Sehat/Adipura'),
-(1533, 158, 2, 'Koordinasi penilaian langit biru'),
-(1534, 158, 3, 'Pemantauan Kualitas Lingkungan'),
-(1535, 158, 4, 'Pengawasan pelaksanaan kebijakan bidang lingkungan hidup'),
-(1536, 158, 5, 'Koordinasi penertiban kegiatan Pertambangan Tanpa Izin (PETI)'),
-(1537, 158, 6, 'Pengelolaan B3 dan Limbah B3'),
-(1538, 158, 7, 'Pengkajian dampak lingkungan'),
-(1539, 158, 8, 'Peningkatan pengelolaan lingkungan pertambangan'),
-(1540, 158, 9, 'Peningkatan peringkat kinerja perusahaan (proper)'),
-(1541, 158, 10, 'Koordinasi pengelolaan Prokasih/Superkasih'),
-(1542, 158, 11, 'Pengembangan produsi ramah lingkungan'),
-(1543, 158, 12, 'Penyusunan kebijakan pengendalian pencemaran dan perusakan lingkungan hidup'),
-(1544, 158, 13, 'Koordinasi penyusunan AMDAL'),
-(1545, 158, 14, 'Peningkatan peran serta masyarakat dalam pengendalian lingkungan hidup'),
-(1546, 158, 15, 'Pengkajian pengembangan sistem insentif dan disinsentif'),
-(1547, 158, 16, 'Monitoring, evaluasi dan pelaporan'),
-(1548, 159, 1, 'Konservasi Sumber Daya Air dan Pengendalian Kerusakan Sumber-Sumber Air'),
-(1549, 159, 2, 'Pantai dan Laut Lestari'),
-(1550, 159, 3, 'Pengembangan dan Pemantapan Kawasan Konservasi Laut, Suaka Perikanan, dan keaneragaman Hayati Laut'),
-(1551, 159, 4, 'Pengembangan Ekowisata dan Jasa Lingkungan'),
-(1552, 159, 5, 'Pengendalian Dampak Perubahan Iklim'),
-(1553, 159, 6, 'Pengendalian Kerusakan Hutan dan Lahan'),
-(1554, 159, 7, 'Peningkatan Konservasi Daerah tangkapan Air dan Sumber-Sumber Air'),
-(1555, 159, 8, 'Pengendalian dan pengawasan pemanfaatan SDA'),
-(1556, 159, 9, 'Koordinasi pengelolaan konservasi SDA'),
-(1557, 159, 10, 'Pengelolaan keanekaragaman hayati dan ekosistem'),
-(1558, 159, 11, 'Pengembangan dan Pengelolaan Kawasan World Hearitage Laut'),
-(1559, 159, 12, 'Pengembangan Kerjasama Pengelolaan Kawasan Konservasi Laut Regional'),
-(1560, 159, 13, 'Koordinasi pengendalian Kebakaran Hutan'),
-(1561, 159, 14, 'Peningkatan peran serta masyarakat dalam perlindungan dan konservasi SDA'),
-(1562, 159, 15, 'Koordinasi peningkatan pengelolaan kawasan konservasi'),
-(1563, 159, 16, 'Monitoring, evaluasi dan pelaporan'),
-(1564, 160, 1, 'Pengelolaan dan rehabilitasi terumbu karang, mangrove, padang lamun, estuaria dan teluk'),
-(1565, 160, 2, 'Perencanaan dan penyusunan program pembangunan pengendalian sumber daya alam dan lingkungan hidup'),
-(1566, 160, 3, 'Rehabilitasi hutan dan lahan'),
-(1567, 160, 4, 'Pengembangan kelembagaan rehabilitasi hutan dan lahan'),
-(1568, 160, 5, 'Penyusunan pedoman standar dan prosedur rehabilitasi terumbu karang, mangrove, dan padang lamun'),
-(1569, 160, 6, 'Sosialisasi pedoman standar dan prosedur rehabilitasi terumbu karang, mangrove, dan padang lamun'),
-(1570, 160, 7, 'Peningkatan peran serta masyarakat dalam rehabilitasi dan pemulihan cadangan SDA'),
-(1571, 160, 8, 'Monitoring, evaluasi dan pelaporan'),
-(1572, 161, 1, 'Peningkatan edukasi dan komunikasi masyarakat di bidang lingkungan'),
-(1573, 161, 2, 'Pengembangan data dan informasi lingkungan'),
-(1574, 161, 3, 'Penyusunan data sumberdaya alam dan neraca sumberdaya hutan (NSDH) nasional dan daerah'),
-(1575, 161, 4, 'Penguatan, jejaring informasi lingkungan pusat dan daerah'),
-(1576, 161, 5, 'Monitoring, evaluasi dan pelaporan'),
-(1577, 162, 1, 'Pengujian emisi kendaraan bermotor'),
-(1578, 162, 2, 'Pengujian emisi/polusi udara akibat aktivitas industri'),
-(1579, 162, 3, 'Pengujian kadar polusi limbah padat dan limbah cair'),
-(1580, 162, 4, 'Pembangunan tempat pembuangan benda padat/cair yang menimbulkan polusi'),
-(1581, 162, 5, 'Penyuluhan dan pengendalian polusi dan pencemaran'),
-(1582, 162, 6, 'Monitoring, evaluasi dan pelaporan'),
-(1583, 163, 1, 'Pengembangan ekowisata dan jasa lingkungan dikawasan konservasi'),
-(1584, 163, 2, 'Pengembangan konservasi laut dan hutan wisata'),
-(1585, 163, 3, 'Monitoring, evaluasi dan pelaporan'),
-(1586, 164, 1, 'Pengadaan alat pemadam kebakaran'),
-(1587, 164, 2, 'Pemetaan kawasan rawan kebakaran hutan'),
-(1588, 164, 3, 'Koordinasi pengendalian kebakaran hutan'),
-(1589, 164, 4, 'Penyusunan norma, standar, prosedur, dan manual pengendalian kebakaran hutan'),
-(1590, 164, 5, 'Sosialisasi kebijakan pencagahan kebakaran hutan'),
-(1591, 164, 6, 'Monitoring, evaluasi dan pelaporan'),
-(1592, 165, 1, 'Pengelolaan dan rehabilitasi ekosistem pesisir dan laut'),
-(1593, 165, 2, 'Pengembangan sistem manajemen pengelolaan pesisir laut');
-INSERT INTO `ref_kegiatan` (`id_kegiatan`, `id_program`, `kd_kegiatan`, `nm_kegiatan`) VALUES
-(1594, 166, 1, 'Penyusunan kebijakan, norma, standar, prosedur dan manual pengelolaan RTH'),
-(1595, 166, 2, 'Sosiallisasi kebijakan, norma, standar, prosedur dan manual pengelolaan RTH'),
-(1596, 166, 3, 'Penyusunan dan analisis data/informasi pengelolaan RTH'),
-(1597, 166, 4, 'Penyusunan program pengembahan RTH'),
-(1598, 166, 5, 'Penataan RTH'),
-(1599, 166, 6, 'Pemeliharaan RTH'),
-(1600, 166, 7, 'Pengembangan taman rekreasi'),
-(1601, 166, 8, 'Pengawasan dan pengendalian RTH'),
-(1602, 166, 9, 'Peningkatan peran serta masyarakat dalam pengelolaan RTH'),
-(1603, 166, 10, 'Monitoring dan evaluasi'),
-(1604, 167, 0, 'Non Kegiatan'),
-(1605, 168, 1, 'Penyediaan jasa surat menyurat'),
-(1606, 168, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1607, 168, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1608, 168, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1609, 168, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1610, 168, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1611, 168, 7, 'Penyediaan jasa administrasi keuangan'),
-(1612, 168, 8, 'Penyediaan jasa kebersihan kantor'),
-(1613, 168, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1614, 168, 10, 'Penyediaan alat tulis kantor'),
-(1615, 168, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1616, 168, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1617, 168, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1618, 168, 14, 'Penyediaan peralatan rumah tangga'),
-(1619, 168, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1620, 168, 16, 'Penyediaan bahan logistik kantor'),
-(1621, 168, 17, 'Penyediaan makanan dan minuman'),
-(1622, 168, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1623, 168, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1624, 169, 1, 'Pembangunan rumah jabatan'),
-(1625, 169, 2, 'Pembangunan rumah dinas'),
-(1626, 169, 3, 'Pembangunan gedung kantor'),
-(1627, 169, 4, 'Pengadaan mobil jabatan'),
-(1628, 169, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1629, 169, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1630, 169, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1631, 169, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1632, 169, 9, 'Pengadaan peralatan gedung kantor'),
-(1633, 169, 10, 'Pengadaan mebeleur'),
-(1634, 169, 11, 'Pengadaan ……'),
-(1635, 169, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1636, 169, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1637, 169, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1638, 169, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1639, 169, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1640, 169, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1641, 169, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1642, 169, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1643, 169, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1644, 169, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1645, 169, 30, 'Pemeliharaan rutin/berkala …..'),
-(1646, 169, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1647, 169, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1648, 169, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1649, 169, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1650, 169, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1651, 170, 1, 'Pengadaan mesin/kartu absensi'),
-(1652, 170, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1653, 170, 3, 'Pengadaan pakaian kerja lapangan'),
-(1654, 170, 4, 'Pengadaan pakaian KORPRI'),
-(1655, 170, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1656, 171, 1, 'Pemulangan pegawai yang pensiun'),
-(1657, 171, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1658, 171, 3, 'Pemindahan tugas PNS'),
-(1659, 172, 1, 'Pendidikan dan pelatihan formal'),
-(1660, 172, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1661, 172, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1662, 173, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1663, 173, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1664, 173, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1665, 173, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1666, 174, 1, 'Pembangunan dan pengoperasian SIAK secara terpadu'),
-(1667, 174, 2, 'Pelatihan tenaga pengelola SIAK'),
-(1668, 174, 3, 'Implementasi Sistem Administrasi Kependudukan (membangun, updating dan pemeliharaan)'),
-(1669, 174, 4, 'Pembentukan dan Penataan Sistem Koneksi (Inter-Phase Tahap Awal) NIK'),
-(1670, 174, 5, 'Koordinasi pelaksanaan kebijakan kependudukan'),
-(1671, 174, 6, 'Pengolahan dalam penyusunan laporan informasi kependudukan'),
-(1672, 174, 7, 'Peningkatan pelayanan publik dalam bidang kependudukan'),
-(1673, 174, 8, 'Pengembangan data base kependudukan'),
-(1674, 174, 9, 'Penyusunan kebijakan kependudukan'),
-(1675, 174, 10, 'Peningkatan kapasitas aparat kependudukan dan catatan sipil'),
-(1676, 174, 11, 'Sosialisasi kebijakan kependudukan'),
-(1677, 174, 12, 'Peningkatan kapasitas kelembagaan kependudukan'),
-(1678, 174, 13, 'Monitoring, evaluasi dan pelaporan'),
-(1679, 175, 0, 'Non Kegiatan'),
-(1680, 176, 1, 'Penyediaan jasa surat menyurat'),
-(1681, 176, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1682, 176, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1683, 176, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1684, 176, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1685, 176, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1686, 176, 7, 'Penyediaan jasa administrasi keuangan'),
-(1687, 176, 8, 'Penyediaan jasa kebersihan kantor'),
-(1688, 176, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1689, 176, 10, 'Penyediaan alat tulis kantor'),
-(1690, 176, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1691, 176, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1692, 176, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1693, 176, 14, 'Penyediaan peralatan rumah tangga'),
-(1694, 176, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1695, 176, 16, 'Penyediaan bahan logistik kantor'),
-(1696, 176, 17, 'Penyediaan makanan dan minuman'),
-(1697, 176, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1698, 176, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1699, 177, 1, 'Pembangunan rumah jabatan'),
-(1700, 177, 2, 'Pembangunan rumah dinas'),
-(1701, 177, 3, 'Pembangunan gedung kantor'),
-(1702, 177, 4, 'Pengadaan mobil jabatan'),
-(1703, 177, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1704, 177, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1705, 177, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1706, 177, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1707, 177, 9, 'Pengadaan peralatan gedung kantor'),
-(1708, 177, 10, 'Pengadaan mebeleur'),
-(1709, 177, 11, 'Pengadaan ……'),
-(1710, 177, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1711, 177, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1712, 177, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1713, 177, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1714, 177, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1715, 177, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1716, 177, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1717, 177, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1718, 177, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1719, 177, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1720, 177, 30, 'Pemeliharaan rutin/berkala …..'),
-(1721, 177, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1722, 177, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1723, 177, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1724, 177, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1725, 177, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1726, 178, 1, 'Pengadaan mesin/kartu absensi'),
-(1727, 178, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1728, 178, 3, 'Pengadaan pakaian kerja lapangan'),
-(1729, 178, 4, 'Pengadaan pakaian KORPRI'),
-(1730, 178, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1731, 179, 1, 'Pemulangan pegawai yang pensiun'),
-(1732, 179, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1733, 179, 3, 'Pemindahan tugas PNS'),
-(1734, 180, 1, 'Pendidikan dan pelatihan formal'),
-(1735, 180, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1736, 180, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1737, 181, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1738, 181, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1739, 181, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1740, 181, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1741, 182, 1, 'Pemberdayaan Lembaga dan Organisasi Masyarakat Perdesaan'),
-(1742, 182, 2, 'Penyelenggaraan Pendidikan dan Pelatihan Tenaga Teknis dan Masyarakat'),
-(1743, 182, 3, 'Penyelenggaraan Diseminasi Informasi bagi Masyarakat Desa'),
-(1744, 183, 1, 'Pelatihan ketrampilan usaha budidaya tanaman'),
-(1745, 183, 2, 'Pelatihan ketrampilan manajemen badan usaha milik desa'),
-(1746, 183, 3, 'Pelatihan ketrampilan usaha industri kerajinan'),
-(1747, 183, 4, 'Pelatihan ketrampilan usaha pertanian dan peternakan'),
-(1748, 183, 5, 'Fasilitasi permodalan bagi usaha mikro kecil dan menengah di perdesaan'),
-(1749, 183, 6, 'Fasilitasi kemitraan swasta dan usaha mikro kecil dan menengah di perdesaan'),
-(1750, 183, 7, 'Monitoring, evaluasi dan pelaporan'),
-(1751, 184, 1, 'Pembinaan kelompok masyarakat pembangunan desa'),
-(1752, 184, 2, 'Pelaksanaan musyawarah pembangunan desa'),
-(1753, 184, 3, 'Pemberian stimulan pembangunan desa'),
-(1754, 184, 4, 'Monitoring, evaluasi dan pelaporan'),
-(1755, 185, 1, 'Pelatihan aparatur pemerintah desa dalam bidang pembangunan kawasan perdesaan'),
-(1756, 185, 2, 'Pelatihan aparatur pemerintah desa dalam bidang pengelolaan keuangan daerah'),
-(1757, 185, 3, 'Pelatihan aparatur pemerintah desa dalam bidang manajemen pemerintahan desa'),
-(1758, 185, 4, 'Monitoring, evaluasi dan pelaporan'),
-(1759, 186, 1, 'Pelatihan perempuan di perdesaan dalam bidang usaha ekonomi produktif'),
-(1760, 187, 0, 'Non Kegiatan'),
-(1761, 188, 1, 'Penyediaan jasa surat menyurat'),
-(1762, 188, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1763, 188, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1764, 188, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1765, 188, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1766, 188, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1767, 188, 7, 'Penyediaan jasa administrasi keuangan'),
-(1768, 188, 8, 'Penyediaan jasa kebersihan kantor'),
-(1769, 188, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1770, 188, 10, 'Penyediaan alat tulis kantor'),
-(1771, 188, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1772, 188, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1773, 188, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1774, 188, 14, 'Penyediaan peralatan rumah tangga'),
-(1775, 188, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1776, 188, 16, 'Penyediaan bahan logistik kantor'),
-(1777, 188, 17, 'Penyediaan makanan dan minuman'),
-(1778, 188, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1779, 188, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1780, 189, 1, 'Pembangunan rumah jabatan'),
-(1781, 189, 2, 'Pembangunan rumah dinas'),
-(1782, 189, 3, 'Pembangunan gedung kantor'),
-(1783, 189, 4, 'Pengadaan mobil jabatan'),
-(1784, 189, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1785, 189, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1786, 189, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1787, 189, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1788, 189, 9, 'Pengadaan peralatan gedung kantor'),
-(1789, 189, 10, 'Pengadaan mebeleur'),
-(1790, 189, 11, 'Pengadaan ……'),
-(1791, 189, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1792, 189, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1793, 189, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1794, 189, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1795, 189, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1796, 189, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1797, 189, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1798, 189, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1799, 189, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1800, 189, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1801, 189, 30, 'Pemeliharaan rutin/berkala …..'),
-(1802, 189, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1803, 189, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1804, 189, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1805, 189, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1806, 189, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1807, 190, 1, 'Pengadaan mesin/kartu absensi'),
-(1808, 190, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1809, 190, 3, 'Pengadaan pakaian kerja lapangan'),
-(1810, 190, 4, 'Pengadaan pakaian KORPRI'),
-(1811, 190, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1812, 191, 1, 'Pemulangan pegawai yang pensiun'),
-(1813, 191, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1814, 191, 3, 'Pemindahan tugas PNS'),
-(1815, 192, 1, 'Pendidikan dan pelatihan formal'),
-(1816, 192, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1817, 192, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1818, 193, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1819, 193, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1820, 193, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1821, 193, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1822, 194, 1, 'Penyediaan pelayanan KB dan Alat kontrasepsi bagi Keluarga Miskin'),
-(1823, 194, 2, 'Pelayanan KIE'),
-(1824, 194, 3, 'Peningkatan Perlindungan Hak Reproduksi Individu'),
-(1825, 194, 4, 'Promosi Pelayanan Khiba'),
-(1826, 194, 5, 'Pembinaan Keluarga Berencana'),
-(1827, 194, 6, 'Pengadaan sarana mobilitas tim KB keliling'),
-(1828, 195, 1, 'Advokasi dan KIE tentang Kesehatan Reproduksi Remaja (KRR)'),
-(1829, 195, 2, 'Memperkuat dukungan dan partisipasi masyarakat'),
-(1830, 196, 1, 'Pelayanan konseling KB'),
-(1831, 196, 2, 'Pelayanan pemasangan kontrasepsi KB'),
-(1832, 196, 3, 'Pengadaan alat kontrasepsi'),
-(1833, 196, 4, 'Pelayanan KB medis operasi'),
-(1834, 197, 1, 'Fasilitasi pembentukan kelompok masyarakat peduli KB'),
-(1835, 198, 1, 'Penyuluhan kesehatan ibu, bayi dan anak melalui kelompok dimasyarakat'),
-(1836, 199, 1, 'Pendirian pusat pelayanan informasi dan konseling KKR'),
-(1837, 199, 2, 'Fasilitasi forum pelayanan KKR bagi kelompok remaja dan kelompok sebaya diluar sekolah'),
-(1838, 200, 1, 'Penyuluhan penanggulangan narkoba dan PMS di sekolah'),
-(1839, 201, 1, 'Pengumpulan bahan informasi tentang pengasuhan dan pembinaan tumbuh kembang anak'),
-(1840, 202, 1, 'Pelatihan tenaga pedamping kelompok bina keluarga di kecamatan'),
-(1841, 203, 1, 'Pengkajian pengembangan model operasional BKB-Posyandu-PADU'),
-(1842, 204, 0, 'Non Kegiatan'),
-(1843, 205, 1, 'Penyediaan jasa surat menyurat'),
-(1844, 205, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1845, 205, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1846, 205, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1847, 205, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1848, 205, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1849, 205, 7, 'Penyediaan jasa administrasi keuangan'),
-(1850, 205, 8, 'Penyediaan jasa kebersihan kantor'),
-(1851, 205, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1852, 205, 10, 'Penyediaan alat tulis kantor'),
-(1853, 205, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1854, 205, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1855, 205, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1856, 205, 14, 'Penyediaan peralatan rumah tangga'),
-(1857, 205, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1858, 205, 16, 'Penyediaan bahan logistik kantor'),
-(1859, 205, 17, 'Penyediaan makanan dan minuman'),
-(1860, 205, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1861, 205, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1862, 206, 1, 'Pembangunan rumah jabatan'),
-(1863, 206, 2, 'Pembangunan rumah dinas'),
-(1864, 206, 3, 'Pembangunan gedung kantor'),
-(1865, 206, 4, 'Pengadaan mobil jabatan'),
-(1866, 206, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1867, 206, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1868, 206, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1869, 206, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1870, 206, 9, 'Pengadaan peralatan gedung kantor'),
-(1871, 206, 10, 'Pengadaan mebeleur'),
-(1872, 206, 11, 'Pengadaan ……'),
-(1873, 206, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1874, 206, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1875, 206, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1876, 206, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1877, 206, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1878, 206, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1879, 206, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1880, 206, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1881, 206, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1882, 206, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1883, 206, 30, 'Pemeliharaan rutin/berkala …..'),
-(1884, 206, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1885, 206, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1886, 206, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1887, 206, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1888, 206, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1889, 207, 1, 'Pengadaan mesin/kartu absensi'),
-(1890, 207, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1891, 207, 3, 'Pengadaan pakaian kerja lapangan'),
-(1892, 207, 4, 'Pengadaan pakaian KORPRI'),
-(1893, 207, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1894, 208, 1, 'Pemulangan pegawai yang pensiun'),
-(1895, 208, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1896, 208, 3, 'Pemindahan tugas PNS'),
-(1897, 209, 1, 'Pendidikan dan pelatihan formal'),
-(1898, 209, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1899, 209, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(1900, 210, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(1901, 210, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(1902, 210, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(1903, 210, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(1904, 211, 1, 'Perencanaan pembangunan prasarana dan fasilitas perhubungan'),
-(1905, 211, 2, 'Penyusunan kebijakan, norma, standar dan prosedur bidang perhubungan'),
-(1906, 211, 3, 'Koordinasi dalam pembangunan prasarana dan fasilitas perhubungan'),
-(1907, 211, 4, 'Sosialisasi kebijakan di bidang perhubungan'),
-(1908, 211, 5, 'Pembangunan sarana dan prasarana jembatan timbang'),
-(1909, 211, 6, 'Peningkatan pengelolaan terminal angkutan sungai, danau dan penyeberangan'),
-(1910, 211, 7, 'Peningkatan pengelolaan terminal angkutan darat'),
-(1911, 211, 8, 'Monitoring, evaluasi dan pelaporan'),
-(1912, 212, 1, 'Rehabilitasi/pemeliharaan sarana alat pengujian kendaraan bermotor'),
-(1913, 212, 2, 'Rehabilitasi/pemeliharaan prasarana balai pengujian kendaraan bermotor'),
-(1914, 212, 3, 'Rehabilitasi/pemeliharaan sarana dan prasarana jembatan timbang'),
-(1915, 212, 4, 'Rehabilitasi/pemeliharaan terminal/pelabuhan'),
-(1916, 213, 1, 'Kegiatan penyuluhan bagi para sopir/juru mudi untuk peningkatan keselamatan penumpang'),
-(1917, 213, 2, 'Kegiatan peningkatan disiplin masyarakat menggunakan angkutan'),
-(1918, 213, 3, 'Kegiatan temu wicana pengelola angkutan umum guna meningkatkan keselamatan penumpang'),
-(1919, 213, 4, 'Kegiatan uji kelayakan sarana transportasi guna keselamatan penumpang'),
-(1920, 213, 5, 'Kegiatan pengendalian disiplin pengoperasian angkutan umum dijalan raya'),
-(1921, 213, 6, 'Kegiatan penciptaan keamanan dan kenyamanan penumpang di lingkungan terminal'),
-(1922, 213, 7, 'Kegiatan pengawasan peralatan keamanan dalam keadaan darurat dan perlengkapan pertolongan pertama'),
-(1923, 213, 8, 'Kegiatan penataan tempat-tempat pemberhentian angkutan umum'),
-(1924, 213, 9, 'Kegiatan penciptaan disiplin dan pemeliharaan kebersihan dilingkungan terminal'),
-(1925, 213, 10, 'Kegiatan penciptaan pelayanan cepat, tepat, murah dan mudah'),
-(1926, 213, 11, 'Pengumpulan dan analisis data base pelayanan angkutan'),
-(1927, 213, 12, 'Pengembangan sarana dan prasarana pelayanan jasa angkutan'),
-(1928, 213, 13, 'Fasilitasi perijinan di bidang perhubungan'),
-(1929, 213, 14, 'Sosialisasi/penyuluhan ketertiban lalu lintas dan angkutan'),
-(1930, 213, 15, 'Kegiatan pemilihan dan pemberian penghargaan sopir/juru mudi/awak kendaraan angkutan umum teladan'),
-(1931, 213, 16, 'Koordinasi dalam peningkatan pelayanan angkutan'),
-(1932, 213, 17, 'Monitoring, evaluasi dan pelaporan'),
-(1933, 214, 1, 'Pembangunan gedung terminal'),
-(1934, 214, 2, 'Pembangunan Halte bus, taxi gedung terminal'),
-(1935, 214, 3, 'Pembangunan jembatan penyebrangan gedung terminal'),
-(1936, 215, 1, 'Pengadaan rambu-rambu lalu lintas'),
-(1937, 215, 2, 'Pengadaan marka jalan'),
-(1938, 215, 3, 'Pengadaan pagar pengaman jalan'),
-(1939, 216, 1, 'Pembangunan balai pengujian kendaraan bermotor'),
-(1940, 216, 2, 'Pengadaan alat pengujian kendaraan bermotor'),
-(1941, 216, 3, 'Pelaksanaan uji petik kendaraan bermotor'),
-(1942, 217, 0, 'Non Kegiatan'),
-(1943, 218, 1, 'Penyediaan jasa surat menyurat'),
-(1944, 218, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(1945, 218, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(1946, 218, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(1947, 218, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(1948, 218, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(1949, 218, 7, 'Penyediaan jasa administrasi keuangan'),
-(1950, 218, 8, 'Penyediaan jasa kebersihan kantor'),
-(1951, 218, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(1952, 218, 10, 'Penyediaan alat tulis kantor'),
-(1953, 218, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(1954, 218, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(1955, 218, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(1956, 218, 14, 'Penyediaan peralatan rumah tangga'),
-(1957, 218, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(1958, 218, 16, 'Penyediaan bahan logistik kantor'),
-(1959, 218, 17, 'Penyediaan makanan dan minuman'),
-(1960, 218, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(1961, 218, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(1962, 219, 1, 'Pembangunan rumah jabatan'),
-(1963, 219, 2, 'Pembangunan rumah dinas'),
-(1964, 219, 3, 'Pembangunan gedung kantor'),
-(1965, 219, 4, 'Pengadaan mobil jabatan'),
-(1966, 219, 5, 'pengadaan Kendaraan dinas/operasional'),
-(1967, 219, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(1968, 219, 7, 'Pengadaan perlengkapan gedung kantor'),
-(1969, 219, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(1970, 219, 9, 'Pengadaan peralatan gedung kantor'),
-(1971, 219, 10, 'Pengadaan mebeleur'),
-(1972, 219, 11, 'Pengadaan ……'),
-(1973, 219, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(1974, 219, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(1975, 219, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(1976, 219, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(1977, 219, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(1978, 219, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(1979, 219, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(1980, 219, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(1981, 219, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(1982, 219, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(1983, 219, 30, 'Pemeliharaan rutin/berkala …..'),
-(1984, 219, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(1985, 219, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(1986, 219, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(1987, 219, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(1988, 219, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(1989, 220, 1, 'Pengadaan mesin/kartu absensi'),
-(1990, 220, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(1991, 220, 3, 'Pengadaan pakaian kerja lapangan'),
-(1992, 220, 4, 'Pengadaan pakaian KORPRI'),
-(1993, 220, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(1994, 221, 1, 'Pemulangan pegawai yang pensiun'),
-(1995, 221, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(1996, 221, 3, 'Pemindahan tugas PNS'),
-(1997, 222, 1, 'Pendidikan dan pelatihan formal'),
-(1998, 222, 2, 'Sosialisasi peraturan perundang-undangan'),
-(1999, 222, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2000, 223, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2001, 223, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2002, 223, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2003, 223, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2004, 224, 1, 'Fasilitasi penyempurnaan peraturan perundangan penyiaran dan KMIP'),
-(2005, 224, 2, 'Pembinaan dan Pengembangan Jaringan Komunikasi dan Informasi'),
-(2006, 224, 3, 'Pembinaan dan pengembangan sumber daya komunikasi dan informasi'),
-(2007, 224, 4, 'Pengadaan alat studio dan komunikasi'),
-(2008, 224, 5, 'Pengkajian dan pengembangan sistem informasi'),
-(2009, 224, 6, 'Perencanaan dan pengembangan kebijakan komunikasi dan informasi'),
-(2010, 225, 1, 'Pengkajian dan penelitian bidang informasi dan komunikasi'),
-(2011, 226, 1, 'Pelatihan SDM dalam bidang komunikasi dan informasi'),
-(2012, 227, 1, 'Penyebarluasan informasi pembangunan daerah'),
-(2013, 227, 2, 'Penyebarluasan informasi penyelenggaraan pemerintahan daerah'),
-(2014, 227, 3, 'Penyebarluasan informasi yang bersifat penyuluhan bagi masyarakat'),
-(2015, 228, 0, 'Non Kegiatan'),
-(2016, 229, 1, 'Penyediaan jasa surat menyurat'),
-(2017, 229, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2018, 229, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2019, 229, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2020, 229, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2021, 229, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2022, 229, 7, 'Penyediaan jasa administrasi keuangan'),
-(2023, 229, 8, 'Penyediaan jasa kebersihan kantor'),
-(2024, 229, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2025, 229, 10, 'Penyediaan alat tulis kantor'),
-(2026, 229, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2027, 229, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2028, 229, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2029, 229, 14, 'Penyediaan peralatan rumah tangga'),
-(2030, 229, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2031, 229, 16, 'Penyediaan bahan logistik kantor'),
-(2032, 229, 17, 'Penyediaan makanan dan minuman'),
-(2033, 229, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2034, 229, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2035, 230, 1, 'Pembangunan rumah jabatan'),
-(2036, 230, 2, 'Pembangunan rumah dinas'),
-(2037, 230, 3, 'Pembangunan gedung kantor'),
-(2038, 230, 4, 'Pengadaan mobil jabatan'),
-(2039, 230, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2040, 230, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2041, 230, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2042, 230, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2043, 230, 9, 'Pengadaan peralatan gedung kantor'),
-(2044, 230, 10, 'Pengadaan mebeleur'),
-(2045, 230, 11, 'Pengadaan ……'),
-(2046, 230, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2047, 230, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2048, 230, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2049, 230, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2050, 230, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2051, 230, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2052, 230, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2053, 230, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2054, 230, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2055, 230, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2056, 230, 30, 'Pemeliharaan rutin/berkala …..'),
-(2057, 230, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2058, 230, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2059, 230, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2060, 230, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2061, 230, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2062, 231, 1, 'Pengadaan mesin/kartu absensi'),
-(2063, 231, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2064, 231, 3, 'Pengadaan pakaian kerja lapangan'),
-(2065, 231, 4, 'Pengadaan pakaian KORPRI'),
-(2066, 231, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2067, 232, 1, 'Pemulangan pegawai yang pensiun'),
-(2068, 232, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2069, 232, 3, 'Pemindahan tugas PNS'),
-(2070, 233, 1, 'Pendidikan dan pelatihan formal'),
-(2071, 233, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2072, 233, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2073, 234, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2074, 234, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2075, 234, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2076, 234, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2077, 235, 1, 'Penyusunan kebijakan tentang Usaha Kecil Menengah'),
-(2078, 235, 2, 'Sosialisasi kebijakan tentang Usaha Kecil Menengah'),
-(2079, 235, 3, 'Fasilitasi kemudahan formalisasi badan usaha Usaha Kecil Menengah'),
-(2080, 235, 4, 'Pendirian unit penanganan pengaduan'),
-(2081, 235, 5, 'Pengkajian dampak regulasi/kebijakan nasional'),
-(2082, 235, 6, 'Perencanaan, koordinasi, dan pengembangan Usaha Kecil Menengah'),
-(2083, 235, 7, 'Pengembangan jaringan infrastruktur Usaha Kecil Menengah'),
-(2084, 235, 8, 'Fasilitasi pengembangan Usaha Kecil Menengah'),
-(2085, 235, 9, 'Fasilitasi permasalahan proses produksi Usaha Kecil Menengah'),
-(2086, 235, 10, 'Pemberian fasilitasi pengamanan kawasan Usaha Kecil Menengah'),
-(2087, 235, 11, 'Monitoring, evaluasi dan pelaporan'),
-(2088, 236, 1, 'Fasilitasi pengembangan inkubator teknologi dan bisnis'),
-(2089, 236, 2, 'Memfasilitasi peningkatan kemitraan investasi Usaha Kecil Menengah dengan perusahaan asing'),
-(2090, 236, 3, 'Memfasilitasi peningkatan kemitraan usaha bagi Usaha Mikro Kecil Menengah'),
-(2091, 236, 4, 'Peningkatan kerjasama di bidang HAKI'),
-(2092, 236, 5, 'Fasilitasi pengembangan sarana promosi hasil produksi'),
-(2093, 236, 6, 'Penyelenggaraan pelatihan kewirausahaan'),
-(2094, 236, 7, 'Pelatihan manajemen pengelolaan Koperasi/KUD'),
-(2095, 236, 8, 'Sosialisasi HAKI kepada Usaha Mikro Kecil menengah'),
-(2096, 236, 9, 'Sosialisasi dan pelatihan pola pengelolaan limbah industri dalam menjaga kelestarian kawasan Usaha Mikro Kecil Menengah'),
-(2097, 236, 10, 'Monitoring, evaluasi dan pelaporan'),
-(2098, 237, 1, 'Sosialisasi dukungan informasi penyediaan permodalan'),
-(2099, 237, 2, 'Pengembangan klaster bisnis'),
-(2100, 237, 3, 'Koordinasi pemanfaatan fasilitas pemerintah untuk Usaha Kecil Menengah dan koperasi'),
-(2101, 237, 4, 'Koordinasi penggunaan dana pemerintah bagi Usaha Mikro Kecil Menengah'),
-(2102, 237, 5, 'Pemantauan pengelolaan penggunaan dana pemerintah bagi Usaha Mikro Kecil Menengah'),
-(2103, 237, 6, 'Pengembangan sarana pemasaran produk Usaha Mikro Kecil Menengah'),
-(2104, 237, 7, 'Peningkatan jaringan kerjasama antar lembaga'),
-(2105, 237, 8, 'Penyelenggaraan pembinaan industri rumah tanggan, industri kecil dan industri menengah'),
-(2106, 237, 9, 'Penyelenggaraan promosi produk Usaha Mikro kecil Menengah'),
-(2107, 237, 10, 'Pengembangan kebijakan dan program peningkatan ekonomi lokal'),
-(2108, 237, 11, 'Monitoring, evaluasi dan pelaporan'),
-(2109, 238, 1, 'Koordinasi pelaksanaan kebijakan dan program pembangunan koperasi'),
-(2110, 238, 2, 'Peningkatan sarana dan prasarana pendidikan dan pelatihan perkoperasian'),
-(2111, 238, 3, 'Pembangunan sistem informasi perencanaan pengembangan perkopersian'),
-(2112, 238, 4, 'Sosialisasi prinsip-prinsip pemahaman perkoperasian'),
-(2113, 238, 5, 'Pembinaan, pengawasan, dan perhargaan koperasi berprestasi'),
-(2114, 238, 6, 'Peningkatan dan pengembangan jaringan kerjasama usaha koperasi'),
-(2115, 238, 7, 'Penyebaran model-model pola pengembangan koperasi'),
-(2116, 238, 8, 'Rintisan penerapan teknologi sederhana/manajemen modern pada jenis usaha koperasi'),
-(2117, 238, 9, 'Monitoring, evaluasi dan pelaporan'),
-(2118, 239, 0, 'Non Kegiatan'),
-(2119, 240, 1, 'Penyediaan jasa surat menyurat'),
-(2120, 240, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2121, 240, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2122, 240, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2123, 240, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2124, 240, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2125, 240, 7, 'Penyediaan jasa administrasi keuangan'),
-(2126, 240, 8, 'Penyediaan jasa kebersihan kantor'),
-(2127, 240, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2128, 240, 10, 'Penyediaan alat tulis kantor'),
-(2129, 240, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2130, 240, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2131, 240, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2132, 240, 14, 'Penyediaan peralatan rumah tangga'),
-(2133, 240, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2134, 240, 16, 'Penyediaan bahan logistik kantor'),
-(2135, 240, 17, 'Penyediaan makanan dan minuman'),
-(2136, 240, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2137, 240, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2138, 241, 1, 'Pembangunan rumah jabatan'),
-(2139, 241, 2, 'Pembangunan rumah dinas'),
-(2140, 241, 3, 'Pembangunan gedung kantor'),
-(2141, 241, 4, 'Pengadaan mobil jabatan'),
-(2142, 241, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2143, 241, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2144, 241, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2145, 241, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2146, 241, 9, 'Pengadaan peralatan gedung kantor'),
-(2147, 241, 10, 'Pengadaan mebeleur'),
-(2148, 241, 11, 'Pengadaan ……'),
-(2149, 241, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2150, 241, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2151, 241, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2152, 241, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2153, 241, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2154, 241, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2155, 241, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2156, 241, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2157, 241, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2158, 241, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2159, 241, 30, 'Pemeliharaan rutin/berkala …..'),
-(2160, 241, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2161, 241, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2162, 241, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2163, 241, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2164, 241, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2165, 242, 1, 'Pengadaan mesin/kartu absensi'),
-(2166, 242, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2167, 242, 3, 'Pengadaan pakaian kerja lapangan'),
-(2168, 242, 4, 'Pengadaan pakaian KORPRI'),
-(2169, 242, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2170, 243, 1, 'Pemulangan pegawai yang pensiun'),
-(2171, 243, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2172, 243, 3, 'Pemindahan tugas PNS'),
-(2173, 244, 1, 'Pendidikan dan pelatihan formal'),
-(2174, 244, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2175, 244, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2176, 245, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2177, 245, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2178, 245, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2179, 245, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2180, 246, 1, 'Peningkatan fasilitasi terwujudnya kerjasama strategis antara usaha besar dan Usaha Kecil Menengah'),
-(2181, 246, 2, 'Pengembangan potensi unggulan daerah'),
-(2182, 246, 3, 'Fasilitasi dan koordinasi percepatan pembangunan kawasan produksi daerah tertinggal (P2KPDT)'),
-(2183, 246, 4, 'Koordinasi antar lembaga dalam pengendalian pelaksanaan investasi PMDN/PMA'),
-(2184, 246, 5, 'Koordinasi perencanaan dan pengembangan penanaman modal'),
-(2185, 246, 6, 'Peningkatan koordinasi dan kerjasama di bidang penanaman modal dengan instansi pemerintah dan dunia usaha'),
-(2186, 246, 7, 'Pengawasan dan evaluasi kinerja dan aparatur Badan Penanaman Modal Daerah'),
-(2187, 246, 8, 'Peningkatan kegiatan pemantauan, pembinaan dan pengawasan pelaksanaan penanaman modal'),
-(2188, 246, 9, 'Peningkatan kualitas SDM guna peningkatan pelayanan Investasi'),
-(2189, 246, 10, 'Penyelenggaraan pameran investasi'),
-(2190, 246, 11, 'Monitoring, evaluasi dan pelaporan'),
-(2191, 247, 1, 'Penyusunan kebijakan investasi bagi pembangunan fasilitas infrastruktur'),
-(2192, 247, 2, 'Memfasilitasi dan koordinasi kerjasama di bidang investasi'),
-(2193, 247, 3, 'Penyusunan Cetak Biru (Master Plan) pengembangan penanaman modal'),
-(2194, 247, 4, 'Pengembangan System Informasi Penanaman Modal'),
-(2195, 247, 5, 'Penyusunan sistem informasi penanaman modal di daerah'),
-(2196, 247, 6, 'Penyederhanaan prosedur perijinan dan peningkatan pelayanan penanaman modal'),
-(2197, 247, 7, 'Kajian kebijakan penanaman modal'),
-(2198, 247, 8, 'Pemberian insentif di wilayah tertinggal'),
-(2199, 247, 9, 'Monitoring, evaluasi dan pelaporan'),
-(2200, 248, 1, 'Kajian potensi sumberdaya yang terkait dengan investasi'),
-(2201, 249, 0, 'Non Kegiatan'),
-(2202, 250, 1, 'Penyediaan jasa surat menyurat'),
-(2203, 250, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2204, 250, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2205, 250, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2206, 250, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2207, 250, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2208, 250, 7, 'Penyediaan jasa administrasi keuangan'),
-(2209, 250, 8, 'Penyediaan jasa kebersihan kantor'),
-(2210, 250, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2211, 250, 10, 'Penyediaan alat tulis kantor'),
-(2212, 250, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2213, 250, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2214, 250, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2215, 250, 14, 'Penyediaan peralatan rumah tangga'),
-(2216, 250, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2217, 250, 16, 'Penyediaan bahan logistik kantor'),
-(2218, 250, 17, 'Penyediaan makanan dan minuman'),
-(2219, 250, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2220, 250, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2221, 251, 1, 'Pembangunan rumah jabatan'),
-(2222, 251, 2, 'Pembangunan rumah dinas'),
-(2223, 251, 3, 'Pembangunan gedung kantor'),
-(2224, 251, 4, 'Pengadaan mobil jabatan'),
-(2225, 251, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2226, 251, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2227, 251, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2228, 251, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2229, 251, 9, 'Pengadaan peralatan gedung kantor'),
-(2230, 251, 10, 'Pengadaan mebeleur'),
-(2231, 251, 11, 'Pengadaan ……'),
-(2232, 251, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2233, 251, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2234, 251, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2235, 251, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2236, 251, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2237, 251, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2238, 251, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2239, 251, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2240, 251, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2241, 251, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2242, 251, 30, 'Pemeliharaan rutin/berkala …..'),
-(2243, 251, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2244, 251, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2245, 251, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2246, 251, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2247, 251, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2248, 252, 1, 'Pengadaan mesin/kartu absensi'),
-(2249, 252, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2250, 252, 3, 'Pengadaan pakaian kerja lapangan'),
-(2251, 252, 4, 'Pengadaan pakaian KORPRI'),
-(2252, 252, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2253, 253, 1, 'Pemulangan pegawai yang pensiun'),
-(2254, 253, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2255, 253, 3, 'Pemindahan tugas PNS'),
-(2256, 254, 1, 'Pendidikan dan pelatihan formal'),
-(2257, 254, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2258, 254, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2259, 255, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2260, 255, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2261, 255, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2262, 255, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2263, 256, 1, 'Pendataan potensi kepemudaan'),
-(2264, 256, 2, 'Pemantauan dan evaluasi pelaksanaan pembangunan pemuda'),
-(2265, 256, 3, 'Penelitian dan pengkajian kebijakan-kebijakan pembangunan kepemudaan'),
-(2266, 256, 4, 'Pengembangan sistem informasi manajemen kepemudaan berbasis E-YOUTH'),
-(2267, 256, 5, 'Peningkatan keimanan dan ketaqwaan kepemudaan'),
-(2268, 256, 6, 'Penyusunan pedoman komunikasi, informasi, edukasi, dan advokasi tentang kepemimpinan pemuda'),
-(2269, 256, 7, 'Penyusunan rancangan pola kemitraan antar pemuda dengan masyarakat'),
-(2270, 256, 8, 'Perluasan penyusunan rencana aksi daerah bidang kepemudaan'),
-(2271, 256, 9, 'Perumusan kebijakan kewirausahaan bagi pemuda'),
-(2272, 256, 10, 'Monitoring, evaluasi dan pelaporan'),
-(2273, 257, 1, 'Pembinaan organisasi kepemudaan'),
-(2274, 257, 2, 'Pendidikan dan pelatihan dasar kepemimpinan'),
-(2275, 257, 3, 'Fasilitasi aksi bhakti sosial kepemudaan'),
-(2276, 257, 4, 'Fasilitasi pekan temu wicara organisasi pemuda'),
-(2277, 257, 5, 'Penyuluhan pencegahan penggunaan narkoba dikalangan generasi muda'),
-(2278, 257, 6, 'Lomba kreasi dan karya tulis ilmiah dikalangan pemuda'),
-(2279, 257, 7, 'Pembinaan pemuda pelopor keamanan lingkungan'),
-(2280, 257, 8, 'Pameran prestasi hasil karya pemudan'),
-(2281, 257, 9, 'Monitoring, evaluasi dan pelaporan'),
-(2282, 258, 1, 'Pelatihan kewirausahaan bagi pemuda'),
-(2283, 258, 2, 'Pelatihan ketrampilan bagi pemuda'),
-(2284, 259, 1, 'Pemberian penyuluhan tentang bahaya narkoba bagi pemuda'),
-(2285, 260, 1, 'Peningkatan mutu organisasi dan tenaga keolahragaan'),
-(2286, 260, 2, 'Pengembangan sistem sertifikasi dan standarisasi profesi'),
-(2287, 260, 3, 'Pengembangan perencanaan olah raga terpadu'),
-(2288, 260, 4, 'Pemantauan dan evaluasi pelaksanaan pengembangan olahraga'),
-(2289, 260, 5, 'Pembinaan manajemen organisasi olahraga'),
-(2290, 260, 6, 'Pengkajian kebijakan-kebijakan pembangunan olahraga'),
-(2291, 260, 7, 'Penyusunan pola kemitraan pemerintah dan masyarakat dalam pembangunan dan pengembangan industri olahraga'),
-(2292, 260, 8, 'Monitoring, evaluasi dan pelaporan'),
-(2293, 261, 1, 'Pelaksanaan identifikasi bakat dan potensi pelajar dalam olahraga'),
-(2294, 261, 2, 'Pelaksanaan identifikasi dan pengembangan olahraga unggulan daerah'),
-(2295, 261, 3, 'Pembibitan dan pembinaan olahragawan berbakat'),
-(2296, 261, 4, 'Pembinaan cabang olahraga prestasi di tingkat daerah'),
-(2297, 261, 5, 'Peningkatan kesegaran jasmani dan rekreasi'),
-(2298, 261, 6, 'Penyelenggaraan kompetisi olahraga'),
-(2299, 261, 7, 'Permassalan olah raga bagi pelajar, mahasiswa, dan masyarakat'),
-(2300, 261, 8, 'Pemberian penghargaan bagi insan olahraga yang berdedikasi dan berprestasi'),
-(2301, 261, 9, 'Pengembangan dan pemanfaatan IPTEK olahraga sebagai pendorong peningkatan prestasi olahraga'),
-(2302, 261, 10, 'Pengembangan olahraga lanjut usia termasuk penyandang cacat'),
-(2303, 261, 11, 'Pengembangan olahraga rekreasi'),
-(2304, 261, 12, 'Peningkatan jaminan kesejahteraan bagi masa depan atlet, pelatih, dan teknisi olahraga'),
-(2305, 261, 13, 'Peningkatan jumlah dan kualitas serta kompetensi pelatih, peneliti, praktisi, dan teknisi olahraga'),
-(2306, 261, 14, 'Pembinaan olahraga yang berkembang di masyarakat'),
-(2307, 261, 15, 'Peningkatan manajemen organisasi olahraga tingkat perkumpulan dan tingkat daerah'),
-(2308, 261, 16, 'Kerjasama peningkatan olahragawan berbakat dan berprestasi dengan lembaga/instansi lainnya'),
-(2309, 262, 1, 'Peningkatan kerjasama pola kemitraan antara pemerintah dan masyarakat untuk pembangunan sarana dan prasarana olahraga'),
-(2310, 262, 2, 'Peningkatan pembangunan sarana dan prasarana olah raga'),
-(2311, 262, 3, 'Pemantauan dan evaluasi pembangunan sarana dan prasarana olah raga'),
-(2312, 262, 5, 'Pengembangan dan pemanfaatan iptek dalam pengembangan sarana dan prasarana olahraga'),
-(2313, 262, 6, 'Peningkatan peran dunia usaha dalam pengembangan sarana dan prasarana olahraga'),
-(2314, 262, 7, 'Pemeliharaan rutin/berkala sarana dan prasarana olah raga'),
-(2315, 263, 0, 'Non Kegiatan'),
-(2316, 264, 1, 'Penyediaan jasa surat menyurat'),
-(2317, 264, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2318, 264, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2319, 264, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2320, 264, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2321, 264, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2322, 264, 7, 'Penyediaan jasa administrasi keuangan'),
-(2323, 264, 8, 'Penyediaan jasa kebersihan kantor'),
-(2324, 264, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2325, 264, 10, 'Penyediaan alat tulis kantor'),
-(2326, 264, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2327, 264, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2328, 264, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2329, 264, 14, 'Penyediaan peralatan rumah tangga'),
-(2330, 264, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2331, 264, 16, 'Penyediaan bahan logistik kantor'),
-(2332, 264, 17, 'Penyediaan makanan dan minuman'),
-(2333, 264, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2334, 264, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2335, 265, 1, 'Pembangunan rumah jabatan'),
-(2336, 265, 2, 'Pembangunan rumah dinas'),
-(2337, 265, 3, 'Pembangunan gedung kantor'),
-(2338, 265, 4, 'Pengadaan mobil jabatan'),
-(2339, 265, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2340, 265, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2341, 265, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2342, 265, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2343, 265, 9, 'Pengadaan peralatan gedung kantor'),
-(2344, 265, 10, 'Pengadaan mebeleur'),
-(2345, 265, 11, 'Pengadaan ……'),
-(2346, 265, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2347, 265, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2348, 265, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2349, 265, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2350, 265, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2351, 265, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2352, 265, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2353, 265, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2354, 265, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2355, 265, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2356, 265, 30, 'Pemeliharaan rutin/berkala …..'),
-(2357, 265, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2358, 265, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2359, 265, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2360, 265, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2361, 265, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2362, 266, 1, 'Pengadaan mesin/kartu absensi'),
-(2363, 266, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2364, 266, 3, 'Pengadaan pakaian kerja lapangan'),
-(2365, 266, 4, 'Pengadaan pakaian KORPRI'),
-(2366, 266, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2367, 267, 1, 'Pemulangan pegawai yang pensiun'),
-(2368, 267, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2369, 267, 3, 'Pemindahan tugas PNS'),
-(2370, 268, 1, 'Pendidikan dan pelatihan formal'),
-(2371, 268, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2372, 268, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2373, 269, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2374, 269, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2375, 269, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2376, 269, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2377, 270, 1, 'Penyusunan dan pengumpulan data dan statistik daerah'),
-(2378, 270, 2, 'Pengolahan, updating dan analisis data dan statistik daerah'),
-(2379, 270, 3, 'Penyusunan dan pengumpulan data PDRB'),
-(2380, 270, 4, 'Pengolahan, updating dan analisis data PDRB'),
-(2381, 271, 0, 'Non Kegiatan'),
-(2382, 272, 1, 'Penyediaan jasa surat menyurat'),
-(2383, 272, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2384, 272, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2385, 272, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2386, 272, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2387, 272, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2388, 272, 7, 'Penyediaan jasa administrasi keuangan'),
-(2389, 272, 8, 'Penyediaan jasa kebersihan kantor'),
-(2390, 272, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2391, 272, 10, 'Penyediaan alat tulis kantor'),
-(2392, 272, 11, 'Penyediaan barang cetakan dan penggandaan');
-INSERT INTO `ref_kegiatan` (`id_kegiatan`, `id_program`, `kd_kegiatan`, `nm_kegiatan`) VALUES
-(2393, 272, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2394, 272, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2395, 272, 14, 'Penyediaan peralatan rumah tangga'),
-(2396, 272, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2397, 272, 16, 'Penyediaan bahan logistik kantor'),
-(2398, 272, 17, 'Penyediaan makanan dan minuman'),
-(2399, 272, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2400, 272, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2401, 273, 1, 'Pembangunan rumah jabatan'),
-(2402, 273, 2, 'Pembangunan rumah dinas'),
-(2403, 273, 3, 'Pembangunan gedung kantor'),
-(2404, 273, 4, 'Pengadaan mobil jabatan'),
-(2405, 273, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2406, 273, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2407, 273, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2408, 273, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2409, 273, 9, 'Pengadaan peralatan gedung kantor'),
-(2410, 273, 10, 'Pengadaan mebeleur'),
-(2411, 273, 11, 'Pengadaan ……'),
-(2412, 273, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2413, 273, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2414, 273, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2415, 273, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2416, 273, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2417, 273, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2418, 273, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2419, 273, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2420, 273, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2421, 273, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2422, 273, 30, 'Pemeliharaan rutin/berkala …..'),
-(2423, 273, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2424, 273, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2425, 273, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2426, 273, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2427, 273, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2428, 274, 1, 'Pengadaan mesin/kartu absensi'),
-(2429, 274, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2430, 274, 3, 'Pengadaan pakaian kerja lapangan'),
-(2431, 274, 4, 'Pengadaan pakaian KORPRI'),
-(2432, 274, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2433, 275, 1, 'Pemulangan pegawai yang pensiun'),
-(2434, 275, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2435, 275, 3, 'Pemindahan tugas PNS'),
-(2436, 276, 1, 'Pendidikan dan pelatihan formal'),
-(2437, 276, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2438, 276, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2439, 277, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2440, 277, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2441, 277, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2442, 277, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2443, 278, 0, 'Non Kegiatan'),
-(2444, 279, 1, 'Penyediaan jasa surat menyurat'),
-(2445, 279, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2446, 279, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2447, 279, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2448, 279, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2449, 279, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2450, 279, 7, 'Penyediaan jasa administrasi keuangan'),
-(2451, 279, 8, 'Penyediaan jasa kebersihan kantor'),
-(2452, 279, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2453, 279, 10, 'Penyediaan alat tulis kantor'),
-(2454, 279, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2455, 279, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2456, 279, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2457, 279, 14, 'Penyediaan peralatan rumah tangga'),
-(2458, 279, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2459, 279, 16, 'Penyediaan bahan logistik kantor'),
-(2460, 279, 17, 'Penyediaan makanan dan minuman'),
-(2461, 279, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2462, 279, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2463, 280, 1, 'Pembangunan rumah jabatan'),
-(2464, 280, 2, 'Pembangunan rumah dinas'),
-(2465, 280, 3, 'Pembangunan gedung kantor'),
-(2466, 280, 4, 'Pengadaan mobil jabatan'),
-(2467, 280, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2468, 280, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2469, 280, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2470, 280, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2471, 280, 9, 'Pengadaan peralatan gedung kantor'),
-(2472, 280, 10, 'Pengadaan mebeleur'),
-(2473, 280, 11, 'Pengadaan ……'),
-(2474, 280, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2475, 280, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2476, 280, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2477, 280, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2478, 280, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2479, 280, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2480, 280, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2481, 280, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2482, 280, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2483, 280, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2484, 280, 30, 'Pemeliharaan rutin/berkala …..'),
-(2485, 280, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2486, 280, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2487, 280, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2488, 280, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2489, 280, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2490, 281, 1, 'Pengadaan mesin/kartu absensi'),
-(2491, 281, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2492, 281, 3, 'Pengadaan pakaian kerja lapangan'),
-(2493, 281, 4, 'Pengadaan pakaian KORPRI'),
-(2494, 281, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2495, 282, 1, 'Pemulangan pegawai yang pensiun'),
-(2496, 282, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2497, 282, 3, 'Pemindahan tugas PNS'),
-(2498, 283, 1, 'Pendidikan dan pelatihan formal'),
-(2499, 283, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2500, 283, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2501, 284, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2502, 284, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2503, 284, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2504, 284, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2505, 285, 1, 'Pelestarian dan aktualisasi adat budaya daerah'),
-(2506, 285, 2, 'Penetagunaan naskah kuno nusantara'),
-(2507, 285, 3, 'Penyusunan kebijakan tentang budaya lokal daerah'),
-(2508, 285, 4, 'Pemantauan dan evaluasi pelaksanaan program pengembangan nilai budaya'),
-(2509, 285, 5, 'Pemberian dukungan, penghargaan dan kerjasama di bidang budaya'),
-(2510, 286, 1, 'Fasilitasi partisipasi masyarakat dalam pengelolaan kekayaan budaya'),
-(2511, 286, 2, 'Pelestarian fisik dan kandungan bahan pustaka termasuk naskah kuno'),
-(2512, 286, 3, 'Penyusunan kebijakan pengelolaan kekayaan budaya lokal daerah'),
-(2513, 286, 4, 'Sosialisasi pengelolaan kekayaan budaya lokal daerah'),
-(2514, 286, 5, 'Pengelolaan dan pengembangan pelestarian peninggalan sejarah purbakala, museum dan peninggalan bawah air'),
-(2515, 286, 6, 'Pengembangan kebudayaan dan pariwisata'),
-(2516, 286, 7, 'Pengembangan nilai dan geografi sejarah'),
-(2517, 286, 8, 'Perekaman dan digitalisasi bahan pustaka'),
-(2518, 286, 9, 'Perumusan kebijakan sejarah dan purbakala'),
-(2519, 286, 10, 'Pengawasan, Monitoring, evaluasi dan pelaporan pelaksanaan program pengelolaan kekayaan budaya'),
-(2520, 286, 11, 'Pendukungan pengelolaan museum dan taman budaya di daerah'),
-(2521, 286, 12, 'Pengelolaan karya cetak dan karya rekam'),
-(2522, 286, 13, 'Pengembangan database sistem informasi sejarah purbakala'),
-(2523, 287, 1, 'Pengembangan kesenian dan kebudayaan daerah'),
-(2524, 287, 2, 'Penyusunan sistem informasi database bidang kebudayaan'),
-(2525, 287, 3, 'Penyelenggaraan dialog kebudayaan'),
-(2526, 287, 4, 'Fasilitasi perkembangan keragaman budaya daerah'),
-(2527, 287, 5, 'Fasilitasi penyelenggaraan festival budaya daerah'),
-(2528, 287, 6, 'Seminar dalam rangka revitalisasi dan reaktualisasi budaya lokal'),
-(2529, 287, 7, 'Monitoring, evaluasi dan pelaporan pelaksanaan pengembangan keanekaragaman budaya'),
-(2530, 288, 1, 'Fasilitasi pengembangan kemitraan dengan LSM dan perusahaan swasta'),
-(2531, 288, 2, 'Fasilitasi pembentukan kemitraan usaha profesi antar daerah'),
-(2532, 288, 3, 'Membangun kemitraanpengelolaan kebudayaan anatar daerah'),
-(2533, 288, 4, 'Monitoring, evaluasi dan pelaporan'),
-(2534, 289, 0, 'Non Kegiatan'),
-(2535, 290, 1, 'Penyediaan Jasa Surat Menyurat'),
-(2536, 290, 2, 'Penyediaan Jasa Komunikasi, Sumber Daya Air dan Listrik'),
-(2537, 290, 3, 'Penyediaan Jasa Peralatan dan Perlengkapan Kantor'),
-(2538, 290, 4, 'Penyediaan Jasa Jaminan Pemeliharaan Kesehatan PNS'),
-(2539, 290, 5, 'Penyediaan Jasa Jaminan Barang Milik Daerah'),
-(2540, 290, 6, 'Penyediaan Jasa Pemeliharaan dan Perizinan Kendaraan Dinas/Operasional'),
-(2541, 290, 7, 'Penyediaan Jasa Administrasi Keuangan'),
-(2542, 290, 8, 'Penyediaan Jasa Kebersihan Kantor'),
-(2543, 290, 9, 'Penyediaan Jasa Perbaikan Peralatan Kerja'),
-(2544, 290, 10, 'Penyediaan Alat Tulis Kantor'),
-(2545, 290, 11, 'Penyediaan Barang Cetakan dan Penggandaan'),
-(2546, 290, 12, 'Penyediaan Komponen Instalasi Listrik/Penerangan Bangunan Kantor'),
-(2547, 290, 13, 'Penyediaan Peralatan dan Perlengkapan Kantor'),
-(2548, 290, 14, 'Penyediaan Peralatan Rumah Tangga'),
-(2549, 290, 15, 'Penyediaan Bahan Bacaan dan Peraturan Perundang-Undangan'),
-(2550, 290, 16, 'Penyediaan Bahan Logistik Kantor'),
-(2551, 290, 17, 'Penyediaan Makanan dan Minuman'),
-(2552, 290, 18, 'Rapat-Rapat Koordinasi dan Konsultasi Ke Luar Daerah'),
-(2553, 291, 1, 'Pembangunan Rumah Jabatan'),
-(2554, 291, 2, 'Pembangunan Rumah Dinas'),
-(2555, 291, 3, 'Pembangunan Gedung Kantor'),
-(2556, 291, 4, 'Pengadaan Mobil Jabatan'),
-(2557, 291, 5, 'Pengadaan Kendaraan Dinas/Operasional'),
-(2558, 291, 6, 'Pengadaan Perlengkapan Rumah Jabatan/Dinas'),
-(2559, 291, 7, 'Pengadaan Perlengkapan Gedung Kantor'),
-(2560, 291, 8, 'Pengadaan Peralatan Rumah Jabatan/Dinas'),
-(2561, 291, 9, 'Pengadaan Peralatan Gedung Kantor'),
-(2562, 291, 10, 'Pengadaan Mebeleur'),
-(2563, 291, 11, 'Pengadaan ......'),
-(2564, 291, 20, 'Pemeliharaan Rutin/Berkala Rumah Jabatan'),
-(2565, 291, 21, 'Pemeliharaan Rutin/Berkala Rumah Dinas'),
-(2566, 291, 22, 'Pemeliharaan Rutin/Berkala Gedung Kantor'),
-(2567, 291, 23, 'Pemeliharaan Rutin/Berkala Mobil Jabatan'),
-(2568, 291, 24, 'Pemeliharaan Rutin/Berkala Kendaraan Dinas/Operasional'),
-(2569, 291, 25, 'Pemeliharaan Rutin/Berkala Perlengkapan Rumah Jabatan/Dinas'),
-(2570, 291, 26, 'Pemeliharaan Rutin/Berkala Perlengkapan Gedung Kantor'),
-(2571, 291, 27, 'Pemeliharaan Rutin/Berkala Peralatan Rumah Jabatan/Dinas'),
-(2572, 291, 28, 'Pemeliharaan Rutin/Berkala Peralatan Gedung Kantor'),
-(2573, 291, 29, 'Pemeliharaan Rutin/Berkala Mebeleur'),
-(2574, 291, 30, 'Pemeliharaan Rutin/Berkala ......'),
-(2575, 291, 40, 'Rehabilitasi Sedang/Berat Rumah Jabatan'),
-(2576, 291, 41, 'Rehabilitasi Sedang/Berat Rumah Dinas'),
-(2577, 291, 42, 'Rehabilitasi Sedang/Berat Gedung Kantor'),
-(2578, 291, 43, 'Rehabilitasi Sedang/Berat Mobil Jabatan'),
-(2579, 291, 44, 'Rehabilitasi Sedang/Berat Kendaraan Dinas/Operasional'),
-(2580, 292, 1, 'Pengadaan Mesin/Kartu Absensi'),
-(2581, 292, 2, 'Pengadaan Pakaian Dinas Beserta Perlengkapannya'),
-(2582, 292, 3, 'Pengadaan Pakaian Kerja Lapangan'),
-(2583, 292, 4, 'Pengadaan Pakaian KORPRI'),
-(2584, 292, 5, 'Pengadaan Pakaian Khusus Hari-Hari Tertentu'),
-(2585, 293, 1, 'Pemulangan Pegawai yang Pensiun'),
-(2586, 293, 2, 'Pemulangan Pegawai yang Tewas Dalam Melaksanakan Tugas'),
-(2587, 293, 3, 'Pemindahan Tugas PNS'),
-(2588, 294, 1, 'Pendidikan dan Pelatihan Formal'),
-(2589, 294, 2, 'Sosialisasi Peraturan Perundang-Undangan'),
-(2590, 294, 3, 'Bimbingan Teknis Implementasi Peraturan Perundang-Undangan'),
-(2591, 295, 1, 'Penyusunan Laporan Capaian Kinerja dan Ikhtisar Realisasi Kinerja SKPD'),
-(2592, 295, 2, 'Penyusunan Pelaporan Keuangan Semesteran'),
-(2593, 295, 3, 'Penyusunan Pelaporan Prognosis Realisasi Anggaran'),
-(2594, 295, 4, 'Penyusunan Pelaporan Keuangan Akhir Tahun'),
-(2595, 296, 1, 'Pemasyarakatan Minat dan Kebiasaan Membaca Untuk Mendorong Terwujudnya Masyarakat Pembelajar'),
-(2596, 296, 2, 'Pengembangan Minat dan Budaya Baca'),
-(2597, 296, 3, 'Supervisi, Pembinaan dan Stimulasi Pada Perpustakaan Umum, Perpustakaan Khusus, Perpustakaan Sekolah dan Perpustakaan Masyarakat'),
-(2598, 296, 4, 'Pelaksanaan Koordinasi Pengembangan Perpustakaan'),
-(2599, 296, 5, 'Penyediaan Bantuan Pengembangan Perpustakaan dan Minat Baca Di Daerah'),
-(2600, 296, 6, 'Penyelenggaraan Koordinasi Pengembangan Budaya Baca'),
-(2601, 296, 7, 'Perencanaan dan Penyusunan Program Budaya Baca'),
-(2602, 296, 8, 'Publikasi dan Sosialisasi Minat dan Budaya Baca'),
-(2603, 296, 9, 'Penyediaan Bahan Pustaka Perpustakaan Umum Daerah'),
-(2604, 296, 10, 'Monitoring, Evaluasi dan Pelaporan'),
-(2605, 297, 0, 'Non Kegiatan'),
-(2606, 298, 1, 'Penyediaan jasa surat menyurat'),
-(2607, 298, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2608, 298, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2609, 298, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2610, 298, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2611, 298, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2612, 298, 7, 'Penyediaan jasa administrasi keuangan'),
-(2613, 298, 8, 'Penyediaan jasa kebersihan kantor'),
-(2614, 298, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2615, 298, 10, 'Penyediaan alat tulis kantor'),
-(2616, 298, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2617, 298, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2618, 298, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2619, 298, 14, 'Penyediaan peralatan rumah tangga'),
-(2620, 298, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2621, 298, 16, 'Penyediaan bahan logistik kantor'),
-(2622, 298, 17, 'Penyediaan makanan dan minuman'),
-(2623, 298, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2624, 298, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2625, 299, 1, 'Pembangunan rumah jabatan'),
-(2626, 299, 2, 'Pembangunan rumah dinas'),
-(2627, 299, 3, 'Pembangunan gedung kantor'),
-(2628, 299, 4, 'Pengadaan mobil jabatan'),
-(2629, 299, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2630, 299, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2631, 299, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2632, 299, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2633, 299, 9, 'Pengadaan peralatan gedung kantor'),
-(2634, 299, 10, 'Pengadaan mebeleur'),
-(2635, 299, 11, 'Pengadaan ……'),
-(2636, 299, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2637, 299, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2638, 299, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2639, 299, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2640, 299, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2641, 299, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2642, 299, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2643, 299, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2644, 299, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2645, 299, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2646, 299, 30, 'Pemeliharaan rutin/berkala …..'),
-(2647, 299, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2648, 299, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2649, 299, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2650, 299, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2651, 299, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2652, 300, 1, 'Pengadaan mesin/kartu absensi'),
-(2653, 300, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2654, 300, 3, 'Pengadaan pakaian kerja lapangan'),
-(2655, 300, 4, 'Pengadaan pakaian KORPRI'),
-(2656, 300, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2657, 301, 1, 'Pemulangan pegawai yang pensiun'),
-(2658, 301, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2659, 301, 3, 'Pemindahan tugas PNS'),
-(2660, 302, 1, 'Pendidikan dan pelatihan formal'),
-(2661, 302, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2662, 302, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2663, 303, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2664, 303, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2665, 303, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2666, 303, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2667, 304, 1, 'Pembangunan data base informasi kearsipan'),
-(2668, 304, 2, 'Pengumpulan data'),
-(2669, 304, 3, 'Pengklasifikasian data'),
-(2670, 304, 4, 'Penyusunan sistem katalog data'),
-(2671, 304, 5, 'Pengadaan sarana penyimpanan'),
-(2672, 304, 6, 'Kajian sistem administrasi kearsipan'),
-(2673, 304, 7, 'Pemeliharaan peralatan jaringan informasi kearsipan'),
-(2674, 305, 1, 'Pengadaan sarana pengolahan dan penyimpanan arsip'),
-(2675, 305, 2, 'Pendataan dan penataan dokumen/arsip daerah'),
-(2676, 305, 3, 'Penduplikasian dokumen/arsip daerah dalam bentuk informatika'),
-(2677, 305, 4, 'Pembangunan sistem keamanan penyimpanan data'),
-(2678, 306, 1, 'Pemeliharaan rutin/berkala sarana pengolahan dan penyimpanan arsip'),
-(2679, 306, 2, 'Pemeliharaan rutin/berkala arsip daerah'),
-(2680, 306, 3, 'Monitoring, evaluasi dan pelaporan kondisi situasi data'),
-(2681, 307, 1, 'Penyusunan dan penerbitan naskah sumber arsip'),
-(2682, 307, 2, 'Penyediaan sarana layanan informasi arsip'),
-(2683, 307, 3, 'Sosialisasi/penyuluhan kearsipan dilingkungan instansi pemerintah/swasta'),
-(2684, 308, 0, 'Non Kegiatan'),
-(2685, 309, 1, 'Penyediaan jasa surat menyurat'),
-(2686, 309, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2687, 309, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2688, 309, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2689, 309, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2690, 309, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2691, 309, 7, 'Penyediaan jasa administrasi keuangan'),
-(2692, 309, 8, 'Penyediaan jasa kebersihan kantor'),
-(2693, 309, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2694, 309, 10, 'Penyediaan alat tulis kantor'),
-(2695, 309, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2696, 309, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2697, 309, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2698, 309, 14, 'Penyediaan peralatan rumah tangga'),
-(2699, 309, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2700, 309, 16, 'Penyediaan bahan logistik kantor'),
-(2701, 309, 17, 'Penyediaan makanan dan minuman'),
-(2702, 309, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2703, 309, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2704, 310, 1, 'Pembangunan rumah jabatan'),
-(2705, 310, 2, 'Pembangunan rumah dinas'),
-(2706, 310, 3, 'Pembangunan gedung kantor'),
-(2707, 310, 4, 'Pengadaan mobil jabatan'),
-(2708, 310, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2709, 310, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2710, 310, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2711, 310, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2712, 310, 9, 'Pengadaan peralatan gedung kantor'),
-(2713, 310, 10, 'Pengadaan mebeleur'),
-(2714, 310, 11, 'Pengadaan ……'),
-(2715, 310, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2716, 310, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2717, 310, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2718, 310, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2719, 310, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2720, 310, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2721, 310, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2722, 310, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2723, 310, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2724, 310, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2725, 310, 30, 'Pemeliharaan rutin/berkala …..'),
-(2726, 310, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2727, 310, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2728, 310, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2729, 310, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2730, 310, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2731, 311, 1, 'Pengadaan mesin/kartu absensi'),
-(2732, 311, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2733, 311, 3, 'Pengadaan pakaian kerja lapangan'),
-(2734, 311, 4, 'Pengadaan pakaian KORPRI'),
-(2735, 311, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2736, 312, 1, 'Pemulangan pegawai yang pensiun'),
-(2737, 312, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2738, 312, 3, 'Pemindahan tugas PNS'),
-(2739, 313, 1, 'Pendidikan dan pelatihan formal'),
-(2740, 313, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2741, 313, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2742, 314, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2743, 314, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2744, 314, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2745, 314, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2746, 315, 1, 'Pembinaan kelompok ekonomi masyarakat pesisir'),
-(2747, 316, 1, 'Pembentukan kelompok masyarakat swakarsa pengamanan sumberdaya kelautan'),
-(2748, 317, 1, 'Penyuluhan hukum dalam pendayagunaan sumberdaya laut'),
-(2749, 318, 1, 'Kajian mitigasi bencana alam laut dan prakiraan iklim laut'),
-(2750, 319, 1, 'Penyuluhan budaya kelautan'),
-(2751, 320, 1, 'Pengembangan bibit ikan unggul'),
-(2752, 320, 2, 'Pendampingan pada kelompok tani pembudidaya ikan'),
-(2753, 320, 3, 'Pembinaan dan pengembangan perikanan'),
-(2754, 321, 1, 'Pendampingan pada kelompok nelayan perikanan tangkap'),
-(2755, 321, 2, 'Pembangunan tempat pelelangan ikan'),
-(2756, 321, 3, 'Pemeliharaan rutin/berkala tempat pelelangan ikan'),
-(2757, 321, 4, 'Rehabilitasi sedang/berat tempat pelelangan ikan'),
-(2758, 321, 5, 'Pengembangan lembaga usaha perdagangan perikanan tangkap'),
-(2759, 322, 1, 'Kajian sistem penyuluhan perikanan'),
-(2760, 323, 1, 'Kajian optimalisasi pengelolaan dan pemasaran produksi perikanan'),
-(2761, 324, 1, 'Kajian kawasan budidaya laut, air payau dan air tawar'),
-(2762, 325, 0, 'Non Kegiatan'),
-(2763, 326, 1, 'Penyediaan jasa surat menyurat'),
-(2764, 326, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2765, 326, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2766, 326, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2767, 326, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2768, 326, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2769, 326, 7, 'Penyediaan jasa administrasi keuangan'),
-(2770, 326, 8, 'Penyediaan jasa kebersihan kantor'),
-(2771, 326, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2772, 326, 10, 'Penyediaan alat tulis kantor'),
-(2773, 326, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2774, 326, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2775, 326, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2776, 326, 14, 'Penyediaan peralatan rumah tangga'),
-(2777, 326, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2778, 326, 16, 'Penyediaan bahan logistik kantor'),
-(2779, 326, 17, 'Penyediaan makanan dan minuman'),
-(2780, 326, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2781, 326, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2782, 327, 1, 'Pembangunan rumah jabatan'),
-(2783, 327, 2, 'Pembangunan rumah dinas'),
-(2784, 327, 3, 'Pembangunan gedung kantor'),
-(2785, 327, 4, 'Pengadaan mobil jabatan'),
-(2786, 327, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2787, 327, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2788, 327, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2789, 327, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2790, 327, 9, 'Pengadaan peralatan gedung kantor'),
-(2791, 327, 10, 'Pengadaan mebeleur'),
-(2792, 327, 11, 'Pengadaan ……'),
-(2793, 327, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2794, 327, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2795, 327, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2796, 327, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2797, 327, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2798, 327, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2799, 327, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2800, 327, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2801, 327, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2802, 327, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2803, 327, 30, 'Pemeliharaan rutin/berkala …..'),
-(2804, 327, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2805, 327, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2806, 327, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2807, 327, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2808, 327, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2809, 328, 1, 'Pengadaan mesin/kartu absensi'),
-(2810, 328, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2811, 328, 3, 'Pengadaan pakaian kerja lapangan'),
-(2812, 328, 4, 'Pengadaan pakaian KORPRI'),
-(2813, 328, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2814, 329, 1, 'Pemulangan pegawai yang pensiun'),
-(2815, 329, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2816, 329, 3, 'Pemindahan tugas PNS'),
-(2817, 330, 1, 'Pendidikan dan pelatihan formal'),
-(2818, 330, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2819, 330, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2820, 331, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2821, 331, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2822, 331, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2823, 331, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2824, 332, 1, 'Analisa pasar untuk promosi dan pemasaran objek pariwisata'),
-(2825, 332, 2, 'Peningkatan pemanfaatan teknologi informasi dalam pemasaran pariwisata'),
-(2826, 332, 3, 'Pengembangan jaringan kerja sama promosi pariwisata'),
-(2827, 332, 4, 'Koordinasi dengan sektor pendukung pariwisata'),
-(2828, 332, 5, 'Pelaksanaan promosi pariwisata nusantara di dalam dan di luar negeri'),
-(2829, 332, 6, 'Pemantauan dan evaluasi pelaksanaan program pengembangan pemasaran pariwisata'),
-(2830, 332, 7, 'Pengembangan statistik wisata terpadu'),
-(2831, 332, 8, 'Pelatihan pemandu wisata terpadu'),
-(2832, 333, 1, 'Pengembangan objek pariwisata unggulan'),
-(2833, 333, 2, 'Peningkatan pembangunan sarana dan prasarana pariwisata'),
-(2834, 333, 3, 'Pengembangan jenis dan paket wisata unggulan'),
-(2835, 333, 4, 'Pelaksanaan koordinasi pembangunan objek pariwisata dengan lembaga/dunia usaha'),
-(2836, 333, 5, 'Pemantauan dan evaluasi pelaksanaan program pengembangan destinasi pemasaran pariwisata'),
-(2837, 333, 6, 'Pengembangan daerah tujuan wisata'),
-(2838, 333, 7, 'Pengembangan, sosialisasi, dan penerapan swera pengawasan standarisasi'),
-(2839, 334, 1, 'Pengembangan dan penguatan informasi dan database'),
-(2840, 334, 2, 'Pengembangan dan penguatan litbang, kebudayaan dan pariwisata'),
-(2841, 334, 3, 'Pengembangan SDM di bidang kebudayaan dan pariwisata bekerjasama dengan lembaga lainnya'),
-(2842, 334, 4, 'Fasilitasi pembentukan forum komunikasi antar pelaku industri pariwisata dan budaya'),
-(2843, 334, 5, 'Pelaksanaan koordinasi pembangunan kemitraan pariwisata'),
-(2844, 334, 6, 'Pemantauan dan evaluasi pelaksanaan program peningkatan kemitraan'),
-(2845, 334, 7, 'Pengembangan sumber daya manusia dan profesionalisme bidang pariwisata'),
-(2846, 334, 8, 'Peningkatan peran serta masyarakat dalam pengembangan kemitraan pariwisata'),
-(2847, 334, 9, 'Monitoring, evaluasi dan pelaporan'),
-(2848, 335, 0, 'Non Kegiatan'),
-(2849, 336, 1, 'Penyediaan jasa surat menyurat'),
-(2850, 336, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2851, 336, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2852, 336, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2853, 336, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2854, 336, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2855, 336, 7, 'Penyediaan jasa administrasi keuangan'),
-(2856, 336, 8, 'Penyediaan jasa kebersihan kantor'),
-(2857, 336, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2858, 336, 10, 'Penyediaan alat tulis kantor'),
-(2859, 336, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2860, 336, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2861, 336, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2862, 336, 14, 'Penyediaan peralatan rumah tangga'),
-(2863, 336, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2864, 336, 16, 'Penyediaan bahan logistik kantor'),
-(2865, 336, 17, 'Penyediaan makanan dan minuman'),
-(2866, 336, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2867, 337, 1, 'Pembangunan rumah jabatan'),
-(2868, 337, 2, 'Pembangunan rumah dinas'),
-(2869, 337, 3, 'Pembangunan gedung kantor'),
-(2870, 337, 4, 'Pengadaan mobil jabatan'),
-(2871, 337, 5, 'pengadaan Kendaraan dinas/operasional'),
-(2872, 337, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(2873, 337, 7, 'Pengadaan perlengkapan gedung kantor'),
-(2874, 337, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(2875, 337, 9, 'Pengadaan peralatan gedung kantor'),
-(2876, 337, 10, 'Pengadaan mebeleur'),
-(2877, 337, 11, 'Pengadaan ……'),
-(2878, 337, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(2879, 337, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(2880, 337, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(2881, 337, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(2882, 337, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(2883, 337, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(2884, 337, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(2885, 337, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(2886, 337, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(2887, 337, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(2888, 337, 30, 'Pemeliharaan rutin/berkala …..'),
-(2889, 337, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(2890, 337, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(2891, 337, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(2892, 337, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(2893, 337, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(2894, 338, 1, 'Pengadaan mesin/kartu absensi'),
-(2895, 338, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(2896, 338, 3, 'Pengadaan pakaian kerja lapangan'),
-(2897, 338, 4, 'Pengadaan pakaian KORPRI'),
-(2898, 338, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(2899, 339, 1, 'Pemulangan pegawai yang pensiun'),
-(2900, 339, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(2901, 339, 3, 'Pemindahan tugas PNS'),
-(2902, 340, 1, 'Pendidikan dan pelatihan formal'),
-(2903, 340, 2, 'Sosialisasi peraturan perundang-undangan'),
-(2904, 340, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(2905, 341, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(2906, 341, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(2907, 341, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(2908, 341, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(2909, 342, 1, 'Pelatihan petani dan pelaku agribisnis'),
-(2910, 342, 2, 'Penyuluhan dan pendampingan petani dan pelaku agribisnis'),
-(2911, 342, 3, 'Peningkatan kemampuan lembaga petani'),
-(2912, 342, 4, 'Peningkatan sistem insentif dan disinsentif bagi petani/kelompok tani'),
-(2913, 342, 5, 'Penyuluhan dan bimbingan pemanfaatan dan produktivitas lahan tidur'),
-(2914, 343, 1, 'Penelitian dan pengembangan pemasaran hasil produksi pertanian/perkebunan'),
-(2915, 343, 2, 'Fasilitasi kerjasama regional/nasional/internasional penyediaan hasil produksi pertanian/perkebunan komplementer'),
-(2916, 343, 3, 'Pembangunan sarana dan prasarana pasar kecamatan/perdesaan produksi hasil pertanian/perkebunan'),
-(2917, 343, 4, 'Pembangunan pusat-pusat etalase/eksebisi/promosi atas hasil produksi pertanian/perkebunan'),
-(2918, 343, 5, 'Pemeliharaan rutin/berkala sarana dan prasarana pasar kecamatan/perdesaan produksi hasil pertanian/perkebunan'),
-(2919, 343, 6, 'Pemeliharaan rutin/berkala pusat-pusat etalase/eksebisi/promosi atas hasil produksi pertanian/perkebunan'),
-(2920, 343, 7, 'Promosi atas hasil produksi pertanian/perkebunan unggulan daerah'),
-(2921, 343, 8, 'Penyuluhan pemasaran produksi pertanian/perkebunan guna menghindari tengkulak dan sistem ijon'),
-(2922, 343, 9, 'Pembangunan pusat-pusat penampungan produksi hasil pertanian/perkebunan masyarakat yang akan dipasarkan'),
-(2923, 343, 10, 'Pengolahan informasi permintaan pasar atas hasil produksi pertanian/perkebunan masyarakat'),
-(2924, 343, 11, 'Penyuluhan distribusi pemasaran atas hasil produksi pertanian/perkebunan masyarakat'),
-(2925, 343, 12, 'Penyuluhan kualitas dan teknis kemasan hasil produksi pertanian/perkebunan yang akan dipasarkan'),
-(2926, 343, 13, 'Monitoring, evaluasi dan pelaporan'),
-(2927, 344, 1, 'Penelitian dan pengembanan teknologi pertanian/perkebunan tepat guna'),
-(2928, 344, 2, 'Pengadaan sarana dan prasarana teknologi pertanian/perkebunan tepat guna'),
-(2929, 344, 3, 'Pemeliharaan rutin/berkala sarana dan prasarana teknologi pertanian/perkebunan tepat guna'),
-(2930, 344, 4, 'Kegiatan penyuluhan penerapan teknologi pertanian/perkebunan tepat guna'),
-(2931, 344, 5, 'Pelatihan dan bimbingan pengoperasian teknologi pertanian/perkebunan tepat guna'),
-(2932, 344, 6, 'Pelatihan penerapan teknologi pertanian/perkebunan modern bercocok tanam'),
-(2933, 344, 7, 'Monitoring, evaluasi dan pelaporan'),
-(2934, 345, 1, 'Penyuluhan peningkatan produksi pertanian/perkebunan'),
-(2935, 345, 2, 'Penyediaan sarana produksi pertanian/perkebunan'),
-(2936, 345, 3, 'Pengembangan bibit unggul pertanian/perkebunan'),
-(2937, 345, 4, 'Sertifikasi bibit unggul pertanian/perkebunan'),
-(2938, 345, 5, 'Penyusunan kebijakan pencegahan alih fungsi lahan pertanian'),
-(2939, 345, 6, 'Monitoring, evaluasi dan pelaporan'),
-(2940, 346, 1, 'Peningkatan kapasitas tenaga penyuluh pertanian/perkebunan'),
-(2941, 346, 2, 'Peningkatan kesejahteraan tenaga penyuluh pertanian/perkebunan'),
-(2942, 346, 3, 'Penyuluhan dan pendampingan bagi pertanian/perkebunan'),
-(2943, 347, 1, 'Pendataan masalah peternakan'),
-(2944, 347, 2, 'Pemeliharaan kesehatan dan pencegahan penyakit menular ternak'),
-(2945, 347, 3, 'Pemusnahan ternak yang terjangkit penyakit endemik'),
-(2946, 347, 4, 'Pengawasan perdagangan ternak antar daerah'),
-(2947, 347, 5, 'Monitoring, evaluasi dan pelaporan'),
-(2948, 348, 1, 'Pembangunan sarana dan prasarana pembibitan ternak'),
-(2949, 348, 2, 'Pembibitan dan perawatan ternak'),
-(2950, 348, 3, 'Pendistribusian bibit ternak kepada masyarakat'),
-(2951, 348, 4, 'Penyuluhan pengelolaan bibit ternak yang didistribusikan kepada masyarakat'),
-(2952, 348, 5, 'Penilitian dan pengolahan gizi dan pakan ternak'),
-(2953, 348, 6, 'Pembelian dan pendidistribusian vaksin dan pakan ternak'),
-(2954, 348, 7, 'Penyuluhan kualitas gizi dan pakan ternak'),
-(2955, 348, 8, 'Pengembangan agribisnis peternakan'),
-(2956, 348, 9, 'Monitoring, evaluasi dan pelaporan'),
-(2957, 349, 1, 'Penelitian dan pengembangan hasil produksi peternakan'),
-(2958, 349, 2, 'Fasilitasi kerjasama regional/nasional/internasional penyediaan hasil produksi peternakan komplementer'),
-(2959, 349, 3, 'Pembangunan sarana dan prasarana pasar produksi hasil peternakan'),
-(2960, 349, 4, 'Pembangunan pusat-pusat etalase/eksebisi/promosi atas hasil produksi peternakan'),
-(2961, 349, 5, 'Promosi atas hasil produksi peternakan unggulan daerah'),
-(2962, 349, 6, 'Penyuluhan pemasaran produksi peternakan'),
-(2963, 349, 7, 'Pembangunan pusat-pusat penampungan produksi hasil peternakan masyarakat'),
-(2964, 349, 8, 'Pengolahan informasi permintaan pasar atas hasil produksi peternakan masyarakat'),
-(2965, 349, 9, 'Penyuluhan distribusi pemasaran atas hasil produksi peternakan masyarakat'),
-(2966, 349, 10, 'Penyuluhan kualitas dan teknis kemasan hasil produksi peternakan yang akan dipasarkan'),
-(2967, 349, 11, 'Monitoring, evaluasi dan pelaporan'),
-(2968, 349, 12, 'Pemeliharaan rutin/berkala sarana dan prasarana pasar produksi peternakan'),
-(2969, 349, 13, 'Pemeliharaan rutin/berkala pusat-pusat etalase/eksebisi/promosi atas hasil produksi peternakan'),
-(2970, 350, 1, 'Penelitian dan pengembangan teknologi peternakan tepat guna'),
-(2971, 350, 2, 'Pengadaan sarana dan prasarana teknologi peternakan tepat guna'),
-(2972, 350, 3, 'Pemeliharaan rutin/berkala sarana dan prasarana teknologi peternakan tepat guna'),
-(2973, 350, 4, 'Kegiatan penyuluhan penerapan teknologi peternakan tepat guna'),
-(2974, 350, 5, 'Pelatihan dan bimbingan pengoperasian teknologi peternakan tepat guna'),
-(2975, 350, 6, 'Monitoring, evaluasi dan pelaporan'),
-(2976, 351, 0, 'Non Kegiatan'),
-(2977, 352, 1, 'Penyediaan jasa surat menyurat'),
-(2978, 352, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(2979, 352, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(2980, 352, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(2981, 352, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(2982, 352, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(2983, 352, 7, 'Penyediaan jasa administrasi keuangan'),
-(2984, 352, 8, 'Penyediaan jasa kebersihan kantor'),
-(2985, 352, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(2986, 352, 10, 'Penyediaan alat tulis kantor'),
-(2987, 352, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(2988, 352, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(2989, 352, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(2990, 352, 14, 'Penyediaan peralatan rumah tangga'),
-(2991, 352, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(2992, 352, 16, 'Penyediaan bahan logistik kantor'),
-(2993, 352, 17, 'Penyediaan makanan dan minuman'),
-(2994, 352, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(2995, 352, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(2996, 353, 1, 'Pembangunan rumah jabatan'),
-(2997, 353, 2, 'Pembangunan rumah dinas'),
-(2998, 353, 3, 'Pembangunan gedung kantor'),
-(2999, 353, 4, 'Pengadaan mobil jabatan'),
-(3000, 353, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3001, 353, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3002, 353, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3003, 353, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3004, 353, 9, 'Pengadaan peralatan gedung kantor'),
-(3005, 353, 10, 'Pengadaan mebeleur'),
-(3006, 353, 11, 'Pengadaan ……'),
-(3007, 353, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3008, 353, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3009, 353, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3010, 353, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3011, 353, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3012, 353, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3013, 353, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3014, 353, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3015, 353, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3016, 353, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3017, 353, 30, 'Pemeliharaan rutin/berkala …..'),
-(3018, 353, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3019, 353, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3020, 353, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3021, 353, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3022, 353, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3023, 354, 1, 'Pengadaan mesin/kartu absensi'),
-(3024, 354, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3025, 354, 3, 'Pengadaan pakaian kerja lapangan'),
-(3026, 354, 4, 'Pengadaan pakaian KORPRI'),
-(3027, 354, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3028, 355, 1, 'Pemulangan pegawai yang pensiun'),
-(3029, 355, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3030, 355, 3, 'Pemindahan tugas PNS'),
-(3031, 356, 1, 'Pendidikan dan pelatihan formal'),
-(3032, 356, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3033, 356, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3034, 357, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3035, 357, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3036, 357, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3037, 357, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3038, 358, 1, 'Pembentukan kesatuan pengelolaan hutan produksi'),
-(3039, 358, 2, 'Pengembangan hutan tanaman'),
-(3040, 358, 3, 'Pengembangan hasil hutan non kayu'),
-(3041, 358, 4, 'Perencanaan dan pengembangan hutan kemasyarakatan'),
-(3042, 358, 5, 'Optimalisasi PNBP'),
-(3043, 358, 6, 'Pengelolaan dan pemanfaatan hutan'),
-(3044, 358, 7, 'Pengembangan industri dan pemasaran hasil hutan'),
-(3045, 358, 8, 'Pengembangan pengujian dan pengendalian peredaran hasil hutan'),
-(3046, 358, 9, 'Monitoring, evaluasi dan pelaporan'),
-(3047, 359, 1, 'Koordinasi penyelenggaraan reboisasi dan penghijauan hutan'),
-(3048, 359, 2, 'Pembuatan bibit/benih tanaman kehutanan'),
-(3049, 359, 3, 'Penanaman pohon pada kawasan hutan industri dan hutan wisata'),
-(3050, 359, 4, 'Pemeliharaan kawasan hutan industri dan hutan wisata'),
-(3051, 359, 5, 'Pembinaan, pengendalian dan pengawasan gerakan rehabilitasi hutan dan lahan'),
-(3052, 359, 6, 'Peningkatan peran serta masyarakat dalam rehabilitasi hutan dan lahan'),
-(3053, 359, 7, 'Monitoring, evaluasi dan pelaporan'),
-(3054, 360, 1, 'Pencegahan dan pengendalian kebakaran hutan dan lahan'),
-(3055, 360, 2, 'Sosialisasi pencegahan dan dampak kebakaran hutan dan lahan'),
-(3056, 360, 3, 'Bimbingan teknis pengendalian kebakaran hutan dan lahan'),
-(3057, 360, 4, 'Penanggulangan kebakaran hutan dan lahan'),
-(3058, 360, 5, 'Penyuluhan kesadaran masyarakat mengenai dampak perusakan hutan'),
-(3059, 361, 1, 'Pertanian tanaman palawija, padi gogorancah'),
-(3060, 362, 1, 'Penyusunan peraturan daerah mengenai pengelolaan industri hasil hutan'),
-(3061, 362, 2, 'Sosialisasi peraturan daerah mengenai pengelolaan industri hasil hutan'),
-(3062, 362, 3, 'Pengawasan dan penertiban pelaksanaan peraturan daerah mengenai pengelolaan industri hasil hutan'),
-(3063, 362, 4, 'Perluasan akses layanan informasi pemasaran hasil hutan'),
-(3064, 362, 5, 'Monitoring, evaluasi dan pelaporan'),
-(3065, 363, 1, 'Pengembangan hutan masyarakat adat'),
-(3066, 363, 2, 'Pendampingan kelompok usaha perhutanan rakyat'),
-(3067, 364, 0, 'Non Kegiatan'),
-(3068, 365, 1, 'Penyediaan jasa surat menyurat'),
-(3069, 365, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3070, 365, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3071, 365, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3072, 365, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3073, 365, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3074, 365, 7, 'Penyediaan jasa administrasi keuangan'),
-(3075, 365, 8, 'Penyediaan jasa kebersihan kantor'),
-(3076, 365, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3077, 365, 10, 'Penyediaan alat tulis kantor'),
-(3078, 365, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3079, 365, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3080, 365, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3081, 365, 14, 'Penyediaan peralatan rumah tangga'),
-(3082, 365, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3083, 365, 16, 'Penyediaan bahan logistik kantor'),
-(3084, 365, 17, 'Penyediaan makanan dan minuman'),
-(3085, 365, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3086, 365, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3087, 366, 1, 'Pembangunan rumah jabatan'),
-(3088, 366, 2, 'Pembangunan rumah dinas'),
-(3089, 366, 3, 'Pembangunan gedung kantor'),
-(3090, 366, 4, 'Pengadaan mobil jabatan'),
-(3091, 366, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3092, 366, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3093, 366, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3094, 366, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3095, 366, 9, 'Pengadaan peralatan gedung kantor'),
-(3096, 366, 10, 'Pengadaan mebeleur'),
-(3097, 366, 11, 'Pengadaan ……'),
-(3098, 366, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3099, 366, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3100, 366, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3101, 366, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3102, 366, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3103, 366, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3104, 366, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3105, 366, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3106, 366, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3107, 366, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3108, 366, 30, 'Pemeliharaan rutin/berkala …..'),
-(3109, 366, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3110, 366, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3111, 366, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3112, 366, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3113, 366, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3114, 367, 1, 'Pengadaan mesin/kartu absensi'),
-(3115, 367, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3116, 367, 3, 'Pengadaan pakaian kerja lapangan'),
-(3117, 367, 4, 'Pengadaan pakaian KORPRI'),
-(3118, 367, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3119, 368, 1, 'Pemulangan pegawai yang pensiun'),
-(3120, 368, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3121, 368, 3, 'Pemindahan tugas PNS'),
-(3122, 369, 1, 'Pendidikan dan pelatihan formal'),
-(3123, 369, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3124, 369, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3125, 370, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3126, 370, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3127, 370, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3128, 370, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3129, 371, 1, 'Penyusunan regulasi mengenai kegiatan penambangan bahan galian C'),
-(3130, 371, 2, 'Sosialisasi regulasi mengenai kegiatan penambangan bahan galian C'),
-(3131, 371, 3, 'Monitoring dan pengendalian kegiatan penambangan bahan galian C'),
-(3132, 371, 4, 'Koordinasi dan pendataan tentang hasil produksi dibidang pertambangan'),
-(3133, 371, 5, 'Pengawasan terhadap pelaksanaan kegiatan penambangan bahan galian C'),
-(3134, 371, 6, 'Monitoring, evaluasi dan pelaporan'),
-(3135, 372, 1, 'Pengawasan penertiban kegiatan pertambangan rakyat'),
-(3136, 372, 2, 'Monitoring, evaluasi dan pelaporan dampak kerusakan lingkungan akibat kegiatan pertambangan rakyat'),
-(3137, 372, 3, 'Penyebaran peta daerah rawan bencana alam geologi'),
-(3138, 373, 1, 'Koordinasi pengembangan ketenaga listrikan'),
-(3139, 374, 0, 'Non Kegiatan'),
-(3140, 375, 1, 'Penyediaan jasa surat menyurat'),
-(3141, 375, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3142, 375, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3143, 375, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3144, 375, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3145, 375, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3146, 375, 7, 'Penyediaan jasa administrasi keuangan'),
-(3147, 375, 8, 'Penyediaan jasa kebersihan kantor'),
-(3148, 375, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3149, 375, 10, 'Penyediaan alat tulis kantor'),
-(3150, 375, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3151, 375, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3152, 375, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3153, 375, 14, 'Penyediaan peralatan rumah tangga'),
-(3154, 375, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3155, 375, 16, 'Penyediaan bahan logistik kantor'),
-(3156, 375, 17, 'Penyediaan makanan dan minuman'),
-(3157, 375, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3158, 375, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3159, 376, 1, 'Pembangunan rumah jabatan'),
-(3160, 376, 2, 'Pembangunan rumah dinas'),
-(3161, 376, 3, 'Pembangunan gedung kantor'),
-(3162, 376, 4, 'Pengadaan mobil jabatan'),
-(3163, 376, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3164, 376, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3165, 376, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3166, 376, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3167, 376, 9, 'Pengadaan peralatan gedung kantor'),
-(3168, 376, 10, 'Pengadaan mebeleur'),
-(3169, 376, 11, 'Pengadaan ……'),
-(3170, 376, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3171, 376, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3172, 376, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3173, 376, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3174, 376, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3175, 376, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3176, 376, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3177, 376, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3178, 376, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3179, 376, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3180, 376, 30, 'Pemeliharaan rutin/berkala …..'),
-(3181, 376, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3182, 376, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3183, 376, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3184, 376, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3185, 376, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3186, 377, 1, 'Pengadaan mesin/kartu absensi'),
-(3187, 377, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3188, 377, 3, 'Pengadaan pakaian kerja lapangan'),
-(3189, 377, 4, 'Pengadaan pakaian KORPRI'),
-(3190, 377, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3191, 378, 1, 'Pemulangan pegawai yang pensiun'),
-(3192, 378, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3193, 378, 3, 'Pemindahan tugas PNS');
-INSERT INTO `ref_kegiatan` (`id_kegiatan`, `id_program`, `kd_kegiatan`, `nm_kegiatan`) VALUES
-(3194, 379, 1, 'Pendidikan dan pelatihan formal'),
-(3195, 379, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3196, 379, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3197, 380, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3198, 380, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3199, 380, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3200, 380, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3201, 381, 1, 'koordinasi peningkatan hubungan kerja dengan lembaga perlindungan konsumen'),
-(3202, 381, 2, 'Fasilitasi penyelesaian permasalahan-permasalahan pengaduan konsumen'),
-(3203, 381, 3, 'Peningkatan pengawasan peredaran barang dan jasa'),
-(3204, 381, 4, 'Operasionalisasi dan pengembangan UPT kemetrologian daerah'),
-(3205, 382, 1, 'Penyiapan data base kuota setiap jenis barang dan jasa'),
-(3206, 382, 2, 'Penyebarluasan informasi data base kuota setiap jenis barang dan jasa'),
-(3207, 382, 3, 'Penyusunan tim daerah dalam perundingan perdagangan internasional'),
-(3208, 382, 4, 'Fasilitasi penyelesaian sengketa dagang'),
-(3209, 382, 5, 'Koordinasi pengelolaan isu-isu perdagangan internasional'),
-(3210, 383, 1, 'Koordinasi dan sinkronisasi kebijakan pengembangan industri'),
-(3211, 383, 2, 'Pengembangan informasi peluang pasar perdagangan luar negeri'),
-(3212, 383, 3, 'Sosialisasi kebijakan penyederhanaan prosedur dan dokumen ekspor dan impor'),
-(3213, 383, 4, 'Pengembangan data base informasi potensi unggulan'),
-(3214, 383, 5, 'Kerjasama standarisasi mutu produk baik nasional, bilateral, regional dan internasional'),
-(3215, 383, 6, 'Kerjasama dengan lembaga internasional dalam rangka pengembangan produk'),
-(3216, 383, 7, 'Koordinasi penyelesaian masalah produksi dan distribusi sektor industri'),
-(3217, 383, 8, 'Membangun jejaring dengan eksportir'),
-(3218, 383, 9, 'Koordinasi program pengembangan ekspor dengan instansi terkait/asosiasi/pengusaha'),
-(3219, 383, 10, 'Pengembangan kluster produk ekspor'),
-(3220, 383, 11, 'Peningkatan kapasitas lab penguji mutu barang ekspor dan impor'),
-(3221, 383, 12, 'Pembangunan promosi perdagangan internasional'),
-(3222, 384, 1, 'Penyempurnaan perangkat peraturan, kebijakan dan pelaksanaan operasional'),
-(3223, 384, 2, 'Fasilitasi kemudahan perijinan pengembangan usaha'),
-(3224, 384, 3, 'Pengembangan pasar dan distribusi barang/produk'),
-(3225, 384, 4, 'Pengembangan kelembagaan kerjasama kemitraan'),
-(3226, 384, 5, 'Pengembangan pasar lelang daerah'),
-(3227, 384, 6, 'Peningkatan sistem dan jaringan informasi perdagangan'),
-(3228, 384, 7, 'Sosialisasi peningkatan penggunaan produk dalamnegeri'),
-(3229, 385, 1, 'Kegiatan pembinaan organisasi pedagang kakilima dan asongan'),
-(3230, 385, 2, 'Kegiatan penyuluhan peningkatan disiplin pedagang kakilima dan asongan'),
-(3231, 385, 3, 'Kegiatan penataan tempat berusaha bagi pedagang kakilima dan asongan'),
-(3232, 385, 4, 'Kegiatan fasilitasi modal usaha bagi pedagang kakilima dan asongan'),
-(3233, 385, 5, 'Kegiatan pengawasan mutu dagangan pedagang kakilima dan asongan'),
-(3234, 385, 6, 'Kegiatan pembangunan gudang penyimpanan barang pedagang kakilima dan asongan'),
-(3235, 386, 0, 'Non Kegiatan'),
-(3236, 387, 1, 'Penyediaan jasa surat menyurat'),
-(3237, 387, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3238, 387, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3239, 387, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3240, 387, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3241, 387, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3242, 387, 7, 'Penyediaan jasa administrasi keuangan'),
-(3243, 387, 8, 'Penyediaan jasa kebersihan kantor'),
-(3244, 387, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3245, 387, 10, 'Penyediaan alat tulis kantor'),
-(3246, 387, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3247, 387, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3248, 387, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3249, 387, 14, 'Penyediaan peralatan rumah tangga'),
-(3250, 387, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3251, 387, 16, 'Penyediaan bahan logistik kantor'),
-(3252, 387, 17, 'Penyediaan makanan dan minuman'),
-(3253, 387, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3254, 387, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3255, 388, 1, 'Pembangunan rumah jabatan'),
-(3256, 388, 2, 'Pembangunan rumah dinas'),
-(3257, 388, 3, 'Pembangunan gedung kantor'),
-(3258, 388, 4, 'Pengadaan mobil jabatan'),
-(3259, 388, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3260, 388, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3261, 388, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3262, 388, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3263, 388, 9, 'Pengadaan peralatan gedung kantor'),
-(3264, 388, 10, 'Pengadaan mebeleur'),
-(3265, 388, 11, 'Pengadaan ……'),
-(3266, 388, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3267, 388, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3268, 388, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3269, 388, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3270, 388, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3271, 388, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3272, 388, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3273, 388, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3274, 388, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3275, 388, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3276, 388, 30, 'Pemeliharaan rutin/berkala …..'),
-(3277, 388, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3278, 388, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3279, 388, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3280, 388, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3281, 388, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3282, 389, 1, 'Pengadaan mesin/kartu absensi'),
-(3283, 389, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3284, 389, 3, 'Pengadaan pakaian kerja lapangan'),
-(3285, 389, 4, 'Pengadaan pakaian KORPRI'),
-(3286, 389, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3287, 390, 1, 'Pemulangan pegawai yang pensiun'),
-(3288, 390, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3289, 390, 3, 'Pemindahan tugas PNS'),
-(3290, 391, 1, 'Pendidikan dan pelatihan formal'),
-(3291, 391, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3292, 391, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3293, 392, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3294, 392, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3295, 392, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3296, 392, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3297, 393, 1, 'Koordinasi model ventura bagi industri berbasis teknologi'),
-(3298, 393, 2, 'Pelayanan pengembangan modal ventura dan inkubator'),
-(3299, 393, 3, 'Pengembangan infrastruktur kelembagaan standarisasi'),
-(3300, 393, 4, 'Pengembangan kapasitas pranata pengukuran, standarisasi, pengujian dan kualitas'),
-(3301, 393, 5, 'Penegmbangan sistem inovasi teknologi industri'),
-(3302, 393, 6, 'Penguatan kemampuan industri berbasis teknologi'),
-(3303, 394, 1, 'Fasilitasi bagi industri kecil dan menengah terhadap pemanfaatan sumber daya'),
-(3304, 394, 2, 'Pembinaan industri kecil dan menengah dalam memperkuat jaringan klaster industeri'),
-(3305, 394, 3, 'Penyusunan kebijakan industri terkait dan industri penunjang industri kecil dan menengah'),
-(3306, 394, 4, 'Pemberian kemudahan izin usaha industri kecil dan menengah'),
-(3307, 394, 5, 'Pemberian fasilitas kemudahan akses perbankan bagi industri kecil dan menengah'),
-(3308, 394, 6, 'Fasilitasi kerjasama kemitraan industri mikro, kecil dan menengah dengan swasta'),
-(3309, 395, 1, 'Pembinaan kemampuan teknologi industri'),
-(3310, 395, 2, 'Pengembangan dan pelayanan teknologi industri'),
-(3311, 395, 3, 'Perluasan penerapan SNI untuk mendorong saya saing industri manufaktur'),
-(3312, 395, 4, 'Perluasan penerapan standar produk industri manufaktur'),
-(3313, 396, 1, 'Kebijakan keterkaitan industri hulu-hilir'),
-(3314, 396, 2, 'Penyediaan sarana maupun prasarana klaster industri'),
-(3315, 396, 3, 'Pembinaan keterkaitan produksi industri hulu hingga ke hilir'),
-(3316, 397, 1, 'Pembangunan akses transportasi sentra-sentra industri potensial'),
-(3317, 397, 2, 'Penyediaan sarana informasi yang dapat diakses masyarakat'),
-(3318, 398, 0, 'Non Kegiatan'),
-(3319, 399, 1, 'Penyediaan jasa surat menyurat'),
-(3320, 399, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3321, 399, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3322, 399, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3323, 399, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3324, 399, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3325, 399, 7, 'Penyediaan jasa administrasi keuangan'),
-(3326, 399, 8, 'Penyediaan jasa kebersihan kantor'),
-(3327, 399, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3328, 399, 10, 'Penyediaan alat tulis kantor'),
-(3329, 399, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3330, 399, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3331, 399, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3332, 399, 14, 'Penyediaan peralatan rumah tangga'),
-(3333, 399, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3334, 399, 16, 'Penyediaan bahan logistik kantor'),
-(3335, 399, 17, 'Penyediaan makanan dan minuman'),
-(3336, 399, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3337, 399, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3338, 400, 1, 'Pembangunan rumah jabatan'),
-(3339, 400, 2, 'Pembangunan rumah dinas'),
-(3340, 400, 3, 'Pembangunan gedung kantor'),
-(3341, 400, 4, 'Pengadaan mobil jabatan'),
-(3342, 400, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3343, 400, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3344, 400, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3345, 400, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3346, 400, 9, 'Pengadaan peralatan gedung kantor'),
-(3347, 400, 10, 'Pengadaan mebeleur'),
-(3348, 400, 11, 'Pengadaan ……'),
-(3349, 400, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3350, 400, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3351, 400, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3352, 400, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3353, 400, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3354, 400, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3355, 400, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3356, 400, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3357, 400, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3358, 400, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3359, 400, 30, 'Pemeliharaan rutin/berkala …..'),
-(3360, 400, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3361, 400, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3362, 400, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3363, 400, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3364, 400, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3365, 401, 1, 'Pengadaan mesin/kartu absensi'),
-(3366, 401, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3367, 401, 3, 'Pengadaan pakaian kerja lapangan'),
-(3368, 401, 4, 'Pengadaan pakaian KORPRI'),
-(3369, 401, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3370, 402, 1, 'Pemulangan pegawai yang pensiun'),
-(3371, 402, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3372, 402, 3, 'Pemindahan tugas PNS'),
-(3373, 403, 1, 'Pendidikan dan pelatihan formal'),
-(3374, 403, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3375, 403, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3376, 404, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3377, 404, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3378, 404, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3379, 404, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3380, 405, 1, 'Penguatan SDM pemerintah daerah dan masyarakat transmigrasi di kawasan transmigrasi di perbatasan'),
-(3381, 405, 2, 'Peningkatan kerjasama antar wilayah, antar pelaku dan antar sektor dalam rangka pengembangan kawasan transmigrasi'),
-(3382, 405, 3, 'Penyediaan dan pengelolaan prasarana dan sarana sosial dan ekonomi di kawasan transmigrasi'),
-(3383, 405, 4, 'Penyediaan Lembaga Keuangan Daerah yang membantu modal usaha dikawasan transmigrasi'),
-(3384, 405, 5, 'Pengerahan dan fasilitasi perpindahan serta penempatan transmigrasi untuk memenuhi kebutuhan SDM'),
-(3385, 406, 1, 'Penyuluhan transmigrasi lokal'),
-(3386, 406, 2, 'Pelatihan transmigrasi lokal'),
-(3387, 407, 1, 'Penyuluhan transmigrasi regional'),
-(3388, 407, 2, 'Pelatihan transmigrasi regional'),
-(3389, 408, 0, 'Non Kegiatan'),
-(3390, 409, 1, 'Penyediaan jasa surat menyurat'),
-(3391, 409, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3392, 409, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3393, 409, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3394, 409, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3395, 409, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3396, 409, 7, 'Penyediaan jasa administrasi keuangan'),
-(3397, 409, 8, 'Penyediaan jasa kebersihan kantor'),
-(3398, 409, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3399, 409, 10, 'Penyediaan alat tulis kantor'),
-(3400, 409, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3401, 409, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3402, 409, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3403, 409, 14, 'Penyediaan peralatan rumah tangga'),
-(3404, 409, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3405, 409, 16, 'Penyediaan bahan logistik kantor'),
-(3406, 409, 17, 'Penyediaan makanan dan minuman'),
-(3407, 409, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3408, 409, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3409, 410, 1, 'Pembangunan rumah jabatan'),
-(3410, 410, 2, 'Pembangunan rumah dinas'),
-(3411, 410, 3, 'Pembangunan gedung kantor'),
-(3412, 410, 4, 'Pengadaan mobil jabatan'),
-(3413, 410, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3414, 410, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3415, 410, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3416, 410, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3417, 410, 9, 'Pengadaan peralatan gedung kantor'),
-(3418, 410, 10, 'Pengadaan mebeleur'),
-(3419, 410, 11, 'Pengadaan ……'),
-(3420, 410, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3421, 410, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3422, 410, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3423, 410, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3424, 410, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3425, 410, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3426, 410, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3427, 410, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3428, 410, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3429, 410, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3430, 410, 30, 'Pemeliharaan rutin/berkala …..'),
-(3431, 410, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3432, 410, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3433, 410, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3434, 410, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3435, 410, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3436, 411, 1, 'Pengadaan mesin/kartu absensi'),
-(3437, 411, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3438, 411, 3, 'Pengadaan pakaian kerja lapangan'),
-(3439, 411, 4, 'Pengadaan pakaian KORPRI'),
-(3440, 411, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3441, 412, 1, 'Pemulangan pegawai yang pensiun'),
-(3442, 412, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3443, 412, 3, 'Pemindahan tugas PNS'),
-(3444, 413, 1, 'Pendidikan dan pelatihan formal'),
-(3445, 413, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3446, 413, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3447, 414, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3448, 414, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3449, 414, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3450, 414, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3451, 415, 1, 'Pembahasan Rancangan Peraturan Daerah'),
-(3452, 415, 2, 'Hearing/Dialog dan Koordinasi Dengan Pejabat Pemerintah Daerah dan Tokoh Masyarakat/Tokoh Agama'),
-(3453, 415, 3, 'Rapat-Rapat Alat Kelengkapan Dewan'),
-(3454, 415, 4, 'Rapat-Rapat Paripurna'),
-(3455, 415, 5, 'Kegiatan Reses'),
-(3456, 415, 6, 'Kunjungan Kerja Pimpinan dan Anggota DPRD Dalam Daerah'),
-(3457, 415, 7, 'Peningkatan Kapasitas Pimpinan dan Anggota DPRD'),
-(3458, 415, 8, 'Sosialisasi Peraturan Perundang-Undangan'),
-(3459, 416, 1, 'Dialog/Audiensi Dengan Tokoh-Tokoh Masyarakat, Pimpinan/Anggota Organisasi Sosial dan Kemasyarakatan'),
-(3460, 416, 2, 'Penerimaan Kunjungan Kerja Pejabat Negara/Departemen/Lembaga Pemerintah Non Departemen/Luar Negeri'),
-(3461, 416, 3, 'Rapat Koordinasi Unsur MUSPIDA'),
-(3462, 416, 4, 'Rapat Koordinasi Pejabat Pemerintahan Daerah'),
-(3463, 416, 5, 'Kunjunagn Kerja/Inspeksi Kepala Daerah/Wakil Kepala Daerah'),
-(3464, 416, 6, 'Koordinasi Dengan Pemerintah Pusat dan Pemerintah Daerah Lainnya'),
-(3465, 417, 1, 'Penyusunan Sistem Informasi Terhadap Layanan Publik'),
-(3466, 418, 1, 'Pembentukan Unit Khusus Penanganan Pengaduan Masyarakat'),
-(3467, 419, 1, 'Fasilitasi/Pembentukan Kerjasama Antar Daerah Dalam Penyediaan Pelayanan Publik'),
-(3468, 419, 2, 'Fasilitasi/Pembentukan Perkuatan Kerjasama Antar Daerah Pada Bidang Ekonomi'),
-(3469, 419, 3, 'Fasilitasi/Pembentukan Kerjasama Antar Daerah Di Bidang Hukum'),
-(3470, 419, 4, 'Fasilitasi/Pembentukan Kerjasama Antar Daerah Dalam Penyediaan Sarana dan Prasarana Publik'),
-(3471, 420, 1, 'Koordinasi Kerjasama Permasalahan Peraturan Perundang-Undangan'),
-(3472, 420, 2, 'Penyusunan Rencana Kerja Rancangan Peraturan Perundang-Undangan'),
-(3473, 420, 3, 'Legislasi Rancangan Peraturan Perundang-Undangan'),
-(3474, 420, 4, 'Fasilitasi Sosialisasi Peraturan Perundang-Undangan'),
-(3475, 420, 5, 'Publikasi Peraturan Perundang-Undangan'),
-(3476, 420, 6, 'Kajian Peraturan Perundang-Undangan Daerah Terhadap Peraturan Perundang-Undangan yang Baru, Lebih Tinggi dan Keserasian Antar Peraturan Peundang-Undangan Daerah'),
-(3477, 421, 1, 'Fasilitasi Penyiapan Data dan Informasi Pendukung Proses Pemekaran Daerah'),
-(3478, 421, 2, 'Fasilitasi Percepatan Penyerahan P3D Dari Daerah Induk Ke Daerah Pemekaran'),
-(3479, 421, 3, 'Fasilitasi Percepatan Penyelesaian Tapal Batas Wilayah Administrasi Antar Daerah'),
-(3480, 421, 4, 'Fasilitasi Pemantapan SOTK Pemerintah Daerah Otonom Baru'),
-(3481, 422, 0, 'Non Kegiatan'),
-(3482, 423, 1, 'Penyediaan jasa surat menyurat'),
-(3483, 423, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3484, 423, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3485, 423, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3486, 423, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3487, 423, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3488, 423, 7, 'Penyediaan jasa administrasi keuangan'),
-(3489, 423, 8, 'Penyediaan jasa kebersihan kantor'),
-(3490, 423, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3491, 423, 10, 'Penyediaan alat tulis kantor'),
-(3492, 423, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3493, 423, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3494, 423, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3495, 423, 14, 'Penyediaan peralatan rumah tangga'),
-(3496, 423, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3497, 423, 16, 'Penyediaan bahan logistik kantor'),
-(3498, 423, 17, 'Penyediaan makanan dan minuman'),
-(3499, 423, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3500, 423, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3501, 424, 1, 'Pembangunan rumah jabatan'),
-(3502, 424, 2, 'Pembangunan rumah dinas'),
-(3503, 424, 3, 'Pembangunan gedung kantor'),
-(3504, 424, 4, 'Pengadaan mobil jabatan'),
-(3505, 424, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3506, 424, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3507, 424, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3508, 424, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3509, 424, 9, 'Pengadaan peralatan gedung kantor'),
-(3510, 424, 10, 'Pengadaan mebeleur'),
-(3511, 424, 11, 'Pengadaan ……'),
-(3512, 424, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3513, 424, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3514, 424, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3515, 424, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3516, 424, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3517, 424, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3518, 424, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3519, 424, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3520, 424, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3521, 424, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3522, 424, 30, 'Pemeliharaan rutin/berkala …..'),
-(3523, 424, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3524, 424, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3525, 424, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3526, 424, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3527, 424, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3528, 425, 1, 'Pengadaan mesin/kartu absensi'),
-(3529, 425, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3530, 425, 3, 'Pengadaan pakaian kerja lapangan'),
-(3531, 425, 4, 'Pengadaan pakaian KORPRI'),
-(3532, 425, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3533, 426, 1, 'Pemulangan pegawai yang pensiun'),
-(3534, 426, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3535, 426, 3, 'Pemindahan tugas PNS'),
-(3536, 427, 1, 'Pendidikan dan pelatihan formal'),
-(3537, 427, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3538, 427, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3539, 428, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3540, 428, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3541, 428, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3542, 428, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3543, 429, 1, 'Pelaksanaan Pengawasan Internal Secara Berkala'),
-(3544, 429, 2, 'Penanganan Kasus Pengaduan Di Lingkungan Pemerintah Daerah'),
-(3545, 429, 3, 'Pengendalian Manajemen Pelaksanaan Kebijakan KDH'),
-(3546, 429, 4, 'Penanganan Kasus Pada Wilayah Pemerintahan Dibawahnya'),
-(3547, 429, 5, 'Inverisasi Temuan Pengawasan'),
-(3548, 429, 6, 'Tindak Lanjut Hasil Temuan Pengawasan'),
-(3549, 429, 7, 'Koordinasi Pengawasan yang Lebih Komprehensif'),
-(3550, 429, 8, 'Evaluasi Berkala Temuan Hasil Pengawasan'),
-(3551, 430, 1, 'Pelatihan Pengembangan Tenaga Pemeriksa dan Aparatur Pengawasan'),
-(3552, 430, 2, 'Pelatihan Teknis Pengawasan dan Penilaian Akuntabilitas Kinerja'),
-(3553, 431, 1, 'Penyusunan Naskah Akademik Kebijakan Sistem dan Prosedur Pengawasan'),
-(3554, 431, 2, 'Penyusunan Kebijakan Sistem dan Prosedur Pengawasan'),
-(3555, 432, 0, 'Non Kegiatan'),
-(3556, 433, 1, 'Penyediaan jasa surat menyurat'),
-(3557, 433, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3558, 433, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3559, 433, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3560, 433, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3561, 433, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3562, 433, 7, 'Penyediaan jasa administrasi keuangan'),
-(3563, 433, 8, 'Penyediaan jasa kebersihan kantor'),
-(3564, 433, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3565, 433, 10, 'Penyediaan alat tulis kantor'),
-(3566, 433, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3567, 433, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3568, 433, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3569, 433, 14, 'Penyediaan peralatan rumah tangga'),
-(3570, 433, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3571, 433, 16, 'Penyediaan bahan logistik kantor'),
-(3572, 433, 17, 'Penyediaan makanan dan minuman'),
-(3573, 433, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3574, 433, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3575, 434, 1, 'Pembangunan rumah jabatan'),
-(3576, 434, 2, 'Pembangunan rumah dinas'),
-(3577, 434, 3, 'Pembangunan gedung kantor'),
-(3578, 434, 4, 'Pengadaan mobil jabatan'),
-(3579, 434, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3580, 434, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3581, 434, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3582, 434, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3583, 434, 9, 'Pengadaan peralatan gedung kantor'),
-(3584, 434, 10, 'Pengadaan mebeleur'),
-(3585, 434, 11, 'Pengadaan ……'),
-(3586, 434, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3587, 434, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3588, 434, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3589, 434, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3590, 434, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3591, 434, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3592, 434, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3593, 434, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3594, 434, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3595, 434, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3596, 434, 30, 'Pemeliharaan rutin/berkala …..'),
-(3597, 434, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3598, 434, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3599, 434, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3600, 434, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3601, 434, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3602, 435, 1, 'Pengadaan mesin/kartu absensi'),
-(3603, 435, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3604, 435, 3, 'Pengadaan pakaian kerja lapangan'),
-(3605, 435, 4, 'Pengadaan pakaian KORPRI'),
-(3606, 435, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3607, 436, 1, 'Pemulangan pegawai yang pensiun'),
-(3608, 436, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3609, 436, 3, 'Pemindahan tugas PNS'),
-(3610, 437, 1, 'Pendidikan dan pelatihan formal'),
-(3611, 437, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3612, 437, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3613, 438, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3614, 438, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3615, 438, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3616, 438, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3617, 439, 1, 'Pengumpulan, updating, dan analisis data informasi capaian target kinerja program dan kegiatan'),
-(3618, 439, 2, 'Penyusunan dan pengumpulan data/informasi kebutuhan penyusunan dokumen perencanaan'),
-(3619, 439, 3, 'Penyusunan dan analisis data/informasi perencanaan pembangunan kawasan rawan bencana'),
-(3620, 439, 4, 'Penyusunan dan anlisi data/informasi perencanaan pembangunan ekonomi'),
-(3621, 439, 5, 'Penyusunan profile daerah'),
-(3622, 440, 1, 'Koordinasi kerjasama wilayah perbatasan'),
-(3623, 440, 2, 'Koordinasi kerjasama pembangunan antar daerah'),
-(3624, 440, 3, 'Fasilitasi kerjasama dengan dunia usaha/lembaga'),
-(3625, 440, 4, 'Koordinasi dalam pemecahan masalah-masalah daerah'),
-(3626, 440, 5, 'Monitoring, evaluasi dan pelaporan'),
-(3627, 441, 1, 'Koordinasi penyelesaian masalah perbatasan antar daerah'),
-(3628, 441, 2, 'Sosialisasi kebijakan Pemerintah dalam penyelesaian perbatasan antar negara'),
-(3629, 441, 3, 'koordinasi penetapan rencana tata ruang perbatasan'),
-(3630, 441, 4, 'penyusunan perencanaan pengembangan perbatasan'),
-(3631, 441, 5, 'Monitoring, evaluasi dan pelaporan'),
-(3632, 442, 1, 'Sosialisasi kebijakan Pemerintah dalam pengembangan wilayah strategis dan cepat tumbuh'),
-(3633, 442, 2, 'Koordinasi penetapan rencana tata ruang wilayah strategis dan cepat tumbuh'),
-(3634, 442, 3, 'Penyusunan perencanaan pengembangan wilayah strategis dan cepat tumbuh'),
-(3635, 442, 4, 'Monitoring, evaluasi dan pelaporan'),
-(3636, 443, 1, 'Koordinasi penyelesaian permasalahan penanganan sampai perkotaan'),
-(3637, 443, 2, 'Koordinasi penyelesaian permasalahan transportasi perkotaan'),
-(3638, 443, 3, 'Koordinasi penanggulangan dan penyelesaian bencana alam/sosial'),
-(3639, 443, 4, 'Koordinasi perencanaan penanganan pusat-pusat pertumbuhan ekonomi'),
-(3640, 443, 5, 'Koordinasi perencanaan penanganan pusat-pusat industri'),
-(3641, 443, 6, 'Koordinasi perencanaan penanganan pusat-pusat pendidikan'),
-(3642, 443, 7, 'Koordinasi perencanaan penanganan perumahan'),
-(3643, 443, 8, 'Koordinasi perencanaan penanganan perpakiran'),
-(3644, 443, 9, 'Koordinasi perencanaan air minum, drainase dan sanitasi perkotaan'),
-(3645, 443, 10, 'Koordinasi penanggulangan limbah rumah tangga dan industri perkotaan'),
-(3646, 443, 11, 'Monitoring, evaluasi dan pelaporan'),
-(3647, 444, 1, 'Peningkatan kemampuan teknis aparat perencana'),
-(3648, 444, 2, 'Sosialisasi kebijakan perencanaan pembangunan daerah'),
-(3649, 444, 3, 'Bimbingan teknis tentang perencanan pembangunan daerah'),
-(3650, 445, 1, 'Pengembangan partisipasi masyarakat dalam perumusan program dan kebijakan layanan publik'),
-(3651, 445, 2, 'Penyusunan rancangan RPJPD'),
-(3652, 445, 3, 'Penyelenggaraan musrenbang RPJPD'),
-(3653, 445, 4, 'Penetapan RPJPD'),
-(3654, 445, 5, 'Penyusunan rancangan RPJMD'),
-(3655, 445, 6, 'Penyelenggaraan musrenbang RPJMD'),
-(3656, 445, 7, 'Penetapan RPJMD'),
-(3657, 445, 8, 'Penyusunan rancangan RKPD'),
-(3658, 445, 9, 'Penyelenggaraan musrenbang RKPD'),
-(3659, 445, 10, 'Penetapan RKPD'),
-(3660, 445, 11, 'Koordinasi penyusunan Laporan Kinerja Pemerintah Daerah'),
-(3661, 445, 12, 'Koordinasi penyusunan laporan Keterangan Pertanggung Jawaban (LKPJ)'),
-(3662, 445, 13, 'Monitoring, evaluasi dan pelaporan'),
-(3663, 446, 1, 'Penyusunan masterplan pembangunan ekonomi daerah'),
-(3664, 446, 2, 'Penyusunan indikator ekonomi daerah'),
-(3665, 446, 3, 'Penyusunan perencanaan pengembangan ekonomi masyarakat'),
-(3666, 446, 4, 'koordinasi perencanaan pembangunan bidang ekonomi'),
-(3667, 446, 5, 'Penyusunan tabel input output daerah'),
-(3668, 446, 6, 'Penyusunan masterplan penanggulangan kemiskinan'),
-(3669, 446, 7, 'Penyusunan indikator dan pemetaan daerah rawan pangan'),
-(3670, 446, 8, 'Monitoring, evaluasi dan pelaporan'),
-(3671, 447, 1, 'Koordinasi penyusunan masterplan pendidikan'),
-(3672, 447, 2, 'Koordinasi penyusunan masterplan kesehatan'),
-(3673, 447, 3, 'Koordinasi perencanaan pembangunan bidang sosial dan budaya'),
-(3674, 447, 4, 'Monitoring, evaluasi dan pelaporan'),
-(3675, 448, 1, 'Koordinasi penyusunan masterplan prasarana perhubungan daerah'),
-(3676, 448, 2, 'Koordinasi penyusunan masterplan pengendalian sumber daya alam dan lingkungan hidup'),
-(3677, 448, 3, 'Monitoring, evaluasi dan pelaporan'),
-(3678, 449, 1, 'Koordinasi penyusunan profile daerah rawan bencana'),
-(3679, 449, 2, 'Koordinasi pembangunan daerah rawan bencana'),
-(3680, 449, 3, 'Monitoring, evaluasi dan pelaporan'),
-(3681, 450, 0, 'Non Kegiatan'),
-(3682, 451, 1, 'Penyediaan jasa surat menyurat'),
-(3683, 451, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3684, 451, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3685, 451, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3686, 451, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3687, 451, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3688, 451, 7, 'Penyediaan jasa administrasi keuangan'),
-(3689, 451, 8, 'Penyediaan jasa kebersihan kantor'),
-(3690, 451, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3691, 451, 10, 'Penyediaan alat tulis kantor'),
-(3692, 451, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3693, 451, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3694, 451, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3695, 451, 14, 'Penyediaan peralatan rumah tangga'),
-(3696, 451, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3697, 451, 16, 'Penyediaan bahan logistik kantor'),
-(3698, 451, 17, 'Penyediaan makanan dan minuman'),
-(3699, 451, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3700, 451, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3701, 452, 1, 'Pembangunan rumah jabatan'),
-(3702, 452, 2, 'Pembangunan rumah dinas'),
-(3703, 452, 3, 'Pembangunan gedung kantor'),
-(3704, 452, 4, 'Pengadaan mobil jabatan'),
-(3705, 452, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3706, 452, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3707, 452, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3708, 452, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3709, 452, 9, 'Pengadaan peralatan gedung kantor'),
-(3710, 452, 10, 'Pengadaan mebeleur'),
-(3711, 452, 11, 'Pengadaan ……'),
-(3712, 452, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3713, 452, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3714, 452, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3715, 452, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3716, 452, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3717, 452, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3718, 452, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3719, 452, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3720, 452, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3721, 452, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3722, 452, 30, 'Pemeliharaan rutin/berkala …..'),
-(3723, 452, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3724, 452, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3725, 452, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3726, 452, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3727, 452, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3728, 453, 1, 'Pengadaan mesin/kartu absensi'),
-(3729, 453, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3730, 453, 3, 'Pengadaan pakaian kerja lapangan'),
-(3731, 453, 4, 'Pengadaan pakaian KORPRI'),
-(3732, 453, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3733, 454, 1, 'Pemulangan pegawai yang pensiun'),
-(3734, 454, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3735, 454, 3, 'Pemindahan tugas PNS'),
-(3736, 455, 1, 'Pendidikan dan pelatihan formal'),
-(3737, 455, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3738, 455, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3739, 456, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3740, 456, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3741, 456, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3742, 456, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3743, 457, 1, 'Penyusunan Analisa Standar Belanja'),
-(3744, 457, 2, 'Penyusunan Standar Satuan Harga'),
-(3745, 457, 3, 'Penyusunan Kebijakan Akuntansi Pemerintah Daerah'),
-(3746, 457, 4, 'Penyusunan Sistem dan Prosedur Pengelolaan Keuangan Daerah'),
-(3747, 457, 5, 'Penyusunan Rancangan Peraturan Daerah Tentang Pajak Daerah dan Restribusi'),
-(3748, 457, 6, 'Penyusunan Rancangan Peraturan Daerah Tentang APBD'),
-(3749, 457, 7, 'Penyusunan Rancangan Peraturan KDH Tentang Penjabaran APBD'),
-(3750, 457, 8, 'Penyusunan Rancangan Peraturan Daerah Tentang Perubahan APBD'),
-(3751, 457, 9, 'Penyusunan Rancangan Peraturan KDH Tentang Penjabaran Perubahan APBD'),
-(3752, 457, 10, 'Penyusunan Rancangan Peraturan Daerah Tentang Pertanggungjawaban Pelaksanaan APBD'),
-(3753, 457, 11, 'Penyusunan Rancangan Peraturan KDH Tentang Penjabaran Pertanggungjawaban Pelaksanaan APBD'),
-(3754, 457, 12, 'Penyusunan Sistem Informasi Keuangan Daerah'),
-(3755, 457, 13, 'Penyusunan Sistem Informasi Pengelolaan Keuangan Daerah'),
-(3756, 457, 14, 'Sosialisasi Paket Regulasi Tentang Pengelolaan Keuangan Daerah'),
-(3757, 457, 15, 'Bimbingan Teknis Implementasi Paket Regulasi Tentang Pengelolaan Keuangan Daerah'),
-(3758, 457, 16, 'Peningkatan Manajemen Aset/Barang Daerah'),
-(3759, 457, 17, 'Peningkatan Manajemen Investasi Daerah'),
-(3760, 457, 18, 'Revaluasi/Appraisal Aset/Barang Daerah'),
-(3761, 457, 19, 'Intensifikasi dan Ekstensifikasi Sumber-Sumber Pendapatan Daerah'),
-(3762, 458, 1, 'Evaluasi Rancangan Peraturan Daerah Tentang APBD Kabupaten/Kota'),
-(3763, 458, 2, 'Evaluasi Rancangan Peraturan KDH Tentang Penjabaran APBD Kabupaten/Kota'),
-(3764, 458, 3, 'Evaluasi Rancangan Peraturan Daerah Tentang Pajak Daerah dan Restribusi Daerah Kabupaten/Kota'),
-(3765, 458, 4, 'Penyusunan Standar Evaluasi Rancangan Peraturan Daerah Tentang APBD Kabupaten/Kota'),
-(3766, 458, 5, 'Asistensi Penyusunan Rancangan Regulasi Pengelolaan Keuangan Daerah Kabupaten/Kota'),
-(3767, 459, 1, 'Evaluasi Rancangan Peraturan Desa Tentang APB Desa'),
-(3768, 459, 2, 'Evaluasi Rancangan Peraturan Desa Tentang Pendapatan Desa'),
-(3769, 459, 3, 'Penyusunan Pedoman Pengelolaan Keuangan Desa'),
-(3770, 460, 0, 'Non Kegiatan'),
-(3771, 461, 1, 'Penyediaan jasa surat menyurat'),
-(3772, 461, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3773, 461, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3774, 461, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3775, 461, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3776, 461, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3777, 461, 7, 'Penyediaan jasa administrasi keuangan'),
-(3778, 461, 8, 'Penyediaan jasa kebersihan kantor'),
-(3779, 461, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3780, 461, 10, 'Penyediaan alat tulis kantor'),
-(3781, 461, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3782, 461, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3783, 461, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3784, 461, 14, 'Penyediaan peralatan rumah tangga'),
-(3785, 461, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3786, 461, 16, 'Penyediaan bahan logistik kantor'),
-(3787, 461, 17, 'Penyediaan makanan dan minuman'),
-(3788, 461, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3789, 461, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3790, 462, 1, 'Pembangunan rumah jabatan'),
-(3791, 462, 2, 'Pembangunan rumah dinas'),
-(3792, 462, 3, 'Pembangunan gedung kantor'),
-(3793, 462, 4, 'Pengadaan mobil jabatan'),
-(3794, 462, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3795, 462, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3796, 462, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3797, 462, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3798, 462, 9, 'Pengadaan peralatan gedung kantor'),
-(3799, 462, 10, 'Pengadaan mebeleur'),
-(3800, 462, 11, 'Pengadaan ……'),
-(3801, 462, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3802, 462, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3803, 462, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3804, 462, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3805, 462, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3806, 462, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3807, 462, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3808, 462, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3809, 462, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3810, 462, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3811, 462, 30, 'Pemeliharaan rutin/berkala …..'),
-(3812, 462, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3813, 462, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3814, 462, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3815, 462, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3816, 462, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3817, 463, 1, 'Pengadaan mesin/kartu absensi'),
-(3818, 463, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3819, 463, 3, 'Pengadaan pakaian kerja lapangan'),
-(3820, 463, 4, 'Pengadaan pakaian KORPRI'),
-(3821, 463, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3822, 464, 1, 'Pemulangan pegawai yang pensiun'),
-(3823, 464, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3824, 464, 3, 'Pemindahan tugas PNS'),
-(3825, 465, 1, 'Pendidikan dan pelatihan formal'),
-(3826, 465, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3827, 465, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3828, 466, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3829, 466, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3830, 466, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3831, 466, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3832, 467, 1, 'Penyusunan rencana pembinaan karir PNS'),
-(3833, 467, 2, 'Seleksi penerimaan calon PNS'),
-(3834, 467, 3, 'Penempatan PNS'),
-(3835, 467, 4, 'Penataan sistem administrasi kenaikan pangkat otomatis PNS'),
-(3836, 467, 5, 'Pembangunan/pengembangan sistem informasi kepegawaian daerah'),
-(3837, 467, 6, 'Penyusunan instrumen analisis jabatan PNS'),
-(3838, 467, 7, 'Seleksi dan penetapan PNS untuk tugas belajar'),
-(3839, 467, 8, 'Pemberian penghargaan bagi PNS yang berprestasi'),
-(3840, 467, 9, 'Proses penanganan kasus-kasus pelanggaran disiplin PNS'),
-(3841, 467, 10, 'Kajian sistem dan kualitas materi diklat PNS'),
-(3842, 467, 11, 'Pemberian bantuan tugas belajar dan ikatan dinas'),
-(3843, 467, 12, 'Pemberian bantuan penyelenggaraan penerimaan Praja IPDN'),
-(3844, 467, 13, 'Penyelenggaraan diklat teknis, fungsional dan kepemimpinan'),
-(3845, 467, 14, 'Pengembangan diklat (Analisis kebutuhan Diklat, Penyusunan Silabi, Penyusunan Modul, Penyusunan Pedoman Diklat)'),
-(3846, 467, 15, 'Monitoring, evaluasi dan pelaporan'),
-(3847, 467, 16, 'Koordinasi penyelenggaraan diklat'),
-(3848, 468, 0, 'Non Kegiatan'),
-(3849, 469, 1, 'Penyediaan jasa surat menyurat'),
-(3850, 469, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3851, 469, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3852, 469, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3853, 469, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3854, 469, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3855, 469, 7, 'Penyediaan jasa administrasi keuangan'),
-(3856, 469, 8, 'Penyediaan jasa kebersihan kantor'),
-(3857, 469, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3858, 469, 10, 'Penyediaan alat tulis kantor'),
-(3859, 469, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3860, 469, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3861, 469, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3862, 469, 14, 'Penyediaan peralatan rumah tangga'),
-(3863, 469, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3864, 469, 16, 'Penyediaan bahan logistik kantor'),
-(3865, 469, 17, 'Penyediaan makanan dan minuman'),
-(3866, 469, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3867, 469, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3868, 470, 1, 'Pembangunan rumah jabatan'),
-(3869, 470, 2, 'Pembangunan rumah dinas'),
-(3870, 470, 3, 'Pembangunan gedung kantor'),
-(3871, 470, 4, 'Pengadaan mobil jabatan'),
-(3872, 470, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3873, 470, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3874, 470, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3875, 470, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3876, 470, 9, 'Pengadaan peralatan gedung kantor'),
-(3877, 470, 10, 'Pengadaan mebeleur'),
-(3878, 470, 11, 'Pengadaan ……'),
-(3879, 470, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3880, 470, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3881, 470, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3882, 470, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3883, 470, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3884, 470, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3885, 470, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3886, 470, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3887, 470, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3888, 470, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3889, 470, 30, 'Pemeliharaan rutin/berkala …..'),
-(3890, 470, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3891, 470, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3892, 470, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3893, 470, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3894, 470, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3895, 471, 1, 'Pengadaan mesin/kartu absensi'),
-(3896, 471, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3897, 471, 3, 'Pengadaan pakaian kerja lapangan'),
-(3898, 471, 4, 'Pengadaan pakaian KORPRI'),
-(3899, 471, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3900, 472, 1, 'Pemulangan pegawai yang pensiun'),
-(3901, 472, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3902, 472, 3, 'Pemindahan tugas PNS'),
-(3903, 473, 1, 'Pendidikan dan pelatihan formal'),
-(3904, 473, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3905, 473, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3906, 474, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3907, 474, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3908, 474, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3909, 474, 4, 'penyusunan pelaporan keuangan akhir tahun'),
-(3910, 475, 1, 'Pendidikan dan pelatihan teknis'),
-(3911, 475, 2, 'Pendidikan penjenjangan struktural'),
-(3912, 475, 3, 'Pemantauan dan evaluasi penyelenggaraan pendidikan'),
-(3913, 475, 4, 'Pembuatan buku juknis/juklak'),
-(3914, 475, 5, 'Pengembangan kurikulum pendidikan dan pelatihan'),
-(3915, 475, 6, 'Peningkatan keterampilan dan profesionalisme'),
-(3916, 476, 1, 'Pendidikan dan pelatihan prajabatan bagi calon PNS Daerah'),
-(3917, 476, 2, 'Pendidikan dan pelatihan struktural bagi PNS Daerah'),
-(3918, 476, 3, 'Pendidikan dan pelatihan teknis tugas dan fungsi bagi PNS Daerah'),
-(3919, 476, 4, 'Pendidikan dan pelatihan fungsional bagi PNS Daerah'),
-(3920, 477, 0, 'Non Kegiatan'),
-(3921, 478, 1, 'Penyediaan jasa surat menyurat'),
-(3922, 478, 2, 'Penyediaan jasa komunikasi, sumber daya air dan listrik'),
-(3923, 478, 3, 'Penyediaan jasa peralatan dan perlengkapan kantor'),
-(3924, 478, 4, 'Penyediaan jasa jaminan pemeliharaan kesehatan PNS'),
-(3925, 478, 5, 'Penyediaan jasa jaminan barang milik daerah'),
-(3926, 478, 6, 'Penyediaan jasa pemeliharaan dan perizinan kendaraan dinas/operasional'),
-(3927, 478, 7, 'Penyediaan jasa administrasi keuangan'),
-(3928, 478, 8, 'Penyediaan jasa kebersihan kantor'),
-(3929, 478, 9, 'Penyediaan jasa perbaikan peralatan kerja'),
-(3930, 478, 10, 'Penyediaan alat tulis kantor'),
-(3931, 478, 11, 'Penyediaan barang cetakan dan penggandaan'),
-(3932, 478, 12, 'Penyediaan komponen instalasi listrik/penerangan bangunan kantor'),
-(3933, 478, 13, 'Penyediaan peralatan dan perlengkapan kantor'),
-(3934, 478, 14, 'Penyediaan peralatan rumah tangga'),
-(3935, 478, 15, 'Penyediaan bahan bacaan dan peraturan perundang-undangan'),
-(3936, 478, 16, 'Penyediaan bahan logistik kantor'),
-(3937, 478, 17, 'Penyediaan makanan dan minuman'),
-(3938, 478, 18, 'Rapat-rapat koordinasi dan konsultasi ke luar daerah'),
-(3939, 478, 19, 'Penyediaan Jasa Administrasi Perkantoran'),
-(3940, 479, 1, 'Pembangunan rumah jabatan'),
-(3941, 479, 2, 'Pembangunan rumah dinas'),
-(3942, 479, 3, 'Pembangunan gedung kantor'),
-(3943, 479, 4, 'Pengadaan mobil jabatan'),
-(3944, 479, 5, 'pengadaan Kendaraan dinas/operasional'),
-(3945, 479, 6, 'Pengadaan perlengkapan rumah jabatan/dinas'),
-(3946, 479, 7, 'Pengadaan perlengkapan gedung kantor'),
-(3947, 479, 8, 'Pengadaan peralatan rumah jabatan/dinas'),
-(3948, 479, 9, 'Pengadaan peralatan gedung kantor'),
-(3949, 479, 10, 'Pengadaan mebeleur'),
-(3950, 479, 11, 'Pengadaan ……'),
-(3951, 479, 20, 'Pemeliharaan rutin/berkala rumah jabatan'),
-(3952, 479, 21, 'Pemeliharaan rutin/berkala rumah dinas'),
-(3953, 479, 22, 'Pemeliharaan rutin/berkala gedung kantor'),
-(3954, 479, 23, 'Pemeliharaan rutin/berkala mobil jabatan'),
-(3955, 479, 24, 'Pemeliharaan rutin/berkala kendaraan dinas/operasional'),
-(3956, 479, 25, 'Pemeliharaan rutin/berkala perlengkapan rumah jabatan/dinas'),
-(3957, 479, 26, 'Pemeliharaan rutin/berkala perlengkapan gedung kantor'),
-(3958, 479, 27, 'Pemeliharaan rutin/berkala peralatan rumah jabatan/dinas'),
-(3959, 479, 28, 'Pemeliharaan rutin/berkala peralatan gedung kantor'),
-(3960, 479, 29, 'Pemeliharaan rutin/berkala mebeleur'),
-(3961, 479, 30, 'Pemeliharaan rutin/berkala …..'),
-(3962, 479, 40, 'Rehabilitasi sedang/berat rumah jabatan'),
-(3963, 479, 41, 'Rehabilitasi sedang/berat rumah dinas'),
-(3964, 479, 42, 'Rehabilitasi sedang/berat gedung kantor'),
-(3965, 479, 43, 'Rehabilitasi sedang/berat mobil jabatan'),
-(3966, 479, 44, 'Rehabilitasi sedang/berat kendaraan dinas/operasional'),
-(3967, 480, 1, 'Pengadaan mesin/kartu absensi'),
-(3968, 480, 2, 'Pengadaan pakaian dinas beserta perlengkapannya'),
-(3969, 480, 3, 'Pengadaan pakaian kerja lapangan'),
-(3970, 480, 4, 'Pengadaan pakaian KORPRI'),
-(3971, 480, 5, 'Pengadaan pakaian khusus hari-hari tertentu'),
-(3972, 481, 1, 'Pemulangan pegawai yang pensiun'),
-(3973, 481, 2, 'Pemulangan pegawai yang tewas dalam melaksanakan tugas'),
-(3974, 481, 3, 'Pemindahan tugas PNS'),
-(3975, 482, 1, 'Pendidikan dan pelatihan formal'),
-(3976, 482, 2, 'Sosialisasi peraturan perundang-undangan'),
-(3977, 482, 3, 'Bimbingan teknis implementasi peraturan perundang-undangan'),
-(3978, 483, 1, 'Penyusunan laporan capaian kinerja dan ikhtisar realisasi kinerja SKPD'),
-(3979, 483, 2, 'Penyusunan pelaporan keuangan semesteran'),
-(3980, 483, 3, 'Penyusunan pelaporan prognosis realisasi anggaran'),
-(3981, 483, 4, 'penyusunan pelaporan keuangan akhir tahun');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `ref_kolom_tabel_dasar`
 --
 
+DROP TABLE IF EXISTS `ref_kolom_tabel_dasar`;
 CREATE TABLE `ref_kolom_tabel_dasar` (
   `id_kolom_tabel_dasar` int(11) NOT NULL,
   `id_tabel_dasar` int(11) DEFAULT NULL,
@@ -5877,76 +1166,13 @@ CREATE TABLE `ref_kolom_tabel_dasar` (
   `parent_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `ref_kolom_tabel_dasar`
---
-
-INSERT INTO `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`, `id_tabel_dasar`, `nama_kolom`, `level`, `parent_id`) VALUES
-(0, 1, 'root', 0, 0),
-(1, 1, 'Pertanian', 1, 0),
-(2, 1, 'Pertambangan dan penggalian', 1, 0),
-(3, 1, 'Industri pengolahan', 1, 0),
-(4, 1, 'Listrik, gas dan air bersih', 1, 0),
-(5, 1, 'Konstruksi', 1, 0),
-(6, 1, 'Perdagangan, hotel dan restoran', 1, 0),
-(7, 1, 'Pengangkutan dan komunikasi', 1, 0),
-(8, 1, 'Keuangan, sewa dan jasa perusahaan', 1, 0),
-(9, 1, 'Jasa-jasa', 1, 0),
-(10, 2, 'root', 0, 0),
-(11, 2, 'Pertanian', 1, 0),
-(12, 2, 'Pertambangan dan penggalian', 1, 0),
-(13, 2, 'Industri pengolahan', 1, 0),
-(14, 2, 'Listrik, gas dan air bersih', 1, 0),
-(15, 2, 'Konstruksi', 1, 0),
-(16, 2, 'Perdagangan, hotel dan restoran', 1, 0),
-(17, 2, 'Pengangkutan dan komunikasi', 1, 0),
-(18, 2, 'Keuangan, sewa dan jasa perusahaan', 1, 0),
-(19, 2, 'Jasa-jasa', 1, 0),
-(20, 3, 'Jumlah penduduk usia diatas 15 tahun yangbisa membaca dan menulis', 1, 0),
-(21, 3, 'Jumlah penduduk usia 15 tahun keatas', 1, 0),
-(22, 3, 'Angka Melek Huruf', 1, 0),
-(23, 4, 'Rata-rata Lama Sekolah (tahun)', 1, 0),
-(24, 5, 'Jumlah grup kesenian per 10.000 penduduk', 1, 0),
-(25, 5, 'Jumlah gedung kesenian per 10.000 penduduk', 1, 0),
-(26, 5, 'Jumlah klub olahraga per 10.000 penduduk', 1, 0),
-(27, 5, 'Jumlah gedung olahraga per 10.000 penduduk', 1, 0),
-(28, 6, 'SD/MI', 0, 0),
-(29, 6, 'jumlah murid usia 7-12 thn', 1, 28),
-(30, 6, 'jumlah penduduk kelompok usia7-12 tahun', 1, 28),
-(31, 6, 'APS SD/MI', 1, 28),
-(32, 6, 'SMP', 0, 0),
-(33, 6, 'jumlah murid usia 13-15 thn', 1, 32),
-(34, 6, 'jumlah penduduk kelompok usia13-15 tahun', 1, 32),
-(35, 6, 'APS SMP/MTs', 1, 32),
-(36, 7, 'SD/MI', 0, 0),
-(37, 7, 'Jumlah gedung sekolah', 1, 36),
-(38, 7, 'jumlah penduduk kelompok usia7-12 tahun', 1, 36),
-(39, 7, 'Rasio', 1, 36),
-(40, 7, 'SMP', 0, 0),
-(41, 7, 'Jumlah gedung sekolah', 1, 40),
-(42, 7, 'jumlah penduduk kelompok usia13-15 tahun', 1, 40),
-(43, 7, 'Rasio', 1, 40),
-(44, 8, 'SD/MI', 0, 0),
-(45, 8, 'Jumlah Guru', 1, 44),
-(46, 8, 'Jumlah Murid', 1, 44),
-(47, 8, 'Rasio', 1, 44),
-(48, 8, 'SMP', 0, 0),
-(49, 8, 'Jumlah guru', 1, 48),
-(50, 8, 'Jumlah Murid', 1, 48),
-(51, 8, 'Rasio', 1, 48),
-(52, 9, 'PMDN', 1, 0),
-(53, 9, 'PMA', 1, 0),
-(54, 10, 'Persetujuan Jumlah Proyek', 1, 0),
-(55, 10, 'Realisasi Jumlah Proyek', 1, 0),
-(56, 10, 'Persetujuan Nilai Investasi', 1, 0),
-(57, 10, 'Realisasi Nilai Investasi', 1, 0);
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `ref_langkah`
 --
 
+DROP TABLE IF EXISTS `ref_langkah`;
 CREATE TABLE `ref_langkah` (
   `id_langkah` int(255) NOT NULL,
   `jenis_dokumen` int(255) NOT NULL,
@@ -5986,9 +1212,30 @@ INSERT INTO `ref_langkah` (`id_langkah`, `jenis_dokumen`, `nm_langkah`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ref_laporan`
+--
+
+DROP TABLE IF EXISTS `ref_laporan`;
+CREATE TABLE `ref_laporan` (
+  `id` bigint(11) UNSIGNED NOT NULL,
+  `id_modul` int(11) NOT NULL DEFAULT '0' COMMENT '0 : Parameter 1 : SSH 2 : ASB 3 : RPJMD 4 : Renstra 5 : RKPD 6 : Renja 7 : Forum 8 : Musrenbang 9 : Pokir 10 : PPAS 11 : RAPBD : 12 APBD ',
+  `id_dokumen` int(11) NOT NULL DEFAULT '0',
+  `jns_laporan` int(11) NOT NULL DEFAULT '0' COMMENT '0 : Utama 1 : Manajemen',
+  `id_laporan` int(11) NOT NULL DEFAULT '1',
+  `no_urut` int(11) NOT NULL DEFAULT '1',
+  `uraian_laporan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_laporan` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ref_log_akses`
 --
 
+DROP TABLE IF EXISTS `ref_log_akses`;
 CREATE TABLE `ref_log_akses` (
   `id_log` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `fl1` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
@@ -6006,6 +1253,7 @@ CREATE TABLE `ref_log_akses` (
 -- Table structure for table `ref_lokasi`
 --
 
+DROP TABLE IF EXISTS `ref_lokasi`;
 CREATE TABLE `ref_lokasi` (
   `id_lokasi` int(11) NOT NULL,
   `jenis_lokasi` int(11) NOT NULL COMMENT '0 = Kewilayahan\r\n1 = Ruas Jalan \r\n2 = Saluran Irigasi\r\n3 = Kawasan\r\n99 = Lokasi di Luar Daerah',
@@ -6026,12 +1274,35 @@ CREATE TABLE `ref_lokasi` (
   `keterangan_lokasi` longtext CHARACTER SET latin1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `ref_lokasi`
+--
+
+INSERT INTO `ref_lokasi` (`id_lokasi`, `jenis_lokasi`, `nama_lokasi`, `id_desa`, `id_desa_awal`, `id_desa_akhir`, `koordinat_1`, `koordinat_2`, `koordinat_3`, `koordinat_4`, `luasan_kawasan`, `satuan_luas`, `panjang`, `satuan_panjang`, `lebar`, `satuan_lebar`, `keterangan_lokasi`) VALUES
+(1, 99, 'Luar Daerah', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 99, 'Semua Wilayah Pemda', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 99, 'Kecamatan Ngaliyan', 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(4, 99, 'Kecamatan Tugu', 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(5, 0, 'Kelurahan Beringin', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(6, 0, 'Kelurahan Ngaliyan', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(7, 0, 'Desa Tambakaji', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(8, 0, 'Desa Wonosari', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(9, 0, 'Kelurahan Jrakah', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(10, 0, 'Desa Tugurejo', 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(11, 0, 'Desa Karanganyar', 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(12, 0, 'Desa Mangkang', 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hasil Import'),
+(13, 1, 'Jalan Watuwila I', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00', -1, '2.00', 9, '7.00', 14, 'Jalan Watuwilaya I di Kecamatan Ngalaiyan'),
+(14, 1, 'Jalan Watuwila II', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00', -1, '2.50', 9, '7.00', 14, 'Jalan Watuwila II di Kecamatan Ngaliyan'),
+(15, 1, 'Jalan Watuwila III', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00', -1, '2.00', 9, '8.00', 14, 'Jalan Watuwila III di Kecamatan Ngaliyan'),
+(16, 2, 'Jalan Watuwila IV', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00', -1, '3.00', 9, '8.00', 14, 'Jalan Watuwila IV di Kecamatan Ngaliyan');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `ref_mapping_asb_renstra`
 --
 
+DROP TABLE IF EXISTS `ref_mapping_asb_renstra`;
 CREATE TABLE `ref_mapping_asb_renstra` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
   `id_kegiatan_renstra` int(11) NOT NULL
@@ -6043,6 +1314,7 @@ CREATE TABLE `ref_mapping_asb_renstra` (
 -- Table structure for table `ref_menu`
 --
 
+DROP TABLE IF EXISTS `ref_menu`;
 CREATE TABLE `ref_menu` (
   `id_menu` bigint(255) NOT NULL,
   `group_id` int(11) NOT NULL,
@@ -6058,9 +1330,7 @@ INSERT INTO `ref_menu` (`id_menu`, `group_id`, `menu`, `akses`) VALUES
 (1, 1, 9, '11100'),
 (2, 2, 9, '11100'),
 (3, 7, 9, '11100'),
-(4, 2, 20, '11100'),
 (5, 7, 20, '11100'),
-(6, 2, 30, '11100'),
 (7, 7, 30, '11100'),
 (8, 2, 101, '11100'),
 (9, 7, 101, '11100'),
@@ -6222,11 +1492,38 @@ INSERT INTO `ref_menu` (`id_menu`, `group_id`, `menu`, `akses`) VALUES
 (175, 3, 940, '11100'),
 (176, 3, 941, '11100'),
 (177, 3, 942, '11100'),
-(178, 3, 950, '11100');
+(178, 3, 950, '11100'),
+(179, 2, 804, NULL),
+(180, 2, 807, NULL),
+(181, 2, 890, NULL),
+(182, 2, 891, NULL),
+(183, 2, 892, NULL),
+(184, 2, 893, NULL),
+(185, 2, 201, NULL),
+(186, 2, 202, NULL),
+(187, 2, 301, NULL),
+(188, 2, 302, NULL),
+(189, 2, 440, NULL),
+(190, 2, 441, NULL),
+(191, 2, 442, NULL),
+(192, 2, 443, NULL),
+(193, 2, 505, NULL),
+(194, 2, 542, NULL),
+(195, 2, 640, NULL),
+(196, 2, 641, NULL),
+(197, 2, 642, NULL),
+(198, 2, 699, NULL),
+(199, 2, 504, NULL),
+(200, 2, 643, NULL),
+(201, 2, 740, NULL),
+(202, 2, 742, NULL),
+(203, 2, 935, NULL),
+(204, 2, 943, NULL);
 
 --
 -- Triggers `ref_menu`
 --
+DROP TRIGGER IF EXISTS `trg_ref_menu_c`;
 DELIMITER $$
 CREATE TRIGGER `trg_ref_menu_c` BEFORE INSERT ON `ref_menu` FOR EACH ROW IF new.group_id = 0 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -6234,6 +1531,7 @@ CREATE TRIGGER `trg_ref_menu_c` BEFORE INSERT ON `ref_menu` FOR EACH ROW IF new.
 END IF
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_ref_menu_d`;
 DELIMITER $$
 CREATE TRIGGER `trg_ref_menu_d` BEFORE DELETE ON `ref_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -6241,6 +1539,7 @@ CREATE TRIGGER `trg_ref_menu_d` BEFORE DELETE ON `ref_menu` FOR EACH ROW IF old.
 END IF
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_ref_menu_u`;
 DELIMITER $$
 CREATE TRIGGER `trg_ref_menu_u` BEFORE UPDATE ON `ref_menu` FOR EACH ROW IF old.group_id = 0 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -6252,14 +1551,55 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ref_pangkat_golongan`
+--
+
+DROP TABLE IF EXISTS `ref_pangkat_golongan`;
+CREATE TABLE `ref_pangkat_golongan` (
+  `id_pangkat_pns` bigint(255) NOT NULL,
+  `pangkat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `golongan` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ruang` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ref_pangkat_golongan`
+--
+
+INSERT INTO `ref_pangkat_golongan` (`id_pangkat_pns`, `pangkat`, `golongan`, `ruang`, `created_at`, `updated_at`) VALUES
+(1, 'Juru Muda', 'I', 'a', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(2, 'Juru Muda Tingkat I', 'I', 'b', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(3, 'Juru', 'I', 'c', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(4, 'Juru Tingkat I', 'I', 'd', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(5, 'Pengatur Muda', 'II', 'a', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(6, 'Pengatur Muda Tingkat I', 'II', 'b', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(7, 'Pengatur', 'II', 'c', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(8, 'Pengatur Tingkat I', 'II', 'd', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(9, 'Penata Muda', 'III', 'a', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(10, 'Penata Muda Tingkat I', 'III', 'b', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(11, 'Penata', 'III', 'c', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(12, 'Penata Tingkat I', 'III', 'd', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(13, 'Pembina', 'IV', 'a', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(14, 'Pembina Tingkat I', 'IV', 'b', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(15, 'Pembina Utama Muda', 'IV', 'c', '2019-10-01 06:46:52', '2019-10-01 06:46:52'),
+(16, 'Pembina Utama Madya', 'IV', 'd', '2019-10-01 06:46:52', '2019-10-01 06:46:59'),
+(17, 'Pembina Utama', 'IV', 'e', '2019-10-01 06:46:52', '2019-10-01 06:46:52');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ref_pegawai`
 --
 
+DROP TABLE IF EXISTS `ref_pegawai`;
 CREATE TABLE `ref_pegawai` (
   `id_pegawai` int(11) NOT NULL,
   `nama_pegawai` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nip_pegawai` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_pegawai` int(11) NOT NULL DEFAULT '0',
+  `status_kepegawaian` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -6270,6 +1610,7 @@ CREATE TABLE `ref_pegawai` (
 -- Table structure for table `ref_pegawai_pangkat`
 --
 
+DROP TABLE IF EXISTS `ref_pegawai_pangkat`;
 CREATE TABLE `ref_pegawai_pangkat` (
   `id_pangkat` int(11) NOT NULL,
   `id_pegawai` int(255) NOT NULL DEFAULT '0',
@@ -6285,6 +1626,7 @@ CREATE TABLE `ref_pegawai_pangkat` (
 -- Table structure for table `ref_pegawai_unit`
 --
 
+DROP TABLE IF EXISTS `ref_pegawai_unit`;
 CREATE TABLE `ref_pegawai_unit` (
   `id_unit_pegawai` int(11) NOT NULL,
   `id_pegawai` int(255) NOT NULL DEFAULT '0',
@@ -6303,6 +1645,7 @@ CREATE TABLE `ref_pegawai_unit` (
 -- Table structure for table `ref_pembatalan`
 --
 
+DROP TABLE IF EXISTS `ref_pembatalan`;
 CREATE TABLE `ref_pembatalan` (
   `id_batal` int(255) NOT NULL,
   `uraian_batal` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -6314,6 +1657,7 @@ CREATE TABLE `ref_pembatalan` (
 -- Table structure for table `ref_pemda`
 --
 
+DROP TABLE IF EXISTS `ref_pemda`;
 CREATE TABLE `ref_pemda` (
   `kd_prov` int(11) NOT NULL,
   `kd_kab` int(11) NOT NULL,
@@ -6350,6 +1694,7 @@ CREATE TABLE `ref_pemda` (
 -- Table structure for table `ref_pengusul`
 --
 
+DROP TABLE IF EXISTS `ref_pengusul`;
 CREATE TABLE `ref_pengusul` (
   `id_pengusul` int(255) NOT NULL,
   `nm_pengusul` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -6386,6 +1731,7 @@ INSERT INTO `ref_pengusul` (`id_pengusul`, `nm_pengusul`, `keterangan`) VALUES
 -- Table structure for table `ref_program`
 --
 
+DROP TABLE IF EXISTS `ref_program`;
 CREATE TABLE `ref_program` (
   `id_bidang` int(11) NOT NULL,
   `id_program` int(11) NOT NULL,
@@ -6888,6 +2234,7 @@ INSERT INTO `ref_program` (`id_bidang`, `id_program`, `kd_program`, `uraian_prog
 -- Table structure for table `ref_rek_1`
 --
 
+DROP TABLE IF EXISTS `ref_rek_1`;
 CREATE TABLE `ref_rek_1` (
   `kd_rek_1` int(11) NOT NULL,
   `nama_kd_rek_1` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -6912,6 +2259,7 @@ INSERT INTO `ref_rek_1` (`kd_rek_1`, `nama_kd_rek_1`) VALUES
 -- Table structure for table `ref_rek_2`
 --
 
+DROP TABLE IF EXISTS `ref_rek_2`;
 CREATE TABLE `ref_rek_2` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
@@ -6951,6 +2299,7 @@ INSERT INTO `ref_rek_2` (`kd_rek_1`, `kd_rek_2`, `nama_kd_rek_2`) VALUES
 -- Table structure for table `ref_rek_3`
 --
 
+DROP TABLE IF EXISTS `ref_rek_3`;
 CREATE TABLE `ref_rek_3` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
@@ -7049,6 +2398,7 @@ INSERT INTO `ref_rek_3` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `nama_kd_rek_3`, `s
 -- Table structure for table `ref_rek_4`
 --
 
+DROP TABLE IF EXISTS `ref_rek_4`;
 CREATE TABLE `ref_rek_4` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
@@ -7479,6 +2829,7 @@ INSERT INTO `ref_rek_4` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`, `nama_k
 -- Table structure for table `ref_rek_5`
 --
 
+DROP TABLE IF EXISTS `ref_rek_5`;
 CREATE TABLE `ref_rek_5` (
   `kd_rek_1` int(11) NOT NULL,
   `kd_rek_2` int(11) NOT NULL,
@@ -9084,6 +4435,7 @@ INSERT INTO `ref_rek_5` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`, `kd_rek
 -- Table structure for table `ref_revisi`
 --
 
+DROP TABLE IF EXISTS `ref_revisi`;
 CREATE TABLE `ref_revisi` (
   `id_revisi` int(255) NOT NULL,
   `uraian_revisi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -9095,6 +4447,7 @@ CREATE TABLE `ref_revisi` (
 -- Table structure for table `ref_satuan`
 --
 
+DROP TABLE IF EXISTS `ref_satuan`;
 CREATE TABLE `ref_satuan` (
   `id_satuan` int(11) NOT NULL,
   `uraian_satuan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -9102,183 +4455,13 @@ CREATE TABLE `ref_satuan` (
   `scope_pemakaian` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `ref_satuan`
---
-
-INSERT INTO `ref_satuan` (`id_satuan`, `uraian_satuan`, `singkatan_satuan`, `scope_pemakaian`) VALUES
-(1, 'buah', 'bh', '4789'),
-(2, 'buku', 'buku', '47'),
-(3, 'bulan', 'bulan', '2345789'),
-(4, 'dus', 'dus', '4567'),
-(5, 'hari', 'hari', '4567'),
-(6, 'jam', 'j', '4567'),
-(7, 'kelas', 'kls', '4567'),
-(8, 'kilogram', 'kg', '4789'),
-(9, 'kilometer', 'km', '4567'),
-(10, 'lembar', 'lbr', '4589'),
-(11, 'lusin', 'lusin', '45789'),
-(12, 'm2', 'm2', '47'),
-(13, 'm3', 'm3', '479'),
-(14, 'meter', 'm', '45679'),
-(15, 'orang', 'org', '4567'),
-(16, 'orang/hari', 'oh', '47'),
-(17, 'orang/jam', 'oj', '47'),
-(18, 'orang/kegiatan', 'o/k', '234789'),
-(19, 'paket', 'pkt', '23457'),
-(20, 'pax', 'pax', '457'),
-(21, 'peserta', 'psrt', '45679'),
-(22, 'PP', 'PP', '4567'),
-(23, 'rim', 'rim', '4789'),
-(24, 'ruangan', 'rg', '4567'),
-(25, 'sak', 'sak', '457'),
-(26, 'tahun', 'th', '456789'),
-(27, 'persen', '%', '2389'),
-(28, 'batang', 'btg', '4567'),
-(29, 'liter', 'ltr', '4567'),
-(30, 'ekor', 'ekor', '4567'),
-(31, 'tin', 'tin', '4567'),
-(32, 'kelompok', 'klpk', '4567'),
-(33, '1 katn', '', '0'),
-(34, '1 kit', '', '0'),
-(35, '1 pak', '', '0'),
-(36, '1 Set', '', '0'),
-(37, '10 gr', '', '0'),
-(38, 'ons', '', '0'),
-(39, 'kuintal', '', '0'),
-(40, '100 ml', '', '0'),
-(41, '1000 gr', '', '0'),
-(42, '1000 ml', '', '0'),
-(43, '2 Pc', '', '0'),
-(44, '2 Set', '', '0'),
-(45, '2.500 ml', '', '0'),
-(46, '25 gr', '', '0'),
-(47, '250 gr', '', '0'),
-(48, '250 ml', '', '0'),
-(49, '2500 ml', '', '0'),
-(50, '3 PC', '', '0'),
-(51, '3 Set', '', '0'),
-(52, '5 pc', '', '0'),
-(53, '50 klg', '', '0'),
-(54, '500 gr', '', '0'),
-(55, '500 ml', '', '0'),
-(56, '6 kg', '', '0'),
-(57, '6 M³', '', '0'),
-(58, '8 kg', '', '0'),
-(59, 'ampul', '', '0'),
-(60, 'Bak', '', '0'),
-(61, 'Batang', '', '0'),
-(62, 'bendel', '', '0'),
-(63, 'Bh', '', '0'),
-(64, 'Biji', '', '0'),
-(65, 'Bingkai', '', '0'),
-(66, 'Bj', '', '0'),
-(67, 'Bks', '', '0'),
-(68, 'blst', '', '0'),
-(69, 'Botol', '', '0'),
-(70, 'Box', '', '0'),
-(71, 'Box/100', '', '0'),
-(72, 'Box/125', '', '0'),
-(73, 'Box/25', '', '0'),
-(74, 'Box/25\'', '', '0'),
-(75, 'Btl', '', '0'),
-(76, 'Buah', '', '0'),
-(77, 'Buah', '', '0'),
-(78, 'Buah', '', '0'),
-(79, 'Buku', '', '0'),
-(80, 'can', '', '0'),
-(81, 'caps', '', '0'),
-(82, 'Carton', '', '0'),
-(83, 'Dos', '', '0'),
-(84, 'Dosin', '', '0'),
-(85, 'Drum', '', '0'),
-(86, 'ds', '', '0'),
-(87, 'Dus', '', '0'),
-(88, 'Dusin', '', '0'),
-(89, 'Duz', '', '0'),
-(90, 'Ekor', '', '0'),
-(91, 'Eksemplar', '', '0'),
-(92, 'Expr', '', '0'),
-(93, 'flas', '', '0'),
-(94, 'Flas/25 kg', '', '0'),
-(95, 'Fles', '', '0'),
-(96, 'gal', '', '0'),
-(97, 'Galon', '', '0'),
-(98, 'Gin', '', '0'),
-(99, 'Gln', '', '0'),
-(100, 'Gln/5 L', '', '0'),
-(101, 'Gras', '', '0'),
-(102, 'gros', '', '0'),
-(103, 'inj', '', '0'),
-(104, 'Instal', '', '0'),
-(105, 'Kaleng', '', '0'),
-(106, 'kapsul', '', '0'),
-(107, 'Kg', '', '0'),
-(108, 'Kit', '', '0'),
-(109, 'Klg', '', '0'),
-(110, 'Kotak', '', '0'),
-(111, 'Lebar', '', '0'),
-(112, 'Lembar', 'lbr', '0'),
-(113, 'Liter', 'ltr', '0'),
-(114, 'lmbar', '', '0'),
-(115, 'Ltr', '', '0'),
-(116, 'lusin', '', '0'),
-(117, 'M2', '', '0'),
-(118, 'M3', '', '0'),
-(119, 'M3', '', '0'),
-(120, 'Mes', '', '0'),
-(121, 'Meter', 'M', '0'),
-(122, 'Meter', 'M', '0'),
-(123, 'ml', '', '0'),
-(124, 'Mtr', 'M', '0'),
-(125, 'Pack', '', '0'),
-(126, 'Pae', '', '0'),
-(127, 'Pail', '', '0'),
-(128, 'Pak', '', '0'),
-(129, 'Paket', '', '0'),
-(130, 'Pasang', '', '0'),
-(131, 'Pc', '', '0'),
-(132, 'Pcs', '', '0'),
-(133, 'Per Lbr', '', '0'),
-(134, 'Pes', '', '0'),
-(135, 'Pohon', '', '0'),
-(136, 'Pot', '', '0'),
-(137, 'Potong', '', '0'),
-(138, 'ps', '', '0'),
-(139, 'psg', '', '0'),
-(140, 'R', '', '0'),
-(141, 'Rim', '', '0'),
-(142, 'Rol', '', '0'),
-(143, 'Roll', '', '0'),
-(144, 'Ruas', '', '0'),
-(145, 'Rumpun', '', '0'),
-(146, 'sak', '', '0'),
-(147, 'Sam Pcl', '', '0'),
-(148, 'Sampel', '', '0'),
-(149, 'SATUAN', '', '0'),
-(150, 'SATUAN', '', '0'),
-(151, 'Set', '', '0'),
-(152, 'Slop', '', '0'),
-(153, 'Stel', '', '0'),
-(154, 'Tabung', '', '0'),
-(155, 'Tangkai', '', '0'),
-(156, 'Tangki', '', '0'),
-(157, 'Tin', '', '0'),
-(158, 'Truk', '', '0'),
-(159, 'tube', '', '0'),
-(160, 'Unit', '', '0'),
-(161, 'Unit', '', '0'),
-(162, 'Unit', '', '0'),
-(163, 'Vial', '', '0'),
-(164, 'Zak', '', '0'),
-(165, 'Zak/1000', '', '0');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `ref_setting`
 --
 
+DROP TABLE IF EXISTS `ref_setting`;
 CREATE TABLE `ref_setting` (
   `tahun_rencana` int(11) NOT NULL COMMENT 'tahun_perencanaan',
   `jenis_rw` int(11) NOT NULL DEFAULT '0' COMMENT 'jenis_pembatasan_rw, 0 tidak dibatasi, 1 jml_usulan, 2 jml_pagu',
@@ -9308,6 +4491,7 @@ INSERT INTO `ref_setting` (`tahun_rencana`, `jenis_rw`, `jml_rw`, `pagu_rw`, `je
 -- Table structure for table `ref_sotk_level_1`
 --
 
+DROP TABLE IF EXISTS `ref_sotk_level_1`;
 CREATE TABLE `ref_sotk_level_1` (
   `id_sotk_es2` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
@@ -9324,6 +4508,7 @@ CREATE TABLE `ref_sotk_level_1` (
 -- Table structure for table `ref_sotk_level_2`
 --
 
+DROP TABLE IF EXISTS `ref_sotk_level_2`;
 CREATE TABLE `ref_sotk_level_2` (
   `id_sotk_es3` int(11) NOT NULL,
   `id_sotk_es2` int(11) NOT NULL,
@@ -9340,6 +4525,7 @@ CREATE TABLE `ref_sotk_level_2` (
 -- Table structure for table `ref_sotk_level_3`
 --
 
+DROP TABLE IF EXISTS `ref_sotk_level_3`;
 CREATE TABLE `ref_sotk_level_3` (
   `id_sotk_es4` int(11) NOT NULL,
   `id_sotk_es3` int(11) NOT NULL,
@@ -9356,6 +4542,7 @@ CREATE TABLE `ref_sotk_level_3` (
 -- Table structure for table `ref_ssh_golongan`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_golongan`;
 CREATE TABLE `ref_ssh_golongan` (
   `id_golongan_ssh` int(11) NOT NULL,
   `jenis_ssh` int(11) NOT NULL DEFAULT '0' COMMENT '0 = BL 1=BTL 2=Pendapatan 3=Pembiayaan ',
@@ -9369,6 +4556,7 @@ CREATE TABLE `ref_ssh_golongan` (
 -- Table structure for table `ref_ssh_kelompok`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_kelompok`;
 CREATE TABLE `ref_ssh_kelompok` (
   `id_kelompok_ssh` int(11) NOT NULL,
   `id_golongan_ssh` int(11) NOT NULL,
@@ -9382,6 +4570,7 @@ CREATE TABLE `ref_ssh_kelompok` (
 -- Table structure for table `ref_ssh_perkada`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_perkada`;
 CREATE TABLE `ref_ssh_perkada` (
   `id_perkada` int(11) NOT NULL,
   `nomor_perkada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -9402,6 +4591,7 @@ CREATE TABLE `ref_ssh_perkada` (
 -- Table structure for table `ref_ssh_perkada_tarif`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_perkada_tarif`;
 CREATE TABLE `ref_ssh_perkada_tarif` (
   `id_tarif_perkada` bigint(11) NOT NULL,
   `id_tarif_old` bigint(11) NOT NULL DEFAULT '0',
@@ -9420,6 +4610,7 @@ CREATE TABLE `ref_ssh_perkada_tarif` (
 -- Table structure for table `ref_ssh_perkada_zona`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_perkada_zona`;
 CREATE TABLE `ref_ssh_perkada_zona` (
   `id_zona_perkada` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -9435,6 +4626,7 @@ CREATE TABLE `ref_ssh_perkada_zona` (
 -- Table structure for table `ref_ssh_rekening`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_rekening`;
 CREATE TABLE `ref_ssh_rekening` (
   `id_rekening_ssh` bigint(11) NOT NULL,
   `id_tarif_ssh` bigint(20) NOT NULL,
@@ -9448,6 +4640,7 @@ CREATE TABLE `ref_ssh_rekening` (
 -- Table structure for table `ref_ssh_sub_kelompok`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_sub_kelompok`;
 CREATE TABLE `ref_ssh_sub_kelompok` (
   `id_sub_kelompok_ssh` int(11) NOT NULL,
   `id_kelompok_ssh` int(11) NOT NULL,
@@ -9461,6 +4654,7 @@ CREATE TABLE `ref_ssh_sub_kelompok` (
 -- Table structure for table `ref_ssh_tarif`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_tarif`;
 CREATE TABLE `ref_ssh_tarif` (
   `id_tarif_ssh` bigint(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -9477,6 +4671,7 @@ CREATE TABLE `ref_ssh_tarif` (
 -- Table structure for table `ref_ssh_zona`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_zona`;
 CREATE TABLE `ref_ssh_zona` (
   `id_zona` int(11) NOT NULL,
   `keterangan_zona` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -9497,6 +4692,7 @@ INSERT INTO `ref_ssh_zona` (`id_zona`, `keterangan_zona`, `diskripsi_zona`) VALU
 -- Table structure for table `ref_ssh_zona_lokasi`
 --
 
+DROP TABLE IF EXISTS `ref_ssh_zona_lokasi`;
 CREATE TABLE `ref_ssh_zona_lokasi` (
   `id_zona_lokasi` int(11) NOT NULL,
   `id_zona` int(11) NOT NULL,
@@ -9511,6 +4707,7 @@ CREATE TABLE `ref_ssh_zona_lokasi` (
 -- Table structure for table `ref_status_usul`
 --
 
+DROP TABLE IF EXISTS `ref_status_usul`;
 CREATE TABLE `ref_status_usul` (
   `id_status_usul` int(11) NOT NULL,
   `uraian_status_usul` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -9522,6 +4719,7 @@ CREATE TABLE `ref_status_usul` (
 -- Table structure for table `ref_sub_unit`
 --
 
+DROP TABLE IF EXISTS `ref_sub_unit`;
 CREATE TABLE `ref_sub_unit` (
   `id_sub_unit` int(255) NOT NULL,
   `id_unit` int(11) NOT NULL,
@@ -9535,6 +4733,7 @@ CREATE TABLE `ref_sub_unit` (
 -- Table structure for table `ref_sumber_dana`
 --
 
+DROP TABLE IF EXISTS `ref_sumber_dana`;
 CREATE TABLE `ref_sumber_dana` (
   `id_sumber_dana` int(11) NOT NULL,
   `uraian_sumber_dana` longtext CHARACTER SET latin1 NOT NULL
@@ -9558,6 +4757,7 @@ INSERT INTO `ref_sumber_dana` (`id_sumber_dana`, `uraian_sumber_dana`) VALUES
 -- Table structure for table `ref_tabel_dasar`
 --
 
+DROP TABLE IF EXISTS `ref_tabel_dasar`;
 CREATE TABLE `ref_tabel_dasar` (
   `id_tabel_dasar` int(11) NOT NULL,
   `nama_tabel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -9585,6 +4785,7 @@ INSERT INTO `ref_tabel_dasar` (`id_tabel_dasar`, `nama_tabel`) VALUES
 -- Table structure for table `ref_tahun`
 --
 
+DROP TABLE IF EXISTS `ref_tahun`;
 CREATE TABLE `ref_tahun` (
   `id_tahun` int(11) NOT NULL,
   `id_pemda` int(11) NOT NULL,
@@ -9603,6 +4804,7 @@ CREATE TABLE `ref_tahun` (
 -- Table structure for table `ref_unit`
 --
 
+DROP TABLE IF EXISTS `ref_unit`;
 CREATE TABLE `ref_unit` (
   `id_unit` int(11) NOT NULL,
   `id_bidang` int(11) NOT NULL,
@@ -9616,6 +4818,7 @@ CREATE TABLE `ref_unit` (
 -- Table structure for table `ref_urusan`
 --
 
+DROP TABLE IF EXISTS `ref_urusan`;
 CREATE TABLE `ref_urusan` (
   `kd_urusan` int(255) NOT NULL,
   `nm_urusan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -9637,6 +4840,7 @@ INSERT INTO `ref_urusan` (`kd_urusan`, `nm_urusan`) VALUES
 -- Table structure for table `ref_user_role`
 --
 
+DROP TABLE IF EXISTS `ref_user_role`;
 CREATE TABLE `ref_user_role` (
   `id` int(11) NOT NULL,
   `uraian_peran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -9657,6 +4861,7 @@ CREATE TABLE `ref_user_role` (
 -- Table structure for table `temp_table_info`
 --
 
+DROP TABLE IF EXISTS `temp_table_info`;
 CREATE TABLE `temp_table_info` (
   `TBL_INDEX` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TABLE_SCHEMA` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -9679,6 +4884,7 @@ CREATE TABLE `temp_table_info` (
 -- Table structure for table `trx_anggaran_aktivitas_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_aktivitas_pd`;
 CREATE TABLE `trx_anggaran_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL,
   `id_pelaksana_pd` bigint(20) NOT NULL,
@@ -9718,6 +4924,7 @@ CREATE TABLE `trx_anggaran_aktivitas_pd` (
 -- Table structure for table `trx_anggaran_belanja_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_belanja_pd`;
 CREATE TABLE `trx_anggaran_belanja_pd` (
   `id_belanja_pd` bigint(20) NOT NULL,
   `id_aktivitas_pd` bigint(20) NOT NULL,
@@ -9756,6 +4963,7 @@ CREATE TABLE `trx_anggaran_belanja_pd` (
 -- Table structure for table `trx_anggaran_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_dokumen`;
 CREATE TABLE `trx_anggaran_dokumen` (
   `id_dokumen_keu` int(11) NOT NULL,
   `jns_dokumen_keu` int(11) NOT NULL DEFAULT '0' COMMENT '0 ppas 1 apbd',
@@ -9782,6 +4990,7 @@ CREATE TABLE `trx_anggaran_dokumen` (
 -- Table structure for table `trx_anggaran_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_indikator`;
 CREATE TABLE `trx_anggaran_indikator` (
   `id_indikator_program_rkpd` int(11) NOT NULL COMMENT 'nomor urut indikator sasaran',
   `id_anggaran_pemda` int(11) NOT NULL,
@@ -9809,6 +5018,7 @@ CREATE TABLE `trx_anggaran_indikator` (
 -- Table structure for table `trx_anggaran_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_kegiatan_pd`;
 CREATE TABLE `trx_anggaran_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL,
   `id_program_pd` bigint(20) NOT NULL,
@@ -9844,6 +5054,7 @@ CREATE TABLE `trx_anggaran_kegiatan_pd` (
 -- Table structure for table `trx_anggaran_keg_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_keg_indikator_pd`;
 CREATE TABLE `trx_anggaran_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL COMMENT 'nomor urut indikator sasaran',
   `id_kegiatan_pd` bigint(11) NOT NULL,
@@ -9871,6 +5082,7 @@ CREATE TABLE `trx_anggaran_keg_indikator_pd` (
 -- Table structure for table `trx_anggaran_lokasi_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_lokasi_pd`;
 CREATE TABLE `trx_anggaran_lokasi_pd` (
   `id_lokasi_pd` bigint(20) NOT NULL,
   `id_lokasi_rkpd_final` int(11) NOT NULL DEFAULT '0' COMMENT '0',
@@ -9905,6 +5117,7 @@ CREATE TABLE `trx_anggaran_lokasi_pd` (
 -- Table structure for table `trx_anggaran_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_pelaksana`;
 CREATE TABLE `trx_anggaran_pelaksana` (
   `id_pelaksana_anggaran` int(11) NOT NULL,
   `id_anggaran_pemda` int(11) NOT NULL,
@@ -9928,6 +5141,7 @@ CREATE TABLE `trx_anggaran_pelaksana` (
 -- Table structure for table `trx_anggaran_pelaksana_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_pelaksana_pd`;
 CREATE TABLE `trx_anggaran_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL,
   `id_kegiatan_pd` bigint(11) NOT NULL,
@@ -9950,6 +5164,7 @@ CREATE TABLE `trx_anggaran_pelaksana_pd` (
 -- Table structure for table `trx_anggaran_program`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_program`;
 CREATE TABLE `trx_anggaran_program` (
   `id_anggaran_pemda` int(11) NOT NULL,
   `id_dokumen_keu` int(11) NOT NULL DEFAULT '0',
@@ -9983,6 +5198,7 @@ CREATE TABLE `trx_anggaran_program` (
 -- Table structure for table `trx_anggaran_program_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_program_pd`;
 CREATE TABLE `trx_anggaran_program_pd` (
   `id_program_pd` bigint(11) NOT NULL,
   `id_pelaksana_anggaran` int(11) NOT NULL,
@@ -10015,6 +5231,7 @@ CREATE TABLE `trx_anggaran_program_pd` (
 -- Table structure for table `trx_anggaran_prog_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_prog_indikator_pd`;
 CREATE TABLE `trx_anggaran_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL COMMENT 'nomor urut indikator sasaran',
   `id_program_pd` bigint(11) NOT NULL,
@@ -10040,9 +5257,81 @@ CREATE TABLE `trx_anggaran_prog_indikator_pd` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trx_anggaran_tapd`
+--
+
+DROP TABLE IF EXISTS `trx_anggaran_tapd`;
+CREATE TABLE `trx_anggaran_tapd` (
+  `id_tapd` bigint(255) NOT NULL,
+  `id_dokumen_keu` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
+  `id_unit_pegawai` int(11) NOT NULL,
+  `peran_tim` varchar(255) NOT NULL,
+  `status_tim` int(255) NOT NULL DEFAULT '0',
+  `tmt_tim` date DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trx_anggaran_tapd_unit`
+--
+
+DROP TABLE IF EXISTS `trx_anggaran_tapd_unit`;
+CREATE TABLE `trx_anggaran_tapd_unit` (
+  `id_unit_tapd` bigint(255) NOT NULL,
+  `id_tapd` bigint(255) NOT NULL,
+  `id_unit` int(11) NOT NULL,
+  `status_unit` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trx_anggaran_unit_kpa`
+--
+
+DROP TABLE IF EXISTS `trx_anggaran_unit_kpa`;
+CREATE TABLE `trx_anggaran_unit_kpa` (
+  `id_kpa` bigint(255) NOT NULL,
+  `id_pa` bigint(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
+  `id_unit_pegawai` int(11) NOT NULL,
+  `id_program` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trx_anggaran_unit_pa`
+--
+
+DROP TABLE IF EXISTS `trx_anggaran_unit_pa`;
+CREATE TABLE `trx_anggaran_unit_pa` (
+  `id_pa` bigint(255) NOT NULL,
+  `id_dokumen_keu` int(11) NOT NULL,
+  `no_dokumen` varchar(255) DEFAULT NULL,
+  `tgl_dokumen` date DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `id_pegawai` int(11) NOT NULL,
+  `id_unit_pegawai` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trx_anggaran_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_anggaran_urusan`;
 CREATE TABLE `trx_anggaran_urusan` (
   `id_urusan_anggaran` int(11) NOT NULL,
   `id_anggaran_pemda` int(11) NOT NULL,
@@ -10059,6 +5348,7 @@ CREATE TABLE `trx_anggaran_urusan` (
 -- Table structure for table `trx_asb_aktivitas`
 --
 
+DROP TABLE IF EXISTS `trx_asb_aktivitas`;
 CREATE TABLE `trx_asb_aktivitas` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
   `id_asb_sub_sub_kelompok` int(11) NOT NULL,
@@ -10084,6 +5374,7 @@ CREATE TABLE `trx_asb_aktivitas` (
 -- Table structure for table `trx_asb_kelompok`
 --
 
+DROP TABLE IF EXISTS `trx_asb_kelompok`;
 CREATE TABLE `trx_asb_kelompok` (
   `id_asb_kelompok` int(11) NOT NULL,
   `id_asb_perkada` int(11) NOT NULL,
@@ -10097,6 +5388,7 @@ CREATE TABLE `trx_asb_kelompok` (
 -- Table structure for table `trx_asb_komponen`
 --
 
+DROP TABLE IF EXISTS `trx_asb_komponen`;
 CREATE TABLE `trx_asb_komponen` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
   `id_komponen_asb` bigint(20) NOT NULL,
@@ -10111,6 +5403,7 @@ CREATE TABLE `trx_asb_komponen` (
 -- Table structure for table `trx_asb_komponen_rinci`
 --
 
+DROP TABLE IF EXISTS `trx_asb_komponen_rinci`;
 CREATE TABLE `trx_asb_komponen_rinci` (
   `id_komponen_asb_rinci` bigint(20) NOT NULL,
   `id_komponen_asb` bigint(20) NOT NULL,
@@ -10135,6 +5428,7 @@ CREATE TABLE `trx_asb_komponen_rinci` (
 -- Table structure for table `trx_asb_perhitungan`
 --
 
+DROP TABLE IF EXISTS `trx_asb_perhitungan`;
 CREATE TABLE `trx_asb_perhitungan` (
   `tahun_perhitungan` int(11) NOT NULL,
   `id_perhitungan` bigint(20) NOT NULL,
@@ -10148,6 +5442,7 @@ CREATE TABLE `trx_asb_perhitungan` (
 -- Table structure for table `trx_asb_perhitungan_rinci`
 --
 
+DROP TABLE IF EXISTS `trx_asb_perhitungan_rinci`;
 CREATE TABLE `trx_asb_perhitungan_rinci` (
   `id_perhitungan_rinci` bigint(20) NOT NULL,
   `id_perhitungan` bigint(20) NOT NULL,
@@ -10178,6 +5473,7 @@ CREATE TABLE `trx_asb_perhitungan_rinci` (
 -- Table structure for table `trx_asb_perkada`
 --
 
+DROP TABLE IF EXISTS `trx_asb_perkada`;
 CREATE TABLE `trx_asb_perkada` (
   `id_asb_perkada` int(11) NOT NULL,
   `nomor_perkada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -10193,6 +5489,7 @@ CREATE TABLE `trx_asb_perkada` (
 -- Table structure for table `trx_asb_sub_kelompok`
 --
 
+DROP TABLE IF EXISTS `trx_asb_sub_kelompok`;
 CREATE TABLE `trx_asb_sub_kelompok` (
   `id_asb_sub_kelompok` int(11) NOT NULL,
   `id_asb_kelompok` int(11) NOT NULL,
@@ -10206,6 +5503,7 @@ CREATE TABLE `trx_asb_sub_kelompok` (
 -- Table structure for table `trx_asb_sub_sub_kelompok`
 --
 
+DROP TABLE IF EXISTS `trx_asb_sub_sub_kelompok`;
 CREATE TABLE `trx_asb_sub_sub_kelompok` (
   `id_asb_sub_sub_kelompok` int(11) NOT NULL,
   `id_asb_sub_kelompok` int(11) NOT NULL,
@@ -10219,6 +5517,7 @@ CREATE TABLE `trx_asb_sub_sub_kelompok` (
 -- Table structure for table `trx_forum_skpd`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd`;
 CREATE TABLE `trx_forum_skpd` (
   `id_forum_skpd` bigint(20) NOT NULL,
   `id_forum_program` bigint(20) NOT NULL,
@@ -10249,6 +5548,7 @@ CREATE TABLE `trx_forum_skpd` (
 -- Table structure for table `trx_forum_skpd_aktivitas`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_aktivitas`;
 CREATE TABLE `trx_forum_skpd_aktivitas` (
   `id_aktivitas_forum` bigint(11) NOT NULL,
   `id_forum_skpd` bigint(20) NOT NULL,
@@ -10285,6 +5585,7 @@ CREATE TABLE `trx_forum_skpd_aktivitas` (
 -- Table structure for table `trx_forum_skpd_belanja`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_belanja`;
 CREATE TABLE `trx_forum_skpd_belanja` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10319,6 +5620,7 @@ CREATE TABLE `trx_forum_skpd_belanja` (
 -- Table structure for table `trx_forum_skpd_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_dokumen`;
 CREATE TABLE `trx_forum_skpd_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL,
   `id_unit_renja` int(255) NOT NULL,
@@ -10338,6 +5640,7 @@ CREATE TABLE `trx_forum_skpd_dokumen` (
 -- Table structure for table `trx_forum_skpd_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_kebijakan`;
 CREATE TABLE `trx_forum_skpd_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10353,6 +5656,7 @@ CREATE TABLE `trx_forum_skpd_kebijakan` (
 -- Table structure for table `trx_forum_skpd_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_kegiatan_indikator`;
 CREATE TABLE `trx_forum_skpd_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10380,6 +5684,7 @@ CREATE TABLE `trx_forum_skpd_kegiatan_indikator` (
 -- Table structure for table `trx_forum_skpd_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_lokasi`;
 CREATE TABLE `trx_forum_skpd_lokasi` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10414,6 +5719,7 @@ CREATE TABLE `trx_forum_skpd_lokasi` (
 -- Table structure for table `trx_forum_skpd_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_pelaksana`;
 CREATE TABLE `trx_forum_skpd_pelaksana` (
   `id_pelaksana_forum` bigint(20) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
@@ -10434,6 +5740,7 @@ CREATE TABLE `trx_forum_skpd_pelaksana` (
 -- Table structure for table `trx_forum_skpd_program`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_program`;
 CREATE TABLE `trx_forum_skpd_program` (
   `id_forum_program` bigint(11) NOT NULL,
   `id_forum_rkpdprog` int(11) NOT NULL,
@@ -10460,6 +5767,7 @@ CREATE TABLE `trx_forum_skpd_program` (
 -- Table structure for table `trx_forum_skpd_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_program_indikator`;
 CREATE TABLE `trx_forum_skpd_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10487,6 +5795,7 @@ CREATE TABLE `trx_forum_skpd_program_indikator` (
 -- Table structure for table `trx_forum_skpd_program_ranwal`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_program_ranwal`;
 CREATE TABLE `trx_forum_skpd_program_ranwal` (
   `id_forum_rkpdprog` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10510,6 +5819,7 @@ CREATE TABLE `trx_forum_skpd_program_ranwal` (
 -- Table structure for table `trx_forum_skpd_usulan`
 --
 
+DROP TABLE IF EXISTS `trx_forum_skpd_usulan`;
 CREATE TABLE `trx_forum_skpd_usulan` (
   `id_sumber_usulan` bigint(20) NOT NULL,
   `sumber_usulan` int(11) DEFAULT '0' COMMENT '0 renja 1 musrendes 2 musrencam 3 pokir 4 forum_skpd',
@@ -10530,6 +5840,7 @@ CREATE TABLE `trx_forum_skpd_usulan` (
 -- Table structure for table `trx_group_menu`
 --
 
+DROP TABLE IF EXISTS `trx_group_menu`;
 CREATE TABLE `trx_group_menu` (
   `menu` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
@@ -10538,6 +5849,7 @@ CREATE TABLE `trx_group_menu` (
 --
 -- Triggers `trx_group_menu`
 --
+DROP TRIGGER IF EXISTS `trg_agroup_menu`;
 DELIMITER $$
 CREATE TRIGGER `trg_agroup_menu` BEFORE INSERT ON `trx_group_menu` FOR EACH ROW IF new.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -10545,6 +5857,7 @@ CREATE TRIGGER `trg_agroup_menu` BEFORE INSERT ON `trx_group_menu` FOR EACH ROW 
 END IF
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_egroup_menu`;
 DELIMITER $$
 CREATE TRIGGER `trg_egroup_menu` BEFORE UPDATE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -10552,6 +5865,7 @@ CREATE TRIGGER `trg_egroup_menu` BEFORE UPDATE ON `trx_group_menu` FOR EACH ROW 
 END IF
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_group_menu`;
 DELIMITER $$
 CREATE TRIGGER `trg_group_menu` BEFORE DELETE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -10566,6 +5880,7 @@ DELIMITER ;
 -- Table structure for table `trx_isian_data_dasar`
 --
 
+DROP TABLE IF EXISTS `trx_isian_data_dasar`;
 CREATE TABLE `trx_isian_data_dasar` (
   `id_isian_tabel_dasar` int(11) NOT NULL,
   `id_kolom_tabel_dasar` int(11) DEFAULT NULL,
@@ -10586,9 +5901,29 @@ CREATE TABLE `trx_isian_data_dasar` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trx_log_api`
+--
+
+DROP TABLE IF EXISTS `trx_log_api`;
+CREATE TABLE `trx_log_api` (
+  `id_log` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `id_app` int(11) NOT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `tgl_kirim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_kirim` int(11) NOT NULL,
+  `log_kirim` varchar(500) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trx_log_events`
 --
 
+DROP TABLE IF EXISTS `trx_log_events`;
 CREATE TABLE `trx_log_events` (
   `id` int(11) NOT NULL,
   `code_events` int(11) NOT NULL DEFAULT '0',
@@ -10603,6 +5938,7 @@ CREATE TABLE `trx_log_events` (
 -- Table structure for table `trx_musrencam`
 --
 
+DROP TABLE IF EXISTS `trx_musrencam`;
 CREATE TABLE `trx_musrencam` (
   `tahun_musren` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10638,6 +5974,7 @@ CREATE TABLE `trx_musrencam` (
 -- Table structure for table `trx_musrencam_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_musrencam_lokasi`;
 CREATE TABLE `trx_musrencam_lokasi` (
   `tahun_musren` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10664,6 +6001,7 @@ CREATE TABLE `trx_musrencam_lokasi` (
 -- Table structure for table `trx_musrendes`
 --
 
+DROP TABLE IF EXISTS `trx_musrendes`;
 CREATE TABLE `trx_musrendes` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10697,6 +6035,7 @@ CREATE TABLE `trx_musrendes` (
 -- Table structure for table `trx_musrendes_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_musrendes_lokasi`;
 CREATE TABLE `trx_musrendes_lokasi` (
   `tahun_musren` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10721,6 +6060,7 @@ CREATE TABLE `trx_musrendes_lokasi` (
 -- Table structure for table `trx_musrendes_rw`
 --
 
+DROP TABLE IF EXISTS `trx_musrendes_rw`;
 CREATE TABLE `trx_musrendes_rw` (
   `tahun_musren` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10748,6 +6088,7 @@ CREATE TABLE `trx_musrendes_rw` (
 -- Table structure for table `trx_musrendes_rw_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_musrendes_rw_lokasi`;
 CREATE TABLE `trx_musrendes_rw_lokasi` (
   `no_urut` int(11) NOT NULL,
   `id_musrendes_rw` int(11) NOT NULL,
@@ -10765,6 +6106,7 @@ CREATE TABLE `trx_musrendes_rw_lokasi` (
 -- Table structure for table `trx_musrenkab`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab`;
 CREATE TABLE `trx_musrenkab` (
   `id_musrenkab` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
@@ -10796,6 +6138,7 @@ CREATE TABLE `trx_musrenkab` (
 -- Table structure for table `trx_musrenkab_aktivitas_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_aktivitas_pd`;
 CREATE TABLE `trx_musrenkab_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL,
   `id_pelaksana_pd` bigint(20) NOT NULL,
@@ -10833,6 +6176,7 @@ CREATE TABLE `trx_musrenkab_aktivitas_pd` (
 -- Table structure for table `trx_musrenkab_belanja_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_belanja_pd`;
 CREATE TABLE `trx_musrenkab_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10868,6 +6212,7 @@ CREATE TABLE `trx_musrenkab_belanja_pd` (
 -- Table structure for table `trx_musrenkab_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_dokumen`;
 CREATE TABLE `trx_musrenkab_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL,
   `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -10887,6 +6232,7 @@ CREATE TABLE `trx_musrenkab_dokumen` (
 -- Table structure for table `trx_musrenkab_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_indikator`;
 CREATE TABLE `trx_musrenkab_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10914,6 +6260,7 @@ CREATE TABLE `trx_musrenkab_indikator` (
 -- Table structure for table `trx_musrenkab_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_kebijakan`;
 CREATE TABLE `trx_musrenkab_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10929,6 +6276,7 @@ CREATE TABLE `trx_musrenkab_kebijakan` (
 -- Table structure for table `trx_musrenkab_kebijakan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_kebijakan_pd`;
 CREATE TABLE `trx_musrenkab_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -10944,6 +6292,7 @@ CREATE TABLE `trx_musrenkab_kebijakan_pd` (
 -- Table structure for table `trx_musrenkab_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_kegiatan_pd`;
 CREATE TABLE `trx_musrenkab_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL,
   `id_program_pd` bigint(20) NOT NULL,
@@ -10975,6 +6324,7 @@ CREATE TABLE `trx_musrenkab_kegiatan_pd` (
 -- Table structure for table `trx_musrenkab_keg_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_keg_indikator_pd`;
 CREATE TABLE `trx_musrenkab_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11002,6 +6352,7 @@ CREATE TABLE `trx_musrenkab_keg_indikator_pd` (
 -- Table structure for table `trx_musrenkab_lokasi_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_lokasi_pd`;
 CREATE TABLE `trx_musrenkab_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11037,6 +6388,7 @@ CREATE TABLE `trx_musrenkab_lokasi_pd` (
 -- Table structure for table `trx_musrenkab_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_pelaksana`;
 CREATE TABLE `trx_musrenkab_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11060,6 +6412,7 @@ CREATE TABLE `trx_musrenkab_pelaksana` (
 -- Table structure for table `trx_musrenkab_pelaksana_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_pelaksana_pd`;
 CREATE TABLE `trx_musrenkab_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
@@ -11081,6 +6434,7 @@ CREATE TABLE `trx_musrenkab_pelaksana_pd` (
 -- Table structure for table `trx_musrenkab_program_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_program_pd`;
 CREATE TABLE `trx_musrenkab_program_pd` (
   `id_program_pd` bigint(11) NOT NULL,
   `id_pelaksana_rkpd` int(11) NOT NULL,
@@ -11108,6 +6462,7 @@ CREATE TABLE `trx_musrenkab_program_pd` (
 -- Table structure for table `trx_musrenkab_prog_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_prog_indikator_pd`;
 CREATE TABLE `trx_musrenkab_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11136,6 +6491,7 @@ CREATE TABLE `trx_musrenkab_prog_indikator_pd` (
 -- Table structure for table `trx_musrenkab_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_musrenkab_urusan`;
 CREATE TABLE `trx_musrenkab_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
@@ -11151,6 +6507,7 @@ CREATE TABLE `trx_musrenkab_urusan` (
 -- Table structure for table `trx_pokir`
 --
 
+DROP TABLE IF EXISTS `trx_pokir`;
 CREATE TABLE `trx_pokir` (
   `id_tahun` int(11) NOT NULL,
   `id_pokir` int(11) NOT NULL,
@@ -11173,6 +6530,7 @@ CREATE TABLE `trx_pokir` (
 -- Table structure for table `trx_pokir_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_pokir_lokasi`;
 CREATE TABLE `trx_pokir_lokasi` (
   `id_pokir_usulan` int(11) NOT NULL,
   `id_pokir_lokasi` int(11) NOT NULL,
@@ -11189,6 +6547,7 @@ CREATE TABLE `trx_pokir_lokasi` (
 -- Table structure for table `trx_pokir_tl`
 --
 
+DROP TABLE IF EXISTS `trx_pokir_tl`;
 CREATE TABLE `trx_pokir_tl` (
   `id_pokir_tl` int(11) NOT NULL,
   `id_pokir` int(11) NOT NULL,
@@ -11206,6 +6565,7 @@ CREATE TABLE `trx_pokir_tl` (
 -- Table structure for table `trx_pokir_tl_unit`
 --
 
+DROP TABLE IF EXISTS `trx_pokir_tl_unit`;
 CREATE TABLE `trx_pokir_tl_unit` (
   `id_pokir_unit` int(11) NOT NULL,
   `unit_tl` int(11) DEFAULT NULL,
@@ -11230,6 +6590,7 @@ CREATE TABLE `trx_pokir_tl_unit` (
 -- Table structure for table `trx_pokir_usulan`
 --
 
+DROP TABLE IF EXISTS `trx_pokir_usulan`;
 CREATE TABLE `trx_pokir_usulan` (
   `id_pokir` int(11) NOT NULL,
   `id_pokir_usulan` int(11) NOT NULL,
@@ -11251,6 +6612,7 @@ CREATE TABLE `trx_pokir_usulan` (
 -- Table structure for table `trx_prioritas_nasional`
 --
 
+DROP TABLE IF EXISTS `trx_prioritas_nasional`;
 CREATE TABLE `trx_prioritas_nasional` (
   `tahun` int(11) NOT NULL,
   `id_prioritas` int(11) NOT NULL,
@@ -11266,6 +6628,7 @@ CREATE TABLE `trx_prioritas_nasional` (
 -- Table structure for table `trx_prioritas_pemda`
 --
 
+DROP TABLE IF EXISTS `trx_prioritas_pemda`;
 CREATE TABLE `trx_prioritas_pemda` (
   `id_tema_rkpd` int(11) NOT NULL,
   `id_prioritas` int(11) NOT NULL,
@@ -11281,6 +6644,7 @@ CREATE TABLE `trx_prioritas_pemda` (
 -- Table structure for table `trx_prioritas_pemda_tema`
 --
 
+DROP TABLE IF EXISTS `trx_prioritas_pemda_tema`;
 CREATE TABLE `trx_prioritas_pemda_tema` (
   `tahun` int(11) NOT NULL,
   `id_tema_rkpd` int(11) NOT NULL,
@@ -11296,6 +6660,7 @@ CREATE TABLE `trx_prioritas_pemda_tema` (
 -- Table structure for table `trx_prioritas_provinsi`
 --
 
+DROP TABLE IF EXISTS `trx_prioritas_provinsi`;
 CREATE TABLE `trx_prioritas_provinsi` (
   `tahun` int(11) NOT NULL,
   `id_prioritas` int(11) NOT NULL,
@@ -11311,6 +6676,7 @@ CREATE TABLE `trx_prioritas_provinsi` (
 -- Table structure for table `trx_program_nasional`
 --
 
+DROP TABLE IF EXISTS `trx_program_nasional`;
 CREATE TABLE `trx_program_nasional` (
   `id_prioritas` int(11) NOT NULL,
   `id_prognas` int(11) NOT NULL,
@@ -11326,6 +6692,7 @@ CREATE TABLE `trx_program_nasional` (
 -- Table structure for table `trx_program_nasional_detail`
 --
 
+DROP TABLE IF EXISTS `trx_program_nasional_detail`;
 CREATE TABLE `trx_program_nasional_detail` (
   `id_prognas_unit` int(11) NOT NULL,
   `id_prognas_item` bigint(11) NOT NULL,
@@ -11341,6 +6708,7 @@ CREATE TABLE `trx_program_nasional_detail` (
 -- Table structure for table `trx_program_nasional_unit`
 --
 
+DROP TABLE IF EXISTS `trx_program_nasional_unit`;
 CREATE TABLE `trx_program_nasional_unit` (
   `id_prognas` int(11) NOT NULL,
   `id_prognas_unit` int(11) NOT NULL,
@@ -11356,6 +6724,7 @@ CREATE TABLE `trx_program_nasional_unit` (
 -- Table structure for table `trx_program_provinsi`
 --
 
+DROP TABLE IF EXISTS `trx_program_provinsi`;
 CREATE TABLE `trx_program_provinsi` (
   `id_prioritas` int(11) NOT NULL,
   `id_progprov` int(11) NOT NULL,
@@ -11371,6 +6740,7 @@ CREATE TABLE `trx_program_provinsi` (
 -- Table structure for table `trx_program_provinsi_detail`
 --
 
+DROP TABLE IF EXISTS `trx_program_provinsi_detail`;
 CREATE TABLE `trx_program_provinsi_detail` (
   `id_progprov_unit` int(11) NOT NULL,
   `id_progprov_item` bigint(11) NOT NULL,
@@ -11386,6 +6756,7 @@ CREATE TABLE `trx_program_provinsi_detail` (
 -- Table structure for table `trx_program_provinsi_unit`
 --
 
+DROP TABLE IF EXISTS `trx_program_provinsi_unit`;
 CREATE TABLE `trx_program_provinsi_unit` (
   `id_progprov` int(11) NOT NULL,
   `id_progprov_unit` int(11) NOT NULL,
@@ -11401,6 +6772,7 @@ CREATE TABLE `trx_program_provinsi_unit` (
 -- Table structure for table `trx_renja_aktivitas`
 --
 
+DROP TABLE IF EXISTS `trx_renja_aktivitas`;
 CREATE TABLE `trx_renja_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11433,6 +6805,7 @@ CREATE TABLE `trx_renja_aktivitas` (
 -- Table structure for table `trx_renja_belanja`
 --
 
+DROP TABLE IF EXISTS `trx_renja_belanja`;
 CREATE TABLE `trx_renja_belanja` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11459,6 +6832,7 @@ CREATE TABLE `trx_renja_belanja` (
 -- Table structure for table `trx_renja_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_renja_dokumen`;
 CREATE TABLE `trx_renja_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL,
   `id_unit_renja` int(255) NOT NULL,
@@ -11481,6 +6855,7 @@ CREATE TABLE `trx_renja_dokumen` (
 -- Table structure for table `trx_renja_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_renja_kebijakan`;
 CREATE TABLE `trx_renja_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11499,6 +6874,7 @@ CREATE TABLE `trx_renja_kebijakan` (
 -- Table structure for table `trx_renja_kegiatan`
 --
 
+DROP TABLE IF EXISTS `trx_renja_kegiatan`;
 CREATE TABLE `trx_renja_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL COMMENT 'juga menunjukkan prioritas',
@@ -11534,6 +6910,7 @@ CREATE TABLE `trx_renja_kegiatan` (
 -- Table structure for table `trx_renja_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_kegiatan_indikator`;
 CREATE TABLE `trx_renja_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11556,6 +6933,7 @@ CREATE TABLE `trx_renja_kegiatan_indikator` (
 -- Table structure for table `trx_renja_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_renja_lokasi`;
 CREATE TABLE `trx_renja_lokasi` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11582,6 +6960,7 @@ CREATE TABLE `trx_renja_lokasi` (
 -- Table structure for table `trx_renja_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_renja_pelaksana`;
 CREATE TABLE `trx_renja_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11602,6 +6981,7 @@ CREATE TABLE `trx_renja_pelaksana` (
 -- Table structure for table `trx_renja_program`
 --
 
+DROP TABLE IF EXISTS `trx_renja_program`;
 CREATE TABLE `trx_renja_program` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11636,6 +7016,7 @@ CREATE TABLE `trx_renja_program` (
 -- Table structure for table `trx_renja_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_program_indikator`;
 CREATE TABLE `trx_renja_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11663,6 +7044,7 @@ CREATE TABLE `trx_renja_program_indikator` (
 -- Table structure for table `trx_renja_program_rkpd`
 --
 
+DROP TABLE IF EXISTS `trx_renja_program_rkpd`;
 CREATE TABLE `trx_renja_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL,
@@ -11687,6 +7069,7 @@ CREATE TABLE `trx_renja_program_rkpd` (
 -- Table structure for table `trx_renja_rancangan`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan`;
 CREATE TABLE `trx_renja_rancangan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL COMMENT 'juga menunjukkan prioritas',
@@ -11722,6 +7105,7 @@ CREATE TABLE `trx_renja_rancangan` (
 -- Table structure for table `trx_renja_rancangan_aktivitas`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_aktivitas`;
 CREATE TABLE `trx_renja_rancangan_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11754,6 +7138,7 @@ CREATE TABLE `trx_renja_rancangan_aktivitas` (
 -- Table structure for table `trx_renja_rancangan_belanja`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_belanja`;
 CREATE TABLE `trx_renja_rancangan_belanja` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11780,6 +7165,7 @@ CREATE TABLE `trx_renja_rancangan_belanja` (
 -- Table structure for table `trx_renja_rancangan_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_dokumen`;
 CREATE TABLE `trx_renja_rancangan_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL,
   `id_unit_renja` int(255) NOT NULL,
@@ -11799,6 +7185,7 @@ CREATE TABLE `trx_renja_rancangan_dokumen` (
 -- Table structure for table `trx_renja_rancangan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_indikator`;
 CREATE TABLE `trx_renja_rancangan_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11821,6 +7208,7 @@ CREATE TABLE `trx_renja_rancangan_indikator` (
 -- Table structure for table `trx_renja_rancangan_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_kebijakan`;
 CREATE TABLE `trx_renja_rancangan_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11839,6 +7227,7 @@ CREATE TABLE `trx_renja_rancangan_kebijakan` (
 -- Table structure for table `trx_renja_rancangan_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_lokasi`;
 CREATE TABLE `trx_renja_rancangan_lokasi` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11865,6 +7254,7 @@ CREATE TABLE `trx_renja_rancangan_lokasi` (
 -- Table structure for table `trx_renja_rancangan_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_pelaksana`;
 CREATE TABLE `trx_renja_rancangan_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11885,6 +7275,7 @@ CREATE TABLE `trx_renja_rancangan_pelaksana` (
 -- Table structure for table `trx_renja_rancangan_program`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_program`;
 CREATE TABLE `trx_renja_rancangan_program` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11919,6 +7310,7 @@ CREATE TABLE `trx_renja_rancangan_program` (
 -- Table structure for table `trx_renja_rancangan_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_program_indikator`;
 CREATE TABLE `trx_renja_rancangan_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -11946,6 +7338,7 @@ CREATE TABLE `trx_renja_rancangan_program_indikator` (
 -- Table structure for table `trx_renja_rancangan_program_ranwal`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_program_ranwal`;
 CREATE TABLE `trx_renja_rancangan_program_ranwal` (
   `tahun_renja` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL,
@@ -11970,6 +7363,7 @@ CREATE TABLE `trx_renja_rancangan_program_ranwal` (
 -- Table structure for table `trx_renja_rancangan_ref_pokir`
 --
 
+DROP TABLE IF EXISTS `trx_renja_rancangan_ref_pokir`;
 CREATE TABLE `trx_renja_rancangan_ref_pokir` (
   `id_aktivitas_renja` int(11) NOT NULL,
   `id_pokir_usulan` int(11) NOT NULL,
@@ -11982,6 +7376,7 @@ CREATE TABLE `trx_renja_rancangan_ref_pokir` (
 -- Table structure for table `trx_renja_ranwal_aktivitas`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_aktivitas`;
 CREATE TABLE `trx_renja_ranwal_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12014,6 +7409,7 @@ CREATE TABLE `trx_renja_ranwal_aktivitas` (
 -- Table structure for table `trx_renja_ranwal_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_dokumen`;
 CREATE TABLE `trx_renja_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL,
   `id_unit_renja` int(255) NOT NULL,
@@ -12033,6 +7429,7 @@ CREATE TABLE `trx_renja_ranwal_dokumen` (
 -- Table structure for table `trx_renja_ranwal_kegiatan`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan`;
 CREATE TABLE `trx_renja_ranwal_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL COMMENT 'juga menunjukkan prioritas',
@@ -12068,6 +7465,7 @@ CREATE TABLE `trx_renja_ranwal_kegiatan` (
 -- Table structure for table `trx_renja_ranwal_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan_indikator`;
 CREATE TABLE `trx_renja_ranwal_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12090,6 +7488,7 @@ CREATE TABLE `trx_renja_ranwal_kegiatan_indikator` (
 -- Table structure for table `trx_renja_ranwal_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_pelaksana`;
 CREATE TABLE `trx_renja_ranwal_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12110,6 +7509,7 @@ CREATE TABLE `trx_renja_ranwal_pelaksana` (
 -- Table structure for table `trx_renja_ranwal_program`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_program`;
 CREATE TABLE `trx_renja_ranwal_program` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12144,6 +7544,7 @@ CREATE TABLE `trx_renja_ranwal_program` (
 -- Table structure for table `trx_renja_ranwal_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_program_indikator`;
 CREATE TABLE `trx_renja_ranwal_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12171,6 +7572,7 @@ CREATE TABLE `trx_renja_ranwal_program_indikator` (
 -- Table structure for table `trx_renja_ranwal_program_rkpd`
 --
 
+DROP TABLE IF EXISTS `trx_renja_ranwal_program_rkpd`;
 CREATE TABLE `trx_renja_ranwal_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL,
@@ -12195,6 +7597,7 @@ CREATE TABLE `trx_renja_ranwal_program_rkpd` (
 -- Table structure for table `trx_renstra_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_dokumen`;
 CREATE TABLE `trx_renstra_dokumen` (
   `id_rpjmd` int(11) NOT NULL,
   `id_renstra` int(11) NOT NULL,
@@ -12221,6 +7624,7 @@ CREATE TABLE `trx_renstra_dokumen` (
 -- Table structure for table `trx_renstra_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_kebijakan`;
 CREATE TABLE `trx_renstra_kebijakan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12240,6 +7644,7 @@ CREATE TABLE `trx_renstra_kebijakan` (
 -- Table structure for table `trx_renstra_kegiatan`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_kegiatan`;
 CREATE TABLE `trx_renstra_kegiatan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12267,6 +7672,7 @@ CREATE TABLE `trx_renstra_kegiatan` (
 -- Table structure for table `trx_renstra_kegiatan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_kegiatan_indikator`;
 CREATE TABLE `trx_renstra_kegiatan_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12295,6 +7701,7 @@ CREATE TABLE `trx_renstra_kegiatan_indikator` (
 -- Table structure for table `trx_renstra_kegiatan_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_kegiatan_pelaksana`;
 CREATE TABLE `trx_renstra_kegiatan_pelaksana` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12314,6 +7721,7 @@ CREATE TABLE `trx_renstra_kegiatan_pelaksana` (
 -- Table structure for table `trx_renstra_misi`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_misi`;
 CREATE TABLE `trx_renstra_misi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12332,6 +7740,7 @@ CREATE TABLE `trx_renstra_misi` (
 -- Table structure for table `trx_renstra_program`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_program`;
 CREATE TABLE `trx_renstra_program` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12359,6 +7768,7 @@ CREATE TABLE `trx_renstra_program` (
 -- Table structure for table `trx_renstra_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_program_indikator`;
 CREATE TABLE `trx_renstra_program_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12389,6 +7799,7 @@ CREATE TABLE `trx_renstra_program_indikator` (
 -- Table structure for table `trx_renstra_sasaran`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_sasaran`;
 CREATE TABLE `trx_renstra_sasaran` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12409,6 +7820,7 @@ CREATE TABLE `trx_renstra_sasaran` (
 -- Table structure for table `trx_renstra_sasaran_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_sasaran_indikator`;
 CREATE TABLE `trx_renstra_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12438,6 +7850,7 @@ CREATE TABLE `trx_renstra_sasaran_indikator` (
 -- Table structure for table `trx_renstra_strategi`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_strategi`;
 CREATE TABLE `trx_renstra_strategi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12457,6 +7870,7 @@ CREATE TABLE `trx_renstra_strategi` (
 -- Table structure for table `trx_renstra_tujuan`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_tujuan`;
 CREATE TABLE `trx_renstra_tujuan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12476,6 +7890,7 @@ CREATE TABLE `trx_renstra_tujuan` (
 -- Table structure for table `trx_renstra_tujuan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_tujuan_indikator`;
 CREATE TABLE `trx_renstra_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12504,6 +7919,7 @@ CREATE TABLE `trx_renstra_tujuan_indikator` (
 -- Table structure for table `trx_renstra_visi`
 --
 
+DROP TABLE IF EXISTS `trx_renstra_visi`;
 CREATE TABLE `trx_renstra_visi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12526,6 +7942,7 @@ CREATE TABLE `trx_renstra_visi` (
 -- Table structure for table `trx_rkpd_final`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final`;
 CREATE TABLE `trx_rkpd_final` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
@@ -12557,6 +7974,7 @@ CREATE TABLE `trx_rkpd_final` (
 -- Table structure for table `trx_rkpd_final_aktivitas_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_aktivitas_pd`;
 CREATE TABLE `trx_rkpd_final_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL,
   `id_pelaksana_pd` bigint(20) NOT NULL,
@@ -12594,6 +8012,7 @@ CREATE TABLE `trx_rkpd_final_aktivitas_pd` (
 -- Table structure for table `trx_rkpd_final_belanja_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_belanja_pd`;
 CREATE TABLE `trx_rkpd_final_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12629,6 +8048,7 @@ CREATE TABLE `trx_rkpd_final_belanja_pd` (
 -- Table structure for table `trx_rkpd_final_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_dokumen`;
 CREATE TABLE `trx_rkpd_final_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL,
   `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -12648,6 +8068,7 @@ CREATE TABLE `trx_rkpd_final_dokumen` (
 -- Table structure for table `trx_rkpd_final_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_indikator`;
 CREATE TABLE `trx_rkpd_final_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12675,6 +8096,7 @@ CREATE TABLE `trx_rkpd_final_indikator` (
 -- Table structure for table `trx_rkpd_final_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan`;
 CREATE TABLE `trx_rkpd_final_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12690,6 +8112,7 @@ CREATE TABLE `trx_rkpd_final_kebijakan` (
 -- Table structure for table `trx_rkpd_final_kebijakan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan_pd`;
 CREATE TABLE `trx_rkpd_final_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12705,6 +8128,7 @@ CREATE TABLE `trx_rkpd_final_kebijakan_pd` (
 -- Table structure for table `trx_rkpd_final_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_kegiatan_pd`;
 CREATE TABLE `trx_rkpd_final_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL,
   `id_program_pd` bigint(20) NOT NULL,
@@ -12736,6 +8160,7 @@ CREATE TABLE `trx_rkpd_final_kegiatan_pd` (
 -- Table structure for table `trx_rkpd_final_keg_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_keg_indikator_pd`;
 CREATE TABLE `trx_rkpd_final_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12763,6 +8188,7 @@ CREATE TABLE `trx_rkpd_final_keg_indikator_pd` (
 -- Table structure for table `trx_rkpd_final_lokasi_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_lokasi_pd`;
 CREATE TABLE `trx_rkpd_final_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12798,6 +8224,7 @@ CREATE TABLE `trx_rkpd_final_lokasi_pd` (
 -- Table structure for table `trx_rkpd_final_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana`;
 CREATE TABLE `trx_rkpd_final_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12821,6 +8248,7 @@ CREATE TABLE `trx_rkpd_final_pelaksana` (
 -- Table structure for table `trx_rkpd_final_pelaksana_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana_pd`;
 CREATE TABLE `trx_rkpd_final_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
@@ -12842,6 +8270,7 @@ CREATE TABLE `trx_rkpd_final_pelaksana_pd` (
 -- Table structure for table `trx_rkpd_final_program_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_program_pd`;
 CREATE TABLE `trx_rkpd_final_program_pd` (
   `id_program_pd` bigint(11) NOT NULL,
   `id_rkpd_rancangan` int(11) NOT NULL,
@@ -12870,6 +8299,7 @@ CREATE TABLE `trx_rkpd_final_program_pd` (
 -- Table structure for table `trx_rkpd_final_prog_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_prog_indikator_pd`;
 CREATE TABLE `trx_rkpd_final_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -12898,6 +8328,7 @@ CREATE TABLE `trx_rkpd_final_prog_indikator_pd` (
 -- Table structure for table `trx_rkpd_final_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_final_urusan`;
 CREATE TABLE `trx_rkpd_final_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
@@ -12913,6 +8344,7 @@ CREATE TABLE `trx_rkpd_final_urusan` (
 -- Table structure for table `trx_rkpd_identifikasi_masalah`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_identifikasi_masalah`;
 CREATE TABLE `trx_rkpd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL,
   `tahun_perencanaan` int(11) DEFAULT NULL,
@@ -12934,6 +8366,7 @@ CREATE TABLE `trx_rkpd_identifikasi_masalah` (
 -- Table structure for table `trx_rkpd_rancangan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan`;
 CREATE TABLE `trx_rkpd_rancangan` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
@@ -12965,6 +8398,7 @@ CREATE TABLE `trx_rkpd_rancangan` (
 -- Table structure for table `trx_rkpd_rancangan_aktivitas_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_aktivitas_pd`;
 CREATE TABLE `trx_rkpd_rancangan_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL,
   `id_pelaksana_pd` bigint(20) NOT NULL,
@@ -13002,6 +8436,7 @@ CREATE TABLE `trx_rkpd_rancangan_aktivitas_pd` (
 -- Table structure for table `trx_rkpd_rancangan_belanja_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_belanja_pd`;
 CREATE TABLE `trx_rkpd_rancangan_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13037,6 +8472,7 @@ CREATE TABLE `trx_rkpd_rancangan_belanja_pd` (
 -- Table structure for table `trx_rkpd_rancangan_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_dokumen`;
 CREATE TABLE `trx_rkpd_rancangan_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL,
   `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -13056,6 +8492,7 @@ CREATE TABLE `trx_rkpd_rancangan_dokumen` (
 -- Table structure for table `trx_rkpd_rancangan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_indikator`;
 CREATE TABLE `trx_rkpd_rancangan_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13083,6 +8520,7 @@ CREATE TABLE `trx_rkpd_rancangan_indikator` (
 -- Table structure for table `trx_rkpd_rancangan_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan`;
 CREATE TABLE `trx_rkpd_rancangan_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13098,6 +8536,7 @@ CREATE TABLE `trx_rkpd_rancangan_kebijakan` (
 -- Table structure for table `trx_rkpd_rancangan_kebijakan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan_pd`;
 CREATE TABLE `trx_rkpd_rancangan_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13113,6 +8552,7 @@ CREATE TABLE `trx_rkpd_rancangan_kebijakan_pd` (
 -- Table structure for table `trx_rkpd_rancangan_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_kegiatan_pd`;
 CREATE TABLE `trx_rkpd_rancangan_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL,
   `id_program_pd` bigint(20) NOT NULL,
@@ -13144,6 +8584,7 @@ CREATE TABLE `trx_rkpd_rancangan_kegiatan_pd` (
 -- Table structure for table `trx_rkpd_rancangan_keg_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_keg_indikator_pd`;
 CREATE TABLE `trx_rkpd_rancangan_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13171,6 +8612,7 @@ CREATE TABLE `trx_rkpd_rancangan_keg_indikator_pd` (
 -- Table structure for table `trx_rkpd_rancangan_lokasi_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_lokasi_pd`;
 CREATE TABLE `trx_rkpd_rancangan_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13206,6 +8648,7 @@ CREATE TABLE `trx_rkpd_rancangan_lokasi_pd` (
 -- Table structure for table `trx_rkpd_rancangan_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana`;
 CREATE TABLE `trx_rkpd_rancangan_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13229,6 +8672,7 @@ CREATE TABLE `trx_rkpd_rancangan_pelaksana` (
 -- Table structure for table `trx_rkpd_rancangan_pelaksana_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana_pd`;
 CREATE TABLE `trx_rkpd_rancangan_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
@@ -13250,6 +8694,7 @@ CREATE TABLE `trx_rkpd_rancangan_pelaksana_pd` (
 -- Table structure for table `trx_rkpd_rancangan_program_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_program_pd`;
 CREATE TABLE `trx_rkpd_rancangan_program_pd` (
   `id_program_pd` bigint(11) NOT NULL,
   `id_rkpd_rancangan` int(11) NOT NULL,
@@ -13277,6 +8722,7 @@ CREATE TABLE `trx_rkpd_rancangan_program_pd` (
 -- Table structure for table `trx_rkpd_rancangan_prog_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_prog_indikator_pd`;
 CREATE TABLE `trx_rkpd_rancangan_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13305,6 +8751,7 @@ CREATE TABLE `trx_rkpd_rancangan_prog_indikator_pd` (
 -- Table structure for table `trx_rkpd_rancangan_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rancangan_urusan`;
 CREATE TABLE `trx_rkpd_rancangan_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
@@ -13320,6 +8767,7 @@ CREATE TABLE `trx_rkpd_rancangan_urusan` (
 -- Table structure for table `trx_rkpd_ranhir`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir`;
 CREATE TABLE `trx_rkpd_ranhir` (
   `id_rkpd_rancangan` int(11) NOT NULL,
   `id_rkpd_ranwal` int(11) NOT NULL COMMENT '0 baru',
@@ -13351,6 +8799,7 @@ CREATE TABLE `trx_rkpd_ranhir` (
 -- Table structure for table `trx_rkpd_ranhir_aktivitas_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_aktivitas_pd`;
 CREATE TABLE `trx_rkpd_ranhir_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL,
   `id_pelaksana_pd` bigint(20) NOT NULL,
@@ -13388,6 +8837,7 @@ CREATE TABLE `trx_rkpd_ranhir_aktivitas_pd` (
 -- Table structure for table `trx_rkpd_ranhir_belanja_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_belanja_pd`;
 CREATE TABLE `trx_rkpd_ranhir_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13423,6 +8873,7 @@ CREATE TABLE `trx_rkpd_ranhir_belanja_pd` (
 -- Table structure for table `trx_rkpd_ranhir_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_dokumen`;
 CREATE TABLE `trx_rkpd_ranhir_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL,
   `nomor_rkpd` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -13442,6 +8893,7 @@ CREATE TABLE `trx_rkpd_ranhir_dokumen` (
 -- Table structure for table `trx_rkpd_ranhir_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_indikator`;
 CREATE TABLE `trx_rkpd_ranhir_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13469,6 +8921,7 @@ CREATE TABLE `trx_rkpd_ranhir_indikator` (
 -- Table structure for table `trx_rkpd_ranhir_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan`;
 CREATE TABLE `trx_rkpd_ranhir_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13484,6 +8937,7 @@ CREATE TABLE `trx_rkpd_ranhir_kebijakan` (
 -- Table structure for table `trx_rkpd_ranhir_kebijakan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan_pd`;
 CREATE TABLE `trx_rkpd_ranhir_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13499,6 +8953,7 @@ CREATE TABLE `trx_rkpd_ranhir_kebijakan_pd` (
 -- Table structure for table `trx_rkpd_ranhir_kegiatan_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_kegiatan_pd`;
 CREATE TABLE `trx_rkpd_ranhir_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL,
   `id_program_pd` bigint(20) NOT NULL,
@@ -13530,6 +8985,7 @@ CREATE TABLE `trx_rkpd_ranhir_kegiatan_pd` (
 -- Table structure for table `trx_rkpd_ranhir_keg_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_keg_indikator_pd`;
 CREATE TABLE `trx_rkpd_ranhir_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13557,6 +9013,7 @@ CREATE TABLE `trx_rkpd_ranhir_keg_indikator_pd` (
 -- Table structure for table `trx_rkpd_ranhir_lokasi_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_lokasi_pd`;
 CREATE TABLE `trx_rkpd_ranhir_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13592,6 +9049,7 @@ CREATE TABLE `trx_rkpd_ranhir_lokasi_pd` (
 -- Table structure for table `trx_rkpd_ranhir_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana`;
 CREATE TABLE `trx_rkpd_ranhir_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13615,6 +9073,7 @@ CREATE TABLE `trx_rkpd_ranhir_pelaksana` (
 -- Table structure for table `trx_rkpd_ranhir_pelaksana_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana_pd`;
 CREATE TABLE `trx_rkpd_ranhir_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL,
   `tahun_forum` int(11) NOT NULL,
@@ -13636,6 +9095,7 @@ CREATE TABLE `trx_rkpd_ranhir_pelaksana_pd` (
 -- Table structure for table `trx_rkpd_ranhir_program_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_program_pd`;
 CREATE TABLE `trx_rkpd_ranhir_program_pd` (
   `id_program_pd` bigint(11) NOT NULL,
   `id_rkpd_rancangan` int(11) NOT NULL,
@@ -13663,6 +9123,7 @@ CREATE TABLE `trx_rkpd_ranhir_program_pd` (
 -- Table structure for table `trx_rkpd_ranhir_prog_indikator_pd`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_prog_indikator_pd`;
 CREATE TABLE `trx_rkpd_ranhir_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13691,6 +9152,7 @@ CREATE TABLE `trx_rkpd_ranhir_prog_indikator_pd` (
 -- Table structure for table `trx_rkpd_ranhir_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranhir_urusan`;
 CREATE TABLE `trx_rkpd_ranhir_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
@@ -13706,6 +9168,7 @@ CREATE TABLE `trx_rkpd_ranhir_urusan` (
 -- Table structure for table `trx_rkpd_ranwal`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal`;
 CREATE TABLE `trx_rkpd_ranwal` (
   `id_rkpd_ranwal` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13735,6 +9198,7 @@ CREATE TABLE `trx_rkpd_ranwal` (
 -- Table structure for table `trx_rkpd_ranwal_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal_dokumen`;
 CREATE TABLE `trx_rkpd_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL,
   `nomor_ranwal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -13754,6 +9218,7 @@ CREATE TABLE `trx_rkpd_ranwal_dokumen` (
 -- Table structure for table `trx_rkpd_ranwal_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal_indikator`;
 CREATE TABLE `trx_rkpd_ranwal_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13780,6 +9245,7 @@ CREATE TABLE `trx_rkpd_ranwal_indikator` (
 -- Table structure for table `trx_rkpd_ranwal_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal_kebijakan`;
 CREATE TABLE `trx_rkpd_ranwal_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13794,6 +9260,7 @@ CREATE TABLE `trx_rkpd_ranwal_kebijakan` (
 -- Table structure for table `trx_rkpd_ranwal_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal_pelaksana`;
 CREATE TABLE `trx_rkpd_ranwal_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -13816,6 +9283,7 @@ CREATE TABLE `trx_rkpd_ranwal_pelaksana` (
 -- Table structure for table `trx_rkpd_ranwal_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_ranwal_urusan`;
 CREATE TABLE `trx_rkpd_ranwal_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
   `no_urut` int(11) DEFAULT NULL,
@@ -13831,6 +9299,7 @@ CREATE TABLE `trx_rkpd_ranwal_urusan` (
 -- Table structure for table `trx_rkpd_renstra`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_renstra`;
 CREATE TABLE `trx_rkpd_renstra` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_renstra` int(11) NOT NULL,
@@ -13861,6 +9330,7 @@ CREATE TABLE `trx_rkpd_renstra` (
 -- Table structure for table `trx_rkpd_renstra_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_renstra_indikator`;
 CREATE TABLE `trx_rkpd_renstra_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_renstra` int(11) NOT NULL,
@@ -13877,6 +9347,7 @@ CREATE TABLE `trx_rkpd_renstra_indikator` (
 -- Table structure for table `trx_rkpd_renstra_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_renstra_pelaksana`;
 CREATE TABLE `trx_rkpd_renstra_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_renstra` int(11) NOT NULL,
@@ -13891,6 +9362,7 @@ CREATE TABLE `trx_rkpd_renstra_pelaksana` (
 -- Table structure for table `trx_rkpd_rpjmd_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rpjmd_kebijakan`;
 CREATE TABLE `trx_rkpd_rpjmd_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_rpjmd` int(11) NOT NULL,
@@ -13904,6 +9376,7 @@ CREATE TABLE `trx_rkpd_rpjmd_kebijakan` (
 -- Table structure for table `trx_rkpd_rpjmd_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_indikator`;
 CREATE TABLE `trx_rkpd_rpjmd_program_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_rkpd_rpjmd` int(11) NOT NULL,
@@ -13921,6 +9394,7 @@ CREATE TABLE `trx_rkpd_rpjmd_program_indikator` (
 -- Table structure for table `trx_rkpd_rpjmd_program_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_pelaksana`;
 CREATE TABLE `trx_rkpd_rpjmd_program_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
   `id_pelaksana_rpjmd` int(11) NOT NULL,
@@ -13937,6 +9411,7 @@ CREATE TABLE `trx_rkpd_rpjmd_program_pelaksana` (
 -- Table structure for table `trx_rkpd_rpjmd_ranwal`
 --
 
+DROP TABLE IF EXISTS `trx_rkpd_rpjmd_ranwal`;
 CREATE TABLE `trx_rkpd_rpjmd_ranwal` (
   `id_rkpd_rpjmd` int(11) NOT NULL,
   `tahun_rkpd` int(11) NOT NULL,
@@ -13961,6 +9436,7 @@ CREATE TABLE `trx_rkpd_rpjmd_ranwal` (
 -- Table structure for table `trx_rpjmd_analisa_ikk`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_analisa_ikk`;
 CREATE TABLE `trx_rpjmd_analisa_ikk` (
   `id_capaian_rpjmd` int(11) NOT NULL,
   `id_pemda` int(11) NOT NULL,
@@ -13984,6 +9460,7 @@ CREATE TABLE `trx_rpjmd_analisa_ikk` (
 -- Table structure for table `trx_rpjmd_dokumen`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_dokumen`;
 CREATE TABLE `trx_rpjmd_dokumen` (
   `id_rpjmd` int(11) NOT NULL COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
   `id_pemda` int(11) NOT NULL DEFAULT '1',
@@ -14012,6 +9489,7 @@ CREATE TABLE `trx_rpjmd_dokumen` (
 -- Table structure for table `trx_rpjmd_identifikasi_masalah`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_identifikasi_masalah`;
 CREATE TABLE `trx_rpjmd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL,
   `id_pemda` int(11) DEFAULT NULL,
@@ -14032,6 +9510,7 @@ CREATE TABLE `trx_rpjmd_identifikasi_masalah` (
 -- Table structure for table `trx_rpjmd_kebijakan`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_kebijakan`;
 CREATE TABLE `trx_rpjmd_kebijakan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14054,6 +9533,7 @@ CREATE TABLE `trx_rpjmd_kebijakan` (
 -- Table structure for table `trx_rpjmd_misi`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_misi`;
 CREATE TABLE `trx_rpjmd_misi` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14075,6 +9555,7 @@ CREATE TABLE `trx_rpjmd_misi` (
 -- Table structure for table `trx_rpjmd_prioritas`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_prioritas`;
 CREATE TABLE `trx_rpjmd_prioritas` (
   `id_masalah` int(11) NOT NULL,
   `id_pemda` int(11) NOT NULL DEFAULT '1',
@@ -14094,6 +9575,7 @@ CREATE TABLE `trx_rpjmd_prioritas` (
 -- Table structure for table `trx_rpjmd_program`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_program`;
 CREATE TABLE `trx_rpjmd_program` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14122,6 +9604,7 @@ CREATE TABLE `trx_rpjmd_program` (
 -- Table structure for table `trx_rpjmd_program_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_program_indikator`;
 CREATE TABLE `trx_rpjmd_program_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14156,6 +9639,7 @@ CREATE TABLE `trx_rpjmd_program_indikator` (
 -- Table structure for table `trx_rpjmd_program_pelaksana`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_program_pelaksana`;
 CREATE TABLE `trx_rpjmd_program_pelaksana` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14184,6 +9668,7 @@ CREATE TABLE `trx_rpjmd_program_pelaksana` (
 -- Table structure for table `trx_rpjmd_program_urusan`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_program_urusan`;
 CREATE TABLE `trx_rpjmd_program_urusan` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14205,6 +9690,7 @@ CREATE TABLE `trx_rpjmd_program_urusan` (
 -- Table structure for table `trx_rpjmd_sasaran`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_sasaran`;
 CREATE TABLE `trx_rpjmd_sasaran` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14227,6 +9713,7 @@ CREATE TABLE `trx_rpjmd_sasaran` (
 -- Table structure for table `trx_rpjmd_sasaran_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_sasaran_indikator`;
 CREATE TABLE `trx_rpjmd_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14258,6 +9745,7 @@ CREATE TABLE `trx_rpjmd_sasaran_indikator` (
 -- Table structure for table `trx_rpjmd_strategi`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_strategi`;
 CREATE TABLE `trx_rpjmd_strategi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14280,6 +9768,7 @@ CREATE TABLE `trx_rpjmd_strategi` (
 -- Table structure for table `trx_rpjmd_tujuan`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_tujuan`;
 CREATE TABLE `trx_rpjmd_tujuan` (
   `thn_id_rpjmd` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14302,6 +9791,7 @@ CREATE TABLE `trx_rpjmd_tujuan` (
 -- Table structure for table `trx_rpjmd_tujuan_indikator`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_tujuan_indikator`;
 CREATE TABLE `trx_rpjmd_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14334,6 +9824,7 @@ CREATE TABLE `trx_rpjmd_tujuan_indikator` (
 -- Table structure for table `trx_rpjmd_visi`
 --
 
+DROP TABLE IF EXISTS `trx_rpjmd_visi`;
 CREATE TABLE `trx_rpjmd_visi` (
   `thn_id` int(11) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14354,6 +9845,7 @@ CREATE TABLE `trx_rpjmd_visi` (
 -- Table structure for table `trx_usulan_kab`
 --
 
+DROP TABLE IF EXISTS `trx_usulan_kab`;
 CREATE TABLE `trx_usulan_kab` (
   `id_usulan_kab` int(11) NOT NULL,
   `id_tahun` int(11) NOT NULL,
@@ -14377,6 +9869,7 @@ CREATE TABLE `trx_usulan_kab` (
 -- Table structure for table `trx_usulan_kab_lokasi`
 --
 
+DROP TABLE IF EXISTS `trx_usulan_kab_lokasi`;
 CREATE TABLE `trx_usulan_kab_lokasi` (
   `id_usulan_kab` int(11) NOT NULL,
   `id_usulan_kab_lokasi` int(11) NOT NULL,
@@ -14393,6 +9886,7 @@ CREATE TABLE `trx_usulan_kab_lokasi` (
 -- Table structure for table `trx_usulan_rw`
 --
 
+DROP TABLE IF EXISTS `trx_usulan_rw`;
 CREATE TABLE `trx_usulan_rw` (
   `id_usulan_rw` bigint(20) NOT NULL,
   `no_urut` int(11) NOT NULL,
@@ -14413,6 +9907,7 @@ CREATE TABLE `trx_usulan_rw` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `group_id` int(11) NOT NULL,
@@ -14421,22 +9916,26 @@ CREATE TABLE `users` (
   `id_unit` int(11) DEFAULT NULL COMMENT 'Diisi dengan kode unit asal operator',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status_user` int(11) NOT NULL DEFAULT '1' COMMENT '0 non aktif 1 aktif'
+  `status_user` int(11) NOT NULL DEFAULT '1' COMMENT '0 non aktif 1 aktif',
+  `status_waktu` int(11) NOT NULL DEFAULT '0' COMMENT '0 unlimited 1 limited',
+  `tgl_mulai` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_akhir` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `group_id`, `name`, `email`, `id_unit`, `password`, `remember_token`, `created_at`, `updated_at`, `status_user`) VALUES
-(1, 2, 'administrator', 'admin@bpkp.go.id', NULL, '$2y$10$jR4xkjKFcnS9RSwkKz0odef0Qu7wsqb4YYnx16ElnCC72eXcLvRYy', 'G26OwlbgxnpvLOnTQRXws9pZDu4HhHMcuclLCccZETHR60nSedZqiA27B4kd', '2017-04-06 16:30:42', '2019-08-23 11:13:42', 1),
-(2, 1, 'superAdmin@simcan.dev', 'super@simcan.dev', NULL, '$2y$10$tZIfh.n2Fw9bO.0dMvA/nOr6oNA7gdmg8aU9gHylOS79z2RfCc10W', 'Fu4rfAUv5Mza1V9UnL1df0D7tlTQGiVT1jsB1Q3G29T3bygxZUPr72OaHx0X', '2017-10-08 11:02:03', '2019-08-05 14:03:25', 1);
+INSERT INTO `users` (`id`, `group_id`, `name`, `email`, `id_unit`, `password`, `remember_token`, `status_user`, `status_waktu`, `tgl_mulai`, `tgl_akhir`, `created_at`, `updated_at`) VALUES
+(1, 2, 'administrator', 'admin@bpkp.go.id', NULL, '$2y$10$jR4xkjKFcnS9RSwkKz0odef0Qu7wsqb4YYnx16ElnCC72eXcLvRYy', 'tN3kZXlybTOvM1Gg3aUC9AgfX5tw5kSoIJKDvUW0rnEytn3vr64KvyVn98zF', 1, 0, '0000-00-00 00:00:00', '2019-10-01 11:04:44', '2017-04-06 23:30:42', '2019-10-07 08:55:09'),
+(2, 1, 'superAdmin@simcan.dev', 'super@simcan.dev', NULL, '$2y$10$tZIfh.n2Fw9bO.0dMvA/nOr6oNA7gdmg8aU9gHylOS79z2RfCc10W', 'kW6NbEcIIcCmWo7VLM0ui13Nv8NoyAilB5yLypQ7xHeED4IDCKPBGCqfHJSC', 1, 0, '0000-00-00 00:00:00', '2019-10-01 11:04:44', '2017-10-08 18:02:03', '2019-09-25 08:43:04');
 
 --
 -- Triggers `users`
 --
+DROP TRIGGER IF EXISTS `trg_user`;
 DELIMITER $$
 CREATE TRIGGER `trg_user` BEFORE DELETE ON `users` FOR EACH ROW IF old.email = 'super@simcan.dev' THEN 
     SIGNAL SQLSTATE '45000' 
@@ -14451,12 +9950,16 @@ DELIMITER ;
 -- Table structure for table `user_app`
 --
 
+DROP TABLE IF EXISTS `user_app`;
 CREATE TABLE `user_app` (
   `id_app_user` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `group_id` int(11) UNSIGNED NOT NULL,
   `app_id` int(11) NOT NULL COMMENT '0',
   `status_app` int(11) NOT NULL COMMENT '1',
+  `status_waktu` int(11) NOT NULL DEFAULT '0',
+  `tgl_mulai` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_akhir` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -14467,12 +9970,17 @@ CREATE TABLE `user_app` (
 -- Table structure for table `user_desa`
 --
 
+DROP TABLE IF EXISTS `user_desa`;
 CREATE TABLE `user_desa` (
   `id_user_wil` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `kd_kecamatan` int(11) NOT NULL COMMENT 'prov',
   `kd_desa` int(11) NOT NULL COMMENT 'kab/kota',
-  `rw` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `rw` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_wil` int(11) NOT NULL DEFAULT '0',
+  `status_waktu` int(11) NOT NULL DEFAULT '0',
+  `tgl_mulai` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_akhir` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -14481,6 +9989,7 @@ CREATE TABLE `user_desa` (
 -- Table structure for table `user_level_sakip`
 --
 
+DROP TABLE IF EXISTS `user_level_sakip`;
 CREATE TABLE `user_level_sakip` (
   `id_user_level` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
@@ -14495,11 +10004,16 @@ CREATE TABLE `user_level_sakip` (
 -- Table structure for table `user_sub_unit`
 --
 
+DROP TABLE IF EXISTS `user_sub_unit`;
 CREATE TABLE `user_sub_unit` (
   `id_user_unit` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `kd_unit` int(11) NOT NULL,
-  `kd_sub` int(11) DEFAULT NULL
+  `kd_sub` int(11) DEFAULT NULL,
+  `status_unit` int(11) NOT NULL DEFAULT '0',
+  `status_waktu` int(11) NOT NULL DEFAULT '0',
+  `tgl_mulai` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_akhir` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 --
@@ -14774,6 +10288,13 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `ref_api_manajemen`
+--
+ALTER TABLE `ref_api_manajemen`
+  ADD PRIMARY KEY (`id_setting`),
+  ADD UNIQUE KEY `id_app` (`id_app`);
+
+--
 -- Indexes for table `ref_aspek_pembangunan`
 --
 ALTER TABLE `ref_aspek_pembangunan`
@@ -14878,6 +10399,13 @@ ALTER TABLE `ref_langkah`
   ADD UNIQUE KEY `idx_ref_step` (`id_langkah`) USING BTREE;
 
 --
+-- Indexes for table `ref_laporan`
+--
+ALTER TABLE `ref_laporan`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_modul` (`id_modul`,`id_dokumen`,`jns_laporan`,`id_laporan`);
+
+--
 -- Indexes for table `ref_log_akses`
 --
 ALTER TABLE `ref_log_akses`
@@ -14904,6 +10432,13 @@ ALTER TABLE `ref_menu`
   ADD PRIMARY KEY (`id_menu`) USING BTREE,
   ADD UNIQUE KEY `menu` (`menu`,`group_id`) USING BTREE,
   ADD KEY `akses` (`akses`) USING BTREE;
+
+--
+-- Indexes for table `ref_pangkat_golongan`
+--
+ALTER TABLE `ref_pangkat_golongan`
+  ADD PRIMARY KEY (`id_pangkat_pns`),
+  ADD UNIQUE KEY `pangkat` (`pangkat`,`golongan`);
 
 --
 -- Indexes for table `ref_pegawai`
@@ -15260,6 +10795,37 @@ ALTER TABLE `trx_anggaran_prog_indikator_pd`
   ADD KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE;
 
 --
+-- Indexes for table `trx_anggaran_tapd`
+--
+ALTER TABLE `trx_anggaran_tapd`
+  ADD PRIMARY KEY (`id_tapd`),
+  ADD UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_pegawai`,`id_unit_pegawai`,`status_tim`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
+
+--
+-- Indexes for table `trx_anggaran_tapd_unit`
+--
+ALTER TABLE `trx_anggaran_tapd_unit`
+  ADD PRIMARY KEY (`id_unit_tapd`),
+  ADD UNIQUE KEY `id_tapd` (`id_tapd`,`id_unit`,`status_unit`);
+
+--
+-- Indexes for table `trx_anggaran_unit_kpa`
+--
+ALTER TABLE `trx_anggaran_unit_kpa`
+  ADD PRIMARY KEY (`id_kpa`) USING BTREE,
+  ADD UNIQUE KEY `id_pa` (`id_pa`,`id_program`,`id_pegawai`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
+
+--
+-- Indexes for table `trx_anggaran_unit_pa`
+--
+ALTER TABLE `trx_anggaran_unit_pa`
+  ADD PRIMARY KEY (`id_pa`),
+  ADD UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_unit`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
+
+--
 -- Indexes for table `trx_anggaran_urusan`
 --
 ALTER TABLE `trx_anggaran_urusan`
@@ -15440,6 +11006,12 @@ ALTER TABLE `trx_isian_data_dasar`
   ADD PRIMARY KEY (`id_isian_tabel_dasar`) USING BTREE,
   ADD KEY `id_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) USING BTREE,
   ADD KEY `id_kecamatan` (`id_kecamatan`) USING BTREE;
+
+--
+-- Indexes for table `trx_log_api`
+--
+ALTER TABLE `trx_log_api`
+  ADD PRIMARY KEY (`id_log`);
 
 --
 -- Indexes for table `trx_log_events`
@@ -16940,6 +12512,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `ref_api_manajemen`
+--
+ALTER TABLE `ref_api_manajemen`
+  MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `ref_aspek_pembangunan`
 --
 ALTER TABLE `ref_aspek_pembangunan`
@@ -16997,19 +12575,31 @@ ALTER TABLE `ref_kecamatan`
 -- AUTO_INCREMENT for table `ref_kegiatan`
 --
 ALTER TABLE `ref_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3982;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ref_laporan`
+--
+ALTER TABLE `ref_laporan`
+  MODIFY `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ref_lokasi`
 --
 ALTER TABLE `ref_lokasi`
-  MODIFY `id_lokasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_lokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ref_menu`
 --
 ALTER TABLE `ref_menu`
-  MODIFY `id_menu` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id_menu` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+
+--
+-- AUTO_INCREMENT for table `ref_pangkat_golongan`
+--
+ALTER TABLE `ref_pangkat_golongan`
+  MODIFY `id_pangkat_pns` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `ref_pegawai`
@@ -17057,7 +12647,7 @@ ALTER TABLE `ref_rek_5`
 -- AUTO_INCREMENT for table `ref_satuan`
 --
 ALTER TABLE `ref_satuan`
-  MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ref_sotk_level_1`
@@ -17129,7 +12719,7 @@ ALTER TABLE `ref_ssh_tarif`
 -- AUTO_INCREMENT for table `ref_ssh_zona`
 --
 ALTER TABLE `ref_ssh_zona`
-  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ref_ssh_zona_lokasi`
@@ -17232,6 +12822,30 @@ ALTER TABLE `trx_anggaran_program_pd`
 --
 ALTER TABLE `trx_anggaran_prog_indikator_pd`
   MODIFY `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran';
+
+--
+-- AUTO_INCREMENT for table `trx_anggaran_tapd`
+--
+ALTER TABLE `trx_anggaran_tapd`
+  MODIFY `id_tapd` bigint(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `trx_anggaran_tapd_unit`
+--
+ALTER TABLE `trx_anggaran_tapd_unit`
+  MODIFY `id_unit_tapd` bigint(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `trx_anggaran_unit_kpa`
+--
+ALTER TABLE `trx_anggaran_unit_kpa`
+  MODIFY `id_kpa` bigint(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `trx_anggaran_unit_pa`
+--
+ALTER TABLE `trx_anggaran_unit_pa`
+  MODIFY `id_pa` bigint(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trx_anggaran_urusan`
@@ -17370,6 +12984,12 @@ ALTER TABLE `trx_forum_skpd_usulan`
 --
 ALTER TABLE `trx_isian_data_dasar`
   MODIFY `id_isian_tabel_dasar` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `trx_log_api`
+--
+ALTER TABLE `trx_log_api`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trx_log_events`
@@ -18710,6 +14330,33 @@ ALTER TABLE `trx_anggaran_program_pd`
 --
 ALTER TABLE `trx_anggaran_prog_indikator_pd`
   ADD CONSTRAINT `FK_trx_anggaran_prog_indikator_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `trx_anggaran_tapd`
+--
+ALTER TABLE `trx_anggaran_tapd`
+  ADD CONSTRAINT `trx_anggaran_tapd_ibfk_1` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `trx_anggaran_tapd_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`);
+
+--
+-- Constraints for table `trx_anggaran_tapd_unit`
+--
+ALTER TABLE `trx_anggaran_tapd_unit`
+  ADD CONSTRAINT `trx_anggaran_tapd_unit_ibfk_1` FOREIGN KEY (`id_tapd`) REFERENCES `trx_anggaran_tapd` (`id_tapd`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `trx_anggaran_unit_kpa`
+--
+ALTER TABLE `trx_anggaran_unit_kpa`
+  ADD CONSTRAINT `trx_anggaran_unit_kpa_ibfk_1` FOREIGN KEY (`id_pa`) REFERENCES `trx_anggaran_unit_pa` (`id_pa`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `trx_anggaran_unit_kpa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`);
+
+--
+-- Constraints for table `trx_anggaran_unit_pa`
+--
+ALTER TABLE `trx_anggaran_unit_pa`
+  ADD CONSTRAINT `trx_anggaran_unit_pa_ibfk_1` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `trx_anggaran_unit_pa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`);
 
 --
 -- Constraints for table `trx_anggaran_urusan`

@@ -17,49 +17,6 @@ $( document ).ready( function () {
   var id_pelaksana_program;
   var tahun_rpjmd;
 
-  function formatTgl ( val_tanggal ) {
-    var formattedDate = new Date( val_tanggal );
-    var d = formattedDate.getDate();
-    var m = formattedDate.getMonth();
-    var y = formattedDate.getFullYear();
-    var m_names = new Array( "Januari", "Februari", "Maret",
-      "April", "Mei", "Juni", "Juli", "Agustus", "September",
-      "Oktober", "November", "Desember" )
-
-    var tgl = d + " " + m_names[ m ] + " " + y;
-    return tgl;
-  }
-
-  function hariIni () {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    var hariIni = yyyy + '-' + mm + '-' + dd;
-    return hariIni;
-  }
-
-  function createPesan ( message, type ) {
-    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += '<p><strong>' + message + '</strong></p>';
-    html += '</div>';
-    $( html ).hide().prependTo( '#pesan' ).slideDown();
-
-    setTimeout( function () {
-      $( '#pesanx' ).removeClass( 'in' );
-    }, 3500 );
-  };
-
-  $( '[data-toggle="popover"]' ).popover();
-
-
-  $( '.page-alert .close' ).click( function ( e ) {
-    e.preventDefault();
-    $( this ).closest( '.page-alert' ).slideUp();
-  } );
-
   $( ".disabled" ).click( function ( e ) {
     e.preventDefault();
     return false;
@@ -165,7 +122,6 @@ $( document ).ready( function () {
     backUrusanPdt();
   } );
 
-  $( '.number' ).number( true, 4, ',', '.' );
   $( '#thn_1_dok' ).number( true, 0, '', '' );
   $( '#thn_5_dok' ).number( true, 0, '', '' );
   $( '#no_urut_edit' ).number( true, 0, '', '' );
@@ -201,6 +157,28 @@ $( document ).ready( function () {
   $( '#pagu5_opd' ).number( true, 2, ',', '.' );
   $( '#pagu_total_edit' ).number( true, 2, ',', '.' );
   $( '#pagu_total_opd' ).number( true, 2, ',', '.' );
+
+  $( '#inditujuan1_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan2_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan3_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan4_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan5_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan_akhir_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran1_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran2_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran3_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran4_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran5_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran_akhir_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram1_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram2_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram3_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram4_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram5_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram_akhir_edit' ).number( true, 2, ',', '.' );
 
 
   $.ajax( {
@@ -2102,6 +2080,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( 0 );
     $( '#pagu4_opd' ).val( 0 );
     $( '#pagu5_opd' ).val( 0 );
+    $( '#jns_program' ).val( 0 );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#ur_program_rpjmd_edit' ).val( null );
     $( '#id_sasaran_program_edit' ).val( no_sasaran_rpjmd );
     $( '#pagu_total_edit' ).val( 0 );
@@ -2166,6 +2146,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( data.pagu_tahun3_opd );
     $( '#pagu4_opd' ).val( data.pagu_tahun4_opd );
     $( '#pagu5_opd' ).val( data.pagu_tahun5_opd );
+    $( '#jns_program' ).val( data.jns_program );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#ur_program_rpjmd_edit' ).val( data.uraian_program_rpjmd );
     $( '#id_sasaran_program_edit' ).val( data.id_sasaran );
     $( '#pagu_total_edit' ).val( data.total_pagua );
@@ -2200,6 +2182,7 @@ $( document ).ready( function () {
         'pagu3_edit': $( '#pagu3_edit' ).val(),
         'pagu4_edit': $( '#pagu4_edit' ).val(),
         'pagu5_edit': $( '#pagu5_edit' ).val(),
+        'jns_program': 0,
         'ur_program_rpjmd_edit': $( '#ur_program_rpjmd_edit' ).val(),
       },
       success: function ( data ) {
@@ -3328,6 +3311,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( 0 );
     $( '#pagu4_opd' ).val( 0 );
     $( '#pagu5_opd' ).val( 0 );
+    $( '#jns_program' ).val( 1 );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#ur_program_rpjmd_edit' ).val( null );
     $( '#id_sasaran_program_edit' ).val( no_sasaran_rpjmd );
     $( '#pagu_total_edit' ).val( 0 );
@@ -3392,6 +3377,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( data.pagu_tahun3_opd );
     $( '#pagu4_opd' ).val( data.pagu_tahun4_opd );
     $( '#pagu5_opd' ).val( data.pagu_tahun5_opd );
+    $( '#jns_program' ).val( data.jns_program );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#ur_program_rpjmd_edit' ).val( data.uraian_program_rpjmd );
     $( '#id_sasaran_program_edit' ).val( data.id_sasaran );
     $( '#pagu_total_edit' ).val( data.total_pagua );
@@ -3427,6 +3414,7 @@ $( document ).ready( function () {
         'pagu3_edit': $( '#pagu3_edit' ).val(),
         'pagu4_edit': $( '#pagu4_edit' ).val(),
         'pagu5_edit': $( '#pagu5_edit' ).val(),
+        'jns_program': 1,
         'ur_program_rpjmd_edit': $( '#ur_program_rpjmd_edit' ).val(),
       },
       success: function ( data ) {
@@ -3824,6 +3812,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( 0 );
     $( '#pagu4_opd' ).val( 0 );
     $( '#pagu5_opd' ).val( 0 );
+    $( '#jns_program' ).val( 2 );
+    $( "#jns_program" ).removeAttr( "disabled" );
     $( '#ur_program_rpjmd_edit' ).val( null );
     $( '#id_sasaran_program_edit' ).val( no_sasaran_rpjmd );
     $( '#pagu_total_edit' ).val( 0 );
@@ -3850,6 +3840,7 @@ $( document ).ready( function () {
         'pagu3_edit': $( '#pagu3_edit' ).val(),
         'pagu4_edit': $( '#pagu4_edit' ).val(),
         'pagu5_edit': $( '#pagu5_edit' ).val(),
+        'jns_program': $( '#jns_program' ).val(),
         'ur_program_rpjmd_edit': $( '#ur_program_rpjmd_edit' ).val(),
       },
       success: function ( data ) {
@@ -3888,6 +3879,8 @@ $( document ).ready( function () {
     $( '#pagu3_opd' ).val( data.pagu_tahun3_opd );
     $( '#pagu4_opd' ).val( data.pagu_tahun4_opd );
     $( '#pagu5_opd' ).val( data.pagu_tahun5_opd );
+    $( '#jns_program' ).val( data.jns_program );
+    $( "#jns_program" ).removeAttr( "disabled" );
     $( '#ur_program_rpjmd_edit' ).val( data.uraian_program_rpjmd );
     $( '#id_sasaran_program_edit' ).val( data.id_sasaran );
     $( '#pagu_total_edit' ).val( data.total_pagua );
@@ -3923,6 +3916,7 @@ $( document ).ready( function () {
         'pagu3_edit': $( '#pagu3_edit' ).val(),
         'pagu4_edit': $( '#pagu4_edit' ).val(),
         'pagu5_edit': $( '#pagu5_edit' ).val(),
+        'jns_program': $( '#jns_program' ).val(),
         'ur_program_rpjmd_edit': $( '#ur_program_rpjmd_edit' ).val(),
       },
       success: function ( data ) {

@@ -415,6 +415,7 @@ $( document ).ready( function () {
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
       vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
       vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
       vars += "&id_program=" + $( '#prog_prarka' ).val();
       vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
@@ -431,7 +432,7 @@ $( document ).ready( function () {
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
       vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       vars += "&uraian_dok=PPAS";
-      vars += "&uraian_header=PRIORITAS DAN PLAFON AANGGARAN SEMENTARA";
+      vars += "&uraian_header=PRIORITAS DAN PLAFON ANGGARAN SEMENTARA";
       window.open( '../PPAS61' + vars, '_blank' );
     };
 
@@ -444,7 +445,7 @@ $( document ).ready( function () {
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
       vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       vars += "&uraian_dok=PPAS";
-      vars += "&uraian_header=PRIORITAS DAN PLAFON AANGGARAN SEMENTARA";
+      vars += "&uraian_header=PRIORITAS DAN PLAFON ANGGARAN SEMENTARA";
       vars += "&ttd=" + check_data;
       vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
       window.open( '../LampSumberDana' + vars, '_blank' );
@@ -459,7 +460,7 @@ $( document ).ready( function () {
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
       vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       vars += "&uraian_dok=PPAS";
-      vars += "&uraian_header=PRIORITAS DAN PLAFON AANGGARAN SEMENTARA";
+      vars += "&uraian_header=PRIORITAS DAN PLAFON ANGGARAN SEMENTARA";
       vars += "&ttd=" + check_data;
       vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
       window.open( '../RekapSumberDana' + vars, '_blank' );
@@ -474,7 +475,7 @@ $( document ).ready( function () {
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
       vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       vars += "&uraian_dok=PPAS";
-      vars += "&uraian_header=PRIORITAS DAN PLAFON AANGGARAN SEMENTARA";
+      vars += "&uraian_header=PRIORITAS DAN PLAFON ANGGARAN SEMENTARA";
       vars += "&ttd=" + check_data;
       vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
       window.open( '../RekapPerUnit' + vars, '_blank' );
@@ -489,7 +490,7 @@ $( document ).ready( function () {
       vars += "&kota=" + $( '#nama_kota_lap' ).val();
       vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       vars += "&uraian_dok=PPAS";
-      vars += "&uraian_header=PRIORITAS DAN PLAFON AANGGARAN SEMENTARA";
+      vars += "&uraian_header=PRIORITAS DAN PLAFON ANGGARAN SEMENTARA";
       vars += "&ttd=" + check_data;
       vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
       window.open( '../RekapPerPK' + vars, '_blank' );

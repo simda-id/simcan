@@ -9,37 +9,16 @@ $( document ).ready( function () {
   var id_indikator_program_renstra, id_kegiatan_renstra, id_indikator_kegiatan_renstra, id_pelaksana_kegiatan_renstra, thn_id, id_sasaran_rpjmd;
   var id_dokumen_renstra, id_dokumen_ref, id_dokumen_rpjmd, sumber_belanja;
 
-  function formatTgl ( val_tanggal ) {
-    var formattedDate = new Date( val_tanggal );
-    var d = formattedDate.getDate();
-    var m = formattedDate.getMonth();
-    var y = formattedDate.getFullYear();
-    var m_names = new Array( "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" )
-    var tgl = d + " " + m_names[ m ] + " " + y;
-    return tgl;
-  };
+  $.datepicker.setDefaults( $.datepicker.regional[ "id" ] );
 
-  function hariIni () {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
+  $( '#tgl_perda_dok_x' ).datepicker( {
+    altField: "#tgl_perda_dok",
+    altFormat: "yy-mm-dd",
+    dateFormat: "dd MM yy",
+  } );
 
-    var hariIni = yyyy + '-' + mm + '-' + dd;
-    return hariIni;
-  };
-
-  function buatNip ( string ) {
-    return string.replace( /(\d{8})(\d{6})(\d{1})(\d{3})/, "$1 $2 $3 $4" );
-  };
-
-  function nilaiNip ( string ) {
-    return string.replace( /\D/g, '' ).substring( 0, 20 );
-  };
-
-  $( '.page-alert .close' ).click( function ( e ) {
-    e.preventDefault();
-    $( this ).closest( '.page-alert' ).slideUp();
+  $( '#btn' ).click( function () {
+    $( "#tgl_perda_dok_x" ).focus();
   } );
 
   $( ".disabled" ).click( function ( e ) {
@@ -47,30 +26,11 @@ $( document ).ready( function () {
     return false;
   } );
 
-  var angkaNip = document.getElementsByClassName( 'nip' );
-
-  angkaNip.onkeydown = function ( e ) {
-    if ( !( ( e.keyCode > 95 && e.keyCode < 106 )
-      || ( e.keyCode > 47 && e.keyCode < 58 )
-    ) ) { return false; }
-  };
-
   $( "input[name='nip_tandatangan_display']" ).on( "keyup", function () {
     $( "input[name='nip_tandatangan']" ).val( nilaiNip( this.value ) );
     this.value = buatNip( $( "input[name='nip_tandatangan']" ).val() );
   } );
 
-  function createPesan ( message, type ) {
-    var html = '<div id="pesanx" class="alert alert-' + type + ' alert-dismissable flyover flyover-bottom in">';
-    html += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-    html += '<p><strong>' + message + '</strong></p>';
-    html += '</div>';
-    $( html ).hide().prependTo( '#pesan' ).slideDown();
-
-    setTimeout( function () {
-      $( '#pesanx' ).removeClass( 'in' );
-    }, 3500 );
-  };
 
   function backDokumen () {
     $( '.nav-tabs a[href="#dokumen"]' ).tab( 'show' );
@@ -176,6 +136,35 @@ $( document ).ready( function () {
   $( '#pagu4_edit_kegiatan' ).number( true, 2, ',', '.' );
   $( '#pagu5_edit_kegiatan' ).number( true, 2, ',', '.' );
   $( '#pagu6_edit_kegiatan' ).number( true, 2, ',', '.' );
+
+  $( '#inditujuan1_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan2_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan3_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan4_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan5_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#inditujuan_akhir_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran1_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran2_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran3_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran4_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran5_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#indisasaran_akhir_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram1_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram2_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram3_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram4_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram5_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#indiprogram_akhir_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan1_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan2_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan3_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan4_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan5_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan_awal_edit' ).number( true, 2, ',', '.' );
+  $( '#indikegiatan_akhir_edit' ).number( true, 2, ',', '.' );
 
   $( '#tblDokumen' ).DataTable( { dom: 'BfRtip', } );
   $( '#tblVisi' ).DataTable( { dom: 'BfRtip', } );
@@ -2671,6 +2660,8 @@ $( document ).ready( function () {
     $( '#kd_program_edit' ).val( null );
     $( '#ur_program_renstra_edit' ).val( null );
     $( '#ur_sasaran_program_renstra_edit' ).val( null );
+    $( '#jns_program' ).val( 0 );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#pagu1_edit' ).val( 0 );
     $( '#pagu2_edit' ).val( 0 );
     $( '#pagu3_edit' ).val( 0 );
@@ -2710,6 +2701,8 @@ $( document ).ready( function () {
     $( '#kd_program_edit' ).val( null );
     $( '#ur_program_renstra_edit' ).val( null );
     $( '#ur_sasaran_program_renstra_edit' ).val( null );
+    $( '#jns_program' ).val( 1 );
+    $( "#jns_program" ).prop( 'disabled', 'disabled' );
     $( '#pagu1_edit' ).val( 0 );
     $( '#pagu2_edit' ).val( 0 );
     $( '#pagu3_edit' ).val( 0 );
@@ -2749,6 +2742,8 @@ $( document ).ready( function () {
     $( '#kd_program_edit' ).val( null );
     $( '#ur_program_renstra_edit' ).val( null );
     $( '#ur_sasaran_program_renstra_edit' ).val( null );
+    $( '#jns_program' ).val( 2 );
+    $( "#jns_program" ).removeAttr( "disabled" );
     $( '#pagu1_edit' ).val( 0 );
     $( '#pagu2_edit' ).val( 0 );
     $( '#pagu3_edit' ).val( 0 );
@@ -2787,6 +2782,7 @@ $( document ).ready( function () {
         'pagu_tahun3': $( '#pagu3_edit' ).val(),
         'pagu_tahun4': $( '#pagu4_edit' ).val(),
         'pagu_tahun5': $( '#pagu5_edit' ).val(),
+        'jns_program': 0,
         'sumber_data': 0,
       },
       success: function ( data ) {
@@ -2824,6 +2820,7 @@ $( document ).ready( function () {
         'pagu_tahun3': $( '#pagu3_edit' ).val(),
         'pagu_tahun4': $( '#pagu4_edit' ).val(),
         'pagu_tahun5': $( '#pagu5_edit' ).val(),
+        'jns_program': 1,
         'sumber_data': 0,
       },
       success: function ( data ) {
@@ -2861,6 +2858,7 @@ $( document ).ready( function () {
         'pagu_tahun3': $( '#pagu3_edit' ).val(),
         'pagu_tahun4': $( '#pagu4_edit' ).val(),
         'pagu_tahun5': $( '#pagu5_edit' ).val(),
+        'jns_program': $( '#jns_program' ).val(),
         'sumber_data': 0,
       },
       success: function ( data ) {
@@ -2998,6 +2996,7 @@ $( document ).ready( function () {
     $( '#ModalProgram' ).modal( 'show' );
   } );
 
+  var jns_program;
   $( '.modal-footer' ).on( 'click', '.editProgram', function () {
     if ( $( '#id_sasaran_rpjmd_ori_edit' ).val() != $( '#id_sasaran_rpjmd_program_edit' ).val() ) {
       alert( "Sasaran RPJMD tidak sama dengan Sasaran RPJMD yang dipilih di Program RPJMD" )
@@ -3005,6 +3004,16 @@ $( document ).ready( function () {
       $.ajaxSetup( {
         headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
       } );
+
+      if ( sumber_belanja == 0 ) {
+        jns_program = 0;
+      }
+      if ( sumber_belanja == 1 ) {
+        jns_program = 1;
+      }
+      if ( sumber_belanja == 2 ) {
+        jns_program = $( '#jns_program' ).val();
+      }
 
       $.ajax( {
         type: 'post',
@@ -3025,6 +3034,7 @@ $( document ).ready( function () {
           'pagu_tahun3': $( '#pagu3_edit' ).val(),
           'pagu_tahun4': $( '#pagu4_edit' ).val(),
           'pagu_tahun5': $( '#pagu5_edit' ).val(),
+          'jns_program': jns_program,
           'sumber_data': 0,
         },
         success: function ( data ) {
@@ -3042,7 +3052,6 @@ $( document ).ready( function () {
           } else {
             createPesan( data.pesan, "danger" );
           }
-
         }
       } );
     }
@@ -3055,6 +3064,16 @@ $( document ).ready( function () {
       $.ajaxSetup( {
         headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
       } );
+
+      if ( sumber_belanja == 0 ) {
+        jns_program = 0;
+      }
+      if ( sumber_belanja == 1 ) {
+        jns_program = 1;
+      }
+      if ( sumber_belanja == 2 ) {
+        jns_program = $( '#jns_program' ).val();
+      }
 
       $.ajax( {
         type: 'post',
@@ -3075,6 +3094,7 @@ $( document ).ready( function () {
           'pagu_tahun3': $( '#pagu3_edit' ).val(),
           'pagu_tahun4': $( '#pagu4_edit' ).val(),
           'pagu_tahun5': $( '#pagu5_edit' ).val(),
+          'jns_program': jns_program,
           'sumber_data': 0,
         },
         success: function ( data ) {

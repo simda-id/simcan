@@ -103,7 +103,7 @@ $( document ).ready( function () {
   $( ".unit_prarka" ).change( function () {
     $.ajax( {
       type: "GET",
-      url: 'getProgramRkpdRancang/' + $( '#unit_prarka' ).val() + '/' + $( '#tahun_prarka' ).val(),
+      url: 'getProgramRkpd/' + $( '#unit_prarka' ).val() + '/' + $( '#tahun_prarka' ).val() + '/' + $( '#jns_dokumen' ).val(),
       dataType: "json",
       success: function ( data ) {
         var j = data.length;
@@ -136,13 +136,12 @@ $( document ).ready( function () {
         }
       }
     } );
-
   } );
 
   $( ".prog_prarka" ).change( function () {
     $.ajax( {
       type: "GET",
-      url: 'getKegiatanRkpdRancang/' + $( '#prog_prarka' ).val(),
+      url: 'getKegiatanRkpd/' + $( '#prog_prarka' ).val() + '/' + $( '#jns_dokumen' ).val(),
       dataType: "json",
       success: function ( data ) {
         var j = data.length;

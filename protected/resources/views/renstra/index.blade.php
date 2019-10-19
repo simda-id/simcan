@@ -578,7 +578,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <button type="button" class="btn btn-primary btn-labeled btnTambahProgramPdt" data-dismiss="modal"
                     aria-hidden="true">
                     <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Program
-                    Pendapatan</button>
+                    Pendanaan</button>
                   <div class="">
                     <table id="tblProgramPdt"
                       class="table compact table-responsive table-striped table-bordered display" cellspacing="0"

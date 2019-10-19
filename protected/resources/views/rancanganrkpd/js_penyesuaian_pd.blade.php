@@ -1,6 +1,5 @@
 <script type="text/javascript">
-
-$(document).ready(function(){
+  $(document).ready(function(){
 
 
 var template = Handlebars.compile($("#details-template").html());
@@ -15,7 +14,6 @@ vol2_temp,nm_sat_asb1,nm_sat_asb2;
 
 $('[data-toggle="popover"]').popover();
 
-$('.number').number(true,2,',', '.');
 $('.nomor').number(true,0,',', '.');
 
 function createPesan(message, type) {
@@ -3052,7 +3050,7 @@ $(document).on('click', '#btnCopyBelanja', function() {
         serverSide: true,
         autoWidth : false,
         dom: 'bfrtIp',
-        "ajax": {"url": "./getLokasiCopy/"+unit_temp},
+        "ajax": {"url": "./getLokasiCopy/"+ unit_temp},
         "columns": [
               { data: 'urut', sClass: "dt-center"},
               { data: 'uraian_aktivitas_kegiatan'},

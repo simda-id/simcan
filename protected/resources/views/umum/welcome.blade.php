@@ -16,7 +16,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
 
     <style>
       nav.navbar-well {
@@ -627,6 +633,17 @@ height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fi
   <script src="{{ asset('/js/jquery.min.js')}}"></script>
   <script src="{{ asset('/js/jquery-ui.js')}}"></script>
   <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+  <script src="{{ asset('/js/handlebars.js')}}"></script>
+  <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
+  <script src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('/js/dataTables.checkboxes.min.js') }}"></script>
+  <script src="{{ asset('/js/input.js')}}"></script>
+  <script src="{{ asset('/js/jquery.number.js')}}"></script>
+  <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
+  <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
+  <script src="{{ asset('/js/datepicker-id.js')}}"></script>
+  <script src="{{ asset('/js/select2.js')}}"></script>
   <script src="{{ asset('/js/Chart.bundle.js') }}"></script>
 
   <script type="text/javascript" language="javascript" class="init">

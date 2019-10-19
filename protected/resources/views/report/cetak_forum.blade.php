@@ -172,7 +172,7 @@ use hoaaah\LaravelMenu\Menu;
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
           <label for="tahun_prarka" class="col-sm-3 control-label" align='left'>Tahun :</label>
-          <div class="col-sm-8">
+          <div class="col-sm-2">
             <select class="form-control select2 tahun_prarka" name="tahun_prarka" id="tahun_prarka"></select>
           </div>
         </div>

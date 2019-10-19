@@ -3,17 +3,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 ?>
 @extends('layouts.parameterlayout')
 
-{{-- <style> --}}
-  {{-- /*.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
-  .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}*/ --}}
-{{-- </style> --}}
-
 @section('content')
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <?php
+  <div class="row">
+    <div class="col-md-12">
+      <?php
                 $this->title = 'User';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->begin();
@@ -21,428 +16,465 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 $breadcrumb->add(['label' => 'User dan Group', 'url' => '/admin/parameter/user']);
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
-            ?>          
-        </div>
+            ?>
     </div>
+  </div>
 
-    <div id="pesan"></div>
-    <div class="row">
+  <div id="pesan"></div>
+  <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Daftar User</h3>
-            </div>
-            <div class="panel-body">
-                <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                    <ul class="nav nav-tabs nav-justified" role="tablist">
-                      <li class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
-                      <li><a href="#unit" aria-controls="unit" role="tab-kv" data-toggle="tab">Akses Unit</a></li>
-                      <li><a href="#wilayah" aria-controls="wilayah" role="tab-kv" data-toggle="tab">Akses Wilayah</a></li>
-                      <li><a href="#kabupaten" aria-controls="kabupaten" role="tab-kv" data-toggle="tab">Akses Wilayah</a></li>
-                    </ul>
-
-                <div class="tab-content">
-                    <br>
-                    <div role="tabpanel" class="tab-pane fade in active" id="user">
-                            <button type="button" id="btnTambahUser" class="btn btn-labeled btn-success">
-                                <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah User
-                            </button>  
-                            <table class="table display table-bordered table-striped compact table-responsive" id="users-table">
-                                <thead>
-                                    <tr>
-                                        <th width='10px' style="text-align: center; vertical-align:middle">Nomor</th>
-                                        <th style="text-align: center; vertical-align:middle">Email</th>
-                                        <th style="text-align: center; vertical-align:middle">Nama</th>                                        
-                                        <th width='20%' style="text-align: center; vertical-align:middle">Asal OPD</th>
-                                        <th width='5%' style="text-align: center; vertical-align:middle">Status</th>
-                                        <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade in" id="unit">
-                        <button type="button" id="btnTambahAUnit" class="btn btn-labeled  btn-success" data-toggle="modal">
-                            <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Unit
-                        </button>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
-                             <tbody>
-                               <tr>
-                                 <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
-                                 <td style="text-align: left; vertical-align:top;"><label id="username_unit" align='left'></td>
-                               </tr>
-                             </tbody>
-                            </table>
-                        </div>
-                        <table class="table display table-bordered table-striped compact table-responsive" id="unit-table">
-                            <thead>
-                                <tr>
-                                    <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
-                                    <th style="text-align: center; vertical-align:middle">Nama Unit</th>
-                                    <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
-                                </tr>
-                            </thead>
-                        </table>   
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade in" id="wilayah">
-                        <button type="button" id="btnTambahAWilayah" class="btn btn-labeled  btn-success" data-toggle="modal">
-                            <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
-                        </button>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
-                             <tbody>
-                               <tr>
-                                 <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
-                                 <td style="text-align: left; vertical-align:top;"><label id="username_wilayah" align='left'></td>
-                               </tr>
-                             </tbody>
-                            </table>
-                        </div>
-                            <table class="table display table-bordered table-striped compact table-responsive" id="wilayah-table">
-                                <thead>
-                                     <tr>
-                                         <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
-                                         <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
-                                         <th style="text-align: center; vertical-align:middle">Nama Kecamatan</th>
-                                         <th style="text-align: center; vertical-align:middle">Nama Desa/Kelurahan</th>
-                                         <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
-                                     </tr>
-                                </thead>
-                            </table>   
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade in" id="kabupaten">
-                        <button type="button" id="btnTambahAWilayahKab" class="btn btn-labeled btn-primary" data-toggle="modal">
-                            <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
-                        </button>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
-                             <tbody>
-                               <tr>
-                                 <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
-                                 <td style="text-align: left; vertical-align:top;"><label id="username_kabupaten" align='left'></td>
-                               </tr>
-                             </tbody>
-                            </table>
-                        </div>
-                            <table class="table display table-bordered table-striped compact table-responsive" id="kabupaten-table">
-                                <thead>
-                                     <tr>
-                                         <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
-                                         <th witdh='10%' style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
-                                         <th style="text-align: center; vertical-align:middle">Nama Provinsi</th>
-                                         <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
-                                         <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
-                                     </tr>
-                                </thead>
-                            </table>   
-                    </div>
-                </div>
-                </div>
-            </div>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Daftar User</h3>
         </div>
+        <div class="panel-body">
+          <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
+              <li class="disabled"><a href="#unit" aria-controls="unit" role="tab-kv" data-toggle="tab">Akses Unit</a>
+              </li>
+              <li class="disabled"><a href="#wilayah" aria-controls="wilayah" role="tab-kv" data-toggle="tab">Akses
+                  Wilayah</a></li>
+              <li class="disabled"><a href="#kabupaten" aria-controls="kabupaten" role="tab-kv" data-toggle="tab">Akses
+                  Wilayah</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <br>
+              <div role="tabpanel" class="tab-pane fade in active" id="user">
+                <button type="button" id="btnTambahUser" class="btn btn-labeled btn-success">
+                  <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah User
+                </button>
+                <table class="table display table-bordered table-striped compact table-responsive" id="users-table">
+                  <thead>
+                    <tr>
+                      <th width='10px' style="text-align: center; vertical-align:middle">Nomor</th>
+                      <th style="text-align: center; vertical-align:middle">Email</th>
+                      <th style="text-align: center; vertical-align:middle">Nama</th>
+                      <th width='20%' style="text-align: center; vertical-align:middle">Asal OPD</th>
+                      <th width='5%' style="text-align: center; vertical-align:middle">Status</th>
+                      <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="unit">
+                <button type="button" id="btnTambahAUnit" class="btn btn-labeled  btn-success" data-toggle="modal">
+                  <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Unit
+                </button>
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="username_unit" align='left'></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <table class="table display table-bordered table-striped compact table-responsive" id="unit-table">
+                  <thead>
+                    <tr>
+                      <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Unit</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Sub Unit</th>
+                      <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="wilayah">
+                <button type="button" id="btnTambahAWilayah" class="btn btn-labeled  btn-success" data-toggle="modal">
+                  <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
+                </button>
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="username_wilayah" align='left'>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <table class="table display table-bordered table-striped compact table-responsive" id="wilayah-table">
+                  <thead>
+                    <tr>
+                      <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Kecamatan</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Desa/Kelurahan</th>
+                      <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="kabupaten">
+                <button type="button" id="btnTambahAWilayahKab" class="btn btn-labeled btn-primary" data-toggle="modal">
+                  <span class="btn-label"><i class="fa fa-plus fa-lg fa-fw"></i></span>Tambah Akses Wilayah
+                </button>
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td width="15%" style="text-align: left; vertical-align:top;">Username</td>
+                        <td style="text-align: left; vertical-align:top;"><label id="username_kabupaten" align='left'>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <table class="table display table-bordered table-striped compact table-responsive" id="kabupaten-table">
+                  <thead>
+                    <tr>
+                      <th width='5%' style="text-align: center; vertical-align:middle">Nomor Urut</th>
+                      <th witdh='10%' style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Provinsi</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
+                      <th width='15%' style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
 
 <div id="ModalUser" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-  <div class="modal-dialog modal-lg"  >
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body"  style="background-color: #eee;">        
-        <form name="frmModalUser" class="form-horizontal" role="form" autocomplete='off' action="{{ Request::url() }}" method="post">
+      <div class="modal-body" style="background-color: #eee;">
+        <form name="frmModalUser" class="form-horizontal" role="form" autocomplete='off' action="{{ Request::url() }}"
+          method="post">
           <div class="row">
-          <div class="col-sm-2" style="text-align: center;">
-            <i class="fa fa-user-circle-o" style="font-size: 120px;color: #357EBD;"></i>
-          </div>
-          <div class="col-sm-10">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id_user" id="id_user">
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <div class="col-sm-2" style="text-align: center;">
+              <i class="fa fa-user-circle-o" style="font-size: 120px;color: #357EBD;"></i>
+            </div>
+            <div class="col-sm-10">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id_user" id="id_user">
+              <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">Nama User</label>
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control" name="name" required autofocus data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Nama untuk ditampilkan di header setelah login">
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
+                  <input id="name" type="text" class="form-control" name="name" required autofocus data-toggle="popover"
+                    data-html="true" data-container="body" title="User dan Group User" data-trigger="hover"
+                    data-content="Nama untuk ditampilkan di header setelah login">
+                  @if ($errors->has('name'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('name') }}</strong>
+                  </span>
+                  @endif
                 </div>
-            </div>
+              </div>
 
-            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-3 control-label">Group User</label>
-                    <?php $groups = \App\Models\RefGroup::get(); ?>
-                    <div class="col-md-6">
-                        <select id="group_id" type="group_id" class="form-control" name="group_id" required>
-                        </select>                            
-                        @if ($errors->has('group_id'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('group_id') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-            </div>
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-3 control-label">Alamat e-Mail</label>
-                    <div class="col-md-6">
-                        <input id="email" type="email" class="form-control" name="email" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk login.<br>Tidak dapat diganti." required>
-                        @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    {{-- <span><a href="#" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk login.<br>Tidak dapat diganti."><i class="fa fa-question-circle fa-fw fa-lg text-info"></i></a></span> --}}
-            </div>
+              <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
+                <label for="email" class="col-md-3 control-label">Group User</label>
+                <?php $groups = \App\Models\RefGroup::get(); ?>
+                <div class="col-md-6">
+                  <select id="group_id" type="group_id" class="form-control select2" name="group_id" required>
+                  </select>
+                  @if ($errors->has('group_id'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('group_id') }}</strong>
+                  </span>
+                  @endif
+                </div>
+              </div>
+              <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label for="email" class="col-md-3 control-label">Alamat e-Mail</label>
+                <div class="col-md-6">
+                  <input id="email" type="email" class="form-control" name="email" data-toggle="popover"
+                    data-html="true" data-container="body" title="User dan Group User" data-trigger="hover"
+                    data-content="Digunakan untuk login.<br>Tidak dapat diganti." required>
+                  @if ($errors->has('email'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span>
+                  @endif
+                </div>
+              </div>
 
-            <div id="divPassword" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="col-md-3 control-label">Password</label>
-                    <div class="col-md-4">
-                        <input id="password" type="password" class="form-control" name="password" required>
-                        @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
+              <div id="divPassword" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password" class="col-md-3 control-label">Password</label>
+                <div class="col-md-4">
+                  <input id="password" type="password" class="form-control" name="password" required>
+                  @if ($errors->has('password'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                  </span>
+                  @endif
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input id="password_confirmation" type="password"
+                      class="form-control{{ $errors->has('password_confirmation') ? ' has-error' : '' }}"
+                      name="password_confirmation" required>
+                    <div class="input-group-btn">
+                      <button type="button" id="showPass" name="showPass" data-val="1" class="btn btn-md btn-success"
+                        data-toggle="popover" data-html="true" data-container="body" title="User dan Group User"
+                        data-trigger="hover" data-content="Digunakan untuk menampilkan Password yang diketik"><span
+                          id="eye" class="fa fa-eye fa-fw fa-lg"></span></button>
                     </div>
-                    <div class="col-md-4">
-                      <div class="input-group">
-                        <input id="password_confirmation" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' has-error' : '' }}" name="password_confirmation" required>
-                          <div class="input-group-btn">
-                                <button type="button" id="showPass" name="showPass" data-val="1" class="btn btn-md btn-success" data-toggle="popover" data-html="true" data-container="body" title="User dan Group User" data-trigger="hover" data-content="Digunakan untuk menampilkan Password yang diketik"><span id="eye" class="fa fa-eye fa-fw fa-lg"></span></button>
-                          </div>
-                        </div>
-                        @if ($errors->has('password_confirmation'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-            </div>
-            <div class="form-group">
+                  </div>
+                  @if ($errors->has('password_confirmation'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                  </span>
+                  @endif
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-3" for="title">OPD Asal User</label>
                 <div class="col-sm-8">
-                    <select type="text" class="form-control opd_asal" id="opd_asal" name="opd_asal"></select>
+                  <select type="text" class="form-control select2 opd_asal" id="opd_asal" name="opd_asal"></select>
                 </div>
+              </div>
+              <div class="form-group idStatusUser">
+                <label for="status_user" class="col-sm-3 control-label" align='left'>Status User</label>
+                <div class="col-sm-6">
+                  <label class="radio-inline">
+                    <input type="radio" class="status_user" name="status_user" id="status_user" value="0">Non Aktif
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" class="status_user" name="status_user" id="status_user" value="1">Aktif
+                  </label>
+                </div>
+              </div>
             </div>
-            <div class="form-group idStatusUser"> 
-                  <label for="status_user" class="col-sm-3 control-label" align='left'>Status User</label>                 
-                  <div class="col-sm-6">
-                    <label class="radio-inline">
-                      <input type="radio" class="status_user" name="status_user" id="status_user" value="0">Non Aktif
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" class="status_user" name="status_user" id="status_user" value="1">Aktif
-                    </label>
-                  </div>
-                </div>
           </div>
-        </div>
         </form>
       </div>
-        <div class="modal-footer" style="background-color: #357EBD;">
-            <div class="row">
-                <div class="col-sm-2 text-left">                        
-                </div>
-                <div class="col-sm-10 text-right">
-                  <div class="ui-group-buttons">
-                       <button type="button" class="btn btn-success btnUser btn-labeled" >
-                        <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Simpan</button>
-                    <div class="or"></div>
-                    <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                        <span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span>Tutup</button>
-                  </div>
-                </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" class="btn btn-success btnUser btn-labeled">
+                <span class="btn-label"><i class="fa fa-floppy-o fa-lg fa-fw"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span>Tutup</button>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 {{-- </div> --}}
 
 <div id="HapusUser" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"></h4>
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body" style="background-color: #eee;">
+        <input type="hidden" id="id_user_hapus" name="id_user_hapus">
+        <div class="alert alert-danger deleteContent">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          <br>
+          Yakin akan menghapus User : <strong><span id="name_user_hapus"></span></strong> ?
+          <br>
+          <br>
         </div>
-        <div class="modal-body" style="background-color: #eee;">
-          <input type="hidden" id="id_user_hapus" name="id_user_hapus">
-          <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                <br>
-                Yakin akan menghapus User : <strong><span id="name_user_hapus"></span></strong> ?
-                <br>
-                <br>
-          </div>
+      </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
+        <div class="ui-group-buttons">
+          <button type="button" id="btnDelUser" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal"><span
+              class="btn-label"><i id="footer_action_button" class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
+          <div class="or"></div>
+          <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span
+              class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
         </div>
-          <div class="modal-footer" style="background-color: #357EBD;">
-            <div class="ui-group-buttons">
-              <button type="button" id="btnDelUser" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="fa fa-trash fa-lg fa-fw"></i></span> Hapus</button>
-              <div class="or"></div>
-              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
-            </div>
-          </div>
       </div>
     </div>
   </div>
+</div>
 
 <div id="ModalUnit" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Tambah Akses Unit</h4>
-        </div>
-        <div class="modal-body" style="background-color: #eee;">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >            
-            <div class="form-group">
-             <div class="col-sm-12">
-                <table id='tblUnit' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                          <tr>
-                            <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                            <th style="text-align: center; vertical-align:middle">Nama Unit</th>
-                            <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-              </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Tambah Akses Unit</h4>
+      </div>
+      <div class="modal-body" style="background-color: #eee;">
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+          <div class="form-group hidden">
+            <div class="col-sm-12">
+              <table id='tblUnit' class="table display compact table-striped table-bordered" cellspacing="0"
+                width="100%">
+                <thead>
+                  <tr>
+                    <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                    <th style="text-align: center; vertical-align:middle">Nama Unit</th>
+                    <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
             </div>
-          </form>
+          </div>
+          <div class="form-group">
+            <label for="unit_user" class="col-sm-3 control-label" align='left'>Unit OPD :</label>
+            <div class="col-sm-8">
+              <select class="form-control select2 unit_user" name="unit_user" id="unit_user"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sub_unit_user" class="col-sm-3 control-label" align='left'>Sub Unit OPD :</label>
+            <div class="col-sm-8">
+              <select class="form-control select2 sub_unit_user" name="sub_unit_user" id="sub_unit_user"></select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" id="btnSimpanUnit" class="btn btn-success btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
         </div>
-            <div class="modal-footer" style="background-color: #357EBD;">
-                <div class="row">
-                    <div class="col-sm-2 text-left">                        
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span>Tutup</button>
-                    </div>
-                </div>
-            </div> 
       </div>
     </div>
+  </div>
 </div>
 
 <div id="ModalDesa" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Tambah Akses Wilayah</h4>
-        </div>
-        <div class="modal-body" style="background-color: #eee;">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Kecamatan :</label>
-                <div class="col-sm-8">
-                    <select type="text" class="form-control kecamatan" id="kecamatan" name="kecamatan"></select>
-                </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Tambah Akses Wilayah</h4>
+      </div>
+      <div class="modal-body" style="background-color: #eee;">
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="title">Kecamatan :</label>
+            <div class="col-sm-8">
+              <select type="text" class="form-control select2 kecamatan" id="kecamatan" name="kecamatan"></select>
             </div>
-            <table id='tblDesa' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
-                      <tr>
-                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Kode Desa</th>
-                        <th style="text-align: center; vertical-align:middle">Nama Desa/Kelurahan</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-          </form>
-        </div>
-          <div class="modal-footer" style="background-color: #357EBD;">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-      </div>
-    </div>
-</div>
-
-<div id="ModalKabupaten" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-lg"  >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Tambah Akses Wilayah</h4>
-        </div>
-        <div class="modal-body" style="background-color: #eee;">
-          <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-            {{-- <div class="form-group">
-                <label class="control-label col-sm-3" for="title">Kecamatan :</label>
-                <div class="col-sm-8">
-                    <select type="text" class="form-control kecamatan" id="kecamatan" name="kecamatan"></select>
-                </div>
-            </div> --}}
-            <table id='tblKabupaten' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
-                      <tr>
-                        <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
-                        <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                      </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-          </form>
-        </div>
-          <div class="modal-footer" style="background-color: #357EBD;">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                    </div>
-                </div>
-              </div> 
-      </div>
-    </div>
-</div>
-
-<div id="ModalNotifikasi" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-dialog modal-xs"  >
-      <div class="modal-content">
-        <div class="modal-body" style="background-color: #5bc0de;">
-          <div id="bodyNotif" class="alert">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left" aria-hidden="true"></i>
-                <br>
-                <strong><span id="uraian_notifikasi"></span></strong>
-                <br>
           </div>
-          <hr class="message-inner-separator">
-          <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        <button type="button" class="btn btn-primary icon-btn" data-dismiss="modal" aria-hidden="true">
-                            <i class="glyphicon glyphicon-log-out" style="color: #fff"></i> Tutup</button>
-                    </div>
-                </div>
+          <table id='tblDesa' class="table display compact table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Kode Desa</th>
+                <th style="text-align: center; vertical-align:middle">Nama Desa/Kelurahan</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusKeg">
+          </div>
+          <div class="col-sm-10 text-right">
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+              <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="ModalKabupaten" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1"
+  data-focus-on="input:first">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Tambah Akses Wilayah</h4>
+      </div>
+      <div class="modal-body" style="background-color: #eee;">
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+          <table id='tblKabupaten' class="table display compact table-striped table-bordered" cellspacing="0"
+            width="100%">
+            <thead>
+              <tr>
+                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Kode Kabupaten/Kota</th>
+                <th style="text-align: center; vertical-align:middle">Nama Kabupaten/Kota</th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="background-color: #357EBD;">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusKeg">
+          </div>
+          <div class="col-sm-10 text-right">
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+              <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ModalNotifikasi" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1"
+  data-focus-on="input:first">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-body" style="background-color: #5bc0de;">
+        <div id="bodyNotif" class="alert">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left" aria-hidden="true"></i>
+          <br>
+          <strong><span id="uraian_notifikasi"></span></strong>
+          <br>
+        </div>
+        <hr class="message-inner-separator">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <button type="button" class="btn btn-primary icon-btn" data-dismiss="modal" aria-hidden="true">
+              <i class="glyphicon glyphicon-log-out" style="color: #fff"></i> Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection
- 
+
 @section('scripts')
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
 
 var dataApp = "{{Session::get('AppType')}}";
+
+$( ".disabled" ).click( function ( e ) {
+  e.preventDefault();
+  return false;
+} );
 
 if (dataApp == 0) {
   $('[href="#wilayah"]').closest('li').hide();
@@ -579,6 +611,7 @@ akses_unit = $('#unit-table').DataTable({
     columns: [
         { data: 'no_urut', name: 'no_urut', sClass: "dt-center" },
         { data: 'nm_unit', name: 'nm_unit' },
+        { data: 'nm_sub', name: 'nm_sub' },
         { data: 'action', name: 'action', orderable: false, searchable: false , sClass: "dt-center"}
     ],
       "order": [[0, 'asc']],
@@ -642,6 +675,46 @@ $.ajax({
           }
           }
   });
+
+$.ajax( {
+    type: "GET",
+    url: 'getUnit',
+    dataType: "json",
+
+    success: function ( data ) {
+
+      var j = data.length;
+      var post, i;
+
+      $( 'select[name="unit_user"]' ).empty();
+      $( 'select[name="unit_user"]' ).append( '<option value="-1">---Pilih Unit---</option>' );
+
+      for ( i = 0; i < j; i++ ) {
+        post = data[ i ];
+        $( 'select[name="unit_user"]' ).append( '<option value="' + post.id_unit + '">' + post.nama_display + '</option>' );
+      }
+    }
+  } );
+
+$( "#unit_user" ).change(function() {
+  $.ajax( {
+  type: "GET",
+  url: 'getSubUnit/'+ $( "#unit_user" ).val(),
+  dataType: "json",
+  
+  success: function ( data ) {  
+    var j = data.length;
+    var post, i;    
+    $( 'select[name="sub_unit_user"]' ).empty();
+    $( 'select[name="sub_unit_user"]' ).append( '<option value="">---Tanpa Sub Unit Pilihan---</option>' );
+    
+    for ( i = 0; i < j; i++ ) { post=data[ i ]; $( 'select[name="sub_unit_user"]' ).append( '<option value="' + post.id_sub_unit
+      + '">' + post.nama_display + '</option>' ); 
+    } 
+  } 
+  } );  
+
+});
 
 var desa_tbl;
 $( "#kecamatan" ).change(function() {
@@ -994,8 +1067,8 @@ function LoadUnit(){
     });  
 };
 
-$(document).on('click', '#btnPilihUnit', function() {
-    var data = unit_tbl.row( $(this).parents('tr') ).data();
+$(document).on('click', '#btnSimpanUnit', function() {
+    // var data = unit_tbl.row( $(this).parents('tr') ).data();
     $.ajaxSetup({
      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
@@ -1006,7 +1079,8 @@ $(document).on('click', '#btnPilihUnit', function() {
         data: {
             '_token': $('input[name=_token]').val(),
             'user_id' : id_user_temp,
-            'kd_unit' : data.id_unit,
+            'kd_unit' : $('#unit_user').val(),
+            'kd_sub' : $('#sub_unit_user').val(),
         },
         success: function(data) {
           $('#unit-table').DataTable().ajax.reload();

@@ -3031,7 +3031,7 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.btnHapusBelanja', function () {
 
-    if ( $( '#sumber_data_belanja' ).val() == 4 ) {
+    if ( $( '#sumber_belanja' ).val() == 1 ) {
 
       var x = confirm( "Anda yakin akan menghapus item belanja " + $( '#ur_item_ssh' ).val() + " ini ?" );
 
@@ -3070,13 +3070,12 @@ $( document ).ready( function () {
   $( document ).on( 'click', '#btnCopyBelanja', function () {
 
     $( '#ModalCopyBelanja' ).modal( 'show' );
-
     CopyBelanjaTbl = $( '#tblCopyBelanja' ).DataTable( {
       processing: true,
       serverSide: true,
       autoWidth: false,
       dom: 'bfrtIp',
-      "ajax": { "url": "./forumskpd/forum/getLokasiCopy/" + id_aktivitas_temp },
+      "ajax": { "url": "./forumskpd/forum/getLokasiCopy/" + $( '#id_unit' ).val() },
       "columns": [
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_aktivitas_kegiatan' },

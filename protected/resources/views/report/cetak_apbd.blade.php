@@ -172,13 +172,13 @@ use hoaaah\LaravelMenu\Menu;
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
           <label for="tahun_prarka" class="col-sm-3 control-label" align='left' style="color:#fff;">Tahun :</label>
-          <div class="col-sm-8">
+          <div class="col-sm-2">
             <select class="form-control tahun_prarka select2" name="tahun_prarka" id="tahun_prarka"></select>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-3" for="jns_dokumen" style="color:#fff;">Jenis Dokumen :</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
               <option value="-1">--Pilih Jenis Dokumen--</option>
               <option value="RAPBD">RANCANGAN APBD</option>

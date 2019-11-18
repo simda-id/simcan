@@ -76,10 +76,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 </div>
               </div>
               <div class="form-group">
-                <label for="peranuser" class="col-md-3 control-label">Peran/Role User</label>
-                <?php $groups = \App\Models\RefGroup::get(); ?>
+                <label for="peranuser" class="col-md-3 control-label">Role User</label>
                 <div class="col-md-6">
-                  <select id="role_id" type="role_id" class="form-control" name="role_id" required>
+                  <select id="role_id" type="role_id" class="form-control select2" name="role_id" required>
+                    <option value="0">---Pilih Peran/Role User---</option>
+                    <option value="1">Visitor</option>
+                    <option value="2">Operator</option>
+                    <option value="3">Supervisor</option>
+                    <option value="4">Administrator</option>
                   </select>
                 </div>
               </div>
@@ -156,21 +160,21 @@ $('.page-alert .close').click(function(e) {
         $(this).closest('.page-alert').slideUp();
     });
 
-$.ajax({
-  type: "GET",
-  url: 'group/peranGroup',
-  dataType: "json",
-  success: function(data) {
-     var j = data.length;
-    var post, i;
-    $('select[name="role_id"]').empty();
-    $('select[name="role_id"]').append('<option value="-1">---Pilih Peran/Role User---</option>');
-    for (i = 0; i < j; i++) {
-      post = data[i];
-      $('select[name="role_id"]').append('<option value="'+ post.id +'">'+ post.uraian_peran +'</option>');
-    }
-  }
-});
+// $.ajax({
+//   type: "GET",
+//   url: 'group/peranGroup',
+//   dataType: "json",
+//   success: function(data) {
+//      var j = data.length;
+//     var post, i;
+//     $('select[name="role_id"]').empty();
+//     $('select[name="role_id"]').append('<option value="-1">---Pilih Peran/Role User---</option>');
+//     for (i = 0; i < j; i++) {
+//       post = data[i];
+//       $('select[name="role_id"]').append('<option value="'+ post.id +'">'+ post.uraian_peran +'</option>');
+//     }
+//   }
+// });
 
 var group_tbl=$('#group-table').DataTable({
                 processing: true,

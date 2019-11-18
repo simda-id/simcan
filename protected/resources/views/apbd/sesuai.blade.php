@@ -344,5 +344,5 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-  @include('apbd.js_pagu_pd')
+  <script src="{{ asset('/protected/resources/views/apbd/js/js_pagu_pd.js')}}"></script>
 @endsection

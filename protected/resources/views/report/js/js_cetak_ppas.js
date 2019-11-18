@@ -496,6 +496,21 @@ $( document ).ready( function () {
       window.open( '../RekapPerPK' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 42 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&uraian_dok=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      vars += "&ttd=" + check_data;
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      window.open( '../CompareRincianBelanja' + vars, '_blank' );
+    };
+
 
   } );
 

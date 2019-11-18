@@ -114,19 +114,6 @@ $( document ).ready( function () {
     } );
 
     $( document ).on( 'click', '.btnProses', function () {
-        // if ( $( '#jns_laporan' ).val() == 1 ) {
-        //     window.open( './printGolonganSsh' );
-        // };
-        // if ( $( '#jns_laporan' ).val() == 2 ) {
-        //     window.open( './printKelompokSsh' );
-        // };
-        // if ( $( '#jns_laporan' ).val() == 3 ) {
-        //     window.open( './printSubKelompokSsh' );
-        // };
-        // if ( $( '#jns_laporan' ).val() == 4 ) {
-        //     window.open( './printItemSshX' );
-        // };
-
         if ( $( '#jns_laporan' ).val() == 1 ) {
             vars = "?token=" + $( 'input[name=_token]' ).val();
             vars += "&id_golongan=" + $( '#cb_golongan' ).val();
@@ -145,6 +132,28 @@ $( document ).ready( function () {
             vars += "&id_subkelompok=" + $( '#cb_subkelompok' ).val();
             vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
             window.open( './printPerkadaSsh' + vars, '_blank' );
+        };
+
+        if ( $( '#jns_laporan' ).val() == 3 ) {
+            vars = "?token=" + $( 'input[name=_token]' ).val();
+            vars += "&id_dokumen=" + $( '#cb_no_perda' ).val();
+            vars += "&id_zona=" + $( '#cb_zona' ).val();
+            vars += "&id_golongan=" + $( '#cb_golongan' ).val();
+            vars += "&id_kelompok=" + $( '#cb_kelompok' ).val();
+            vars += "&id_subkelompok=" + $( '#cb_subkelompok' ).val();
+            vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+            window.open( './printSsh900' + vars, '_blank' );
+        };
+
+        if ( $( '#jns_laporan' ).val() == 4 ) {
+            vars = "?token=" + $( 'input[name=_token]' ).val();
+            vars += "&id_dokumen=" + $( '#cb_no_perda' ).val();
+            vars += "&id_zona=" + $( '#cb_zona' ).val();
+            vars += "&id_golongan=" + $( '#cb_golongan' ).val();
+            vars += "&id_kelompok=" + $( '#cb_kelompok' ).val();
+            vars += "&id_subkelompok=" + $( '#cb_subkelompok' ).val();
+            vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+            window.open( './printSsh999' + vars, '_blank' );
         };
     } );
 

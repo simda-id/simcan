@@ -1,0 +1,41 @@
+<?php //00523
+// powerby:simda-perencanaan@simda.bpkp
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+iuM84Pa=

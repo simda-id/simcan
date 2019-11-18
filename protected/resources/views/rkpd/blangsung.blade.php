@@ -38,7 +38,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                     <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renstra :</label>
                         <div class="col-sm-5">
-                            <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
+                            <select class="form-control select2 id_Unit" name="id_unit" id="id_unit"></select>
                         </div>
                 </div>
                 </form>

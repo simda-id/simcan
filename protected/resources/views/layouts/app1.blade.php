@@ -16,7 +16,7 @@ use hoaaah\LaravelMenu\Menu;
                 <span class="fa-stack">
                     <i class="fa fa-square-o fa-stack-2x text-info"></i>
                     <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
-                </span><span style="color:#fff"> simd@<strong>Perencanaan</strong></span>
+                </span><span style="color:#fff"> simd@<strong>Perencanaan</strong> :: {{Session::get('xPemda')}}</span>
                 @if ( Session::get('AppType') === 0 )
                 <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} -
                     Provinsi </span>

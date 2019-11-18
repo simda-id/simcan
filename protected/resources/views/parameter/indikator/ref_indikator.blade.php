@@ -43,11 +43,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <tr>
                   <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                   <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
-                  <th width="10%" style="text-align: center; vertical-align:middle">Jenis Indikator</th>
-                  <th width="10%" style="text-align: center; vertical-align:middle">Kualitas Indikator</th>
-                  <th width="10%" style="text-align: center; vertical-align:middle">Sifat Indikator</th>
-                  <th width="10%" style="text-align: center; vertical-align:middle">Teknik Pengukuran</th>
-                  <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Satuan</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Jenis</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Kualitas</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Sifat</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Teknik</th>
+                  <th width="5%" style="text-align: center; vertical-align:middle">Aksi</th>
                 </tr>
               </thead>
               <tbody>

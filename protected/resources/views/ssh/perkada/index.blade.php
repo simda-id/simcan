@@ -912,7 +912,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div class="form-group">
                   <label class="control-label col-sm-3" for="no_dokumen_trans">Nomor Dokumen :</label> 
                   <div class="col-sm-9">                                  
-                    <select class="form-control no_dokumen_trans" name="no_dokumen_trans" id="no_dokumen_trans">
+                    <select class="form-control no_dokumen_trans select2" name="no_dokumen_trans" id="no_dokumen_trans">
                     </select>
                   </div>
               </div>
@@ -943,6 +943,61 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
       </div>
     </div>
+
+<div id="ModalUpdateItem900" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> UPDATE ITEM NON SSH YANG TELAH DIGUNAKAN DI TRANSAKSI </h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="title">Nomor Perkada SSH:</label>
+            <div class="col-sm-9">
+              <textarea type="text" id="nama_tarif_update" name="nama_tarif_update" class="form-control" rows="3" readonly></textarea>
+              <input type="hidden" id="id_tarif_perkada_update" name="id_tarif_perkada_update" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="no_dokumen_update">Nomor Dokumen :</label>
+            <div class="col-sm-9">
+              <select class="form-control no_dokumen_update select2" name="no_dokumen_update" id="no_dokumen_update">
+              </select>
+            </div>
+          </div>
+          <hr>
+          <h4 style="color: #b94743">Catatan :</h4>
+          <label>1. <span style="color: #b94743; font-style: italic;">Update</span> Item SSH hanya dapat dilakukan saat
+            <span style="color: #b94743">tahap penganggaran</span> </label><br>
+          <label>2. Dokumen Penganggaran yang dapat di-<span style="color: #b94743; font-style: italic;">update</span>
+            yang statusnya <span style="color: #b94743">belum terposting</span> </label><br>
+          <label>3. Item SSH yang di-<span style="color: #b94743; font-style: italic;">update</span>-kan untuk aktivitas
+            <span style="color: #b94743">NON ASB</span> </label><br>
+          <label>4. Jangan Lupa <span style="color: #b94743">Backup Database</span> sebelum <span
+              style="color: #b94743; font-style: italic;">update</span>...</label><br>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" class="btn btn-success btnUpdateItem900 btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-paper-plane-o fa-fw fa-lg"></i></span>Proses</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 @endsection
 

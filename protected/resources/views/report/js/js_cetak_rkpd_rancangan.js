@@ -173,11 +173,30 @@ $( document ).ready( function () {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
       vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
       vars += "&tabel=" + $( '#jns_dokumen' ).val();
       vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
       vars += "&id_program=" + $( '#prog_prarka' ).val();
       vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
       window.open( '../Rancangan221' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 51 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdRekapSD' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 52 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdRincianSD' + vars, '_blank' );
     };
 
     if ( $( '#jns_laporan' ).val() == 60 ) {
@@ -196,6 +215,24 @@ $( document ).ready( function () {
       vars += "&tabel=" + $( '#jns_dokumen' ).val();
       vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
       window.open( '../RancanganRkpd1a' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 62 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdRekapPagu' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 63 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdRekapPK' + vars, '_blank' );
     };
 
     //     if($('#jns_laporan').val()==9){

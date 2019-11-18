@@ -40,13 +40,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="form-group">
                     <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen PPAS :</label>
                         <div class="col-sm-5">
-                            <select class="form-control id_dokumen_keu" name="id_dokumen_keu" id="id_dokumen_keu"></select>
+                            <select class="form-control id_dokumen_keu select2" name="id_dokumen_keu" id="id_dokumen_keu"></select>
                         </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3 text-left" for="id_unit">Unit Penyusun Renstra :</label>
                         <div class="col-sm-5">
-                            <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
+                            <select class="form-control id_Unit select2" name="id_unit" id="id_unit"></select>
                         </div>
                 </div>
                 </form>

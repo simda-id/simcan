@@ -1,6 +1,5 @@
 <script type="text/javascript">
-
-$(document).ready(function(){
+  $(document).ready(function(){
 
 
 var template = Handlebars.compile($("#details-template").html());
@@ -431,8 +430,8 @@ $(document).on('click', '#btnCariRekening', function() {
         $('#rekening_ssh').val()==undefined ||
         $('#rekening_ssh').val() == ""){
         if(jenis_belanja_temp == 0){ x = 0 }
-        if(jenis_belanja_temp == 2){ x = 2 }
-        if(jenis_belanja_temp == 1){ x = 3 }
+        if(jenis_belanja_temp == 1){ x = 2 }
+        if(jenis_belanja_temp == 2){ x = 3 }
         if(jenis_belanja_temp == 3){ x = 4 }
         if(jenis_belanja_temp == 4){ x = 4 }
       } else {

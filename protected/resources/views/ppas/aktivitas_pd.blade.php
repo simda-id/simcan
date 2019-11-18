@@ -60,7 +60,7 @@
           <div class="form-group">
             <label class="control-label col-sm-3" for="title">Sumber Dana :</label>
             <div class="col-sm-4">
-              <select type="text" class="form-control sumber_dana" id="sumber_dana" name="sumber_dana"></select>
+              <select type="text" class="form-control sumber_dana select2" id="sumber_dana" name="sumber_dana"></select>
             </div>
           </div>
           <div class="form-group">
@@ -77,11 +77,13 @@
           <div class="form-group">
             <label for="id_satuan_1_aktivitas" class="col-sm-3 control-label" align='left'>Satuan Vol 1 :</label>
             <div class="col-sm-3">
-              <select type="text" class="form-control" id="id_satuan_1_aktivitas" name="id_satuan_1_aktivitas"></select>
+              <select type="text" class="form-control" id="id_satuan_1_aktivitas select2"
+                name="id_satuan_1_aktivitas"></select>
             </div>
             <label for="id_satuan_2_aktivitas" class="col-sm-2 control-label" align='left'>Satuan Vol 2 :</label>
             <div class="col-sm-3">
-              <select type="text" class="form-control" id="id_satuan_2_aktivitas" name="id_satuan_2_aktivitas"></select>
+              <select type="text" class="form-control" id="id_satuan_2_aktivitas select2"
+                name="id_satuan_2_aktivitas"></select>
             </div>
           </div>
           <div class="form-group" id="divSatuanUtama">

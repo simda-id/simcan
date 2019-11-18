@@ -486,6 +486,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   @include('apbd.cariLokasiTeknisModal')
   @include('apbd.cariItemSSH')
   @include('apbd.cariRekening')
+  @include('apbd.cariProgNas')
+  @include('apbd.cariProgProv')
   @include('apbd.ModalCopyBelanja')
   @include('apbd.loadBelanjaASB')
   @include('bebas.FrmCariPegawai')
@@ -493,5 +495,5 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @endsection
 
 @section('scripts')
-  @include('apbd.js_penyesuaian_pd')
+  <script src="{{ asset('/protected/resources/views/apbd/js/js_penyesuaian_pd.js')}}"></script>
 @endsection

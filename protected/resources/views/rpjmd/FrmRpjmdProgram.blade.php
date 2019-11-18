@@ -19,8 +19,8 @@
             <label for="jns_program" class="col-sm-2 control-label" align='left'>Jenis Pendanaan :</label>
             <div class="col-sm-4">
               <select class="form-control select2 jns_program" name="jns_program" id="jns_program">
-                <option value="0">Jika Bukan Pendanaan Abaikan</option>
-                <option value="1">Jika Bukan Pendanaan Abaikan</option>
+                <option value="0">-NA-</option>
+                <option value="1">-NA-</option>
                 <option value="2">Pendapatan</option>
                 <option value="3">Penerimaan Pembiayaan</option>
                 <option value="4">Pengeluaran Pembiayaan</option>

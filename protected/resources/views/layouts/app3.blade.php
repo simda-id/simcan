@@ -7,62 +7,73 @@ use hoaaah\LaravelMenu\Menu;
 @section('layoutBody')
 <div id="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>                    
-                <!-- Branding Image -->
-                <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
-                 <span class="fa-stack">
-                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x text-info"></i>
-                    </span> simd@<strong>Perencanaan</strong> ver <strong>1.0 </strong></a>
-            </div>
-            <ul class="nav navbar-top-links pull-right">
-                <span style="color:#fff">
-                    <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Branding Image -->
+            <a class="navbar-brand navbar-right" href="{{ url('/home') }}">
+                <span class="fa-stack">
+                    <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                    <i class="fa fa-home fa-stack-1x text-info"></i>
                 </span>
-                        @if (Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    User <span class="caret"></span>
-                                </a>
+                <span style="color:#fff"> simd@<strong>INTEGRATED</strong> :: {{Session::get('xPemda')}}</span>
+                @if ( Session::get('AppType') === 0 )
+                <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}}
+                    - Provinsi </span>
+                @else
+                <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}}
+                </span>
+                @endif
+            </a>
+        </div>
+        <ul class="nav navbar-top-links pull-right">
+            <span style="color:#fff">
+                <i class="fa fa-flag fa-fw"></i> Tahun Anggaran:
+                <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+            </span>
+            @if (Auth::guest())
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    User <span class="caret"></span>
+                </a>
 
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ route('register') }}">Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('login') }}">Login</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                <ul class="dropdown-menu dropdown-user" role="menu">
+                    <li>
+                        <a href="{{ route('register') }}">Register</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('login') }}">Login</a>
+                    </li>
+                </ul>
+            </li>
+            @else
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
 
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
+                <ul class="dropdown-menu dropdown-user" role="menu">
+                    <li>
+                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @endif
+        </ul>
 
-            <div class="navbar-default sidebar" role="navigation">
-                <?php
+        <div class="navbar-default sidebar" role="navigation">
+            <?php
                     $akses = new CekAkses();
                     $menu = new Menu();
                     $menu->render([
@@ -84,8 +95,8 @@ use hoaaah\LaravelMenu\Menu;
                         ]
                     ]);
                 ?>
-                
-            </div>
+
+        </div>
     </nav>
 
     <div id="page-wrapper">

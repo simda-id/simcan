@@ -6,99 +6,111 @@ use hoaaah\LaravelMenu\Menu;
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_token" content="{!! csrf_token() !!}"/>
 
-    <meta name="description" content="Sistem Perencanaan yang dikembangkan oleh Tim Simda BPKP">
-    <meta name="author" content="Tim Simda BPKP">
-    <link rel="icon" href="{{asset('simda-favicon.ico')}}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{!! csrf_token() !!}" />
 
-    <title>simd@Perencanaan</title>
+        <meta name="description" content="Sistem Perencanaan yang dikembangkan oleh Tim Simda BPKP">
+        <meta name="author" content="Tim Simda BPKP">
+        <link rel="icon" href="{{asset('simda-favicon.ico')}}">
 
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
-    <style>
-        h1.padding {
-            padding-right: 1cm;
-        }
-        #radioBtn .notActive{
-            color: #b5b6b7;
-            background-color: #fff;
-        }
-    </style>
-</head>
-<body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
-            {{-- <div class="container"> --}}
+        <title>simd@Perencanaan</title>
+
+        <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/sb-admin-2.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/dataTables.fontAwesome.css') }}" rel="stylesheet">
+        <style>
+            h1.padding {
+                padding-right: 1cm;
+            }
+
+            #radioBtn .notActive {
+                color: #b5b6b7;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation"
+                style="margin-bottom: 0; background: #0E203A; border-color: #ccc; box-shadow: 0 0 2px 0 #E8FFFF;">
+                {{-- <div class="container"> --}}
                 <div class="navbar-header">
-                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}" style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
-                    <span class="fa-stack">
-                      <i class="fa fa-square-o fa-stack-2x text-info"></i>
-                      <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
-                    </span>
-                    <span style="color:#fff"> simd@<strong>Anggaran</strong></span>
-                    @if ( Session::get('AppType') === 0 )
-                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}} - Provinsi </span>
+                    <a class="navbar-brand navbar-right" href="{{ url('/home') }}"
+                        style="margin-top: -5px; margin-left: 10px; max-height: 40px;">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-2x text-info"></i>
+                            <i class="fa fa-home fa-stack-1x" style="color:#fff"></i>
+                        </span>
+                        <span style="color:#fff"> simd@<strong>Anggaran</strong> :: {{Session::get('xPemda')}}</span>
+                        @if ( Session::get('AppType') === 0 )
+                        <span class="label" style="background-color: #3a87ad; color:#fff;"> {{Session::get('versiApp')}}
+                            - Provinsi </span>
                         @else
-                            <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}} </span>
+                        <span class="label" style="background-color: #f89406; color:#fff;"> {{Session::get('versiApp')}}
+                        </span>
                         @endif
                     </a>
                 </div>
 
-                    <ul class="nav navbar-top-links pull-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li class="dropdown" style="color:#fff">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
-                                    User <span class="caret"></span>
-                                </a>
+                <ul class="nav navbar-top-links pull-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                    <li class="dropdown" style="color:#fff">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+                            style="color:#fff">
+                            User <span class="caret"></span>
+                        </a>
 
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ route('register') }}">Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('login') }}">Login</a>
-                                    </li>
-                                </ul>
+                        <ul class="dropdown-menu dropdown-user" role="menu">
+                            <li>
+                                <a href="{{ route('register') }}">Register</a>
                             </li>
-                        @else                        
-                        <span style="color:#fff">
-                            <i class="fa fa-flag fa-fw"></i> Tahun Anggaran: <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
-                        </span>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fff">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-user" role="menu">
-                                    <li>
-                                        <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                            <li>
+                                <a href="{{ route('login') }}">Login</a>
                             </li>
-                        @endif
-                    </ul>
+                        </ul>
+                    </li>
+                    @else
+                    <span style="color:#fff">
+                        <i class="fa fa-flag fa-fw"></i> Tahun Anggaran:
+                        <?= Session::get('tahun') != NULL ? Session::get('tahun') : 'Pilih!' ?></i>
+                    </span>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+                            style="color:#fff">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                   <div class="navbar-default sidebar" role="navigation">
-                        <?php
+                        <ul class="dropdown-menu dropdown-user" role="menu">
+                            <li>
+                                <a href="{{ url('/home') }}"><i class="fa fa-home fa-fw text-info"></i> Home</a>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out fa-fw text-info"></i> Logout</a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <?php
                             $akses = new CekAkses();
                             $menu = new Menu();
                             $menu->render([
@@ -339,16 +351,16 @@ use hoaaah\LaravelMenu\Menu;
                                 ]
                             ]);
                         ?>
-                    </div>
-        </nav>
+                </div>
+            </nav>
 
-        <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
+            <div id="page-wrapper" style="background-image: linear-gradient(to bottom, rgb(96,108,136) 0%,rgb(63,76,107) 100%);
         background-repeat: no-repeat; background-attachment: fixed;">
-            <br>
-            @yield('content')
-        </div>
+                <br>
+                @yield('content')
+            </div>
 
-    </div>
+        </div>
 
         <script src="{{ asset('/js/jquery.min.js')}}"></script>
         <script src="{{ asset('/js/jquery-ui.js')}}"></script>
@@ -411,5 +423,6 @@ use hoaaah\LaravelMenu\Menu;
         @yield('scripts')
 
 
-</body>
+    </body>
+
 </html>

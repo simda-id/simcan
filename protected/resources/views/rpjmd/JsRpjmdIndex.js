@@ -222,7 +222,7 @@ $( document ).ready( function () {
         "sLast": "Terakhir"
       }
     },
-    "ajax": { "url": "./rpjmd/getDokumenRpjmd" },
+    ajax: { "url": "./rpjmd/getDokumenRpjmd" },
     columns: [
       {
         "className": 'details-control',
@@ -264,6 +264,7 @@ $( document ).ready( function () {
       ajax: data.details_url,
       dom: 'BfRtIP',
       autoWidth: false,
+      bDestroy: true,
       language: {
         "decimal": ",",
         "thousands": ".",
@@ -284,13 +285,12 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "columns": [
+      columns: [
         { data: 'no_urut', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'uraian_visi_rpjmd', 'searchable': false, 'orderable': false },
         { data: 'action', 'searchable': false, 'orderable': false }
       ],
-      "order": [ [ 0, 'asc' ] ],
-      "bDestroy": true
+      "order": [ [ 0, 'asc' ] ]
     } )
 
     $( '#' + tableId + '  tbody' ).on( 'dblclick', 'tr', function () {
@@ -350,7 +350,7 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/visi/" + id_rpjmd },
+      ajax: { "url": "./rpjmd/visi/" + id_rpjmd },
       columns: [
         { data: 'id_visi_rpjmd', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'uraian_visi_rpjmd', 'searchable': false, 'orderable': false },
@@ -507,8 +507,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/misi/" + id_visi_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/misi/" + id_visi_rpjmd },
+      columns: [
         { data: 'no_visi', 'searchable': false, sClass: "dt-center" },
         { data: 'no_urut', 'searchable': false, sClass: "dt-center" },
         { data: 'uraian_misi_rpjmd' },
@@ -674,8 +674,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/tujuan/" + id_misi_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/tujuan/" + id_misi_rpjmd },
+      columns: [
         {
           "className": 'details-control',
           "orderable": false,
@@ -721,7 +721,7 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "columns": [
+      columns: [
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_sasaran_rpjmd' },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
@@ -1059,8 +1059,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./admin/parameter/getRefIndikator" },
-      "columns": [
+      ajax: { "url": "./admin/parameter/getRefIndikator" },
+      columns: [
         { data: 'no_urut' },
         { data: 'nm_indikator' },
         { data: 'uraian_satuan' },
@@ -1104,8 +1104,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/sasaran/" + id_tujuan_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/sasaran/" + id_tujuan_rpjmd },
+      columns: [
         {
           "className": 'details-control',
           "orderable": false,
@@ -1151,7 +1151,7 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "columns": [
+      columns: [
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_sasaran_rpjmd' },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
@@ -1488,8 +1488,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/kebijakan/" + id_sasaran_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/kebijakan/" + id_sasaran_rpjmd },
+      columns: [
         { data: 'kode_sasaran', sClass: "dt-center" },
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'uraian_kebijakan_rpjmd' },
@@ -1642,8 +1642,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/strategi/" + id_sasaran_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/strategi/" + id_sasaran_rpjmd },
+      columns: [
         { data: 'kode_sasaran', sClass: "dt-center" },
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'uraian_strategi_rpjmd' },
@@ -1795,8 +1795,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/program/" + id_sasaran_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/program/" + id_sasaran_rpjmd },
+      columns: [
         {
           "className": 'details-control',
           "orderable": false,
@@ -1874,7 +1874,7 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "columns": [
+      columns: [
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_program_rpjmd' },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
@@ -2320,8 +2320,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/programurusan/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/programurusan/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kode_bid', sClass: "dt-center" },
         { data: 'nm_urusan' },
@@ -2627,8 +2627,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kd_unit', sClass: "dt-center" },
         { data: 'nm_unit' },
@@ -2669,7 +2669,7 @@ $( document ).ready( function () {
       responsive: true,
       autoWidth: false,
       dom: 'BfRtIp',
-      "ajax": { "url": "./admin/parameter/getUnitPelaksana" },
+      ajax: { "url": "./admin/parameter/getUnitPelaksana" },
       language: {
         "decimal": ",",
         "thousands": ".",
@@ -2690,7 +2690,7 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "columns": [
+      columns: [
         { data: 'kd_unit', sClass: "dt-center" },
         { data: 'nm_unit' },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
@@ -2904,8 +2904,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/pdtRpjmd/" + id_visi },
-      "columns": [
+      ajax: { "url": "./rpjmd/pdtRpjmd/" + id_visi },
+      columns: [
         // { data: 'kd_sasaran', sClass: "dt-center"},
         { data: 'no_urut', sClass: "dt-center" },
         {
@@ -2977,8 +2977,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/btlRpjmd/" + id_visi },
-      "columns": [
+      ajax: { "url": "./rpjmd/btlRpjmd/" + id_visi },
+      columns: [
         // { data: 'kd_sasaran', sClass: "dt-center"},
         { data: 'no_urut', sClass: "dt-center" },
         {
@@ -3486,8 +3486,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/getUrusanBtl/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/getUrusanBtl/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kode_bid', sClass: "dt-center" },
         { data: 'nm_urusan' },
@@ -3702,8 +3702,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kd_unit', sClass: "dt-center" },
         { data: 'nm_unit' },
@@ -3988,8 +3988,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/getUrusanDpt/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/getUrusanDpt/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kode_bid', sClass: "dt-center" },
         { data: 'nm_urusan' },
@@ -4204,8 +4204,8 @@ $( document ).ready( function () {
           "sLast": "Terakhir"
         }
       },
-      "ajax": { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
-      "columns": [
+      ajax: { "url": "./rpjmd/programpelaksana/" + id_program_rpjmd },
+      columns: [
         { data: 'kd_program', sClass: "dt-center" },
         { data: 'kd_unit', sClass: "dt-center" },
         { data: 'nm_unit' },

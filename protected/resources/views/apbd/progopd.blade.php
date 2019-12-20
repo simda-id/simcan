@@ -373,6 +373,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             <tr>
                                                 <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Item Belanja</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Rekening Belanja</th>
                                                 <th colspan="2" width='10%' style="text-align: center; vertical-align:middle">Output</th>
                                                 <th colspan="2" width='20%' style="text-align: center; vertical-align:middle">Jumlah Belanja</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>

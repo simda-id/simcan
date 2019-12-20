@@ -446,21 +446,22 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnCariRekening', function () {
-    var x
+    var x, y;
+    if ( jenis_belanja_temp == 0 ) { x = 0 }
+    if ( jenis_belanja_temp == 1 ) { x = 2 }
+    if ( jenis_belanja_temp == 2 ) { x = 3 }
+    if ( jenis_belanja_temp == 3 ) { x = 4 }
+    if ( jenis_belanja_temp == 4 ) { x = 4 }
     if ( $( '#rekening_ssh' ).val() == null ||
       $( '#rekening_ssh' ).val() == undefined ||
       $( '#rekening_ssh' ).val() == "" ) {
-      if ( jenis_belanja_temp == 0 ) { x = 0 }
-      if ( jenis_belanja_temp == 1 ) { x = 2 }
-      if ( jenis_belanja_temp == 2 ) { x = 3 }
-      if ( jenis_belanja_temp == 3 ) { x = 4 }
-      if ( jenis_belanja_temp == 4 ) { x = 4 }
+      y = 0;
     } else {
-      x = 1
+      y = $( '#id_item_ssh' ).val();
     }
 
     $( '#cariRekening' ).modal( 'show' );
-    loadRekeningSsh( x, $( '#id_item_ssh' ).val() )
+    loadRekeningSsh( x, y )
 
   } );
 
@@ -1321,6 +1322,9 @@ $( document ).ready( function () {
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'uraian_tarif_ssh' },
         {
+          data: 'rekening_display'
+        },
+        {
           data: 'volume_1', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
         },
@@ -1564,6 +1568,15 @@ $( document ).ready( function () {
 
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
 
+    var x
+    if ( jenis_belanja_temp == 0 ) { x = 0 }
+    if ( jenis_belanja_temp == 1 ) { x = 2 }
+    if ( jenis_belanja_temp == 2 ) { x = 3 }
+    if ( jenis_belanja_temp == 3 ) { x = 4 }
+    if ( jenis_belanja_temp == 4 ) { x = 4 }
+
+    loadRekeningSsh( x, 0 );
+
     id_aktivitas_temp = data.id_aktivitas_pd;
     id_asb_temp = data.id_aktivitas_asb;
     id_satuan_1_aktiv_temp = data.id_satuan_1;
@@ -1655,18 +1668,18 @@ $( document ).ready( function () {
     $( '#id_unit_progrenja' ).val( unit_temp );
     $( '#jenis_belanja' ).val( jenis_belanja_temp ).trigger( 'change' );
     $( '#no_urut_progrenja' ).val( null );
-    $( '#id_program_renstra' ).val( null );
+    $( '#id_program_renstra' ).val( 0 );
     $( '#ur_program_renja' ).val( null );
-    $( '#id_renja_program' ).val( null );
+    $( '#id_renja_program' ).val( 0 );
     $( '#ur_program_ref' ).val( null );
-    $( '#id_program_ref' ).val( null );
+    $( '#id_program_ref' ).val( 0 );
     $( '#pagu_renja_program' ).val( null );
     $( '#pagu_forum_progrenja' ).val( null );
     $( '#keterangan_status_progrenja' ).val( null );
     $( '#ur_program_nasional' ).val( null );
-    $( '#id_program_nasional' ).val( null );
+    $( '#id_program_nasional' ).val( 0 );
     $( '#ur_program_prov' ).val( null );
-    $( '#id_program_prov' ).val( null );
+    $( '#id_program_prov' ).val( 0 );
     // document.frmProgRenja.status_pelaksanaan_progrenja[ 4 ].checked = true;
     $( '#sumber_data_progrenja' ).val( 1 );
     $( '#status_data_progrenja' ).val( 0 );

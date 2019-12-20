@@ -6,84 +6,88 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <?php
+  <div class="row">
+    <div class="col-md-12">
+      <?php
                 $this->title = ' API Management ';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'transfer';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
-            ?>          
-        </div>
+            ?>
     </div>
-    <div id="pesan"></div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <p><h2 class="panel-title">Setting API Management</h2></p>
-          </div>
+  </div>
+  <div id="pesan"></div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <p>
+            <h2 class="panel-title">Setting API Management</h2>
+          </p>
+        </div>
 
-          <div class="panel-body">
+        <div class="panel-body">
 
-              <form name="frmModalJenis" class="form-horizontal" role="form" autocomplete='off' action="" method="" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group">
-                  <label class="control-label col-sm-1" for="jenis_api">Jenis API </label>
-                  <div class="col-sm-3">
-                    <select class="form-control" name="jenis_api" id="jenis_api">
-                      <option value="1">API Simda Keuangan</option>
-                      <option value="2">API SIPD Kemendagri</option>
-                      <option value="3">API KRISNA Bappenas</option>
-                    </select>
+          <form name="frmModalJenis" class="form-horizontal" role="form" autocomplete='off' action="" method=""
+            onsubmit="return false;">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+              <label class="control-label col-sm-1" for="jenis_api">Jenis API </label>
+              <div class="col-sm-3">
+                <select class="form-control select2" name="jenis_api" id="jenis_api">
+                  <option value="1">API Simda Keuangan</option>
+                  <option value="2">API SIPD Kemendagri</option>
+                  <option value="3">API KRISNA Bappenas</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-1" for="alamat_api">Alamat API </label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="alamat_api" name="alamat_api">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-1" for="uraian_key">API Key </label>
+              <div class="col-sm-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="uraian_key" name="uraian_key">
+                  <div class="input-group-btn">
+                    {{-- <button class="btn btn-success" id="btnAddSetting" name="btnAddSetting"><i class="fa fa-plus fa-fw fa-lg"></i></button> --}}
+                    <button id="btnAddSetting" type="button" class="btnAddSetting btn btn-labeled btn-success"><span
+                        class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah API</button>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-1" for="alamat_api">Alamat API </label>
-                  <div class="col-sm-6">
-                      <input type="text" class="form-control" id="alamat_api" name="alamat_api">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-1" for="uraian_key">API Key </label>
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="uraian_key" name="uraian_key">
-                      <div class="input-group-btn">
-                        {{-- <button class="btn btn-success" id="btnAddSetting" name="btnAddSetting"><i class="fa fa-plus fa-fw fa-lg"></i></button> --}}
-                        <button id="btnAddSetting" type="button" class="btnAddSetting btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah API</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <table id='tblSettingApi' class="table display compact table-striped table-bordered table-responsive" cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th width="8%" style="text-align: center; vertical-align:middle">No Urut</th>
-                    <th width="15%" style="text-align: center; vertical-align:middle">Jenis API</th>
-                    <th width="30%" style="text-align: center; vertical-align:middle">API Key / Barrier Key</th>
-                    <th style="text-align: center; vertical-align:middle">URL API </th>
-                    <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-           </div> 
+              </div>
+            </div>
+          </form>
+          <table id='tblSettingApi' class="table display compact table-striped table-bordered table-responsive"
+            cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="8%" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th width="15%" style="text-align: center; vertical-align:middle">Jenis API</th>
+                <th width="30%" style="text-align: center; vertical-align:middle">API Key / Barrier Key</th>
+                <th style="text-align: center; vertical-align:middle">URL API </th>
+                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 @endsection
 
 @section('scripts')
-<script  type="text/javascript" language="javascript" class="init">
-
-$(document).ready(function() {
+<script type="text/javascript" language="javascript" class="init">
+  $(document).ready(function() {
 
 $('[data-toggle="popover"]').popover();
 

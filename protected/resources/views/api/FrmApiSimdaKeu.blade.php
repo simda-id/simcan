@@ -30,35 +30,38 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
-              <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Perencanaan :</label>
+              <label for="tahun_rkpd" class="col-sm-3 control-label text-left" align='left'>Tahun Anggaran </label>
               <div class="col-sm-2">
                 <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd"
                   value="{{Session::get('tahun')}}" disabled>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen APBD :</label>
+              <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen APBD </label>
               <div class="col-sm-5">
                 <select class="form-control id_dokumen_keu select2" name="id_dokumen_keu" id="id_dokumen_keu"></select>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3 text-left" for="id_unit">Unit Perangkat Daerah :</label>
+              <label class="control-label col-sm-3 text-left" for="id_unit">Unit Perangkat Daerah </label>
               <div class="col-sm-5">
-                <select class="form-control id_Unit select2" name="id_unit" id="id_unit"></select>
+                <select class="form-control id_unit select2" name="id_unit" id="id_unit"></select>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3 text-left" for="id_sub_unit">Sub Unit PD :</label>
+              <label class="control-label col-sm-3 text-left" for="id_sub_unit">Sub Unit Perangkat Daerah</label>
               <div class="col-sm-5">
                 <select class="form-control id_sub_unit select2" name="id_sub_unit" id="id_sub_unit"></select>
               </div>
             </div>
+            <div class="form-group">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-5 text-right">
+                <p><a class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
+                        class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Baru APBD ke SIMDA Keuangan</a></p>
+              </div>
+            </div>
           </form>
-          <div class="add">
-            <p><a class="add-satuan btn-labeled btn btn-sm btn-success"><span class="btn-label"><i
-                    class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim APBD ke SIMDA Keuangan</a></p>
-          </div>
           <br>
           <table id="TblLogKirim" class="table display compact table-striped table-bordered table-responsive"
             width="100%">
@@ -76,57 +79,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <tbody>
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--Modal Tambah -->
-<div id="frmKirimApi" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Daftar Unit OPD yang siap dikirim </h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">No Dokumen RKPD :</label>
-            <div class="col-sm-8">
-              <select type="text" class="form-control id_dokumen_rkpd" id="id_dokumen_rkpd"
-                name="id_dokumen_rkpd"></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <table id='tblProses' class="table display compact table-striped table-bordered" width="100%">
-                <thead>
-                  <tr>
-                    <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
-                    <th width="15%" style="text-align: center; vertical-align:middle">Kode Unit</th>
-                    <th style="text-align: center; vertical-align:middle">Nama Unit</th>
-                    <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-sm-2 text-left">
-            <button id="btnProsesAll" type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i
-                  class="fa fa-paper-plane-o fa-fw fa-lg"></i></span> Proses Load</button>
-          </div>
-          <div class="col-sm-10 text-right">
-            <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-              <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-          </div>
         </div>
       </div>
     </div>
@@ -175,74 +127,62 @@ $('[data-toggle="popover"]').popover();
 
 $.ajax({
   type: "GET",
-  url: 'getDokRkpd',
+  url: 'getDokApbd',
   dataType: "json",
   success: function(data) {
 
   var j = data.length;
   var post, i;
 
-  $('select[name="id_dokumen_rkpd"]').empty();
-  $('select[name="id_dokumen_rkpd"]').append('<option value="0">---Pilih Dokumen RKPD---</option>');
+  $('select[name="id_dokumen_keu"]').empty();
+  $('select[name="id_dokumen_keu"]').append('<option value="0">---Pilih Dokumen APBD---</option>');
 
   for (i = 0; i < j; i++) {
     post = data[i];
-    $('select[name="id_dokumen_rkpd"]').append('<option value="'+ post.id_dokumen_rkpd +'">'+ post.nomor_display +'</option>');
+    $('select[name="id_dokumen_keu"]').append('<option value="'+ post.id_dokumen_keu +'">'+ post.nomor_keu +'</option>');
   }
   }
 });
 
-var TblUnitKirim;
-function loadTblUnitKirim(id_dokumen_keu){ 
-vars = "?id_dokumen=" + id_dokumen_keu;   
-TblUnitKirim=$('#tblProses').DataTable({
-  processing: true,
-  serverSide: true,
-  autoWidth : false,
-  language: {
-        "decimal": ",",
-        "thousands": ".",
-        "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
-        "sProcessing":   "Sedang memproses...",
-        "sLengthMenu":   "Tampilkan _MENU_ entri",
-        "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-        "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-        "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-        "sInfoPostFix":  "",
-        "sSearch":       "Cari:",
-        "sUrl":          "",
-        "oPaginate": {
-            "sFirst":    "Pertama",
-            "sPrevious": "Sebelumnya",
-            "sNext":     "Selanjutnya",
-            "sLast":     "Terakhir"
-        }
-  },
-  "pageLength": 50,
-  "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
-  "bDestroy": true,
-  "ajax": {"url": "./getUnitRkpd"+ vars},
-  'columnDefs': [
-    { 'width': 10,
-      'targets': 0,
-      'checkboxes': {'selectRow': true } },
-    { "targets": 1, "width": 10 }
-  ],
-  'select': { 'style': 'multi' },
-  "columns": [
-    { data: 'id_unit', sClass: "dt-center", searchable: false, orderable:false,},
-    { data: 'kode_unit', sClass: "dt-center", width:"5px"},
-    { data: 'nama_unit'},                        
-    { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"}
-  ],
-  "order": [[0, 'asc']],
-  });
-}  
+$( ".id_dokumen_keu" ).change( function () {
+  $.ajax( {
+    type: "GET",
+    url: 'getUnitApbd?id_dokumen=' + $( '#id_dokumen_keu' ).val(),
+    dataType: "json",
+    success: function ( data ) {
+      var j = data.length;
+      var post, i;
 
-$( ".id_dokumen_rkpd" ).change(function() {
-  loadTblUnitKirim($('#id_dokumen_rkpd').val());
-});
+      $( 'select[name="id_unit"]' ).empty();
+      $( 'select[name="id_unit"]' ).append( '<option value="0">---Pilih Unit Perangkat Daerah---</option>' );
+
+      for ( i = 0; i < j; i++ ) { 
+        post=data[ i ]; 
+        $( 'select[name="id_unit"]' ).append( '<option value="' + post.id_unit + '">' + post.nama_unit + '</option>' ); 
+      } 
+    } 
+  } ); 
+} );
+
+$( ".id_unit" ).change( function () {
+  $.ajax( {
+    type: "GET",
+    url: 'getSubUnitApbd?id_dokumen=' + $( '#id_dokumen_keu' ).val() + "&id_unit="+ $( '#id_unit' ).val(),
+    dataType: "json",
+    success: function ( data ) {
+      var j = data.length;
+      var post, i;
+
+      $( 'select[name="id_sub_unit"]' ).empty();
+      $( 'select[name="id_sub_unit"]' ).append( '<option value="0">---Pilih Sub Unit Perangkat Daerah---</option>' );
+
+      for ( i = 0; i < j; i++ ) {
+        post=data[ i ]; 
+        $( 'select[name="id_sub_unit"]' ).append( '<option value="' + post.id_sub_unit+ '">' + post.nama_sub_unit + '</option>' ); 
+      } 
+    } 
+  } ); 
+} );
 
 var TblLogKirims; 
 TblLogKirims=$('#TblLogKirim').DataTable({
@@ -271,12 +211,13 @@ TblLogKirims=$('#TblLogKirim').DataTable({
     },
     "pageLength": 50,
     "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
-    "ajax": {"url": "./getdata"},
+    "ajax": {"url": "./getdataKeu"},
     "columns": [
           { data: 'no_urut', sClass: "dt-center", searchable: false, orderable:false,},
           { data: 'tgl_kirim', sClass: "dt-center"},
           { data: 'kodeskpd', sClass: "dt-center"},
-          { data: 'uraiskpd', sClass: "dt-left"},
+          { data: 'nama_unit', sClass: "dt-left"},
+          { data: 'nama_sub', sClass: "dt-left"},
           { data: 'log_kirim','searchable': true, 'orderable':true, sClass: "dt-left",
             render: function(data, type, row,meta) {
             return row.log_kirim + '   <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>  ';
@@ -287,111 +228,57 @@ TblLogKirims=$('#TblLogKirim').DataTable({
     "bDestroy": true
   });
 
-$(document).on('click', '.add-satuan', function() {
-  $('.form-horizontal').show();
-  loadTblUnitKirim($('#id_dokumen_rkpd').val());
-  $('#tblProses').DataTable().ajax.reload(null,false);
-  $('#frmKirimApi').modal('show');
-});
-
-$(document).on('click', '#btnProsesKirim', function() {
-  var data = TblUnitKirim.row( $(this).parents('tr') ).data();
-  var id_unit=data.id_unit;
-
+  $(document).on('click', '.btnLanjutKirim', function() { 
+    $( '#prosesbar' ).show();
+    var data = TblLogKirims.row( $( this ).parents( 'tr' ) ).data();
     $.ajaxSetup({
-        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
-
-    $('#ModalProgress').modal('show');
-    $('#frmKirimApi').modal('hide'); 
-
-    $.ajax({
-        type: 'POST',
-        url: './postJSONBangda',
-        data: {
-          '_token': $('input[name=_token]').val(),
-          'id_unit' : id_unit,
-      },
-      success: function(data) {
-        $('#TblLogKirim').DataTable().ajax.reload(null,false);
-        createPesan(data.pesan,"success");
-        $('#ModalProgress').modal('hide');
-      },
-      error: function(data){
-        $('#TblLogKirim').DataTable().ajax.reload(null,false);
-        createPesan(data.pesan,"danger");
-        $('#ModalProgress').modal('hide');
-      }
-    });
-});
-
-$(document).on('click', '#btnProsesAll', function() {
-  var rows_selected = TblUnitKirim.column(0).checkboxes.selected();
-  var counts_selected = rows_selected.count(); 
-  var rows_data = TblUnitKirim.rows({ selected: true }).data(); 
-  var counts_data = TblUnitKirim.rows({ selected: true }).count();  
-  
-  if (rows_selected.count() == 0) {
-    createPesan("Data belum ada yang dipilih","danger");
-    return;
-  }; 
-
-  $('#ModalProgress').modal('show');
-  $('#frmKirimApi').modal('hide');  
-
-  $.each(rows_selected, function(index, rowId){
-    var id_unit=rowId;
-    $.ajaxSetup({
-        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });         
-    $.ajax({
-        type: 'POST',
-        url: './postJSONBangda',
-        data: {
-          '_token': $('input[name=_token]').val(),
-          'id_unit' : id_unit,
-      },
-      success: function(data) {
-        $('#TblLogKirim').DataTable().ajax.reload(null,false);
-        if(index == (counts_data - 1) ){
-          $('#ModalProgress').modal('hide');
-          createPesan(data.pesan,"success");
-        }
-      },
-      error: function(data){
-        $('#TblLogKirim').DataTable().ajax.reload(null,false);
-        $('#ModalProgress').modal('hide');
-        createPesan(data.pesan,"danger");
-      }
-    });
-  });
-  e.preventDefault();
-});
-
-$(document).on('click', '#btnDeleteLog', function() {
-  var data = TblLogKirims.row( $(this).parents('tr') ).data();
-
-    $.ajaxSetup({
-       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-
+    
     $.ajax({
       type: 'post',
-      url: './hapusLogBangda',
+      url: './postKirimKeu',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id_log': data.id_log,
+        'id_sub': data.id_sub_unit,
+        'id_dokumen_keu': data.id_dok_keu,
+        'step_kirim' : data.step_kirim,
       },
       success: function(data) {
-        $('#TblLogKirim').DataTable().ajax.reload(null,false);;
+        $('#TblLogKirim').DataTable().ajax.reload(null,false);
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
-          createPesan(data.pesan,"danger"); 
-        } 
+          createPesan(data.pesan,"danger");
+        }
       }
     });
-});
+  });
+
+  $(document).on('click', '.btnKirimKeuangan', function() {
+    $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+    
+    $.ajax({
+    type: 'post',
+    url: './postKirimKeu',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id_sub': $( '#id_sub_unit' ).val(),
+      'id_dokumen_keu': $( '#id_dokumen_keu' ).val(),
+      'step_kirim' : 0,
+    },
+    success: function(data) {
+      $('#TblLogKirim').DataTable().ajax.reload(null,false);
+      if(data.status_pesan==1){
+        createPesan(data.pesan,"success");
+      } else {
+        createPesan(data.pesan,"danger");
+      }
+    }
+    });
+  });
 
 }); //end file
 </script>

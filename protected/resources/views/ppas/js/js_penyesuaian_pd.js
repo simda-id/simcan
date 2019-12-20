@@ -488,21 +488,22 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnCariRekening', function () {
-    var x
+    var x, y;
+    if ( jenis_belanja_temp == 0 ) { x = 0 }
+    if ( jenis_belanja_temp == 1 ) { x = 2 }
+    if ( jenis_belanja_temp == 2 ) { x = 3 }
+    if ( jenis_belanja_temp == 3 ) { x = 4 }
+    if ( jenis_belanja_temp == 4 ) { x = 4 }
     if ( $( '#rekening_ssh' ).val() == null ||
       $( '#rekening_ssh' ).val() == undefined ||
       $( '#rekening_ssh' ).val() == "" ) {
-      if ( jenis_belanja_temp == 0 ) { x = 0 }
-      if ( jenis_belanja_temp == 1 ) { x = 2 }
-      if ( jenis_belanja_temp == 2 ) { x = 3 }
-      if ( jenis_belanja_temp == 3 ) { x = 4 }
-      if ( jenis_belanja_temp == 4 ) { x = 4 }
+      y = 0;
     } else {
-      x = 1
+      y = $( '#id_item_ssh' ).val();
     }
 
     $( '#cariRekening' ).modal( 'show' );
-    loadRekeningSsh( x, $( '#id_item_ssh' ).val() )
+    loadRekeningSsh( x, y );
 
   } );
 
@@ -2286,8 +2287,8 @@ $( document ).ready( function () {
     $( '#id_satuan_publik' ).attr( "disabled", "disabled" );
     document.frmModalAktivitas.rbGroupKeu[ 0 ].checked = true;
 
-    $( '#id_satuan_1_aktivitas' ).val( -1 ).trigger( 'change' );
-    $( '#id_satuan_2_aktivitas' ).val( -1 ).trigger( 'change' );
+    $( '#id_satuan_1_aktivitas' ).val( 0 ).trigger( 'change' );
+    $( '#id_satuan_2_aktivitas' ).val( 0 ).trigger( 'change' );
     document.frmModalAktivitas.satuan_utama[ 0 ].checked = true;
 
     $( '#no_urut_aktivitas' ).removeAttr( "disabled" );

@@ -424,21 +424,22 @@ $(document).on('click', '.btnCariSSH', function() {
   });
 
 $(document).on('click', '#btnCariRekening', function() {
-  var x
-      if($('#rekening_ssh').val()==null || 
-        $('#rekening_ssh').val()==undefined ||
-        $('#rekening_ssh').val() == ""){
-        if(jenis_belanja_temp == 0){ x = 0 }
-        if(jenis_belanja_temp == 1){ x = 2 }
-        if(jenis_belanja_temp == 2){ x = 3 }
-        if(jenis_belanja_temp == 3){ x = 4 }
-        if(jenis_belanja_temp == 4){ x = 4 }
-      } else {
-          x = 1
-      }
-
-      $('#cariRekening').modal('show');
-      loadRekeningSsh(x,$('#id_item_ssh').val())
+  var x, y;
+  if ( jenis_belanja_temp == 0 ) { x = 0 }
+  if ( jenis_belanja_temp == 1 ) { x = 2 }
+  if ( jenis_belanja_temp == 2 ) { x = 3 }
+  if ( jenis_belanja_temp == 3 ) { x = 4 }
+  if ( jenis_belanja_temp == 4 ) { x = 4 }
+  if ( $( '#rekening_ssh' ).val() == null ||
+  $( '#rekening_ssh' ).val() == undefined ||
+  $( '#rekening_ssh' ).val() == "" ) {
+  y = 0;
+  } else {
+  y = $( '#id_item_ssh' ).val();
+  }
+  
+  $( '#cariRekening' ).modal( 'show' );
+  loadRekeningSsh( x, y );
 
   });
 

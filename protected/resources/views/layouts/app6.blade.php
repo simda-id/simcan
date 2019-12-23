@@ -128,6 +128,7 @@ use hoaaah\LaravelMenu\Menu;
                                                    ['label' => 'Sinkronisasi Unit OPD', 'url' => '/transfer/sinkOpd'],
                                                    ['label' => 'Sinkronisasi Program-Kegiatan', 'url' => '/transfer/sinkProgram'],
                                                    ['label' => 'Sinkronisasi Rekening Anggaran', 'url' => '/transfer/sinkRekening'],
+                                                //    ['label' => 'Sinkronisasi Tim Anggaran', 'url' => '/transfer/sinkTAPD'],
                                                 ]
                                             ],
                                             ['label' => 'Sinkronisasi APBD', 'url' => '/transfer/transsimda', 'visible' => $akses->get(890)],

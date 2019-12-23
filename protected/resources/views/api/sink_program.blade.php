@@ -52,6 +52,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="urusan">
                 <div class="col-md-12">
+                  <br>
+                  <button class="btnDelAllProgram btn-labeled btn btn-sm btn-primary"><span class="btn-label">
+                      <i class="fa fa-refresh fa-fw fa-lg"></i></span>Proses Persiapan Sikronisasi Program -
+                    Kegiatan</button>
+                  <br>
                   <div class="">
                     <table id="tblUrusan" class="table table-striped table-bordered table-responsive compact"
                       width="100%" cellspacing="0">

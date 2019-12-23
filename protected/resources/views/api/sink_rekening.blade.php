@@ -58,8 +58,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div role="tabpanel" class="tab-pane fade in active" id="akun">
                 <br>
                 <div class="col-md-12">
-                  <button class="btnAddBulkRekening btn-labeled btn btn-sm btn-success"><span class="btn-label">
-                      <i class="fa fa-plus fa-fw fa-lg"></i></span>Proses Persiapan Sikronisasi Rekening</button>
+                  <button class="btnAddBulkRekening btn-labeled btn btn-sm btn-primary"><span class="btn-label">
+                      <i class="fa fa-refresh fa-fw fa-lg"></i></span>Proses Persiapan Sikronisasi Rekening</button>
                   <br>
                   <table id="tblAkun" class="table table-striped table-bordered table-responsive compact" width="100%"
                     cellspacing="0">

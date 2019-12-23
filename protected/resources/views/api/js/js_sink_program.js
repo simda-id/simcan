@@ -235,6 +235,33 @@ $( document ).ready( function () {
         LoadListSubUnit( id_unit_temp, kd_bidang_temp, kd_urusan_temp, kd_unit_temp );
     } );
 
+
+    $( document ).on( 'click', '.btnDelAllProgram', function () {
+        $( '#prosesbar' ).show();
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $.ajax( {
+            type: 'delete',
+            url: './DelProgramAll',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_bidang': id_bidang_temp,
+            },
+
+            success: function ( data ) {
+                if ( data.status_pesan == 1 ) {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "success" );
+                } else {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "danger" );
+                }
+            }
+        } );
+    } );
+
     $( document ).on( 'click', '.btnAddBulkProgram', function () {
         $( '#prosesbar' ).show();
         $.ajaxSetup( {

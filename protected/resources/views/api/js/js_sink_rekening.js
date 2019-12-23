@@ -407,6 +407,7 @@ $( document ).ready( function () {
                 'kd_rek_4': data.Kd_Rek_4,
                 'kd_rek_5': data.Kd_Rek_5,
                 'nm_rek_5': data.Nm_Rek_5_Can,
+                'peraturan': data.Peraturan_Can,
             },
 
             success: function ( data ) {
@@ -440,6 +441,7 @@ $( document ).ready( function () {
                 'kd_rek_4': data.Kd_Rek_4,
                 'kd_rek_5': data.Kd_Rek_5,
                 'nm_rek_5': data.Nm_Rek_5_Can,
+                'peraturan': data.Peraturan_Can,
             },
 
             success: function ( data ) {

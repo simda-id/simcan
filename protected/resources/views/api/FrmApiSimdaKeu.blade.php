@@ -19,6 +19,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
   <div id="pesan"></div>
+  <div id="prosesbar" class="lds-spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-info">
@@ -57,7 +71,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <div class="col-sm-3"></div>
               <div class="col-sm-5 text-right">
-                <p><a class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
+                <p><a class="btnKirimTAPD btn-labeled btn btn-primary"><span class="btn-label"><i
+                        class="fa fa-users fa-lg fa-fw"></i></span> Kirim Tim Anggaran</a> <a
+                    class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
                         class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Baru APBD ke SIMDA Keuangan</a></p>
               </div>
             </div>
@@ -121,7 +137,7 @@ $('.page-alert .close').click(function(e) {
   e.preventDefault();
   $(this).closest('.page-alert').slideUp();
 });
-
+$( '#prosesbar' ).hide();
 $('.number').number(true,0,',', '.');
 $('[data-toggle="popover"]').popover();
 
@@ -246,6 +262,34 @@ TblLogKirims=$('#TblLogKirim').DataTable({
       },
       success: function(data) {
         $('#TblLogKirim').DataTable().ajax.reload(null,false);
+        $( '#prosesbar' ).hide();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger");
+        }
+      }
+    });
+  });
+
+  $(document).on('click', '.btnUlangKirim', function() {
+    $( '#prosesbar' ).show();
+    var data = TblLogKirims.row( $( this ).parents( 'tr' ) ).data();
+    $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+    
+    $.ajax({
+      type: 'post',
+      url: './postKirimUlang',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_sub': data.id_sub_unit,
+        'id_dokumen_keu': data.id_dok_keu,
+      },
+      success: function(data) {
+        $('#TblLogKirim').DataTable().ajax.reload(null,false);
+        $( '#prosesbar' ).hide();
         if(data.status_pesan==1){
           createPesan(data.pesan,"success");
         } else {
@@ -256,6 +300,7 @@ TblLogKirims=$('#TblLogKirim').DataTable({
   });
 
   $(document).on('click', '.btnKirimKeuangan', function() {
+    $( '#prosesbar' ).show();
     $.ajaxSetup({
       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -271,12 +316,37 @@ TblLogKirims=$('#TblLogKirim').DataTable({
     },
     success: function(data) {
       $('#TblLogKirim').DataTable().ajax.reload(null,false);
+      $( '#prosesbar' ).hide();
       if(data.status_pesan==1){
         createPesan(data.pesan,"success");
       } else {
         createPesan(data.pesan,"danger");
       }
     }
+    });
+  });
+
+  $(document).on('click', '.btnKirimTAPD', function() {
+    $( '#prosesbar' ).show();
+    $.ajaxSetup({
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+    
+    $.ajax({
+      type: 'post',
+      url: './sinkTAPD',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id_dokumen_keu': $( '#id_dokumen_keu' ).val(),
+      },
+      success: function(data) {
+        $( '#prosesbar' ).hide();
+        if(data.status_pesan==1){
+          createPesan(data.pesan,"success");
+        } else {
+          createPesan(data.pesan,"danger");
+        }
+      }
     });
   });
 

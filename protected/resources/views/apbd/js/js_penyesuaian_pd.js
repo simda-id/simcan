@@ -7,7 +7,7 @@ $( document ).ready( function () {
   var detInKeg = Handlebars.compile( $( "#details-inKeg" ).html() );
 
   var tahun_temp, unit_temp, sub_unit_temp, ProgRkpd_temp, PelaksanaRkpd_temp, bidang_temp, jenis_belanja_temp, Akses_temp;
-  var id_progref_temp, id_progrenja_temp, id_kegrenja_temp, id_aktivitas_temp, id_pelaksana_temp, id_lokasi_temp, id_sub_unit_temp;
+  var id_urusan_rkpd_temp, id_progref_temp, id_progrenja_temp, id_kegrenja_temp, id_aktivitas_temp, id_pelaksana_temp, id_lokasi_temp, id_sub_unit_temp;
   var id_asb_temp, ur_asb_temp, id_program_renstra_temp, id_satuan_1_aktiv_temp, id_satuan_2_aktiv_temp, vol1_temp,
     vol2_temp, nm_sat_asb1, nm_sat_asb2;
   var dokumen_temp, jns_dokumen_temp, kd_dokumen_temp, ubah_dokumen_temp;
@@ -814,6 +814,7 @@ $( document ).ready( function () {
       jns_dokumen_temp = data.jns_dokumen_keu;
       kd_dokumen_temp = data.kd_dokumen_keu;
       ubah_dokumen_temp = data.id_perubahan;
+      id_urusan_rkpd_temp = data.id_urusan_anggaran;
 
       $( '#nm_program_progrenja' ).text( data.uraian_program_rpjmd );
       if ( Akses_temp == 0 ) {
@@ -823,6 +824,35 @@ $( document ).ready( function () {
         $( '#btnTambahProgRenja' ).show();
         $( '#divTambahProg' ).show();
       }
+
+      vars = "?id_urusan=" + id_urusan_rkpd_temp;
+      $.ajax( {
+        type: "GET",
+        url: 'getPelaksanaOPD' + vars,
+        dataType: "json",
+        success: function ( data ) {
+
+          var j = data.length;
+          var post, i;
+
+          $( 'select[name="opdPelaksana"]' ).empty();
+          $( 'select[name="opdPelaksana"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
+          $( 'select[name="opdPelaksana1"]' ).empty();
+          $( 'select[name="opdPelaksana1"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
+          $( 'select[name="opdPelaksana2"]' ).empty();
+          $( 'select[name="opdPelaksana2"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
+          $( 'select[name="opdPelaksana3"]' ).empty();
+          $( 'select[name="opdPelaksana3"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
+
+          for ( i = 0; i < j; i++ ) {
+            post = data[ i ];
+            $( 'select[name="opdPelaksana"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
+            $( 'select[name="opdPelaksana1"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
+            $( 'select[name="opdPelaksana2"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
+            $( 'select[name="opdPelaksana3"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
+          }
+        }
+      } );
 
       $( '.nav-tabs a[href="#program"]' ).tab( 'show' );
       loadTblProgRenja( unit_temp, PelaksanaRkpd_temp );
@@ -4119,7 +4149,249 @@ $( document ).ready( function () {
     $( '#cariProgProv' ).modal( 'hide' );
   } );
 
+  $( "#opdPelaksana1" ).change( function () {
+    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana1' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getProgramMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
 
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdProgram"]' ).empty();
+        $( 'select[name="opdProgram"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdProgram"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#opdPelaksana2" ).change( function () {
+    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana2' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getProgramMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdProgram1"]' ).empty();
+        $( 'select[name="opdProgram1"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdProgram1"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#opdProgram1" ).change( function () {
+    vars = "?id_program_pd=" + $( '#opdProgram1' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getKegiatanMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdKegiatan"]' ).empty();
+        $( 'select[name="opdKegiatan"]' ).append( '<option value="0">---Pilih Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdKegiatan"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#opdPelaksana3" ).change( function () {
+    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana3' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getProgramMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdProgram2"]' ).empty();
+        $( 'select[name="opdProgram2"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdProgram2"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#opdProgram2" ).change( function () {
+    vars = "?id_program_pd=" + $( '#opdProgram2' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getKegiatanMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdKegiatan1"]' ).empty();
+        $( 'select[name="opdKegiatan1"]' ).append( '<option value="0">---Pilih Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdKegiatan1"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#opdKegiatan1" ).change( function () {
+    vars = "?id_kegiatan_pd=" + $( '#opdKegiatan1' ).val();
+    $.ajax( {
+      type: "GET",
+      url: 'getPelaksanaMove' + vars,
+      dataType: "json",
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="opdSubPelaksana"]' ).empty();
+        $( 'select[name="opdSubPelaksana"]' ).append( '<option value="0">---Pilih Pelaksana Sub OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="opdSubPelaksana"]' ).append( '<option value="' + post.id_pelaksana_pd + '">' + post.nm_sub + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '.move-Program', function () {
+    var data = prog_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_progrenja_temp = data.id_program_pd;
+    $( '#cariPelaksanaRKPD' ).modal( 'show' );
+  } );
+
+  $( document ).on( 'click', '.move-Kegiatan', function () {
+    var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_kegrenja_temp = data.id_kegiatan_pd;
+    $( '#cariProgramRenja' ).modal( 'show' );
+  } );
+
+  $( document ).on( 'click', '.move-Pelaksana', function () {
+    var data = pelaksana_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_pelaksana_temp = data.id_pelaksana_pd;
+    $( '#cariKegiatanRenja' ).modal( 'show' );
+  } );
+
+  $( document ).on( 'click', '.move-Aktivitas', function () {
+    var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_aktivitas_temp = data.id_aktivitas_pd;
+    $( '#cariPelaksanaSub' ).modal( 'show' );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMoveProgram', function () {
+    $.ajax( {
+      type: 'POST',
+      url: 'CopyProgram',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_pelaksana_anggaran': $( '#opdPelaksana' ).val(),
+        'id_program_pd': id_progrenja_temp,
+      },
+      success: function ( data ) {
+        createPesan( data.pesan, "success" );
+        prog_renja_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      },
+      error: function ( data ) {
+        createPesan( data.pesan, "danger" );
+        prog_renja_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMoveKegiatan', function () {
+    $.ajax( {
+      type: 'POST',
+      url: 'MoveKegiatan',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_kegiatan_pd': id_kegrenja_temp,
+        'id_program_pd': $( '#opdProgram' ).val(),
+      },
+      success: function ( data ) {
+        createPesan( data.pesan, "success" );
+        keg_renja_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      },
+      error: function ( data ) {
+        createPesan( data.pesan, "danger" );
+        keg_renja_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMoveSub', function () {
+    $.ajax( {
+      type: 'POST',
+      url: 'MovePelaksana',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_pelaksana_pd': id_pelaksana_temp,
+        'id_kegiatan_pd': $( '#opdKegiatan' ).val(),
+      },
+      success: function ( data ) {
+        createPesan( data.pesan, "success" );
+        pelaksana_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      },
+      error: function ( data ) {
+        createPesan( data.pesan, "danger" );
+        pelaksana_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMoveAktiv', function () {
+    $.ajax( {
+      type: 'POST',
+      url: 'MoveAktivitas',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_aktivitas_pd': id_aktivitas_temp,
+        'id_pelaksana_pd': $( '#opdSubPelaksana' ).val(),
+      },
+      success: function ( data ) {
+        createPesan( data.pesan, "success" );
+        aktivitas_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      },
+      error: function ( data ) {
+        createPesan( data.pesan, "danger" );
+        aktivitas_tbl.ajax.reload( null, false );
+        $( '#ModalProgress' ).modal( 'hide' );
+      }
+    } );
+  } );
 
 
 } ); // end file

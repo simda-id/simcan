@@ -134,7 +134,6 @@
                     <td width="20%" style="text-align: left; vertical-align:middle;">
                       <select type="text" class="form-control" id="id_satuan1_forum" name="id_satuan1_forum"></select>
                     </td>
-
                     <td width="20%" style="text-align: left; vertical-align:middle;">
                       <select type="text" class="form-control" id="id_satuan2_forum" name="id_satuan2_forum"></select>
                     </td>

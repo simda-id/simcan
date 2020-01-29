@@ -9,7 +9,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="row">
         <div class="col-md-12">
             <?php
-                $this->title = 'Penyesuaian Anggaran OPD - APBD Pergeseran';
+                $this->title = 'Penyesuaian Pagu OPD';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'modul3';
                 $breadcrumb->begin();
@@ -24,7 +24,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <p><h2 id="judul" class="panel-title"> {{ $this->title }}</h2></p>
+                    <p><h2 id="judul" class="panel-title"> {{ $this->title }} :: Penyesuaian Pagu Perangkat Daerah X</h2></p>
                 </div>
             <div class="panel-body">
                 <form name="" class="form-horizontal" role="form" autocomplete='off' action="" method="post">
@@ -72,9 +72,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" width='5px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Kode Program</th>
                                                 <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Program Perangkat Daerah</th>
                                                 <th colspan="3" width='45%' style="text-align: center; vertical-align:middle">Rekapitulasi Pagu</th>
-                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Status</th>
                                                 <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
                                             <tr>
@@ -142,14 +142,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                     <table id="tblPelaksana" class="table table-striped table-bordered table-responsive compact" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
-                                                <th style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
-                                                <th width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Aktivitas</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Pagu Belanja</th>
-                                                <th width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
-                                                <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
+                                                <th rowspan="2" width='50px' style="text-align: center; vertical-align:middle">No Urut</th>
+                                                <th rowspan="2" style="text-align: center; vertical-align:middle">Nama Sub Unit Pelaksana</th>
+                                                <th rowspan="2" width='15%' style="text-align: center; vertical-align:middle">Lokasi Penyelenggaraan</th>
+                                                <th colspan="3" width='45%' style="text-align: center; vertical-align:middle">Rekapitulasi Pagu</th>
+                                                <th rowspan="2" width='10%' style="text-align: center; vertical-align:middle">Jumlah Lokasi</th>
+                                                <th rowspan="2" width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             </tr>
+                                            <tr>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Pendapatan</th>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Belanja</th>
+                                                <th width='15%' style="text-align: center; vertical-align:middle">Pembiayaan</th>
+                                              </tr>
                                         </thead>
                                         <tbody>                                        
                                         </tbody>
@@ -314,31 +318,31 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
 </div>
 
-  @include('apbd1.program_pd')
-  @include('apbd1.program_indikator_pd')
-  @include('apbd1.kegiatan_pd')
-  @include('apbd1.kegiatan_indikator_pd')
-  @include('apbd1.pelaksana_pd')
-  @include('apbd1.aktivitas_pd')
-  @include('apbd1.lokasi_pd')
-  @include('apbd1.belanja_pd')
+  @include('apbd.program_pd')
+  @include('apbd.program_indikator_pd')
+  @include('apbd.kegiatan_pd')
+  @include('apbd.kegiatan_indikator_pd')
+  @include('apbd.pelaksana_pd')
+  @include('apbd.aktivitas_pd')
+  @include('apbd.lokasi_pd')
+  @include('apbd.belanja_pd')
 
-  @include('apbd1.cariProgramRenstra')
-  @include('apbd1.cariKegiatanRenstra')
-  @include('apbd1.cariProgramRef')
-  @include('apbd1.cariKegiatanRef')
-  @include('apbd1.cariIndikator')
-  @include('apbd1.cariSubUnit')
-  @include('apbd1.cariAktivitasASB')
-  @include('apbd1.cariLokasiModal')
-  @include('apbd1.cariLokasiTeknisModal')
-  @include('apbd1.cariItemSSH')
-  @include('apbd1.cariRekening')
-  @include('apbd1.ModalCopyBelanja')
-  @include('apbd1.loadBelanjaASB')
+  @include('apbd.cariProgramRenstra')
+  @include('apbd.cariKegiatanRenstra')
+  @include('apbd.cariProgramRef')
+  @include('apbd.cariKegiatanRef')
+  @include('apbd.cariIndikator')
+  @include('apbd.cariSubUnit')
+  @include('apbd.cariAktivitasASB')
+  @include('apbd.cariLokasiModal')
+  @include('apbd.cariLokasiTeknisModal')
+  @include('apbd.cariItemSSH')
+  @include('apbd.cariRekening')
+  @include('apbd.ModalCopyBelanja')
+  @include('apbd.loadBelanjaASB')
 
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('/protected/resources/views/apbd1/js/js_pagu_pd.js')}}"></script>
+  <script src="{{ asset('/protected/resources/views/apbd/js/js_pagu_pd.js')}}"></script>
 @endsection

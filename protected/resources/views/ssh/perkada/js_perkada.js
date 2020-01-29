@@ -1059,7 +1059,8 @@ $( document ).ready( function () {
         // data: "name=" + name+ "&password=" + password,
         data: "id_zona_perkada=" + id_zona_copy_new,
         success: function ( data ) {
-          $( '#tblDetailTarif' ).DataTable().ajax.reload();
+          $( '#tblDetailZona' ).DataTable().ajax.reload();
+          // $( '#tblDetailTarif' ).DataTable().ajax.reload();
           $( '#pesan' ).html( '<div class="alert alert-info col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Berhasil Copy Data</div>' );
           // alert("Berhasil Copy Data");
         }
@@ -1077,7 +1078,7 @@ $( document ).ready( function () {
           url: './copyTarifPerkada',
           data: "id_zona_perkada_new=" + id_zona_copy_new + "&id_zona_perkada=" + id_zona_copy + "&id_perkada=" + id_perkada_copy,
           success: function ( data ) {
-            $( '#tblDetailTarif' ).DataTable().ajax.reload();
+            $( '#tblDetailZona' ).DataTable().ajax.reload();
             $( '#pesan' ).html( '<div class="alert alert-info col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Berhasil Copy Data</div>' );
           }
         } );

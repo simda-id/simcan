@@ -457,4 +457,56 @@ $( document ).ready( function () {
         } );
     } );
 
+    $( document ).on( 'click', '.btnBulkRek4', function () {
+        $( '#prosesbar' ).show();
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $.ajax( {
+            type: 'post',
+            url: './bulkRek4',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+            },
+
+            success: function ( data ) {
+                obyek_tbl.ajax.reload( null, false );
+                if ( data.status_pesan == 1 ) {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "success" );
+                } else {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "danger" );
+                }
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '.btnBulkRek5', function () {
+        $( '#prosesbar' ).show();
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $.ajax( {
+            type: 'post',
+            url: './bulkRek5',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+            },
+
+            success: function ( data ) {
+                rincian_tbl.ajax.reload( null, false );
+                if ( data.status_pesan == 1 ) {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "success" );
+                } else {
+                    $( '#prosesbar' ).hide();
+                    createPesan( data.pesan, "danger" );
+                }
+            }
+        } );
+    } );
+
 } ); // end js file

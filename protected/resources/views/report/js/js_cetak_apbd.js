@@ -86,24 +86,44 @@ $( document ).ready( function () {
     }
   } );
 
-  $( ".tahun_prarka" ).change( function () {
-    $.ajax( {
-      type: "GET",
-      url: './getDokAPBD/' + $( '#tahun_prarka' ).val(),
-      dataType: "json",
-      success: function ( data ) {
-        var j = data.length;
-        var post, i;
+  $( ".jns_dokumen" ).change( function () {
+    if ( $( ".jns_dokumen" ) == "RAPBD" ) {
+      $.ajax( {
+        type: "GET",
+        url: './getDokRAPBD/' + $( '#tahun_prarka' ).val(),
+        dataType: "json",
+        success: function ( data ) {
+          var j = data.length;
+          var post, i;
 
-        $( 'select[name="no_dokumen"]' ).empty();
-        $( 'select[name="no_dokumen"]' ).append( '<option value="-1">---Pilih  Dokumen APBD---</option>' );
+          $( 'select[name="no_dokumen"]' ).empty();
+          $( 'select[name="no_dokumen"]' ).append( '<option value="-1">---Pilih  Dokumen APBD---</option>' );
 
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="no_dokumen"]' ).append( '<option value="' + post.id_dokumen_keu + '">' + post.nomor_keu + " (" + post.uraian_perkada + ")" + '</option>' );
+          for ( i = 0; i < j; i++ ) {
+            post = data[ i ];
+            $( 'select[name="no_dokumen"]' ).append( '<option value="' + post.id_dokumen_keu + '">' + post.nomor_keu + " (" + post.uraian_perkada + ")" + '</option>' );
+          }
         }
-      }
-    } );
+      } );
+    } else {
+      $.ajax( {
+        type: "GET",
+        url: './getDokAPBD/' + $( '#tahun_prarka' ).val(),
+        dataType: "json",
+        success: function ( data ) {
+          var j = data.length;
+          var post, i;
+
+          $( 'select[name="no_dokumen"]' ).empty();
+          $( 'select[name="no_dokumen"]' ).append( '<option value="-1">---Pilih  Dokumen APBD---</option>' );
+
+          for ( i = 0; i < j; i++ ) {
+            post = data[ i ];
+            $( 'select[name="no_dokumen"]' ).append( '<option value="' + post.id_dokumen_keu + '">' + post.nomor_keu + " (" + post.uraian_perkada + ")" + '</option>' );
+          }
+        }
+      } );
+    };
   } );
 
   $( ".urusan_prarka" ).change( function () {

@@ -232,9 +232,25 @@ use hoaaah\LaravelMenu\Menu;
                                         'visible' => $akses->getMulti([730,731,732]),
                                         'items' => [
                                             [
-                                                'label' => 'Dokumen APBD Pergeseran',
-                                                'visible' => $akses->get(730),
-                                                'url' => '/GeserApbd',
+                                                'label' => 'Dok APBD Pergeseran',
+                                                'visible' => $akses->getMulti([730,733]),
+                                                'items' => [
+                                                    [
+                                                        'label' => 'Dokumen APBD',
+                                                        'visible' => $akses->get(730),
+                                                        'url' => '/GeserApbd',
+                                                    ],
+                                                    [
+                                                        'label' => 'Dokumen RKA SKPD',
+                                                        'visible' => $akses->get(733),
+                                                        'url' => '/GeserApbd/dokopd',
+                                                    ],
+                                               /*     [
+                                                        'label' => 'Pagu Anggaran',
+                                                        'visible' => $akses->get(713),
+                                                        'url' => '/Apbd/sesuai',
+                                                    ] */
+                                                ]
                                             ],
                                             [
                                                 'label' => 'Penyusunan APBD Pergeseran',
@@ -342,7 +358,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                    // ['label' => 'RAPBD', 'url' => '/cetak/rapbd', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD', 'url' => '/cetak/apbd', 'visible' => $akses->get(742)],
-                                                    ['label' => 'APBD Pergeseran', 'url' => '#', 'visible' => $akses->get(743)],
+                                                    ['label' => 'APBD Pergeseran', 'url' => '/cetak/geser', 'visible' => $akses->get(743)],
                                                     ['label' => 'APBD Perubahan', 'url' => '#', 'visible' => $akses->get(744)],
                                                 ]
                                             ],

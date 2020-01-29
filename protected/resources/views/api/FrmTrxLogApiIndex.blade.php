@@ -19,6 +19,20 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
   <div id="pesan"></div>
+  <div id="prosesbar" class="lds-spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-info">
@@ -27,10 +41,39 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
 
         <div class="panel-body">
-          <div class="add">
-            <p><a class="add-satuan btn-labeled btn btn-sm btn-success"><span class="btn-label"><i
-                    class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Data ke SIPD</a></p>
-          </div>
+          <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
+            <div class="form-group">
+              <label for="tahun_rkpd" class="col-sm-2 control-label" align='left' style="">Tahun</label>
+              <div class="col-sm-2">
+                <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd"
+                  value="{{Session::get('tahun')}}" disabled>
+              </div>
+              <label class="control-label col-sm-2" for="jns_dokumen" style="text-align: right;">Jenis
+                Dokumen
+                :</label>
+              <div class="col-sm-2">
+                <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
+                  <option value="-1">--Pilih Jenis Dokumen--</option>
+                  <option value="0">RKPD RANWAL</option>
+                  <option value="1">RKPD FINAL</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="title">No Dokumen RKPD</label>
+              <div class="col-sm-6">
+                <select type="text" class="form-control id_dokumen_rkpd select2" id="id_dokumen_rkpd"
+                  name="id_dokumen_rkpd"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="title"></label>
+              <div class="col-sm-6" style="text-align: right;">
+                <a class="add-satuan btn-labeled btn btn-sm btn-success"><span class="btn-label"><i
+                      class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Data ke SIPD</a>
+              </div>
+            </div>
+          </form>
           <br>
           <table id="TblLogKirim" class="table display compact table-striped table-bordered table-responsive"
             width="100%">
@@ -62,30 +105,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <h3 class="modal-title">Daftar Unit OPD yang siap dikirim </h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">No Dokumen APBD :</label>
-            <div class="col-sm-8">
-              <select type="text" class="form-control id_dokumen_rkpd select2" id="id_dokumen_rkpd"
-                name="id_dokumen_rkpd"></select>
-            </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <table id='tblProses' class="table display compact table-striped table-bordered" width="100%">
+              <thead>
+                <tr>
+                  <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Kode Unit</th>
+                  <th style="text-align: center; vertical-align:middle">Nama Unit</th>
+                  <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <table id='tblProses' class="table display compact table-striped table-bordered" width="100%">
-                <thead>
-                  <tr>
-                    <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
-                    <th width="15%" style="text-align: center; vertical-align:middle">Kode Unit</th>
-                    <th style="text-align: center; vertical-align:middle">Nama Unit</th>
-                    <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        </div>
         </form>
       </div>
       <div class="modal-footer">

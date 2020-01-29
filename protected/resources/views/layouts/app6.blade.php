@@ -135,11 +135,14 @@ use hoaaah\LaravelMenu\Menu;
                                         ]
                                         
                                     ],
-                                    [
-                                        'label' => 'SIPD Kemendagri',
+                                    [ 'label' => 'SIPD Kemendagri',
                                         'visible' => $akses->get(891),
-                                        'url' => '/transfer/transbangda'
-                                    ],                                    
+                                        'items' => [
+                                            // ['label' => 'RKPD Ranwal', 'url' => '/transfer/transranwal', 'visible' => $akses->get(891)],
+                                            ['label' => 'RKPD', 'url' => '/transfer/transbangda', 'visible' => $akses->get(891)],
+                                        ]
+                                    
+                                    ],                                  
                                     [
                                         'label' => 'KRISNA Bappenas',
                                         'visible' => $akses->get(892),

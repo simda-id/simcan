@@ -41,11 +41,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         </div>
 
         <div class="panel-body"><br>
-          <div class="form-group hidden">
-            <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
-              <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Rekening
-              Keuangan</button>
-          </div>
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
             <ul class="nav nav-tabs nav-justified" role="tablist">
               <li class="active"><a href="#akun" aria-controls="akun" role="tab" data-toggle="tab">Akun</a></li>
@@ -118,6 +113,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div role="tabpanel" class="tab-pane fade in" id="obyek">
                 <br>
                 <div class="col-md-12">
+                  <button class="btn btn-success btn-sm btnBulkRek4 btn-labeled">
+                    <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Obyek
+                    Rekening</button>
+                  <br>
                   <table id="tblObyek" class="table table-striped table-bordered table-responsive compact" width="100%"
                     cellspacing="0">
                     <thead>
@@ -139,6 +138,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <div role="tabpanel" class="tab-pane fade in" id="rincian">
                 <br>
                 <div class="col-md-12">
+                  <button class="btn btn-success btn-sm btnBulkRek5 btn-labeled">
+                    <span class="btn-label"><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Rincian
+                    Rekening</button>
+                  <br>
                   <table id="tblRincian" class="table table-striped table-bordered table-responsive compact"
                     width="100%" cellspacing="0">
                     <thead>

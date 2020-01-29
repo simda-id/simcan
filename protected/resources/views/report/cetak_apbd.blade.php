@@ -175,9 +175,8 @@ use hoaaah\LaravelMenu\Menu;
           <div class="col-sm-2">
             <select class="form-control tahun_prarka select2" name="tahun_prarka" id="tahun_prarka"></select>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-3" for="jns_dokumen" style="color:#fff;">Jenis Dokumen :</label>
+          <label class="control-label col-sm-3" for="jns_dokumen" style="color:#fff; text-align: right;">Jenis Dokumen
+            :</label>
           <div class="col-sm-3">
             <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
               <option value="-1">--Pilih Jenis Dokumen--</option>

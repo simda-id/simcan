@@ -49,6 +49,22 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd"
                   value="{{Session::get('tahun')}}" disabled>
               </div>
+              <a class="btnKirimTAPD btn-labeled btn btn-primary" data-toggle="popover" data-container="body"
+                title="Kirim Tim Anggaran" data-trigger="hover"
+                data-content="Proses Kirim Tim Anggaran dilakukan 1X untuk 1 APBD, kecuali jikan ada perubahan Tim Anggaran"><span
+                  class="btn-label"><i class="fa fa-users fa-lg fa-fw"></i></span> Kirim Tim Anggaran</a>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3 text-left" for="jns_dokumen_apbd">Jenis Dokumen APBD </label>
+              <div class="col-sm-5">
+                <select class="form-control jns_dokumen_apbd select2" name="jns_dokumen_apbd" id="jns_dokumen_apbd">
+                  <option value="-1">--Pilih Jenis Dokumen--</option>
+                  <option value="0">APBD</option>
+                  <option value="1">Pergeseran APBD</option>
+                  <option value="2">Perubahan APBD</option>
+                  <option value="3">Pergeseran setelah Perubahan APBD</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen APBD </label>
@@ -71,10 +87,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <div class="col-sm-3"></div>
               <div class="col-sm-5 text-right">
-                <p><a class="btnKirimTAPD btn-labeled btn btn-primary"><span class="btn-label"><i
-                        class="fa fa-users fa-lg fa-fw"></i></span> Kirim Tim Anggaran</a> <a
-                    class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
-                        class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Baru APBD ke SIMDA Keuangan</a></p>
+                <p><a class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
+                        class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Baru ke SIMDA Keuangan</a></p>
               </div>
             </div>
           </form>
@@ -84,12 +98,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <thead>
               <tr>
                 <th width="5%" height="50px" style="text-align: center; vertical-align:middle">No Urut</th>
+                <th width="5%" height="50px" style="text-align: center; vertical-align:middle">Aksi</th>
                 <th width="12%" height="50px" style="text-align: center; vertical-align:middle">Tanggal Kirim</th>
                 <th width="8%" height="50px" style="text-align: center; vertical-align:middle">Kode Unit</th>
                 <th width="20%" height="50px" style="text-align: center; vertical-align:middle">Nama Unit</th>
                 <th width="15%" height="50px" style="text-align: center; vertical-align:middle">Nama Sub Unit</th>
                 <th height="50px" style="text-align: center; vertical-align:middle">Log Kirim</th>
-                <th width="5%" height="50px" style="text-align: center; vertical-align:middle">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -137,28 +151,57 @@ $('.page-alert .close').click(function(e) {
   e.preventDefault();
   $(this).closest('.page-alert').slideUp();
 });
-$( '#prosesbar' ).hide();
-$('.number').number(true,0,',', '.');
+
 $('[data-toggle="popover"]').popover();
 
-$.ajax({
-  type: "GET",
-  url: 'getDokApbd',
-  dataType: "json",
-  success: function(data) {
+$( '#prosesbar' ).hide();
+$('.number').number(true,0,',', '.');
 
-  var j = data.length;
-  var post, i;
-
-  $('select[name="id_dokumen_keu"]').empty();
-  $('select[name="id_dokumen_keu"]').append('<option value="0">---Pilih Dokumen APBD---</option>');
-
-  for (i = 0; i < j; i++) {
-    post = data[i];
-    $('select[name="id_dokumen_keu"]').append('<option value="'+ post.id_dokumen_keu +'">'+ post.nomor_keu +'</option>');
-  }
-  }
+$('#TblLogKirim').DataTable({
+  language: {
+  "decimal": ",",
+  "thousands": ".",
+  "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+  "sProcessing": "Sedang memproses...",
+  "sLengthMenu": "Tampilkan _MENU_ entri",
+  "sZeroRecords": "Tidak ditemukan data yang sesuai",
+  "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+  "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+  "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+  "sInfoPostFix": "",
+  "sSearch": "Cari:",
+  "sUrl": "",
+  "oPaginate": {
+    "sFirst": "Pertama",
+    "sPrevious": "Sebelumnya",
+    "sNext": "Selanjutnya",
+    "sLast": "Terakhir"
+    }
+  },
+  "pageLength": 50,
+  "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
 });
+
+$( ".jns_dokumen_apbd" ).change( function () {
+  $.ajax({
+    type: "GET",
+    url: 'getDokApbd?kd_dok='+$( '#jns_dokumen_apbd' ).val(),
+    dataType: "json",
+    success: function(data) {
+
+    var j = data.length;
+    var post, i;
+
+    $('select[name="id_dokumen_keu"]').empty();
+    $('select[name="id_dokumen_keu"]').append('<option value="0">---Pilih Dokumen APBD---</option>');
+
+    for (i = 0; i < j; i++) {
+      post = data[i];
+      $('select[name="id_dokumen_keu"]').append('<option value="'+ post.id_dokumen_keu +'">'+ post.nomor_keu +'</option>');
+    }
+    }
+  });
+} );
 
 $( ".id_dokumen_keu" ).change( function () {
   $.ajax( {
@@ -177,7 +220,10 @@ $( ".id_dokumen_keu" ).change( function () {
         $( 'select[name="id_unit"]' ).append( '<option value="' + post.id_unit + '">' + post.nama_unit + '</option>' ); 
       } 
     } 
-  } ); 
+  } );
+
+  LoadLogKirim($( '#jns_dokumen_apbd' ).val());
+  
 } );
 
 $( ".id_unit" ).change( function () {
@@ -201,48 +247,50 @@ $( ".id_unit" ).change( function () {
 } );
 
 var TblLogKirims; 
-TblLogKirims=$('#TblLogKirim').DataTable({
-    processing: true,
-    serverSide: true,
-    autoWidth : false,
-    language: {
-      "decimal": ",",
-      "thousands": ".",
-      "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
-      "sProcessing":   "Sedang memproses...",
-      "sLengthMenu":   "Tampilkan _MENU_ entri",
-      "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-      "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-      "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-      "sInfoPostFix":  "",
-      "sSearch":       "Cari:",
-      "sUrl":          "",
-      "oPaginate": {
-          "sFirst":    "Pertama",
-          "sPrevious": "Sebelumnya",
-          "sNext":     "Selanjutnya",
-          "sLast":     "Terakhir"
-      }
-    },
-    "pageLength": 50,
-    "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
-    "ajax": {"url": "./getdataKeu"},
-    "columns": [
-          { data: 'no_urut', sClass: "dt-center", searchable: false, orderable:false,},
-          { data: 'tgl_kirim', sClass: "dt-center"},
-          { data: 'kodeskpd', sClass: "dt-center"},
-          { data: 'nama_unit', sClass: "dt-left"},
-          { data: 'nama_sub', sClass: "dt-left"},
-          { data: 'log_kirim','searchable': true, 'orderable':true, sClass: "dt-left",
-            render: function(data, type, row,meta) {
-            return row.log_kirim + '   <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+'</span>  ';
-          }},                      
-          { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"}
-        ],
-    "order": [[0, 'asc']],
-    "bDestroy": true
-  });
+function LoadLogKirim (kd_dokumen) {
+  TblLogKirims=$('#TblLogKirim').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth : false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing":   "Sedang memproses...",
+        "sLengthMenu":   "Tampilkan _MENU_ entri",
+        "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+        "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix":  "",
+        "sSearch":       "Cari:",
+        "sUrl":          "",
+        "oPaginate": {
+            "sFirst":    "Pertama",
+            "sPrevious": "Sebelumnya",
+            "sNext":     "Selanjutnya",
+            "sLast":     "Terakhir"
+        }
+      },
+      "pageLength": 50,
+      "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+      "ajax": {"url": "./getdataKeu?kd_dok="+kd_dokumen},
+      "columns": [
+            { data: 'no_urut', sClass: "dt-center", searchable: false, orderable:false,},
+            { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"},
+            { data: 'tgl_kirim', sClass: "dt-center"},
+            { data: 'kodeskpd', sClass: "dt-center"},
+            { data: 'nama_unit', sClass: "dt-left"},
+            { data: 'nama_sub', sClass: "dt-left"},
+            { data: 'log_kirim','searchable': true, 'orderable':true, sClass: "dt-left",
+              render: function(data, type, row,meta) {
+              return row.log_kirim + '   <span class="label" style="background-color: '+row.status_warna+'; color:#fff;">'+row.status_label+' '+ row.jenis_dokumen +'</span>  ';
+            }}, 
+          ],
+      "order": [[0, 'asc']],
+      "bDestroy": true
+    })
+  };
 
   $(document).on('click', '.btnLanjutKirim', function() { 
     $( '#prosesbar' ).show();
@@ -259,6 +307,7 @@ TblLogKirims=$('#TblLogKirim').DataTable({
         'id_sub': data.id_sub_unit,
         'id_dokumen_keu': data.id_dok_keu,
         'step_kirim' : data.step_kirim,
+        'kd_dok' : data.kd_dokumen,
       },
       success: function(data) {
         $('#TblLogKirim').DataTable().ajax.reload(null,false);
@@ -286,6 +335,7 @@ TblLogKirims=$('#TblLogKirim').DataTable({
         '_token': $('input[name=_token]').val(),
         'id_sub': data.id_sub_unit,
         'id_dokumen_keu': data.id_dok_keu,
+        'kd_dok' : data.kd_dokumen,
       },
       success: function(data) {
         $('#TblLogKirim').DataTable().ajax.reload(null,false);
@@ -313,6 +363,7 @@ TblLogKirims=$('#TblLogKirim').DataTable({
       'id_sub': $( '#id_sub_unit' ).val(),
       'id_dokumen_keu': $( '#id_dokumen_keu' ).val(),
       'step_kirim' : 0,
+      'kd_dok' : $( '#jns_dokumen_apbd' ).val(),
     },
     success: function(data) {
       $('#TblLogKirim').DataTable().ajax.reload(null,false);

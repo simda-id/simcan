@@ -11,7 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table dbsimcan_simulasi_merah.keu_ref_rek_4
+-- Dumping structure for table dbbandung_20200116.keu_ref_rek_4
 DROP TABLE IF EXISTS `keu_ref_rek_4`;
 CREATE TABLE IF NOT EXISTS `keu_ref_rek_4` (
   `Kd_Rek_1` tinyint(4) NOT NULL,
@@ -19,12 +19,12 @@ CREATE TABLE IF NOT EXISTS `keu_ref_rek_4` (
   `Kd_Rek_3` tinyint(4) NOT NULL,
   `Kd_Rek_4` tinyint(4) NOT NULL,
   `Nm_Rek_4` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`Kd_Rek_1`,`Kd_Rek_2`,`Kd_Rek_3`,`Kd_Rek_4`)
+  PRIMARY KEY (`Kd_Rek_1`,`Kd_Rek_2`,`Kd_Rek_3`,`Kd_Rek_4`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.keu_ref_rek_5
+-- Dumping structure for table dbbandung_20200116.keu_ref_rek_5
 DROP TABLE IF EXISTS `keu_ref_rek_5`;
 CREATE TABLE IF NOT EXISTS `keu_ref_rek_5` (
   `Kd_Rek_1` tinyint(4) NOT NULL,
@@ -35,27 +35,27 @@ CREATE TABLE IF NOT EXISTS `keu_ref_rek_5` (
   `Nm_Rek_5` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Peraturan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Id_Rekening` bigint(255) NOT NULL,
-  PRIMARY KEY (`Id_Rekening`),
-  UNIQUE KEY `Kd_Rek_1` (`Kd_Rek_1`,`Kd_Rek_2`,`Kd_Rek_3`,`Kd_Rek_4`,`Kd_Rek_5`),
+  PRIMARY KEY (`Id_Rekening`) USING BTREE,
+  UNIQUE KEY `Kd_Rek_1` (`Kd_Rek_1`,`Kd_Rek_2`,`Kd_Rek_3`,`Kd_Rek_4`,`Kd_Rek_5`) USING BTREE,
   CONSTRAINT `keu_ref_rek_5_ibfk_1` FOREIGN KEY (`Kd_Rek_1`, `Kd_Rek_2`, `Kd_Rek_3`, `Kd_Rek_4`) REFERENCES `keu_ref_rek_4` (`Kd_Rek_1`, `Kd_Rek_2`, `Kd_Rek_3`, `Kd_Rek_4`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_cascading_indikator_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.kin_trx_cascading_indikator_kegiatan_pd
 DROP TABLE IF EXISTS `kin_trx_cascading_indikator_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_kegiatan_pd` (
   `id_indikator_kegiatan_pd` int(11) NOT NULL AUTO_INCREMENT,
   `id_hasil_kegiatan` int(11) NOT NULL DEFAULT '0',
   `id_renstra_kegiatan_indikator` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_indikator_kegiatan_pd`) USING BTREE,
-  UNIQUE KEY `FK_kin_trx_cascading_indikator_program_pd_1` (`id_hasil_kegiatan`,`id_renstra_kegiatan_indikator`) USING BTREE,
+  KEY `FK_kin_trx_cascading_indikator_kegiatan_pd_kin_1` (`id_hasil_kegiatan`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_indikator_kegiatan_pd_kin_1` FOREIGN KEY (`id_hasil_kegiatan`) REFERENCES `kin_trx_cascading_kegiatan_opd` (`id_hasil_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=896 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_cascading_indikator_program_pd
+-- Dumping structure for table dbbandung_20200116.kin_trx_cascading_indikator_program_pd
 DROP TABLE IF EXISTS `kin_trx_cascading_indikator_program_pd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_program_pd` (
   `id_indikator_program_pd` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,11 +64,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_cascading_indikator_program_pd` (
   PRIMARY KEY (`id_indikator_program_pd`) USING BTREE,
   UNIQUE KEY `FK_kin_trx_cascading_indikator_program_pd_1` (`id_hasil_program`,`id_renstra_program_indikator`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_indikator_program_pd_1` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_cascading_kegiatan_opd
+-- Dumping structure for table dbbandung_20200116.kin_trx_cascading_kegiatan_opd
 DROP TABLE IF EXISTS `kin_trx_cascading_kegiatan_opd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_kegiatan_opd` (
   `id_hasil_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -79,11 +79,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_cascading_kegiatan_opd` (
   PRIMARY KEY (`id_hasil_kegiatan`) USING BTREE,
   KEY `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` (`id_hasil_program`,`id_renstra_kegiatan`,`id_unit`) USING BTREE,
   CONSTRAINT `FK_kin_trx_cascading_kegiatan_opd_kin_trx_cascading_program_opd` FOREIGN KEY (`id_hasil_program`) REFERENCES `kin_trx_cascading_program_opd` (`id_hasil_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1315 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_cascading_program_opd
+-- Dumping structure for table dbbandung_20200116.kin_trx_cascading_program_opd
 DROP TABLE IF EXISTS `kin_trx_cascading_program_opd`;
 CREATE TABLE IF NOT EXISTS `kin_trx_cascading_program_opd` (
   `id_hasil_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_cascading_program_opd` (
   `uraian_hasil_program` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_hasil_program`) USING BTREE,
   KEY `tahun` (`tahun`,`id_unit`,`id_renstra_sasaran`,`id_renstra_program`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=433 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_opd_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_opd_dok
 DROP TABLE IF EXISTS `kin_trx_iku_opd_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `id_dokumen` int(11) NOT NULL AUTO_INCREMENT,
@@ -112,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_dok` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_unit` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_dokumen`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_opd_kegiatan
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_opd_kegiatan
 DROP TABLE IF EXISTS `kin_trx_iku_opd_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_kegiatan` (
   `id_iku_opd_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -132,11 +132,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_kegiatan` (
   PRIMARY KEY (`id_iku_opd_kegiatan`) USING BTREE,
   KEY `id_dokumen` (`id_iku_opd_program`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_kegiatan_ibfk_1` FOREIGN KEY (`id_iku_opd_program`) REFERENCES `kin_trx_iku_opd_program` (`id_iku_opd_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1093 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_opd_program
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_opd_program
 DROP TABLE IF EXISTS `kin_trx_iku_opd_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_program` (
   `id_iku_opd_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -152,11 +152,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_program` (
   PRIMARY KEY (`id_iku_opd_program`) USING BTREE,
   KEY `id_dokumen` (`id_iku_opd_sasaran`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_program_ibfk_1` FOREIGN KEY (`id_iku_opd_sasaran`) REFERENCES `kin_trx_iku_opd_sasaran` (`id_iku_opd_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_opd_sasaran
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_opd_sasaran
 DROP TABLE IF EXISTS `kin_trx_iku_opd_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_sasaran` (
   `id_iku_opd_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -171,11 +171,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_opd_sasaran` (
   PRIMARY KEY (`id_iku_opd_sasaran`) USING BTREE,
   KEY `id_dokumen` (`id_dokumen`) USING BTREE,
   CONSTRAINT `kin_trx_iku_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_opd_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_pemda_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_pemda_dok
 DROP TABLE IF EXISTS `kin_trx_iku_pemda_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_dok` (
   `id_dokumen` int(11) NOT NULL AUTO_INCREMENT,
@@ -188,11 +188,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_dok` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_iku_pemda_rinci
+-- Dumping structure for table dbbandung_20200116.kin_trx_iku_pemda_rinci
 DROP TABLE IF EXISTS `kin_trx_iku_pemda_rinci`;
 CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_rinci` (
   `id_iku_pemda` int(11) NOT NULL AUTO_INCREMENT,
@@ -207,11 +207,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_iku_pemda_rinci` (
   PRIMARY KEY (`id_iku_pemda`) USING BTREE,
   KEY `id_dokumen` (`id_dokumen`) USING BTREE,
   CONSTRAINT `kin_trx_iku_pemda_rinci_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `kin_trx_iku_pemda_dok` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es3_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es3_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
@@ -231,11 +231,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_dok` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es3`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es3_kegiatan
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es3_kegiatan
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -250,11 +250,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_kegiatan` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_program`) USING BTREE,
   KEY `id_program` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es3_program
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es3_program
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program` (
   `id_perkin_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -275,11 +275,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program` (
   KEY `id_perkin_program_opd` (`id_perkin_program_opd`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_perkin_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program_opd`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es3_program_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es3_program_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_es3_program_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -297,11 +297,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es3_program_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_program`) USING BTREE,
   KEY `id_program` (`id_indikator_program_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es4_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es4_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
@@ -321,11 +321,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_dok` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es4`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es4_kegiatan
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es4_kegiatan
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan` (
   `id_perkin_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -346,11 +346,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan` (
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan_es3`) REFERENCES `kin_trx_perkin_es3_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_es4_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_es4_kegiatan_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_es4_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -368,11 +368,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_es4_kegiatan_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_kegiatan`) USING BTREE,
   KEY `id_program` (`id_indikator_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_dok
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_dok` (
   `id_dokumen_perkin` int(11) NOT NULL AUTO_INCREMENT,
@@ -392,11 +392,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_dok` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_dokumen_perkin`) USING BTREE,
   KEY `id_unit` (`id_sotk_es2`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_program
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_program
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program` (
   `id_perkin_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -412,11 +412,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_sasaran`) USING BTREE,
   KEY `id_program` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_program_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_program_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_program_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_indikator` (
   `id_perkin_indikator` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -427,11 +427,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_indikator` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_perkin_indikator`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_program_pelaksana
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_program_pelaksana
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_pelaksana` (
   `id_perkin_pelaksana` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -441,11 +441,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_program_pelaksana` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_perkin_pelaksana`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_sasaran
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_sasaran
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran` (
   `id_perkin_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -458,11 +458,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran` (
   KEY `id_sasaran_kinerja_skpd` (`id_dokumen_perkin`) USING BTREE,
   KEY `id_program` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_perkin_opd_sasaran_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_perkin_opd_sasaran_indikator
 DROP TABLE IF EXISTS `kin_trx_perkin_opd_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran_indikator` (
   `id_perkin_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -480,11 +480,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_perkin_opd_sasaran_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_perkin_sasaran`) USING BTREE,
   KEY `id_program` (`id_indikator_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_perkin_opd_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_perkin_sasaran`) REFERENCES `kin_trx_perkin_opd_sasaran` (`id_perkin_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es2_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es2_dok
 DROP TABLE IF EXISTS `kin_trx_real_es2_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -506,13 +506,13 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_dok` (
   PRIMARY KEY (`id_dokumen_real`) USING BTREE,
   KEY `id_unit` (`id_sotk_es2`) USING BTREE,
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
-  CONSTRAINT `kin_trx_real_es2_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`),
-  CONSTRAINT `kin_trx_real_es2_dok_ibfk_2` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es2_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_opd_dok` (`id_dokumen_perkin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `kin_trx_real_es2_dok_ibfk_2` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es2_program
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es2_program
 DROP TABLE IF EXISTS `kin_trx_real_es2_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_program` (
   `id_real_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -538,13 +538,13 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_program` (
   KEY `id_dokumen_perkin` (`id_real_sasaran`) USING BTREE,
   KEY `id_real_program_es3` (`id_real_program_es3`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_program_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `kin_trx_real_es2_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`),
-  CONSTRAINT `kin_trx_real_es2_program_ibfk_3` FOREIGN KEY (`id_real_program_es3`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es2_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_opd_program` (`id_perkin_program`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `kin_trx_real_es2_program_ibfk_3` FOREIGN KEY (`id_real_program_es3`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es2_sasaran
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es2_sasaran
 DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran` (
   `id_real_sasaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -558,11 +558,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran` (
   KEY `id_sasaran_kinerja_skpd` (`id_dokumen_real`) USING BTREE,
   KEY `id_program` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_sasaran_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es2_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es2_sasaran_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es2_sasaran_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es2_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -588,11 +588,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es2_sasaran_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_real_sasaran`) USING BTREE,
   KEY `id_program` (`id_indikator_sasaran_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es2_sasaran_indikator_ibfk_1` FOREIGN KEY (`id_real_sasaran`) REFERENCES `kin_trx_real_es2_sasaran` (`id_real_sasaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es3_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es3_dok
 DROP TABLE IF EXISTS `kin_trx_real_es3_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -614,13 +614,13 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_dok` (
   PRIMARY KEY (`id_dokumen_real`) USING BTREE,
   KEY `id_unit` (`id_sotk_es3`) USING BTREE,
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
-  CONSTRAINT `kin_trx_real_es3_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`),
-  CONSTRAINT `kin_trx_real_es3_dok_ibfk_2` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es3_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es3_dok` (`id_dokumen_perkin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `kin_trx_real_es3_dok_ibfk_2` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es3_kegiatan
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es3_kegiatan
 DROP TABLE IF EXISTS `kin_trx_real_es3_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -647,12 +647,12 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_kegiatan` (
   KEY `id_dokumen_perkin` (`id_real_program`) USING BTREE,
   KEY `id_real_kegiatan_es4` (`id_real_kegiatan_es4`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_2` FOREIGN KEY (`id_real_kegiatan_es4`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es3_kegiatan_ibfk_2` FOREIGN KEY (`id_real_kegiatan_es4`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es3_program
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es3_program
 DROP TABLE IF EXISTS `kin_trx_real_es3_program`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program` (
   `id_real_program` int(11) NOT NULL AUTO_INCREMENT,
@@ -678,12 +678,12 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program` (
   KEY `id_program` (`id_program_renstra`) USING BTREE,
   KEY `id_dokumen_perkin` (`id_dokumen_real`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_program_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es3_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `kin_trx_real_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es3_program_ibfk_2` FOREIGN KEY (`id_perkin_program`) REFERENCES `kin_trx_perkin_es3_program` (`id_perkin_program`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es3_program_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es3_program_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es3_program_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -712,11 +712,11 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es3_program_indikator` (
   KEY `id_program` (`id_indikator_program_renstra`) USING BTREE,
   KEY `id_real_program` (`id_real_program`) USING BTREE,
   CONSTRAINT `kin_trx_real_es3_program_indikator_ibfk_1` FOREIGN KEY (`id_real_program`) REFERENCES `kin_trx_real_es3_program` (`id_real_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es4_dok
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es4_dok
 DROP TABLE IF EXISTS `kin_trx_real_es4_dok`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
   `id_dokumen_real` int(11) NOT NULL AUTO_INCREMENT,
@@ -738,13 +738,13 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_dok` (
   PRIMARY KEY (`id_dokumen_real`) USING BTREE,
   KEY `id_unit` (`id_sotk_es4`) USING BTREE,
   KEY `id_dokumen_perkin` (`id_dokumen_perkin`) USING BTREE,
-  CONSTRAINT `kin_trx_real_es4_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`),
-  CONSTRAINT `kin_trx_real_es4_dok_ibfk_2` FOREIGN KEY (`id_sotk_es4`) REFERENCES `ref_sotk_level_3` (`id_sotk_es4`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es4_dok_ibfk_1` FOREIGN KEY (`id_dokumen_perkin`) REFERENCES `kin_trx_perkin_es4_dok` (`id_dokumen_perkin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `kin_trx_real_es4_dok_ibfk_2` FOREIGN KEY (`id_sotk_es4`) REFERENCES `ref_sotk_level_3` (`id_sotk_es4`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es4_kegiatan
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es4_kegiatan
 DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan` (
   `id_real_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -770,12 +770,12 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan` (
   KEY `id_program` (`id_kegiatan_renstra`) USING BTREE,
   KEY `id_dokumen_perkin` (`id_dokumen_real`) USING BTREE,
   CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_1` FOREIGN KEY (`id_dokumen_real`) REFERENCES `kin_trx_real_es4_dok` (`id_dokumen_real`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `kin_trx_real_es4_kegiatan_ibfk_2` FOREIGN KEY (`id_perkin_kegiatan`) REFERENCES `kin_trx_perkin_es4_kegiatan` (`id_perkin_kegiatan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.kin_trx_real_es4_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.kin_trx_real_es4_kegiatan_indikator
 DROP TABLE IF EXISTS `kin_trx_real_es4_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan_indikator` (
   `id_real_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -804,22 +804,22 @@ CREATE TABLE IF NOT EXISTS `kin_trx_real_es4_kegiatan_indikator` (
   KEY `id_sasaran_kinerja_skpd` (`id_real_kegiatan`) USING BTREE,
   KEY `id_program` (`id_indikator_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `kin_trx_real_es4_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_real_kegiatan`) REFERENCES `kin_trx_real_es4_kegiatan` (`id_real_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.migrations
+-- Dumping structure for table dbbandung_20200116.migrations
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.password_resets
+-- Dumping structure for table dbbandung_20200116.password_resets
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -829,7 +829,7 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_api_manajemen
+-- Dumping structure for table dbbandung_20200116.ref_api_manajemen
 DROP TABLE IF EXISTS `ref_api_manajemen`;
 CREATE TABLE IF NOT EXISTS `ref_api_manajemen` (
   `id_setting` int(11) NOT NULL AUTO_INCREMENT,
@@ -838,13 +838,13 @@ CREATE TABLE IF NOT EXISTS `ref_api_manajemen` (
   `key_barrier` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_setting`),
-  UNIQUE KEY `id_app` (`id_app`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_setting`) USING BTREE,
+  UNIQUE KEY `id_app` (`id_app`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_aspek_pembangunan
+-- Dumping structure for table dbbandung_20200116.ref_aspek_pembangunan
 DROP TABLE IF EXISTS `ref_aspek_pembangunan`;
 CREATE TABLE IF NOT EXISTS `ref_aspek_pembangunan` (
   `id_aspek` int(11) NOT NULL AUTO_INCREMENT,
@@ -853,11 +853,11 @@ CREATE TABLE IF NOT EXISTS `ref_aspek_pembangunan` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_aspek`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_bidang
+-- Dumping structure for table dbbandung_20200116.ref_bidang
 DROP TABLE IF EXISTS `ref_bidang`;
 CREATE TABLE IF NOT EXISTS `ref_bidang` (
   `id_bidang` int(11) NOT NULL AUTO_INCREMENT,
@@ -870,11 +870,11 @@ CREATE TABLE IF NOT EXISTS `ref_bidang` (
   KEY `fk_ref_fungsi` (`kd_fungsi`) USING BTREE,
   CONSTRAINT `ref_bidang_ibfk_1` FOREIGN KEY (`kd_fungsi`) REFERENCES `ref_fungsi` (`kd_fungsi`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ref_bidang_ibfk_2` FOREIGN KEY (`kd_urusan`) REFERENCES `ref_urusan` (`kd_urusan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_data_sub_unit
+-- Dumping structure for table dbbandung_20200116.ref_data_sub_unit
 DROP TABLE IF EXISTS `ref_data_sub_unit`;
 CREATE TABLE IF NOT EXISTS `ref_data_sub_unit` (
   `tahun` int(11) NOT NULL,
@@ -889,11 +889,11 @@ CREATE TABLE IF NOT EXISTS `ref_data_sub_unit` (
   UNIQUE KEY `tahun` (`tahun`,`id_sub_unit`) USING BTREE,
   KEY `id_sub_unit` (`id_sub_unit`) USING BTREE,
   CONSTRAINT `fk_data_sub_unit` FOREIGN KEY (`id_sub_unit`) REFERENCES `ref_sub_unit` (`id_sub_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_desa
+-- Dumping structure for table dbbandung_20200116.ref_desa
 DROP TABLE IF EXISTS `ref_desa`;
 CREATE TABLE IF NOT EXISTS `ref_desa` (
   `id_kecamatan` int(11) NOT NULL,
@@ -905,11 +905,11 @@ CREATE TABLE IF NOT EXISTS `ref_desa` (
   PRIMARY KEY (`id_desa`) USING BTREE,
   UNIQUE KEY `id_kecamatan` (`id_kecamatan`,`kd_desa`) USING BTREE,
   CONSTRAINT `ref_desa_ibfk_1` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_dokumen
+-- Dumping structure for table dbbandung_20200116.ref_dokumen
 DROP TABLE IF EXISTS `ref_dokumen`;
 CREATE TABLE IF NOT EXISTS `ref_dokumen` (
   `id_dokumen` int(255) NOT NULL,
@@ -921,7 +921,7 @@ CREATE TABLE IF NOT EXISTS `ref_dokumen` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_fungsi
+-- Dumping structure for table dbbandung_20200116.ref_fungsi
 DROP TABLE IF EXISTS `ref_fungsi`;
 CREATE TABLE IF NOT EXISTS `ref_fungsi` (
   `kd_fungsi` int(11) NOT NULL AUTO_INCREMENT,
@@ -935,7 +935,7 @@ CREATE TABLE IF NOT EXISTS `ref_fungsi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_group
+-- Dumping structure for table dbbandung_20200116.ref_group
 DROP TABLE IF EXISTS `ref_group`;
 CREATE TABLE IF NOT EXISTS `ref_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -943,11 +943,11 @@ CREATE TABLE IF NOT EXISTS `ref_group` (
   `id_roles` int(11) NOT NULL,
   `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_indikator
+-- Dumping structure for table dbbandung_20200116.ref_indikator
 DROP TABLE IF EXISTS `ref_indikator`;
 CREATE TABLE IF NOT EXISTS `ref_indikator` (
   `id_indikator` int(11) NOT NULL AUTO_INCREMENT,
@@ -969,11 +969,11 @@ CREATE TABLE IF NOT EXISTS `ref_indikator` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_indikator`) USING BTREE,
   FULLTEXT KEY `nm_indikator` (`nm_indikator`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6948 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_jadwal
+-- Dumping structure for table dbbandung_20200116.ref_jadwal
 DROP TABLE IF EXISTS `ref_jadwal`;
 CREATE TABLE IF NOT EXISTS `ref_jadwal` (
   `tahun` int(11) NOT NULL,
@@ -988,11 +988,11 @@ CREATE TABLE IF NOT EXISTS `ref_jadwal` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_proses`) USING BTREE,
   UNIQUE KEY `idx_ref_jadwal` (`tahun`,`id_langkah`,`jenis_proses`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_jenis_lokasi
+-- Dumping structure for table dbbandung_20200116.ref_jenis_lokasi
 DROP TABLE IF EXISTS `ref_jenis_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_jenis_lokasi` (
   `id_jenis` int(11) NOT NULL,
@@ -1003,7 +1003,7 @@ CREATE TABLE IF NOT EXISTS `ref_jenis_lokasi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_kabupaten
+-- Dumping structure for table dbbandung_20200116.ref_kabupaten
 DROP TABLE IF EXISTS `ref_kabupaten`;
 CREATE TABLE IF NOT EXISTS `ref_kabupaten` (
   `id_pemda` int(11) NOT NULL,
@@ -1013,11 +1013,11 @@ CREATE TABLE IF NOT EXISTS `ref_kabupaten` (
   `nama_kab_kota` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_kab`) USING BTREE,
   UNIQUE KEY `id_pemda` (`id_pemda`,`id_prov`,`id_kab`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_kecamatan
+-- Dumping structure for table dbbandung_20200116.ref_kecamatan
 DROP TABLE IF EXISTS `ref_kecamatan`;
 CREATE TABLE IF NOT EXISTS `ref_kecamatan` (
   `id_pemda` int(11) NOT NULL,
@@ -1027,11 +1027,11 @@ CREATE TABLE IF NOT EXISTS `ref_kecamatan` (
   PRIMARY KEY (`id_kecamatan`) USING BTREE,
   UNIQUE KEY `id_kecamatan` (`id_pemda`,`kd_kecamatan`) USING BTREE,
   CONSTRAINT `fk_ref_kecamatan` FOREIGN KEY (`id_pemda`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_kegiatan
+-- Dumping structure for table dbbandung_20200116.ref_kegiatan
 DROP TABLE IF EXISTS `ref_kegiatan`;
 CREATE TABLE IF NOT EXISTS `ref_kegiatan` (
   `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT,
@@ -1041,11 +1041,11 @@ CREATE TABLE IF NOT EXISTS `ref_kegiatan` (
   PRIMARY KEY (`id_kegiatan`) USING BTREE,
   UNIQUE KEY `idx_ref_kegiatan` (`id_program`,`kd_kegiatan`) USING BTREE,
   CONSTRAINT `fk_ref_kegiatan` FOREIGN KEY (`id_program`) REFERENCES `ref_program` (`id_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3982 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7398 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_kolom_tabel_dasar
+-- Dumping structure for table dbbandung_20200116.ref_kolom_tabel_dasar
 DROP TABLE IF EXISTS `ref_kolom_tabel_dasar`;
 CREATE TABLE IF NOT EXISTS `ref_kolom_tabel_dasar` (
   `id_kolom_tabel_dasar` int(11) NOT NULL,
@@ -1058,11 +1058,11 @@ CREATE TABLE IF NOT EXISTS `ref_kolom_tabel_dasar` (
   KEY `id_tabel_dasar` (`id_tabel_dasar`) USING BTREE,
   CONSTRAINT `ref_kolom_tabel_dasar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ref_kolom_tabel_dasar_ibfk_2` FOREIGN KEY (`id_tabel_dasar`) REFERENCES `ref_tabel_dasar` (`id_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_langkah
+-- Dumping structure for table dbbandung_20200116.ref_langkah
 DROP TABLE IF EXISTS `ref_langkah`;
 CREATE TABLE IF NOT EXISTS `ref_langkah` (
   `id_langkah` int(255) NOT NULL,
@@ -1074,7 +1074,7 @@ CREATE TABLE IF NOT EXISTS `ref_langkah` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_laporan
+-- Dumping structure for table dbbandung_20200116.ref_laporan
 DROP TABLE IF EXISTS `ref_laporan`;
 CREATE TABLE IF NOT EXISTS `ref_laporan` (
   `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -1087,13 +1087,13 @@ CREATE TABLE IF NOT EXISTS `ref_laporan` (
   `status_laporan` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_modul` (`id_modul`,`id_dokumen`,`jns_laporan`,`id_laporan`)
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `id_modul` (`id_modul`,`id_dokumen`,`jns_laporan`,`id_laporan`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_log_akses
+-- Dumping structure for table dbbandung_20200116.ref_log_akses
 DROP TABLE IF EXISTS `ref_log_akses`;
 CREATE TABLE IF NOT EXISTS `ref_log_akses` (
   `id_log` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1105,11 +1105,11 @@ CREATE TABLE IF NOT EXISTS `ref_log_akses` (
   `id_log_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_log_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_log`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_lokasi
+-- Dumping structure for table dbbandung_20200116.ref_lokasi
 DROP TABLE IF EXISTS `ref_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_lokasi` (
   `id_lokasi` int(11) NOT NULL AUTO_INCREMENT,
@@ -1131,24 +1131,24 @@ CREATE TABLE IF NOT EXISTS `ref_lokasi` (
   `keterangan_lokasi` longtext CHARACTER SET latin1,
   PRIMARY KEY (`id_lokasi`) USING BTREE,
   UNIQUE KEY `jenis_lokasi` (`jenis_lokasi`,`nama_lokasi`,`id_desa`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_mapping_asb_renstra
+-- Dumping structure for table dbbandung_20200116.ref_mapping_asb_renstra
 DROP TABLE IF EXISTS `ref_mapping_asb_renstra`;
 CREATE TABLE IF NOT EXISTS `ref_mapping_asb_renstra` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
   `id_kegiatan_renstra` int(11) NOT NULL,
   KEY `idx_ref_mapping_asb_renstra` (`id_aktivitas_asb`,`id_kegiatan_renstra`) USING BTREE,
   KEY `fk_ref_mapping_asb_renstra1` (`id_kegiatan_renstra`) USING BTREE,
-  CONSTRAINT `fk_ref_mapping_asb_renstra` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`),
-  CONSTRAINT `fk_ref_mapping_asb_renstra1` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`)
+  CONSTRAINT `fk_ref_mapping_asb_renstra` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ref_mapping_asb_renstra1` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_menu
+-- Dumping structure for table dbbandung_20200116.ref_menu
 DROP TABLE IF EXISTS `ref_menu`;
 CREATE TABLE IF NOT EXISTS `ref_menu` (
   `id_menu` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -1158,11 +1158,11 @@ CREATE TABLE IF NOT EXISTS `ref_menu` (
   PRIMARY KEY (`id_menu`) USING BTREE,
   UNIQUE KEY `menu` (`menu`,`group_id`) USING BTREE,
   KEY `akses` (`akses`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1071 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pangkat_golongan
+-- Dumping structure for table dbbandung_20200116.ref_pangkat_golongan
 DROP TABLE IF EXISTS `ref_pangkat_golongan`;
 CREATE TABLE IF NOT EXISTS `ref_pangkat_golongan` (
   `id_pangkat_pns` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -1171,13 +1171,13 @@ CREATE TABLE IF NOT EXISTS `ref_pangkat_golongan` (
   `ruang` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_pangkat_pns`),
-  UNIQUE KEY `id_pangkat_pns` (`id_pangkat_pns`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_pangkat_pns`) USING BTREE,
+  UNIQUE KEY `id_pangkat_pns` (`id_pangkat_pns`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pegawai
+-- Dumping structure for table dbbandung_20200116.ref_pegawai
 DROP TABLE IF EXISTS `ref_pegawai`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai` (
   `id_pegawai` int(11) NOT NULL AUTO_INCREMENT,
@@ -1189,11 +1189,11 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_pegawai`) USING BTREE,
   UNIQUE KEY `nip_pegawai` (`nip_pegawai`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1367 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pegawai_pangkat
+-- Dumping structure for table dbbandung_20200116.ref_pegawai_pangkat
 DROP TABLE IF EXISTS `ref_pegawai_pangkat`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai_pangkat` (
   `id_pangkat` int(11) NOT NULL AUTO_INCREMENT,
@@ -1205,11 +1205,11 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai_pangkat` (
   PRIMARY KEY (`id_pangkat`) USING BTREE,
   UNIQUE KEY `id_pegawai` (`id_pegawai`,`pangkat_pegawai`) USING BTREE,
   CONSTRAINT `ref_pegawai_pangkat_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1453 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pegawai_unit
+-- Dumping structure for table dbbandung_20200116.ref_pegawai_unit
 DROP TABLE IF EXISTS `ref_pegawai_unit`;
 CREATE TABLE IF NOT EXISTS `ref_pegawai_unit` (
   `id_unit_pegawai` int(11) NOT NULL AUTO_INCREMENT,
@@ -1226,21 +1226,21 @@ CREATE TABLE IF NOT EXISTS `ref_pegawai_unit` (
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `ref_pegawai_unit_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ref_pegawai_unit_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pembatalan
+-- Dumping structure for table dbbandung_20200116.ref_pembatalan
 DROP TABLE IF EXISTS `ref_pembatalan`;
 CREATE TABLE IF NOT EXISTS `ref_pembatalan` (
   `id_batal` int(255) NOT NULL AUTO_INCREMENT,
   `uraian_batal` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_batal`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pemda
+-- Dumping structure for table dbbandung_20200116.ref_pemda
 DROP TABLE IF EXISTS `ref_pemda`;
 CREATE TABLE IF NOT EXISTS `ref_pemda` (
   `kd_prov` int(11) NOT NULL,
@@ -1277,7 +1277,7 @@ CREATE TABLE IF NOT EXISTS `ref_pemda` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_pengusul
+-- Dumping structure for table dbbandung_20200116.ref_pengusul
 DROP TABLE IF EXISTS `ref_pengusul`;
 CREATE TABLE IF NOT EXISTS `ref_pengusul` (
   `id_pengusul` int(255) NOT NULL,
@@ -1288,7 +1288,7 @@ CREATE TABLE IF NOT EXISTS `ref_pengusul` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_program
+-- Dumping structure for table dbbandung_20200116.ref_program
 DROP TABLE IF EXISTS `ref_program`;
 CREATE TABLE IF NOT EXISTS `ref_program` (
   `id_bidang` int(11) NOT NULL,
@@ -1297,23 +1297,23 @@ CREATE TABLE IF NOT EXISTS `ref_program` (
   `uraian_program` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_program`) USING BTREE,
   UNIQUE KEY `idx_ref_program` (`id_bidang`,`kd_program`) USING BTREE,
-  CONSTRAINT `fk_ref_program` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`)
-) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_ref_program` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=783 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_rek_1
+-- Dumping structure for table dbbandung_20200116.ref_rek_1
 DROP TABLE IF EXISTS `ref_rek_1`;
 CREATE TABLE IF NOT EXISTS `ref_rek_1` (
   `kd_rek_1` int(11) NOT NULL,
   `nama_kd_rek_1` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`kd_rek_1`) USING BTREE,
-  UNIQUE KEY `kd_rek_1` (`kd_rek_1`)
+  UNIQUE KEY `kd_rek_1` (`kd_rek_1`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_rek_2
+-- Dumping structure for table dbbandung_20200116.ref_rek_2
 DROP TABLE IF EXISTS `ref_rek_2`;
 CREATE TABLE IF NOT EXISTS `ref_rek_2` (
   `kd_rek_1` int(11) NOT NULL,
@@ -1326,7 +1326,7 @@ CREATE TABLE IF NOT EXISTS `ref_rek_2` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_rek_3
+-- Dumping structure for table dbbandung_20200116.ref_rek_3
 DROP TABLE IF EXISTS `ref_rek_3`;
 CREATE TABLE IF NOT EXISTS `ref_rek_3` (
   `kd_rek_1` int(11) NOT NULL,
@@ -1341,7 +1341,7 @@ CREATE TABLE IF NOT EXISTS `ref_rek_3` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_rek_4
+-- Dumping structure for table dbbandung_20200116.ref_rek_4
 DROP TABLE IF EXISTS `ref_rek_4`;
 CREATE TABLE IF NOT EXISTS `ref_rek_4` (
   `kd_rek_1` int(11) NOT NULL,
@@ -1356,7 +1356,7 @@ CREATE TABLE IF NOT EXISTS `ref_rek_4` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_rek_5
+-- Dumping structure for table dbbandung_20200116.ref_rek_5
 DROP TABLE IF EXISTS `ref_rek_5`;
 CREATE TABLE IF NOT EXISTS `ref_rek_5` (
   `kd_rek_1` int(11) NOT NULL,
@@ -1371,11 +1371,11 @@ CREATE TABLE IF NOT EXISTS `ref_rek_5` (
   UNIQUE KEY `kd_rek_1` (`kd_rek_1`,`kd_rek_2`,`kd_rek_3`,`kd_rek_4`,`kd_rek_5`) USING BTREE,
   KEY `id_rekening` (`id_rekening`) USING BTREE,
   CONSTRAINT `ref_rek_5_ibfk_1` FOREIGN KEY (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) REFERENCES `ref_rek_4` (`kd_rek_1`, `kd_rek_2`, `kd_rek_3`, `kd_rek_4`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1582 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2627 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_revisi
+-- Dumping structure for table dbbandung_20200116.ref_revisi
 DROP TABLE IF EXISTS `ref_revisi`;
 CREATE TABLE IF NOT EXISTS `ref_revisi` (
   `id_revisi` int(255) NOT NULL,
@@ -1386,7 +1386,7 @@ CREATE TABLE IF NOT EXISTS `ref_revisi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_satuan
+-- Dumping structure for table dbbandung_20200116.ref_satuan
 DROP TABLE IF EXISTS `ref_satuan`;
 CREATE TABLE IF NOT EXISTS `ref_satuan` (
   `id_satuan` int(11) NOT NULL AUTO_INCREMENT,
@@ -1394,11 +1394,11 @@ CREATE TABLE IF NOT EXISTS `ref_satuan` (
   `singkatan_satuan` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `scope_pemakaian` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_satuan`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_setting
+-- Dumping structure for table dbbandung_20200116.ref_setting
 DROP TABLE IF EXISTS `ref_setting`;
 CREATE TABLE IF NOT EXISTS `ref_setting` (
   `tahun_rencana` int(11) NOT NULL COMMENT 'tahun_perencanaan',
@@ -1418,7 +1418,7 @@ CREATE TABLE IF NOT EXISTS `ref_setting` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_sotk_level_1
+-- Dumping structure for table dbbandung_20200116.ref_sotk_level_1
 DROP TABLE IF EXISTS `ref_sotk_level_1`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_1` (
   `id_sotk_es2` int(11) NOT NULL AUTO_INCREMENT,
@@ -1431,11 +1431,11 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_1` (
   PRIMARY KEY (`id_sotk_es2`) USING BTREE,
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `ref_sotk_level_1_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_sotk_level_2
+-- Dumping structure for table dbbandung_20200116.ref_sotk_level_2
 DROP TABLE IF EXISTS `ref_sotk_level_2`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_2` (
   `id_sotk_es3` int(11) NOT NULL AUTO_INCREMENT,
@@ -1448,11 +1448,11 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_2` (
   PRIMARY KEY (`id_sotk_es3`) USING BTREE,
   KEY `id_sotk_es2` (`id_sotk_es2`) USING BTREE,
   CONSTRAINT `ref_sotk_level_2_ibfk_1` FOREIGN KEY (`id_sotk_es2`) REFERENCES `ref_sotk_level_1` (`id_sotk_es2`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_sotk_level_3
+-- Dumping structure for table dbbandung_20200116.ref_sotk_level_3
 DROP TABLE IF EXISTS `ref_sotk_level_3`;
 CREATE TABLE IF NOT EXISTS `ref_sotk_level_3` (
   `id_sotk_es4` int(11) NOT NULL AUTO_INCREMENT,
@@ -1465,11 +1465,11 @@ CREATE TABLE IF NOT EXISTS `ref_sotk_level_3` (
   PRIMARY KEY (`id_sotk_es4`) USING BTREE,
   KEY `id_sotk_es2` (`id_sotk_es3`) USING BTREE,
   CONSTRAINT `ref_sotk_level_3_ibfk_1` FOREIGN KEY (`id_sotk_es3`) REFERENCES `ref_sotk_level_2` (`id_sotk_es3`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=473 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_golongan
+-- Dumping structure for table dbbandung_20200116.ref_ssh_golongan
 DROP TABLE IF EXISTS `ref_ssh_golongan`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_golongan` (
   `id_golongan_ssh` int(11) NOT NULL AUTO_INCREMENT,
@@ -1478,11 +1478,11 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_golongan` (
   `uraian_golongan_ssh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_golongan_ssh`) USING BTREE,
   UNIQUE KEY `idx_ref_ssh_golongan` (`id_golongan_ssh`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_kelompok
+-- Dumping structure for table dbbandung_20200116.ref_ssh_kelompok
 DROP TABLE IF EXISTS `ref_ssh_kelompok`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_kelompok` (
   `id_kelompok_ssh` int(11) NOT NULL AUTO_INCREMENT,
@@ -1492,11 +1492,11 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_kelompok` (
   PRIMARY KEY (`id_kelompok_ssh`) USING BTREE,
   KEY `fk_ssh_kelompok` (`id_golongan_ssh`) USING BTREE,
   CONSTRAINT `fk_ssh_kelompok` FOREIGN KEY (`id_golongan_ssh`) REFERENCES `ref_ssh_golongan` (`id_golongan_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_perkada
+-- Dumping structure for table dbbandung_20200116.ref_ssh_perkada
 DROP TABLE IF EXISTS `ref_ssh_perkada`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada` (
   `id_perkada` int(11) NOT NULL AUTO_INCREMENT,
@@ -1513,11 +1513,11 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada` (
   PRIMARY KEY (`id_perkada`) USING BTREE,
   UNIQUE KEY `idx_ref_ssh_perkada_2` (`id_perkada`,`id_perkada_induk`,`id_perubahan`) USING BTREE,
   KEY `idx_ref_ssh_perkada_1` (`id_perkada`,`created_at`,`updated_at`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_perkada_tarif
+-- Dumping structure for table dbbandung_20200116.ref_ssh_perkada_tarif
 DROP TABLE IF EXISTS `ref_ssh_perkada_tarif`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_tarif` (
   `id_tarif_perkada` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -1533,13 +1533,13 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_tarif` (
   UNIQUE KEY `ref_ssh_perkada_tarif_unik` (`id_tarif_ssh`,`id_zona_perkada`) USING BTREE,
   KEY `fk_ref_tarif_jumlah_1` (`id_zona_perkada`) USING BTREE,
   KEY `idx_ref_ssh_tarif_jumlah` (`id_tarif_ssh`,`id_zona_perkada`) USING BTREE,
-  CONSTRAINT `fk_ref_tarif_jumlah` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`),
+  CONSTRAINT `fk_ref_tarif_jumlah` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ref_tarif_jumlah_1` FOREIGN KEY (`id_zona_perkada`) REFERENCES `ref_ssh_perkada_zona` (`id_zona_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1599 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=117484 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_perkada_zona
+-- Dumping structure for table dbbandung_20200116.ref_ssh_perkada_zona
 DROP TABLE IF EXISTS `ref_ssh_perkada_zona`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_zona` (
   `id_zona_perkada` int(11) NOT NULL AUTO_INCREMENT,
@@ -1552,13 +1552,13 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_perkada_zona` (
   UNIQUE KEY `idx_ref_ssh_tarif_jumlah` (`id_perkada`,`id_zona`,`id_perubahan`) USING BTREE,
   KEY `fk_ref_tarif_jumlah_1` (`id_zona_perkada`,`no_urut`,`id_perkada`,`id_zona`) USING BTREE,
   KEY `ref_ssh_perkada_zona_fk` (`id_zona`) USING BTREE,
-  CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`),
+  CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona` FOREIGN KEY (`id_zona`) REFERENCES `ref_ssh_zona` (`id_zona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ref_ssh_perkada_zona_ref_ssh_zona_1` FOREIGN KEY (`id_perkada`) REFERENCES `ref_ssh_perkada` (`id_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_rekening
+-- Dumping structure for table dbbandung_20200116.ref_ssh_rekening
 DROP TABLE IF EXISTS `ref_ssh_rekening`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_rekening` (
   `id_rekening_ssh` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -1568,11 +1568,11 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_rekening` (
   PRIMARY KEY (`id_rekening_ssh`) USING BTREE,
   UNIQUE KEY `fk_ref_ssh_rekening` (`id_tarif_ssh`,`id_rekening`) USING BTREE,
   CONSTRAINT `fk_ref_ssh_rekening` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_sub_kelompok
+-- Dumping structure for table dbbandung_20200116.ref_ssh_sub_kelompok
 DROP TABLE IF EXISTS `ref_ssh_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_sub_kelompok` (
   `id_sub_kelompok_ssh` int(11) NOT NULL AUTO_INCREMENT,
@@ -1584,11 +1584,11 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_sub_kelompok` (
   PRIMARY KEY (`id_sub_kelompok_ssh`) USING BTREE,
   KEY `fk_ref_ssh_sub_kelompok` (`id_kelompok_ssh`) USING BTREE,
   CONSTRAINT `fk_ref_ssh_sub_kelompok` FOREIGN KEY (`id_kelompok_ssh`) REFERENCES `ref_ssh_kelompok` (`id_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_tarif
+-- Dumping structure for table dbbandung_20200116.ref_ssh_tarif
 DROP TABLE IF EXISTS `ref_ssh_tarif`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_tarif` (
   `id_tarif_ssh` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -1603,22 +1603,22 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_tarif` (
   KEY `id_ref_ssh_tarif` (`id_sub_kelompok_ssh`) USING BTREE,
   FULLTEXT KEY `uraian_tarif_ssh` (`uraian_tarif_ssh`),
   CONSTRAINT `fk_ref_ssh_tarif` FOREIGN KEY (`id_sub_kelompok_ssh`) REFERENCES `ref_ssh_sub_kelompok` (`id_sub_kelompok_ssh`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=495 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40373 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_zona
+-- Dumping structure for table dbbandung_20200116.ref_ssh_zona
 DROP TABLE IF EXISTS `ref_ssh_zona`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_zona` (
   `id_zona` int(11) NOT NULL AUTO_INCREMENT,
   `keterangan_zona` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `diskripsi_zona` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_zona`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_ssh_zona_lokasi
+-- Dumping structure for table dbbandung_20200116.ref_ssh_zona_lokasi
 DROP TABLE IF EXISTS `ref_ssh_zona_lokasi`;
 CREATE TABLE IF NOT EXISTS `ref_ssh_zona_lokasi` (
   `id_zona_lokasi` int(11) NOT NULL AUTO_INCREMENT,
@@ -1633,7 +1633,7 @@ CREATE TABLE IF NOT EXISTS `ref_ssh_zona_lokasi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_status_usul
+-- Dumping structure for table dbbandung_20200116.ref_status_usul
 DROP TABLE IF EXISTS `ref_status_usul`;
 CREATE TABLE IF NOT EXISTS `ref_status_usul` (
   `id_status_usul` int(11) NOT NULL,
@@ -1643,7 +1643,7 @@ CREATE TABLE IF NOT EXISTS `ref_status_usul` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_sub_unit
+-- Dumping structure for table dbbandung_20200116.ref_sub_unit
 DROP TABLE IF EXISTS `ref_sub_unit`;
 CREATE TABLE IF NOT EXISTS `ref_sub_unit` (
   `id_sub_unit` int(255) NOT NULL AUTO_INCREMENT,
@@ -1651,13 +1651,13 @@ CREATE TABLE IF NOT EXISTS `ref_sub_unit` (
   `kd_sub` int(255) NOT NULL,
   `nm_sub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_sub_unit`) USING BTREE,
-  KEY `idx_ref_sub_unit` (`id_unit`,`kd_sub`) USING BTREE,
-  CONSTRAINT `fk_ref_sub_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_ref_sub_unit` (`id_unit`,`kd_sub`) USING BTREE,
+  CONSTRAINT `fk_ref_sub_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_sumber_dana
+-- Dumping structure for table dbbandung_20200116.ref_sumber_dana
 DROP TABLE IF EXISTS `ref_sumber_dana`;
 CREATE TABLE IF NOT EXISTS `ref_sumber_dana` (
   `id_sumber_dana` int(11) NOT NULL,
@@ -1667,17 +1667,17 @@ CREATE TABLE IF NOT EXISTS `ref_sumber_dana` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_tabel_dasar
+-- Dumping structure for table dbbandung_20200116.ref_tabel_dasar
 DROP TABLE IF EXISTS `ref_tabel_dasar`;
 CREATE TABLE IF NOT EXISTS `ref_tabel_dasar` (
   `id_tabel_dasar` int(11) NOT NULL,
   `nama_tabel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_tabel_dasar`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_tahun
+-- Dumping structure for table dbbandung_20200116.ref_tahun
 DROP TABLE IF EXISTS `ref_tahun`;
 CREATE TABLE IF NOT EXISTS `ref_tahun` (
   `id_tahun` int(11) NOT NULL AUTO_INCREMENT,
@@ -1694,7 +1694,7 @@ CREATE TABLE IF NOT EXISTS `ref_tahun` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_unit
+-- Dumping structure for table dbbandung_20200116.ref_unit
 DROP TABLE IF EXISTS `ref_unit`;
 CREATE TABLE IF NOT EXISTS `ref_unit` (
   `id_unit` int(11) NOT NULL AUTO_INCREMENT,
@@ -1702,13 +1702,13 @@ CREATE TABLE IF NOT EXISTS `ref_unit` (
   `kd_unit` int(255) NOT NULL,
   `nm_unit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_unit`) USING BTREE,
-  KEY `idx_ref_unit` (`id_bidang`,`kd_unit`) USING BTREE,
-  CONSTRAINT `fk_ref_unit` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  UNIQUE KEY `idx_ref_unit` (`id_bidang`,`kd_unit`) USING BTREE,
+  CONSTRAINT `fk_ref_unit` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_urusan
+-- Dumping structure for table dbbandung_20200116.ref_urusan
 DROP TABLE IF EXISTS `ref_urusan`;
 CREATE TABLE IF NOT EXISTS `ref_urusan` (
   `kd_urusan` int(11) NOT NULL AUTO_INCREMENT,
@@ -1718,11 +1718,11 @@ CREATE TABLE IF NOT EXISTS `ref_urusan` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`kd_urusan`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.ref_user_role
+-- Dumping structure for table dbbandung_20200116.ref_user_role
 DROP TABLE IF EXISTS `ref_user_role`;
 CREATE TABLE IF NOT EXISTS `ref_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1737,11 +1737,55 @@ CREATE TABLE IF NOT EXISTS `ref_user_role` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.temp_table_info
+-- Dumping structure for table dbbandung_20200116.ta_belanja_item
+DROP TABLE IF EXISTS `ta_belanja_item`;
+CREATE TABLE IF NOT EXISTS `ta_belanja_item` (
+  `id_item_can` bigint(20) NOT NULL,
+  `id_belanja_renja` bigint(20) NOT NULL,
+  `group_keu` tinyint(4) NOT NULL,
+  `uraian_aktivitas_kegiatan` varchar(255) DEFAULT NULL,
+  `Tahun` smallint(6) NOT NULL,
+  `Kd_Urusan` tinyint(4) NOT NULL,
+  `Kd_Bidang` tinyint(4) NOT NULL,
+  `Kd_Unit` tinyint(4) NOT NULL,
+  `Kd_Sub` smallint(6) NOT NULL,
+  `Kd_Prog` smallint(6) NOT NULL,
+  `ID_Prog` smallint(6) NOT NULL,
+  `Kd_Keg` smallint(6) NOT NULL,
+  `Kd_Rek_1` tinyint(4) NOT NULL,
+  `Kd_Rek_2` tinyint(4) NOT NULL,
+  `Kd_Rek_3` tinyint(4) NOT NULL,
+  `Kd_Rek_4` tinyint(4) NOT NULL,
+  `Kd_Rek_5` tinyint(4) NOT NULL,
+  `Nm_Rek_5` varchar(255) DEFAULT NULL,
+  `No_Rinc` smallint(6) NOT NULL,
+  `Keterangan_Rinc` varchar(255) DEFAULT NULL,
+  `Kd_Sumber` tinyint(4) DEFAULT NULL,
+  `No_ID` smallint(6) NOT NULL,
+  `Sat_1` varchar(10) DEFAULT NULL,
+  `Nilai_1` decimal(20,2) NOT NULL,
+  `Sat_2` varchar(10) DEFAULT NULL,
+  `Nilai_2` decimal(20,2) NOT NULL,
+  `Sat_3` varchar(10) DEFAULT NULL,
+  `Nilai_3` decimal(20,2) NOT NULL,
+  `Satuan123` varchar(50) NOT NULL,
+  `Jml_Satuan` decimal(20,2) NOT NULL,
+  `Nilai_Rp` decimal(20,2) NOT NULL,
+  `Total` decimal(20,2) NOT NULL,
+  `Keterangan` varchar(255) DEFAULT NULL,
+  `sumber_aktivitas` tinyint(4) DEFAULT NULL,
+  `id_aktivitas_renja` bigint(20) NOT NULL,
+  `id_aktivitas_asb` bigint(20) NOT NULL,
+  `id_tarif_ssh` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table dbbandung_20200116.temp_table_info
 DROP TABLE IF EXISTS `temp_table_info`;
 CREATE TABLE IF NOT EXISTS `temp_table_info` (
   `TBL_INDEX` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1762,7 +1806,7 @@ CREATE TABLE IF NOT EXISTS `temp_table_info` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_aktivitas_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_aktivitas_pd
 DROP TABLE IF EXISTS `trx_anggaran_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -1802,11 +1846,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_aktivitas_pd` (
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   KEY `id_pelaksana_pd` (`id_pelaksana_pd`,`id_aktivitas_rkpd_final`,`tahun_anggaran`,`sumber_aktivitas`,`sumber_dana`,`id_perubahan`,`id_aktivitas_asb`,`sumber_data`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_aktivitas_pd_trx_anggaran_pelaksana_pd` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_anggaran_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=38838 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_belanja_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_belanja_pd
 DROP TABLE IF EXISTS `trx_anggaran_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd` (
   `id_belanja_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -1845,11 +1889,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_anggaran`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_belanja_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2602 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=522016 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_dokumen
 DROP TABLE IF EXISTS `trx_anggaran_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_dokumen` (
   `id_dokumen_keu` int(11) NOT NULL AUTO_INCREMENT,
@@ -1874,11 +1918,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_dokumen` (
   `updated_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_dokumen_keu`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`jns_dokumen_keu`,`kd_dokumen_keu`,`id_perubahan`,`tahun_anggaran`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_indikator
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_indikator
 DROP TABLE IF EXISTS `trx_anggaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator` (
   `id_indikator_program_rkpd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -1907,11 +1951,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_anggaran_pemda`,`kd_indikator`,`no_urut`,`id_indikator_rkpd_final`) USING BTREE,
   KEY `id_anggaran_pemda` (`id_anggaran_pemda`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_indikator_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_kegiatan_pd
 DROP TABLE IF EXISTS `trx_anggaran_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -1947,11 +1991,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_kegiatan_pd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`,`tahun_anggaran`,`id_kegiatan_pd_rkpd_final`,`id_perubahan`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_kegiatan_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10528 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_keg_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_anggaran_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd` (
   `id_indikator_kegiatan` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -1981,11 +2025,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_indikator_rkpd_final`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_keg_indikator_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11932 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_lokasi_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_lokasi_pd
 DROP TABLE IF EXISTS `trx_anggaran_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_lokasi_pd` (
   `id_lokasi_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2020,11 +2064,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_lokasi_pd` (
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_anggaran`,`no_urut`,`id_lokasi_pd`,`jenis_lokasi`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_lokasi_pd_trx_anggaran_aktivitas_pd` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_anggaran_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=50073 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_pelaksana
 DROP TABLE IF EXISTS `trx_anggaran_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana` (
   `id_pelaksana_anggaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -2051,11 +2095,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_urusan_anggaran`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_pelaksana_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_pelaksana_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_pelaksana_pd
 DROP TABLE IF EXISTS `trx_anggaran_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2079,11 +2123,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_pelaksana_pd` (
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_anggaran`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_pelaksana_pd_trx_anggaran_kegiatan_pd` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_anggaran_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11655 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_program
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_program
 DROP TABLE IF EXISTS `trx_anggaran_program`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_program` (
   `id_anggaran_pemda` int(11) NOT NULL AUTO_INCREMENT,
@@ -2116,11 +2160,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_program` (
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_anggaran`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_rkpd_final`,`id_rkpd_ranwal`,`id_dokumen_keu`) USING BTREE,
   KEY `id_dokumen_keu` (`id_dokumen_keu`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_program_trx_anggaran_dokumen` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_program_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_program_pd
 DROP TABLE IF EXISTS `trx_anggaran_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2155,11 +2199,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_program_pd` (
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`tahun_anggaran`,`kd_dokumen_keu`,`jns_dokumen_keu`,`id_perubahan`,`id_pelaksana_anggaran`,`id_program_ref`,`id_program_pd_rkpd_final`,`id_dokumen_keu`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_pelaksana_anggaran`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_program_pd_trx_anggaran_pelaksana` FOREIGN KEY (`id_pelaksana_anggaran`) REFERENCES `trx_anggaran_pelaksana` (`id_pelaksana_anggaran`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_prog_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_anggaran_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd` (
   `id_indikator_program` int(11) NOT NULL AUTO_INCREMENT COMMENT 'nomor urut indikator sasaran',
@@ -2190,14 +2234,15 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_prog_indikator_pd_trx_anggaran_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_anggaran_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5351 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_tapd
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_tapd
 DROP TABLE IF EXISTS `trx_anggaran_tapd`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_tapd` (
   `id_tapd` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_tapd_ref` bigint(255) NOT NULL DEFAULT '0',
   `id_dokumen_keu` int(11) NOT NULL,
   `id_pegawai` int(11) NOT NULL,
   `id_unit_pegawai` int(11) NOT NULL,
@@ -2208,16 +2253,16 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_tapd` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `updated_by` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_tapd`),
-  UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_pegawai`,`id_unit_pegawai`,`status_tim`),
-  KEY `id_pegawai` (`id_pegawai`),
+  PRIMARY KEY (`id_tapd`) USING BTREE,
+  UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_pegawai`,`id_unit_pegawai`,`status_tim`) USING BTREE,
+  KEY `id_pegawai` (`id_pegawai`) USING BTREE,
   CONSTRAINT `trx_anggaran_tapd_ibfk_1` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `trx_anggaran_tapd_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  CONSTRAINT `trx_anggaran_tapd_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_tapd_unit
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_tapd_unit
 DROP TABLE IF EXISTS `trx_anggaran_tapd_unit`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_tapd_unit` (
   `id_unit_tapd` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -2228,14 +2273,14 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_tapd_unit` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `updated_by` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_unit_tapd`),
-  UNIQUE KEY `id_tapd` (`id_tapd`,`id_unit`,`status_unit`),
+  PRIMARY KEY (`id_unit_tapd`) USING BTREE,
+  UNIQUE KEY `id_tapd` (`id_tapd`,`id_unit`,`status_unit`) USING BTREE,
   CONSTRAINT `trx_anggaran_tapd_unit_ibfk_1` FOREIGN KEY (`id_tapd`) REFERENCES `trx_anggaran_tapd` (`id_tapd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_unit_kpa
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_unit_kpa
 DROP TABLE IF EXISTS `trx_anggaran_unit_kpa`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_unit_kpa` (
   `id_kpa` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -2248,18 +2293,19 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_unit_kpa` (
   `created_by` int(11) NOT NULL DEFAULT '0',
   `updated_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_kpa`) USING BTREE,
-  UNIQUE KEY `id_pa` (`id_pa`,`id_program`,`id_pegawai`),
-  KEY `id_pegawai` (`id_pegawai`),
+  UNIQUE KEY `id_pa` (`id_pa`,`id_program`,`id_pegawai`) USING BTREE,
+  KEY `id_pegawai` (`id_pegawai`) USING BTREE,
   CONSTRAINT `trx_anggaran_unit_kpa_ibfk_1` FOREIGN KEY (`id_pa`) REFERENCES `trx_anggaran_unit_pa` (`id_pa`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `trx_anggaran_unit_kpa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `trx_anggaran_unit_kpa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_unit_pa
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_unit_pa
 DROP TABLE IF EXISTS `trx_anggaran_unit_pa`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_unit_pa` (
   `id_pa` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_pa_ref` bigint(255) NOT NULL DEFAULT '0',
   `id_dokumen_keu` int(11) NOT NULL,
   `no_dokumen` varchar(255) DEFAULT NULL,
   `tgl_dokumen` date DEFAULT NULL,
@@ -2270,16 +2316,16 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_unit_pa` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `updated_by` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_pa`),
-  UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_unit`),
-  KEY `id_pegawai` (`id_pegawai`),
+  PRIMARY KEY (`id_pa`) USING BTREE,
+  UNIQUE KEY `id_dokumen_keu` (`id_dokumen_keu`,`id_unit`) USING BTREE,
+  KEY `id_pegawai` (`id_pegawai`) USING BTREE,
   CONSTRAINT `trx_anggaran_unit_pa_ibfk_1` FOREIGN KEY (`id_dokumen_keu`) REFERENCES `trx_anggaran_dokumen` (`id_dokumen_keu`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `trx_anggaran_unit_pa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `trx_anggaran_unit_pa_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `ref_pegawai` (`id_pegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_anggaran_urusan
+-- Dumping structure for table dbbandung_20200116.trx_anggaran_urusan
 DROP TABLE IF EXISTS `trx_anggaran_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_anggaran_urusan` (
   `id_urusan_anggaran` int(11) NOT NULL AUTO_INCREMENT,
@@ -2298,11 +2344,11 @@ CREATE TABLE IF NOT EXISTS `trx_anggaran_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_anggaran_pemda`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `FK_trx_anggaran_urusan_trx_anggaran_program` FOREIGN KEY (`id_anggaran_pemda`) REFERENCES `trx_anggaran_program` (`id_anggaran_pemda`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=681 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_aktivitas
+-- Dumping structure for table dbbandung_20200116.trx_asb_aktivitas
 DROP TABLE IF EXISTS `trx_asb_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_asb_aktivitas` (
   `id_aktivitas_asb` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2324,11 +2370,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_aktivitas` (
   PRIMARY KEY (`id_aktivitas_asb`) USING BTREE,
   KEY `fk_trx_aktivitas_asb` (`id_asb_sub_sub_kelompok`) USING BTREE,
   CONSTRAINT `FK_trx_asb_aktivitas_trx_asb_sub_sub_kelompok` FOREIGN KEY (`id_asb_sub_sub_kelompok`) REFERENCES `trx_asb_sub_sub_kelompok` (`id_asb_sub_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4131374 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_kelompok
+-- Dumping structure for table dbbandung_20200116.trx_asb_kelompok
 DROP TABLE IF EXISTS `trx_asb_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_kelompok` (
   `id_asb_kelompok` int(11) NOT NULL AUTO_INCREMENT,
@@ -2338,11 +2384,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_kelompok` (
   PRIMARY KEY (`id_asb_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_perkada`) USING BTREE,
   CONSTRAINT `FK_trx_asb_cluster_trx_asb_perkada` FOREIGN KEY (`id_asb_perkada`) REFERENCES `trx_asb_perkada` (`id_asb_perkada`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_komponen
+-- Dumping structure for table dbbandung_20200116.trx_asb_komponen
 DROP TABLE IF EXISTS `trx_asb_komponen`;
 CREATE TABLE IF NOT EXISTS `trx_asb_komponen` (
   `id_aktivitas_asb` bigint(20) NOT NULL,
@@ -2353,11 +2399,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_komponen` (
   PRIMARY KEY (`id_komponen_asb`) USING BTREE,
   KEY `FK_trx_asb_komponen_trx_asb_aktivitas` (`id_aktivitas_asb`) USING BTREE,
   CONSTRAINT `FK_trx_asb_komponen_trx_asb_aktivitas` FOREIGN KEY (`id_aktivitas_asb`) REFERENCES `trx_asb_aktivitas` (`id_aktivitas_asb`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=819 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_komponen_rinci
+-- Dumping structure for table dbbandung_20200116.trx_asb_komponen_rinci
 DROP TABLE IF EXISTS `trx_asb_komponen_rinci`;
 CREATE TABLE IF NOT EXISTS `trx_asb_komponen_rinci` (
   `id_komponen_asb_rinci` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2384,11 +2430,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_komponen_rinci` (
   FULLTEXT KEY `ket_group` (`ket_group`),
   CONSTRAINT `FK_trx_asb_komponen_rinci_ref_ssh_tarif` FOREIGN KEY (`id_tarif_ssh`) REFERENCES `ref_ssh_tarif` (`id_tarif_ssh`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trx_asb_komponen_rinci_trx_asb_komponen` FOREIGN KEY (`id_komponen_asb`) REFERENCES `trx_asb_komponen` (`id_komponen_asb`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3479732 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37482 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_perhitungan
+-- Dumping structure for table dbbandung_20200116.trx_asb_perhitungan
 DROP TABLE IF EXISTS `trx_asb_perhitungan`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan` (
   `tahun_perhitungan` int(11) NOT NULL,
@@ -2397,11 +2443,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan` (
   `flag_aktif` int(11) NOT NULL DEFAULT '0' COMMENT '0 aktif 1 non aktif',
   PRIMARY KEY (`id_perhitungan`) USING BTREE,
   UNIQUE KEY `idx_trx_perhitungan_asb` (`tahun_perhitungan`,`id_perkada`,`flag_aktif`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_perhitungan_rinci
+-- Dumping structure for table dbbandung_20200116.trx_asb_perhitungan_rinci
 DROP TABLE IF EXISTS `trx_asb_perhitungan_rinci`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan_rinci` (
   `id_perhitungan_rinci` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2428,11 +2474,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_perhitungan_rinci` (
   PRIMARY KEY (`id_perhitungan_rinci`) USING BTREE,
   UNIQUE KEY `id_trx_perhitungan_aktivitas` (`id_perhitungan`,`id_asb_kelompok`,`id_asb_sub_kelompok`,`id_aktivitas_asb`,`id_komponen_asb`,`id_komponen_asb_rinci`,`id_zona`) USING BTREE,
   CONSTRAINT `trx_asb_perhitungan_rinci_ibfk_1` FOREIGN KEY (`id_perhitungan`) REFERENCES `trx_asb_perhitungan` (`id_perhitungan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=100949 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_perkada
+-- Dumping structure for table dbbandung_20200116.trx_asb_perkada
 DROP TABLE IF EXISTS `trx_asb_perkada`;
 CREATE TABLE IF NOT EXISTS `trx_asb_perkada` (
   `id_asb_perkada` int(11) NOT NULL AUTO_INCREMENT,
@@ -2442,11 +2488,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_perkada` (
   `uraian_perkada` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_asb_perkada`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_sub_kelompok
+-- Dumping structure for table dbbandung_20200116.trx_asb_sub_kelompok
 DROP TABLE IF EXISTS `trx_asb_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_sub_kelompok` (
   `id_asb_sub_kelompok` int(11) NOT NULL AUTO_INCREMENT,
@@ -2456,11 +2502,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_sub_kelompok` (
   PRIMARY KEY (`id_asb_sub_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_kelompok`) USING BTREE,
   CONSTRAINT `trx_asb_sub_kelompok_ibfk_1` FOREIGN KEY (`id_asb_kelompok`) REFERENCES `trx_asb_kelompok` (`id_asb_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1619 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_asb_sub_sub_kelompok
+-- Dumping structure for table dbbandung_20200116.trx_asb_sub_sub_kelompok
 DROP TABLE IF EXISTS `trx_asb_sub_sub_kelompok`;
 CREATE TABLE IF NOT EXISTS `trx_asb_sub_sub_kelompok` (
   `id_asb_sub_sub_kelompok` int(11) NOT NULL AUTO_INCREMENT,
@@ -2470,11 +2516,11 @@ CREATE TABLE IF NOT EXISTS `trx_asb_sub_sub_kelompok` (
   PRIMARY KEY (`id_asb_sub_sub_kelompok`) USING BTREE,
   KEY `FK_trx_asb_cluster_trx_asb_perkada` (`id_asb_sub_kelompok`) USING BTREE,
   CONSTRAINT `FK_trx_asb_sub_sub_kelompok_trx_asb_sub_kelompok` FOREIGN KEY (`id_asb_sub_kelompok`) REFERENCES `trx_asb_sub_kelompok` (`id_asb_sub_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=162394 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd
 DROP TABLE IF EXISTS `trx_forum_skpd`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd` (
   `id_forum_skpd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2502,11 +2548,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_forum_program`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_trx_forum_skpd_program` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7972 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_aktivitas
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_aktivitas
 DROP TABLE IF EXISTS `trx_forum_skpd_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_aktivitas` (
   `id_aktivitas_forum` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2539,11 +2585,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_aktivitas` (
   PRIMARY KEY (`id_aktivitas_forum`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_forum_skpd`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd_pelaksana` (`id_pelaksana_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16874 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_belanja
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_belanja
 DROP TABLE IF EXISTS `trx_forum_skpd_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_belanja` (
   `tahun_forum` int(11) NOT NULL,
@@ -2575,11 +2621,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_belanja` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_forum`,`id_lokasi_forum`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_lokasi_forum`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_belanja_ibfk_1` FOREIGN KEY (`id_lokasi_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1390 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=136135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_dokumen
 DROP TABLE IF EXISTS `trx_forum_skpd_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -2594,11 +2640,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_dokumen` (
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_kebijakan
 DROP TABLE IF EXISTS `trx_forum_skpd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -2613,7 +2659,7 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_forum_skpd_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -2639,11 +2685,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_kegiatan_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_forum_skpd`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_forum_skpd`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8935 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_lokasi
 DROP TABLE IF EXISTS `trx_forum_skpd_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_lokasi` (
   `tahun_forum` int(11) NOT NULL,
@@ -2674,11 +2720,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_lokasi` (
   PRIMARY KEY (`id_lokasi_forum`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_pelaksana_forum`,`tahun_forum`,`no_urut`,`id_lokasi_forum`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_lokasi_ibfk_1` FOREIGN KEY (`id_pelaksana_forum`) REFERENCES `trx_forum_skpd_aktivitas` (`id_aktivitas_forum`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11376 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_pelaksana
 DROP TABLE IF EXISTS `trx_forum_skpd_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_pelaksana` (
   `id_pelaksana_forum` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2695,11 +2741,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_pelaksana` (
   PRIMARY KEY (`id_pelaksana_forum`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_aktivitas_forum`,`tahun_forum`,`no_urut`,`id_pelaksana_forum`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_pelaksana_ibfk_1` FOREIGN KEY (`id_aktivitas_forum`) REFERENCES `trx_forum_skpd` (`id_forum_skpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6993 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_program
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_program
 DROP TABLE IF EXISTS `trx_forum_skpd_program`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program` (
   `id_forum_program` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -2723,11 +2769,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program` (
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) USING BTREE,
   CONSTRAINT `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` FOREIGN KEY (`id_forum_rkpdprog`) REFERENCES `trx_forum_skpd_program_ranwal` (`id_forum_rkpdprog`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2329 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_program_indikator
 DROP TABLE IF EXISTS `trx_forum_skpd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -2753,11 +2799,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_forum_program`) USING BTREE,
   CONSTRAINT `trx_forum_skpd_program_indikator_ibfk_1` FOREIGN KEY (`id_forum_program`) REFERENCES `trx_forum_skpd_program` (`id_forum_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2594 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_program_ranwal
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_program_ranwal
 DROP TABLE IF EXISTS `trx_forum_skpd_program_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_ranwal` (
   `id_forum_rkpdprog` int(11) NOT NULL AUTO_INCREMENT,
@@ -2776,11 +2822,11 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_program_ranwal` (
   `sumber_data` int(11) NOT NULL DEFAULT '0' COMMENT '0 = RPJMD 1 = Baru 2 = Luncuran tahun sebelumnya',
   PRIMARY KEY (`id_forum_rkpdprog`) USING BTREE,
   UNIQUE KEY `id_rkpd_ranwal_id_bidang_id_unit` (`id_rkpd_ranwal`,`id_bidang`,`id_unit`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_forum_skpd_usulan
+-- Dumping structure for table dbbandung_20200116.trx_forum_skpd_usulan
 DROP TABLE IF EXISTS `trx_forum_skpd_usulan`;
 CREATE TABLE IF NOT EXISTS `trx_forum_skpd_usulan` (
   `id_sumber_usulan` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2802,7 +2848,7 @@ CREATE TABLE IF NOT EXISTS `trx_forum_skpd_usulan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_group_menu
+-- Dumping structure for table dbbandung_20200116.trx_group_menu
 DROP TABLE IF EXISTS `trx_group_menu`;
 CREATE TABLE IF NOT EXISTS `trx_group_menu` (
   `menu` int(11) NOT NULL,
@@ -2812,7 +2858,7 @@ CREATE TABLE IF NOT EXISTS `trx_group_menu` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_isian_data_dasar
+-- Dumping structure for table dbbandung_20200116.trx_isian_data_dasar
 DROP TABLE IF EXISTS `trx_isian_data_dasar`;
 CREATE TABLE IF NOT EXISTS `trx_isian_data_dasar` (
   `id_isian_tabel_dasar` int(11) NOT NULL AUTO_INCREMENT,
@@ -2834,33 +2880,35 @@ CREATE TABLE IF NOT EXISTS `trx_isian_data_dasar` (
   KEY `id_kecamatan` (`id_kecamatan`) USING BTREE,
   CONSTRAINT `trx_isian_data_dasar_ibfk_1` FOREIGN KEY (`id_kolom_tabel_dasar`) REFERENCES `ref_kolom_tabel_dasar` (`id_kolom_tabel_dasar`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_isian_data_dasar_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `ref_kecamatan` (`id_kecamatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_log_api
+-- Dumping structure for table dbbandung_20200116.trx_log_api
 DROP TABLE IF EXISTS `trx_log_api`;
 CREATE TABLE IF NOT EXISTS `trx_log_api` (
   `id_log` int(11) NOT NULL AUTO_INCREMENT,
   `tahun` int(11) NOT NULL,
   `id_app` int(11) NOT NULL,
+  `jns_dokumen` int(11) NOT NULL DEFAULT '1',
   `id_unit` int(11) DEFAULT NULL,
   `tgl_kirim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status_kirim` int(11) NOT NULL,
   `log_kirim` varchar(500) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_log`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_log_api_keu
+-- Dumping structure for table dbbandung_20200116.trx_log_api_keu
 DROP TABLE IF EXISTS `trx_log_api_keu`;
 CREATE TABLE IF NOT EXISTS `trx_log_api_keu` (
   `id_log` int(11) NOT NULL AUTO_INCREMENT,
   `tahun` int(11) NOT NULL,
   `id_dok_keu` int(11) NOT NULL,
+  `kd_dokumen` int(11) NOT NULL DEFAULT '0',
   `id_unit` int(11) DEFAULT NULL,
   `id_sub_unit` int(11) DEFAULT NULL,
   `tgl_kirim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2869,12 +2917,12 @@ CREATE TABLE IF NOT EXISTS `trx_log_api_keu` (
   `log_kirim` varchar(5000) CHARACTER SET latin1 DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_log`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_log_events
+-- Dumping structure for table dbbandung_20200116.trx_log_events
 DROP TABLE IF EXISTS `trx_log_events`;
 CREATE TABLE IF NOT EXISTS `trx_log_events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2883,11 +2931,11 @@ CREATE TABLE IF NOT EXISTS `trx_log_events` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `operate` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrencam
+-- Dumping structure for table dbbandung_20200116.trx_musrencam
 DROP TABLE IF EXISTS `trx_musrencam`;
 CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   `tahun_musren` int(11) NOT NULL,
@@ -2919,11 +2967,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam` (
   PRIMARY KEY (`id_musrencam`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes` (`id_renja`,`tahun_musren`,`no_urut`,`id_musrencam`,`id_kecamatan`,`id_usulan_desa`) USING BTREE,
   CONSTRAINT `trx_musrencam_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10417 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrencam_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_musrencam_lokasi
 DROP TABLE IF EXISTS `trx_musrencam_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrencam_lokasi` (
   `tahun_musren` int(11) NOT NULL,
@@ -2946,11 +2994,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrencam_lokasi` (
   PRIMARY KEY (`id_lokasi_musrencam`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes_lokasi` (`id_musrencam`,`tahun_musren`,`no_urut`,`id_lokasi_musrencam`,`id_desa`,`rt`,`rw`) USING BTREE,
   CONSTRAINT `trx_musrencam_lokasi_ibfk_1` FOREIGN KEY (`id_musrencam`) REFERENCES `trx_musrencam` (`id_musrencam`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrendes
+-- Dumping structure for table dbbandung_20200116.trx_musrendes
 DROP TABLE IF EXISTS `trx_musrendes`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes` (
   `tahun_renja` int(11) NOT NULL,
@@ -2980,11 +3028,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes` (
   PRIMARY KEY (`id_musrendes`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes` (`id_renja`,`tahun_renja`,`no_urut`,`id_musrendes`,`id_desa`,`id_usulan_rw`) USING BTREE,
   CONSTRAINT `fk_trx_musrendes` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7238 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrendes_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_musrendes_lokasi
 DROP TABLE IF EXISTS `trx_musrendes_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_lokasi` (
   `tahun_musren` int(11) NOT NULL,
@@ -3005,11 +3053,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_lokasi` (
   PRIMARY KEY (`id_lokasi_musrendes`) USING BTREE,
   UNIQUE KEY `idx_trx_musrendes_lokasi` (`id_musrendes`,`tahun_musren`,`no_urut`,`id_lokasi_musrendes`,`id_desa`,`rt`,`rw`) USING BTREE,
   CONSTRAINT `fk_trx_musrendes_lokasi` FOREIGN KEY (`id_musrendes`) REFERENCES `trx_musrendes` (`id_musrendes`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5378 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrendes_rw
+-- Dumping structure for table dbbandung_20200116.trx_musrendes_rw
 DROP TABLE IF EXISTS `trx_musrendes_rw`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_rw` (
   `tahun_musren` int(11) NOT NULL,
@@ -3034,11 +3082,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_rw` (
   UNIQUE KEY `tahun_musren` (`tahun_musren`,`no_urut`,`id_renja`,`id_desa`,`id_kegiatan`,`id_asb_aktivitas`,`rt`,`rw`) USING BTREE,
   KEY `id_renja` (`id_renja`) USING BTREE,
   CONSTRAINT `trx_musrendes_rw_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3025 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrendes_rw_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_musrendes_rw_lokasi
 DROP TABLE IF EXISTS `trx_musrendes_rw_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_musrendes_rw_lokasi` (
   `no_urut` int(11) NOT NULL,
@@ -3054,7 +3102,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrendes_rw_lokasi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab
 DROP TABLE IF EXISTS `trx_musrenkab`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab` (
   `id_musrenkab` int(11) NOT NULL AUTO_INCREMENT,
@@ -3081,11 +3129,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab` (
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_musrenkab`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`id_program_rpjmd`,`id_visi_rpjmd`,`id_sasaran_rpjmd`,`thn_id_rpjmd`,`id_rkpd_rancangan`,`id_tujuan_rpjmd`,`tahun_rkpd`,`no_urut`,`id_misi_rpjmd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_aktivitas_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_aktivitas_pd
 DROP TABLE IF EXISTS `trx_musrenkab_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -3119,11 +3167,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_aktivitas_pd` (
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_musrenkab_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9747 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_belanja_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_belanja_pd
 DROP TABLE IF EXISTS `trx_musrenkab_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -3156,11 +3204,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=86417 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_dokumen
 DROP TABLE IF EXISTS `trx_musrenkab_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
@@ -3179,7 +3227,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_dokumen` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_indikator
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_indikator
 DROP TABLE IF EXISTS `trx_musrenkab_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3204,11 +3252,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_musrenkab`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_musrenkab`) USING BTREE,
   CONSTRAINT `trx_musrenkab_indikator_ibfk_1` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_kebijakan
 DROP TABLE IF EXISTS `trx_musrenkab_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3224,7 +3272,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_kebijakan_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_kebijakan_pd
 DROP TABLE IF EXISTS `trx_musrenkab_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3239,7 +3287,7 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kebijakan_pd` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_kegiatan_pd
 DROP TABLE IF EXISTS `trx_musrenkab_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3268,11 +3316,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_kegiatan_pd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5297 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_keg_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_musrenkab_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3298,11 +3346,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5624 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_lokasi_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_lokasi_pd
 DROP TABLE IF EXISTS `trx_musrenkab_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -3334,11 +3382,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_lokasi_pd` (
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_musrenkab_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3589 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_pelaksana
 DROP TABLE IF EXISTS `trx_musrenkab_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3362,11 +3410,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_musrenkab_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_musrenkab_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_musrenkab_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=409 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_pelaksana_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_pelaksana_pd
 DROP TABLE IF EXISTS `trx_musrenkab_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -3384,11 +3432,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_pelaksana_pd` (
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_musrenkab_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_musrenkab_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5361 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_program_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_program_pd
 DROP TABLE IF EXISTS `trx_musrenkab_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -3412,11 +3460,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_program_pd` (
   PRIMARY KEY (`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_pelaksana_rkpd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_program_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_rkpd`) REFERENCES `trx_musrenkab_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1423 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_prog_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_musrenkab_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3443,11 +3491,11 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_musrenkab_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_musrenkab_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1532 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_musrenkab_urusan
+-- Dumping structure for table dbbandung_20200116.trx_musrenkab_urusan
 DROP TABLE IF EXISTS `trx_musrenkab_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -3460,13 +3508,13 @@ CREATE TABLE IF NOT EXISTS `trx_musrenkab_urusan` (
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_musrenkab`,`id_bidang`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_musrenkab`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
-  CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
+  CONSTRAINT `trx_musrenkab_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_musrenkab_urusan_ibfk_2` FOREIGN KEY (`id_musrenkab`) REFERENCES `trx_musrenkab` (`id_musrenkab`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_pokir
+-- Dumping structure for table dbbandung_20200116.trx_pokir
 DROP TABLE IF EXISTS `trx_pokir`;
 CREATE TABLE IF NOT EXISTS `trx_pokir` (
   `id_tahun` int(11) NOT NULL,
@@ -3484,11 +3532,11 @@ CREATE TABLE IF NOT EXISTS `trx_pokir` (
   `entried_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pokir`) USING BTREE,
   UNIQUE KEY `id_tahun` (`id_tahun`,`tanggal_pengusul`,`asal_pengusul`,`jabatan_pengusul`,`nomor_anggota`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_pokir_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_pokir_lokasi
 DROP TABLE IF EXISTS `trx_pokir_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_lokasi` (
   `id_pokir_usulan` int(11) NOT NULL,
@@ -3501,11 +3549,11 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_lokasi` (
   PRIMARY KEY (`id_pokir_lokasi`) USING BTREE,
   UNIQUE KEY `id_pokir_usulan` (`id_pokir_usulan`,`id_kecamatan`,`id_desa`,`rw`,`rt`) USING BTREE,
   CONSTRAINT `trx_pokir_lokasi_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=13121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_pokir_tl
+-- Dumping structure for table dbbandung_20200116.trx_pokir_tl
 DROP TABLE IF EXISTS `trx_pokir_tl`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_tl` (
   `id_pokir_tl` int(11) NOT NULL AUTO_INCREMENT,
@@ -3520,11 +3568,11 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_tl` (
   UNIQUE KEY `id_pokir_usulan` (`id_pokir`,`id_pokir_usulan`,`id_pokir_lokasi`) USING BTREE,
   KEY `trx_pokir_tl_ibfk_1` (`id_pokir_usulan`) USING BTREE,
   CONSTRAINT `trx_pokir_tl_ibfk_1` FOREIGN KEY (`id_pokir_usulan`) REFERENCES `trx_pokir_usulan` (`id_pokir_usulan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2712 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_pokir_tl_unit
+-- Dumping structure for table dbbandung_20200116.trx_pokir_tl_unit
 DROP TABLE IF EXISTS `trx_pokir_tl_unit`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_tl_unit` (
   `id_pokir_unit` int(11) NOT NULL AUTO_INCREMENT,
@@ -3547,11 +3595,11 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_tl_unit` (
   KEY `trx_pokir_tl_ibfk_1` (`id_pokir_usulan`) USING BTREE,
   KEY `trx_pokir_tl_unit_ibfk_1` (`id_pokir_tl`) USING BTREE,
   CONSTRAINT `trx_pokir_tl_unit_ibfk_1` FOREIGN KEY (`id_pokir_tl`) REFERENCES `trx_pokir_tl` (`id_pokir_tl`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_pokir_usulan
+-- Dumping structure for table dbbandung_20200116.trx_pokir_usulan
 DROP TABLE IF EXISTS `trx_pokir_usulan`;
 CREATE TABLE IF NOT EXISTS `trx_pokir_usulan` (
   `id_pokir` int(11) NOT NULL,
@@ -3571,11 +3619,11 @@ CREATE TABLE IF NOT EXISTS `trx_pokir_usulan` (
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_pokir_usulan_ibfk_1` FOREIGN KEY (`id_pokir`) REFERENCES `trx_pokir` (`id_pokir`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_pokir_usulan_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7303 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_prioritas_pemda
+-- Dumping structure for table dbbandung_20200116.trx_prioritas_pemda
 DROP TABLE IF EXISTS `trx_prioritas_pemda`;
 CREATE TABLE IF NOT EXISTS `trx_prioritas_pemda` (
   `id_tema_rkpd` int(11) NOT NULL,
@@ -3585,13 +3633,13 @@ CREATE TABLE IF NOT EXISTS `trx_prioritas_pemda` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_prioritas`) USING BTREE,
-  KEY `id_tema_rkpd` (`id_tema_rkpd`),
+  KEY `id_tema_rkpd` (`id_tema_rkpd`) USING BTREE,
   CONSTRAINT `trx_prioritas_pemda_ibfk_1` FOREIGN KEY (`id_tema_rkpd`) REFERENCES `trx_prioritas_pemda_tema` (`id_tema_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_prioritas_pemda_tema
+-- Dumping structure for table dbbandung_20200116.trx_prioritas_pemda_tema
 DROP TABLE IF EXISTS `trx_prioritas_pemda_tema`;
 CREATE TABLE IF NOT EXISTS `trx_prioritas_pemda_tema` (
   `tahun` int(11) NOT NULL,
@@ -3605,7 +3653,7 @@ CREATE TABLE IF NOT EXISTS `trx_prioritas_pemda_tema` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_program_nasional
+-- Dumping structure for table dbbandung_20200116.trx_program_nasional
 DROP TABLE IF EXISTS `trx_program_nasional`;
 CREATE TABLE IF NOT EXISTS `trx_program_nasional` (
   `id_prioritas` int(11) NOT NULL,
@@ -3618,11 +3666,11 @@ CREATE TABLE IF NOT EXISTS `trx_program_nasional` (
   `updated_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_prognas`) USING BTREE,
   KEY `id_prioritas` (`id_prioritas`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_program_nasional_urusan
+-- Dumping structure for table dbbandung_20200116.trx_program_nasional_urusan
 DROP TABLE IF EXISTS `trx_program_nasional_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_program_nasional_urusan` (
   `id_prognas` int(11) NOT NULL,
@@ -3638,11 +3686,11 @@ CREATE TABLE IF NOT EXISTS `trx_program_nasional_urusan` (
   `updated_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_prognas_urusan`) USING BTREE,
   UNIQUE KEY `id_prognas` (`id_bidang`,`id_prognas`,`lingkup_program`,`ref_rek_1`,`ref_rek_2`,`ref_rek_3`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_program_provinsi
+-- Dumping structure for table dbbandung_20200116.trx_program_provinsi
 DROP TABLE IF EXISTS `trx_program_provinsi`;
 CREATE TABLE IF NOT EXISTS `trx_program_provinsi` (
   `id_prioritas` int(11) NOT NULL DEFAULT '0',
@@ -3655,11 +3703,11 @@ CREATE TABLE IF NOT EXISTS `trx_program_provinsi` (
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id_progprov`) USING BTREE,
   KEY `id_prioritas` (`id_prioritas`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_program_provinsi_urusan
+-- Dumping structure for table dbbandung_20200116.trx_program_provinsi_urusan
 DROP TABLE IF EXISTS `trx_program_provinsi_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_program_provinsi_urusan` (
   `id_progprov` int(11) NOT NULL,
@@ -3678,7 +3726,41 @@ CREATE TABLE IF NOT EXISTS `trx_program_provinsi_urusan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_aktivitas
+-- Dumping structure for table dbbandung_20200116.trx_realisasi_keu
+DROP TABLE IF EXISTS `trx_realisasi_keu`;
+CREATE TABLE IF NOT EXISTS `trx_realisasi_keu` (
+  `id_log_realisasi` bigint(255) NOT NULL AUTO_INCREMENT,
+  `Tahun` smallint(6) NOT NULL,
+  `Kd_Urusan` tinyint(4) NOT NULL,
+  `Kd_Bidang` tinyint(4) NOT NULL,
+  `Kd_Unit` tinyint(4) NOT NULL,
+  `Kd_Sub` smallint(6) NOT NULL,
+  `Kd_Urusan_Program` smallint(6) NOT NULL,
+  `Kd_Bidang_Program` smallint(6) DEFAULT NULL,
+  `Kd_Prog` smallint(6) NOT NULL,
+  `Uraian_Program` varchar(255) DEFAULT NULL,
+  `Kd_Keg` smallint(6) NOT NULL,
+  `Uraian_Kegiatan` varchar(255) DEFAULT NULL,
+  `Kd_Rek_1` tinyint(4) NOT NULL,
+  `Kd_Rek_2` tinyint(4) NOT NULL,
+  `Kd_Rek_3` tinyint(4) NOT NULL,
+  `Kd_Rek_4` tinyint(4) NOT NULL,
+  `Kd_Rek_5` tinyint(4) NOT NULL,
+  `Jumlah_Anggaran` decimal(20,2) DEFAULT NULL,
+  `Jumlah_Realisasi` decimal(20,2) DEFAULT NULL,
+  `id_belanja_pd` bigint(11) NOT NULL,
+  `id_rekening` bigint(11) NOT NULL,
+  `id_sub_unit` int(11) NOT NULL,
+  `id_kegiatan_ref` bigint(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_log_realisasi`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table dbbandung_20200116.trx_renja_aktivitas
 DROP TABLE IF EXISTS `trx_renja_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -3711,7 +3793,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_aktivitas` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_belanja
+-- Dumping structure for table dbbandung_20200116.trx_renja_belanja
 DROP TABLE IF EXISTS `trx_renja_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_renja_belanja` (
   `tahun_renja` int(11) NOT NULL,
@@ -3738,7 +3820,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_belanja` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_renja_dokumen
 DROP TABLE IF EXISTS `trx_renja_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -3756,11 +3838,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_dokumen` (
   `id_perubahan` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_renja_kebijakan
 DROP TABLE IF EXISTS `trx_renja_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -3780,7 +3862,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_kegiatan
+-- Dumping structure for table dbbandung_20200116.trx_renja_kegiatan
 DROP TABLE IF EXISTS `trx_renja_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
@@ -3822,7 +3904,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renja_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -3846,7 +3928,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_kegiatan_indikator` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_renja_lokasi
 DROP TABLE IF EXISTS `trx_renja_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_renja_lokasi` (
   `tahun_renja` int(11) NOT NULL,
@@ -3873,7 +3955,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_lokasi` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_renja_pelaksana
 DROP TABLE IF EXISTS `trx_renja_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -3894,7 +3976,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_pelaksana` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_program
+-- Dumping structure for table dbbandung_20200116.trx_renja_program
 DROP TABLE IF EXISTS `trx_renja_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -3932,7 +4014,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_program_indikator
 DROP TABLE IF EXISTS `trx_renja_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -3962,7 +4044,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_indikator` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_program_rkpd
+-- Dumping structure for table dbbandung_20200116.trx_renja_program_rkpd
 DROP TABLE IF EXISTS `trx_renja_program_rkpd`;
 CREATE TABLE IF NOT EXISTS `trx_renja_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
@@ -3986,7 +4068,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_program_rkpd` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan
 DROP TABLE IF EXISTS `trx_renja_rancangan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4023,11 +4105,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan` (
   KEY `FK_trx_renja_rancangan_trx_renja_rancangan_program` (`id_renja_program`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_trx_renja_rancangan_program` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_rancangan_renja_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=19410 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_aktivitas
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_aktivitas
 DROP TABLE IF EXISTS `trx_renja_rancangan_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -4056,11 +4138,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_aktivitas` (
   PRIMARY KEY (`id_aktivitas_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_aktivitas_renja`) USING BTREE,
   CONSTRAINT `trx_renja_rancangan_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15784 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_belanja
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_belanja
 DROP TABLE IF EXISTS `trx_renja_rancangan_belanja`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_belanja` (
   `tahun_renja` int(11) NOT NULL,
@@ -4083,11 +4165,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_belanja` (
   PRIMARY KEY (`id_belanja_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_renja_rancangan_belanja` (`id_lokasi_renja`,`tahun_renja`,`no_urut`,`id_belanja_renja`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_belanja_trx_renja_rancangan_lokasi` FOREIGN KEY (`id_lokasi_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=80760 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_dokumen
 DROP TABLE IF EXISTS `trx_renja_rancangan_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -4102,11 +4184,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_dokumen` (
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_indikator
 DROP TABLE IF EXISTS `trx_renja_rancangan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4126,11 +4208,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_indikator` (
   UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_renja`) USING BTREE,
   KEY `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` (`id_renja`) USING BTREE,
   CONSTRAINT `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=21768 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_kebijakan
 DROP TABLE IF EXISTS `trx_renja_rancangan_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_kebijakan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4150,7 +4232,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_lokasi
 DROP TABLE IF EXISTS `trx_renja_rancangan_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_lokasi` (
   `tahun_renja` int(11) NOT NULL,
@@ -4173,11 +4255,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_lokasi` (
   PRIMARY KEY (`id_lokasi_renja`) USING BTREE,
   UNIQUE KEY `idx_rancangan_renja_lokasi` (`id_pelaksana_renja`,`tahun_renja`,`no_urut`,`id_lokasi_renja`) USING BTREE,
   CONSTRAINT `fk_rancangan_renja_lokasi` FOREIGN KEY (`id_pelaksana_renja`) REFERENCES `trx_renja_rancangan_aktivitas` (`id_aktivitas_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1768 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_pelaksana
 DROP TABLE IF EXISTS `trx_renja_rancangan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -4194,11 +4276,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_pelaksana` (
   PRIMARY KEY (`id_pelaksana_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_pelaksana_renja`) USING BTREE,
   CONSTRAINT `fk_trx_rancangan_renja_pelaksana` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_rancangan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=18165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_program
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_program
 DROP TABLE IF EXISTS `trx_renja_rancangan_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -4232,11 +4314,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program` (
   KEY `id_program_renstra` (`id_program_renstra`) USING BTREE,
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_ibfk_2` (`id_renja_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4543 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_program_indikator
 DROP TABLE IF EXISTS `trx_renja_rancangan_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4262,11 +4344,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_rancangan_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_rancangan_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_program_ranwal
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_program_ranwal
 DROP TABLE IF EXISTS `trx_renja_rancangan_program_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_ranwal` (
   `tahun_renja` int(11) NOT NULL,
@@ -4290,7 +4372,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_program_ranwal` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_rancangan_ref_pokir
+-- Dumping structure for table dbbandung_20200116.trx_renja_rancangan_ref_pokir
 DROP TABLE IF EXISTS `trx_renja_rancangan_ref_pokir`;
 CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_ref_pokir` (
   `id_aktivitas_renja` int(11) NOT NULL,
@@ -4304,7 +4386,7 @@ CREATE TABLE IF NOT EXISTS `trx_renja_rancangan_ref_pokir` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_aktivitas
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_aktivitas
 DROP TABLE IF EXISTS `trx_renja_ranwal_aktivitas`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_aktivitas` (
   `tahun_renja` int(11) NOT NULL,
@@ -4333,11 +4415,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_aktivitas` (
   PRIMARY KEY (`id_aktivitas_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_aktivitas_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_aktivitas_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_pelaksana` (`id_pelaksana_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=19776 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_dokumen
 DROP TABLE IF EXISTS `trx_renja_ranwal_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -4352,11 +4434,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_dokumen` (
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `id_unit_renja` (`id_unit_renja`,`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=261 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_kegiatan
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_kegiatan
 DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan` (
   `tahun_renja` int(11) NOT NULL,
@@ -4392,11 +4474,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan` (
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `FK_trx_renja_rancangan_trx_renja_rancangan_program` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_kegiatan_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45926 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renja_ranwal_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4416,11 +4498,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_kegiatan_indikator` (
   UNIQUE KEY `idx_trx_renja_rancangan_indikator` (`tahun_renja`,`kd_indikator`,`no_urut`,`id_perubahan`,`id_renja`) USING BTREE,
   KEY `FK_trx_renja_rancangan_indikator_trx_renja_rancangan` (`id_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_kegiatan_indikator_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=52421 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_pelaksana
 DROP TABLE IF EXISTS `trx_renja_ranwal_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_pelaksana` (
   `tahun_renja` int(11) NOT NULL,
@@ -4437,11 +4519,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_pelaksana` (
   PRIMARY KEY (`id_pelaksana_renja`) USING BTREE,
   UNIQUE KEY `idx_trx_rancangan_renja_pelaksana` (`id_renja`,`tahun_renja`,`no_urut`,`id_pelaksana_renja`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_pelaksana_ibfk_1` FOREIGN KEY (`id_renja`) REFERENCES `trx_renja_ranwal_kegiatan` (`id_renja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=39959 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_program
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_program
 DROP TABLE IF EXISTS `trx_renja_ranwal_program`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   `tahun_renja` int(11) NOT NULL,
@@ -4476,11 +4558,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program` (
   KEY `id_sasaran_renstra` (`id_sasaran_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_ibfk_2` (`id_renja_ranwal`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_program_ibfk_1` FOREIGN KEY (`id_renja_ranwal`) REFERENCES `trx_renja_ranwal_program_rkpd` (`id_renja_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12903 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_program_indikator
 DROP TABLE IF EXISTS `trx_renja_ranwal_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_indikator` (
   `tahun_renja` int(11) NOT NULL,
@@ -4506,11 +4588,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_indikator` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_ranwal_program_indikator_ibfk_1` (`id_renja_program`) USING BTREE,
   CONSTRAINT `trx_renja_ranwal_program_indikator_ibfk_1` FOREIGN KEY (`id_renja_program`) REFERENCES `trx_renja_ranwal_program` (`id_renja_program`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=14435 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renja_ranwal_program_rkpd
+-- Dumping structure for table dbbandung_20200116.trx_renja_ranwal_program_rkpd
 DROP TABLE IF EXISTS `trx_renja_ranwal_program_rkpd`;
 CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_rkpd` (
   `tahun_renja` int(11) NOT NULL,
@@ -4531,11 +4613,11 @@ CREATE TABLE IF NOT EXISTS `trx_renja_ranwal_program_rkpd` (
   PRIMARY KEY (`id_renja_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_renja_id_rkpd_ranwal_id_unit` (`tahun_renja`,`id_rkpd_ranwal`,`id_unit`) USING BTREE,
   KEY `id_rkpd_ranwal` (`id_rkpd_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_renstra_dokumen
 DROP TABLE IF EXISTS `trx_renstra_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_dokumen` (
   `id_rpjmd` int(11) NOT NULL,
@@ -4560,11 +4642,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_dokumen` (
   KEY `fk_trx_renstra_dokumen_1` (`id_unit`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_dokumen` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_renstra_dokumen_1` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_renstra_kebijakan
 DROP TABLE IF EXISTS `trx_renstra_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kebijakan` (
   `thn_id` int(11) NOT NULL,
@@ -4581,11 +4663,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kebijakan` (
   UNIQUE KEY `idx_trx_renstra_kebijakan` (`thn_id`,`id_sasaran_renstra`,`id_kebijakan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kebijakan` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kebijakan` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_kegiatan
+-- Dumping structure for table dbbandung_20200116.trx_renstra_kegiatan
 DROP TABLE IF EXISTS `trx_renstra_kegiatan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan` (
   `thn_id` int(11) NOT NULL,
@@ -4610,11 +4692,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan` (
   UNIQUE KEY `idx_trx_renstra_kegiatan` (`thn_id`,`id_program_renstra`,`id_kegiatan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4842 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_kegiatan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renstra_kegiatan_indikator
 DROP TABLE IF EXISTS `trx_renstra_kegiatan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4640,11 +4722,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_indikator` (
   UNIQUE KEY `idx_trx_renstra_kegiatan_indikator` (`thn_id`,`id_kegiatan_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan_indikator` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan_indikator` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5472 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_kegiatan_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_renstra_kegiatan_pelaksana
 DROP TABLE IF EXISTS `trx_renstra_kegiatan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_pelaksana` (
   `thn_id` int(11) NOT NULL,
@@ -4661,11 +4743,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_kegiatan_pelaksana` (
   UNIQUE KEY `idx_trx_renstra_kegiatan_pelaksana` (`thn_id`,`id_kegiatan_renstra`,`id_perubahan`,`id_sub_unit`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_kegiatan_pelaksana` (`id_kegiatan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_kegiatan_pelaksana` FOREIGN KEY (`id_kegiatan_renstra`) REFERENCES `trx_renstra_kegiatan` (`id_kegiatan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3806 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_misi
+-- Dumping structure for table dbbandung_20200116.trx_renstra_misi
 DROP TABLE IF EXISTS `trx_renstra_misi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_misi` (
   `thn_id` int(11) NOT NULL,
@@ -4680,11 +4762,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_misi` (
   PRIMARY KEY (`id_misi_renstra`) USING BTREE,
   UNIQUE KEY `idx_trx_renstra_misi` (`id_visi_renstra`,`thn_id`,`no_urut`,`id_misi_renstra`,`id_perubahan`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_misi` FOREIGN KEY (`id_visi_renstra`) REFERENCES `trx_renstra_visi` (`id_visi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_program
+-- Dumping structure for table dbbandung_20200116.trx_renstra_program
 DROP TABLE IF EXISTS `trx_renstra_program`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_program` (
   `thn_id` int(11) NOT NULL,
@@ -4712,11 +4794,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program` (
   KEY `fk_trx_renstra_program_1` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_program` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_trx_renstra_program_1` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1944 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renstra_program_indikator
 DROP TABLE IF EXISTS `trx_renstra_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_program_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4744,11 +4826,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_program_indikator` (
   UNIQUE KEY `idx_trx_renstra_program_indikator` (`thn_id`,`id_program_renstra`,`id_indikator_program_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_program_indikator` (`id_program_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_program_indikator` FOREIGN KEY (`id_program_renstra`) REFERENCES `trx_renstra_program` (`id_program_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2175 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_sasaran
+-- Dumping structure for table dbbandung_20200116.trx_renstra_sasaran
 DROP TABLE IF EXISTS `trx_renstra_sasaran`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran` (
   `thn_id` int(11) NOT NULL,
@@ -4766,11 +4848,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran` (
   UNIQUE KEY `idx_trx_renstra_sasaran` (`thn_id`,`id_tujuan_renstra`,`id_sasaran_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran` (`id_tujuan_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_sasaran` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=359 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_sasaran_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renstra_sasaran_indikator
 DROP TABLE IF EXISTS `trx_renstra_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4797,11 +4879,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_sasaran_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_sasaran_renstra`,`id_indikator_sasaran_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran_indikator` (`id_sasaran_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_sasaran_indikator` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_strategi
+-- Dumping structure for table dbbandung_20200116.trx_renstra_strategi
 DROP TABLE IF EXISTS `trx_renstra_strategi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_strategi` (
   `thn_id` int(11) NOT NULL,
@@ -4817,12 +4899,12 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_strategi` (
   PRIMARY KEY (`id_strategi_renstra`) USING BTREE,
   UNIQUE KEY `idx_trx_renstra_kebijakan` (`thn_id`,`id_sasaran_renstra`,`id_perubahan`,`id_strategi_renstra`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_strategi` (`id_sasaran_renstra`) USING BTREE,
-  CONSTRAINT `fk_trx_renstra_strategi` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_trx_renstra_strategi` FOREIGN KEY (`id_sasaran_renstra`) REFERENCES `trx_renstra_sasaran` (`id_sasaran_renstra`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=270 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_tujuan
+-- Dumping structure for table dbbandung_20200116.trx_renstra_tujuan
 DROP TABLE IF EXISTS `trx_renstra_tujuan`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan` (
   `thn_id` int(11) NOT NULL,
@@ -4839,11 +4921,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan` (
   UNIQUE KEY `idx_trx_renstra_tujuan` (`thn_id`,`id_misi_renstra`,`id_tujuan_renstra`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_tujuan` (`id_misi_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_renstra_tujuan` FOREIGN KEY (`id_misi_renstra`) REFERENCES `trx_renstra_misi` (`id_misi_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_tujuan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_renstra_tujuan_indikator
 DROP TABLE IF EXISTS `trx_renstra_tujuan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -4869,11 +4951,11 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_tujuan_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_tujuan_renstra`,`id_indikator_tujuan_renstra`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_renstra_sasaran_indikator` (`id_tujuan_renstra`) USING BTREE,
   CONSTRAINT `trx_renstra_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_renstra`) REFERENCES `trx_renstra_tujuan` (`id_tujuan_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_renstra_visi
+-- Dumping structure for table dbbandung_20200116.trx_renstra_visi
 DROP TABLE IF EXISTS `trx_renstra_visi`;
 CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
   `thn_id` int(11) NOT NULL,
@@ -4892,12 +4974,12 @@ CREATE TABLE IF NOT EXISTS `trx_renstra_visi` (
   PRIMARY KEY (`id_visi_renstra`) USING BTREE,
   UNIQUE KEY `idx_ta_visi_rpjmd` (`thn_id`,`id_visi_renstra`,`thn_awal_renstra`,`thn_akhir_renstra`,`id_perubahan`,`id_unit`,`no_urut`) USING BTREE,
   KEY `FK_trx_renstra_visi_ref_unit` (`id_unit`) USING BTREE,
-  CONSTRAINT `FK_trx_renstra_visi_ref_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  CONSTRAINT `FK_trx_renstra_visi_ref_unit` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final
 DROP TABLE IF EXISTS `trx_rkpd_final`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -4924,11 +5006,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final` (
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`thn_id_rpjmd`,`id_misi_rpjmd`,`id_sasaran_rpjmd`,`no_urut`,`tahun_rkpd`,`id_visi_rpjmd`,`id_tujuan_rpjmd`,`id_program_rpjmd`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_aktivitas_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -4962,11 +5044,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_aktivitas_pd` (
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_final_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9818 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_belanja_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -4999,11 +5081,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=93427 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_final_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
@@ -5017,11 +5099,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_dokumen` (
   `nip_tandatangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_rkpd`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_indikator
 DROP TABLE IF EXISTS `trx_rkpd_final_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5046,11 +5128,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5066,7 +5148,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_kebijakan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5081,7 +5163,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kebijakan_pd` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5110,11 +5192,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_kegiatan_pd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5341 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_keg_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5140,11 +5222,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5666 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_lokasi_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5176,11 +5258,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_lokasi_pd` (
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_final_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9082 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5204,11 +5286,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_final_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_final_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=471 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_pelaksana_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5226,11 +5308,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_pelaksana_pd` (
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_final_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5404 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_program_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5258,11 +5340,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_program_pd` (
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_rkpd_rancangan`,`id_program_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1457 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_prog_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_final_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5289,11 +5371,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_final_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1552 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_final_urusan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_final_urusan
 DROP TABLE IF EXISTS `trx_rkpd_final_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_final_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5308,11 +5390,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_final_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_final_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_final_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_final` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_identifikasi_masalah
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_identifikasi_masalah
 DROP TABLE IF EXISTS `trx_rkpd_identifikasi_masalah`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -5328,11 +5410,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_identifikasi_masalah` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -5359,11 +5441,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan` (
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_rancangan`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`,`id_forum_rkpdprog`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_aktivitas_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5397,11 +5479,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_aktivitas_pd` (
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_rancangan_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=14098 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_belanja_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5434,11 +5516,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=129871 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
@@ -5457,7 +5539,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_dokumen` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_indikator
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5482,11 +5564,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5502,7 +5584,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_kebijakan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5517,7 +5599,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kebijakan_pd` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5546,11 +5628,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_kegiatan_pd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_rancangan_kegiatan_pd_trx_rkpd_rancangan_program_pd` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6709 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_keg_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5576,11 +5658,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8691 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_lokasi_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5612,11 +5694,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_lokasi_pd` (
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_rancangan_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5640,11 +5722,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_rancangan_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3681 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_pelaksana_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5662,11 +5744,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_pelaksana_pd` (
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_rancangan_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6371 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_program_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5691,11 +5773,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_program_pd` (
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_forum_program`,`id_rkpd_rancangan`,`tahun_forum`,`jenis_belanja`,`id_unit`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4230 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_prog_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5722,11 +5804,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_rancangan_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_rancangan_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2481 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rancangan_urusan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rancangan_urusan
 DROP TABLE IF EXISTS `trx_rkpd_rancangan_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5739,13 +5821,13 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rancangan_urusan` (
   UNIQUE KEY `idx_trx_rkpd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rancangan`,`id_bidang`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_rkpd_rancangan`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
-  CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE,
+  CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_rancangan_urusan_ibfk_3` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_rancangan` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir
 DROP TABLE IF EXISTS `trx_rkpd_ranhir`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir` (
   `id_rkpd_rancangan` int(11) NOT NULL AUTO_INCREMENT,
@@ -5776,7 +5858,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_aktivitas_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_aktivitas_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_aktivitas_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_aktivitas_pd` (
   `id_aktivitas_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -5810,11 +5892,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_aktivitas_pd` (
   PRIMARY KEY (`id_aktivitas_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_aktivitas_trx_forum_skpd` (`id_pelaksana_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_aktivitas_pd_ibfk_1` FOREIGN KEY (`id_pelaksana_pd`) REFERENCES `trx_rkpd_ranhir_pelaksana_pd` (`id_pelaksana_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9747 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_belanja_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_belanja_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_belanja_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_belanja_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -5847,11 +5929,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_belanja_pd` (
   UNIQUE KEY `id_trx_forum_skpd_belanja` (`tahun_forum`,`no_urut`,`id_belanja_pd`,`id_aktivitas_pd`) USING BTREE,
   KEY `fk_trx_forum_skpd_belanja` (`id_aktivitas_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_belanja_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=85925 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_dokumen` (
   `id_dokumen_rkpd` int(11) NOT NULL AUTO_INCREMENT,
@@ -5870,7 +5952,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_dokumen` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_indikator
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5895,11 +5977,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_rancangan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -5915,7 +5997,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_kebijakan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_kebijakan_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kebijakan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5930,7 +6012,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kebijakan_pd` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_kegiatan_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_kegiatan_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_kegiatan_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kegiatan_pd` (
   `id_kegiatan_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -5959,11 +6041,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_kegiatan_pd` (
   UNIQUE KEY `id_unit_id_renja_id_kegiatan_ref` (`id_unit`,`id_kegiatan_ref`,`id_program_pd`) USING BTREE,
   KEY `FK_trx_forum_skpd_trx_forum_skpd_program` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_kegiatan_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5257 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_keg_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_keg_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_keg_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_keg_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -5989,11 +6071,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_keg_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_kegiatan_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_keg_indikator_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5637 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_lokasi_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_lokasi_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_lokasi_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_lokasi_pd` (
   `tahun_forum` int(11) NOT NULL,
@@ -6025,11 +6107,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_lokasi_pd` (
   PRIMARY KEY (`id_lokasi_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_lokasi` (`id_aktivitas_pd`,`tahun_forum`,`no_urut`,`id_lokasi_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_lokasi_pd_ibfk_1` FOREIGN KEY (`id_aktivitas_pd`) REFERENCES `trx_rkpd_ranhir_aktivitas_pd` (`id_aktivitas_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3589 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6053,11 +6135,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_1` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranhir_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=420 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_pelaksana_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_pelaksana_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_pelaksana_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana_pd` (
   `id_pelaksana_pd` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -6075,11 +6157,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_pelaksana_pd` (
   PRIMARY KEY (`id_pelaksana_pd`) USING BTREE,
   UNIQUE KEY `id_trx_forum_pelaksana` (`id_kegiatan_pd`,`tahun_forum`,`no_urut`,`id_pelaksana_pd`,`id_sub_unit`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_pelaksana_pd_ibfk_1` FOREIGN KEY (`id_kegiatan_pd`) REFERENCES `trx_rkpd_ranhir_kegiatan_pd` (`id_kegiatan_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5361 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_program_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_program_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_program_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_program_pd` (
   `id_program_pd` bigint(11) NOT NULL AUTO_INCREMENT,
@@ -6104,11 +6186,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_program_pd` (
   UNIQUE KEY `id_unit_id_renja_program_id_program_ref` (`id_unit`,`id_renja_program`,`id_program_ref`,`id_forum_program`) USING BTREE,
   KEY `FK_trx_forum_skpd_program_trx_forum_skpd_program_ranwal` (`id_rkpd_rancangan`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_program_pd_ibfk_1` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir_pelaksana` (`id_pelaksana_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1383 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_prog_indikator_pd
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_prog_indikator_pd
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_prog_indikator_pd`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_prog_indikator_pd` (
   `tahun_renja` int(11) NOT NULL,
@@ -6135,11 +6217,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_prog_indikator_pd` (
   KEY `fk_trx_renja_rancangan_indikator` (`id_program_renstra`) USING BTREE,
   KEY `trx_renja_rancangan_program_indikator_ibfk_1` (`id_program_pd`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_prog_indikator_pd_ibfk_1` FOREIGN KEY (`id_program_pd`) REFERENCES `trx_rkpd_ranhir_program_pd` (`id_program_pd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1495 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranhir_urusan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranhir_urusan
 DROP TABLE IF EXISTS `trx_rkpd_ranhir_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6154,11 +6236,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranhir_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_1` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `trx_rkpd_ranhir_urusan_ibfk_2` FOREIGN KEY (`id_rkpd_rancangan`) REFERENCES `trx_rkpd_ranhir` (`id_rkpd_rancangan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal
 DROP TABLE IF EXISTS `trx_rkpd_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal` (
   `id_rkpd_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -6183,11 +6265,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal` (
   `id_dokumen` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_rkpd_ranwal`) USING BTREE,
   UNIQUE KEY `idx_trx_rkpd_ranwal` (`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`,`no_urut`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal_dokumen
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_dokumen` (
   `id_dokumen_ranwal` int(11) NOT NULL AUTO_INCREMENT,
@@ -6202,11 +6284,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_dokumen` (
   `flag` int(11) NOT NULL DEFAULT '0' COMMENT '0 draft 1 aktif 2 tidak aktif',
   PRIMARY KEY (`id_dokumen_ranwal`) USING BTREE,
   UNIQUE KEY `tahun_ranwal` (`tahun_ranwal`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal_indikator
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6230,11 +6312,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_indikator` (
   UNIQUE KEY `idx_trx_rkpd_program_indikator` (`tahun_rkpd`,`id_rkpd_ranwal`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_indikator` (`id_rkpd_ranwal`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_ranwal_indikator` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6250,7 +6332,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6272,12 +6354,12 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_pelaksana` (
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_urusan_rkpd`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_2` (`id_unit`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_ranwal_pelaksana_trx_rkpd_ranwal_urusan` FOREIGN KEY (`id_urusan_rkpd`) REFERENCES `trx_rkpd_ranwal_urusan` (`id_urusan_rkpd`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_trx_rkpd_ranwal_pelaksana_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_trx_rkpd_ranwal_pelaksana_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3600 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_ranwal_urusan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_ranwal_urusan
 DROP TABLE IF EXISTS `trx_rkpd_ranwal_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_urusan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6291,12 +6373,12 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_ranwal_urusan` (
   KEY `fk_trx_rkpd_ranwal_pelaksana` (`id_rkpd_ranwal`) USING BTREE,
   KEY `fk_trx_rkpd_ranwal_pelaksana_1` (`id_bidang`) USING BTREE,
   CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_1` FOREIGN KEY (`id_rkpd_ranwal`) REFERENCES `trx_rkpd_ranwal` (`id_rkpd_ranwal`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  CONSTRAINT `trx_rkpd_ranwal_urusan_ibfk_2` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang` (`id_bidang`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_renstra
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_renstra
 DROP TABLE IF EXISTS `trx_rkpd_renstra`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6323,11 +6405,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra` (
   PRIMARY KEY (`id_rkpd_renstra`) USING BTREE,
   KEY `idx_trx_rkpd_renstra` (`id_rkpd_rpjmd`,`tahun_rkpd`,`id_rkpd_renstra`,`id_program_rpjmd`,`id_unit`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_renstra` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=23501 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_renstra_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_renstra_indikator
 DROP TABLE IF EXISTS `trx_rkpd_renstra_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6341,11 +6423,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_indikator` (
   KEY `fk_trx_rkpd_renstra_pelaksana` (`id_rkpd_renstra`) USING BTREE,
   KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_renstra`,`kd_indikator`) USING BTREE,
   CONSTRAINT `trx_rkpd_renstra_indikator_ibfk_1` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26441 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_renstra_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_renstra_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_renstra_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6357,11 +6439,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_renstra_pelaksana` (
   UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_renstra`,`id_sub_unit`) USING BTREE,
   KEY `fk_trx_rkpd_renstra_pelaksana` (`id_rkpd_renstra`) USING BTREE,
   CONSTRAINT `fk_trx_rkpd_renstra_pelaksana` FOREIGN KEY (`id_rkpd_renstra`) REFERENCES `trx_rkpd_renstra` (`id_rkpd_renstra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=20426 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rpjmd_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rpjmd_kebijakan
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_kebijakan` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6376,7 +6458,7 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_kebijakan` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rpjmd_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rpjmd_program_indikator
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_indikator` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6391,11 +6473,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_indikator` (
   KEY `fk_rkpd_rpjmd_indikator` (`id_rkpd_rpjmd`) USING BTREE,
   KEY `idx_trx_rkpd_rpjmd_program_indikator` (`tahun_rkpd`,`id_rkpd_rpjmd`,`kd_indikator`) USING BTREE,
   CONSTRAINT `fk_rkpd_rpjmd_indikator` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rpjmd_program_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rpjmd_program_pelaksana
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_pelaksana` (
   `tahun_rkpd` int(11) NOT NULL,
@@ -6409,11 +6491,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_program_pelaksana` (
   UNIQUE KEY `idx_trx_rkpd_rpjmd_program_pelaksana` (`tahun_rkpd`,`id_rkpd_rpjmd`,`id_urbid_rpjmd`,`id_unit`) USING BTREE,
   KEY `fk_rkpd_rpjmd_pelaksana` (`id_rkpd_rpjmd`) USING BTREE,
   CONSTRAINT `fk_rkpd_rpjmd_pelaksana` FOREIGN KEY (`id_rkpd_rpjmd`) REFERENCES `trx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1241 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rkpd_rpjmd_ranwal
+-- Dumping structure for table dbbandung_20200116.trx_rkpd_rpjmd_ranwal
 DROP TABLE IF EXISTS `trx_rkpd_rpjmd_ranwal`;
 CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_ranwal` (
   `id_rkpd_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
@@ -6435,11 +6517,11 @@ CREATE TABLE IF NOT EXISTS `trx_rkpd_rpjmd_ranwal` (
   UNIQUE KEY `idx_rkpd_rpjmd_ranwal` (`id_rkpd_rpjmd`,`tahun_rkpd`,`thn_id_rpjmd`,`id_visi_rpjmd`,`id_misi_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_program_rpjmd`) USING BTREE,
   KEY `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` (`id_visi_rpjmd`) USING BTREE,
   CONSTRAINT `FK_trx_rkpd_rpjmd_ranwal_trx_rpjmd_visi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_analisa_ikk
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_analisa_ikk
 DROP TABLE IF EXISTS `trx_rpjmd_analisa_ikk`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_analisa_ikk` (
   `id_capaian_rpjmd` int(11) NOT NULL AUTO_INCREMENT,
@@ -6457,11 +6539,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_analisa_ikk` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_capaian_rpjmd`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_dokumen
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_dokumen
 DROP TABLE IF EXISTS `trx_rpjmd_dokumen`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_dokumen` (
   `id_rpjmd` int(11) NOT NULL AUTO_INCREMENT COMMENT 'berisi id khusus untuk setiap visi pada periode yang sama',
@@ -6485,11 +6567,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_dokumen` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_rpjmd`) USING BTREE,
   KEY `id_rpjmd_old` (`id_rpjmd_old`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_identifikasi_masalah
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_identifikasi_masalah
 DROP TABLE IF EXISTS `trx_rpjmd_identifikasi_masalah`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_identifikasi_masalah` (
   `id_masalah` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -6504,11 +6586,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_identifikasi_masalah` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_kebijakan
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_kebijakan
 DROP TABLE IF EXISTS `trx_rpjmd_kebijakan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_kebijakan` (
   `thn_id` int(11) NOT NULL,
@@ -6528,11 +6610,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_kebijakan` (
   UNIQUE KEY `idx_trx_rpjmd_kebijakan` (`thn_id`,`id_sasaran_rpjmd`,`id_kebijakan_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_kebijakan` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_kebijakan` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_misi
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_misi
 DROP TABLE IF EXISTS `trx_rpjmd_misi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_misi` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6551,11 +6633,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_misi` (
   UNIQUE KEY `idx_ta_misi_rpjmd` (`thn_id_rpjmd`,`id_visi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_misi` (`id_visi_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_misi` FOREIGN KEY (`id_visi_rpjmd`) REFERENCES `trx_rpjmd_visi` (`id_visi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_prioritas
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_prioritas
 DROP TABLE IF EXISTS `trx_rpjmd_prioritas`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_prioritas` (
   `id_masalah` int(11) NOT NULL AUTO_INCREMENT,
@@ -6569,11 +6651,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_prioritas` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_masalah`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_program
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_program
 DROP TABLE IF EXISTS `trx_rpjmd_program`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program` (
   `thn_id` int(11) NOT NULL,
@@ -6600,11 +6682,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program` (
   UNIQUE KEY `idx_trx_rpjmd_program` (`thn_id`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_program_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_program_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_program_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6636,11 +6718,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_program_indikator` (`thn_id`,`id_program_rpjmd`,`id_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_indikator` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_indikator` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_program_pelaksana
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_program_pelaksana
 DROP TABLE IF EXISTS `trx_rpjmd_program_pelaksana`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_pelaksana` (
   `thn_id` int(11) NOT NULL,
@@ -6666,11 +6748,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_pelaksana` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_urbid_rpjmd`,`id_unit`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_pelaksana` (`id_urbid_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_pelaksana` FOREIGN KEY (`id_urbid_rpjmd`) REFERENCES `trx_rpjmd_program_urusan` (`id_urbid_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=916 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_program_urusan
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_program_urusan
 DROP TABLE IF EXISTS `trx_rpjmd_program_urusan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_urusan` (
   `thn_id` int(11) NOT NULL,
@@ -6689,11 +6771,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_program_urusan` (
   UNIQUE KEY `idx_trx_rpjmd_program_pelaksana` (`thn_id`,`id_program_rpjmd`,`id_bidang`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_program_urusan` (`id_program_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_program_urusan` FOREIGN KEY (`id_program_rpjmd`) REFERENCES `trx_rpjmd_program` (`id_program_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=423 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_sasaran
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_sasaran
 DROP TABLE IF EXISTS `trx_rpjmd_sasaran`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6713,11 +6795,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran` (`thn_id_rpjmd`,`id_tujuan_rpjmd`,`id_sasaran_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `FK_trx_rpjmd_sasaran_trx_rpjmd_tujuan` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_sasaran_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_sasaran_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_sasaran_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6746,11 +6828,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_sasaran_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_sasaran_indikator` (`thn_id`,`id_sasaran_rpjmd`,`id_indikator_sasaran_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_sasaran_indikator` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_sasaran_indikator` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_strategi
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_strategi
 DROP TABLE IF EXISTS `trx_rpjmd_strategi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_strategi` (
   `thn_id` int(11) NOT NULL,
@@ -6770,11 +6852,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_strategi` (
   UNIQUE KEY `idx_trx_rpjmd_strategi` (`thn_id`,`id_sasaran_rpjmd`,`id_strategi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_strategi` (`id_sasaran_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_strategi` FOREIGN KEY (`id_sasaran_rpjmd`) REFERENCES `trx_rpjmd_sasaran` (`id_sasaran_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_tujuan
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_tujuan
 DROP TABLE IF EXISTS `trx_rpjmd_tujuan`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan` (
   `thn_id_rpjmd` int(11) NOT NULL,
@@ -6794,11 +6876,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan` (
   UNIQUE KEY `idx_trx_rpjmd_tujuan` (`thn_id_rpjmd`,`id_misi_rpjmd`,`id_perubahan`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan` (`id_misi_rpjmd`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_tujuan` FOREIGN KEY (`id_misi_rpjmd`) REFERENCES `trx_rpjmd_misi` (`id_misi_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_tujuan_indikator
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_tujuan_indikator
 DROP TABLE IF EXISTS `trx_rpjmd_tujuan_indikator`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan_indikator` (
   `thn_id` int(11) NOT NULL,
@@ -6828,11 +6910,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_tujuan_indikator` (
   UNIQUE KEY `idx_trx_rpjmd_tujuan_indikator` (`thn_id`,`id_tujuan_rpjmd`,`id_indikator_tujuan_rpjmd`,`id_perubahan`,`kd_indikator`,`no_urut`) USING BTREE,
   KEY `fk_trx_rpjmd_tujuan_indikator` (`id_tujuan_rpjmd`) USING BTREE,
   CONSTRAINT `trx_rpjmd_tujuan_indikator_ibfk_1` FOREIGN KEY (`id_tujuan_rpjmd`) REFERENCES `trx_rpjmd_tujuan` (`id_tujuan_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_rpjmd_visi
+-- Dumping structure for table dbbandung_20200116.trx_rpjmd_visi
 DROP TABLE IF EXISTS `trx_rpjmd_visi`;
 CREATE TABLE IF NOT EXISTS `trx_rpjmd_visi` (
   `thn_id` int(11) NOT NULL,
@@ -6849,11 +6931,11 @@ CREATE TABLE IF NOT EXISTS `trx_rpjmd_visi` (
   PRIMARY KEY (`id_visi_rpjmd`) USING BTREE,
   UNIQUE KEY `idx_trx_rpjmd_visi` (`id_rpjmd`,`no_urut`,`thn_id`,`id_visi_rpjmd`,`id_perubahan`) USING BTREE,
   CONSTRAINT `fk_trx_rpjmd_visi` FOREIGN KEY (`id_rpjmd`) REFERENCES `trx_rpjmd_dokumen` (`id_rpjmd`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_usulan_kab
+-- Dumping structure for table dbbandung_20200116.trx_usulan_kab
 DROP TABLE IF EXISTS `trx_usulan_kab`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_kab` (
   `id_usulan_kab` int(11) NOT NULL AUTO_INCREMENT,
@@ -6876,11 +6958,11 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_kab` (
   KEY `id_unit` (`id_unit`) USING BTREE,
   CONSTRAINT `trx_usulan_kab_ibfk_1` FOREIGN KEY (`id_kab`) REFERENCES `ref_kabupaten` (`id_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `trx_usulan_kab_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_usulan_kab_lokasi
+-- Dumping structure for table dbbandung_20200116.trx_usulan_kab_lokasi
 DROP TABLE IF EXISTS `trx_usulan_kab_lokasi`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_kab_lokasi` (
   `id_usulan_kab` int(11) NOT NULL,
@@ -6894,12 +6976,12 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_kab_lokasi` (
   UNIQUE KEY `id_usulan_kab` (`id_usulan_kab`,`no_urut`,`id_lokasi`) USING BTREE,
   KEY `id_lokasi` (`id_lokasi`) USING BTREE,
   CONSTRAINT `trx_usulan_kab_lokasi_ibfk_1` FOREIGN KEY (`id_usulan_kab`) REFERENCES `trx_usulan_kab` (`id_usulan_kab`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `trx_usulan_kab_lokasi_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `ref_lokasi` (`id_lokasi`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `trx_usulan_kab_lokasi_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `ref_lokasi` (`id_lokasi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.trx_usulan_rw
+-- Dumping structure for table dbbandung_20200116.trx_usulan_rw
 DROP TABLE IF EXISTS `trx_usulan_rw`;
 CREATE TABLE IF NOT EXISTS `trx_usulan_rw` (
   `id_usulan_rw` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -6918,7 +7000,7 @@ CREATE TABLE IF NOT EXISTS `trx_usulan_rw` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.users
+-- Dumping structure for table dbbandung_20200116.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -6935,13 +7017,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `email` (`email`) USING BTREE,
   KEY `group_id` (`group_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=481 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.user_app
+-- Dumping structure for table dbbandung_20200116.user_app
 DROP TABLE IF EXISTS `user_app`;
 CREATE TABLE IF NOT EXISTS `user_app` (
   `id_app_user` int(11) NOT NULL AUTO_INCREMENT,
@@ -6958,12 +7040,12 @@ CREATE TABLE IF NOT EXISTS `user_app` (
   UNIQUE KEY `user_id` (`user_id`,`group_id`,`app_id`) USING BTREE,
   KEY `group_id` (`group_id`) USING BTREE,
   CONSTRAINT `user_app_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_app_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `ref_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `user_app_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `ref_group` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.user_desa
+-- Dumping structure for table dbbandung_20200116.user_desa
 DROP TABLE IF EXISTS `user_desa`;
 CREATE TABLE IF NOT EXISTS `user_desa` (
   `id_user_wil` int(11) NOT NULL AUTO_INCREMENT,
@@ -6978,11 +7060,11 @@ CREATE TABLE IF NOT EXISTS `user_desa` (
   PRIMARY KEY (`id_user_wil`) USING BTREE,
   UNIQUE KEY `user_id` (`user_id`,`kd_kecamatan`,`kd_desa`) USING BTREE,
   CONSTRAINT `user_desa_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.user_level_sakip
+-- Dumping structure for table dbbandung_20200116.user_level_sakip
 DROP TABLE IF EXISTS `user_level_sakip`;
 CREATE TABLE IF NOT EXISTS `user_level_sakip` (
   `id_user_level` int(11) NOT NULL AUTO_INCREMENT,
@@ -6997,7 +7079,7 @@ CREATE TABLE IF NOT EXISTS `user_level_sakip` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table dbsimcan_simulasi_merah.user_sub_unit
+-- Dumping structure for table dbbandung_20200116.user_sub_unit
 DROP TABLE IF EXISTS `user_sub_unit`;
 CREATE TABLE IF NOT EXISTS `user_sub_unit` (
   `id_user_unit` int(11) NOT NULL AUTO_INCREMENT,
@@ -7011,11 +7093,11 @@ CREATE TABLE IF NOT EXISTS `user_sub_unit` (
   PRIMARY KEY (`id_user_unit`) USING BTREE,
   UNIQUE KEY `kd_unit` (`user_id`,`kd_unit`,`kd_sub`) USING BTREE,
   CONSTRAINT `user_sub_unit_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
 
--- Dumping structure for procedure dbsimcan_simulasi_merah.setAutoIncrement
+-- Dumping structure for procedure dbbandung_20200116.setAutoIncrement
 DROP PROCEDURE IF EXISTS `setAutoIncrement`;
 DELIMITER //
 CREATE PROCEDURE `setAutoIncrement`()
@@ -7043,7 +7125,7 @@ DECLARE cur1 cursor for SELECT t.table_name FROM INFORMATION_SCHEMA.TABLES t
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.GantiEnter
+-- Dumping structure for function dbbandung_20200116.GantiEnter
 DROP FUNCTION IF EXISTS `GantiEnter`;
 DELIMITER //
 CREATE FUNCTION `GantiEnter`(`uraian` VARCHAR (1000)) RETURNS varchar(1000) CHARSET latin1
@@ -7061,7 +7143,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.HTML_UnEncode
+-- Dumping structure for function dbbandung_20200116.HTML_UnEncode
 DROP FUNCTION IF EXISTS `HTML_UnEncode`;
 DELIMITER //
 CREATE FUNCTION `HTML_UnEncode`(X VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
@@ -7581,7 +7663,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.PaguASB
+-- Dumping structure for function dbbandung_20200116.PaguASB
 DROP FUNCTION IF EXISTS `PaguASB`;
 DELIMITER //
 CREATE FUNCTION `PaguASB`(jns_biaya INT, hub_driver INT, vol1 DECIMAL(15, 4), vol2 DECIMAL(15, 4), r1 DECIMAL(15, 4), r2 DECIMAL(15, 4), m1 DECIMAL(15, 4), m2 DECIMAL(15, 4), k1 DECIMAL(15, 4), k2 DECIMAL(15, 4), k3 DECIMAL(15, 4), harga DECIMAL(15, 4)) RETURNS decimal(15,4)
@@ -7666,7 +7748,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.PaguASBDistribusi
+-- Dumping structure for function dbbandung_20200116.PaguASBDistribusi
 DROP FUNCTION IF EXISTS `PaguASBDistribusi`;
 DELIMITER //
 CREATE FUNCTION `PaguASBDistribusi`(jns_biaya INT,hub_driver INT,vol1 DECIMAL(15,4),vol2 DECIMAL(15,4),r1 DECIMAL(15,4),r2 DECIMAL(15,4),m1 DECIMAL(15,4) ,m2 DECIMAL(15,4), k1 DECIMAL(15,4),k2 DECIMAL(15,4),k3 DECIMAL(15,4),harga DECIMAL(15,4),persen DECIMAL(15,4)) RETURNS decimal(15,4)
@@ -7745,7 +7827,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.TglIndonesia
+-- Dumping structure for function dbbandung_20200116.TglIndonesia
 DROP FUNCTION IF EXISTS `TglIndonesia`;
 DELIMITER //
 CREATE FUNCTION `TglIndonesia`(tanggal DATE) RETURNS varchar(255) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci
@@ -7776,12 +7858,10 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for function dbsimcan_simulasi_merah.XML_Encode
+-- Dumping structure for function dbbandung_20200116.XML_Encode
 DROP FUNCTION IF EXISTS `XML_Encode`;
 DELIMITER //
-CREATE FUNCTION `XML_Encode`(
-	`X` VARCHAR(1000)
-) RETURNS varchar(1000) CHARSET latin1
+CREATE FUNCTION `XML_Encode`(`X` VARCHAR(1000)) RETURNS varchar(1000) CHARSET latin1
     DETERMINISTIC
 BEGIN 
 
@@ -7843,9 +7923,9 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_agroup_menu
+-- Dumping structure for trigger dbbandung_20200116.trg_agroup_menu
 DROP TRIGGER IF EXISTS `trg_agroup_menu`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_agroup_menu` BEFORE INSERT ON `trx_group_menu` FOR EACH ROW IF new.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7854,9 +7934,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_egroup_menu
+-- Dumping structure for trigger dbbandung_20200116.trg_egroup_menu
 DROP TRIGGER IF EXISTS `trg_egroup_menu`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_egroup_menu` BEFORE UPDATE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7865,9 +7945,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_group_menu
+-- Dumping structure for trigger dbbandung_20200116.trg_group_menu
 DROP TRIGGER IF EXISTS `trg_group_menu`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_group_menu` BEFORE DELETE ON `trx_group_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7876,9 +7956,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_ref_menu_c
+-- Dumping structure for trigger dbbandung_20200116.trg_ref_menu_c
 DROP TRIGGER IF EXISTS `trg_ref_menu_c`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_ref_menu_c` BEFORE INSERT ON `ref_menu` FOR EACH ROW IF new.group_id = 0 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7887,9 +7967,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_ref_menu_d
+-- Dumping structure for trigger dbbandung_20200116.trg_ref_menu_d
 DROP TRIGGER IF EXISTS `trg_ref_menu_d`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_ref_menu_d` BEFORE DELETE ON `ref_menu` FOR EACH ROW IF old.group_id = 1 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7898,9 +7978,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_ref_menu_u
+-- Dumping structure for trigger dbbandung_20200116.trg_ref_menu_u
 DROP TRIGGER IF EXISTS `trg_ref_menu_u`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_ref_menu_u` BEFORE UPDATE ON `ref_menu` FOR EACH ROW IF old.group_id = 0 THEN 
     SIGNAL SQLSTATE '45000' 
@@ -7909,9 +7989,9 @@ END IF//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger dbsimcan_simulasi_merah.trg_user
+-- Dumping structure for trigger dbbandung_20200116.trg_user
 DROP TRIGGER IF EXISTS `trg_user`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `trg_user` BEFORE DELETE ON `users` FOR EACH ROW IF old.email = 'super@simcan.dev' THEN 
     SIGNAL SQLSTATE '45000' 

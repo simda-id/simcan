@@ -5,117 +5,131 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @extends('layouts.app')
 
 @section('content')
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <?php
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <?php
                 $this->title = ' Data Pokok-Pokok Pikiran DPRD ';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = '/';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
-            ?>          
-        </div>
+            ?>
     </div>
+  </div>
   <div id="pesan"></div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <p><h2 class="panel-title">Detail Data Pokok-Pokok Pikiran DPRD</h2></p>
-          </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <p>
+            <h2 class="panel-title">Detail Data Pokok-Pokok Pikiran DPRD</h2>
+          </p>
+        </div>
 
-          <div class='panel-body'>
+        <div class='panel-body'>
           <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li id="tab-pokir" class="active"><a href="#pokir" role="tab" data-toggle="tab">Identitas Pengusul</a></li>
-                    <li id="tab-uraian"><a href="#uraian" role="tab-kv" data-toggle="tab">Uraian Pokok Pikiran</a></li>
-                    <li id="tab-lokasi"><a href="#lokasi" role="tab-kv" data-toggle="tab">Lokasi Usulan</a></li>
-                </ul>
+            <ul class="nav nav-tabs" role="tablist">
+              <li id="tab-pokir" class="active"><a href="#pokir" role="tab" data-toggle="tab">Identitas Pengusul</a>
+              </li>
+              <li id="tab-uraian"><a href="#uraian" role="tab-kv" data-toggle="tab">Uraian Pokok Pikiran</a></li>
+              <li id="tab-lokasi"><a href="#lokasi" role="tab-kv" data-toggle="tab">Lokasi Usulan</a></li>
+            </ul>
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="pokir">
-                <br>          
-                  <a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok Pikiran</a>
-                  {{-- <a class="btn btn-labeled btn-info btnPrintPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a> --}}
-                  <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span>Cetak Pokok Pikiran <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                  <a class="dropdown-item btnPrintPokir" ><i class="fa fa-print fa-fw fa-lg text-success"></i> XLS Pokok Pikiran</a>
-                                </li> 
-                                <li>
-                                  <a class="dropdown-item btnPrintUsulanPokir" ><i class="fa fa-print fa-fw fa-lg text-info"></i> Cetak Usulan Pokok Pikiran</a>
-                                </li>                     
-                            </ul>
-                    </div>
-                    
-                    {{-- <div class="table-responsive"> --}}
-                    <table id="tblPokir" class="table display table-striped table-bordered table-responsive"  width="100%">
-                          <thead>
-                              <tr>
-                                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th width="5%" style="text-align: center; vertical-align:middle">Tahun Usulan</th>
-                                <th width="35%" style="text-align: center; vertical-align:middle">Asal Pengusul</th>
-                                <th style="text-align: center; vertical-align:middle">Nama Pengusul</th>
-                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                    </table>
-                  {{-- </div> --}}
+              <div class="tab-pane fade in active" id="pokir">
+                <br>
+                <a class="btn btn-labeled btn-success addPokir" data-toggle="modal"><span class="btn-label"><i
+                      class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pokok Pikiran</a>
+                {{-- <a class="btn btn-labeled btn-info btnPrintPokir" data-toggle="modal"><span class="btn-label"><i class="fa fa-print fa-fw fa-lg"></i></span> Cetak Pokok-Pokok Pemikiran</a> --}}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-info dropdown-toggle btn-labeled" aria-haspopup="true"
+                    aria-expanded="false" data-toggle="dropdown"><span class="btn-label"><i
+                        class="fa fa-print fa-fw fa-lg"></i></span>Cetak Pokok Pikiran <span
+                      class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item btnPrintPokir"><i class="fa fa-print fa-fw fa-lg text-success"></i> XLS
+                        Pokok Pikiran</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item btnPrintUsulanPokir"><i class="fa fa-print fa-fw fa-lg text-info"></i>
+                        Cetak Usulan Pokok Pikiran</a>
+                    </li>
+                  </ul>
                 </div>
-                <div class="tab-pane fade in" id="uraian">
-                <br>          
-                  <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="addUraian"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Uraian Pemikiran</a></p>
-                    {{-- <div class="table-responsive"> --}}
-                    <table id="tblUraian" class="table table-striped display compact table-bordered table-responsive"  width="100%">
-                          <thead>
-                              <tr>
-                                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th width="25%" style="text-align: center; vertical-align:middle">Judul Usulan</th>
-                                <th style="text-align: center; vertical-align:middle">Uraian Usulan</th>
-                                {{-- <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Anggaran</th> --}}
-                                <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Output</th>
-                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                    </table>
-                  {{-- </div> --}}
-                </div>
-                <div class="tab-pane fade in" id="lokasi">
-                <br>          
-                  <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="btnAddLokasi"><span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Lokasi</a></p>
-                    {{-- <div class="table-responsive"> --}}
-                    <table id="tblLokasi" class="table display table-striped table-bordered table-responsive"  cellspacing="0" width="100%">
-                          <thead>
-                              <tr>
-                                <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th style="text-align: center; vertical-align:middle">Nama Kecamatan</th>
-                                <th style="text-align: center; vertical-align:middle">Nama Desa</th>
-                                <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                    </table>
-                  {{-- </div> --}}
-                </div>
-            </div>          
+
+                {{-- <div class="table-responsive"> --}}
+                <table id="tblPokir" class="table display table-striped table-bordered table-responsive" width="100%">
+                  <thead>
+                    <tr>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                      <th width="5%" style="text-align: center; vertical-align:middle">Tahun Usulan</th>
+                      <th width="35%" style="text-align: center; vertical-align:middle">Asal Pengusul</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Pengusul</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                {{-- </div> --}}
+              </div>
+              <div class="tab-pane fade in" id="uraian">
+                <br>
+                <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="addUraian"><span class="btn-label"><i
+                        class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Uraian Pemikiran</a></p>
+                {{-- <div class="table-responsive"> --}}
+                <table id="tblUraian" class="table table-striped display compact table-bordered table-responsive"
+                  width="100%">
+                  <thead>
+                    <tr>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                      <th width="25%" style="text-align: center; vertical-align:middle">Judul Usulan</th>
+                      <th style="text-align: center; vertical-align:middle">Uraian Usulan</th>
+                      {{-- <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Anggaran</th> --}}
+                      <th width="15%" style="text-align: center; vertical-align:middle">Jumlah Output</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                {{-- </div> --}}
+              </div>
+              <div class="tab-pane fade in" id="lokasi">
+                <br>
+                <p><a class="btn btn-labeled btn-success" data-toggle="modal" id="btnAddLokasi"><span
+                      class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Lokasi</a></p>
+                {{-- <div class="table-responsive"> --}}
+                <table id="tblLokasi" class="table display table-striped table-bordered table-responsive"
+                  cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Kecamatan</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Desa</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                {{-- </div> --}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
 <!--Modal Tambah Pokir -->
 
-<div id="TambahPokir" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" >
-  <div class="modal-dialog modal-lg"  >
+<div id="TambahPokir" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title">Identitas Pengusul Pokok Pikiran</h3>
@@ -123,344 +137,352 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       <div class="modal-body">
         <form class="form-horizontal" autocomplete='off' action="" method="post" onsubmit="return false;">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="id_pokir" id="id_pokir">        
+          <input type="hidden" name="id_pokir" id="id_pokir">
           <div class="form-group">
             <label for="txt_tahun" class="col-sm-4 control-label" align='left'>Tahun dan Tanggal Pengusulan :</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control number" id="txt_tahun" name="txt_tahun" required="required" disabled="">
-            </div>            
+              <input type="text" class="form-control number" id="txt_tahun" name="txt_tahun" required="required"
+                disabled="">
+            </div>
             <input type="hidden" class="form-control" name="txt_tgl_usul1" id="txt_tgl_usul1">
             <div class="form-group has-feedback">
               <div class="col-sm-4">
-                <input type="text" class="form-control date-picker" id="txt_tgl_usul" name="txt_tgl_usul" required="required" >
+                <input type="text" class="form-control date-picker" id="txt_tgl_usul" name="txt_tgl_usul"
+                  required="required">
                 <span>
                   <i class="fa fa-calendar fa-fw fa-lg form-control-feedback" style="color:blue;"></i>
                 </span>
-                
+
               </div>
             </div>
-          </div>                              
+          </div>
           <div class="form-group">
             <label for="txt_asal_usul" class="col-sm-4 control-label" align='left'>Asal dan Jabatan Pengusul :</label>
             <div class="col-sm-4">
               <select class="form-control" name="txt_asal_usul" id="txt_asal_usul">
-                  <option value="0">Fraksi</option>
-                  <option value="1">Pimpinan</option>
-                  <option value="2">Badan Musyawarah</option>
-                  <option value="3">Komisi</option>
-                  <option value="4">Badan Legislasi Daerah</option>
-                  <option value="5">Badan Anggaran</option>
-                  <option value="6">Badan Kehormatan</option>
-                  <option value="7">Panitia Ad Hoc</option>
-                  <option value="9">Kelangkapan Dewan Lainnya</option>
+                <option value="0">Fraksi</option>
+                <option value="1">Pimpinan</option>
+                <option value="2">Badan Musyawarah</option>
+                <option value="3">Komisi</option>
+                <option value="4">Badan Legislasi Daerah</option>
+                <option value="5">Badan Anggaran</option>
+                <option value="6">Badan Kehormatan</option>
+                <option value="7">Panitia Ad Hoc</option>
+                <option value="9">Kelangkapan Dewan Lainnya</option>
               </select>
             </div>
             <div class="col-sm-3">
               <select class="form-control" name="txt_jabat_usul" id="txt_jabat_usul">
-                  <option value="0">Ketua</option>
-                  <option value="1">Wakil Ketua</option>
-                  <option value="2">Sekretaris</option>
-                  <option value="3">Bendahara</option>
-                  <option value="4">Anggota</option>
+                <option value="0">Ketua</option>
+                <option value="1">Wakil Ketua</option>
+                <option value="2">Sekretaris</option>
+                <option value="3">Bendahara</option>
+                <option value="4">Anggota</option>
               </select>
             </div>
-          </div>  
+          </div>
           <div class="form-group has-feedback">
             <label for="txt_nama_pengusul" class="col-sm-4 control-label" align='left'>Nama Pengusul :</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="txt_nama_pengusul" name="txt_nama_pengusul" required="required">
+              <input type="text" class="form-control" id="txt_nama_pengusul" name="txt_nama_pengusul"
+                required="required">
               {{-- <span class="form-control-feedback">
                 <i id="btnTest" class="fa fa-search fa-fw fa-lg form-control-feedback" style="color:blue;"></i>
               </span> --}}
             </div>
           </div>
-          
+
           <div class="form-group">
-            <label for="txt_no_dewan" class="col-sm-4 control-label" align='left' >Nomor Anggota :</label>
+            <label for="txt_no_dewan" class="col-sm-4 control-label" align='left'>Nomor Anggota :</label>
             <div class="col-sm-3">
               <input type="text" class="form-control " id="txt_no_dewan" name="txt_no_dewan">
             </div>
           </div>
           <div class="form-group">
-                    <label class="control-label col-sm-4" for="media_pokir">Media Penyampaian Pokir :</label>
-                    <div class="col-sm-5">
-                        <select type="text" class="form-control" id="media_pokir" name="media_pokir">
-                          <option value="1">Surat</option>
-                          <option value="2">Email</option>
-                          <option value="3">Notulen Rapat</option>
-                          <option value="4">Telepon</option>
-                          <option value="5">Pesan Singkat</option>
-                          <option value="6">Lisan</option>
-                          <option value="0">Lainnya</option>
-                        </select>
-                    </div>
-                </div>         
+            <label class="control-label col-sm-4" for="media_pokir">Media Penyampaian Pokir :</label>
+            <div class="col-sm-5">
+              <select type="text" class="form-control" id="media_pokir" name="media_pokir">
+                <option value="1">Surat</option>
+                <option value="2">Email</option>
+                <option value="3">Notulen Rapat</option>
+                <option value="4">Telepon</option>
+                <option value="5">Pesan Singkat</option>
+                <option value="6">Lisan</option>
+                <option value="0">Lainnya</option>
+              </select>
+            </div>
+          </div>
         </form>
       </div>
-        <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btn-labeled btnPokir" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-      </div>      
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusKeg">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" class="btn btn-sm btn-success btn-labeled btnPokir" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <!--Modal Status Perkada -->
-  <div id="HapusPokir" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Posting</h4>
+<!--Modal Status Perkada -->
+<div id="HapusPokir" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Posting</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger deleteContent">
+          <input type="hidden" name="id_pokir_hapus" id="id_pokir_hapus">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          Yakin akan menghapus Data Pokir, ini ?
+          <br>
+          <br>
+          <strong>Proses Posting Tidak dapat diulangi, Cek lagi sebelum memposting ! </strong>
         </div>
-        <div class="modal-body">
-            <div class="alert alert-danger deleteContent">
-                <input type="hidden" name="id_pokir_hapus" id="id_pokir_hapus">  
-                <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus Data Pokir, ini ?                
-                <br>
-                <br>
-                <strong>Proses Posting Tidak dapat diulangi, Cek lagi sebelum memposting ! </strong> 
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusKeg">
           </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusKeg">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-danger btnHapusPokir btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" class="btn btn-sm btn-danger btnHapusPokir btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <div id="ModalUsulan" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title"></h4>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form name="frmModalUsulan" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+          onsubmit="return false;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" id="id_pokir_usulan" name="id_pokir_usulan">
+          <input type="hidden" id="id_pokir_rincian" name="id_pokir_rincian">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="volume_usulan">No Urut :</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control number" id="no_urut_usulan" name="no_urut_usulan">
             </div>
-            <div class="modal-body">
-              <form name="frmModalUsulan" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id_pokir_usulan" name="id_pokir_usulan">
-                <input type="hidden" id="id_pokir_rincian" name="id_pokir_rincian">
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="volume_usulan">No Urut :</label>
-                    <div class="col-sm-3">
-                          <input type="text" class="form-control number" id="no_urut_usulan" name="no_urut_usulan">
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3 text-left" for="id_unit">Unit Pelaksana :</label>
-                  <div class="col-sm-8">
-                      <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="judul_usulan">Judul Usulan :</label>
-                      <div class="col-sm-8">
-                        <textarea type="name" class="form-control" id="judul_usulan" rows="3"></textarea>
-                      </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="uraian_usulan">Uraian Usulan :</label>
-                      <div class="col-sm-8">
-                        <textarea type="name" class="form-control" id="uraian_usulan" rows="6"></textarea>
-                      </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="volume_usulan">Volume Usulan :</label>
-                    <div class="col-sm-2">
-                          <input type="text" class="form-control number" id="volume_usulan" name="volume_usulan">
-                    </div>
-                    <div class="col-sm-4">
-                      <select type="text" class="form-control" id="id_satuan_usulan" name="id_satuan_usulan"></select>
-                    </div>
-                  </div>
-                  <div class="form-group hidden">
-                    <label class="control-label col-sm-3" for="pagu_usulan">Anggaran Usulan :</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control number" id="pagu_usulan" name="pagu_usulan">                    
-                    </div>
-                  </div>
-              </form>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3 text-left" for="id_unit">Unit Pelaksana :</label>
+            <div class="col-sm-8">
+              <select class="form-control id_Unit" name="id_unit" id="id_unit"></select>
             </div>
-                  <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-sm-2 text-left idbtnHapusUsulan">
-                            <button id="btnHapusUsulan" type="button" class="btn btn-sm btn-danger btn-labeled">
-                                <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        </div>
-                        <div class="col-sm-10 text-right">
-                          <div class="ui-group-buttons">
-                            <button id="btnUsulan" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                            <div class="or"></div>
-                            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="judul_usulan">Judul Usulan :</label>
+            <div class="col-sm-8">
+              <textarea type="name" class="form-control" id="judul_usulan" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="uraian_usulan">Uraian Usulan :</label>
+            <div class="col-sm-8">
+              <textarea type="name" class="form-control" id="uraian_usulan" rows="6"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="volume_usulan">Volume Usulan :</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control number" id="volume_usulan" name="volume_usulan">
+            </div>
+            <div class="col-sm-4">
+              <select type="text" class="form-control" id="id_satuan_usulan" name="id_satuan_usulan"></select>
+            </div>
+          </div>
+          <div class="form-group hidden">
+            <label class="control-label col-sm-3" for="pagu_usulan">Anggaran Usulan :</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control number" id="pagu_usulan" name="pagu_usulan">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusUsulan">
+            <button id="btnHapusUsulan" type="button" class="btn btn-sm btn-danger btn-labeled">
+              <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button id="btnUsulan" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="HapusUsulan" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Rincian Usulan Pokok-Pokok Pemikiran</h4>
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Hapus Rincian Usulan Pokok-Pokok Pemikiran</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="id_usulan_hapus" name="id_usulan_hapus">
+        <div class="alert alert-danger deleteContent">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          Yakin akan menghapus uraian dari Pokok - pokok pemikiran dengan judul : <strong><span
+              id="ur_usulan_hapus"></span></strong> ?
+          <br>
+          <br>
+          <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong>
         </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_usulan_hapus" name="id_usulan_hapus">
-            <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus uraian dari Pokok - pokok pemikiran dengan judul : <strong><span id="ur_usulan_hapus"></span></strong> ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left">
           </div>
-        </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button  id="btnDelUsulan" type="button" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button id="btnDelUsulan" type="button" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <div id="ModalLokasi" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-          <form name="frmModalLokasi" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" id="id_usulan_lokasi" name="id_usulan_lokasi">
-            <input type="hidden" id="id_pokir_lokasi" name="id_pokir_lokasi">
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="id_kecamatan">Kecamatan :</label>
-                <div class="col-sm-5">
-                    <select type="text" class="form-control" id="id_kecamatan" name="id_kecamatan"></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="id_desa">Kelurahan/Desa :</label>
-                <div class="col-sm-5">
-                    <select type="text" class="form-control" id="id_desa" name="id_desa" disabled></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="">RT / RW :</label>
-                <div class="col-sm-2">
-                      <input type="text" maxlength="3" class="form-control number" id="id_rt" name="id_rt">
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" maxlength="3" class="form-control number" id="id_rw" name="id_rw">                    
-                </div>
-              </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="diskripsi_lokasi">Keterangan Lokasi :</label>
-                <div class="col-sm-8">
-                      <textarea type="name" class="form-control" id="diskripsi_lokasi" name="diskripsi_lokasi" rows="3"></textarea>
-                </div>
-            </div>
-          </form>
-        </div>
-              <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left idbtnHapusLokasi">
-                        <button id="btnHapusLokasi" type="button" class="btn btn-sm btn-danger btn-labeled">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button id="btnLokasi" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-        </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
       </div>
-    </div>
-
-<div id="HapusLokasi" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4>Hapus Data Lokasi Usulan</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="id_lokasi_hapus" name="id_lokasi_hapus">
-            <div class="alert alert-danger deleteContent">
-                <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                Yakin akan menghapus lokasi : <strong><span id="ur_lokasi_hapus"></span></strong> dalam usulan Pokok-pokok Pemikiran Dewan ?
-                <br>
-                <br>
-                <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong> 
+      <div class="modal-body">
+        <form name="frmModalLokasi" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+          onsubmit="return false;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" id="id_usulan_lokasi" name="id_usulan_lokasi">
+          <input type="hidden" id="id_pokir_lokasi" name="id_pokir_lokasi">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="id_kecamatan">Kecamatan :</label>
+            <div class="col-sm-5">
+              <select type="text" class="form-control" id="id_kecamatan" name="id_kecamatan"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="id_desa">Kelurahan/Desa :</label>
+            <div class="col-sm-5">
+              <select type="text" class="form-control" id="id_desa" name="id_desa" disabled></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="">RT / RW :</label>
+            <div class="col-sm-2">
+              <input type="text" maxlength="3" class="form-control number" id="id_rt" name="id_rt">
+            </div>
+            <div class="col-sm-2">
+              <input type="text" maxlength="3" class="form-control number" id="id_rw" name="id_rw">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="diskripsi_lokasi">Keterangan Lokasi :</label>
+            <div class="col-sm-8">
+              <textarea type="name" class="form-control" id="diskripsi_lokasi" name="diskripsi_lokasi"
+                rows="3"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left idbtnHapusLokasi">
+            <button id="btnHapusLokasi" type="button" class="btn btn-sm btn-danger btn-labeled">
+              <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button id="btnLokasi" type="button" class="btn btn-sm btn-success btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
           </div>
         </div>
-          <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" id="btnDelLokasi" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="HapusLokasi" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Hapus Data Lokasi Usulan</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="id_lokasi_hapus" name="id_lokasi_hapus">
+        <div class="alert alert-danger deleteContent">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          Yakin akan menghapus lokasi : <strong><span id="ur_lokasi_hapus"></span></strong> dalam usulan Pokok-pokok
+          Pemikiran Dewan ?
+          <br>
+          <br>
+          <strong>Catatan : Penghapusan data ini mempengaruhi data selanjutnya akan ikut terhapus.....!!!!</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" id="btnDelLokasi" class="btn btn-sm btn-danger btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="fa fa-trash fa-fw fa-lg"></i></span>Hapus</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
-$(document).ready(function() {
+  $(document).ready(function() {
   var id_tahun_temp = {{Session::get('tahun')}};
 
   $('.number').number(true,0,'', '');
@@ -1166,13 +1188,11 @@ $(document).on('click', '.btnPrintPokir', function() {
   window.open('./printPokir');
 });
 
-$(document).on('click', '.m', function() {
-  window.open('./printUsulanPokir');
+$(document).on('click', '.btnPrintUsulanPokir', function() {
+  window.open('./printUsulPokir');
 });
 
 
 });
 </script>
 @endsection
-
-

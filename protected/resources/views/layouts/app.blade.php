@@ -397,6 +397,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpdranwal', 'visible' => $akses->get(440)],
                                                     ['label' => 'RKPD dan Musrenbang RKPD', 'url' => '/cetak/rkpdrancangan', 'visible' => $akses->get(441)],
+                                                    ['label' => 'RKPD-90', 'url' => '/cetak90/rkpd', 'visible' => $akses->get(441)]
                                                     // ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdranhir', 'visible' => $akses->get(442)],
                                                     // ['label' => 'Musrenbang RKPD', 'url' => '/cetak/rkpdmusren', 'visible' => $akses->get(642)],
                                                     // ['label' => 'RKPD', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(443)],

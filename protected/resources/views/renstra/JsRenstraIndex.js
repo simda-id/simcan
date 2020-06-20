@@ -4021,6 +4021,7 @@ $( document ).ready( function () {
       }
     } );
   } );
+
   $( document ).on( 'click', '.btnTambahPelaksana', function () {
     $.ajax( {
       type: "GET",
@@ -4288,7 +4289,7 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.btnHapusPelaksana', function () {
     var data = tbl_Pelaksana.row( $( this ).parents( 'tr' ) ).data();
-    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanIndikator' );
+    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanPelaksana' );
     $( '.modal-title' ).text( 'Hapus Pelaksana Kegiatan Renstra' );
     $( '.form-horizontal' ).hide();
     $( '#id_kegiatan_pelaksana_hapus' ).val( data.id_kegiatan_renstra_pelaksana );
@@ -4299,7 +4300,7 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.btnHapusPelaksanaBtl', function () {
     var data = tbl_PelaksanaBtl.row( $( this ).parents( 'tr' ) ).data();
-    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanIndikator' );
+    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanPelaksana' );
     $( '.modal-title' ).text( 'Hapus Pelaksana Non Program Renstra' );
     $( '.form-horizontal' ).hide();
     $( '#id_kegiatan_pelaksana_hapus' ).val( data.id_kegiatan_renstra_pelaksana );
@@ -4310,7 +4311,7 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.btnHapusPelaksanaPdt', function () {
     var data = tbl_PelaksanaPdt.row( $( this ).parents( 'tr' ) ).data();
-    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanIndikator' );
+    $( '.btnDelKegiatanPelaksana' ).addClass( 'delKegiatanPelaksana' );
     $( '.modal-title' ).text( 'Hapus Pelaksana Pendanaan Renstra' );
     $( '.form-horizontal' ).hide();
     $( '#id_kegiatan_pelaksana_hapus' ).val( data.id_kegiatan_renstra_pelaksana );
@@ -4319,7 +4320,7 @@ $( document ).ready( function () {
     $( '#HapusKegiatanPelaksanaModal' ).modal( 'show' );
   } );
 
-  $( '.modal-footer' ).on( 'click', '.delKegiatanIndikator', function () {
+  $( '.modal-footer' ).on( 'click', '.delKegiatanPelaksana', function () {
     $.ajaxSetup( {
       headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
     } );

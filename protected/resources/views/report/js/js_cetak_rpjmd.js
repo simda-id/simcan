@@ -219,6 +219,15 @@ $( document ).ready( function () {
 
             window.open( '../RpjmdPaguRenstra' + vars, '_blank' );
         };
+        if ( $( '#jns_laporan' ).val() == 7 ) {
+            vars = "?token=" + $( 'input[name=_token]' ).val();
+            vars += "&id_dokumen=" + $( '#cb_no_perda' ).val();
+            vars += "&id_misi=" + $( '#cb_misi_rpjmd' ).val();
+            vars += "&id_tujuan=" + $( '#cb_tujuan_rpjmd' ).val();
+            vars += "&id_sasaran=" + $( '#cb_sasaran_rpjmd' ).val();
+            vars += "&id_program=" + $( '#cb_program_rpjmd' ).val();
+            window.open( '../RpjmdSinkronisasiIndikator' + vars, '_blank' );
+        };
     } );
 
 } );

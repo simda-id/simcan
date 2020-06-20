@@ -1,205 +1,169 @@
-$(document).ready(function(){
+$( document ).ready( function () {
 
-$.ajax({
+  $.ajax( {
     type: "GET",
     url: '../admin/parameter/getUrusan',
     dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
+    success: function ( data ) {
+      var j = data.length;
+      var post, i;
 
-        $('select[name="urusan_prarka"]').empty();
-        $('select[name="urusan_prarka"]').append('<option value="-1">---Pilih Urusan---</option>');
+      $( 'select[name="urusan_prarka"]' ).empty();
+      $( 'select[name="urusan_prarka"]' ).append( '<option value="-1">---Pilih Urusan---</option>' );
 
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="urusan_prarka"]').append('<option value="'+ post.kd_urusan +'">'+ post.nm_urusan +'</option>');
+      for ( i = 0; i < j; i++ ) {
+        post = data[ i ];
+        $( 'select[name="urusan_prarka"]' ).append( '<option value="' + post.kd_urusan + '">' + post.nm_urusan + '</option>' );
 
-        }
+      }
     }
-});
+  } );
 
-$.ajax({
+  $.ajax( {
     type: "GET",
     url: './jenis_rkpd_final',
     dataType: "json",
-    success: function(data) {
-        var j = data.length;
-        var post, i;
+    success: function ( data ) {
+      var j = data.length;
+      var post, i;
 
-        for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="jns_laporan"]').append('<option value="'+ post.id +'">'+ post.uraian_laporan +'</option>');
-        }
+      for ( i = 0; i < j; i++ ) {
+        post = data[ i ];
+        $( 'select[name="jns_laporan"]' ).append( '<option value="' + post.id + '">' + post.uraian_laporan + '</option>' );
+      }
     }
-});
+  } );
 
-$.ajax({
+  $.ajax( {
     type: "GET",
     url: '../admin/parameter/getTahun',
     dataType: "json",
-    success: function(data) {
+    success: function ( data ) {
+      var j = data.length;
+      var post, i;
+
+      $( 'select[name="tahun_prarka"]' ).empty();
+      $( 'select[name="tahun_prarka"]' ).append( '<option value="-1">---Pilih Tahun---</option>' );
+
+      for ( i = 0; i < j; i++ ) {
+        post = data[ i ];
+        $( 'select[name="tahun_prarka"]' ).append( '<option value="' + post.tahun + '">' + post.tahun + '</option>' );
+      }
+    }
+  } );
+
+  $( ".urusan_prarka" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: '../admin/parameter/getBidang/' + $( '#urusan_prarka' ).val(),
+      dataType: "json",
+      success: function ( data ) {
         var j = data.length;
         var post, i;
 
-        $('select[name="tahun_prarka"]').empty();
-        $('select[name="tahun_prarka"]').append('<option value="-1">---Pilih Tahun---</option>');
+        $( 'select[name="bidang_prarka"]' ).empty();
+        $( 'select[name="bidang_prarka"]' ).append( '<option value="-1">---Pilih  Bidang---</option>' );
 
-        for (i = 0; i < j; i++) {
-          post = data[i];
-          $('select[name="tahun_prarka"]').append('<option value="'+ post.tahun +'">'+ post.tahun +'</option>');
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="bidang_prarka"]' ).append( '<option value="' + post.id_bidang + '">' + post.nm_bidang + '</option>' );
         }
-    }
-});
+      }
+    } );
+  } );
 
-$( ".urusan_prarka" ).change(function() {
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getBidang/'+$('#urusan_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
+  $( ".bidang_prarka" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: '../admin/parameter/getUnit2/' + $( '#bidang_prarka' ).val(),
+      dataType: "json",
+      success: function ( data ) {
+        var j = data.length;
+        var post, i;
 
-          $('select[name="bidang_prarka"]').empty();
-          $('select[name="bidang_prarka"]').append('<option value="-1">---Pilih  Bidang---</option>');
+        $( 'select[name="unit_prarka"]' ).empty();
+        $( 'select[name="unit_prarka"]' ).append( '<option value="-1">---Pilih Unit---</option>' );
 
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="bidang_prarka"]').append('<option value="'+ post.id_bidang +'">'+ post.nm_bidang +'</option>');
-          }
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="unit_prarka"]' ).append( '<option value="' + post.id_unit + '">' + post.nm_unit + '</option>' );
         }
-    });
-});
+      }
+    } );
+  } );
 
-$( ".bidang_prarka" ).change(function() {  
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getUnit2/'+$('#bidang_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
+  $( ".unit_prarka" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getProgramRkpdFinal/' + $( '#unit_prarka' ).val() + '/' + $( '#tahun_prarka' ).val(),
+      dataType: "json",
+      success: function ( data ) {
+        var j = data.length;
+        var post, i;
 
-          $('select[name="unit_prarka"]').empty();
-          $('select[name="unit_prarka"]').append('<option value="-1">---Pilih Unit---</option>');
+        $( 'select[name="prog_prarka"]' ).empty();
+        $( 'select[name="prog_prarka"]' ).append( '<option value="-1">---Pilih Program---</option>' );
 
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="unit_prarka"]').append('<option value="'+ post.id_unit +'">'+ post.nm_unit +'</option>');
-          }
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="prog_prarka"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_program_renstra + '</option>' );
         }
-    });
-});
+      }
+    } );
+    $.ajax( {
+      type: "GET",
+      url: '../admin/parameter/getSub2/' + $( '#unit_prarka' ).val(),
+      dataType: "json",
 
-$( ".unit_prarka" ).change(function() { 
-    $.ajax({
-        type: "GET",
-        url: 'getProgramRkpdFinal/'+$('#unit_prarka').val()+'/'+$('#tahun_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
+      success: function ( data ) {
+        var j = data.length;
+        var post, i;
 
-          $('select[name="prog_prarka"]').empty();
-          $('select[name="prog_prarka"]').append('<option value="-1">---Pilih Program---</option>');
+        $( 'select[name="sub_prarka2"]' ).empty();
+        $( 'select[name="sub_prarka2"]' ).append( '<option value="-1">---Pilih Sub Unit---</option>' );
 
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="prog_prarka"]').append('<option value="'+ post.id_program_pd +'">'+ post.uraian_program_renstra +'</option>');
-          }
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="sub_prarka2"]' ).append( '<option value="' + post.id_sub_unit + '">' + post.nm_sub + '</option>' );
         }
-    });
-    $.ajax({
-        type: "GET",
-        url: '../admin/parameter/getSub2/'+$('#unit_prarka').val(),
-        dataType: "json",
+      }
+    } );
 
-        success: function(data) {
-          var j = data.length;
-          var post, i;
+  } );
 
-          $('select[name="sub_prarka2"]').empty();
-          $('select[name="sub_prarka2"]').append('<option value="-1">---Pilih Sub Unit---</option>');
+  $( ".prog_prarka" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getKegiatanRkpdFinal/' + $( '#prog_prarka' ).val(),
+      dataType: "json",
+      success: function ( data ) {
+        var j = data.length;
+        var post, i;
 
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="sub_prarka2"]').append('<option value="'+ post.id_sub_unit +'">'+ post.nm_sub +'</option>');
-          }
+        $( 'select[name="keg_prarka"]' ).empty();
+        $( 'select[name="keg_prarka"]' ).append( '<option value="-1">---Pilih Kegiatan---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="keg_prarka"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_kegiatan_forum + '</option>' );
         }
-    });
-
-});
-
-$( ".prog_prarka" ).change(function() {  
-    $.ajax({
-        type: "GET",
-        url: 'getKegiatanRkpdFinal/'+$('#prog_prarka').val(),
-        dataType: "json",
-        success: function(data) {
-          var j = data.length;
-          var post, i;
-
-          $('select[name="keg_prarka"]').empty();
-          $('select[name="keg_prarka"]').append('<option value="-1">---Pilih Kegiatan---</option>');
-
-          for (i = 0; i < j; i++) {
-            post = data[i];
-            $('select[name="keg_prarka"]').append('<option value="'+ post.id_kegiatan_pd +'">'+ post.uraian_kegiatan_forum +'</option>');
-          }
-        }
-    });
-});
+      }
+    } );
+  } );
 
 
-$(document).on('click', '.btnProses', function() {
-    if($('#jns_laporan').val()==1){
-       window.open('../PrintKompilasiKegiatandanPaguF/'+ $('#unit_prarka').val()+'/'+ $('#tahun_prarka').val()); 
+  $( document ).on( 'click', '.btnProses', function () {
+
+    if ( $( '#jns_laporan' ).val() == 1 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&ttd=" + check_data;
+      window.open( '../RkpdTC33ver90' + vars, '_blank' );
     };
-    if($('#jns_laporan').val()==2){
-       window.open('../PrintRingkasAPBDRF/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==3){
-       window.open('../PrintAPBDRF/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==4){
-       window.open('../PrintPraRKA2RF/'+$('#sub_prarka2').val()+'/'+$('#tahun_prarka').val()); 
-    };
-    if($('#jns_laporan').val()==5){
-       window.open('../PrintPraRKARF/'+$('#keg_prarka').val()+'/'+$('#sub_prarka2').val()); 
-    };
-    // if($('#jns_laporan').val()==6){
-    // 	window.open('../PrintPrakiraanMajuRkpdFinal/'+ $('#sub_prarka2').val()+'/'+$('#tahun_prarka').val());  
-    //  };
 
-     if($('#jns_laporan').val()==6){
-         vars = "?token="     + $('input[name=_token]').val();
-        vars += "&tahun="     + $('#tahun_prarka').val();
-        vars += "&unit="   + $('#unit_prarka').val();
-
-        window.open('../PrintPrakiraanMajuRkpdF' + vars, '_blank');
-   
-       };
-  
-     if($('#jns_laporan').val()==11){
-       window.open('../PrintMatrikForm2/'+$('#tahun_prarka').val()); 
-       };
-     if($('#jns_laporan').val()==12){
-       window.open('../PrintMatrikForm3/'+$('#tahun_prarka').val()); 
-
-       };
-     if($('#jns_laporan').val()==13){
-       window.open('../PrintMusrenRancangan/'+$('#tahun_prarka').val()); 
-
-       };
-
-      if($('#jns_laporan').val()==7){
-        vars = "?token="     + $('input[name=_token]').val();
-          vars += "&tahun="     + $('#tahun_prarka').val();
-       
-         window.open('../RekapSumberDana'+ vars, '_blank'); 
-      };  
-});
+  } );
 
 
-});
+} );

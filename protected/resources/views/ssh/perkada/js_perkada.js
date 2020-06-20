@@ -669,7 +669,7 @@ $( document ).ready( function () {
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
-          createPesan( data.pesan, "alert" );
+          createPesan( data.pesan, "danger" );
         }
       }
     } );

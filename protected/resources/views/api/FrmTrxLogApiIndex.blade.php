@@ -55,12 +55,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
                   <option value="-1">--Pilih Jenis Dokumen--</option>
                   <option value="0">RKPD RANWAL</option>
+                  <option value="2">RKPD RANCANGAN</option>
                   <option value="1">RKPD FINAL</option>
+                  <option value="3">RPJMD</option>
+                  <option value="4">RENSTRA</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2" for="title">No Dokumen RKPD</label>
+              <label class="control-label col-sm-2" for="title">No Dokumen</label>
               <div class="col-sm-6">
                 <select type="text" class="form-control id_dokumen_rkpd select2" id="id_dokumen_rkpd"
                   name="id_dokumen_rkpd"></select>
@@ -102,7 +105,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title">Daftar Unit OPD yang siap dikirim </h3>
+        <h3 class="modal-title">Daftar Pemda / Unit OPD yang siap dikirim </h3>
       </div>
       <div class="modal-body">
 
@@ -112,8 +115,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <thead>
                 <tr>
                   <th width="10px" style="text-align: center; vertical-align:middle">Pilih</th>
-                  <th width="15%" style="text-align: center; vertical-align:middle">Kode Unit</th>
-                  <th style="text-align: center; vertical-align:middle">Nama Unit</th>
+                  <th width="15%" style="text-align: center; vertical-align:middle">Kode</th>
+                  <th style="text-align: center; vertical-align:middle">Nama</th>
                   <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                 </tr>
               </thead>

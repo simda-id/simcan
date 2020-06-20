@@ -74,7 +74,7 @@ use hoaaah\LaravelMenu\Menu;
                             'ulId' => 'side-menu'
                         ],
                         'items' => [
-                            ['label' => 'Parameter', 'icon' => 'fa fa-cogs', 'url' => '/parameter/dash'],
+                            ['label' => 'Parameter', 'icon' => 'fa fa-cogs fa-fw text-success', 'url' => '/parameter/dash'],
                             ['label' => 'Pengelolaan User', 
                                 'visible' => $akses->get(110),
                                 'icon' => 'fa fa-users fa-fw',
@@ -166,7 +166,51 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                 ]
                             ],
-                            ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw', 'url' => '/admin/update','visible' => $akses->get(9)],
+                            [
+                            'label' => 'Parameter-90',
+                            'icon' => 'fa fa-snowflake-o fa-fw text-danger',
+                            'visible' => $akses->getMulti([101, 102, 103, 104, 105, 106, 107, 108, 109, 111]),
+                            'items' => [
+                                    [ 'label' => 'Import Data Pmd 90',
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->get(103),
+                                        'url' => '/parameter90/import','visible'
+                                    ],
+                                    [ 'label' => 'Unit Organisasi',
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->get(103),
+                                        'items' => [
+                                            ['label' => 'Unit & Sub Unit', 'url' => '/parameter90/unit','visible' => $akses->get(103)],
+                                            ['label' => 'Mapping Organisasi', 'url' => '/parameter90/mapping_unit','visible' => $akses->get(103)],
+                                        ]
+                                    ],
+                                    [ 'label' => 'Program Kegiatan',
+                                        'icon' => 'fa fa-briefcase fa-fw',
+                                        'visible' => $akses->get(106),
+                                        'items' => [
+                                            ['label' => 'Program Kegiatan', 'url' => '/parameter90/program','visible' => $akses->get(106)],
+                                            ['label' => 'Mapping Program', 'url' => '/parameter90/mapping_prog','visible' => $akses->get(106)],
+                                        ]
+                                    ],
+                                    [ 'label' => 'Rekening Anggaran',
+                                        'icon' => 'fa fa-money fa-fw',
+                                        'visible' => $akses->get(105),
+                                        'items' => [
+                                            ['label' => 'Rekening Anggaran', 'url' => '/parameter90/rekening','visible' => $akses->get(105)],
+                                            ['label' => 'Mapping Rekening', 'url' => '/parameter90/mapping_rek90','visible' => $akses->get(105)],
+                                        ]
+                                    ],
+                                    [ 'label' => 'Sumber Dana',
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->get(103),
+                                        'items' => [
+                                            ['label' => 'Sumber Dana', 'url' => '/parameter90/sumdana','visible' => $akses->get(103)],
+                                            ['label' => 'Mapping Sumber Dana', 'url' => '/parameter90/mapping_sd90','visible' => $akses->get(103)],
+                                        ]
+                                    ],
+                                ]
+                            ],
+                            ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw text-warning', 'url' => '/admin/update','visible' => $akses->get(9)],
                         ]
                     ]);
                 ?>

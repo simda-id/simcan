@@ -85,6 +85,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
+              <label class="control-label col-sm-3 text-left" for="id_dokumen_keu">Alamat API Simda Keuangan </label>
+              <div class="col-sm-5">
+                <input class="form-control alamat_api select2" name="alamat_api" id="alamat_api" value={{$alamatApi}}
+                  disabled>
+              </div>
+            </div>
+            <div class="form-group">
               <div class="col-sm-3"></div>
               <div class="col-sm-5 text-right">
                 <p><a class="btnKirimKeuangan btn-labeled btn btn-success"><span class="btn-label"><i
@@ -222,7 +229,7 @@ $( ".id_dokumen_keu" ).change( function () {
     } 
   } );
 
-  LoadLogKirim($( '#jns_dokumen_apbd' ).val());
+  LoadLogKirim($( '#id_dokumen_keu' ).val());
   
 } );
 
@@ -274,7 +281,7 @@ function LoadLogKirim (kd_dokumen) {
       },
       "pageLength": 50,
       "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
-      "ajax": {"url": "./getdataKeu?kd_dok="+kd_dokumen},
+      "ajax": {"url": "./getdataKeu?id_dokumen="+kd_dokumen},
       "columns": [
             { data: 'no_urut', sClass: "dt-center", searchable: false, orderable:false,},
             { data: 'action', 'searchable': false, width :"10%", 'orderable':false, sClass: "dt-center"},

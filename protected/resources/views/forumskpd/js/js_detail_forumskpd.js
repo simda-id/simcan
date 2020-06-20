@@ -243,13 +243,13 @@ $( document ).ready( function () {
       var j = data.length;
       var post, i;
 
-      $( 'select[name="id_satuan_1"]' ).empty();
-      $( 'select[name="id_satuan_1"]' ).append( '<option value="-1">---Pilih Satuan---</option>' );
-      $( 'select[name="id_satuan_1"]' ).append( '<option value="0">-- N/A --</option>' );
+      $( 'select[name="id_satuan_1_lokasi"]' ).empty();
+      $( 'select[name="id_satuan_1_lokasi"]' ).append( '<option value="-1">---Pilih Satuan---</option>' );
+      $( 'select[name="id_satuan_1_lokasi"]' ).append( '<option value="0">-- N/A --</option>' );
 
-      $( 'select[name="id_satuan_2"]' ).empty();
-      $( 'select[name="id_satuan_2"]' ).append( '<option value="-1">---Pilih Satuan---</option>' );
-      $( 'select[name="id_satuan_2"]' ).append( '<option value="0">-- N/A --</option>' );
+      $( 'select[name="id_satuan_2_lokasi"]' ).empty();
+      $( 'select[name="id_satuan_2_lokasi"]' ).append( '<option value="-1">---Pilih Satuan---</option>' );
+      $( 'select[name="id_satuan_2_lokasi"]' ).append( '<option value="0">-- N/A --</option>' );
 
       $( 'select[name="id_satuan_1_aktivitas"]' ).empty();
       $( 'select[name="id_satuan_1_aktivitas"]' ).append( '<option value="-1">---Pilih Satuan---</option>' );
@@ -277,8 +277,8 @@ $( document ).ready( function () {
 
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
-        $( 'select[name="id_satuan_1"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
-        $( 'select[name="id_satuan_2"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
+        $( 'select[name="id_satuan_1_lokasi"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
+        $( 'select[name="id_satuan_2_lokasi"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
         $( 'select[name="id_satuan_1_aktivitas"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
         $( 'select[name="id_satuan_2_aktivitas"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
         $( 'select[name="id_satuan1_forum"]' ).append( '<option value="' + post.id_satuan + '">' + post.uraian_satuan + '</option>' );
@@ -2605,12 +2605,12 @@ $( document ).ready( function () {
     $( '#jenis_lokasi' ).val( null );
     $( '#uraian_lokasi' ).val( null );
     $( '#sumber_data_lokasi' ).val( 4 );
-    $( '#volume_1' ).val( 1 );
-    $( '#volume_2' ).val( 1 );
-    $( '#volume_usulan_1' ).val( 0 );
-    $( '#volume_usulan_2' ).val( 0 );
-    $( '#id_satuan_1' ).val( id_satuan_1_aktiv_temp );
-    $( '#id_satuan_2' ).val( id_satuan_2_aktiv_temp );
+    $( '#volume_1_lokasi' ).val( 1 );
+    $( '#volume_2_lokasi' ).val( 1 );
+    $( '#volume_usulan_1_lokasi' ).val( 0 );
+    $( '#volume_usulan_2_lokasi' ).val( 0 );
+    $( '#id_satuan_1_lokasi' ).val( id_satuan_1_aktiv_temp );
+    $( '#id_satuan_2_lokasi' ).val( id_satuan_2_aktiv_temp );
     $( '#nm_lokasi' ).val( null );
     $( '#nm_lokasi_teknis' ).val( null );
     document.frmModalLokasi.status_pelaksanaan_lokasi[ 0 ].checked = true;
@@ -2642,10 +2642,10 @@ $( document ).ready( function () {
         'jenis_lokasi': $( '#jenis_lokasi' ).val(),
         'id_lokasi_teknis': $( '#id_lokasi_teknis' ).val(),
         'id_lokasi': $( '#id_lokasi' ).val(),
-        'volume_1': $( '#volume_1' ).val(),
-        'volume_2': $( '#volume_2' ).val(),
-        'id_satuan_1': $( '#id_satuan_1' ).val(),
-        'id_satuan_2': $( '#id_satuan_2' ).val(),
+        'volume_1': $( '#volume_1_lokasi' ).val(),
+        'volume_2': $( '#volume_2_lokasi' ).val(),
+        'id_satuan_1': $( '#id_satuan_1_lokasi' ).val(),
+        'id_satuan_2': $( '#id_satuan_2_lokasi' ).val(),
         'uraian_lokasi': $( '#uraian_lokasi' ).val(),
         'ket_lokasi': $( '#keterangan_status_lokasi' ).val(),
         'status_pelaksanaan': getStatusPelaksanaanLokasi(),
@@ -2670,7 +2670,7 @@ $( document ).ready( function () {
     $( '#btnLokasi' ).addClass( 'editLokasi' );
     $( '#btnLokasi' ).removeClass( 'addLokasi' );
     $( '.form-horizontal' ).show();
-    $( '.modal-title' ).text( 'Edit Data Lokasi Aktivitas' );
+    $( '.modal-title' ).text( 'Edit Data Lokasi Aktivitas X' );
     $( '#id_pelaksana_lokasi' ).val( data.id_pelaksana_forum );
     $( '#id_lokasi_forum' ).val( data.id_lokasi_forum );
     $( '#tahun_forum_lokasi' ).val( data.tahun_forum );
@@ -2680,12 +2680,12 @@ $( document ).ready( function () {
     $( '#jenis_lokasi' ).val( data.jenis_lokasi );
     $( '#uraian_lokasi' ).val( data.uraian_lokasi );
     $( '#nm_lokasi' ).val( data.nama_lokasi );
-    $( '#volume_1' ).val( data.volume_1 );
-    $( '#volume_2' ).val( data.volume_2 );
-    $( '#volume_usulan_1' ).val( data.volume_usulan_1 );
-    $( '#volume_usulan_2' ).val( data.volume_usulan_2 );
-    $( '#id_satuan_1' ).val( data.id_satuan_1 );
-    $( '#id_satuan_2' ).val( data.id_satuan_2 );
+    $( '#volume_1_lokasi' ).val( data.volume_1 );
+    $( '#volume_2_lokasi' ).val( data.volume_2 );
+    $( '#volume_usulan_1_lokasi' ).val( data.volume_usulan_1 );
+    $( '#volume_usulan_2_lokasi' ).val( data.volume_usulan_2 );
+    $( '#id_satuan_1_lokasi' ).val( data.id_satuan_1 );
+    $( '#id_satuan_2_lokasi' ).val( data.id_satuan_2 );
     document.frmModalLokasi.status_pelaksanaan_lokasi[ data.status_pelaksanaan ].checked = true;
     $( '#keterangan_status_lokasi' ).val( data.ket_lokasi );
 
@@ -2738,10 +2738,10 @@ $( document ).ready( function () {
         'jenis_lokasi': $( '#jenis_lokasi' ).val(),
         'id_lokasi': $( '#id_lokasi' ).val(),
         'id_lokasi_teknis': $( '#id_lokasi_teknis' ).val(),
-        'volume_1': $( '#volume_1' ).val(),
-        'volume_2': $( '#volume_2' ).val(),
-        'id_satuan_1': $( '#id_satuan_1' ).val(),
-        'id_satuan_2': $( '#id_satuan_2' ).val(),
+        'volume_1': $( '#volume_1_lokasi' ).val(),
+        'volume_2': $( '#volume_2_lokasi' ).val(),
+        'id_satuan_1': $( '#id_satuan_1_lokasi' ).val(),
+        'id_satuan_2': $( '#id_satuan_2_lokasi' ).val(),
         'uraian_lokasi': $( '#uraian_lokasi' ).val(),
         'ket_lokasi': $( '#keterangan_status_lokasi' ).val(),
         'status_data': check_data,

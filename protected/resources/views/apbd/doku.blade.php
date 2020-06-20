@@ -186,7 +186,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group has-feedback">
-              <label for="tanggal_rkpd" class="col-sm-3 control-label" align='left'>Tanggal Dokumen :</label>
+              <label for="tanggal_rkpd" class="col-sm-3 control-label" align='left'>Tanggal Raperda :</label>
               <input type="hidden" name="tanggal_rkpd" id="tanggal_rkpd">
               <div class="col-sm-4">
                 <input type="text" class="form-control datepicker" id="tanggal_rkpd_x" name="tanggal_rkpd_x"
@@ -195,15 +195,37 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
-              <label for="nomor_rkpd" class="col-sm-3 control-label" align='left'>Nomor Dokumen :</label>
+              <label for="nomor_rkpd" class="col-sm-3 control-label" align='left'>Nomor Raperda :</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="nomor_rkpd" name="nomor_rkpd" required="required">
               </div>
             </div>
             <div class="form-group">
-              <label for="uraian_perkada" class="col-sm-3 control-label" align='left'>Uraian Dokumen :</label>
+              <label for="uraian_perkada" class="col-sm-3 control-label" align='left'>Uraian Raperda :</label>
               <div class="col-sm-8">
                 <textarea type="text" class="form-control" id="uraian_perkada" name="uraian_perkada" required="required"
+                  rows="3"></textarea>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <label for="tanggal_perda" class="col-sm-3 control-label" align='left'>Tanggal Perda :</label>
+              <input type="hidden" name="tanggal_perda" id="tanggal_perda">
+              <div class="col-sm-4">
+                <input type="text" class="form-control datepicker" id="tanggal_perda_x" name="tanggal_perda_x"
+                  style="text-align: center;">
+                <i class="fa fa-calendar fa-fw fa-lg text-primary form-control-feedback"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nomor_perda" class="col-sm-3 control-label" align='left'>Nomor Perda :</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="nomor_perda" name="nomor_perda" required="required">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="uraian_perda" class="col-sm-3 control-label" align='left'>Uraian Perda :</label>
+              <div class="col-sm-8">
+                <textarea type="text" class="form-control" id="uraian_perda" name="uraian_perda" required="required"
                   rows="3"></textarea>
               </div>
             </div>

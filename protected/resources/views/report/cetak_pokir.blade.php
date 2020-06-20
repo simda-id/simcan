@@ -171,25 +171,32 @@ use hoaaah\LaravelMenu\Menu;
       <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
-          <label for="tahun_prarka" class="col-sm-3 control-label" align='left'>Tahun :</label>
+          <label for="tahun_prarka" class="col-sm-3 control-label" align='left' style="color:#fff;">Tahun :</label>
           <div class="col-sm-8">
             <select class="form-control select2 tahun_prarka" name="tahun_prarka" id="tahun_prarka"></select>
           </div>
         </div>
         <div class="form-group">
-          <label for="urusan_prarka" class="col-sm-3 control-label" align='left'>Urusan :</label>
+          <label class="control-label col-sm-3" for="nm_pengusul" style="color:#fff;">Nama Pengusul
+            :</label>
+          <div class="col-sm-8">
+            <select class="form-control select2 nm_pengusul" name="nm_pengusul" id="nm_pengusul"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="urusan_prarka" class="col-sm-3 control-label" align='left' style="color:#fff;">Urusan :</label>
           <div class="col-sm-8">
             <select class="form-control select2 urusan_prarka" name="urusan_prarka" id="urusan_prarka"></select>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="bidang_prarka">Bidang :</label>
+          <label class="control-label col-sm-3" for="bidang_prarka" style="color:#fff;">Bidang :</label>
           <div class="col-sm-8">
             <select class="form-control select2 bidang_prarka" name="bidang_prarka" id="bidang_prarka"></select>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="unit_prarka">Unit :</label>
+          <label class="control-label col-sm-3" for="unit_prarka" style="color:#fff;">Unit :</label>
           <div class="col-sm-8">
             <select class="form-control select2 unit_prarka" name="unit_prarka" id="unit_prarka"></select>
           </div>
@@ -213,13 +220,13 @@ use hoaaah\LaravelMenu\Menu;
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="jns_laporan">Jenis Laporan :</label>
+          <label class="control-label col-sm-3" for="jns_laporan" style="color:#fff;">Jenis Laporan :</label>
           <div class="col-sm-8">
             <select class="form-control select2 jns_laporan" name="jns_laporan" id="jns_laporan"></select>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="cb_status">Status Data :</label>
+          <label class="control-label col-sm-3" for="cb_status" style="color:#fff;">Status Data :</label>
           <div class="col-sm-8">
             <select class="form-control cb_status" name="cb_status" id="cb_status">
               <option value="-1"> Semua Status </option>
@@ -229,7 +236,7 @@ use hoaaah\LaravelMenu\Menu;
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="jns_laporan"></label>
+          <label class="control-label col-sm-3" for="jns_laporan" style="color:#fff;"></label>
           <div class="col-sm-8 text-left">
             <button type="button" class="btn btn-labeled btn-success btnProses"><span class="btn-label"><i
                   class="fa fa-print fa-lg fa-fw"></i></span> Proses</button>

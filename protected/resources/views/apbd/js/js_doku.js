@@ -44,8 +44,15 @@ $( document ).ready( function () {
     dateFormat: "dd MM yy"
   } );
 
+  $( '#tanggal_perda_x' ).datepicker( {
+    altField: "#tanggal_perda",
+    altFormat: "yy-mm-dd",
+    dateFormat: "dd MM yy"
+  } );
+
   $( '#btn' ).click( function () {
-    $( "#tanggal_rkpd_x" ).focus()
+    $( "#tanggal_rkpd_x" ).focus();
+    $( "#tanggal_perda_x" ).focus()
   } );
 
   function buatNip ( string ) {
@@ -431,6 +438,10 @@ $( document ).ready( function () {
         $( '#tanggal_rkpd_x' ).val( null );
         $( '#nomor_rkpd' ).val( null );
         $( '#uraian_perkada' ).val( null );
+        $( '#tanggal_perda' ).val( null );
+        $( '#tanggal_perda_x' ).val( null );
+        $( '#nomor_perda' ).val( null );
+        $( '#uraian_perda' ).val( null );
         $( '#id_sub_unit_ppkd' ).val( 0 ).trigger( 'change' );
         $( '#id_unit_perencana' ).val( data[ 0 ].unit_keuangan );
         $( '#id_unit_perencana_display' ).val( data[ 0 ].nm_unit );
@@ -465,6 +476,9 @@ $( document ).ready( function () {
         'nomor_keu': $( '#nomor_rkpd' ).val(),
         'tanggal_keu': $( '#tanggal_rkpd' ).val(),
         'uraian_perkada': $( '#uraian_perkada' ).val(),
+        'nomor_perda': $( '#nomor_perda' ).val(),
+        'tgl_perda': $( '#tanggal_perda' ).val(),
+        'uraian_perda': $( '#uraian_perda' ).val(),
         'id_unit_ppkd': $( '#id_unit_perencana' ).val(),
         'id_sub_unit_ppkd': $( '#id_sub_unit_ppkd' ).val(),
         'nama_tandatangan': $( '#nama_tandatangan' ).val(),
@@ -502,6 +516,10 @@ $( document ).ready( function () {
     $( '#id_unit_perencana_display' ).val( data.nm_unit );
     $( '#nama_tandatangan' ).val( data.nama_tandatangan );
     $( '#nip_tandatangan' ).val( data.nip_tandatangan );
+    $( '#tanggal_perda' ).val( data.tgl_perda );
+    $( '#tanggal_perda_x' ).val( data.tgl_perda );
+    $( '#nomor_perda' ).val( data.nomor_perda );
+    $( '#uraian_perda' ).val( data.uraian_perda );
 
     if ( data.nip_tandatangan == null ) {
       $( '#nip_tandatangan_display' ).val( null );
@@ -535,6 +553,9 @@ $( document ).ready( function () {
         'tanggal_keu': $( '#tanggal_rkpd' ).val(),
         'nomor_keu': $( '#nomor_rkpd' ).val(),
         'uraian_perkada': $( '#uraian_perkada' ).val(),
+        'nomor_perda': $( '#nomor_perda' ).val(),
+        'tgl_perda': $( '#tanggal_perda' ).val(),
+        'uraian_perda': $( '#uraian_perda' ).val(),
         'id_sub_unit_ppkd': $( '#id_sub_unit_ppkd' ).val(),
         'id_unit_ppkd': $( '#id_unit_perencana' ).val(),
         'nama_tandatangan': $( '#nama_tandatangan' ).val(),

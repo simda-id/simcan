@@ -63,7 +63,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a>
                 </div>
                 <div>
-                  <table id="tblProgramRKPD" class="table display table-responsive table-striped compact table-bordered"
+                  <table id="tblProgramRKPD" class="table table-striped table-bordered table-responsive compact"
                     cellspacing="0" width="100%">
                     <thead>
                       <tr>

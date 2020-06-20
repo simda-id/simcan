@@ -68,6 +68,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                       <tr>
                         <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Aksi</th>
                         <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
                         <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu PPAS</th>
                         <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu APBD</th>
@@ -76,7 +77,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                         <th colspan="2" width="3%" style="text-align: center; vertical-align:middle">Pelaksana</th>
                         {{-- <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Status Pelaksanaan</th> --}}
                         <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">Status Usulan</th>
-                        <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                       <tr>
                         <th style="text-align: center; vertical-align:middle">Jml</th>

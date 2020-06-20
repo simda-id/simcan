@@ -96,9 +96,9 @@ $( document ).ready( function () {
       },
       "columns": [
         { data: 'urut', sClass: "dt-center" },
-        // { data: 'uraian_program_rpjmd'},
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         {
-          data: 'uraian', 'searchable': false, 'orderable': false, sClass: "dt-left",
+          data: 'uraian', 'searchable': true, sClass: "dt-left",
           render: function ( data, type, row, meta ) {
             return row.uraian_program_rpjmd +
               '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>'
@@ -129,8 +129,7 @@ $( document ).ready( function () {
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
           }, sClass: "dt-center"
-        },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -736,11 +735,11 @@ $( document ).ready( function () {
       data: {
         '_token': $( 'input[name=_token]' ).val(),
         'no_urut': $( '#no_urut_indikator' ).val(),
-        'id_rkpd_ranwal': $( '#id_rkpd_ranwal_indikator' ).val(),
+        'id_anggaran_pemda': $( '#id_rkpd_ranwal_indikator' ).val(),
         'kd_indikator': $( '#kd_indikator_rkpd' ).val(),
         'uraian_indikator': $( '#ur_indikator_rkpd' ).val(),
         'tolok_ukur_indikator': $( '#ur_tolokukur_rkpd' ).val(),
-        'target_rkpd': $( '#target_indikator_rkpd' ).val(),
+        'target_keuangan': $( '#target_indikator_rkpd' ).val(),
         'id_satuan_output': $( '#id_satuan_output' ).val(),
       },
       success: function ( data ) {
@@ -1166,7 +1165,7 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
-      "ajax": { "url": "./admin/parameter/getRefIndikator" },
+      "ajax": { "url": "../admin/parameter/getRefIndikator" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'nm_indikator' },

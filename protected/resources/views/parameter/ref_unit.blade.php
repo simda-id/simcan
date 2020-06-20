@@ -6,204 +6,235 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <?php
+  <div class="row">
+    <div class="col-md-12">
+      <?php
                 $this->title = 'Unit Perangkat Daerah';
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = 'parameter/dash';
                 $breadcrumb->begin();
                 $breadcrumb->add(['label' => $this->title]);
                 $breadcrumb->end();
-            ?>        
+            ?>
+    </div>
+  </div>
+  <div id="pesan"></div>
+  <div id="prosesbar" class="lds-spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h2 class="panel-title">Referensi Unit & Sub Unit Perangkat Daerah</h2>
         </div>
-    </div>
-    <div id="pesan"></div>
-    <div id="prosesbar" class="lds-spinner">
-      <div></div><div></div><div></div><div></div>
-      <div></div><div></div><div></div><div></div>
-      <div></div><div></div><div></div><div></div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h2 class="panel-title">Referensi Unit & Sub Unit Perangkat Daerah</h2>
-          </div>
 
-          <div class="panel-body"><br>
-            <div class="form-group hidden">
-              <button type="button" class="btn btn-success btn-labeled btnLoadUrbid" data-dismiss="modal" aria-hidden="true">
-                <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Urusan-Bidang</button>
-              <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
-                <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Unit-Sub Unit</button>
-                <button type="button" class="btn btn-danger btn-labeled btnTestApi" data-dismiss="modal" aria-hidden="true">
-                  <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Test Api</button>
-            </div>
-            <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-              <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li class="active"><a href="#urusan" aria-controls="urusan" role="tab" data-toggle="tab">Urusan-Bidang</a></li>
-                <li><a href="#unit" aria-controls="unit" role="tab-kv" data-toggle="tab">Unit</a></li>
-                <li><a href="#subunit" aria-controls="subunit" role="tab-kv" data-toggle="tab">Sub Unit</a></li>
-                <li><a href="#dataunit" aria-controls="dataunit" role="tab-kv" data-toggle="tab">Rincian Data Unit</a></li>
-              </ul>
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="urusan">
-                  <div class="col-md-12">
+        <div class="panel-body"><br>
+          <div class="form-group hidden">
+            <button type="button" class="btn btn-success btn-labeled btnLoadUrbid" data-dismiss="modal"
+              aria-hidden="true">
+              <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi
+              Urusan-Bidang</button>
+            <button type="button" class="btn btn-primary btn-labeled btnLoad" data-dismiss="modal" aria-hidden="true">
+              <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Sinkronisasi Unit-Sub
+              Unit</button>
+            <button type="button" class="btn btn-danger btn-labeled btnTestApi" data-dismiss="modal" aria-hidden="true">
+              <span class="btn-label "><i class="fa fa-paper-plane fa-fw fa-lg"></i></span>Test Api</button>
+          </div>
+          <div class='tabs-x tabs-above tab-bordered tabs-krajee'>
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li class="active"><a href="#urusan" aria-controls="urusan" role="tab" data-toggle="tab">Urusan-Bidang</a>
+              </li>
+              <li><a href="#unit" aria-controls="unit" role="tab-kv" data-toggle="tab">Unit</a></li>
+              <li><a href="#subunit" aria-controls="subunit" role="tab-kv" data-toggle="tab">Sub Unit</a></li>
+              <li><a href="#dataunit" aria-controls="dataunit" role="tab-kv" data-toggle="tab">Rincian Data Unit</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="urusan">
+                <div class="col-md-12">
                   <div class="table-responsive">
-                  <table id="tblUrusan" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th width="5px" style="text-align: center; vertical-align:middle"></th>
-                                <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
-                                <th style="text-align: center; vertical-align:middle">Uraian Urusan Pemerintahan</th>
-                            </tr>
-                        </thead>
-                        <tbody>                                        
+                    <table id="tblUrusan" class="table table-striped table-bordered table-responsive compact"
+                      width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th width="5px" style="text-align: center; vertical-align:middle"></th>
+                          <th width="10%" style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Urusan Pemerintahan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="unit">
+                <br>
+                <div class="col-md-12">
+                  <div class="add">
+                    <button id="btnTambahUnit" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
+                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Unit Perangkat
+                      Daerah</button>
+                  </div>
+                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-responsive compact">
+                        <tbody>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_urusan"
+                                align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_bidang"
+                                align='left'></label></td>
+                          </tr>
                         </tbody>
-                    </table>  
-                  </div>
-                  </div>  
-                </div>  
-                <div role="tabpanel" class="tab-pane fade in" id="unit">
-                  <br>
-                  <div class="col-md-12">
-                      <div class="add">
-                      <button id="btnTambahUnit" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
-                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Unit Perangkat Daerah</button>
-                  </div>
-                      <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-                      <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-responsive compact">
-                          <tbody>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_urusan" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_bidang" align='left'></label></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      </form>                      
-                      <div class="table-responsive">
-                      <table id="tblUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
-                            <thead>
-                              <tr>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
-                                  <th width='15%' style="text-align: center; vertical-align:middle">Kode Unit</th>
-                                  <th style="text-align: center; vertical-align:middle">Uraian Unit</th>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>                                        
-                          </tbody>
                       </table>
                     </div>
-                  </div> 
+                  </form>
+                  <div class="table-responsive">
+                    <table id="tblUnit" class="table table-striped table-bordered table-responsive compact" width="100%"
+                      cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width='15%' style="text-align: center; vertical-align:middle">Kode Unit</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Unit</th>
+                          <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="subunit">
                 <br>
-                  <div class="col-md-12">
-                      <div class="add">
-                      <button id="btnTambahSub" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
-                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Unit Perangkat Daerah</button>
+                <div class="col-md-12">
+                  <div class="add">
+                    <button id="btnTambahSub" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
+                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Unit Perangkat
+                      Daerah</button>
                   </div>
-                      <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-                      <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-responsive compact">
-                          <tbody>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_urusan_sub" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_bidang_sub" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Unit</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_unit" align='left'></label></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      </form>                      
-                      <div class="table-responsive">
-                      <table id="tblSubUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
-                            <thead>
-                              <tr>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
-                                  <th width='15%' style="text-align: center; vertical-align:middle">Kode Unit</th>
-                                  <th style="text-align: center; vertical-align:middle">Uraian Sub Unit</th>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>                                        
-                          </tbody>
+                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-responsive compact">
+                        <tbody>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_urusan_sub" align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_bidang_sub" align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Unit</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_unit"
+                                align='left'></label></td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
-                  </div> 
+                  </form>
+                  <div class="table-responsive">
+                    <table id="tblSubUnit" class="table table-striped table-bordered table-responsive compact"
+                      width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width='15%' style="text-align: center; vertical-align:middle">Kode Unit</th>
+                          <th style="text-align: center; vertical-align:middle">Uraian Sub Unit</th>
+                          <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="dataunit">
                 <br>
-                  <div class="col-md-12">
-                      <div class="add">
-                      <button id="btnTambahDataUnit" type="button" class="add-ProgRenja btn btn-labeled btn-sm btn-success">
-                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Unit Perangkat Daerah</button>
+                <div class="col-md-12">
+                  <div class="add">
+                    <button id="btnTambahDataUnit" type="button"
+                      class="add-ProgRenja btn btn-labeled btn-sm btn-success">
+                      <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tambah Sub Unit Perangkat
+                      Daerah</button>
                   </div>
-                      <form class="form-horizontal" role="form" autocomplete='off' action="" method="" >
-                      <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-responsive compact">
-                          <tbody>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_urusan_rinc" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_bidang_rinc" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Unit</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_unit_rinc" align='left'></label></td>
-                            </tr>
-                            <tr>
-                              <td width="20%" style="text-align: left; vertical-align:top;">Sub Unit</td>
-                              <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd" id="ur_sub_rinc" align='left'></label></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      </form>
-                      <div class="table-responsive">
-                      <table id="tblDataUnit" class="table table-striped table-bordered table-responsive compact" width="100%" cellspacing="0">
-                            <thead>
-                              <tr>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">Tahun</th>
-                                  <th width='30%' style="text-align: center; vertical-align:middle">Nama Pimpinan Unit</th>
-                                  <th style="text-align: center; vertical-align:middle">Alamat Unit</th>
-                                  <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
-                              </tr>
-                          </thead>
-                          <tbody>                                        
-                          </tbody>
+                  <form class="form-horizontal" role="form" autocomplete='off' action="" method="">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-responsive compact">
+                        <tbody>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Urusan</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_urusan_rinc" align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Bidang</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_bidang_rinc" align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Unit</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_unit_rinc" align='left'></label></td>
+                          </tr>
+                          <tr>
+                            <td width="20%" style="text-align: left; vertical-align:top;">Sub Unit</td>
+                            <td style="text-align: left; vertical-align:top;"><label class="backProgRkpd"
+                                id="ur_sub_rinc" align='left'></label></td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
-                  </div> 
+                  </form>
+                  <div class="table-responsive">
+                    <table id="tblDataUnit" class="table table-striped table-bordered table-responsive compact"
+                      width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th width='10%' style="text-align: center; vertical-align:middle">No Urut</th>
+                          <th width='10%' style="text-align: center; vertical-align:middle">Tahun</th>
+                          <th width='30%' style="text-align: center; vertical-align:middle">Nama Pimpinan Unit</th>
+                          <th style="text-align: center; vertical-align:middle">Alamat Unit</th>
+                          <th width='10%' style="text-align: center; vertical-align:middle">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script id="details-bidang" type="text/x-handlebars-template">
-        <table class="table table-striped table-bordered table-responsive compact details-table" id="bidang-@{{kd_urusan}}">
+  <script id="details-bidang" type="text/x-handlebars-template">
+    <table class="table table-striped table-bordered table-responsive compact details-table" id="bidang-@{{kd_urusan}}">
             <thead>
               <tr>
                   <th width="10%" style="text-align: center; vertical-align:middle;">Kd Bidang</th>
@@ -215,174 +246,190 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 </script>
 
 
-<!--Modal Tambah -->
-<div id="ModalUnit" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <form name="frmModalUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+  <!--Modal Tambah -->
+  <div id="ModalUnit" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form name="frmModalUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+            onsubmit="return false;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_bidang" id="id_bidang">
             <input type="hidden" name="id_unit" id="id_unit">
             <div class="form-group">
               <label for="kd_unit" class="col-sm-3" align='left'>Kode Unit</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control number" id="kd_unit" name="kd_unit" required="required" >
+                <input type="text" class="form-control number" id="kd_unit" name="kd_unit" required="required">
               </div>
-            </div>            
+            </div>
             <div class="form-group">
               <label for="nm_unit" class="col-sm-3" align='left'>Nama Unit</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="nm_unit" name="nm_unit" required="required">
               </div>
-            </div> 
-        </form>
-      </div>
+            </div>
+          </form>
+        </div>
         <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">                        
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnUnit btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-2 text-left">
+            </div>
+            <div class="col-sm-10 text-right">
+              <div class="ui-group-buttons">
+                <button type="button" class="btn btn-sm btn-success btnUnit btn-labeled" data-dismiss="modal">
+                  <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                <div class="or"></div>
+                <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+                  aria-hidden="true">
+                  <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!--Modal Hapus -->
-<div id="HapusUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <!--Modal Hapus -->
+  <div id="HapusUnit" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"></h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <input type="hidden" id="id_unit_hapus" name="id_unit_hapus">
           <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                <br>
-                Yakin akan menghapus Unit Perangkat Daerah : <strong><span id="nm_unit_hapus"></span></strong> ini ?
-                <br>
-                <br>
+            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;"
+              aria-hidden="true"></i>
+            <br>
+            Yakin akan menghapus Unit Perangkat Daerah : <strong><span id="nm_unit_hapus"></span></strong> ini ?
+            <br>
+            <br>
           </div>
         </div>
-          <div class="modal-footer">
-            <div class="ui-group-buttons">
-              <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
-              <div class="or"></div>
-              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
-            </div>
+        <div class="modal-footer">
+          <div class="ui-group-buttons">
+            <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelUnit" data-dismiss="modal"><span
+                class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>
+              Hapus</button>
+            <div class="or"></div>
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+              aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>
+              Tutup</button>
           </div>
+        </div>
       </div>
     </div>
   </div>
 
-<!--Modal Tambah -->
-<div id="ModalSubUnit" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <form name="frmModalSubUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+  <!--Modal Tambah -->
+  <div id="ModalSubUnit" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form name="frmModalSubUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+            onsubmit="return false;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_sub_unit" id="id_sub_unit">
             <input type="hidden" name="id_unit_sub" id="id_unit_sub">
             <div class="form-group">
               <label for="kd_sub" class="col-sm-3" align='left'>Kode Sub Unit</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control number" id="kd_sub" name="kd_sub" required="required" >
+                <input type="text" class="form-control number" id="kd_sub" name="kd_sub" required="required">
               </div>
-            </div>            
+            </div>
             <div class="form-group">
               <label for="nm_sub" class="col-sm-3" align='left'>Nama Sub Unit</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="nm_sub" name="nm_sub" required="required">
               </div>
-            </div> 
-        </form>
-      </div>
+            </div>
+          </form>
+        </div>
         <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">                        
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnSubUnit btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-2 text-left">
+            </div>
+            <div class="col-sm-10 text-right">
+              <div class="ui-group-buttons">
+                <button type="button" class="btn btn-sm btn-success btnSubUnit btn-labeled" data-dismiss="modal">
+                  <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                <div class="or"></div>
+                <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+                  aria-hidden="true">
+                  <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!--Modal Hapus -->
-<div id="HapusSubUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <!--Modal Hapus -->
+  <div id="HapusSubUnit" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"></h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <input type="hidden" id="id_sub_unit_hapus" name="id_sub_unit_hapus">
           <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                <br>
-                Yakin akan menghapus Sub Unit Perangkat Daerah : <strong><span id="nm_sub_unit_hapus"></span></strong> ini ?
-                <br>
-                <br>
+            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;"
+              aria-hidden="true"></i>
+            <br>
+            Yakin akan menghapus Sub Unit Perangkat Daerah : <strong><span id="nm_sub_unit_hapus"></span></strong> ini ?
+            <br>
+            <br>
           </div>
         </div>
-          <div class="modal-footer">
-            <div class="ui-group-buttons">
-              <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
-              <div class="or"></div>
-              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
-            </div>
+        <div class="modal-footer">
+          <div class="ui-group-buttons">
+            <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal"><span
+                class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>
+              Hapus</button>
+            <div class="or"></div>
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+              aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>
+              Tutup</button>
           </div>
+        </div>
       </div>
     </div>
   </div>
 
-<!--Modal Tambah -->
-<div id="ModalDataUnit" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-lg"  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <form name="frmModalDataUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post" onsubmit="return false;">
+  <!--Modal Tambah -->
+  <div id="ModalDataUnit" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form name="frmModalDataUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+            onsubmit="return false;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id_sub_unit_rinc" id="id_sub_unit_rinc">
             <input type="hidden" name="id_rincian_unit" id="id_rincian_unit">
             <div class="form-group">
               <label for="tahun" class="col-sm-3" align='left'>Tahun</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control number" id="tahun" name="tahun" required="required" >
+                <input type="text" class="form-control number" id="tahun" name="tahun" required="required">
               </div>
-            </div>            
+            </div>
             <div class="form-group">
               <label for="nama_jabatan_pimpinan_skpd" class="col-sm-3" align='left'>Jabatan Pimpinan OPD</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="nama_jabatan_pimpinan_skpd" name="nama_jabatan_pimpinan_skpd">
+                <input type="text" class="form-control" id="nama_jabatan_pimpinan_skpd"
+                  name="nama_jabatan_pimpinan_skpd">
               </div>
             </div>
             <div class="form-group">
@@ -401,85 +448,92 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label for="alamat_sub_unit" class="col-sm-3" align='left'>Alamat Kantor</label>
               <div class="col-sm-8">
-                <textarea type="name" class="form-control" id="alamat_sub_unit" name="alamat_sub_unit" rows="3"></textarea>
+                <textarea type="name" class="form-control" id="alamat_sub_unit" name="alamat_sub_unit"
+                  rows="3"></textarea>
               </div>
-            </div> 
+            </div>
             <div class="form-group">
               <label for="kota_sub_unit" class="col-sm-3" align='left'>Kota Kedudukan</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="kota_sub_unit" name="kota_sub_unit">
               </div>
-            </div>  
-        </form>
-      </div>
+            </div>
+          </form>
+        </div>
         <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-2 text-left">                        
-                    </div>
-                    <div class="col-sm-10 text-right">
-                      <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-sm btn-success btnDataUnit btn-labeled" data-dismiss="modal">
-                            <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                        <div class="or"></div>
-                        <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
-                            <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-                      </div>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-2 text-left">
+            </div>
+            <div class="col-sm-10 text-right">
+              <div class="ui-group-buttons">
+                <button type="button" class="btn btn-sm btn-success btnDataUnit btn-labeled" data-dismiss="modal">
+                  <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+                <div class="or"></div>
+                <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+                  aria-hidden="true">
+                  <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!--Modal Hapus -->
-<div id="HapusDataUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <!--Modal Hapus -->
+  <div id="HapusDataUnit" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-xs">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"></h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <input type="hidden" id="id_rincian_unit_hapus" name="id_rincian_unit_hapus">
           <div class="alert alert-danger deleteContent">
-              <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border"  style="color:red;" aria-hidden="true"></i>
-                <br>
-                Yakin akan menghapus Rincian Unit untuk Tahun : <strong><span id="tahun_hapus"></span></strong> ini ?
-                <br>
-                <br>
+            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;"
+              aria-hidden="true"></i>
+            <br>
+            Yakin akan menghapus Rincian Unit untuk Tahun : <strong><span id="tahun_hapus"></span></strong> ini ?
+            <br>
+            <br>
           </div>
         </div>
-          <div class="modal-footer">
-            <div class="ui-group-buttons">
-              <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelDataUnit" data-dismiss="modal" ><span class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span> Hapus</button>
-              <div class="or"></div>
-              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span> Tutup</button>
-            </div>
+        <div class="modal-footer">
+          <div class="ui-group-buttons">
+            <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelDataUnit" data-dismiss="modal"><span
+                class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>
+              Hapus</button>
+            <div class="or"></div>
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
+              aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>
+              Tutup</button>
           </div>
+        </div>
       </div>
     </div>
   </div>
 
 
 
-<div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
+  <div id="ModalProgress" class="modal fade modal-static" role="dialog" data-backdrop="static" role="dialog"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-        <div class="text-center">
-          <h3><strong>Sedang proses...</strong></h3>
-          <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:grey;"></i>
-        </div>
+          <div class="text-center">
+            <h3><strong>Sedang proses...</strong></h3>
+            <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:grey;"></i>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-@endsection
+  @endsection
 
-@section('scripts')
-<script  type="text/javascript" language="javascript" class="init">
-
-$(document).ready(function() {
+  @section('scripts')
+  <script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
 
 var template = Handlebars.compile($("#details-bidang").html());
 
@@ -1131,5 +1185,5 @@ $(document).on('click', '.btnTestApi', function() {
 });
 
 });
-</script>
-@endsection
+  </script>
+  @endsection

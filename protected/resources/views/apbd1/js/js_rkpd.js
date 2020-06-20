@@ -98,7 +98,7 @@ $( document ).ready( function () {
         { data: 'urut', sClass: "dt-center" },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         {
-          data: 'uraian', 'searchable': true, 'orderable': false, sClass: "dt-left",
+          data: 'uraian', 'searchable': true, 'orderable': true, sClass: "dt-left",
           render: function ( data, type, row, meta ) {
             return row.uraian_program_rpjmd +
               '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>'
@@ -217,7 +217,6 @@ $( document ).ready( function () {
 
   $( '#tblUrusanRKPD tbody' ).on( 'dblclick', 'tr', function () {
     var data = UrusanTable.row( this ).data();
-
     temp_rkpd_ranwal = data.id_anggaran_pemda;
     temp_urusan_rkpd = data.id_urusan_anggaran;
 
@@ -329,7 +328,7 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.view-pelaksana', function () {
     var data = progrkpd.row( $( this ).parents( 'tr' ) ).data();
-
+    temp_ur_program_rkpd = data.uraian_program_rpjmd;
     temp_rkpd_ranwal = data.id_anggaran_pemda;
     $( '#divAddUrusan' ).show();
 
@@ -733,11 +732,11 @@ $( document ).ready( function () {
       data: {
         '_token': $( 'input[name=_token]' ).val(),
         'no_urut': $( '#no_urut_indikator' ).val(),
-        'id_rkpd_ranwal': $( '#id_rkpd_ranwal_indikator' ).val(),
+        'id_anggaran_pemda': $( '#id_rkpd_ranwal_indikator' ).val(),
         'kd_indikator': $( '#kd_indikator_rkpd' ).val(),
         'uraian_indikator': $( '#ur_indikator_rkpd' ).val(),
         'tolok_ukur_indikator': $( '#ur_tolokukur_rkpd' ).val(),
-        'target_rkpd': $( '#target_indikator_rkpd' ).val(),
+        'target_keuangan': $( '#target_indikator_rkpd' ).val(),
         'id_satuan_output': $( '#id_satuan_output' ).val(),
       },
       success: function ( data ) {
@@ -1163,7 +1162,7 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
-      "ajax": { "url": "./admin/parameter/getRefIndikator" },
+      "ajax": { "url": "../admin/parameter/getRefIndikator" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'nm_indikator' },
@@ -1292,17 +1291,17 @@ $( document ).ready( function () {
     } );
   } );
 
-  $( document ).on( 'click', '#btnReviuPelaksana', function () {
+  $( document ).on( 'click', '#btnReviuPelaksana', function ( e ) {
     var rows_selected = PelaksanaTable.column( 0 ).checkboxes.selected();
-    var counts_selected = rows_selected.count();
     var rows_data = PelaksanaTable.rows( { selected: true } ).data();
-    var counts_data = PelaksanaTable.rows( { selected: true } ).count();
     if ( rows_selected.count() == 0 ) {
       createPesan( "Data belum ada yang dipilih", "danger" );
       return;
     };
+    // console.log( rows_selected );
 
     $.each( rows_selected, function ( index, rowId ) {
+      // alert( index + " - " + rows_data[ index ].status_data + " - " + rowId );
       $.ajaxSetup( {
         headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
       } );
@@ -1334,7 +1333,7 @@ $( document ).ready( function () {
     e.preventDefault();
   } );
 
-  $( document ).on( 'click', '#btnReviuIndikator', function () {
+  $( document ).on( 'click', '#btnReviuIndikator', function ( e ) {
     var rows_selected = indiProg_tbl.column( 0 ).checkboxes.selected();
     var counts_selected = rows_selected.count();
     var rows_data = indiProg_tbl.rows( { selected: true } ).data();

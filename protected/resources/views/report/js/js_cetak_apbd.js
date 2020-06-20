@@ -87,7 +87,8 @@ $( document ).ready( function () {
   } );
 
   $( ".jns_dokumen" ).change( function () {
-    if ( $( ".jns_dokumen" ) == "RAPBD" ) {
+    if ( $( ".jns_dokumen" ).val() === "RAPBD" ) {
+      // alert( $( ".jns_dokumen" ).val() + "-RAPBD" );
       $.ajax( {
         type: "GET",
         url: './getDokRAPBD/' + $( '#tahun_prarka' ).val(),
@@ -106,6 +107,7 @@ $( document ).ready( function () {
         }
       } );
     } else {
+      // alert( $( ".jns_dokumen" ).val() + "-APBD" );
       $.ajax( {
         type: "GET",
         url: './getDokAPBD/' + $( '#tahun_prarka' ).val(),
@@ -808,7 +810,39 @@ $( document ).ready( function () {
       vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
       vars += "&id_program=" + $( '#prog_prarka' ).val();
       window.open( '../PrintMatrikSasProgRenjaFinal' + vars, '_blank' );
-      // window.open('../PrintMatrikSasProgRenjaFinal/'+$('#prog_prarka').val()+'/'+$('#tahun_prarka').val()); 
+    };
+
+    if ( $( '#jns_laporan' ).val() == 51 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&uraian_dok=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      vars += "&ttd=" + check_data;
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      window.open( '../LKRKA221APBD' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 52 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&uraian_dok=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      window.open( '../AnalisaSSH' + vars, '_blank' );
     };
 
   } );

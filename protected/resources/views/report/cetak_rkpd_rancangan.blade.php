@@ -260,6 +260,24 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           </div>
         </div>
         <div class="form-group">
+          <label for="jabatan" class="col-sm-3 control-label" style="color:#fff;">Jabatan </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="jabatan" name="jabatan" style="text-align: left;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nama_pejabat" class="col-sm-3 control-label" style="color:#fff;">Nama </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="nama_pejabat" name="nama_pejabat" style="text-align: left;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nip_pejabat" class="col-sm-3 control-label" style="color:#fff;">NIP </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="nip_pejabat" name="nip_pejabat" style="text-align: left;">
+          </div>
+        </div>
+        <div class="form-group">
           <label class="control-label col-sm-3" for="jns_laporan" style="color:#fff;">Jenis Laporan :</label>
           <div class="col-sm-8">
             <select class="form-control select2 jns_laporan" name="jns_laporan" id="jns_laporan"></select>

@@ -160,13 +160,138 @@ $( document ).ready( function () {
 
 
   $( document ).on( 'click', '.btnProses', function () {
+    if ( document.getElementById( "checkTandatangan" ).checked ) {
+      check_data = 1
+    } else {
+      check_data = 0
+    }
+
     if ( $( '#jns_laporan' ).val() == 1 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
       vars += "&unit=" + $( '#unit_prarka' ).val();
       vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
       vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
       window.open( '../RancanganTC33' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 31 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm1' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 32 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm2' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 33 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm3' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 34 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm4' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 35 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm5' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 36 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm6' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 37 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdForm7' + vars, '_blank' );
     };
 
     if ( $( '#jns_laporan' ).val() == 50 ) {

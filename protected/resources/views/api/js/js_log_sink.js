@@ -98,7 +98,7 @@ $( document ).ready( function () {
     var TblUnitKirim;
     function loadTblUnitKirim ( id_dokumen_keu ) {
         vars = "?id_dokumen=" + id_dokumen_keu;
-        vars += "&jns_dok=" + + $( "#jns_dokumen" ).val();
+        vars += "&jns_dok=" + $( "#jns_dokumen" ).val();
         TblUnitKirim = $( '#tblProses' ).DataTable( {
             processing: true,
             serverSide: true,
@@ -242,14 +242,117 @@ $( document ).ready( function () {
         } );
     } );
 
-    $( document ).on( 'click', '#btnProsesAll', function () {
+    $( document ).on( 'click', '#btnProsesKirimRancangan', function () {
+        var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
+        var id_unit = data.id_unit;
+
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $( '#frmKirimApi' ).modal( 'hide' );
+
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaRancangan',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_unit': id_unit,
+            },
+            success: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '#btnProsesKirimRpjmd', function () {
+        var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
+        var id_unit = data.id_unit;
+
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $( '#frmKirimApi' ).modal( 'hide' );
+
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaRpjmd',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_unit': id_unit,
+            },
+            success: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '#btnProsesKirimRenstra', function () {
+        var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
+        var id_unit = data.id_unit;
+
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $( '#frmKirimApi' ).modal( 'hide' );
+
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaRenstra',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_unit': id_unit,
+            },
+            success: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '#btnProsesAll', function ( e ) {
         var rows_selected = TblUnitKirim.column( 0 ).checkboxes.selected();
         var counts_data = TblUnitKirim.rows( { selected: true } ).count();
         if ( $( "#jns_dokumen" ).val() == 0 ) {
             var url_temp = './postJSONBangdaRanwal';
-        } else {
+        };
+        if ( $( "#jns_dokumen" ).val() == 1 ) {
             var url_temp = './postJSONBangda';
-        }
+        };
+        if ( $( "#jns_dokumen" ).val() == 2 ) {
+            var url_temp = './postJSONBangdaRancangan';
+        };
+        if ( $( "#jns_dokumen" ).val() == 3 ) {
+            var url_temp = './postJSONBangdaRpjmd';
+        };
+        if ( $( "#jns_dokumen" ).val() == 4 ) {
+            var url_temp = './postJSONBangdaRenstra';
+        };
 
         if ( rows_selected.count() == 0 ) {
             createPesan( "Data belum ada yang dipilih", "danger" );

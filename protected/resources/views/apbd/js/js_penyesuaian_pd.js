@@ -2072,7 +2072,6 @@ $( document ).ready( function () {
 
     } );
 
-
     if ( data.status_data == 0 ) {
       $( '#btnKegiatan' ).show();
       if ( data.sumber_data == 0 ) {

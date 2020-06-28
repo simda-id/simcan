@@ -273,6 +273,37 @@ $( document ).ready( function () {
         } );
     } );
 
+    $( document ).on( 'click', '#btnProsesKirimRanhir', function () {
+        var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
+        var id_unit = data.id_unit;
+
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $( '#frmKirimApi' ).modal( 'hide' );
+
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaRanhir',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_unit': id_unit,
+            },
+            success: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
+    } );
+
     $( document ).on( 'click', '#btnProsesKirimRpjmd', function () {
         var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
         var id_unit = data.id_unit;
@@ -352,6 +383,9 @@ $( document ).ready( function () {
         };
         if ( $( "#jns_dokumen" ).val() == 4 ) {
             var url_temp = './postJSONBangdaRenstra';
+        };
+        if ( $( "#jns_dokumen" ).val() == 5 ) {
+            var url_temp = './postJSONBangdaRanhir';
         };
 
         if ( rows_selected.count() == 0 ) {

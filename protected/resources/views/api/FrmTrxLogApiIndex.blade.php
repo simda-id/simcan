@@ -56,6 +56,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <option value="-1">--Pilih Jenis Dokumen--</option>
                   <option value="0">RKPD RANWAL</option>
                   <option value="2">RKPD RANCANGAN</option>
+                  <option value="5">RKPD RANCANGAN AKHIR</option>
                   <option value="1">RKPD FINAL</option>
                   <option value="3">RPJMD</option>
                   <option value="4">RENSTRA</option>

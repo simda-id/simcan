@@ -18,6 +18,7 @@ $( document ).ready( function () {
     } );
 
     $( '#prosesbar' ).hide();
+    $( '#divMapping' ).hide();
     $( '.number' ).number( true, 0, ',', '.' );
     $( '[data-toggle="popover"]' ).popover();
 
@@ -147,29 +148,43 @@ $( document ).ready( function () {
     };
 
     $( "#jns_dokumen" ).change( function () {
-        $.ajax( {
-            type: "GET",
-            url: 'getDokRkpd?jns_dok=' + $( "#jns_dokumen" ).val(),
-            dataType: "json",
-            success: function ( data ) {
-
-                var j = data.length;
-                var post, i;
-
-                $( 'select[name="id_dokumen_rkpd"]' ).empty();
-                $( 'select[name="id_dokumen_rkpd"]' ).append( '<option value="0">---Pilih Dokumen RKPD---</option>' );
-
-                for ( i = 0; i < j; i++ ) {
-                    post = data[ i ];
-                    $( 'select[name="id_dokumen_rkpd"]' ).append( '<option value="' + post.id_dokumen_rkpd + '">' + post.nomor_display + '</option>' );
-                }
+        if ( $( "#jns_dokumen" ).val() == 99 ) {
+            $( '#divMapping' ).show();
+            loadTblLogKirim();
+        } else {
+            $( '#divMapping' ).hide();
+            if ( $( "#jns_dokumen" ).val() == 98 ) {
+                loadTblLogKirim();
             }
-        } );
+        }
+
+        if ( $( "#jns_dokumen" ).val() < 90 ) {
+            $.ajax( {
+                type: "GET",
+                url: 'getDokRkpd?jns_dok=' + $( "#jns_dokumen" ).val(),
+                dataType: "json",
+                success: function ( data ) {
+
+                    var j = data.length;
+                    var post, i;
+
+                    $( 'select[name="id_dokumen_rkpd"]' ).empty();
+                    $( 'select[name="id_dokumen_rkpd"]' ).append( '<option value="0">---Pilih Dokumen RKPD---</option>' );
+
+                    for ( i = 0; i < j; i++ ) {
+                        post = data[ i ];
+                        $( 'select[name="id_dokumen_rkpd"]' ).append( '<option value="' + post.id_dokumen_rkpd + '">' + post.nomor_display + '</option>' );
+                    }
+                }
+            } );
+        }
     } );
 
     $( ".id_dokumen_rkpd" ).change( function () {
-        loadTblLogKirim( $( '#id_dokumen_rkpd' ).val() );
-        loadTblUnitKirim( $( '#id_dokumen_rkpd' ).val() );
+        if ( $( "#jns_dokumen" ).val() < 90 ) {
+            loadTblLogKirim( $( '#id_dokumen_rkpd' ).val() );
+            loadTblUnitKirim( $( '#id_dokumen_rkpd' ).val() );
+        }
     } );
 
 
@@ -189,8 +204,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangda',
@@ -199,14 +212,16 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
             }
         } );
     } );
@@ -220,8 +235,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangdaRanwal',
@@ -230,12 +243,14 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
             }
@@ -251,8 +266,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangdaRancangan',
@@ -261,12 +274,14 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
             }
@@ -282,8 +297,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangdaRanhir',
@@ -292,12 +305,14 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
             }
@@ -313,8 +328,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangdaRpjmd',
@@ -323,12 +336,14 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
             }
@@ -344,8 +359,6 @@ $( document ).ready( function () {
         } );
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.ajax( {
             type: 'POST',
             url: './postJSONBangdaRenstra',
@@ -354,12 +367,14 @@ $( document ).ready( function () {
                 'id_unit': id_unit,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "success" );
                 $( '#prosesbar' ).hide();
             },
             error: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
                 createPesan( data.pesan, "danger" );
                 $( '#prosesbar' ).hide();
             }
@@ -387,15 +402,12 @@ $( document ).ready( function () {
         if ( $( "#jns_dokumen" ).val() == 5 ) {
             var url_temp = './postJSONBangdaRanhir';
         };
-
         if ( rows_selected.count() == 0 ) {
             createPesan( "Data belum ada yang dipilih", "danger" );
             return;
         };
 
         $( '#prosesbar' ).show();
-        $( '#frmKirimApi' ).modal( 'hide' );
-
         $.each( rows_selected, function ( index, rowId ) {
             var id_unit = rowId;
             $.ajaxSetup( {
@@ -409,20 +421,78 @@ $( document ).ready( function () {
                     'id_unit': id_unit,
                 },
                 success: function ( data ) {
-                    $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                    TblUnitKirim.ajax.reload( null, false );
+                    TblLogKirims.ajax.reload( null, false );
                     if ( index == ( counts_data - 1 ) ) {
                         $( '#prosesbar' ).hide();
                         createPesan( data.pesan, "success" );
                     }
                 },
                 error: function ( data ) {
-                    $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );
+                    TblUnitKirim.ajax.reload( null, false );
+                    TblLogKirims.ajax.reload( null, false );
                     $( '#prosesbar' ).hide();
                     createPesan( data.pesan, "danger" );
                 }
             } );
         } );
         e.preventDefault();
+    } );
+
+    $( document ).on( 'click', '#btnKirimMapping', function () {
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaMapping',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'tahun': $( '#tahun_rkpd' ).val(),
+            },
+            success: function ( data ) {
+                TblLogKirims.ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                TblLogKirims.ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
+    } );
+    $( document ).on( 'click', '#btnProsesKirimIndikator', function () {
+        var data = TblUnitKirim.row( $( this ).parents( 'tr' ) ).data();
+        var id_unit = data.id_unit;
+
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+
+        $( '#prosesbar' ).show();
+        $.ajax( {
+            type: 'POST',
+            url: './postJSONBangdaMappingInd',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_unit': id_unit,
+            },
+            success: function ( data ) {
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
+                createPesan( data.pesan, "success" );
+                $( '#prosesbar' ).hide();
+            },
+            error: function ( data ) {
+                TblUnitKirim.ajax.reload( null, false );
+                TblLogKirims.ajax.reload( null, false );
+                createPesan( data.pesan, "danger" );
+                $( '#prosesbar' ).hide();
+            }
+        } );
     } );
 
     $( document ).on( 'click', '#btnDeleteLog', function () {
@@ -440,7 +510,7 @@ $( document ).ready( function () {
                 'id_log': data.id_log,
             },
             success: function ( data ) {
-                $( '#TblLogKirim' ).DataTable().ajax.reload( null, false );;
+                TblLogKirims.ajax.reload( null, false );
                 if ( data.status_pesan == 1 ) {
                     createPesan( data.pesan, "success" );
                 } else {

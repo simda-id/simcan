@@ -127,7 +127,16 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Dokumen RKPD Final', 'url' => '/rkpd/dokumen', 'visible' => $akses->get(408)],                                                    
                                                 ]
                                             ],
-                                           /* [
+                                            [
+                                                'label' => 'RKPD Perubahan',
+                                                'visible' => $akses->getMulti([404,407,408]),
+                                                'items' => [
+                                                    ['label' => 'Dokumen RKPD Perubahan', 'url' => '/rkpdubah/dokumen', 'visible' => $akses->getMulti([408,407])],
+                                                    ['label' => 'RKPD Perubahan', 'url' => '/rkpdubah', 'visible' => $akses->get(408)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '/rkpdubah/sesuai', 'visible' => $akses->get(404)],
+                                                ]
+                                            ],
+                                            /* [
                                                 'label' => 'Prioritas Pembangunan',
                                                 'visible' => $akses->get(408) || $akses->get(502),
                                                 'items' => [
@@ -180,7 +189,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                     [ 'label' => 'Forum Perangkat Daerah', 
                                         'visible' => $akses->getMulti([606,607,610]),
-                                       'items' => [
+                                        'items' => [
                                             ['label' => 'Load Rancangan Renja', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
                                             ['label' => 'Dokumen Forum', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(610)],
@@ -222,6 +231,7 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdranhir', 'visible' => $akses->get(442)],
                                                     ['label' => 'Musrenbang RKPD', 'url' => '/cetak/rkpdmusren', 'visible' => $akses->get(642)],
                                                     ['label' => 'RKPD', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(443)],
+                                                    ['label' => 'RKPD-90', 'url' => '/cetak90/rkpd', 'visible' => $akses->get(443)]
                                                 ]
                                             ],
                                             [   
@@ -302,7 +312,16 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Dokumen RKPD Final', 'url' => '/rkpd/dokumen', 'visible' => $akses->get(408)],                                                    
                                                 ]
                                             ],
-                                           /* [
+                                            [
+                                                'label' => 'RKPD Perubahan',
+                                                'visible' => $akses->getMulti([404,407,408]),
+                                                'items' => [
+                                                    ['label' => 'Dokumen RKPD Perubahan', 'url' => '/rkpdubah/dokumen', 'visible' => $akses->getMulti([408,407])],
+                                                    ['label' => 'RKPD Perubahan', 'url' => '/rkpdubah', 'visible' => $akses->get(408)],
+                                                    ['label' => 'Penyesuaian PD', 'url' => '/rkpdubah/sesuai', 'visible' => $akses->get(404)],
+                                                ]
+                                            ],
+                                            /* [
                                                 'label' => 'Prioritas Pembangunan',
                                                 'visible' => $akses->get(408) || $akses->get(502),
                                                 'items' => [
@@ -355,7 +374,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                     [ 'label' => 'Forum Perangkat Daerah', 
                                         'visible' => $akses->getMulti([606,607,610]),
-                                       'items' => [
+                                        'items' => [
                                             ['label' => 'Load Rancangan Renja', 'url' => '/forumskpd/loadData', 'visible' => $akses->get(606)],
                                             ['label' => 'Forum Perangkat Daerah', 'url' => '/forumskpd', 'visible' => $akses->get(607)],
                                             ['label' => 'Dokumen Forum', 'url' => '/forumskpd/dokumen', 'visible' => $akses->get(610)],

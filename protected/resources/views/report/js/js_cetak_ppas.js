@@ -148,7 +148,7 @@ $( document ).ready( function () {
   $( ".unit_prarka" ).change( function () {
     $.ajax( {
       type: "GET",
-      url: 'getProgramPPAS/' + $( '#unit_prarka' ).val() + '/' + $( '#tahun_prarka' ).val(),
+      url: 'getProgramPPAS?id_unit=' + $( '#unit_prarka' ).val() + '&tahun=' + $( '#tahun_prarka' ).val() + '&id_dokumen=' + $( '#no_dokumen' ).val(),
       dataType: "json",
       success: function ( data ) {
         var j = data.length;
@@ -217,45 +217,66 @@ $( document ).ready( function () {
     if ( $( '#jns_laporan' ).val() == 1 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
       vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASFormat1' + vars, '_blank' );
     };
 
     if ( $( '#jns_laporan' ).val() == 11 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
       vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASFormat2' + vars, '_blank' );
     };
 
     if ( $( '#jns_laporan' ).val() == 2 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
-
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASFormatUrusan' + vars, '_blank' );
     };
     if ( $( '#jns_laporan' ).val() == 3 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
-
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASBTL' + vars, '_blank' );
     };
     if ( $( '#jns_laporan' ).val() == 4 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
-
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASPembiayaan' + vars, '_blank' );
     };
     if ( $( '#jns_laporan' ).val() == 5 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
-
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASDapat' + vars, '_blank' );
     };
     if ( $( '#jns_laporan' ).val() == 6 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
-
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
       window.open( '../PPASSumberDana' + vars, '_blank' );
     };
     if ( $( '#jns_laporan' ).val() == 7 ) {

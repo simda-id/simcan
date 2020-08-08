@@ -175,30 +175,32 @@ use hoaaah\LaravelMenu\Menu;
           <div class="col-sm-2">
             <select class="form-control tahun_prarka select2" name="tahun_prarka" id="tahun_prarka"></select>
           </div>
-          <label class="control-label col-sm-3" for="id_perubahan" style="color:#fff; text-align: right;">Pergeseran ke
-            :</label>
-          <div class="col-sm-3">
-            <select class="form-control id_perubahan select2" name="id_perubahan" id="id_perubahan">
-              <option value="-1">--Pergeseran ke ????????--</option>
-              <option value="1">Pergeseran ke 1</option>
-              <option value="2">Pergeseran ke 2</option>
-              <option value="3">Pergeseran ke 3</option>
-              <option value="4">Pergeseran ke 4</option>
-              <option value="5">Pergeseran ke 5</option>
-              <option value="6">Pergeseran ke 6</option>
-              <option value="7">Pergeseran ke 7</option>
-              <option value="8">Pergeseran ke 8</option>
-              <option value="9">Pergeseran ke 9</option>
-            </select>
-          </div>
         </div>
-        <div class="form-group hidden">
+        <div class="form-group">
           <label class="control-label col-sm-3" for="jns_dokumen" style="color:#fff;">Jenis Dokumen :</label>
           <div class="col-sm-3">
             <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
               <option value="-1">--Pilih Jenis Dokumen--</option>
-              <option value="RAPBD">RANCANGAN APBD</option>
-              <option value="APBD">APBD</option>
+              <option value="1">Pergeseran APBD</option>
+              <option value="2">Rancangan APBD-P</option>
+              <option value="3">APBD Perubahan </option>
+              <option value="4">Pergeseran APBD-P </option>
+            </select>
+          </div>
+          <label class="control-label col-sm-2" for="id_perubahan" style="color:#fff; text-align: right;">Pergeseran ke
+            :</label>
+          <div class="col-sm-2">
+            <select class="form-control id_perubahan select2" name="id_perubahan" id="id_perubahan">
+              <option value="-1">-Ke ?-</option>
+              <option value="1">Ke 1</option>
+              <option value="2">Ke 2</option>
+              <option value="3">Ke 3</option>
+              <option value="4">Ke 4</option>
+              <option value="5">Ke 5</option>
+              <option value="6">Ke 6</option>
+              <option value="7">Ke 7</option>
+              <option value="8">Ke 8</option>
+              <option value="9">Ke 9</option>
             </select>
           </div>
         </div>

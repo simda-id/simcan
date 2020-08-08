@@ -185,6 +185,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <option value="trx_musrenkab">MUSRENBANG RKPD</option>
               <option value="trx_rkpd_ranhir">RANCANGAN AKHIR RKPD</option>
               <option value="trx_rkpd_final">RKPD FINAL</option>
+              <option value="70">RKPD PERUBAHAN</option>
             </select>
           </div>
         </div>
@@ -281,6 +282,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <label class="control-label col-sm-3" for="jns_laporan" style="color:#fff;">Jenis Laporan :</label>
           <div class="col-sm-8">
             <select class="form-control select2 jns_laporan" name="jns_laporan" id="jns_laporan"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="status_data" class="col-sm-3 control-label" align='left' style="color:#fff;">Status Data
+            :</label>
+          <div class="col-sm-5">
+            <select class="form-control select2 status_data" name="status_data" id="status_data">
+              <option value="-1">--Semua Status Data--</option>
+              <option value="0">Belum Diposting</option>
+              <option value="1">Sudah Diposting</option>
+            </select>
           </div>
         </div>
         <div class="form-group">

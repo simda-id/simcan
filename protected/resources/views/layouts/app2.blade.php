@@ -141,42 +141,58 @@ use hoaaah\LaravelMenu\Menu;
                                                         'visible' => $akses->get(703),
                                                         'url' => '/ppas/progopd',
                                                     ],
-                                                  /*  [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(704),
-                                                        'url' => '/ppas/sesuai',
-                                                    ] */
                                                 ]
                                             ]
                                         ]
                                     ],
                                     [   'label' => 'PPAS Perubahan', 
-                                        'visible' => $akses->getMulti([720,721,722]),
+                                        'visible' => $akses->getMulti([701,702,703]),
                                         'items' => [
                                             [
                                                 'label' => 'Dokumen PPAS Perubahan',
-                                                'visible' => $akses->get(720),
+                                                'visible' => $akses->get(701),
                                                 'url' => '/ppasubah',
                                             ],
                                             [
                                                 'label' => 'Penyusunan PPAS Perubahan',
-                                                'visible' => $akses->getMulti([721,722]),
+                                                'visible' => $akses->getMulti([702,703]),
                                                 'items' => [
                                                     [
                                                         'label' => 'Program RKPD',
-                                                        'visible' => $akses->get(721),
+                                                        'visible' => $akses->get(702),
                                                         'url' => '/ppasubah/progpemda',
                                                     ],
                                                     [
                                                         'label' => 'Program RENJA',
-                                                        'visible' => $akses->get(722),
-                                                        'url' => '/ppasubah/progpemda',
+                                                        'visible' => $akses->get(703),
+                                                        'url' => '/ppasubah/progopd',
                                                     ],
-                                                /*    [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(704),
-                                                        'url' => '#',
-                                                    ] */
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    [ 'label' => 'PPAS-90',
+                                        'visible' => $akses->getMulti([701,702,703]),
+                                        'items' => [
+                                                [
+                                                'label' => 'Dokumen PPAS',
+                                                'visible' => $akses->get(701),
+                                                'url' => '/90ppas',
+                                                ],
+                                            [
+                                            'label' => 'Penyusunan PPAS',
+                                            'visible' => $akses->getMulti([702,703]),
+                                            'items' => [
+                                                    [
+                                                    'label' => 'Program RKPD',
+                                                    'visible' => $akses->get(702),
+                                                    'url' => '/90ppas/progpemda',
+                                                    ],
+                                                    [
+                                                    'label' => 'Program RENJA',
+                                                    'visible' => $akses->get(703),
+                                                    'url' => '/90ppas/progopd',
+                                                    ],
                                                 ]
                                             ]
                                         ]
@@ -198,11 +214,6 @@ use hoaaah\LaravelMenu\Menu;
                                                         'visible' => $akses->get(712),
                                                         'url' => '/Apbd/dokopd',
                                                     ],
-                                               /*     [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(713),
-                                                        'url' => '/Apbd/sesuai',
-                                                    ] */
                                                 ]
                                             ],
                                             [
@@ -219,11 +230,6 @@ use hoaaah\LaravelMenu\Menu;
                                                         'visible' => $akses->get(712),
                                                         'url' => '/Apbd/progopd',
                                                     ],
-                                               /*     [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(713),
-                                                        'url' => '/Apbd/sesuai',
-                                                    ] */
                                                 ]
                                             ]
                                         ]
@@ -233,7 +239,7 @@ use hoaaah\LaravelMenu\Menu;
                                         'items' => [
                                             [
                                                 'label' => 'Dok APBD Pergeseran',
-                                                'visible' => $akses->getMulti([730,733]),
+                                                'visible' => $akses->getMulti([730,732]),
                                                 'items' => [
                                                     [
                                                         'label' => 'Dokumen APBD',
@@ -242,10 +248,10 @@ use hoaaah\LaravelMenu\Menu;
                                                     ],
                                                     [
                                                         'label' => 'Dokumen RKA SKPD',
-                                                        'visible' => $akses->get(733),
+                                                        'visible' => $akses->get(732),
                                                         'url' => '/GeserApbd/dokopd',
                                                     ],
-                                               /*     [
+                                                /*     [
                                                         'label' => 'Pagu Anggaran',
                                                         'visible' => $akses->get(713),
                                                         'url' => '/Apbd/sesuai',
@@ -266,42 +272,79 @@ use hoaaah\LaravelMenu\Menu;
                                                         'visible' => $akses->get(732),
                                                         'url' => '/GeserApbd/progopd',
                                                     ],
-                                                /*    [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(733),
-                                                        'url' => '/GeserApbd/sesuai',
-                                                    ] */
                                                 ]
                                             ]
                                         ]
                                     ],
                                     [   'label' => 'APBD Perubahan', 
-                                        'visible' => $akses->getMulti([750,751,752]),
+                                        'visible' => $akses->getMulti([730,731,732]),
                                         'items' => [
                                             [
-                                                'label' => 'Dokumen APBD Perubahan',
-                                                'visible' => $akses->get(750),
-                                                'url' => '#',
+                                                'label' => 'Dokumen APBD-P',
+                                                'visible' => $akses->getMulti([730,732]),
+                                                'items' => [
+                                                    [
+                                                        'label' => 'Dokumen APBD-P',
+                                                        'visible' => $akses->get(730),
+                                                        'url' => '/UbahApbd',
+                                                    ],
+                                                    [
+                                                    'label' => 'Dokumen RKA SKPD',
+                                                    'visible' => $akses->get(732),
+                                                    'url' => '/UbahApbd/dokopd',
+                                                    ],
+                                                ]
                                             ],
                                             [
-                                                'label' => 'Penyusunan APBD Perubahan',
-                                                'visible' => $akses->getMulti([751,752]),
+                                                'label' => 'Penyusunan APBD-P',
+                                                'visible' => $akses->getMulti([731,732]),
                                                 'items' => [
                                                     [
                                                         'label' => 'Program RKPD',
-                                                        'visible' => $akses->get(751),
-                                                        'url' => '#',
+                                                        'visible' => $akses->get(731),
+                                                        'url' => '/UbahApbd/progpemda',
                                                     ],
                                                     [
                                                         'label' => 'Program RENJA',
-                                                        'visible' => $akses->get(752),
-                                                        'url' => '#',
+                                                        'visible' => $akses->get(732),
+                                                        'url' => '/UbahApbd/progopd',
                                                     ],
-                                                  /*  [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(753),
-                                                        'url' => '#',
-                                                    ] */
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    [ 'label' => 'APBD-90',
+                                    'visible' => $akses->getMulti([710,711,712]),
+                                    'items' => [
+                                            [
+                                                'label' => 'Dokumen APBD',
+                                                'visible' => $akses->getMulti([710,712]),
+                                                'items' => [
+                                                    [
+                                                    'label' => 'Dokumen APBD',
+                                                    'visible' => $akses->get(710),
+                                                    'url' => '/90Apbd',
+                                                    ],
+                                                    [
+                                                    'label' => 'Dokumen RKA SKPD',
+                                                    'visible' => $akses->get(712),
+                                                    'url' => '/90Apbd/dokopd',
+                                                    ],
+                                                ]
+                                            ],
+                                            [ 'label' => 'Penyusunan APBD',
+                                            'visible' => $akses->getMulti([711,712]),
+                                            'items' => [
+                                                    [
+                                                    'label' => 'Program RKPD',
+                                                    'visible' => $akses->get(711),
+                                                    'url' => '/90Apbd/progpemda',
+                                                    ],
+                                                    [
+                                                    'label' => 'Program RENJA',
+                                                    'visible' => $akses->get(712),
+                                                    'url' => '/90Apbd/progopd',
+                                                    ],
                                                 ]
                                             ]
                                         ]
@@ -337,9 +380,6 @@ use hoaaah\LaravelMenu\Menu;
                                             ]
                                         ]
                                     ],*/
-                                //     [   'label' => 'Sinkronisasi Parameter Simda Keuangan', 
-                                //         'url' => '/ppas', 
-                                //         'visible' => $akses->get(702)],
                                     [
                                         'label' => 'Laporan PPAS & APBD',
                                         'visible' => $akses->getMulti([740,741,742,743,744]),
@@ -349,7 +389,8 @@ use hoaaah\LaravelMenu\Menu;
                                                 'visible' => $akses->getMulti([740,741]),
                                                 'items' => [
                                                     ['label' => 'PPAS', 'url' => '/cetak/ppas', 'visible' => $akses->get(740)],
-                                                    ['label' => 'PPAS Perubahan', 'url' => '#', 'visible' => $akses->get(741)],
+                                                    ['label' => 'PPAS Perubahan', 'url' => '/cetak/ppasubah', 'visible' => $akses->get(741)],
+                                                    ['label' => 'PPAS-90', 'url' => '/cetak/90ppas', 'visible' => $akses->get(740)],
                                                 ]
                                             ],
                                             [   
@@ -359,7 +400,8 @@ use hoaaah\LaravelMenu\Menu;
                                                    // ['label' => 'RAPBD', 'url' => '/cetak/rapbd', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD', 'url' => '/cetak/apbd', 'visible' => $akses->get(742)],
                                                     ['label' => 'APBD Pergeseran', 'url' => '/cetak/geser', 'visible' => $akses->get(743)],
-                                                    ['label' => 'APBD Perubahan', 'url' => '#', 'visible' => $akses->get(744)],
+                                                    ['label' => 'APBD-90', 'url' => '/cetak/90apbd', 'visible' => $akses->get(742)],
+                                                    // ['label' => 'APBD Perubahan', 'url' => '#', 'visible' => $akses->get(744)],
                                                 ]
                                             ],
                                         ]

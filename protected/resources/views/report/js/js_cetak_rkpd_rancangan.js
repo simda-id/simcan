@@ -27,20 +27,20 @@ $( document ).ready( function () {
     }
   } );
 
-  $.ajax( {
-    type: "GET",
-    url: './jenis_rkpd_rancangan',
-    dataType: "json",
-    success: function ( data ) {
-      var j = data.length;
-      var post, i;
+  // $.ajax( {
+  //   type: "GET",
+  //   url: './jenis_rkpd_rancangan',
+  //   dataType: "json",
+  //   success: function ( data ) {
+  //     var j = data.length;
+  //     var post, i;
 
-      for ( i = 0; i < j; i++ ) {
-        post = data[ i ];
-        $( 'select[name="jns_laporan"]' ).append( '<option value="' + post.id + '">' + post.uraian_laporan + '</option>' );
-      }
-    }
-  } );
+  //     for ( i = 0; i < j; i++ ) {
+  //       post = data[ i ];
+  //       $( 'select[name="jns_laporan"]' ).append( '<option value="' + post.id + '">' + post.uraian_laporan + '</option>' );
+  //     }
+  //   }
+  // } );
 
   $.ajax( {
     type: "GET",
@@ -58,6 +58,27 @@ $( document ).ready( function () {
         $( 'select[name="tahun_prarka"]' ).append( '<option value="' + post.tahun + '">' + post.tahun + '</option>' );
       }
     }
+  } );
+
+  $( '#jns_dokumen' ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: './jenis_rkpd_rancangan?id_table=' + $( '#jns_dokumen' ).val(),
+      dataType: "json",
+      success: function ( data ) {
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="jns_laporan"]' ).empty();
+        $( 'select[name="jns_laporan"]' ).append( '<option value="0">---Pilih Jenis Laporan RKPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="jns_laporan"]' ).append( '<option value="' + post.id + '">' + post.uraian_laporan + '</option>' );
+        }
+      }
+    } );
+
   } );
 
   $( ".urusan_prarka" ).change( function () {
@@ -324,6 +345,22 @@ $( document ).ready( function () {
       window.open( '../RkpdRincianSD' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 53 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdStruktur13' + vars, '_blank' );
+    };
+
     if ( $( '#jns_laporan' ).val() == 60 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();
@@ -360,12 +397,76 @@ $( document ).ready( function () {
       window.open( '../RkpdRekapPK' + vars, '_blank' );
     };
 
-    //     if($('#jns_laporan').val()==9){
-    //        window.open('../PrintKompilasiKegiatanRanwalRenja/'+ $('#unit_prarka').val()+'/'+$('#tahun_prarka').val()); 
-    //     };
-    //     if($('#jns_laporan').val()==11){
-    //        window.open('../CekRanwalRenja/'+$('#tahun_prarka').val()); 
-    //     };    
+    if ( $( '#jns_laporan' ).val() == 70 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&status_data=" + $( '#status_data' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdUbahTC33' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 71 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      window.open( '../RkpdUbah221' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 72 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&status_data=" + $( '#status_data' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdUbahStrukturApbd' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 76 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&unit=" + $( '#unit_prarka' ).val();
+      vars += "&tabel=" + $( '#jns_dokumen' ).val();
+      vars += "&jabatan=" + $( '#jabatan' ).val();
+      vars += "&nama_pejabat=" + $( '#nama_pejabat' ).val();
+      vars += "&nip_pejabat=" + $( '#nip_pejabat' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&status_data=" + $( '#status_data' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      window.open( '../RkpdUbahRekapRekening' + vars, '_blank' );
+    };
+
   } );
 
 

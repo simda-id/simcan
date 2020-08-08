@@ -44,14 +44,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
           <form class="form-horizontal" role="form" autocomplete='off' action="" onsubmit="return false;">
             <div class="form-group">
               <label for="tahun_rkpd" class="col-sm-2 control-label" align='left' style="">Tahun</label>
-              <div class="col-sm-2">
+              <div class="col-sm-1">
                 <input class="form-control text-center" type="text" id="tahun_rkpd" name="tahun_rkpd"
                   value="{{Session::get('tahun')}}" disabled>
               </div>
               <label class="control-label col-sm-2" for="jns_dokumen" style="text-align: right;">Jenis
                 Dokumen
                 :</label>
-              <div class="col-sm-2">
+              <div class="col-sm-3">
                 <select class="form-control jns_dokumen select2" name="jns_dokumen" id="jns_dokumen">
                   <option value="-1">--Pilih Jenis Dokumen--</option>
                   <option value="0">RKPD RANWAL</option>
@@ -60,6 +60,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <option value="1">RKPD FINAL</option>
                   <option value="3">RPJMD</option>
                   <option value="4">RENSTRA</option>
+                  <option value="99">MAPPING KEGIATAN</option>
+                  <option value="98">MAPPING INDIKATOR</option>
                 </select>
               </div>
             </div>
@@ -73,8 +75,18 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label class="control-label col-sm-2" for="title"></label>
               <div class="col-sm-6" style="text-align: right;">
-                <a class="add-satuan btn-labeled btn btn-sm btn-success"><span class="btn-label"><i
-                      class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Data ke SIPD</a>
+                <div class="row">
+                  <div class="col-sm-3 text-left">
+                    <button id="btnKirimSIPD" type="button" class="add-satuan btn btn-labeled btn-success"><span
+                        class="btn-label"><i class="fa fa-cloud-upload fa-lg fa-fw"></i></span> Kirim Data ke
+                      SIPD</button>
+                  </div>
+                  <div class="col-sm-9 text-right" id="divMapping">
+                    <button id="btnKirimMapping" type="button" class="btn btn-labeled btn-primary"><span
+                        class="btn-label"><i class="fa fa-paper-plane-o fa-fw fa-lg"></i></span> Kirim Mapping
+                      Kegiatan</button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -109,7 +121,6 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <h3 class="modal-title">Daftar Pemda / Unit OPD yang siap dikirim </h3>
       </div>
       <div class="modal-body">
-
         <div class="form-group">
           <div class="col-sm-12">
             <table id='tblProses' class="table display compact table-striped table-bordered" width="100%">

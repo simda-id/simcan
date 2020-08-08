@@ -2064,8 +2064,6 @@ $( document ).ready( function () {
     } else {
       $( ':radio[name=satuan_utama]:not(:checked)' ).attr( 'disabled', false );
     }
-
-
   } );
 
   function getSumberASB () {

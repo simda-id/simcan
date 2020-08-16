@@ -848,9 +848,11 @@ $( document ).ready( function () {
     $( '#ModalTarifPerkada' ).modal( 'show' );
   } );
 
+  var sumber_add;
   $( document ).on( 'click', '.btntambahsup', function () {
     var data = detailzona.row( $( this ).parents( 'tr' ) ).data();
     status_dokumen_temp = 1;
+    sumber_add = 1;
     $( '.btnTarif' ).addClass( 'btn-success' );
     $( '.btnTarif' ).removeClass( 'edittarif' );
     $( '.btnTarif' ).addClass( 'addtarif' );
@@ -869,9 +871,7 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '.add-tarif', function () {
-    // $('#nmbtnTarif').text(" Simpan");
-    // $('#nmbtnTarif').addClass('glyphicon-plus');
-    // $('#nmbtnTarif').removeClass('glyphicon-check');
+    sumber_add = 0;
     $( '.btnTarif' ).addClass( 'btn-success' );
     $( '.btnTarif' ).removeClass( 'edittarif' );
     $( '.btnTarif' ).addClass( 'addtarif' );
@@ -906,10 +906,11 @@ $( document ).ready( function () {
       },
 
       success: function ( data ) {
-        $( '.nav-tabs a[href="#detailtarif"]' ).tab( 'show' );
-        $( '.error' ).addClass( 'hidden' );
-        $( '#tblDetailTarif' ).DataTable().ajax.reload( null, false );
-        $( '#tblDetailTarif' ).DataTable().page( 'last' ).draw( 'page' );
+        if ( sumber_add == 0 ) {
+          $( '.error' ).addClass( 'hidden' );
+          $( '#tblDetailTarif' ).DataTable().ajax.reload( null, false );
+          $( '#tblDetailTarif' ).DataTable().page( 'last' ).draw( 'page' );
+        }
         if ( data.status_pesan == 1 ) {
           $( '#pesan' ).html( '<div class="alert alert-success col-md-12"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.pesan + '</div>' );
         } else {
@@ -1113,10 +1114,6 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '.btnUpdateSSH', function () {
     var data = perkada.row( $( this ).parents( 'tr' ) ).data();
-    // $('.btnTarif').addClass('btn-success');
-    // $('.btnTarif').removeClass('edittarif');
-    // $('.btnTarif').addClass('addtarif');
-    // $('.modal-title').text('Tambah Data Tarif Item SSH a');
     $.ajax( {
       type: "GET",
       url: './getDokumenTransaksi',

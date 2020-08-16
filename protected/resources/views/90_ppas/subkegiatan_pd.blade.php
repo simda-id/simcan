@@ -72,6 +72,45 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="keterangan_status_subkeg" class="col-sm-3 control-label" align='left'>Waktu Pelaksanaan
+              :</label>
+            <div class="col-sm-3">
+              <select class="form-control select2 waktu_mulai" name="waktu_mulai" id="waktu_mulai">
+                <option value="-1">--Pilih Bulan Mulai--</option>
+                <option value="1">Januari</option>
+                <option value="2">Februari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">Agustus</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+              </select>
+            </div>
+            <label for="" class="col-sm-1 control-label" align='center'>s.d</label>
+            <div class="col-sm-3">
+              <select class="form-control select2 waktu_selesai" name="waktu_selesai" id="waktu_selesai">
+                <option value="-1">--Pilih Bulan Selesai--</option>
+                <option value="1">Januari</option>
+                <option value="2">Februari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">Agustus</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-11">
               <table class="table table-striped table-bordered table-responsive">
                 <thead>

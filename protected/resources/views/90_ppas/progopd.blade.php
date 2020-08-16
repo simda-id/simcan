@@ -584,6 +584,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
 @include('90_ppas.cariLokasiTeknisModal')
 @include('90_ppas.cariItemSSH')
 @include('90_ppas.cariRekening')
+@include('90_ppas.aktivitasMove')
 @include('90_ppas.ModalCopyBelanja')
 @include('90_ppas.loadBelanjaASB')
 

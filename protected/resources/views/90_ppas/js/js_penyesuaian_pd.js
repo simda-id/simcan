@@ -1,6 +1,5 @@
 $( document ).ready( function () {
 
-
   var template = Handlebars.compile( $( "#details-template" ).html() );
   var detInProg = Handlebars.compile( $( "#details-inProg" ).html() );
   var detInKeg = Handlebars.compile( $( "#details-inKeg" ).html() );
@@ -52,7 +51,7 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
 
     $( '.nav-tabs a[href="#programrkpd"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backProgRkpd', function () {
     back2Rkpd();
@@ -68,7 +67,7 @@ $( document ).ready( function () {
     $( '#divAddSSH' ).hide();
     $( '#divImportASB' ).hide();
     $( '.nav-tabs a[href="#program"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backRenja', function () {
     back2renja();
@@ -84,7 +83,7 @@ $( document ).ready( function () {
     $( '#divAddSSH' ).hide();
     $( '#divImportASB' ).hide();
     $( '.nav-tabs a[href="#kegiatan"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backKegiatan', function () {
     back2kegiatan();
@@ -102,7 +101,7 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
     // }
     $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backSubKegiatan', function () {
     back2subkegiatan();
@@ -121,7 +120,7 @@ $( document ).ready( function () {
     // }
     $( '.nav-tabs a[href="#pelaksana"]' ).tab( 'show' );
     // loadTblPelaksana(id_renja_temp);
-  }
+  };
 
   $( document ).on( 'click', '.backPelaksana', function () {
     back2pelaksana();
@@ -140,7 +139,8 @@ $( document ).ready( function () {
     // }
     $( '.nav-tabs a[href="#aktivitas"]' ).tab( 'show' );
     // loadTblAktivitas(id_pelaksana_temp);
-  }
+  };
+
   $( document ).on( 'click', '.backAktivitas', function () {
     back2aktivitas();
   } );
@@ -155,7 +155,7 @@ $( document ).ready( function () {
 
     $( '.nav-tabs a[href="#lokasi"]' ).tab( 'show' );
     // loadTblLokasi(id_aktivitas_temp);
-  }
+  };
 
   $( document ).on( 'click', '.backLokasi', function () {
     back2lokasi();
@@ -231,7 +231,7 @@ $( document ).ready( function () {
       var post, i;
 
       $( 'select[name="zona_ssh"]' ).empty();
-      $( 'select[name="zona_ssh"]' ).append( '<option value="0">---Pilih Sumber Dana---</option>' );
+      $( 'select[name="zona_ssh"]' ).append( '<option value="0">---Pilih Zona Wilayah---</option>' );
 
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
@@ -310,7 +310,7 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'BfrtIp',
       autoWidth: false,
-      "ajax": { "url": "../admin/parameter/getRekeningSsh/" + id + "/" + tarif },
+      "ajax": { "url": "../parameter90/getRekeningSsh/" + id + "/" + tarif },
       "columns": [
         { data: 'no_urut' },
         { data: 'kd_rekening' },
@@ -415,8 +415,7 @@ $( document ).ready( function () {
     $( '#cariKegiatanRenstra' ).modal( 'hide' );
   } );
 
-
-  var itemSSH
+  var itemSSH;
   $( document ).on( 'click', '#btnparam_cari', function () {
     param = $( '#param_cari' ).val();
     itemSSH = $( '#tblItemSSH' ).DataTable( {
@@ -463,14 +462,10 @@ $( document ).ready( function () {
   } );
 
   $( '#tblRekening tbody' ).on( 'dblclick', 'tr', function () {
-
     var data = rekening.row( this ).data();
-
     document.getElementById( "ur_rekening" ).value = data.kd_rekening + '--' + data.nm_rekening;
     document.getElementById( "id_rekening" ).value = data.id_rekening;
-
     $( '#cariRekening' ).modal( 'hide' );
-
   } );
 
   $( '#tblItemSSH tbody' ).on( 'dblclick', 'tr', function () {
@@ -492,10 +487,8 @@ $( document ).ready( function () {
 
   var zona_tmp;
   $( document ).on( 'click', '.btnCariSSH', function () {
-
     zona_temp = $( '#zona_ssh' ).val();
     $( '#cariItemSSH' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnCariRekening', function () {
@@ -518,23 +511,16 @@ $( document ).ready( function () {
 
   } );
 
-  var cariLokasiDesa
-  var cariLokasiTeknis
-  var cariLokasiLuar
-
+  var cariLokasiDesa, cariLokasiTeknis, cariLokasiLuar;
   $.ajax( {
     type: "GET",
     url: '../admin/parameter/getKecamatan',
     dataType: "json",
-
     success: function ( data ) {
-
       var j = data.length;
       var post, i;
-
       $( 'select[name="kecamatan"]' ).empty();
       $( 'select[name="kecamatan"]' ).append( '<option value="0">---Pilih Kecamatan---</option>' );
-
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
         $( 'select[name="kecamatan"]' ).append( '<option value="' + post.id_kecamatan + '">' + post.nama_kecamatan + '</option>' );
@@ -543,7 +529,6 @@ $( document ).ready( function () {
   } );
 
   $( "#kecamatan" ).change( function () {
-
     cariLokasiDesa = $( '#tblLokasiWilayah' ).DataTable( {
       processing: true,
       serverSide: true,
@@ -1136,7 +1121,6 @@ $( document ).ready( function () {
 
 
     $( '#' + tableId + '  tbody' ).on( 'click', 'tr', function () {
-
       var data = tblChildBidang.row( this ).data();
       tahun_temp = data.tahun_anggaran;
       unit_temp = data.id_unit;
@@ -1144,7 +1128,6 @@ $( document ).ready( function () {
       bidang_temp = data.id_bidang;
       ProgRkpd_temp = data.id_anggaran_pemda;
       Akses_temp = data.hak_akses;
-      dokumen_temp = data.id_dokumen_keu;
       jns_dokumen_temp = data.jns_dokumen_keu;
       kd_dokumen_temp = data.kd_dokumen_keu;
       ubah_dokumen_temp = data.id_perubahan;
@@ -1188,7 +1171,6 @@ $( document ).ready( function () {
     bidang_temp = data.id_bidang;
     ProgRkpd_temp = data.id_anggaran_pemda;
     Akses_temp = data.hak_akses;
-    dokumen_temp = data.id_dokumen_keu;
     jns_dokumen_temp = data.jns_dokumen_keu;
     kd_dokumen_temp = data.kd_dokumen_keu;
     ubah_dokumen_temp = data.id_perubahan;
@@ -2164,8 +2146,6 @@ $( document ).ready( function () {
     back2pelaksana();
   } );
 
-
-
   $( document ).on( 'click', '#btnViewPelaksana', function () {
     var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
     id_subkegrenja_temp = data.id_subkegiatan_pd;
@@ -2209,9 +2189,7 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#view-aktivitas', function () {
-
     var data = pelaksana_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     sub_unit_temp = data.nm_sub;
     id_pelaksana_temp = data.id_pelaksana_pd;
     id_sub_unit_temp = data.id_sub_unit;
@@ -2299,7 +2277,6 @@ $( document ).ready( function () {
   $( document ).on( 'click', '#btnViewBelanja', function () {
 
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     id_aktivitas_temp = data.id_aktivitas_pd;
     id_asb_temp = data.id_aktivitas_asb;
     id_satuan_1_aktiv_temp = data.id_satuan_1;
@@ -2562,34 +2539,29 @@ $( document ).ready( function () {
   function HitungPaguMusren ( pagu, persen ) {
     var x = pagu;
     var y = persen;
-
     var nilai_musren = Math.ceil( x * ( y / 100 ) );
-
     return nilai_musren;
   };
 
   $( "#persen_musren" ).change( function () {
     var x = $( '#pagu_forum' ).val();
     var y = $( '#persen_musren' ).val();
-
     $( '#pagu_musren' ).val( HitungPaguMusren( x, y ) );
   } );
 
   $( "#pagu_forum" ).change( function () {
     var x = $( '#pagu_forum' ).val();
     var y = $( '#persen_musren' ).val();
-
     $( '#pagu_musren' ).val( HitungPaguMusren( x, y ) );
   } );
 
   function getStatusPelaksanaanKegRenja () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_kegrenja"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( '.sp_kegrenja' ).change( function () {
     if ( document.frmModalKegiatan.status_pelaksanaan_kegrenja.value == 0 ) {
@@ -2868,6 +2840,8 @@ $( document ).ready( function () {
     $( '#pagu_anggaran_subkeg' ).val( 0 );
     $( '#pagu_plus_subkeg' ).val( 0 );
     $( '#ur_kelompok_sasaran_subkeg' ).val( null );
+    $( '#waktu_mulai' ).val( 1 ).trigger( 'change' );
+    $( '#waktu_selesai' ).val( 1 ).trigger( 'change' );
     $( '#keterangan_status_subkeg' ).removeAttr( "disabled" );
     $( '#btnCariSubKegiatanRef' ).show();
     $( '#btnCariSubKegiatanRenstra' ).show();
@@ -2893,6 +2867,8 @@ $( document ).ready( function () {
         'id_subkegiatan_ref': $( '#id_subkegiatan_ref' ).val(),
         'pagu_plus1_forum': $( '#pagu_plus_subkeg' ).val(),
         'pagu_forum': $( '#pagu_anggaran_subkeg' ).val(),
+        'mulai': $( '#waktu_mulai' ).val(),
+        'selesai': $( '#waktu_selesai' ).val(),
         'keterangan_status': $( '#keterangan_status_subkeg' ).val(),
         'kelompok_sasaran': $( '#ur_kelompok_sasaran_subkeg' ).val(),
       },
@@ -2927,6 +2903,8 @@ $( document ).ready( function () {
     $( '#pagu_anggaran_subkeg' ).val( data.pagu_forum );
     $( '#pagu_plus_subkeg' ).val( data.pagu_plus1_forum );
     $( '#ur_kelompok_sasaran_subkeg' ).val( data.kelompok_sasaran );
+    $( '#waktu_mulai' ).val( data.waktu_0 ).trigger( 'change' );
+    $( '#waktu_selesai' ).val( data.waktu_1 ).trigger( 'change' );
 
     if ( data.status_pelaksanaan == 0 ) {
       $( "#keterangan_status_subkeg" ).attr( "disabled", "disabled" );
@@ -2997,6 +2975,8 @@ $( document ).ready( function () {
         'pagu_forum': $( '#pagu_anggaran_subkeg' ).val(),
         'keterangan_status': $( '#keterangan_status_subkeg' ).val(),
         'kelompok_sasaran': $( '#ur_kelompok_sasaran_subkeg' ).val(),
+        'mulai': $( '#waktu_mulai' ).val(),
+        'selesai': $( '#waktu_selesai' ).val(),
         'status_pelaksanaan': getStatusPelaksanaanSubKegRenja(),
       },
       success: function ( data ) {
@@ -3097,22 +3077,20 @@ $( document ).ready( function () {
   } );
 
   function getSumberASB () {
-
     var xCheck = document.querySelectorAll( 'input[name="sumber_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getJenisKegiatan () {
-
     var xCheck = document.querySelectorAll( 'input[name="jenis_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getGroupKeu () {
     var xCheck = document.querySelectorAll( 'input[name="rbGroupKeu"]:checked' );
@@ -3120,37 +3098,33 @@ $( document ).ready( function () {
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getJenisPembahasan () {
-
     var xCheck = document.querySelectorAll( 'input[name="jenis_pembahasan"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getStatusPelaksanaanAktivitas () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getSatuanUtamaAktivitas () {
-
     var xCheck = document.querySelectorAll( 'input[name="satuan_utama"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( document ).on( 'click', '#btnTambahAktivitas', function () {
-
     $( '#btnAktivitas' ).addClass( 'addAktivitas' );
     $( '#btnAktivitas' ).removeClass( 'editAktivitas' );
     $( '.form-horizontal' ).show();
@@ -3232,7 +3206,6 @@ $( document ).ready( function () {
       },
       success: function ( data ) {
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
@@ -3244,7 +3217,6 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '#btnEditAktivitas', function () {
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     $( '#btnAktivitas' ).removeClass( 'addAktivitas' );
     $( '#btnAktivitas' ).addClass( 'editAktivitas' );
     $( '.form-horizontal' ).show();
@@ -3343,7 +3315,6 @@ $( document ).ready( function () {
 
     $( '.modal-title' ).text( 'Edit Aktivitas Kegiatan SKPD' );
     $( '#ModalAktivitas' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.editAktivitas', function () {
@@ -3382,7 +3353,6 @@ $( document ).ready( function () {
       },
       success: function ( data ) {
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
@@ -3393,12 +3363,9 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnHapusAktivitas', function () {
-
     $( '#id_aktivitas_hapus' ).val( $( '#id_aktivitas' ).val() );
     $( '#ur_aktivitas_hapus' ).text( $( '#ur_aktivitas_kegiatan' ).val() );
-
     $( '#HapusAktivitas' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnDelAktivitas', function () {
@@ -3416,20 +3383,130 @@ $( document ).ready( function () {
       success: function ( data ) {
         $( '#ModalAktivitas' ).modal( 'hide' );
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
+        createPesan( data.pesan, "info" );
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnMoveAktivitas', function () {
+    var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
+    $( '#id_aktivitasMove' ).val( data.id_aktivitas_pd );
+    $.ajax( {
+      type: "GET",
+      url: 'getProgOpd?id_unit=' + unit_temp + '&id_dokumen_keu=' + dokumen_temp,
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="progMove"]' ).empty();
+        $( 'select[name="progMove"]' ).append( '<option value="-1">---Pilih Program OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="progMove"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+    $( '#AktivitasMoveModal' ).modal( 'show' );
+  } );
+
+  $( "#progMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getKegOpd?id_program_pd=' + $( "#progMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="kegMove"]' ).empty();
+        $( 'select[name="kegMove"]' ).append( '<option value="-1">---Pilih Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="kegMove"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#kegMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getSubKegOpd?id_kegiatan_pd=' + $( "#kegMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="subkegMove"]' ).empty();
+        $( 'select[name="subkegMove"]' ).append( '<option value="-1">---Pilih Sub Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="subkegMove"]' ).append( '<option value="' + post.id_subkegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#subkegMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getPelaksanaOpd?id_subkegiatan_pd=' + $( "#subkegMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="pelaksanaMove"]' ).empty();
+        $( 'select[name="pelaksanaMove"]' ).append( '<option value="-1">---Pilih Sub Unit Pelaksana---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="pelaksanaMove"]' ).append( '<option value="' + post.id_pelaksana_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMove', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './MoveAktivitas',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_aktivitas_pd': $( '#id_aktivitasMove' ).val(),
+        'id_pelaksana_pd': $( '#pelaksanaMove' ).val()
+      },
+      success: function ( data ) {
+        $( '#AktivitasMoveModal' ).modal( 'hide' );
+        $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
         createPesan( data.pesan, "info" );
       }
     } );
   } );
 
   function getStatusPelaksanaanPelaksana () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_pelaksana"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( document ).on( 'click', '#btnTambahPelaksana', function () {
 
@@ -3843,8 +3920,7 @@ $( document ).ready( function () {
 
     var nilai_musren = x * y * z * r;
     return nilai_musren;
-
-  }
+  };
 
   $( "#volume1_forum" ).change( function () {
     $( '#jumlah_belanja_forum' ).val( hitungsatuan() );
@@ -3880,7 +3956,7 @@ $( document ).ready( function () {
       document.getElementById( "volume2_forum" ).removeAttribute( "disabled" );
       document.getElementById( "zona_ssh" ).removeAttribute( "disabled" );
     }
-  }
+  };
 
   $( document ).on( 'click', '.catatan', function () {
     alert( "Maaf Tidak Berfungsi karena asal belanja dari ASB" )
@@ -3970,7 +4046,6 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnEditBelanja', function () {
-
     var data = belanja_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
     $( '.btnBelanja' ).addClass( 'editBelanja' );
     $( '.btnBelanja' ).removeClass( 'addBelanja' );
@@ -4006,7 +4081,7 @@ $( document ).ready( function () {
     $( '#id_satuan2_forum' ).val( data.id_satuan_2 );
     $( '#sumber_data_belanja' ).val( data.sumber_data );
 
-    checkAsalbelanja( data.sumber_data );
+    checkAsalbelanja( id_asb_temp );
 
     if ( data.status_aktivitas == 1 ) {
       $( '#btnHapusBelanja' ).hide();
@@ -4024,11 +4099,9 @@ $( document ).ready( function () {
     }
 
     $( '#ModalBelanja' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.editBelanja', function () {
-
     if ( document.getElementById( "checkBelanja" ).checked ) {
       check_data = 1
     } else {
@@ -4938,6 +5011,41 @@ $( document ).ready( function () {
     } );
   } );
 
+  $( document ).on( 'click', '.post-SubKeg', function () {
+    var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    var status_data;
+    if ( data.status_data == 0 ) {
+      status_data = 1;
+    };
+    if ( data.status_data == 1 ) {
+      status_data = 0;
+    };
+
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './postSubKegRenja',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_subkegiatan_pd': data.id_subkegiatan_pd,
+        'status_data': status_data,
+      },
+      success: function ( data ) {
+        prog_renja_tbl.ajax.reload( null, false );
+        keg_renja_tbl.ajax.reload( null, false );
+        subkeg_renja_tbl.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
   $( document ).on( 'click', '.post-KegForum', function () {
     var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
     var status_data;
@@ -5010,13 +5118,6 @@ $( document ).ready( function () {
     jenis_belanja_temp = $( '#jenis_belanja' ).val();
   } );
 
-  $( document ).on( 'click', '.btnCetakRKA', function () {
-    window.open( '../PrintPraRKAAP/' + id_kegrenja_temp + '/' + id_sub_unit_temp );
-  } );
-  $( document ).on( 'click', '.btnCetakRKA1', function () {
-    window.open( '../PrintPraRKAAP/' + id_kegrenja_temp + '/' + id_sub_unit_temp );
-  } );
-
   $( document ).on( 'click', '.btnPostUnit', function () {
     $.ajax( {
       type: 'get',
@@ -5030,4 +5131,4 @@ $( document ).ready( function () {
     } );
   } );
 
-} );
+} ); // end file

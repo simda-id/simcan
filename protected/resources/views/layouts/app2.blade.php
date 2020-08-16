@@ -390,7 +390,7 @@ use hoaaah\LaravelMenu\Menu;
                                                 'items' => [
                                                     ['label' => 'PPAS', 'url' => '/cetak/ppas', 'visible' => $akses->get(740)],
                                                     ['label' => 'PPAS Perubahan', 'url' => '/cetak/ppasubah', 'visible' => $akses->get(741)],
-                                                    ['label' => 'PPAS-90', 'url' => '/cetak/90ppas', 'visible' => $akses->get(740)],
+                                                    ['label' => 'PPAS-90', 'url' => '/cetak90/ppas', 'visible' => $akses->get(740)],
                                                 ]
                                             ],
                                             [   
@@ -400,7 +400,7 @@ use hoaaah\LaravelMenu\Menu;
                                                    // ['label' => 'RAPBD', 'url' => '/cetak/rapbd', 'visible' => $akses->get(71)],
                                                     ['label' => 'APBD', 'url' => '/cetak/apbd', 'visible' => $akses->get(742)],
                                                     ['label' => 'APBD Pergeseran', 'url' => '/cetak/geser', 'visible' => $akses->get(743)],
-                                                    ['label' => 'APBD-90', 'url' => '/cetak/90apbd', 'visible' => $akses->get(742)],
+                                                    ['label' => 'APBD-90', 'url' => '/cetak90/apbd', 'visible' => $akses->get(742)],
                                                     // ['label' => 'APBD Perubahan', 'url' => '#', 'visible' => $akses->get(744)],
                                                 ]
                                             ],
@@ -442,10 +442,7 @@ use hoaaah\LaravelMenu\Menu;
                 var d = formattedDate.getDate();
                 var m = formattedDate.getMonth();
                 var y = formattedDate.getFullYear();
-                var m_names = new Array("Januari", "Februari", "Maret", 
-                  "April", "Mei", "Juni", "Juli", "Agustus", "September", 
-                  "Oktober", "November", "Desember")
-    
+                var m_names = new Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");    
                 var tgl= d + " " + m_names[m] + " " + y;
                 return tgl;
             };
@@ -455,17 +452,17 @@ use hoaaah\LaravelMenu\Menu;
                 var dd = today.getDate();
                 var mm = today.getMonth()+1; //January is 0!
                 var yyyy = today.getFullYear();
-
-                var hariIni = yyyy + '-' + mm + '-' + dd;
+                // var hariIni = yyyy + '-' + mm + '-' + dd;
+                var hariIni = new Date().toISOString().slice( 0, 10 );
                 return hariIni;
             };
 
             function buatNip(string){
-              return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
+                return string.replace(/(\d{8})(\d{6})(\d{1})(\d{3})/,"$1 $2 $3 $4");
             }
 
             function nilaiNip(string){
-              return string.replace(/\D/g,'').substring(0, 20);
+                return string.replace(/\D/g,'').substring(0, 20);
             }
 
             $('#radioBtn a').on('click', function(){

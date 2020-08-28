@@ -621,30 +621,4 @@ $( document ).ready( function () {
     e.preventDefault();
   } );
 
-  $( document ).on( 'click', '#btnUnload', function () {
-    var data = programrkpd.row( $( this ).parents( 'tr' ) ).data();
-    $.ajaxSetup( {
-      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
-    } );
-    $( '#prosesbar' ).show();
-    $.ajax( {
-      type: 'POST',
-      url: './unLoadData',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_rkpd_program': data.id_rkpd_program
-      },
-      success: function ( data ) {
-        createPesan( data.pesan, "success" );
-        programrkpd.ajax.reload( null, false );
-        $( '#prosesbar' ).hide();
-      },
-      error: function ( err ) {
-        createPesan( err, "danger" );
-        programrkpd.ajax.reload( null, false );
-        $( '#prosesbar' ).hide();
-      }
-    } );
-  } );
-
 } );

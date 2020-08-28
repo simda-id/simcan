@@ -373,6 +373,21 @@ $( document ).ready( function () {
 
     $( document ).on( 'click', '#btnDetailUnit', function () {
         var data = unit_tbl.row( $( this ).parents( 'tr' ) ).data();
+        $.ajax( {
+            type: "GET",
+            url: 'unit/getListBidangInduk?id_unit=' + data.id_unit,
+            dataType: "json",
+            success: function ( data ) {
+                var j = data.length;
+                var post, i;
+                $( 'select[name="bidang_induk"]' ).empty();
+                $( 'select[name="bidang_induk"]' ).append( '<option value="-1">---Pilih Bidang Induk Unit---</option>' );
+                for ( i = 0; i < j; i++ ) {
+                    post = data[ i ];
+                    $( 'select[name="bidang_induk"]' ).append( '<option value="' + post.id_bidang + '">' + post.nm_bidang + '</option>' );
+                }
+            }
+        } );
         $( '.btnSaveUnit' ).removeClass( 'addUnit' );
         $( '.btnSaveUnit' ).addClass( 'editUnit' );
         $( '#id_bidang' ).val( data.id_bidang );
@@ -389,10 +404,14 @@ $( document ).ready( function () {
         $( '#kd_unit' ).val( data.kd_unit );
         $( '#kode_unit' ).val( data.kode_unit );
         $( '#nm_unit' ).val( data.nm_unit );
+        $( '#kode_bidang_utama' ).val( data.kode_bidang_utama );
         $( '#divStatusUnit' ).show();
-
         $( '.form-horizontal' ).show();
         $( '#ModalUnit' ).modal( 'show' );
+    } );
+
+    $( "#bidang_induk" ).change( function () {
+        $( '#kode_bidang_utama' ).val( $( '#bidang_induk option:selected' ).text() );
     } );
 
     $( '.modal-footer' ).on( 'click', '.editUnit', function () {
@@ -406,8 +425,7 @@ $( document ).ready( function () {
             data: {
                 '_token': $( 'input[name=_token]' ).val(),
                 'id_unit': $( '#id_unit' ).val(),
-                'nm_unit': $( '#nm_unit' ).val(),
-                'kd_unit': $( '#kd_unit' ).val(),
+                'id_bidang_utama': $( '#bidang_induk' ).val(),
                 'status_data': getStatusUnit(),
             },
             success: function ( data ) {

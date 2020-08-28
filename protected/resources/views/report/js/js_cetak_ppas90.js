@@ -373,6 +373,157 @@ $( document ).ready( function () {
       window.open( './90Rka30' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 50 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda1' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 51 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda2' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 52 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda3' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 53 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda4' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 54 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda5' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 55 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda6' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 57 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda8' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 58 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90Raperda9' + vars, '_blank' );
+    };
+
   } );
 
 

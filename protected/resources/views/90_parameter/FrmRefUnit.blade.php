@@ -219,226 +219,235 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               </div>
             </div>
             <div class="form-group">
-              <label for="kd_unit" class="col-sm-3" align='left'>Kode Unit</label>
-              <div class="col-sm-1">
-                <input type="text" class="form-control number" id="kd_unit" name="kd_unit" style="text-align:center;">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" id="kode_unit" name="kode_unit" readonly>
-              </div>
+              <label for="bidang_induk" class="col-sm-3 control-label" align='left'">Bidang Induk :</label>
+              <div class=" col-sm-7">
+                <input type="text" class="form-control" id="kode_bidang_utama" name="kode_bidang_utama" readonly
+                  style="text-align:left;">
             </div>
-            <div class="form-group">
-              <label for="nm_unit" class="col-sm-3" align='left'>Nama Unit</label>
-              <div class="col-sm-8">
-                <textarea type="text" class="form-control" name="nm_unit" id="nm_unit" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="form-group" id="divStatusUnit">
-              <label for="rbStatusUnit" class="col-sm-3 control-label" align='left'>Status Unit</label>
-              <div class="col-sm-2">
-                <label>
-                  <input type="radio" class="rbStatusUnit" name="rbStatusUnit" id="rbStatusUnit" value="0"> Tidak Aktif
-                </label>
-              </div>
-              <div class="col-sm-1">
-                <label>
-                  <input type="radio" class="rbStatusUnit" name="rbStatusUnit" id="rbStatusUnit" value="1"> Aktif
-                </label>
-              </div>
-            </div>
-          </form>
         </div>
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-sm-2 text-left">
-            </div>
-            <div class="col-sm-10 text-right">
-              <div class="ui-group-buttons">
-                <button type="button" id="btnSaveUnit" class="btn btn-sm btn-success btnSaveUnit btn-labeled"
-                  data-dismiss="modal">
-                  <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
-                <div class="or"></div>
-                <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
-                  aria-hidden="true">
-                  <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="bidang_induk" class="col-sm-3 control-label" align='left'"></label>
+        <div class=" col-sm-7">
+            <select class="form-control select2 bidang_induk" name="bidang_induk" id="bidang_induk"></select>
         </div>
       </div>
+      <div class="form-group">
+        <label for="kd_unit" class="col-sm-3" align='left'>Kode Unit</label>
+        <div class="col-sm-1">
+          <input type="text" class="form-control number" id="kd_unit" name="kd_unit" style="text-align:center;">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" id="kode_unit" name="kode_unit" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nm_unit" class="col-sm-3" align='left'>Nama Unit</label>
+        <div class="col-sm-8">
+          <textarea type="text" class="form-control" name="nm_unit" id="nm_unit" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="form-group" id="divStatusUnit">
+        <label for="rbStatusUnit" class="col-sm-3 control-label" align='left'>Status Unit</label>
+        <div class="col-sm-2">
+          <label>
+            <input type="radio" class="rbStatusUnit" name="rbStatusUnit" id="rbStatusUnit" value="0"> Tidak Aktif
+          </label>
+        </div>
+        <div class="col-sm-1">
+          <label>
+            <input type="radio" class="rbStatusUnit" name="rbStatusUnit" id="rbStatusUnit" value="1"> Aktif
+          </label>
+        </div>
+      </div>
+      </form>
     </div>
-  </div>
-
-  <!--Modal Hapus -->
-  <div id="HapusUnit" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-sm-2 text-left">
         </div>
-        <div class="modal-body">
-          <input type="hidden" id="id_unit_hapus" name="id_unit_hapus">
-          <div class="alert alert-danger deleteContent">
-            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;"
-              aria-hidden="true"></i>
-            <br>
-            Yakin akan menghapus Perangkat Daerah Kewilayahan : <strong><span id="nm_unit_hapus"></span></strong>
-            ini ?
-            <br>
-            <br>
-          </div>
-        </div>
-        <div class="modal-footer">
+        <div class="col-sm-10 text-right">
           <div class="ui-group-buttons">
-            <button type="button" class="btn btn-sm btn-danger btn-labeled btnDeleteUnit" id="btnDeleteUnit"
-              data-dismiss="modal"><span class="btn-label"><i id="footer_action_button"
-                  class="fa fa-trash fa-fw fa-lg"></i></span>
-              Hapus</button>
+            <button type="button" id="btnSaveUnit" class="btn btn-sm btn-success btnSaveUnit btn-labeled"
+              data-dismiss="modal">
+              <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
             <div class="or"></div>
-            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
-              aria-hidden="true"><span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>
-              Tutup</button>
+            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+              <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 
-  <!--Modal Tambah -->
-  <div id="ModalSubUnit" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
+<!--Modal Hapus -->
+<div id="HapusUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="id_unit_hapus" name="id_unit_hapus">
+        <div class="alert alert-danger deleteContent">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          <br>
+          Yakin akan menghapus Perangkat Daerah Kewilayahan : <strong><span id="nm_unit_hapus"></span></strong>
+          ini ?
+          <br>
+          <br>
         </div>
-        <div class="modal-body">
-          <form name="frmModalSubUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
-            onsubmit="return false;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id_sub_unit" id="id_sub_unit">
-            <input type="hidden" name="id_unit_sub" id="id_unit_sub">
-            <input type="hidden" name="kode_unit_sub" id="kode_unit_sub">
-            <div class="form-group">
-              <label for="kd_sub" class="col-sm-3" align='left'>Kode Sub Unit</label>
-              <div class="col-sm-1">
-                <input type="text" class="form-control number" id="kd_sub" name="kd_sub" required="required"
-                  style="text-align:center;">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" id="kode_sub_unit" name="kode_sub_unit" readonly>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="nm_sub" class="col-sm-3" align='left'>Nama Sub Unit</label>
-              <div class="col-sm-8">
-                <textarea type="text" class="form-control" name="nm_sub" id="nm_sub" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="form-group" id="divStatusKinerja">
-              <label for="rbStatusKinerja" class="col-sm-3 control-label" align='left'>Melakukan Pengukuran
-                Kinerja</label>
-              <div class="col-sm-2">
-                <label>
-                  <input type="radio" class="rbStatusKinerja" name="rbStatusKinerja" id="rbStatusKinerja" value="0"> Ya
-                </label>
-              </div>
-              <div class="col-sm-1">
-                <label>
-                  <input type="radio" class="rbStatusKinerja" name="rbStatusKinerja" id="rbStatusKinerja" value="1">
-                  Tidak
-                </label>
-              </div>
-            </div>
-            <div class="form-group" id="divStatusKeuangan">
-              <label for="rbStatusKeuangan" class="col-sm-3 control-label" align='left'>Melakukan Penatausahaan
-                Keuangan</label>
-              <div class="col-sm-2">
-                <label>
-                  <input type="radio" class="rbStatusKeuangan" name="rbStatusKeuangan" id="rbStatusKeuangan" value="0">
-                  Ya
-                </label>
-              </div>
-              <div class="col-sm-1">
-                <label>
-                  <input type="radio" class="rbStatusKeuangan" name="rbStatusKeuangan" id="rbStatusKeuangan" value="1">
-                  Tidak
-                </label>
-              </div>
-            </div>
-            <div class="form-group" id="divStatusSubUnit">
-              <label for="rbStatusSubUnit" class="col-sm-3 control-label" align='left'>Status Sub Unit</label>
-              <div class="col-sm-2">
-                <label>
-                  <input type="radio" class="rbStatusSubUnit" name="rbStatusSubUnit" id="rbStatusSubUnit" value="0">
-                  Tidak Aktif
-                </label>
-              </div>
-              <div class="col-sm-1">
-                <label>
-                  <input type="radio" class="rbStatusSubUnit" name="rbStatusSubUnit" id="rbStatusSubUnit" value="1">
-                  Aktif
-                </label>
-              </div>
-            </div>
-          </form>
+      </div>
+      <div class="modal-footer">
+        <div class="ui-group-buttons">
+          <button type="button" class="btn btn-sm btn-danger btn-labeled btnDeleteUnit" id="btnDeleteUnit"
+            data-dismiss="modal"><span class="btn-label"><i id="footer_action_button"
+                class="fa fa-trash fa-fw fa-lg"></i></span>
+            Hapus</button>
+          <div class="or"></div>
+          <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span
+              class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>
+            Tutup</button>
         </div>
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-sm-2 text-left">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Tambah -->
+<div id="ModalSubUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form name="frmModalSubUnit" class="form-horizontal" role="form" autocomplete='off' action="" method="post"
+          onsubmit="return false;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="id_sub_unit" id="id_sub_unit">
+          <input type="hidden" name="id_unit_sub" id="id_unit_sub">
+          <input type="hidden" name="kode_unit_sub" id="kode_unit_sub">
+          <div class="form-group">
+            <label for="kd_sub" class="col-sm-3" align='left'>Kode Sub Unit</label>
+            <div class="col-sm-1">
+              <input type="text" class="form-control number" id="kd_sub" name="kd_sub" required="required"
+                style="text-align:center;">
             </div>
-            <div class="col-sm-10 text-right">
-              <div class="ui-group-buttons">
-                <button type="button" class="btn btn-sm btn-success btnSubUnit btn-labeled" data-dismiss="modal">
-                  <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
-                <div class="or"></div>
-                <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
-                  aria-hidden="true">
-                  <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
-              </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="kode_sub_unit" name="kode_sub_unit" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nm_sub" class="col-sm-3" align='left'>Nama Sub Unit</label>
+            <div class="col-sm-8">
+              <textarea type="text" class="form-control" name="nm_sub" id="nm_sub" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group" id="divStatusKinerja">
+            <label for="rbStatusKinerja" class="col-sm-3 control-label" align='left'>Melakukan Pengukuran
+              Kinerja</label>
+            <div class="col-sm-2">
+              <label>
+                <input type="radio" class="rbStatusKinerja" name="rbStatusKinerja" id="rbStatusKinerja" value="0"> Ya
+              </label>
+            </div>
+            <div class="col-sm-1">
+              <label>
+                <input type="radio" class="rbStatusKinerja" name="rbStatusKinerja" id="rbStatusKinerja" value="1">
+                Tidak
+              </label>
+            </div>
+          </div>
+          <div class="form-group" id="divStatusKeuangan">
+            <label for="rbStatusKeuangan" class="col-sm-3 control-label" align='left'>Melakukan Penatausahaan
+              Keuangan</label>
+            <div class="col-sm-2">
+              <label>
+                <input type="radio" class="rbStatusKeuangan" name="rbStatusKeuangan" id="rbStatusKeuangan" value="0">
+                Ya
+              </label>
+            </div>
+            <div class="col-sm-1">
+              <label>
+                <input type="radio" class="rbStatusKeuangan" name="rbStatusKeuangan" id="rbStatusKeuangan" value="1">
+                Tidak
+              </label>
+            </div>
+          </div>
+          <div class="form-group" id="divStatusSubUnit">
+            <label for="rbStatusSubUnit" class="col-sm-3 control-label" align='left'>Status Sub Unit</label>
+            <div class="col-sm-2">
+              <label>
+                <input type="radio" class="rbStatusSubUnit" name="rbStatusSubUnit" id="rbStatusSubUnit" value="0">
+                Tidak Aktif
+              </label>
+            </div>
+            <div class="col-sm-1">
+              <label>
+                <input type="radio" class="rbStatusSubUnit" name="rbStatusSubUnit" id="rbStatusSubUnit" value="1">
+                Aktif
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-2 text-left">
+          </div>
+          <div class="col-sm-10 text-right">
+            <div class="ui-group-buttons">
+              <button type="button" class="btn btn-sm btn-success btnSubUnit btn-labeled" data-dismiss="modal">
+                <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>Simpan</button>
+              <div class="or"></div>
+              <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                <span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>Tutup</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!--Modal Hapus -->
-  <div id="HapusSubUnit" class="modal fade" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-xs">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
+<!--Modal Hapus -->
+<div id="HapusSubUnit" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="id_sub_unit_hapus" name="id_sub_unit_hapus">
+        <div class="alert alert-danger deleteContent">
+          <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;" aria-hidden="true"></i>
+          <br>
+          Yakin akan menghapus Sub Unit Perangkat Daerah : <strong><span id="nm_sub_unit_hapus"></span></strong> ini ?
+          <br>
+          <br>
         </div>
-        <div class="modal-body">
-          <input type="hidden" id="id_sub_unit_hapus" name="id_sub_unit_hapus">
-          <div class="alert alert-danger deleteContent">
-            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border" style="color:red;"
-              aria-hidden="true"></i>
-            <br>
-            Yakin akan menghapus Sub Unit Perangkat Daerah : <strong><span id="nm_sub_unit_hapus"></span></strong> ini ?
-            <br>
-            <br>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="ui-group-buttons">
-            <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal"><span
-                class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>
-              Hapus</button>
-            <div class="or"></div>
-            <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal"
-              aria-hidden="true"><span class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>
-              Tutup</button>
-          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="ui-group-buttons">
+          <button type="button" class="btn btn-sm btn-danger btn-labeled btnDelSubUnit" data-dismiss="modal"><span
+              class="btn-label"><i id="footer_action_button" class="glyphicon glyphicon-trash"></i></span>
+            Hapus</button>
+          <div class="or"></div>
+          <button type="button" class="btn btn-sm btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true"><span
+              class="btn-label"><i class="glyphicon glyphicon-log-out"></i></span>
+            Tutup</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  @endsection
+@endsection
 
-  @section('scripts')
-  <script type="text/javascript" language="javascript" class="init"
-    src="{{ asset('/protected/resources/views/90_parameter/js_unit.js')}}">
-  </script>
-  @endsection
+@section('scripts')
+<script type="text/javascript" language="javascript" class="init"
+  src="{{ asset('/protected/resources/views/90_parameter/js_unit.js')}}">
+</script>
+@endsection

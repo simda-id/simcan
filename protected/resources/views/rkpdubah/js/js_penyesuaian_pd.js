@@ -1327,6 +1327,7 @@ $( document ).ready( function () {
                 { data: 'action', 'searchable': false, 'orderable': false },
                 { data: 'no_urut', sClass: "dt-center" },
                 { data: 'uraian_tarif_ssh' },
+                { data: 'rekening_display', sClass: "dt-left", },
                 {
                     data: 'volume_rkpd_1', sClass: "dt-right",
                     render: $.fn.dataTable.render.number( '.', ',', 2, '' )

@@ -208,6 +208,21 @@ use hoaaah\LaravelMenu\Menu;
                                             ['label' => 'Mapping Sumber Dana', 'url' => '/parameter90/mapping_sd90','visible' => $akses->get(103)],
                                         ]
                                     ],
+                                    [ 'label' => 'SPM',
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->getMulti([105,106]),
+                                        'items' => [
+                                            ['label' => 'SPM', 'url' => '/parameter90/spm','visible' => $akses->getMulti([105,106])],
+                                        ]
+                                    ],
+                                    [ 'label' => 'Program Prioritas',
+                                        'icon' => 'fa fa-building-o fa-fw',
+                                        'visible' => $akses->getMulti([113, 114]),
+                                        'items' => [
+                                            ['label' => 'Prioritas Nasional', 'url' => '/parameter90/pronas','visible' => $akses->get(113)],
+                                            // ['label' => 'Prioritas Provinsi', 'url' => '/parameter90/proprov','visible' => $akses->get(114)],
+                                        ]
+                                    ],
                                 ]
                             ],
                             ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw text-warning', 'url' => '/admin/update','visible' => $akses->get(9)],

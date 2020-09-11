@@ -225,7 +225,7 @@ use hoaaah\LaravelMenu\Menu;
                                     ],
                                 ]
                             ],
-                            ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw text-warning', 'url' => '/admin/update','visible' => $akses->get(9)],
+                            // ['label' => 'Update Database', 'icon' => 'fa fa-database fa-fw text-warning', 'url' => '/admin/update','visible' => $akses->get(9)],
                         ]
                     ]);
                 ?>

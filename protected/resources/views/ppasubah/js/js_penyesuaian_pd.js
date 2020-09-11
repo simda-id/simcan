@@ -2937,7 +2937,7 @@ $( document ).ready( function () {
   } );
 
   function checkAsalbelanja ( asal ) {
-    if ( asal == 1 ) {
+    if ( asal != 0 ) {
       $( '#btnCariSSH' ).removeClass( 'btnCariSSH' );
       $( '#btnCariRekening' ).removeClass( 'btnCariRekening' );
       $( '#btnCariSSH' ).addClass( 'catatan' );
@@ -2954,7 +2954,7 @@ $( document ).ready( function () {
       document.getElementById( "volume2_forum" ).removeAttribute( "disabled" );
       document.getElementById( "zona_ssh" ).removeAttribute( "disabled" );
     }
-  }
+  };
 
   $( document ).on( 'click', '.catatan', function () {
     alert( "Maaf Tidak Berfungsi karena asal belanja dari ASB" )
@@ -2997,6 +2997,7 @@ $( document ).ready( function () {
     $( '#sumber_data_belanja' ).val( 4 );
 
     checkAsalbelanja( 0 );
+    document.getElementById( "harga_satuan_forum" ).setAttribute( "disabled", "disabled" );
 
     $( '#ModalBelanja' ).modal( 'show' );
 
@@ -3088,6 +3089,14 @@ $( document ).ready( function () {
     } else {
       $( '#btnBelanja' ).show();
       $( '#btnHapusBelanja' ).show();
+    }
+
+    if ( data.sumber_data == 0 ) {
+      $( '#btnHapusBelanja' ).hide();
+      document.getElementById( "harga_satuan_forum" ).removeAttribute( "disabled" );
+    } else {
+      $( '#btnHapusBelanja' ).show();
+      document.getElementById( "harga_satuan_forum" ).setAttribute( "disabled", "disabled" );
     }
 
     $( '.chkBelanja' ).show();

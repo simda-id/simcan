@@ -237,6 +237,23 @@ $( document ).ready( function () {
       window.open( './90PPAS21' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 5 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS"
+      window.open( './90PPAS34' + vars, '_blank' );
+    };
+
     if ( $( '#jns_laporan' ).val() == 2 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();

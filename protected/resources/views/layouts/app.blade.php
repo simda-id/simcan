@@ -136,15 +136,6 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Penyesuaian PD', 'url' => '/rkpdubah/sesuai', 'visible' => $akses->get(404)],
                                                 ]
                                             ],
-                                            /* [
-                                                'label' => 'Prioritas Pembangunan',
-                                                'visible' => $akses->get(408) || $akses->get(502),
-                                                'items' => [
-                                                    ['label' => 'Prioritas Nasional', 'url' => '/rkpd/prionas', 'visible' => $akses->get(408)],
-                                                    ['label' => 'Prioritas Daerah', 'url' => '/rkpd/prioda', 'visible' => $akses->get(408)],
-                                                    ['label' => 'Penyesuaian PD', 'url' => '/rkpd/priopd', 'visible' => $akses->get(502)],
-                                                ]
-                                            ],*/
                                         ]
                                     ],                                    
                                     [
@@ -227,11 +218,8 @@ use hoaaah\LaravelMenu\Menu;
                                                 'visible' => $akses->getMulti([440,441,442,642,443]),
                                                 'items' => [
                                                     ['label' => 'RKPD Ranwal', 'url' => '/cetak/rkpdranwal', 'visible' => $akses->get(440)],
-                                                    ['label' => 'RKPD Rancangan', 'url' => '/cetak/rkpdrancangan', 'visible' => $akses->get(441)],
-                                                    ['label' => 'RKPD Akhir', 'url' => '/cetak/rkpdranhir', 'visible' => $akses->get(442)],
-                                                    ['label' => 'Musrenbang RKPD', 'url' => '/cetak/rkpdmusren', 'visible' => $akses->get(642)],
-                                                    ['label' => 'RKPD', 'url' => '/cetak/rkpdfinal', 'visible' => $akses->get(443)],
-                                                    ['label' => 'RKPD-90', 'url' => '/cetak90/rkpd', 'visible' => $akses->get(443)]
+                                                    ['label' => 'RKPD dan Musrenbang RKPD', 'url' => '/cetak/rkpdrancangan', 'visible' => $akses->get(441)],
+                                                    ['label' => 'RKPD-90', 'url' => '/cetak90/rkpd', 'visible' => $akses->get(441)]
                                                 ]
                                             ],
                                             [   
@@ -321,15 +309,6 @@ use hoaaah\LaravelMenu\Menu;
                                                     ['label' => 'Penyesuaian PD', 'url' => '/rkpdubah/sesuai', 'visible' => $akses->get(404)],
                                                 ]
                                             ],
-                                            /* [
-                                                'label' => 'Prioritas Pembangunan',
-                                                'visible' => $akses->get(408) || $akses->get(502),
-                                                'items' => [
-                                                    ['label' => 'Prioritas Nasional', 'url' => '/rkpd/prionas', 'visible' => $akses->get(408)],
-                                                    ['label' => 'Prioritas Daerah', 'url' => '/rkpd/prioda', 'visible' => $akses->get(408)],
-                                                    ['label' => 'Penyesuaian PD', 'url' => '/rkpd/priopd', 'visible' => $akses->get(502)],
-                                                ]
-                                            ],*/
                                         ]
                                     ],                                    
                                     [

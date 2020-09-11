@@ -27,7 +27,6 @@ $( document ).ready( function () {
     setTimeout( function () {
       $( '#pesanx' ).removeClass( 'in' );
     }, 3500 );
-
   };
 
   $( '.page-alert .close' ).click( function ( e ) {

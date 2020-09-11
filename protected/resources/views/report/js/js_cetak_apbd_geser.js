@@ -149,7 +149,7 @@ $( document ).ready( function () {
   $( ".unit_prarka" ).change( function () {
     $.ajax( {
       type: "GET",
-      url: 'getProgramGeserAPBD?id_unit=' + $( '#unit_prarka' ).val() + '&tahun=' + $( '#tahun_prarka' ).val() + '&id_perubahan=' + $( '#id_perubahan' ).val(),
+      url: 'getProgramGeserAPBD?id_unit=' + $( '#unit_prarka' ).val() + '&tahun=' + $( '#tahun_prarka' ).val() + '&id_perubahan=' + $( '#id_perubahan' ).val() + '&id_dokumen=' + $( '#no_dokumen' ).val(),
       dataType: "json",
       success: function ( data ) {
         var j = data.length;

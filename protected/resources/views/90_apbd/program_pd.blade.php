@@ -1,5 +1,5 @@
 <div id="ModalProgRenja" class="modal fade" role="dialog" data-backdrop="static" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title"></h4>
@@ -19,7 +19,7 @@
           <input type="hidden" id="id_unit_progrenja" name="id_unit_progrenja">
           <input type="hidden" id="sumber_data_progrenja" name="sumber_data_progrenja">
           <input type="hidden" id="status_data_progrenja" name="status_data_progrenja">
-          <div class="form-group">
+          <div class="form-group hidden">
             <label class="control-label col-sm-3" for="id">No Urut :</label>
             <div class="col-sm-2">
               <input type="text" class="form-control nomor" name="no_urut_progrenja" id="no_urut_progrenja">
@@ -58,39 +58,19 @@
             <span class="btn btn-sm btn-primary btnCariProgRef" id="btnCariProgRef" name="btnCariProgRef"><i
                 class="fa fa-search fa-fw fa-lg"></i></span>
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">Prioritas Nasional:</label>
-            <div class="col-sm-8">
-              <textarea type="name" class="form-control ur_program_nasional" name="ur_program_nasional"
-                id="ur_program_nasional" rows="2" disabled></textarea>
-            </div>
-            <input type="hidden" id="id_program_nasional" name="id_program_nasional">
-            <span class="btn btn-sm btn-primary btnCariProgNas" id="btnCariProgNas" name="btnCariProgNas"><i
-                class="fa fa-search fa-fw fa-lg"></i></span>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">Prioritas Provinsi:</label>
-            <div class="col-sm-8">
-              <textarea type="name" class="form-control ur_program_prov" name="ur_program_prov" id="ur_program_prov"
-                rows="2" disabled></textarea>
-            </div>
-            <input type="hidden" id="id_program_prov" name="id_program_prov">
-            <span class="btn btn-sm btn-primary btnCariProgProv" id="btnCariProgProv" name="btnCariProgProv"><i
-                class="fa fa-search fa-fw fa-lg"></i></span>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">Keterangan Program Renja:</label>
+          <div class="form-group hidden">
+            <label class="control-label col-sm-3" for="title">Uraian Program Renja:</label>
             <div class="col-sm-8">
               <textarea type="name" class="form-control ur_program_renja" name="ur_program_renja" id="ur_program_renja"
                 rows="3" disabled></textarea>
             </div>
           </div>
           <div class="form-group">
-            <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu PPAS :</label>
+            <label for="pagu_rkpd_program" class="col-sm-3 control-label" align='left'>Pagu RKPD :</label>
             <div class="col-sm-3">
               <input type="text" class="form-control number" id="pagu_renja_program" name="pagu_renja_program" disabled>
             </div>
-            <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu APBD :</label>
+            <label for="pagu_forum_program" class="col-sm-2 control-label" align='left'>Pagu PPAS :</label>
             <div class="col-sm-3">
               <input type="text" class="form-control number" id="pagu_forum_progrenja" name="pagu_forum_progrenja"
                 required="required">

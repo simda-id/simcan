@@ -10,7 +10,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   <div class="row">
     <div class="col-md-12">
       <?php
-                $this->title = "Data Program RKPD";
+                $this->title = "Data Program RKPD - APBD";
                 $breadcrumb = new Breadcrumb();
                 $breadcrumb->homeUrl = "modul3";
                 $breadcrumb->begin();
@@ -25,7 +25,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     <div class="col-md-12">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h2 class="panel-title">Daftar Program RKPD</h2>
+          <h2 class="panel-title">Daftar Program RKPD - APBD'90</h2>
         </div>
         <div class="panel-body">
           <form name="" class="form-horizontal" role="form" autocomplete="off" action="" method="post">
@@ -37,29 +37,29 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             </div>
             <div class="form-group">
               <label for="id_dokumen_keu" class="control-label col-sm-3 text-left" for="id_dokumen_keu">Nomor Dokumen
-                Keuangan :</label>
+                APBD :</label>
               <div class="col-sm-5"><select class="form-control id_dokumen_keu select2" name=id_dokumen_keu
                   id="id_dokumen_keu"></select></div>
             </div>
           </form>
           <div class="tabs-x tabs-above tab-bordered tabs-krajee">
             <ul class="nav nav-tabs" role="tablist">
-              <li class="active"><a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program
-                  RKPD</a></li>
+              <li class="active"><a href="#program" aria-controls="program" role="tab" data-toggle="tab">Program RKPD -
+                  APBD</a></li>
               <li class="disabled"><a href="#indikator" aria-controls="indikator" role="tab-kv"
-                  data-toggle="tab">Indikator Program RKPD</a></li>
+                  data-toggle="tab">Indikator Program RKPD - APBD</a></li>
               <li class="disabled"><a href="#urusan" aria-controls="urusan" role="tab-kv" data-toggle="tab">Urusan
-                  Pemerintahan RKPD</a></li>
+                  Pemerintahan RKPD - APBD</a></li>
               <li class="disabled"><a href="#pelaksana" aria-controls="pelaksana" role="tab-kv"
-                  data-toggle="tab">Pelaksana Program RKPD</a></li>
+                  data-toggle="tab">Pelaksana Program RKPD - APBD</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="program">
                 <br>
                 <div>
                   <a id="btnTambahProg" class="add-programrkpd btn btn-labeled btn-success" data-toggle="popover"
-                    data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover"
-                    data-content="Program baru yang belum ada di RPJMD">
+                    data-html="true" data-container="body" title="Penyususan APBD " data-trigger="hover"
+                    data-content="Program baru yang belum ada di RKPD">
                     <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Program</a>
                 </div>
                 <div>
@@ -67,15 +67,15 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
                         <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Aksi</th>
-                        <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD</th>
+                        <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">No Urut</th>
+                        <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Program RKPD - APBD
+                        </th>
                         <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu PPAS</th>
                         <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu APBD</th>
                         <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Pagu OPD</th>
                         <th colspan="2" width="3%" style="text-align: center; vertical-align:middle">Indikator</th>
                         <th colspan="2" width="3%" style="text-align: center; vertical-align:middle">Pelaksana</th>
-                        {{-- <th rowspan="2" width="8%" style="text-align: center; vertical-align:middle">Status Pelaksanaan</th> --}}
                         <th rowspan="2" width="3%" style="text-align: center; vertical-align:middle">Status Usulan</th>
                       </tr>
                       <tr>
@@ -95,11 +95,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="divAddIndikator">
                   <p>
                     <a id="btnTambahIndikator" class="add-indikator btn btn-labeled btn-success" data-toggle="popover"
-                      data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover"
-                      data-content="Indikator baru yang belum ada di RPJMD, namun menjadi indikator program pada RKPD tahun berjalan"><span
+                      data-html="true" data-container="body" title="Penyusunan APBD" data-trigger="hover"
+                      data-content="Indikator baru yang belum ada di PPAS, namun menjadi indikator program pada APBD tahun berjalan"><span
                         class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Indikator</a>
                     <a id="btnReviuIndikator" class="btn btn-labeled btn-primary" data-toggle="popover" data-html="true"
-                      data-container="body" title="Ranwal RKPD" data-trigger="hover"
+                      data-container="body" title="Penyusunan PPAS" data-trigger="hover"
                       data-content="Melakukan Reviu Terhadap Data Indikator secara sekaligus atau sesuai pilihan"><span
                         class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span> Reviu Indikator</a>
                   </p>
@@ -108,12 +108,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="">
                     <table class="table table-striped table-bordered table-responsive">
                       <tbody>
-                        {{-- <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Program RPJMD</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="nm_program_rpjmd_indikator" align="left"></label></td>
-                    </tr> --}}
                         <tr>
-                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD - APBD</td>
                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_rkpd_indikator"
                               align="left"></label></td>
                         </tr>
@@ -128,13 +124,13 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                       <tr>
                         <th width="5%" style="text-align: center; vertical-align:middle">Pilih</th>
+                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                         <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                         <th style="text-align: center; vertical-align:middle">Uraian Indikator</th>
                         <th style="text-align: center; vertical-align:middle">Uraian Tolok Ukur</th>
-                        <th width="5%" style="text-align: center; vertical-align:middle">Target RKPD</th>
                         <th width="5%" style="text-align: center; vertical-align:middle">Target PPAS</th>
+                        <th width="5%" style="text-align: center; vertical-align:middle">Target APBD</th>
                         <th width="50px" style="text-align: center; vertical-align:middle">Status</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -146,20 +142,16 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <br>
                 <div class="divAddUrusan">
                   <p><a id="btnTambahUrusan" class="add-urusan btn btn-labeled btn-success" data-toggle="popover"
-                      data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover"
-                      data-content="Urusan Pelaksana selain yang telah ditetapkan di RPJMD"><span class="btn-label"><i
+                      data-html="true" data-container="body" title="Penyusunan APBD " data-trigger="hover"
+                      data-content="Urusan Pelaksana selain yang telah ditetapkan di RKPD"><span class="btn-label"><i
                           class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Urusan</a></p>
                 </div>
                 <form class="form-horizontal" role="form" autocomplete="off" action="" method="">
                   <div class="">
                     <table class="table table-striped table-bordered table-responsive">
                       <tbody>
-                        {{-- <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Program RPJMD</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="nm_program_rpjmd_urusan" align="left"></label></td>
-                    </tr> --}}
                         <tr>
-                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD - APBD</td>
                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_rkpd_urusan"
                               align="left"></label></td>
                         </tr>
@@ -172,12 +164,11 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        {{-- <th></th> --}}
+                        <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                         <th rowspan="2" width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                         <th rowspan="2" width="35%" style="text-align: center; vertical-align:middle">Uraian Urusan</th>
                         <th rowspan="2" style="text-align: center; vertical-align:middle">Uraian Bidang</th>
                         <th colspan="2" width="10%" style="text-align: center; vertical-align:middle">Pelaksana</th>
-                        <th rowspan="2" width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                       <tr>
                         <th width="5%" style="text-align: center; vertical-align:middle">Jml</th>
@@ -194,14 +185,14 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                 <div class="divAddPelaksana">
                   <p>
                     <a id="btnBackUrusan" class="btn btn-warning hidden" data-toggle="popover" data-html="true"
-                      data-container="body" title="Ranwal RKPD" data-trigger="hover"
+                      data-container="body" title="Penyusunan APBD" data-trigger="hover"
                       data-content="Kembali ke Tabel Urusan"><i class="fa fa-arrow-left fa-fw fa-lg"></i></a>
                     <a id="btnTambahPelaksana" class="add-pelaksana btn btn-labeled btn-success" data-toggle="popover"
-                      data-html="true" data-container="body" title="Ranwal RKPD" data-trigger="hover"
-                      data-content="Perangkat Daerah Pelaksana selain yang telah ditetapkan di RPJMD"><span
+                      data-html="true" data-container="body" title="Penyusunan APBD" data-trigger="hover"
+                      data-content="Perangkat Daerah Pelaksana selain yang telah ditetapkan di RKPD"><span
                         class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span> Tambah Pelaksana</a>
                     <a id="btnReviuPelaksana" class="btn btn-labeled btn-primary" data-toggle="popover" data-html="true"
-                      data-container="body" title="Ranwal RKPD" data-trigger="hover"
+                      data-container="body" title="Penyusunan APBD" data-trigger="hover"
                       data-content="Melakukan Reviu Terhadap Data Pelaksana secara sekaligus atau sesuai pilihan"><span
                         class="btn-label"><i class="fa fa-check-square-o fa-fw fa-lg"></i></span> Reviu Pelaksana</a>
                   </p>
@@ -210,12 +201,8 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                   <div class="">
                     <table class="table table-striped table-bordered table-responsive">
                       <tbody>
-                        {{-- <tr>
-                      <td width="15%" style="text-align: left; vertical-align:top;">Program RPJMD</td>
-                      <td style="text-align: left; vertical-align:top;"><label id="nm_program_rpjmd_pelaksana" align="left"></label></td>
-                    </tr> --}}
                         <tr>
-                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD</td>
+                          <td width="15%" style="text-align: left; vertical-align:top;">Program RKPD - APBD</td>
                           <td style="text-align: left; vertical-align:top;"><label id="nm_program_rkpd_pelaksana"
                               align="left"></label></td>
                         </tr>
@@ -239,12 +226,12 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     <thead>
                       <tr>
                         <th width="5%" style="text-align: center; vertical-align:middle">Pilih</th>
+                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                         <th width="5%" style="text-align: center; vertical-align:middle">No Urut</th>
                         <th width="5%" style="text-align: center; vertical-align:middle">Kode Unit</th>
                         <th style="text-align: center; vertical-align:middle">Nama Unit Pelaksana</th>
                         <th width="20%" style="text-align: center; vertical-align:middle">Pagu Unit</th>
                         <th width="5%" style="text-align: center; vertical-align:middle">Status</th>
-                        <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -260,17 +247,17 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
   </div>
 </div>
 
-@include("apbd.program_rkpd");
-@include("apbd.indikator_program_rkpd");
-@include("apbd.urusan_program_rkpd");
-@include("apbd.pelaksana_program_rkpd");
-@include("apbd.cariIndikator");
-@include("apbd.cariProgramRPJMD");
-@include("apbd.cariRefUnit");
-@include("apbd.StatusProgram");
+@include("90_apbd.program_rkpd");
+@include("90_apbd.indikator_program_rkpd");
+@include("90_apbd.urusan_program_rkpd");
+@include("90_apbd.pelaksana_program_rkpd");
+@include("90_apbd.cariIndikator");
+@include("90_apbd.cariProgramRPJMD");
+@include("90_apbd.cariRefUnit");
+@include("90_apbd.StatusProgram");
 
 @endsection
 
 @section("scripts")
-<script src="{{ asset('/protected/resources/views/apbd/js/js_rkpd.js')}}"></script>
+<script src="{{ asset('/protected/resources/views/90_apbd/js/js_rkpd.js')}}"></script>
 @endsection

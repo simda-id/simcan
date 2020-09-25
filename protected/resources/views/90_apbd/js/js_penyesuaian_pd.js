@@ -1,13 +1,12 @@
 $( document ).ready( function () {
 
-
   var template = Handlebars.compile( $( "#details-template" ).html() );
-  var usulan = Handlebars.compile( $( "#details-usulan" ).html() );
   var detInProg = Handlebars.compile( $( "#details-inProg" ).html() );
   var detInKeg = Handlebars.compile( $( "#details-inKeg" ).html() );
+  var detInSubKeg = Handlebars.compile( $( "#details-inSubKeg" ).html() );
 
   var tahun_temp, unit_temp, sub_unit_temp, ProgRkpd_temp, PelaksanaRkpd_temp, bidang_temp, jenis_belanja_temp, Akses_temp;
-  var id_urusan_rkpd_temp, id_progref_temp, id_progrenja_temp, id_kegrenja_temp, id_aktivitas_temp, id_pelaksana_temp, id_lokasi_temp, id_sub_unit_temp;
+  var id_progref_temp, id_progrenja_temp, id_kegrenja_temp, id_aktivitas_temp, id_pelaksana_temp, id_lokasi_temp, id_sub_unit_temp;
   var id_asb_temp, ur_asb_temp, id_program_renstra_temp, id_satuan_1_aktiv_temp, id_satuan_2_aktiv_temp, vol1_temp,
     vol2_temp, nm_sat_asb1, nm_sat_asb2;
   var dokumen_temp, jns_dokumen_temp, kd_dokumen_temp, ubah_dokumen_temp;
@@ -28,7 +27,6 @@ $( document ).ready( function () {
     setTimeout( function () {
       $( '#pesanx' ).removeClass( 'in' );
     }, 3500 );
-
   };
 
   $( '.page-alert .close' ).click( function ( e ) {
@@ -42,7 +40,6 @@ $( document ).ready( function () {
   } );
 
   function back2Rkpd () {
-
     $( '#divTambahProg' ).hide();
     $( '#divTambahKegiatan' ).hide();
     $( '#divTambahAktivitas' ).hide();
@@ -53,14 +50,13 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
 
     $( '.nav-tabs a[href="#programrkpd"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backProgRkpd', function () {
     back2Rkpd();
   } );
 
   function back2renja () {
-
     $( '#divTambahProg' ).show();
     $( '#divTambahKegiatan' ).hide();
     $( '#divTambahAktivitas' ).hide();
@@ -69,16 +65,14 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
     $( '#divAddSSH' ).hide();
     $( '#divImportASB' ).hide();
-
     $( '.nav-tabs a[href="#program"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backRenja', function () {
     back2renja();
   } );
 
   function back2kegiatan () {
-    // if(status_program_renja_temp==0){
     $( '#divTambahProg' ).hide();
     $( '#divTambahKegiatan' ).show();
     $( '#divTambahAktivitas' ).hide();
@@ -87,12 +81,29 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
     $( '#divAddSSH' ).hide();
     $( '#divImportASB' ).hide();
-    // }
     $( '.nav-tabs a[href="#kegiatan"]' ).tab( 'show' );
-  }
+  };
 
   $( document ).on( 'click', '.backKegiatan', function () {
     back2kegiatan();
+  } );
+
+  function back2subkegiatan () {
+    // if(status_kegiatan_renja_temp==0){
+    $( '#divTambahProg' ).hide();
+    $( '#divTambahKegiatan' ).hide();
+    $( '#divTambahAktivitas' ).hide();
+    $( '#divTambahPelaksana' ).show();
+    $( '#divTambahLokasi' ).hide();
+    $( '#divImportASB' ).hide();
+    $( '#divAddSSH' ).hide();
+    $( '#divImportASB' ).hide();
+    // }
+    $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
+  };
+
+  $( document ).on( 'click', '.backSubKegiatan', function () {
+    back2subkegiatan();
   } );
 
   function back2pelaksana () {
@@ -107,7 +118,8 @@ $( document ).ready( function () {
     $( '#divImportASB' ).hide();
     // }
     $( '.nav-tabs a[href="#pelaksana"]' ).tab( 'show' );
-  }
+    // loadTblPelaksana(id_renja_temp);
+  };
 
   $( document ).on( 'click', '.backPelaksana', function () {
     back2pelaksana();
@@ -126,7 +138,8 @@ $( document ).ready( function () {
     // }
     $( '.nav-tabs a[href="#aktivitas"]' ).tab( 'show' );
     // loadTblAktivitas(id_pelaksana_temp);
-  }
+  };
+
   $( document ).on( 'click', '.backAktivitas', function () {
     back2aktivitas();
   } );
@@ -141,7 +154,7 @@ $( document ).ready( function () {
 
     $( '.nav-tabs a[href="#lokasi"]' ).tab( 'show' );
     // loadTblLokasi(id_aktivitas_temp);
-  }
+  };
 
   $( document ).on( 'click', '.backLokasi', function () {
     back2lokasi();
@@ -170,7 +183,7 @@ $( document ).ready( function () {
 
   $.ajax( {
     type: "GET",
-    url: '../admin/parameter/getUnitUser',
+    url: 'getUnit',
     dataType: "json",
 
     success: function ( data ) {
@@ -190,7 +203,7 @@ $( document ).ready( function () {
 
   $.ajax( {
     type: "GET",
-    url: '../admin/parameter/getSumberDana',
+    url: '../parameter90/getSumberDana',
     dataType: "json",
     success: function ( data ) {
 
@@ -202,7 +215,7 @@ $( document ).ready( function () {
 
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
-        $( 'select[name="sumber_dana"]' ).append( '<option value="' + post.id_sumber_dana + '">' + post.uraian_sumber_dana + '</option>' );
+        $( 'select[name="sumber_dana"]' ).append( '<option value="' + post.id_sd_6 + '">' + post.uraian_sd_6 + '</option>' );
       }
     }
   } );
@@ -217,7 +230,7 @@ $( document ).ready( function () {
       var post, i;
 
       $( 'select[name="zona_ssh"]' ).empty();
-      $( 'select[name="zona_ssh"]' ).append( '<option value="0">---Pilih Zona SSH---</option>' );
+      $( 'select[name="zona_ssh"]' ).append( '<option value="0">---Pilih Zona Wilayah---</option>' );
 
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
@@ -289,7 +302,6 @@ $( document ).ready( function () {
 
     }
   } );
-
   var rekening;
   function loadRekeningSsh ( id, tarif ) {
     rekening = $( '#tblRekening' ).DataTable( {
@@ -297,7 +309,7 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'BfrtIp',
       autoWidth: false,
-      "ajax": { "url": "../admin/parameter/getRekeningSsh/" + id + "/" + tarif },
+      "ajax": { "url": "../parameter90/getRekeningSsh/" + id + "/" + tarif },
       "columns": [
         { data: 'no_urut' },
         { data: 'kd_rekening' },
@@ -306,7 +318,7 @@ $( document ).ready( function () {
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } );
-  };
+  }
 
   var cariProgramRen;
   $( document ).on( 'click', '.btnCariProgramRenstra', function () {
@@ -353,6 +365,28 @@ $( document ).ready( function () {
         serverSide: true,
         dom: 'bfrtIp',
         autoWidth: false,
+        language: {
+          "decimal": ",",
+          "thousands": ".",
+          "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+          "sProcessing": "Sedang memproses...",
+          "sLengthMenu": "Tampilkan _MENU_ entri",
+          "sZeroRecords": "Tidak ditemukan data yang sesuai",
+          "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+          "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+          "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+          "sInfoPostFix": "",
+          "sSearch": "Cari:",
+          "sUrl": "",
+          "oPaginate": {
+            "sFirst": "Pertama",
+            "sPrevious": "Sebelumnya",
+            "sNext": "Selanjutnya",
+            "sLast": "Terakhir"
+          }
+        },
+        "pageLength": 10,
+        "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
         "ajax": { "url": "../admin/parameter/getKegRenstra/" + unit_temp + "/" + id_program_renstra_temp },
         "columns": [
           { data: 'no_urut', sClass: "dt-center" },
@@ -363,8 +397,6 @@ $( document ).ready( function () {
       } );
       $( '#tblCariKegiatanRen' ).DataTable().ajax.reload( null, false );
     }
-
-
   } );
 
   $( '#tblCariKegiatanRenstra tbody' ).on( 'dblclick', 'tr', function () {
@@ -380,19 +412,38 @@ $( document ).ready( function () {
     document.getElementById( "ur_kegiatan_renstra" ).value = data.uraian_kegiatan_renstra;
 
     $( '#cariKegiatanRenstra' ).modal( 'hide' );
-
   } );
 
-
-  var itemSSH
+  var itemSSH;
   $( document ).on( 'click', '#btnparam_cari', function () {
     param = $( '#param_cari' ).val();
     itemSSH = $( '#tblItemSSH' ).DataTable( {
-      // retrieve: true,
       processing: true,
       serverSide: true,
       dom: 'BfrtIp',
       "autoWidth": false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getItemSSH/" + zona_temp + "/" + param.toLowerCase() },
       "columns": [
         { data: 'no_urut', sClass: "dt-center", width: "10px" },
@@ -410,14 +461,10 @@ $( document ).ready( function () {
   } );
 
   $( '#tblRekening tbody' ).on( 'dblclick', 'tr', function () {
-
     var data = rekening.row( this ).data();
-
     document.getElementById( "ur_rekening" ).value = data.kd_rekening + '--' + data.nm_rekening;
     document.getElementById( "id_rekening" ).value = data.id_rekening;
-
     $( '#cariRekening' ).modal( 'hide' );
-
   } );
 
   $( '#tblItemSSH tbody' ).on( 'dblclick', 'tr', function () {
@@ -439,10 +486,8 @@ $( document ).ready( function () {
 
   var zona_tmp;
   $( document ).on( 'click', '.btnCariSSH', function () {
-
     zona_temp = $( '#zona_ssh' ).val();
     $( '#cariItemSSH' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnCariRekening', function () {
@@ -461,27 +506,20 @@ $( document ).ready( function () {
     }
 
     $( '#cariRekening' ).modal( 'show' );
-    loadRekeningSsh( x, y )
+    loadRekeningSsh( x, y );
 
   } );
 
-  var cariLokasiDesa
-  var cariLokasiTeknis
-  var cariLokasiLuar
-
+  var cariLokasiDesa, cariLokasiTeknis, cariLokasiLuar;
   $.ajax( {
     type: "GET",
     url: '../admin/parameter/getKecamatan',
     dataType: "json",
-
     success: function ( data ) {
-
       var j = data.length;
       var post, i;
-
       $( 'select[name="kecamatan"]' ).empty();
       $( 'select[name="kecamatan"]' ).append( '<option value="0">---Pilih Kecamatan---</option>' );
-
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
         $( 'select[name="kecamatan"]' ).append( '<option value="' + post.id_kecamatan + '">' + post.nama_kecamatan + '</option>' );
@@ -490,12 +528,33 @@ $( document ).ready( function () {
   } );
 
   $( "#kecamatan" ).change( function () {
-
     cariLokasiDesa = $( '#tblLokasiWilayah' ).DataTable( {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getLokasiDesa/" + $( '#kecamatan' ).val() },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -514,6 +573,28 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getLokasiDesa/0" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -528,6 +609,28 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getLokasiLuarDaerah" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -541,12 +644,33 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnCariLokasiTeknis', function () {
-
     cariLokasiTeknis = $( '#tblLokasiTeknis' ).DataTable( {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getLokasiTeknis" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -565,12 +689,8 @@ $( document ).ready( function () {
     document.getElementById( "id_lokasi" ).value = data.id_lokasi;
     document.getElementById( "jenis_lokasi" ).value = data.jenis_lokasi;
     document.getElementById( "nm_lokasi" ).value = data.nama_lokasi;
-
-
     document.getElementById( "id_lokasi_pelaksana" ).value = data.id_lokasi;
     document.getElementById( "nm_lokasi_pelaksana" ).value = data.nama_lokasi;
-
-
     $( '#cariLokasiModal' ).modal( 'hide' );
 
   } );
@@ -585,7 +705,6 @@ $( document ).ready( function () {
     document.getElementById( "nm_lokasi_pelaksana" ).value = data.nama_lokasi;
 
     $( '#cariLokasiTeknisModal' ).modal( 'hide' );
-
   } );
 
   $( '#tblLokasiLuar' ).on( 'dblclick', 'tr', function () {
@@ -599,7 +718,6 @@ $( document ).ready( function () {
     document.getElementById( "nm_lokasi_pelaksana" ).value = data.nama_lokasi;
 
     $( '#cariLokasiModal' ).modal( 'hide' );
-
   } );
 
   var CariSubUnit
@@ -611,10 +729,32 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
-      "ajax": { "url": "../admin/parameter/getSubUnitTable/" + unit_temp },
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "ajax": { "url": "../parameter90/getSubUnitTblUser?id_unit=" + unit_temp },
       "columns": [
-        { data: 'no_urut', sClass: "dt-center" },
-        { data: 'nm_sub' }
+        { data: 'kode_sub_unit', sClass: "dt-center" },
+        { data: 'nama_sub_unit' }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -623,23 +763,41 @@ $( document ).ready( function () {
 
   $( '#tblCariSubUnit' ).on( 'dblclick', 'tr', function () {
     var data = CariSubUnit.row( this ).data();
-
     $( '#subunit_pelaksana' ).val( data.nm_sub );
-    $( '#id_subunit_pelaksana' ).val( data.id_sub_unit );
-
+    $( '#id_subunit_pelaksana' ).val( data.id_sub_unit_90 );
     $( '#CariSubUnit' ).modal( 'hide' );
-
   } );
 
   var cariAktivitasASB
   $( document ).on( 'click', '.btnCariASB', function () {
     $( '#cariAktivitasASB' ).modal( 'show' );
-
     cariAktivitasASB = $( '#tblCariAktivitasASB' ).DataTable( {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "../admin/parameter/getAktivitasASB/" + tahun_temp },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -674,10 +832,32 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'BfRtIp',
       autoWidth: false,
-      "ajax": { "url": "../admin/parameter/getProgRef/" + bidang_temp },
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "ajax": { "url": "../parameter90/getProgramTbl?id_bidang=" + bidang_temp },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
-        { data: 'kd_program', sClass: "dt-center" },
+        { data: 'kode_program', sClass: "dt-center" },
         { data: 'uraian_program' }
       ],
       "order": [ [ 0, 'asc' ] ],
@@ -688,7 +868,7 @@ $( document ).ready( function () {
   $( '#tblCariProgramRef tbody' ).on( 'dblclick', 'tr', function () {
     var data = cariProgramRef.row( this ).data();
 
-    $( '#ur_program_ref' ).val( data.kd_program + " - " + data.uraian_program );
+    $( '#ur_program_ref' ).val( data.kode_program + " " + data.uraian_program );
     $( '#id_program_ref' ).val( data.id_program );
     $( '#ur_program_renja' ).val( data.uraian_program );
 
@@ -704,11 +884,33 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'bfrtIp',
       autoWidth: false,
-      "ajax": { "url": "../admin/parameter/getKegRef/" + id_progref_temp },
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "ajax": { "url": "../parameter90/getKegiatanTbl?id_program=" + id_progref_temp },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
-        { data: 'kd_kegiatan', sClass: "dt-center" },
-        { data: 'nm_kegiatan' }
+        { data: 'kode_kegiatan', sClass: "dt-center" },
+        { data: 'uraian_kegiatan' }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -718,11 +920,62 @@ $( document ).ready( function () {
   $( '#tblCariKegiatanRef tbody' ).on( 'dblclick', 'tr', function () {
     var data = cariKegiatanRef.row( this ).data();
 
-    $( '#ur_kegiatan_forum' ).val( data.nm_kegiatan );
-    $( '#ur_kegiatan_ref' ).val( data.kd_kegiatan + ' - ' + data.nm_kegiatan );
+    $( '#ur_kegiatan_forum' ).val( data.uraian_kegiatan );
+    $( '#ur_kegiatan_ref' ).val( data.kode_kegiatan + ' - ' + data.uraian_kegiatan );
     $( '#id_kegiatan_ref' ).val( data.id_kegiatan );
 
     $( '#cariKegiatanRef' ).modal( 'hide' );
+  } );
+
+  var cariSubKegiatanRef
+  $( document ).on( 'click', '.btnCariSubKegiatanRef', function () {
+    $( '#cariSubKegiatanRef' ).modal( 'show' );
+    cariSubKegiatanRef = $( '#tblCariSubKegiatanRef' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      dom: 'bfrtIp',
+      autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "ajax": { "url": "../parameter90/getSubKegiatanTbl?id_kegiatan=" + id_kegref_temp },
+      "columns": [
+        { data: 'no_urut', sClass: "dt-center" },
+        { data: 'kode_sub_kegiatan', sClass: "dt-center" },
+        { data: 'uraian_sub_kegiatan' }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+      "bDestroy": true
+    } );
+  } );
+
+  $( '#tblCariSubKegiatanRef tbody' ).on( 'dblclick', 'tr', function () {
+    var data = cariSubKegiatanRef.row( this ).data();
+
+    $( '#ur_subkegiatan_forum' ).val( data.uraian_sub_kegiatan );
+    $( '#ur_subkegiatan_ref' ).val( data.kode_sub_kegiatan + ' - ' + data.uraian_sub_kegiatan );
+    $( '#id_subkegiatan_ref' ).val( data.id_sub_kegiatan );
+
+    $( '#cariSubKegiatanRef' ).modal( 'hide' );
 
   } );
 
@@ -731,6 +984,28 @@ $( document ).ready( function () {
   $( '#tblProgramRKPD' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -743,6 +1018,28 @@ $( document ).ready( function () {
       serverSide: true,
       dom: 'BfRtip',
       "autoWidth": false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "./getProgramRkpd" + pars },
       "columns": [
         {
@@ -781,7 +1078,7 @@ $( document ).ready( function () {
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } );
-  }
+  };
 
   function initTableBidang ( tableId, data ) {
     tblChildBidang = $( '#' + tableId ).DataTable( {
@@ -790,31 +1087,49 @@ $( document ).ready( function () {
       ajax: data.details_url,
       dom: 'BFRtIP',
       autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       columns: [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center", width: "50px" },
         { data: 'kode_bid', name: 'kode_bid', sClass: "dt-center", width: '15%' },
-        { data: 'nm_bidang', name: 'nm_bidang' },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center", width: "50px" }
+        { data: 'nm_bidang', name: 'nm_bidang' }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
-    } )
+    } );
 
 
     $( '#' + tableId + '  tbody' ).on( 'click', 'tr', function () {
-
       var data = tblChildBidang.row( this ).data();
-
       tahun_temp = data.tahun_anggaran;
       unit_temp = data.id_unit;
       PelaksanaRkpd_temp = data.id_pelaksana_anggaran;
       bidang_temp = data.id_bidang;
       ProgRkpd_temp = data.id_anggaran_pemda;
       Akses_temp = data.hak_akses;
-      dokumen_temp = data.id_dokumen_keu;
       jns_dokumen_temp = data.jns_dokumen_keu;
       kd_dokumen_temp = data.kd_dokumen_keu;
       ubah_dokumen_temp = data.id_perubahan;
-      id_urusan_rkpd_temp = data.id_urusan_anggaran;
 
       $( '#nm_program_progrenja' ).text( data.uraian_program_rpjmd );
       if ( Akses_temp == 0 ) {
@@ -825,44 +1140,13 @@ $( document ).ready( function () {
         $( '#divTambahProg' ).show();
       }
 
-      vars = "?id_urusan=" + id_urusan_rkpd_temp;
-      $.ajax( {
-        type: "GET",
-        url: 'getPelaksanaOPD' + vars,
-        dataType: "json",
-        success: function ( data ) {
-
-          var j = data.length;
-          var post, i;
-
-          $( 'select[name="opdPelaksana"]' ).empty();
-          $( 'select[name="opdPelaksana"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
-          $( 'select[name="opdPelaksana1"]' ).empty();
-          $( 'select[name="opdPelaksana1"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
-          $( 'select[name="opdPelaksana2"]' ).empty();
-          $( 'select[name="opdPelaksana2"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
-          $( 'select[name="opdPelaksana3"]' ).empty();
-          $( 'select[name="opdPelaksana3"]' ).append( '<option value="0">---Pilih OPD Pelaksana RKPD---</option>' );
-
-          for ( i = 0; i < j; i++ ) {
-            post = data[ i ];
-            $( 'select[name="opdPelaksana"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
-            $( 'select[name="opdPelaksana1"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
-            $( 'select[name="opdPelaksana2"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
-            $( 'select[name="opdPelaksana3"]' ).append( '<option value="' + post.id_pelaksana_anggaran + '">' + post.nm_unit + '</option>' );
-          }
-        }
-      } );
-
       $( '.nav-tabs a[href="#program"]' ).tab( 'show' );
       loadTblProgRenja( unit_temp, PelaksanaRkpd_temp );
 
     } );
-
-  }
+  };
 
   $( '#tblProgramRKPD tbody' ).on( 'click', 'td.details-control', function () {
-
     var tr = $( this ).closest( 'tr' );
     var row = prog_rkpd_tbl.row( tr );
     var tableId = 'bidang-' + row.data().id_unit + row.data().id_anggaran_pemda;
@@ -879,16 +1163,13 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '.btnViewProgSkpd', function () {
-
     var data = tblChildBidang.row( $( this ).parents( 'tr' ) ).data();
-
     tahun_temp = data.tahun_anggaran;
     unit_temp = data.id_unit;
     PelaksanaRkpd_temp = data.id_pelaksana_anggaran;
     bidang_temp = data.id_bidang;
     ProgRkpd_temp = data.id_anggaran_pemda;
     Akses_temp = data.hak_akses;
-    dokumen_temp = data.id_dokumen_keu;
     jns_dokumen_temp = data.jns_dokumen_keu;
     kd_dokumen_temp = data.kd_dokumen_keu;
     ubah_dokumen_temp = data.id_perubahan;
@@ -912,6 +1193,28 @@ $( document ).ready( function () {
   $( '#tblProgram' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -922,11 +1225,28 @@ $( document ).ready( function () {
       dom: 'BfRtip',
       autoWidth: false,
       "ajax": { "url": "./getProgramRenja/" + unit + "/" + id_forum },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
-
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
         {
           "className": 'details-control',
@@ -936,15 +1256,9 @@ $( document ).ready( function () {
           "defaultContent": '',
           "width": "5px"
         },
+        { data: 'action', 'searchable': false, 'orderable': false },
         { data: 'urut', sClass: "dt-center", width: "5px" },
-        // { data: 'uraian_program_renstra'},
-        {
-          data: 'uraian', 'searchable': false, 'orderable': false, sClass: "dt-left",
-          render: function ( data, type, row, meta ) {
-            return row.uraian_program_renstra +
-              '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>';
-          }
-        },
+        { data: 'uraian_program' },
         {
           data: 'pagu_anggaran', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
@@ -960,15 +1274,12 @@ $( document ).ready( function () {
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
           }
-        },
-        { data: 'action', 'searchable': false, 'orderable': false }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } );
-  }
-
-
+  };
 
   var tblInProg;
   function initInProg ( tableId, data ) {
@@ -978,11 +1289,30 @@ $( document ).ready( function () {
       ajax: data.details_url,
       dom: 'BfRtIp',
       autoWidth: false,
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_program' },
         {
@@ -998,17 +1328,14 @@ $( document ).ready( function () {
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
           }
-        },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
-    } )
-
-  }
+    } );
+  };
 
   $( '#tblProgram tbody' ).on( 'click', 'td.details-control', function () {
-
     var tr = $( this ).closest( 'tr' );
     var row = prog_renja_tbl.row( tr );
     var tableId = 'inProg-' + row.data().id_program_pd;
@@ -1028,8 +1355,31 @@ $( document ).ready( function () {
   $( '#tblKegiatanRenja' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
+
   function loadTblKegiatanRenja ( id_program ) {
     keg_renja_tbl = $( '#tblKegiatanRenja' ).DataTable( {
       processing: true,
@@ -1037,10 +1387,28 @@ $( document ).ready( function () {
       dom: 'BfRtip',
       autoWidth: false,
       "ajax": { "url": "./getKegiatanRenja/" + id_program },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
         {
           "className": 'details-control',
@@ -1050,14 +1418,10 @@ $( document ).ready( function () {
           "defaultContent": '',
           "width": "5px"
         },
+
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center", width: "5px" },
-        {
-          data: 'uraian', 'searchable': false, 'orderable': false, sClass: "dt-left",
-          render: function ( data, type, row, meta ) {
-            return row.uraian_kegiatan_forum +
-              '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>';
-          }
-        },
+        { data: 'nm_kegiatan' },
         {
           data: 'pagu_tahun_kegiatan', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
@@ -1066,23 +1430,17 @@ $( document ).ready( function () {
           data: 'pagu_forum', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
         },
-        { data: 'jml_aktivitas', sClass: "dt-center" },
-        {
-          data: 'jml_pagu_aktivitas', sClass: "dt-right",
-          render: $.fn.dataTable.render.number( '.', ',', 2, '' )
-        },
         {
           data: 'icon', 'searchable': false, 'orderable': false, sClass: "dt-center", width: "5px",
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
           }
-        },
-        { data: 'action', 'searchable': false, 'orderable': false }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } );
-  }
+  };
 
   function initInKeg ( tableId, data ) {
     tblInKeg = $( '#' + tableId ).DataTable( {
@@ -1091,11 +1449,31 @@ $( document ).ready( function () {
       ajax: data.details_url,
       dom: 'BFRtIp',
       autoWidth: false,
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_kegiatan' },
         {
@@ -1111,16 +1489,14 @@ $( document ).ready( function () {
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
           }
-        },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } )
-  }
+  };
 
   $( '#tblKegiatanRenja tbody' ).on( 'click', 'td.details-control', function () {
-
     var tr = $( this ).closest( 'tr' );
     var row = keg_renja_tbl.row( tr );
     var tableId = 'inKeg-' + row.data().id_kegiatan_pd;
@@ -1136,10 +1512,191 @@ $( document ).ready( function () {
     }
   } );
 
+  var subkeg_renja_tbl;
+  $( '#tblSubKegiatanRenja' ).DataTable( {
+    dom: 'BfRtip',
+    autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+    bDestroy: true
+  } );
+
+  function loadTblSubKegiatanRenja ( id_kegiatan ) {
+    subkeg_renja_tbl = $( '#tblSubKegiatanRenja' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      dom: 'BfRtip',
+      autoWidth: false,
+      "ajax": { "url": "./getSubKegiatanRenja/" + id_kegiatan },
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "columns": [
+        {
+          "className": 'details-control',
+          "orderable": false,
+          "searchable": false,
+          "data": null,
+          "defaultContent": '',
+          "width": "5px"
+        },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
+        { data: 'urut', sClass: "dt-center", width: "5px" },
+        { data: 'nm_subkegiatan' },
+        {
+          data: 'pagu_tahun_kegiatan', sClass: "dt-right",
+          render: $.fn.dataTable.render.number( '.', ',', 2, '' )
+        },
+        {
+          data: 'pagu_forum', sClass: "dt-right",
+          render: $.fn.dataTable.render.number( '.', ',', 2, '' )
+        },
+        {
+          data: 'icon', 'searchable': false, 'orderable': false, sClass: "dt-center", width: "5px",
+          render: function ( data, type, row, meta ) {
+            return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
+          }
+        }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+      "bDestroy": true
+    } );
+  };
+
+  function initInSubKeg ( tableId, data ) {
+    tblInSubKeg = $( '#' + tableId ).DataTable( {
+      processing: true,
+      serverSide: true,
+      ajax: data.details_url,
+      dom: 'BFRtIp',
+      autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
+        { data: 'urut', sClass: "dt-center" },
+        { data: 'nm_indikator' },
+        {
+          data: 'target_renstra', sClass: "dt-right",
+          render: $.fn.dataTable.render.number( '.', ',', 2, '' )
+        },
+        {
+          data: 'target_renja', sClass: "dt-right",
+          render: $.fn.dataTable.render.number( '.', ',', 2, '' )
+        },
+        {
+          data: 'icon', 'searchable': false, 'orderable': false, sClass: "dt-center",
+          render: function ( data, type, row, meta ) {
+            return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
+          }
+        }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+      "bDestroy": true
+    } )
+  };
+
+  $( '#tblSubKegiatanRenja tbody' ).on( 'click', 'td.details-control', function () {
+    var tr = $( this ).closest( 'tr' );
+    var row = subkeg_renja_tbl.row( tr );
+    var tableId = 'inSubKeg-' + row.data().id_subkegiatan_pd;
+
+    if ( row.child.isShown() ) {
+      row.child.hide();
+      tr.removeClass( 'shown' );
+    } else {
+      row.child( detInSubKeg( row.data() ) ).show();
+      initInSubKeg( tableId, row.data() );
+      tr.addClass( 'shown' );
+      tr.next().find( 'td' ).addClass( 'no-padding bg-gray' );
+    }
+  } );
+
   var aktivitas_tbl;
   $( '#tblAktivitas' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -1150,16 +1707,36 @@ $( document ).ready( function () {
       dom: 'BfRtip',
       autoWidth: false,
       "ajax": { "url": "./getAktivitas/" + id_forum },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center", width: "5px" },
         {
-          data: 'uraian', 'searchable': false, 'orderable': false, sClass: "dt-left",
+          data: 'uraian', 'searchable': true, 'orderable': true, sClass: "dt-left",
           render: function ( data, type, row, meta ) {
-            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span> <span class="label" style="background-color: ' + row.status_warna_1 + '; color:#fff;">' + row.status_label_1 + '</span>';
+            // return row.uraian_aktivitas_kegiatan + '  <i class="'+row.img+' fa-lg text-primary"/>';
+            return row.uraian_aktivitas_kegiatan + '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>';
           }
         },
         {
@@ -1183,8 +1760,7 @@ $( document ).ready( function () {
           render: function ( data, type, row, meta ) {
             return '<i class="' + row.status_icon + '" style="color:' + row.warna + ';"/>';
           }
-        },
-        { data: 'action', 'searchable': false, width: "20px", 'orderable': false }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -1195,6 +1771,28 @@ $( document ).ready( function () {
   $( '#tblPelaksana' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -1205,13 +1803,33 @@ $( document ).ready( function () {
       dom: 'BfRtip',
       autoWidth: false,
       "ajax": { "url": "./getPelaksanaAktivitas/" + id_aktivitas },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
-        { data: 'nm_sub' },
+        { data: 'nama_sub' },
         { data: 'nama_lokasi' },
         {
           data: 'jml_pagu_aktivitas', sClass: "dt-right",
@@ -1224,8 +1842,7 @@ $( document ).ready( function () {
         {
           data: 'jml_lokasi', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
-        },
-        { data: 'action', 'searchable': false, 'orderable': false }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -1236,6 +1853,28 @@ $( document ).ready( function () {
   $( '#tblLokasi' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -1247,11 +1886,30 @@ $( document ).ready( function () {
       deferRender: true,
       autoWidth: false,
       "ajax": { "url": "./getLokasiAktivitas/" + id_pelaksana },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'sumber_display', sClass: "dt-center" },
         { data: 'nama_lokasi' },
@@ -1263,77 +1921,39 @@ $( document ).ready( function () {
           data: 'volume_2', sClass: "dt-center", 'searchable': false, 'orderable': false,
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
         },
-        { data: 'usulan_display', sClass: "dt-center" },
-        { data: 'action', 'searchable': false, 'orderable': false }
+        { data: 'usulan_display', sClass: "dt-center" }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
     } );
-  }
-
-  var tblChildUsulan
-
-  function initTableUsulan ( tableId, data ) {
-    tblChildUsulan = $( '#' + tableId ).DataTable( {
-      processing: true,
-      serverSide: true,
-      ajax: data.details_url,
-      dom: 'BFRtIP',
-      autoWidth: false,
-      columns: [
-        { data: 'no_urut', sClass: "dt-center" },
-        { data: 'id_ref_usulan', sClass: "dt-center" },
-        { data: 'display_sumber' },
-        {
-          data: 'volume_1_usulan', sClass: "dt-right", 'searchable': false, 'orderable': false,
-          render: $.fn.dataTable.render.number( '.', ',', 0, '' )
-        },
-        {
-          data: 'volume_2_usulan', sClass: "dt-right", 'searchable': false, 'orderable': false,
-          render: $.fn.dataTable.render.number( '.', ',', 0, '' )
-        },
-        {
-          data: 'volume_1_forum', sClass: "dt-right", 'searchable': false, 'orderable': false,
-          render: $.fn.dataTable.render.number( '.', ',', 0, '' )
-        },
-        {
-          data: 'volume_2_forum', sClass: "dt-right", 'searchable': false, 'orderable': false,
-          render: $.fn.dataTable.render.number( '.', ',', 0, '' )
-        },
-        {
-          data: 'icon', 'searchable': false, 'orderable': false, sClass: "dt-center",
-          render: function ( data, type, row, meta ) {
-            return '<i class="' + row.status_icon + '" style="font-size:16px;color:' + row.warna + ';"/>';
-          }
-        },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center", width: "50px" }
-      ],
-      "order": [ [ 0, 'asc' ] ],
-      "bDestroy": true
-    } )
-  }
-
-  $( '#tblLokasi tbody' ).on( 'click', 'td.details-control', function () {
-
-    var tr = $( this ).closest( 'tr' );
-    var row = lokasi_tbl.row( tr );
-    var tableId = 'usulan-' + row.data().id_lokasi_forum + row.data().id_pelaksana_forum;
-
-    if ( row.child.isShown() ) {
-      row.child.hide();
-      tr.removeClass( 'shown' );
-    } else {
-      row.child( usulan( row.data() ) ).show();
-      initTableUsulan( tableId, row.data() );
-      tr.addClass( 'shown' );
-      tr.next().find( 'td' ).addClass( 'no-padding bg-gray' );
-    }
-  } );
+  };
 
   var belanja_renja_tbl;
   $( '#tblBelanja' ).DataTable( {
     dom: 'BfRtip',
     autoWidth: false,
+    language: {
+      "decimal": ",",
+      "thousands": ".",
+      "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+      }
+    },
+    "pageLength": 10,
+    "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
     bDestroy: true
   } );
 
@@ -1344,16 +1964,32 @@ $( document ).ready( function () {
       autoWidth: false,
       dom: 'BfRtip',
       "ajax": { "url": "./getBelanja/" + lokasi },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'no_urut', sClass: "dt-center" },
         { data: 'uraian_tarif_ssh' },
-        {
-          data: 'rekening_display'
-        },
         {
           data: 'volume_1', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
@@ -1369,8 +2005,7 @@ $( document ).ready( function () {
         {
           data: 'jml_belanja', sClass: "dt-right",
           render: $.fn.dataTable.render.number( '.', ',', 2, '' )
-        },
-        { data: 'action', 'searchable': false, 'orderable': false }
+        }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -1378,16 +2013,14 @@ $( document ).ready( function () {
   }
 
   $( '#tblProgram tbody' ).on( 'dblclick', 'tr', function () {
-
     var data = prog_renja_tbl.row( this ).data();
-
     id_progrenja_temp = data.id_program_pd;
     id_progref_temp = data.id_program_ref;
     id_program_renstra_temp = data.id_program_renstra;
     jenis_belanja_temp = data.jenis_belanja;
 
     $( '#nm_progrkpd_kegrenja' ).text( $( '#nm_program_progrenja' ).text() );
-    $( '#nm_progrenja_kegrenja' ).text( data.uraian_program_renstra );
+    $( '#nm_progrenja_kegrenja' ).text( data.uraian_program );
 
     if ( Akses_temp == 0 ) {
       $( '#btnTambahKegiatan' ).hide();
@@ -1403,23 +2036,19 @@ $( document ).ready( function () {
     }
 
     $( '.nav-tabs a[href="#kegiatan"]' ).tab( 'show' );
-
     loadTblKegiatanRenja( id_progrenja_temp );
     back2kegiatan();
-
   } );
 
   $( document ).on( 'click', '.view-kegiatan', function () {
-
     var data = prog_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     id_progrenja_temp = data.id_program_pd;
     id_progref_temp = data.id_program_ref;
     id_program_renstra_temp = data.id_program_renstra;
     jenis_belanja_temp = data.jenis_belanja;
 
     $( '#nm_progrkpd_kegrenja' ).text( $( '#nm_program_progrenja' ).text() );
-    $( '#nm_progrenja_kegrenja' ).text( data.uraian_program_renstra );
+    $( '#nm_progrenja_kegrenja' ).text( data.uraian_program );
     if ( Akses_temp == 0 ) {
       $( '#btnTambahKegiatan' ).hide();
       $( '#divTambahKegiatan' ).hide();
@@ -1434,20 +2063,74 @@ $( document ).ready( function () {
     }
 
     $( '.nav-tabs a[href="#kegiatan"]' ).tab( 'show' );
-
     loadTblKegiatanRenja( id_progrenja_temp );
     back2kegiatan();
   } );
 
+  var id_kegref_temp;
   $( '#tblKegiatanRenja tbody' ).on( 'dblclick', 'tr', function () {
-
     var data = keg_renja_tbl.row( this ).data();
-
     id_kegrenja_temp = data.id_kegiatan_pd;
+    id_kegref_temp = data.id_kegiatan_ref;
+
+    $( '#nm_progrkpd_subkeg' ).text( $( '#nm_program_progrenja' ).text() );
+    $( '#nm_progrenja_subkeg' ).text( $( '#nm_progrenja_kegrenja' ).text() );
+    $( '#nm_kegrenja_subkeg' ).text( data.nm_kegiatan );
+
+    if ( Akses_temp == 0 ) {
+      $( '#btnTambahSubKegiatan' ).hide();
+      $( '#divTambahSubKegiatan' ).hide();
+    } else {
+      if ( data.status_data == 0 ) {
+        $( '#btnTambahSubKegiatan' ).show();
+        $( '#divTambahSubKegiatan' ).show();
+      } else {
+        $( '#btnTambahSubKegiatan' ).hide();
+        $( '#divTambahSubKegiatan' ).hide();
+      }
+    }
+
+    $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
+    loadTblSubKegiatanRenja( id_kegrenja_temp );
+    back2subkegiatan();
+  } );
+
+  $( document ).on( 'click', '#btnViewSubKegiatan', function () {
+    var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_kegrenja_temp = data.id_kegiatan_pd;
+    id_kegref_temp = data.id_kegiatan_ref;
 
     $( '#nm_progrkpd_pelaksana' ).text( $( '#nm_program_progrenja' ).text() );
     $( '#nm_progrenja_pelaksana' ).text( $( '#nm_progrenja_kegrenja' ).text() );
-    $( '#nm_kegrenja_pelaksana' ).text( data.uraian_kegiatan_forum );
+    $( '#nm_kegrenja_pelaksana' ).text( data.nm_kegiatan );
+
+    if ( Akses_temp == 0 ) {
+      $( '#btnTambahSubKegiatan' ).hide();
+      $( '#divTambahSubKegiatan' ).hide();
+    } else {
+      if ( data.status_data == 0 ) {
+        $( '#btnTambahSubKegiatan' ).show();
+        $( '#divTambahSubKegiatan' ).show();
+      } else {
+        $( '#btnTambahSubKegiatan' ).hide();
+        $( '#divTambahSubKegiatan' ).hide();
+      }
+    }
+
+    $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
+    loadTblSubKegiatanRenja( id_kegrenja_temp );
+    back2subkegiatan();
+  } );
+
+  var id_subkegrenja_temp;
+  $( '#tblSubKegiatanRenja tbody' ).on( 'dblclick', 'tr', function () {
+    var data = subkeg_renja_tbl.row( this ).data();
+    id_subkegrenja_temp = data.id_subkegiatan_pd;
+
+    $( '#nm_progrkpd_pelaksana' ).text( $( '#nm_program_progrenja' ).text() );
+    $( '#nm_progrenja_pelaksana' ).text( $( '#nm_progrenja_kegrenja' ).text() );
+    $( '#nm_kegrenja_pelaksana' ).text( $( '#nm_kegrenja_subkeg' ).text() );
+    $( '#nm_subkeg_pelaksana' ).text( data.nm_subkegiatan );
 
     if ( data.status_data == 0 ) {
       $( '#btnTambahPelaksana' ).show();
@@ -1457,27 +2140,67 @@ $( document ).ready( function () {
       $( '#btnTambahAktivitas' ).hide();
     }
 
-    $( '.nav-tabs a[href="#pelaksana"]' ).tab( 'show' );
-    loadTblPelaksana( id_kegrenja_temp );
+    $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
+    loadTblPelaksana( id_subkegrenja_temp );
     back2pelaksana();
-
   } );
 
-  $( document ).on( 'click', '#view-aktivitas', function () {
+  $( document ).on( 'click', '#btnViewPelaksana', function () {
+    var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    id_subkegrenja_temp = data.id_subkegiatan_pd;
 
-    var data = pelaksana_tbl.row( $( this ).parents( 'tr' ) ).data();
+    $( '#nm_progrkpd_pelaksana' ).text( $( '#nm_program_progrenja' ).text() );
+    $( '#nm_progrenja_pelaksana' ).text( $( '#nm_progrenja_kegrenja' ).text() );
+    $( '#nm_kegrenja_pelaksana' ).text( $( '#nm_kegrenja_subkeg' ).text() );
+    $( '#nm_subkeg_pelaksana' ).text( data.nm_subkegiatan );
 
+    if ( data.status_data == 0 ) {
+      $( '#btnTambahPelaksana' ).show();
+    } else {
+      $( '#btnTambahPelaksana' ).hide();
+    }
+
+    $( '.nav-tabs a[href="#subkegiatan"]' ).tab( 'show' );
+    loadTblPelaksana( id_subkegrenja_temp );
+    back2pelaksana();
+  } );
+
+  $( '#tblPelaksana tbody' ).on( 'dblclick', 'tr', function () {
+    var data = pelaksana_tbl.row( this ).data();
     sub_unit_temp = data.nm_sub;
     id_pelaksana_temp = data.id_pelaksana_pd;
     id_sub_unit_temp = data.id_sub_unit;
 
     $( '#nm_progrkpd_aktivitas' ).text( $( '#nm_program_progrenja' ).text() );
     $( '#nm_progrenja_aktivitas' ).text( $( '#nm_progrenja_kegrenja' ).text() );
-    $( '#nm_kegrenja_aktivitas' ).text( $( '#nm_kegrenja_aktivitas' ).text() );
-    $( '#nm_aktivitas_pelaksana' ).text( data.nm_sub );
+    $( '#nm_kegrenja_aktivitas' ).text( $( '#nm_kegrenja_pelaksana' ).text() );
+    $( '#nm_subkeg_aktivitas' ).text( $( '#nm_subkeg_pelaksana' ).text() );
+    $( '#nm_aktivitas_pelaksana' ).text( data.nama_sub );
 
     $( '.nav-tabs a[href="#aktivitas"]' ).tab( 'show' );
-    if ( data.status_kegiatan == 0 ) {
+    if ( data.status_subkegiatan == 0 ) {
+      $( '#btnTambahAktivitas' ).show();
+    } else {
+      $( '#btnTambahAktivitas' ).hide();
+    }
+    loadTblAktivitas( id_pelaksana_temp );
+    back2aktivitas();
+  } );
+
+  $( document ).on( 'click', '#view-aktivitas', function () {
+    var data = pelaksana_tbl.row( $( this ).parents( 'tr' ) ).data();
+    sub_unit_temp = data.nm_sub;
+    id_pelaksana_temp = data.id_pelaksana_pd;
+    id_sub_unit_temp = data.id_sub_unit;
+
+    $( '#nm_progrkpd_aktivitas' ).text( $( '#nm_program_progrenja' ).text() );
+    $( '#nm_progrenja_aktivitas' ).text( $( '#nm_progrenja_kegrenja' ).text() );
+    $( '#nm_kegrenja_aktivitas' ).text( $( '#nm_kegrenja_pelaksana' ).text() );
+    $( '#nm_subkeg_aktivitas' ).text( $( '#nm_subkeg_pelaksana' ).text() );
+    $( '#nm_aktivitas_pelaksana' ).text( data.nama_sub );
+
+    $( '.nav-tabs a[href="#aktivitas"]' ).tab( 'show' );
+    if ( data.status_subkegiatan == 0 ) {
       $( '#btnTambahAktivitas' ).show();
     } else {
       $( '#btnTambahAktivitas' ).hide();
@@ -1487,87 +2210,42 @@ $( document ).ready( function () {
   } );
 
   $( '#tblAktivitas tbody' ).on( 'dblclick', 'tr', function () {
-
     var data = aktivitas_tbl.row( this ).data();
-
     id_aktivitas_temp = data.id_aktivitas_pd;
     id_asb_temp = data.id_aktivitas_asb;
     id_satuan_1_aktiv_temp = data.id_satuan_1;
     id_satuan_2_aktiv_temp = data.id_satuan_2;
     nm_sat_asb1 = data.ur_satuan_1;
     nm_sat_asb2 = data.ur_satuan_2;
-
     vol1_temp = data.jml_vol_1;
     vol2_temp = data.jml_vol_2;
 
-    $( '#nm_progrkpd_lokasi' ).text( $( '#nm_program_progrenja' ).text() );
-    $( '#nm_progrenja_lokasi' ).text( $( '#nm_progrenja_kegrenja' ).text() );
-    $( '#nm_kegrenja_lokasi' ).text( $( '#nm_kegrenja_aktivitas' ).text() );
-    $( '#nm_aktivitas_lokasi' ).text( data.uraian_aktivitas_kegiatan );
-    $( '#nm_sub_lokasi' ).text( $( '#nm_aktivitas_pelaksana' ).text() );
+    $( '#nm_progrkpd_belanja' ).text( $( '#nm_program_progrenja' ).text() );
+    $( '#nm_progrenja_belanja' ).text( $( '#nm_progrenja_kegrenja' ).text() );
+    $( '#nm_kegrenja_belanja' ).text( $( '#nm_kegrenja_aktivitas' ).text() );
+    $( '#nm_aktivitas_belanja' ).text( data.uraian_aktivitas_kegiatan );
+    $( '#nm_sub_belanja' ).text( $( '#nm_aktivitas_pelaksana' ).text() );
+    $( '#nm_subkeg_belanja' ).text( $( '#nm_subkeg_aktivitas' ).text() );
 
     if ( data.status_data == 0 ) {
-      $( '#btnTambahLokasi' ).show();
+      if ( data.sumber_aktivitas == 0 ) {
+        $( '#divAddSSH' ).hide();
+        $( '#divImportASB' ).show();
+      } else {
+        $( '#divAddSSH' ).show();
+        $( '#divImportASB' ).hide();
+      }
     } else {
-      $( '#btnTambahLokasi' ).hide();
+      $( '#divAddSSH' ).hide();
+      $( '#divImportASB' ).hide();
     }
 
-    $( '.nav-tabs a[href="#lokasi"]' ).tab( 'show' );
-    loadTblLokasi( id_aktivitas_temp );
-    back2lokasi();
-
-  } );
-
-  $( document ).on( 'click', '#btnViewPelaksana', function () {
-
-    var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-    id_kegrenja_temp = data.id_kegiatan_pd;
-
-    $( '#nm_progrkpd_pelaksana' ).text( $( '#nm_program_progrenja' ).text() );
-    $( '#nm_progrenja_pelaksana' ).text( $( '#nm_progrenja_kegrenja' ).text() );
-    $( '#nm_kegrenja_pelaksana' ).text( data.uraian_kegiatan_forum );
-
-    if ( data.status_data == 0 ) {
-      $( '#btnTambahPelaksana' ).show();
-      $( '#btnTambahAktivitas' ).show();
-    } else {
-      $( '#btnTambahPelaksana' ).hide();
-      $( '#btnTambahAktivitas' ).hide();
-    }
-
-    $( '.nav-tabs a[href="#pelaksana"]' ).tab( 'show' );
-    loadTblPelaksana( id_kegrenja_temp );
-    back2pelaksana();
-  } );
-
-  $( '#tblPelaksana tbody' ).on( 'dblclick', 'tr', function () {
-
-    var data = pelaksana_tbl.row( this ).data();
-
-    sub_unit_temp = data.nm_sub;
-    id_pelaksana_temp = data.id_pelaksana_pd;
-    id_sub_unit_temp = data.id_sub_unit;
-
-    $( '#nm_progrkpd_aktivitas' ).text( $( '#nm_program_progrenja' ).text() );
-    $( '#nm_progrenja_aktivitas' ).text( $( '#nm_progrenja_kegrenja' ).text() );
-    $( '#nm_kegrenja_aktivitas' ).text( $( '#nm_kegrenja_pelaksana' ).text() );
-    $( '#nm_aktivitas_pelaksana' ).text( data.nm_sub );
-
-    $( '.nav-tabs a[href="#aktivitas"]' ).tab( 'show' );
-    if ( data.status_kegiatan == 0 ) {
-      $( '#btnTambahAktivitas' ).show();
-    } else {
-      $( '#btnTambahAktivitas' ).hide();
-    }
-    loadTblAktivitas( id_pelaksana_temp );
-    back2aktivitas();
-
+    $( '.nav-tabs a[href="#belanja"]' ).tab( 'show' );
+    loadTblBelanja( id_aktivitas_temp );
   } );
 
   $( document ).on( 'click', '#btnViewLokasi', function () {
-
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     id_aktivitas_temp = data.id_aktivitas_pd;
     id_asb_temp = data.id_aktivitas_asb;
     id_satuan_1_aktiv_temp = data.id_satuan_1;
@@ -1582,6 +2260,7 @@ $( document ).ready( function () {
     $( '#nm_kegrenja_lokasi' ).text( $( '#nm_kegrenja_pelaksana' ).text() );
     $( '#nm_aktivitas_lokasi' ).text( data.uraian_aktivitas_kegiatan );
     $( '#nm_sub_lokasi' ).text( $( '#nm_aktivitas_pelaksana' ).text() );
+    $( '#nm_subkeg_lokasi' ).text( $( '#nm_subkeg_aktivitas' ).text() );
 
     if ( data.status_data == 0 ) {
       $( '#btnTambahLokasi' ).show();
@@ -1597,16 +2276,6 @@ $( document ).ready( function () {
   $( document ).on( 'click', '#btnViewBelanja', function () {
 
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-
-    var x
-    if ( jenis_belanja_temp == 0 ) { x = 0 }
-    if ( jenis_belanja_temp == 1 ) { x = 2 }
-    if ( jenis_belanja_temp == 2 ) { x = 3 }
-    if ( jenis_belanja_temp == 3 ) { x = 4 }
-    if ( jenis_belanja_temp == 4 ) { x = 4 }
-
-    loadRekeningSsh( x, 0 );
-
     id_aktivitas_temp = data.id_aktivitas_pd;
     id_asb_temp = data.id_aktivitas_asb;
     id_satuan_1_aktiv_temp = data.id_satuan_1;
@@ -1621,6 +2290,7 @@ $( document ).ready( function () {
     $( '#nm_kegrenja_belanja' ).text( $( '#nm_kegrenja_aktivitas' ).text() );
     $( '#nm_aktivitas_belanja' ).text( data.uraian_aktivitas_kegiatan );
     $( '#nm_sub_belanja' ).text( $( '#nm_aktivitas_pelaksana' ).text() );
+    $( '#nm_subkeg_belanja' ).text( $( '#nm_subkeg_aktivitas' ).text() );
 
     if ( data.status_data == 0 ) {
       if ( data.sumber_aktivitas == 0 ) {
@@ -1644,32 +2314,10 @@ $( document ).ready( function () {
     dokumen_temp = $( '#id_dokumen_keu' ).val();
   } );
 
-
   $( "#id_unit" ).change( function () {
     tahun_temp = $( '#tahun_rkpd' ).val();
     unit_temp = $( '#id_unit' ).val();
     dokumen_temp = $( '#id_dokumen_keu' ).val();
-    vars = "?id_unit=" + unit_temp + '&id_dokumen_keu=' + dokumen_temp;
-    $.ajax( {
-      type: "GET",
-      url: 'getDataUnitPa' + vars,
-      dataType: "json",
-      success: function ( data ) {
-        var post;
-        post = data[ 0 ];
-        document.getElementById( "nip_tapd" ).value = post.nip_pegawai;
-        document.getElementById( "nama_tapd" ).value = post.nama_pegawai;
-        document.getElementById( "jabatan_tapd" ).value = post.nama_jabatan;
-        document.getElementById( "id_pegawai_tapd" ).value = post.id_pegawai;
-        document.getElementById( "id_unit_pegawai_tapd" ).value = post.id_unit_pegawai;
-        if ( post.nip_pegawai == null ) {
-          $( '#nip_tapd_display' ).val( null );
-        } else {
-          $( '#nip_tapd_display' ).val( buatNip( post.nip_pegawai ) );
-        };
-
-      }
-    } );
 
     $( '.nav-tabs a[href="#programrkpd"]' ).tab( 'show' );
     loadTblProgRkpd( tahun_temp, unit_temp, dokumen_temp );
@@ -1698,19 +2346,15 @@ $( document ).ready( function () {
     $( '#id_unit_progrenja' ).val( unit_temp );
     $( '#jenis_belanja' ).val( jenis_belanja_temp ).trigger( 'change' );
     $( '#no_urut_progrenja' ).val( null );
-    $( '#id_program_renstra' ).val( 0 );
+    $( '#id_program_renstra' ).val( null );
     $( '#ur_program_renja' ).val( null );
-    $( '#id_renja_program' ).val( 0 );
+    $( '#id_renja_program' ).val( null );
     $( '#ur_program_ref' ).val( null );
-    $( '#id_program_ref' ).val( 0 );
+    $( '#id_program_ref' ).val( null );
     $( '#pagu_renja_program' ).val( null );
     $( '#pagu_forum_progrenja' ).val( null );
     $( '#keterangan_status_progrenja' ).val( null );
-    $( '#ur_program_nasional' ).val( null );
-    $( '#id_program_nasional' ).val( 0 );
-    $( '#ur_program_prov' ).val( null );
-    $( '#id_program_prov' ).val( 0 );
-    // document.frmProgRenja.status_pelaksanaan_progrenja[ 4 ].checked = true;
+    document.frmProgRenja.status_pelaksanaan_progrenja[ 4 ].checked = true;
     $( '#sumber_data_progrenja' ).val( 1 );
     $( '#status_data_progrenja' ).val( 0 );
 
@@ -1748,10 +2392,8 @@ $( document ).ready( function () {
         'uraian_program_renstra': $( '#ur_program_renja' ).val(),
         'id_program_ref': $( '#id_program_ref' ).val(),
         'pagu_anggaran': $( '#pagu_forum_progrenja' ).val(),
-        'status_pelaksanaan': 4,
+        'status_pelaksanaan': getStatusPelaksanaanProgRenja(),
         'ket_usulan': $( '#keterangan_status_progrenja' ).val(),
-        'id_prognas': $( '#id_program_nasional' ).val(),
-        'id_progprov': $( '#id_program_prov' ).val(),
       },
       success: function ( data ) {
         $( '#tblProgram' ).DataTable().ajax.reload( null, false );
@@ -1791,10 +2433,6 @@ $( document ).ready( function () {
     document.frmProgRenja.status_pelaksanaan_progrenja[ data.status_pelaksanaan ].checked = true;
     $( '#sumber_data_progrenja' ).val( data.sumber_data );
     $( '#status_data_progrenja' ).val( data.status_data );
-    $( '#ur_program_nasional' ).val( data.uraian_program_nasional );
-    $( '#id_program_nasional' ).val( data.id_prognas );
-    $( '#ur_program_prov' ).val( data.uraian_program_provinsi );
-    $( '#id_program_prov' ).val( data.id_progprov );
     $( '.modal-title' ).text( "Edit Program SKPD" );
 
     if ( data.sumber_data == 0 ) {
@@ -1852,8 +2490,6 @@ $( document ).ready( function () {
         'status_pelaksanaan': getStatusPelaksanaanProgRenja(),
         'ket_usulan': $( '#keterangan_status_progrenja' ).val(),
         'status_data': $( '#status_data_progrenja' ).val(),
-        'id_prognas': $( '#id_program_nasional' ).val(),
-        'id_progprov': $( '#id_program_prov' ).val(),
       },
       success: function ( data ) {
         $( '#tblProgram' ).DataTable().ajax.reload( null, false );
@@ -1902,34 +2538,29 @@ $( document ).ready( function () {
   function HitungPaguMusren ( pagu, persen ) {
     var x = pagu;
     var y = persen;
-
     var nilai_musren = Math.ceil( x * ( y / 100 ) );
-
     return nilai_musren;
   };
 
   $( "#persen_musren" ).change( function () {
     var x = $( '#pagu_forum' ).val();
     var y = $( '#persen_musren' ).val();
-
     $( '#pagu_musren' ).val( HitungPaguMusren( x, y ) );
   } );
 
   $( "#pagu_forum" ).change( function () {
     var x = $( '#pagu_forum' ).val();
     var y = $( '#persen_musren' ).val();
-
     $( '#pagu_musren' ).val( HitungPaguMusren( x, y ) );
   } );
 
   function getStatusPelaksanaanKegRenja () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_kegrenja"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( '.sp_kegrenja' ).change( function () {
     if ( document.frmModalKegiatan.status_pelaksanaan_kegrenja.value == 0 ) {
@@ -1945,31 +2576,30 @@ $( document ).ready( function () {
   $( document ).on( 'click', '#btnTambahKegiatan', function () {
     $( '.btnKegiatan' ).addClass( 'addKegRenja' );
     $( '.btnKegiatan' ).removeClass( 'editKegRenja' );
-    $( '#id_forum_skpd' ).val( null ),
-      $( '#id_forum_program_kegrej' ).val( id_progrenja_temp ),
-      $( '#id_unit_kegrej' ).val( unit_temp ),
-      $( '#tahun_forum_kegrej' ).val( tahun_temp ),
-      $( '#no_urut_kegiatan' ).val( 0 ),
-      $( '#id_renja' ).val( null ),
-      $( '#id_rkpd_renstra' ).val( null ),
-      $( '#id_program_renstra' ).val( null ),
-      $( '#id_kegiatan_renstra' ).val( null ),
-      $( '#id_kegiatan_ref' ).val( null ),
-      $( '#ur_kegiatan_renstra' ).val( null );
-    $( '#ur_kegiatan_forum' ).val( null ),
-      $( '#ur_kegiatan_ref' ).val( null ),
-      $( '#pagu_tahun_kegiatan' ).val( 0 ),
-      $( '#pagu_renstra' ).val( 0 );
+    $( '#id_forum_skpd' ).val( null );
+    $( '#id_forum_program_kegrej' ).val( id_progrenja_temp );
+    $( '#id_unit_kegrej' ).val( unit_temp );
+    $( '#tahun_forum_kegrej' ).val( tahun_temp );
+    $( '#no_urut_kegiatan' ).val( 0 );
+    $( '#id_renja' ).val( null );
+    $( '#id_rkpd_renstra' ).val( null );
+    $( '#id_program_renstra' ).val( null );
+    $( '#id_kegiatan_renstra' ).val( null );
+    $( '#id_kegiatan_ref' ).val( null );
+    $( '#ur_kegiatan_renstra' ).val( null );
+    $( '#ur_kegiatan_forum' ).val( null );
+    $( '#ur_kegiatan_ref' ).val( null );
+    $( '#pagu_tahun_kegiatan' ).val( 0 );
+    $( '#pagu_renstra' ).val( 0 );
     $( '#pagu_renja_kegiatan' ).val( 0 );
     $( '#pagu_selanjutnya' ).val( 0 );
     $( '#pagu_renstra_forum' ).val( 0 );
     $( '#pagu_renja_kegiatan_forum' ).val( 0 );
     $( '#pagu_selanjutnya_forum' ).val( 0 );
-    $( '#pagu_forum' ).val( 0 ),
-      $( '#keterangan_status_kegiatan' ).val( null ),
-      // document.frmModalKegiatan.status_pelaksanaan_kegrenja[ 4 ].checked = true;
-
-      $( '#no_urut_kegiatan' ).removeAttr( "disabled" );
+    $( '#pagu_forum' ).val( 0 );
+    $( '#keterangan_status_kegiatan' ).val( null );
+    document.frmModalKegiatan.status_pelaksanaan_kegrenja[ 4 ].checked = true;
+    $( '#no_urut_kegiatan' ).removeAttr( "disabled" );
     $( '#keterangan_status_kegiatan' ).removeAttr( "disabled" );
     $( '#ur_kegiatan_forum' ).removeAttr( "disabled" );
     $( '#btnCariKegiatanRef' ).show();
@@ -1980,7 +2610,6 @@ $( document ).ready( function () {
 
     $( '.modal-title' ).text( "Tambah Kegiatan SKPD" );
     $( '#ModalKegiatan' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.addKegRenja', function () {
@@ -2006,7 +2635,7 @@ $( document ).ready( function () {
         'pagu_plus1_forum': $( '#pagu_selanjutnya_forum' ).val(),
         'pagu_forum': $( '#pagu_renja_kegiatan_forum' ).val(),
         'keterangan_status': $( '#keterangan_status_kegiatan' ).val(),
-        'status_pelaksanaan': 4,
+        'status_pelaksanaan': getStatusPelaksanaanKegRenja(),
         'kelompok_sasaran': $( '#ur_kelompok_sasaran' ).val(),
       },
       success: function ( data ) {
@@ -2069,7 +2698,6 @@ $( document ).ready( function () {
         document.getElementById( "keterangan_status_kegiatan" ).removeAttribute( "disabled" );
         $( '.KetPelaksanaan_keg' ).show();
       }
-
     } );
 
     if ( data.status_data == 0 ) {
@@ -2109,11 +2737,9 @@ $( document ).ready( function () {
 
     $( '.modal-title' ).text( "Edit Data Kegiatan SKPD" );
     $( '#ModalKegiatan' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.editKegRenja', function () {
-
     if ( document.getElementById( "checkKegiatan" ).checked ) {
       check_data = 1
     } else {
@@ -2160,12 +2786,9 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnHapusKegRenja', function () {
-
     $( '#id_forum_hapus' ).val( $( '#id_forum_skpd' ).val() );
     $( '#ur_kegrenja_hapus' ).text( $( '#ur_kegiatan_forum' ).val() );
-
     $( '#HapusKegRenja' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnDelKegRenja', function () {
@@ -2184,6 +2807,209 @@ $( document ).ready( function () {
         $( '#ModalKegiatan' ).modal( 'hide' );
         $( '#tblProgram' ).DataTable().ajax.reload( null, false );
         $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
+        createPesan( data.pesan, "info" );
+      }
+    } );
+  } );
+
+  function getStatusPelaksanaanSubKegRenja () {
+    var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_subkeg"]:checked' );
+    var xyz = [];
+    for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
+    var xvalues = xyz.join( '' );
+    return xvalues;
+  };
+
+  $( document ).on( 'click', '#btnTambahSubKegiatan', function () {
+    $( '.btnSubKegiatan' ).addClass( 'addSubKegRenja' );
+    $( '.btnSubKegiatan' ).removeClass( 'editSubKegRenja' );
+    $( '#id_subkegiatan_pd' ).val( null );
+    $( '#id_kegiatan_pd_subkeg' ).val( id_kegrenja_temp );
+    $( '#tahun_anggaran_subkeg' ).val( tahun_temp );
+    $( '#id_unit_subkeg' ).val( unit_temp );
+    $( '#no_urut_subkeg' ).val( 1 );
+    $( '#ur_kegiatan_renstra' ).val( null );
+    $( '#id_kegiatan_renstra_subkeg' ).val( null );
+    $( '#id_subkegiatan_renstra_subkeg' ).val( null );
+    document.frmModalSubKegiatan.status_pelaksanaan_subkeg[ 4 ].checked = true;
+    $( '#ur_subkegiatan_ref' ).val( null );
+    $( '#id_subkegiatan_ref' ).val( null );
+    $( '#keterangan_status_subkeg' ).val( null );
+    $( '#pagu_rkpd_subkeg' ).val( 0 );
+    $( '#pagu_anggaran_subkeg' ).val( 0 );
+    $( '#pagu_plus_subkeg' ).val( 0 );
+    $( '#ur_kelompok_sasaran_subkeg' ).val( null );
+    $( '#waktu_mulai' ).val( 1 ).trigger( 'change' );
+    $( '#waktu_selesai' ).val( 1 ).trigger( 'change' );
+    $( '#keterangan_status_subkeg' ).removeAttr( "disabled" );
+    $( '#btnCariSubKegiatanRef' ).show();
+    $( '#btnCariSubKegiatanRenstra' ).show();
+    $( '#btnHapusSubKegRenja' ).hide();
+    $( '#btnSubKegiatan' ).show();
+    $( '#idStatusSubKeg' ).hide();
+    $( '.modal-title' ).text( "Tambah Sub Kegiatan SKPD" );
+    $( '#ModalSubKegiatan' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.addSubKegRenja', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './addSubKegRenja',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_kegiatan_pd': $( '#id_kegiatan_pd_subkeg' ).val(),
+        'id_unit': $( '#id_unit_subkeg' ).val(),
+        'id_subkegiatan_ref': $( '#id_subkegiatan_ref' ).val(),
+        'pagu_plus1_forum': $( '#pagu_plus_subkeg' ).val(),
+        'pagu_forum': $( '#pagu_anggaran_subkeg' ).val(),
+        'mulai': $( '#waktu_mulai' ).val(),
+        'selesai': $( '#waktu_selesai' ).val(),
+        'keterangan_status': $( '#keterangan_status_subkeg' ).val(),
+        'kelompok_sasaran': $( '#ur_kelompok_sasaran_subkeg' ).val(),
+      },
+      success: function ( data ) {
+        $( '#tblSubKegiatanRenja' ).DataTable().ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#edit-SubKegiatan', function () {
+    var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    $( '.btnSubKegiatan' ).removeClass( 'addSubKegRenja' );
+    $( '.btnSubKegiatan' ).addClass( 'editSubKegRenja' );
+    $( '#id_subkegiatan_pd' ).val( data.id_subkegiatan_pd );
+    $( '#id_kegiatan_pd_subkeg' ).val( data.id_kegiatan_pd );
+    $( '#tahun_anggaran_subkeg' ).val( data.tahun_forum );
+    $( '#id_unit_subkeg' ).val( data.id_unit );
+    $( '#no_urut_subkeg' ).val( 1 );
+    $( '#ur_kegiatan_renstra' ).val( null );
+    $( '#id_kegiatan_renstra_subkeg' ).val( null );
+    $( '#id_subkegiatan_renstra_subkeg' ).val( null );
+    document.frmModalSubKegiatan.status_pelaksanaan_subkeg[ data.status_pelaksanaan ].checked = true;
+    $( '#ur_subkegiatan_ref' ).val( data.nm_subkegiatan );
+    $( '#id_subkegiatan_ref' ).val( data.id_subkegiatan_ref );
+    $( '#keterangan_status_subkeg' ).val( data.keterangan_status );
+    $( '#pagu_rkpd_subkeg' ).val( data.pagu_tahun_kegiatan );
+    $( '#pagu_anggaran_subkeg' ).val( data.pagu_forum );
+    $( '#pagu_plus_subkeg' ).val( data.pagu_plus1_forum );
+    $( '#ur_kelompok_sasaran_subkeg' ).val( data.kelompok_sasaran );
+    $( '#waktu_mulai' ).val( data.waktu_0 ).trigger( 'change' );
+    $( '#waktu_selesai' ).val( data.waktu_1 ).trigger( 'change' );
+
+    if ( data.status_pelaksanaan == 0 ) {
+      $( "#keterangan_status_subkeg" ).attr( "disabled", "disabled" );
+      $( '.KetPelaksanaan_keg' ).hide();
+    } else {
+      $( "#keterangan_status_subkeg" ).removeAttr( "disabled" );
+      $( '.KetPelaksanaan_keg' ).show();
+    }
+
+    $( '.sp_kegrenja' ).change( function () {
+      if ( document.frmModalSubKegiatan.status_pelaksanaan_subkeg.value == 0 ) {
+        document.getElementById( "keterangan_status_subkeg" ).setAttribute( "disabled", "disabled" );
+        $( '.KetPelaksanaan_keg' ).hide();
+      } else {
+        document.getElementById( "keterangan_status_subkeg" ).removeAttribute( "disabled" );
+        $( '.KetPelaksanaan_keg' ).show();
+      }
+    } );
+
+    if ( data.status_data == 0 ) {
+      $( '#btnSubKegiatan' ).show();
+      if ( data.sumber_data == 0 ) {
+        $( '#btnHapusSubKegRenja' ).hide();
+      } else {
+        $( '#btnHapusSubKegRenja' ).show();
+      }
+    } else {
+      $( '#btnHapusSubKegRenja' ).hide();
+      $( '#btnSubKegiatan' ).hide();
+    }
+
+    if ( data.sumber_data == 0 ) {
+      $( '#no_urut_subkeg' ).removeAttr( "disabled" );
+      $( '#btnHapusSubKegRenja' ).hide();
+      $( '#btnCariSubKegiatanRef' ).hide();
+      $( '#btnCariSubKegiatanRenstra' ).hide();
+      $( '#ur_kegiatan_forum' ).attr( 'disabled', 'disabled' );
+      $( '#idStatusSubKeg' ).show();
+    } else {
+      $( '#no_urut_subkeg' ).removeAttr( "disabled" );
+      $( '#ur_kegiatan_forum' ).removeAttr( "disabled" );
+      $( '#keterangan_status_kegiatan' ).removeAttr( "disabled" );
+      $( '#btnCariSubKegiatanRef' ).show();
+      $( '#btnCariSubKegiatanRenstra' ).hide();
+      $( '#btnHapusSubKegRenja' ).show();
+      $( '#idStatusSubKeg' ).hide();
+    }
+
+    $( '.modal-title' ).text( "Edit Data Sub Kegiatan SKPD" );
+    $( '#ModalSubKegiatan' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.editSubKegRenja', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './editSubKegRenja',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_subkegiatan_pd': $( '#id_subkegiatan_pd' ).val(),
+        'id_kegiatan_pd': $( '#id_kegiatan_pd_subkeg' ).val(),
+        'id_unit': $( '#id_unit_subkeg' ).val(),
+        'id_subkegiatan_ref': $( '#id_subkegiatan_ref' ).val(),
+        'pagu_plus1_forum': $( '#pagu_plus_subkeg' ).val(),
+        'pagu_forum': $( '#pagu_anggaran_subkeg' ).val(),
+        'keterangan_status': $( '#keterangan_status_subkeg' ).val(),
+        'kelompok_sasaran': $( '#ur_kelompok_sasaran_subkeg' ).val(),
+        'mulai': $( '#waktu_mulai' ).val(),
+        'selesai': $( '#waktu_selesai' ).val(),
+        'status_pelaksanaan': getStatusPelaksanaanSubKegRenja(),
+      },
+      success: function ( data ) {
+        $( '#tblSubKegiatanRenja' ).DataTable().ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnHapusSubKegRenja', function () {
+    $( '#id_subkeg_hapus' ).val( $( '#id_subkegiatan_pd' ).val() );
+    $( '#ur_subkeg_hapus' ).text( $( '#ur_subkegiatan_ref' ).val() );
+    $( '#HapusSubKegRenja' ).modal( 'show' );
+  } );
+
+  $( document ).on( 'click', '#btnDelSubKegRenja', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './hapusSubKegRenja',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_subkegiatan_pd': $( '#id_subkeg_hapus' ).val()
+      },
+      success: function ( data ) {
+        $( '#ModalSubKegiatan' ).modal( 'hide' );
+        $( '#tblSubKegiatanRenja' ).DataTable().ajax.reload( null, false );
         createPesan( data.pesan, "info" );
       }
     } );
@@ -2250,22 +3076,20 @@ $( document ).ready( function () {
   } );
 
   function getSumberASB () {
-
     var xCheck = document.querySelectorAll( 'input[name="sumber_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getJenisKegiatan () {
-
     var xCheck = document.querySelectorAll( 'input[name="jenis_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getGroupKeu () {
     var xCheck = document.querySelectorAll( 'input[name="rbGroupKeu"]:checked' );
@@ -2273,37 +3097,33 @@ $( document ).ready( function () {
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getJenisPembahasan () {
-
     var xCheck = document.querySelectorAll( 'input[name="jenis_pembahasan"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getStatusPelaksanaanAktivitas () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_aktivitas"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   function getSatuanUtamaAktivitas () {
-
     var xCheck = document.querySelectorAll( 'input[name="satuan_utama"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( document ).on( 'click', '#btnTambahAktivitas', function () {
-
     $( '#btnAktivitas' ).addClass( 'addAktivitas' );
     $( '#btnAktivitas' ).removeClass( 'editAktivitas' );
     $( '.form-horizontal' ).show();
@@ -2329,8 +3149,8 @@ $( document ).ready( function () {
     $( '#id_satuan_publik' ).attr( "disabled", "disabled" );
     document.frmModalAktivitas.rbGroupKeu[ 0 ].checked = true;
 
-    $( '#id_satuan_1_aktivitas' ).val( -1 ).trigger( 'change' );
-    $( '#id_satuan_2_aktivitas' ).val( -1 ).trigger( 'change' );
+    $( '#id_satuan_1_aktivitas' ).val( 0 ).trigger( 'change' );
+    $( '#id_satuan_2_aktivitas' ).val( 0 ).trigger( 'change' );
     document.frmModalAktivitas.satuan_utama[ 0 ].checked = true;
 
     $( '#no_urut_aktivitas' ).removeAttr( "disabled" );
@@ -2385,7 +3205,6 @@ $( document ).ready( function () {
       },
       success: function ( data ) {
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
@@ -2397,7 +3216,6 @@ $( document ).ready( function () {
 
   $( document ).on( 'click', '#btnEditAktivitas', function () {
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     $( '#btnAktivitas' ).removeClass( 'addAktivitas' );
     $( '#btnAktivitas' ).addClass( 'editAktivitas' );
     $( '.form-horizontal' ).show();
@@ -2496,7 +3314,6 @@ $( document ).ready( function () {
 
     $( '.modal-title' ).text( 'Edit Aktivitas Kegiatan SKPD' );
     $( '#ModalAktivitas' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.editAktivitas', function () {
@@ -2535,7 +3352,6 @@ $( document ).ready( function () {
       },
       success: function ( data ) {
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
@@ -2546,12 +3362,9 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnHapusAktivitas', function () {
-
     $( '#id_aktivitas_hapus' ).val( $( '#id_aktivitas' ).val() );
     $( '#ur_aktivitas_hapus' ).text( $( '#ur_aktivitas_kegiatan' ).val() );
-
     $( '#HapusAktivitas' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnDelAktivitas', function () {
@@ -2569,20 +3382,130 @@ $( document ).ready( function () {
       success: function ( data ) {
         $( '#ModalAktivitas' ).modal( 'hide' );
         $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
-        $( '#tblKegiatanRenja' ).DataTable().ajax.reload( null, false );
+        createPesan( data.pesan, "info" );
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnMoveAktivitas', function () {
+    var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
+    $( '#id_aktivitasMove' ).val( data.id_aktivitas_pd );
+    $.ajax( {
+      type: "GET",
+      url: 'getProgOpd?id_unit=' + unit_temp + '&id_dokumen_keu=' + dokumen_temp,
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="progMove"]' ).empty();
+        $( 'select[name="progMove"]' ).append( '<option value="-1">---Pilih Program OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="progMove"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+    $( '#AktivitasMoveModal' ).modal( 'show' );
+  } );
+
+  $( "#progMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getKegOpd?id_program_pd=' + $( "#progMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="kegMove"]' ).empty();
+        $( 'select[name="kegMove"]' ).append( '<option value="-1">---Pilih Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="kegMove"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#kegMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getSubKegOpd?id_kegiatan_pd=' + $( "#kegMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="subkegMove"]' ).empty();
+        $( 'select[name="subkegMove"]' ).append( '<option value="-1">---Pilih Sub Kegiatan OPD---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="subkegMove"]' ).append( '<option value="' + post.id_subkegiatan_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( "#subkegMove" ).change( function () {
+    $.ajax( {
+      type: "GET",
+      url: 'getPelaksanaOpd?id_subkegiatan_pd=' + $( "#subkegMove" ).val(),
+      dataType: "json",
+
+      success: function ( data ) {
+
+        var j = data.length;
+        var post, i;
+
+        $( 'select[name="pelaksanaMove"]' ).empty();
+        $( 'select[name="pelaksanaMove"]' ).append( '<option value="-1">---Pilih Sub Unit Pelaksana---</option>' );
+
+        for ( i = 0; i < j; i++ ) {
+          post = data[ i ];
+          $( 'select[name="pelaksanaMove"]' ).append( '<option value="' + post.id_pelaksana_pd + '">' + post.uraian_display + '</option>' );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnProsesMove', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './MoveAktivitas',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_aktivitas_pd': $( '#id_aktivitasMove' ).val(),
+        'id_pelaksana_pd': $( '#pelaksanaMove' ).val()
+      },
+      success: function ( data ) {
+        $( '#AktivitasMoveModal' ).modal( 'hide' );
+        $( '#tblAktivitas' ).DataTable().ajax.reload( null, false );
         createPesan( data.pesan, "info" );
       }
     } );
   } );
 
   function getStatusPelaksanaanPelaksana () {
-
     var xCheck = document.querySelectorAll( 'input[name="status_pelaksanaan_pelaksana"]:checked' );
     var xyz = [];
     for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
     var xvalues = xyz.join( '' );
     return xvalues;
-  }
+  };
 
   $( document ).on( 'click', '#btnTambahPelaksana', function () {
 
@@ -2591,24 +3514,22 @@ $( document ).ready( function () {
     $( '.form-horizontal' ).show();
     $( '.modal-title' ).text( 'Tambah Pelaksana Kegiatan SKPD' );
 
-    $( '#id_pelaksana_forum' ).val( null ),
-      $( '#id_aktivitas_pelaksana' ).val( id_kegrenja_temp ),
-      $( '#tahun_forum_pelaksana' ).val( tahun_temp ),
-      $( '#no_urut_pelaksana' ).val( null ),
-      $( '#id_subunit_pelaksana' ).val( null ),
-      $( '#subunit_pelaksana' ).val( null ),
-      document.frmModalPelaksana.status_pelaksanaan_pelaksana[ 0 ].checked = true;
+    $( '#id_pelaksana_forum' ).val( null );
+    $( '#id_aktivitas_pelaksana' ).val( id_subkegrenja_temp );
+    $( '#tahun_forum_pelaksana' ).val( tahun_temp );
+    $( '#no_urut_pelaksana' ).val( 1 );
+    $( '#id_subunit_pelaksana' ).val( null );
+    $( '#subunit_pelaksana' ).val( null );
+    document.frmModalPelaksana.status_pelaksanaan_pelaksana[ 0 ].checked = true;
     document.frmModalPelaksana.ophak_akses[ 0 ].checked = true;
-    $( '#keterangan_status_pelaksana' ).val( null ),
-      $( '#id_lokasi_pelaksana' ).val( null ),
-      $( '#nm_lokasi_pelaksana' ).val( null ),
-
-      $( '#no_urut_pelaksana' ).removeAttr( "disabled" );
+    $( '#keterangan_status_pelaksana' ).val( null );
+    $( '#id_lokasi_pelaksana' ).val( null );
+    $( '#nm_lokasi_pelaksana' ).val( null );
+    $( '#no_urut_pelaksana' ).hide();
     $( '#keterangan_status_pelaksana' ).removeAttr( "disabled" );
     $( '#btnHapusPelaksana' ).hide();
     $( '#btnPelaksana' ).show();
     $( '#idStatusPelaksanaanPelaksana' ).hide();
-
     $( '#ModalPelaksana' ).modal( 'show' );
 
   } );
@@ -2639,7 +3560,7 @@ $( document ).ready( function () {
         '_token': $( 'input[name=_token]' ).val(),
         'tahun_forum': $( '#tahun_forum_pelaksana' ).val(),
         'no_urut': $( '#no_urut_pelaksana' ).val(),
-        'id_kegiatan_pd': $( '#id_aktivitas_pelaksana' ).val(),
+        'id_subkegiatan_pd': $( '#id_aktivitas_pelaksana' ).val(),
         'id_sub_unit': $( '#id_subunit_pelaksana' ).val(),
         'id_lokasi': $( '#id_lokasi_pelaksana' ).val(),
         'ket_pelaksana': $( '#keterangan_status_pelaksana' ).val(),
@@ -2668,7 +3589,7 @@ $( document ).ready( function () {
     $( '.modal-title' ).text( 'Edit Pelaksana Kegiatan SKPD' );
 
     $( '#id_pelaksana_forum' ).val( data.id_pelaksana_pd );
-    $( '#id_aktivitas_pelaksana' ).val( data.id_kegiatan_pd );
+    $( '#id_aktivitas_pelaksana' ).val( data.id_subkegiatan_pd );
     $( '#tahun_forum_pelaksana' ).val( data.tahun_forum );
     $( '#no_urut_pelaksana' ).val( data.no_urut );
     $( '#id_subunit_pelaksana' ).val( data.id_sub_unit );
@@ -2679,12 +3600,26 @@ $( document ).ready( function () {
     $( '#id_lokasi_pelaksana' ).val( data.id_lokasi );
     $( '#nm_lokasi_pelaksana' ).val( data.nama_lokasi );
 
-    if ( data.status_kegiatan == 0 ) {
+    if ( data.status_subkegiatan == 0 && data.sumber_data == 1 ) {
       $( '#btnHapusPelaksana' ).show();
+      $( '#keterangan_status_pelaksana' ).removeAttr( "disabled" );
+      $( '#idStatusPelaksanaanPelaksana' ).hide();
       $( '#btnPelaksana' ).show();
+      $( '#btnHapusPelaksana' ).show();
     } else {
-      $( '#btnHapusPelaksana' ).hide();
-      $( '#btnPelaksana' ).hide();
+      if ( data.status_subkegiatan == 0 && data.sumber_data == 0 ) {
+        $( '#btnHapusPelaksana' ).hide();
+        $( '#idStatusPelaksanaanPelaksana' ).show();
+        $( '#keterangan_status_pelaksana' ).removeAttr( "disabled" );
+        $( '#btnPelaksana' ).show();
+        $( '#btnHapusPelaksana' ).hide();
+      } else {
+        $( '#btnHapusPelaksana' ).hide();
+        $( '#btnPelaksana' ).hide();
+        $( '#btnHapusPelaksana' ).hide();
+        $( '#idStatusPelaksanaanPelaksana' ).hide();
+        $( '#keterangan_status_pelaksana' ).attr( "disabled", "disabled" );
+      }
     };
 
     $( '.chkPelaksana' ).show();
@@ -2693,19 +3628,7 @@ $( document ).ready( function () {
     } else {
       $( '.checkPelaksana' ).prop( 'checked', false );
     }
-
-    if ( data.sumber_data == 0 ) {
-      $( '#no_urut_pelaksana' ).attr( 'disabled', 'disabled' );
-      $( '#keterangan_status_pelaksana' ).removeAttr( "disabled" );
-      $( '#btnHapusPelaksana' ).hide();
-      $( '#idStatusPelaksanaanPelaksana' ).hide();
-    } else {
-      $( '#no_urut_pelaksana' ).removeAttr( "disabled" );
-      $( '#keterangan_status_pelaksana' ).removeAttr( "disabled" );
-      $( '#btnHapusPelaksana' ).show();
-      $( '#idStatusPelaksanaanPelaksana' ).show();
-    }
-
+    $( '#no_urut_pelaksana' ).hide();
     $( '#ModalPelaksana' ).modal( 'show' );
 
   } );
@@ -2729,7 +3652,7 @@ $( document ).ready( function () {
         'id_pelaksana_pd': $( '#id_pelaksana_forum' ).val(),
         'tahun_forum': $( '#tahun_forum_pelaksana' ).val(),
         'no_urut': $( '#no_urut_pelaksana' ).val(),
-        'id_kegiatan_pd': $( '#id_aktivitas_pelaksana' ).val(),
+        'id_subkegiatan_pd': $( '#id_aktivitas_pelaksana' ).val(),
         'id_sub_unit': $( '#id_subunit_pelaksana' ).val(),
         'id_lokasi': $( '#id_lokasi_pelaksana' ).val(),
         'ket_pelaksana': $( '#keterangan_status_pelaksana' ).val(),
@@ -2750,12 +3673,9 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnHapusPelaksana', function () {
-
     $( '#id_pelaksana_hapus' ).val( $( '#id_pelaksana_forum' ).val() );
     $( '#ur_pelaksana_hapus' ).text( $( '#subunit_pelaksana' ).val() );
-
     $( '#HapusPelaksana' ).modal( 'show' );
-
   } );
 
   $( document ).on( 'click', '#btnDelPelaksana', function () {
@@ -2806,8 +3726,8 @@ $( document ).ready( function () {
     $( '#volume_2' ).val( 1 );
     $( '#volume_usulan_1' ).val( 0 );
     $( '#volume_usulan_2' ).val( 0 );
-    $( '#id_satuan_1' ).val( id_satuan_1_aktiv_temp ).trigger( 'change' );
-    $( '#id_satuan_2' ).val( id_satuan_2_aktiv_temp ).trigger( 'change' );
+    $( '#id_satuan_1' ).val( id_satuan_1_aktiv_temp );
+    $( '#id_satuan_2' ).val( id_satuan_2_aktiv_temp );
     $( '#nm_lokasi' ).val( null );
     $( '#nm_lokasi_teknis' ).val( null );
     document.frmModalLokasi.status_pelaksanaan_lokasi[ 0 ].checked = true;
@@ -2882,8 +3802,8 @@ $( document ).ready( function () {
     $( '#volume_2' ).val( data.volume_2 );
     $( '#volume_usulan_1' ).val( data.volume_usulan_1 );
     $( '#volume_usulan_2' ).val( data.volume_usulan_2 );
-    $( '#id_satuan_1' ).val( data.id_satuan_1 ).trigger( 'change' );
-    $( '#id_satuan_2' ).val( data.id_satuan_2 ).trigger( 'change' );
+    $( '#id_satuan_1' ).val( data.id_satuan_1 );
+    $( '#id_satuan_2' ).val( data.id_satuan_2 );
     document.frmModalLokasi.status_pelaksanaan_lokasi[ data.status_pelaksanaan ].checked = true;
     $( '#keterangan_status_lokasi' ).val( data.ket_lokasi );
 
@@ -2999,8 +3919,7 @@ $( document ).ready( function () {
 
     var nilai_musren = x * y * z * r;
     return nilai_musren;
-
-  }
+  };
 
   $( "#volume1_forum" ).change( function () {
     $( '#jumlah_belanja_forum' ).val( hitungsatuan() );
@@ -3036,7 +3955,7 @@ $( document ).ready( function () {
       document.getElementById( "volume2_forum" ).removeAttribute( "disabled" );
       document.getElementById( "zona_ssh" ).removeAttribute( "disabled" );
     }
-  }
+  };
 
   $( document ).on( 'click', '.catatan', function () {
     alert( "Maaf Tidak Berfungsi karena asal belanja dari ASB" )
@@ -3077,8 +3996,6 @@ $( document ).ready( function () {
     $( '#id_satuan2' ).val( 0 );
     $( '#id_satuan2_forum' ).val( 0 );
     $( '#sumber_data_belanja' ).val( 4 );
-    $( '#ur_prognas_satuan' ).val( null );
-    $( '#id_prognas_satuan' ).val( 0 );
 
     checkAsalbelanja( 0 );
 
@@ -3112,7 +4029,6 @@ $( document ).ready( function () {
         'id_satuan_2': $( '#id_satuan2_forum' ).val(),
         'harga_satuan': $( '#harga_satuan_forum' ).val(),
         'jml_belanja': $( '#jumlah_belanja_forum' ).val(),
-        'id_prognas': $( '#id_prognas_satuan' ).val(),
         'status_data': 0,
       },
       success: function ( data ) {
@@ -3129,7 +4045,6 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '#btnEditBelanja', function () {
-
     var data = belanja_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
     $( '.btnBelanja' ).addClass( 'editBelanja' );
     $( '.btnBelanja' ).removeClass( 'addBelanja' );
@@ -3164,10 +4079,8 @@ $( document ).ready( function () {
     $( '#id_satuan2' ).val( data.id_satuan_2_rkpd );
     $( '#id_satuan2_forum' ).val( data.id_satuan_2 );
     $( '#sumber_data_belanja' ).val( data.sumber_data );
-    $( '#ur_prognas_satuan' ).val( data.uraian_program_nasional );
-    $( '#id_prognas_satuan' ).val( data.id_prognas );
 
-    checkAsalbelanja( data.sumber_data );
+    checkAsalbelanja( id_asb_temp );
 
     if ( data.status_aktivitas == 1 ) {
       $( '#btnHapusBelanja' ).hide();
@@ -3185,11 +4098,9 @@ $( document ).ready( function () {
     }
 
     $( '#ModalBelanja' ).modal( 'show' );
-
   } );
 
   $( '.modal-footer' ).on( 'click', '.editBelanja', function () {
-
     if ( document.getElementById( "checkBelanja" ).checked ) {
       check_data = 1
     } else {
@@ -3221,7 +4132,6 @@ $( document ).ready( function () {
         'id_satuan_2': $( '#id_satuan2_forum' ).val(),
         'harga_satuan': $( '#harga_satuan_forum' ).val(),
         'jml_belanja': $( '#jumlah_belanja_forum' ).val(),
-        'id_prognas': $( '#id_prognas_satuan' ).val(),
         'status_data': check_data,
 
       },
@@ -3436,23 +4346,46 @@ $( document ).ready( function () {
     } );
   } );
 
+  $( document ).on( 'click', '.btnCariIndiSubKeg', function () {
+    $( '#judulModal' ).text( 'Daftar Indikator yang terdapat dalam RPJMD/Renstra' );
+    $( '#cariIndikator' ).modal( 'show' );
+
+    cariindikator = $( '#tblCariIndikator' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      dom: 'bfrtIp',
+      autoWidth: false,
+      "ajax": { "url": "../admin/parameter/getRefIndikator" },
+      "columns": [
+        { data: 'no_urut' },
+        { data: 'nm_indikator' },
+        { data: 'jenis_display' },
+        { data: 'sifat_display' }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+      "bDestroy": true
+    } );
+  } );
+
   $( '#tblCariIndikator tbody' ).on( 'dblclick', 'tr', function () {
     var data = cariindikator.row( this ).data();
 
     document.getElementById( "ur_indikator_renja" ).value = data.nm_indikator;
     document.getElementById( "kd_indikator_renja" ).value = data.id_indikator;
-    document.getElementById( "id_satuan_output" ).value = data.id_satuan_output;
+    $( "#id_satuan_output" ).val( data.id_satuan_output ).trigger( "change" );
 
     document.getElementById( "ur_indikatorKeg_renja" ).value = data.nm_indikator;
     document.getElementById( "kd_indikatorKeg_renja" ).value = data.id_indikator;
-    document.getElementById( "id_satuan_output_keg" ).value = data.id_satuan_output;
+    $( "#id_satuan_output_keg" ).val( data.id_satuan_output ).trigger( "change" );
 
+    document.getElementById( "ur_indikatorSubKeg" ).value = data.nm_indikator;
+    document.getElementById( "kd_indikatorSubKeg" ).value = data.id_indikator;
+    $( "#id_satuan_output_subkeg" ).val( data.id_satuan_output ).trigger( "change" );
     $( '#cariIndikator' ).modal( 'hide' );
   } );
 
   $( document ).on( 'click', '.add-indikator', function () {
     var data = prog_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     $( '.btnIndikator' ).removeClass( 'editIndikator' );
     $( '.btnIndikator' ).addClass( 'addIndikator' );
     $( '.modal-title' ).text( 'Tambah Target Capaian Program Renja SKPD' );
@@ -3466,10 +4399,8 @@ $( document ).ready( function () {
     $( '#target_indikator_renstra' ).val( 0 );
     $( '#target_indikator_renja' ).val( 0 );
     $( '#id_satuan_output' ).val( -1 ).trigger( 'change' );
-
     document.getElementById( "no_urut_indikator" ).removeAttribute( "disabled" );
     document.getElementById( "ur_tolokukur_renja" ).removeAttribute( "disabled" );
-
     $( '.btnCariIndi' ).show();
     $( '.btnHapusIndikator' ).hide();
     $( '.btnIndikator' ).show();
@@ -3547,11 +4478,11 @@ $( document ).ready( function () {
       $( '.checkIndikator' ).prop( 'checked', false );
     }
 
-    if ( data.status_data == 0 ) {
-      if ( data.sumber_data != 0 ) {
-        $( '.btnHapusIndikator' ).show();
-      } else {
+    if ( data.status_program == 0 ) {
+      if ( data.sumber_data == 0 ) {
         $( '.btnHapusIndikator' ).hide();
+      } else {
+        $( '.btnHapusIndikator' ).show();
       }
       $( '.btnIndikator' ).show();
     } else {
@@ -3661,9 +4592,7 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '.add-indikatorKeg', function () {
-
     var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-
     $( '.btnIndikatorKeg' ).removeClass( 'editIndikatorKeg' );
     $( '.btnIndikatorKeg' ).addClass( 'addIndikatorKeg' );
     $( '.modal-title' ).text( 'Tambah Target Capaian Kegiatan Renja' );
@@ -3677,16 +4606,12 @@ $( document ).ready( function () {
     $( '#target_indikatorKeg_renstra' ).val( 0 );
     $( '#target_indikatorKeg_renja' ).val( 0 );
     $( '#id_satuan_output_keg' ).val( 0 ).trigger( 'change' );
-
-
     document.getElementById( "no_urut_indikatorKeg" ).removeAttribute( "disabled" );
     document.getElementById( "ur_tolokukur_keg" ).removeAttribute( "disabled" );
-
     $( '.btnCariIndiKeg' ).show();
     $( '.btnHapusIndikatorKeg' ).hide();
     $( '.btnIndikatorKeg' ).show();
     $( '.chkIndikatorKeg' ).hide();
-
     $( '#ModalIndikatorKeg' ).modal( 'show' );
   } );
 
@@ -3723,9 +4648,7 @@ $( document ).ready( function () {
   } );
 
   $( document ).on( 'click', '.edit-indikator_keg', function () {
-
     var data = tblInKeg.row( $( this ).parents( 'tr' ) ).data();
-
     $( '.btnIndikatorKeg' ).removeClass( 'addIndikatorKeg' );
     $( '.btnIndikatorKeg' ).addClass( 'editIndikatorKeg' );
     $( '.modal-title' ).text( 'Edit dan Reviu Target Capaian Kegiatan Renja' );
@@ -3867,6 +4790,191 @@ $( document ).ready( function () {
     } );
   } );
 
+  $( document ).on( 'click', '.add-indikatorSubKeg', function () {
+    var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    $( '.btnIndikatorSubKeg' ).removeClass( 'editIndikatorSubKeg' );
+    $( '.btnIndikatorSubKeg' ).addClass( 'addIndikatorSubKeg' );
+    $( '.modal-title' ).text( 'Tambah Target Capaian Sub Kegiatan Renja' );
+    $( '.form-horizontal' ).show();
+    $( '#id_subkeg_indikatorKeg' ).val( data.id_subkegiatan_pd );
+    $( '#id_indikator_subkegiatan' ).val( null );
+    $( '#kd_indikatorSubKeg' ).val( null );
+    $( '#no_urut_indikatorSubKeg' ).val( 1 );
+    $( '#ur_tolokukur_Subkeg' ).val( null );
+    $( '#ur_indikatorSubKeg' ).val( null );
+    $( '#target_indikatorSubKeg_rkpd' ).val( 0 );
+    $( '#target_indikatorSubKeg_anggaran' ).val( 0 );
+    $( '#id_satuan_output_subkeg' ).val( 0 ).trigger( 'change' );
+    document.getElementById( "no_urut_indikatorKeg" ).removeAttribute( "disabled" );
+    document.getElementById( "ur_tolokukur_keg" ).removeAttribute( "disabled" );
+    $( '.btnCariIndiKeg' ).show();
+    $( '.btnHapusIndikatorSubKeg' ).hide();
+    $( '.btnIndikatorSubKeg' ).show();
+    $( '#ModalIndikatorSubKeg' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.addIndikatorSubKeg', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './addIndikatorSubKeg',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'tahun_renja': tahun_temp,
+        'id_subkegiatan_pd': $( '#id_subkeg_indikatorKeg' ).val(),
+        'kd_indikator': $( '#kd_indikatorSubKeg' ).val(),
+        'uraian_indikator_subkegiatan': $( '#ur_indikatorSubKeg' ).val(),
+        'tolok_ukur_indikator': $( '#ur_tolokukur_Subkeg' ).val(),
+        'target_renja': $( '#target_indikatorSubKeg_anggaran' ).val(),
+        'id_satuan_output': $( '#id_satuan_output_subkeg' ).val(),
+      },
+      success: function ( data ) {
+        subkeg_renja_tbl.ajax.reload( null, false );
+        tblInSubKeg.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '.edit_indikatorsubkeg', function () {
+    var data = tblInSubKeg.row( $( this ).parents( 'tr' ) ).data();
+    $( '.btnIndikatorSubKeg' ).removeClass( 'addIndikatorSubKeg' );
+    $( '.btnIndikatorSubKeg' ).addClass( 'editIndikatorSubKeg' );
+    $( '.modal-title' ).text( 'Edit Target Capaian Sub Kegiatan Renja' );
+    $( '.form-horizontal' ).show();
+    $( '#id_subkeg_indikatorKeg' ).val( data.id_subkegiatan_pd );
+    $( '#id_indikator_subkegiatan' ).val( data.id_indikator_subkegiatan );
+    $( '#kd_indikatorSubKeg' ).val( data.kd_indikator );
+    $( '#no_urut_indikatorSubKeg' ).val( data.no_urut );
+    $( '#ur_tolokukur_Subkeg' ).val( data.tolok_ukur_indikator );
+    $( '#ur_indikatorSubKeg' ).val( data.nm_indikator );
+    $( '#target_indikatorSubKeg_rkpd' ).val( data.target_renja );
+    $( '#target_indikatorSubKeg_anggaran' ).val( data.target_renja );
+    $( '#id_satuan_output_subkeg' ).val( data.id_satuan_output ).trigger( 'change' );
+    if ( data.sumber_data == 1 ) {
+      document.getElementById( "no_urut_indikatorKeg" ).removeAttribute( "disabled" );
+      $( '.btnCariIndikeg' ).show();
+      $( '.btnHapusIndikatorKeg' ).show();
+      document.getElementById( "ur_tolokukur_keg" ).removeAttribute( "disabled" );
+    } else {
+      document.getElementById( "no_urut_indikatorKeg" ).setAttribute( "disabled", "disabled" );
+      $( '.btnCariIndikeg' ).hide();
+      $( '.btnHapusIndikatorKeg' ).hide();
+      document.getElementById( "ur_tolokukur_keg" ).setAttribute( "disabled", "disabled" );
+    };
+
+    if ( data.status_kegiatan == 0 ) {
+      if ( data.sumber_data == 0 ) {
+        $( '.btnHapusIndikatorSubKeg' ).hide();
+      } else {
+        $( '.btnHapusIndikatorSubKeg' ).show();
+      }
+      $( '.btnIndikatorSubKeg' ).show();
+    } else {
+      $( '.btnHapusIndikatorSubKeg' ).hide();
+      $( '.btnIndikatorSubKeg' ).hide();
+    }
+    $( '#ModalIndikatorSubKeg' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.editIndikatorSubKeg', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './editIndikatorSubKeg',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_indikator_subkegiatan': $( '#id_indikator_subkegiatan' ).val(),
+        'id_subkegiatan_pd': $( '#id_subkeg_indikatorKeg' ).val(),
+        'kd_indikator': $( '#kd_indikatorSubKeg' ).val(),
+        'uraian_indikator_subkegiatan': $( '#ur_indikatorSubKeg' ).val(),
+        'tolok_ukur_indikator': $( '#ur_tolokukur_Subkeg' ).val(),
+        'target_renja': $( '#target_indikatorSubKeg_anggaran' ).val(),
+        'id_satuan_output': $( '#id_satuan_output_subkeg' ).val(),
+      },
+      success: function ( data ) {
+        subkeg_renja_tbl.ajax.reload( null, false );
+        tblInSubKeg.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '.btnHapusIndikatorSubKeg', function () {
+    var x = confirm( "Anda yakin akan menghapus data indikator " + $( '#ur_indikatorSubKeg' ).val() + " ?" );
+    if ( x ) {
+      $.ajaxSetup( {
+        headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+      } );
+
+      $.ajax( {
+        type: 'post',
+        url: './delIndikatorSubKeg',
+        data: {
+          '_token': $( 'input[name=_token]' ).val(),
+          'id_indikator_subkegiatan': $( '#id_indikator_subkegiatan' ).val()
+        },
+        success: function ( data ) {
+          $( '#ModalIndikatorSubKeg' ).modal( 'hide' );
+          tblInSubKeg.ajax.reload( null, false );
+          subkeg_renja_tbl.ajax.reload( null, false );
+          createPesan( data.pesan, "success" );
+        }
+      } );
+    }
+    else {
+      return false;
+    }
+  } );
+
+  $( document ).on( 'click', '.post-InSubKegRenja', function () {
+    var data = tblInSubKeg.row( $( this ).parents( 'tr' ) ).data();
+    var status_data;
+    if ( data.status_data == 0 ) {
+      status_data = 1;
+    };
+    if ( data.status_data == 1 ) {
+      status_data = 0;
+    };
+
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './postIndikatorSubKeg',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_indikator_subkegiatan': data.id_indikator_subkegiatan,
+        'status_data': status_data,
+      },
+      success: function ( data ) {
+        tblInSubKeg.ajax.reload( null, false );
+        subkeg_renja_tbl.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
   $( document ).on( 'click', '.post-AktivForum', function () {
     var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
     var status_data;
@@ -3893,6 +5001,41 @@ $( document ).ready( function () {
         aktivitas_tbl.ajax.reload( null, false );
         keg_renja_tbl.ajax.reload( null, false );
         pelaksana_tbl.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '.post-SubKeg', function () {
+    var data = subkeg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
+    var status_data;
+    if ( data.status_data == 0 ) {
+      status_data = 1;
+    };
+    if ( data.status_data == 1 ) {
+      status_data = 0;
+    };
+
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: './postSubKegRenja',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_subkegiatan_pd': data.id_subkegiatan_pd,
+        'status_data': status_data,
+      },
+      success: function ( data ) {
+        prog_renja_tbl.ajax.reload( null, false );
+        keg_renja_tbl.ajax.reload( null, false );
+        subkeg_renja_tbl.ajax.reload( null, false );
         if ( data.status_pesan == 1 ) {
           createPesan( data.pesan, "success" );
         } else {
@@ -3974,13 +5117,6 @@ $( document ).ready( function () {
     jenis_belanja_temp = $( '#jenis_belanja' ).val();
   } );
 
-  $( document ).on( 'click', '.btnCetakRKA', function () {
-    window.open( '../PrintPraRKAAP/' + id_kegrenja_temp + '/' + id_sub_unit_temp );
-  } );
-  $( document ).on( 'click', '.btnCetakRKA1', function () {
-    window.open( '../PrintPraRKAAP/' + id_kegrenja_temp + '/' + id_sub_unit_temp );
-  } );
-
   $( document ).on( 'click', '.btnPostUnit', function () {
     $.ajax( {
       type: 'get',
@@ -3993,404 +5129,5 @@ $( document ).ready( function () {
       }
     } );
   } );
-
-  var tblPegawai;
-  function loadTblPegawai () {
-    tblPegawai = $( '#tblCariPegawai' ).DataTable( {
-      processing: true,
-      serverSide: true,
-      autoWidth: false,
-      language: {
-        "decimal": ",",
-        "thousands": ".",
-        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
-        "sProcessing": "Sedang memproses...",
-        "sLengthMenu": "Tampilkan _MENU_ entri",
-        "sZeroRecords": "Tidak ditemukan data yang sesuai",
-        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
-        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-        "sInfoPostFix": "",
-        "sSearch": "Cari:",
-        "sUrl": "",
-        "oPaginate": {
-          "sFirst": "Pertama",
-          "sPrevious": "Sebelumnya",
-          "sNext": "Selanjutnya",
-          "sLast": "Terakhir"
-        }
-      },
-      "pageLength": 10,
-      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
-      "bDestroy": true,
-      dom: 'BfRtip',
-      "ajax": { "url": "../admin/parameter/getDataPegawai" },
-      "columns": [
-        { data: 'no_urut', sClass: "dt-center" },
-        { data: 'nip_pegawai', 'searchable': true, 'orderable': true, sClass: "dt-center" },
-        { data: 'nama_pegawai', 'searchable': true, 'orderable': true, sClass: "dt-left" },
-        { data: 'nama_jabatan', 'searchable': true, 'orderable': true, sClass: "dt-left" },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
-      ],
-    } );
-  };
-
-  $( document ).on( 'click', '#btnPegawai', function () {
-    $( '#cariPegawai' ).modal( 'show' );
-    loadTblPegawai();
-  } );
-
-  $( '#tblCariPegawai tbody' ).on( 'dblclick', 'tr', function () {
-    var data = tblPegawai.row( this ).data();
-
-    document.getElementById( "nip_tapd" ).value = data.nip_pegawai;
-    document.getElementById( "nama_tapd" ).value = data.nama_pegawai;
-    document.getElementById( "jabatan_tapd" ).value = data.nama_jabatan;
-    document.getElementById( "id_pegawai_tapd" ).value = data.id_pegawai;
-    document.getElementById( "id_unit_pegawai_tapd" ).value = data.id_unit_pegawai;
-    if ( data.nip_pegawai == null ) {
-      $( '#nip_tapd_display' ).val( null );
-    } else {
-      $( '#nip_tapd_display' ).val( buatNip( data.nip_pegawai ) );
-    };
-
-    $( '#cariPegawai' ).modal( 'hide' );
-  } );
-
-  $( document ).on( 'click', '#btnSimpanPA', function () {
-    $.ajaxSetup( {
-      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
-    } );
-
-    $.ajax( {
-      type: 'post',
-      url: 'addPa',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_dokumen_keu': $( '#id_dokumen_keu' ).val(),
-        'id_pegawai': $( '#id_pegawai_tapd' ).val(),
-        'id_unit_pegawai': $( '#id_unit_pegawai_tapd' ).val(),
-        'id_unit': $( '#id_unit' ).val(),
-      },
-      success: function ( data ) {
-        TblTAPDUnit.ajax.reload( null, false );
-        if ( data.status_pesan == 1 ) {
-          createPesan( data.pesan, "success" );
-        } else {
-          createPesan( data.pesan, "danger" );
-        }
-      }
-    } );
-  } );
-
-  var tblProgramNas;
-  function loadProgNas () {
-    tblProgramNas = $( '#tblProgNas' ).DataTable( {
-      processing: true,
-      serverSide: true,
-      dom: 'BfrtIp',
-      autoWidth: false,
-      "ajax": { "url": "../prioritas/getProgNas" },
-      "columns": [
-        { data: 'no_urut', sClass: "dt-center" },
-        { data: 'uraian_program_nasional' },
-      ],
-      "order": [ [ 0, 'asc' ] ],
-      "bDestroy": true
-    } );
-  };
-
-  $( document ).on( 'click', '#btnCariProgNas', function () {
-    $( '#cariProgNas' ).modal( 'show' );
-    loadProgNas();
-  } );
-
-  $( document ).on( 'click', '#btnCariProgNasSat', function () {
-    $( '#cariProgNas' ).modal( 'show' );
-    loadProgNas();
-  } );
-
-  $( '#tblProgNas tbody' ).on( 'dblclick', 'tr', function () {
-    var data = tblProgramNas.row( this ).data();
-    document.getElementById( "ur_program_nasional" ).value = data.uraian_program_nasional;
-    document.getElementById( "id_program_nasional" ).value = data.id_prognas;
-    document.getElementById( "ur_prognas_satuan" ).value = data.uraian_program_nasional;
-    document.getElementById( "id_prognas_satuan" ).value = data.id_prognas;
-    $( '#cariProgNas' ).modal( 'hide' );
-  } );
-
-  var tblProgramProv;
-  function loadProgProv () {
-    tblProgramProv = $( '#tblProgProv' ).DataTable( {
-      processing: true,
-      serverSide: true,
-      dom: 'BfrtIp',
-      autoWidth: false,
-      "ajax": { "url": "../prioritas/getProgProv" },
-      "columns": [
-        { data: 'no_urut', sClass: "dt-center" },
-        { data: 'uraian_program_provinsi' },
-      ],
-      "order": [ [ 0, 'asc' ] ],
-      "bDestroy": true
-    } );
-  };
-
-  $( document ).on( 'click', '#btnCariProgProv', function () {
-    $( '#cariProgProv' ).modal( 'show' );
-    loadProgProv();
-  } );
-
-  $( '#tblProgProv tbody' ).on( 'dblclick', 'tr', function () {
-    var data = tblProgramProv.row( this ).data();
-    document.getElementById( "ur_program_prov" ).value = data.uraian_program_provinsi;
-    document.getElementById( "id_program_prov" ).value = data.id_progprov;
-    $( '#cariProgProv' ).modal( 'hide' );
-  } );
-
-  $( "#opdPelaksana1" ).change( function () {
-    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana1' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getProgramMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdProgram"]' ).empty();
-        $( 'select[name="opdProgram"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdProgram"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( "#opdPelaksana2" ).change( function () {
-    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana2' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getProgramMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdProgram1"]' ).empty();
-        $( 'select[name="opdProgram1"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdProgram1"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( "#opdProgram1" ).change( function () {
-    vars = "?id_program_pd=" + $( '#opdProgram1' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getKegiatanMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdKegiatan"]' ).empty();
-        $( 'select[name="opdKegiatan"]' ).append( '<option value="0">---Pilih Kegiatan OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdKegiatan"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( "#opdPelaksana3" ).change( function () {
-    vars = "?id_pelaksana_anggaran=" + $( '#opdPelaksana3' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getProgramMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdProgram2"]' ).empty();
-        $( 'select[name="opdProgram2"]' ).append( '<option value="0">---Pilih Program OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdProgram2"]' ).append( '<option value="' + post.id_program_pd + '">' + post.uraian_display + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( "#opdProgram2" ).change( function () {
-    vars = "?id_program_pd=" + $( '#opdProgram2' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getKegiatanMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdKegiatan1"]' ).empty();
-        $( 'select[name="opdKegiatan1"]' ).append( '<option value="0">---Pilih Kegiatan OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdKegiatan1"]' ).append( '<option value="' + post.id_kegiatan_pd + '">' + post.uraian_display + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( "#opdKegiatan1" ).change( function () {
-    vars = "?id_kegiatan_pd=" + $( '#opdKegiatan1' ).val();
-    $.ajax( {
-      type: "GET",
-      url: 'getPelaksanaMove' + vars,
-      dataType: "json",
-      success: function ( data ) {
-
-        var j = data.length;
-        var post, i;
-
-        $( 'select[name="opdSubPelaksana"]' ).empty();
-        $( 'select[name="opdSubPelaksana"]' ).append( '<option value="0">---Pilih Pelaksana Sub OPD---</option>' );
-
-        for ( i = 0; i < j; i++ ) {
-          post = data[ i ];
-          $( 'select[name="opdSubPelaksana"]' ).append( '<option value="' + post.id_pelaksana_pd + '">' + post.nm_sub + '</option>' );
-        }
-      }
-    } );
-  } );
-
-  $( document ).on( 'click', '.move-Program', function () {
-    var data = prog_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-    id_progrenja_temp = data.id_program_pd;
-    $( '#cariPelaksanaRKPD' ).modal( 'show' );
-  } );
-
-  $( document ).on( 'click', '.move-Kegiatan', function () {
-    var data = keg_renja_tbl.row( $( this ).parents( 'tr' ) ).data();
-    id_kegrenja_temp = data.id_kegiatan_pd;
-    $( '#cariProgramRenja' ).modal( 'show' );
-  } );
-
-  $( document ).on( 'click', '.move-Pelaksana', function () {
-    var data = pelaksana_tbl.row( $( this ).parents( 'tr' ) ).data();
-    id_pelaksana_temp = data.id_pelaksana_pd;
-    $( '#cariKegiatanRenja' ).modal( 'show' );
-  } );
-
-  $( document ).on( 'click', '.move-Aktivitas', function () {
-    var data = aktivitas_tbl.row( $( this ).parents( 'tr' ) ).data();
-    id_aktivitas_temp = data.id_aktivitas_pd;
-    $( '#cariPelaksanaSub' ).modal( 'show' );
-  } );
-
-  $( document ).on( 'click', '#btnProsesMoveProgram', function () {
-    $.ajax( {
-      type: 'POST',
-      url: 'CopyProgram',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_pelaksana_anggaran': $( '#opdPelaksana' ).val(),
-        'id_program_pd': id_progrenja_temp,
-      },
-      success: function ( data ) {
-        createPesan( data.pesan, "success" );
-        prog_renja_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      },
-      error: function ( data ) {
-        createPesan( data.pesan, "danger" );
-        prog_renja_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      }
-    } );
-  } );
-
-  $( document ).on( 'click', '#btnProsesMoveKegiatan', function () {
-    $.ajax( {
-      type: 'POST',
-      url: 'MoveKegiatan',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_kegiatan_pd': id_kegrenja_temp,
-        'id_program_pd': $( '#opdProgram' ).val(),
-      },
-      success: function ( data ) {
-        createPesan( data.pesan, "success" );
-        keg_renja_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      },
-      error: function ( data ) {
-        createPesan( data.pesan, "danger" );
-        keg_renja_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      }
-    } );
-  } );
-
-  $( document ).on( 'click', '#btnProsesMoveSub', function () {
-    $.ajax( {
-      type: 'POST',
-      url: 'MovePelaksana',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_pelaksana_pd': id_pelaksana_temp,
-        'id_kegiatan_pd': $( '#opdKegiatan' ).val(),
-      },
-      success: function ( data ) {
-        createPesan( data.pesan, "success" );
-        pelaksana_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      },
-      error: function ( data ) {
-        createPesan( data.pesan, "danger" );
-        pelaksana_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      }
-    } );
-  } );
-
-  $( document ).on( 'click', '#btnProsesMoveAktiv', function () {
-    $.ajax( {
-      type: 'POST',
-      url: 'MoveAktivitas',
-      data: {
-        '_token': $( 'input[name=_token]' ).val(),
-        'id_aktivitas_pd': id_aktivitas_temp,
-        'id_pelaksana_pd': $( '#opdSubPelaksana' ).val(),
-      },
-      success: function ( data ) {
-        createPesan( data.pesan, "success" );
-        aktivitas_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      },
-      error: function ( data ) {
-        createPesan( data.pesan, "danger" );
-        aktivitas_tbl.ajax.reload( null, false );
-        $( '#ModalProgress' ).modal( 'hide' );
-      }
-    } );
-  } );
-
 
 } ); // end file

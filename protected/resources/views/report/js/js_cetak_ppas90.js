@@ -104,7 +104,7 @@ $( document ).ready( function () {
   $( ".tahun_prarka" ).change( function () {
     $.ajax( {
       type: "GET",
-      url: './getDokKeuangan?tahun=' + $( '#tahun_prarka' ).val(),
+      url: './getDokKeuangan?jns_dok=0&kd_dok=0&tahun=' + $( '#tahun_prarka' ).val(),
       dataType: "json",
       success: function ( data ) {
         var j = data.length;
@@ -540,6 +540,46 @@ $( document ).ready( function () {
       vars += "&uraian_header=PPAS";
       window.open( './90Raperda9' + vars, '_blank' );
     };
+
+    if ( $( '#jns_laporan' ).val() == 60 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90JabarRaperkada1' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 61 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_bidang=" + $( '#bidang_prarka' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&id_subkegiatan=" + $( '#subkeg_prarka' ).val();
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&ttd=" + check_data;
+      vars += "&uraian_dok=PPAS";
+      vars += "&uraian_header=PPAS";
+      window.open( './90JabarRaperkada2' + vars, '_blank' );
+    };
+
+
 
   } );
 

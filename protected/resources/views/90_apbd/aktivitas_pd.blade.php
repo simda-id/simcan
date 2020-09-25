@@ -64,12 +64,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="pagu_aktivitas_renja" class="col-sm-3 control-label" align='left'>Pagu PPAS :</label>
+            <label for="pagu_aktivitas_renja" class="col-sm-3 control-label" align='left'>Pagu RKPD :</label>
             <div class="col-sm-3">
               <input type="text" class="form-control number" id="pagu_aktivitas_renja" name="pagu_aktivitas_renja"
                 disabled>
             </div>
-            <label for="pagu_aktivitas" class="col-sm-2 control-label" align='left'>Pagu APBD :</label>
+            <label for="pagu_aktivitas" class="col-sm-2 control-label" align='left'>Pagu PPAS :</label>
             <div class="col-sm-3">
               <input type="text" class="form-control number" id="pagu_aktivitas" name="pagu_aktivitas">
             </div>

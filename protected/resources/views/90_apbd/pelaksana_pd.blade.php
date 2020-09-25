@@ -11,7 +11,7 @@
             <input type="hidden" id="id_forum_pelaksana" name="id_forum_pelaksana">
             <input type="hidden" id="id_aktivitas_pelaksana" name="id_aktivitas_pelaksana">
             <input type="hidden" id="tahun_forum_pelaksana" name="tahun_forum_pelaksana">
-            <div class="form-group">
+            <div class="form-group hidden">
               <label class="control-label col-sm-3" for="id">No Urut :</label>
               <div class="col-sm-3">
                 <input type="text" class="form-control nomor" id="no_urut_pelaksana">

@@ -201,6 +201,12 @@ use hoaaah\LaravelMenu\Menu;
               <option value="7">Ke 7</option>
               <option value="8">Ke 8</option>
               <option value="9">Ke 9</option>
+              <option value="10">Ke 10</option>
+              <option value="11">Ke 11</option>
+              <option value="12">Ke 12</option>
+              <option value="13">Ke 13</option>
+              <option value="14">Ke 14</option>
+              <option value="15">Ke 15</option>
             </select>
           </div>
         </div>

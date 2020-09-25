@@ -23,16 +23,6 @@
                 Direviu</label>
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="title">Prioritas Nasional:</label>
-            <div class="col-sm-8">
-              <textarea type="name" class="form-control ur_prognas_satuan" name="ur_prognas_satuan"
-                id="ur_prognas_satuan" rows="2" disabled></textarea>
-            </div>
-            <input type="hidden" id="id_prognas_satuan" name="id_prognas_satuan">
-            <span class="btn btn-sm btn-primary btnCariProgNasSat" id="btnCariProgNasSat" name="btnCariProgNasSat"><i
-                class="fa fa-search fa-fw fa-lg"></i></span>
-          </div>
           <div class="form-group hidden">
             <label class="control-label col-sm-3" for="title">Aktivitas ASB :</label>
             <input type="hidden" class="form-control" id="id_aktivitas_asb_belanja" name="id_aktivitas_asb_belanja"
@@ -134,6 +124,7 @@
                     <td width="20%" style="text-align: left; vertical-align:middle;">
                       <select type="text" class="form-control" id="id_satuan1_forum" name="id_satuan1_forum"></select>
                     </td>
+
                     <td width="20%" style="text-align: left; vertical-align:middle;">
                       <select type="text" class="form-control" id="id_satuan2_forum" name="id_satuan2_forum"></select>
                     </td>

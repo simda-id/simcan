@@ -88,17 +88,40 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       deferRender: true,
-      "autoWidth": false,
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 1 },
+        { responsivePriority: 2, targets: -1 },
+      ],
+      "autoWidth": true,
       "ajax": { "url": "getData" + pars },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
-        { data: 'urut', sClass: "dt-center" },
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
+        { data: 'urut', sClass: "dt-center" },
         {
-          data: 'uraian', 'searchable': true, sClass: "dt-left",
+          data: 'uraian', 'searchable': false, 'orderable': false, sClass: "dt-left",
           render: function ( data, type, row, meta ) {
             return row.uraian_program_rpjmd +
               '  <span class="label" style="background-color: ' + row.status_warna + '; color:#fff;">' + row.status_label + '</span>'
@@ -123,7 +146,6 @@ $( document ).ready( function () {
         { data: 'indikator_0', sClass: "dt-center" },
         { data: 'jml_unit', sClass: "dt-center" },
         { data: 'unit_0', sClass: "dt-center" },
-        // { data: 'pelaksanaan_display', sClass: "dt-center"},
         {
           data: 'icon', 'searchable': false, 'orderable': false,
           render: function ( data, type, row, meta ) {
@@ -143,12 +165,35 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       deferRender: true,
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 1 },
+        { responsivePriority: 2, targets: -1 },
+      ],
       "autoWidth": false,
       "ajax": { "url": "getIndikatorRKPD/" + id_program },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       'columnDefs': [
         {
           'width': 5,
@@ -160,6 +205,7 @@ $( document ).ready( function () {
       'select': { 'style': 'multi' },
       "columns": [
         { data: 'id_indikator_program_rkpd', sClass: "dt-center", searchable: false, orderable: false, },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
         { data: 'uraian_indikator_program_rkpd' },
         { data: 'tolok_ukur_indikator' },
@@ -180,10 +226,6 @@ $( document ).ready( function () {
             return data
           },
           sClass: "dt-center"
-        },
-        {
-          data: 'action', 'searchable': false, 'orderable': false,
-          sClass: "dt-center"
         }
       ],
       "order": [ [ 0, 'asc' ] ],
@@ -197,19 +239,42 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       deferRender: true,
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 1 },
+        { responsivePriority: 2, targets: -1 },
+      ],
       "autoWidth": false,
       "ajax": { "url": "getUrusanRKPD/" + id_program },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "columns": [
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
         { data: 'nm_urusan' },
         { data: 'nm_bidang' },
         { data: 'jml_data', sClass: "dt-center" },
-        { data: 'jml_0', sClass: "dt-center" },
-        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+        { data: 'jml_0', sClass: "dt-center" }
       ],
       "order": [ [ 0, 'asc' ] ],
       "bDestroy": true
@@ -251,12 +316,35 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       deferRender: true,
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 1 },
+        { responsivePriority: 2, targets: -1 },
+      ],
       "autoWidth": false,
       "ajax": { "url": "getPelaksanaRKPD/" + id_ranwal + "/" + id_urusan },
-      "language": {
+      language: {
         "decimal": ",",
-        "thousands": "."
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
       },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       'columnDefs': [
         {
           'width': 5,
@@ -268,6 +356,7 @@ $( document ).ready( function () {
       'select': { 'style': 'multi' },
       "columns": [
         { data: 'id_pelaksana_anggaran', sClass: "dt-center", searchable: false, orderable: false, },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'urut', sClass: "dt-center" },
         { data: 'kd_unit', sClass: "dt-center" },
         { data: 'nm_unit' },
@@ -284,10 +373,6 @@ $( document ).ready( function () {
             }
             return data
           },
-          sClass: "dt-center"
-        },
-        {
-          data: 'action', 'searchable': false, 'orderable': false,
           sClass: "dt-center"
         }
       ],
@@ -333,6 +418,7 @@ $( document ).ready( function () {
     var data = progrkpd.row( $( this ).parents( 'tr' ) ).data();
 
     temp_rkpd_ranwal = data.id_anggaran_pemda;
+    temp_ur_program_rkpd = data.uraian_program_rpjmd
     $( '#divAddUrusan' ).show();
 
     if ( data.status_data == 0 ) {
@@ -372,6 +458,7 @@ $( document ).ready( function () {
     var data = UrusanTable.row( $( this ).parents( 'tr' ) ).data();
 
     temp_urusan_rkpd = data.id_urusan_anggaran;
+    // temp_ur_program_rkpd = $('#nm_program_rkpd_urusan').text;
 
     $( '#divAddPelaksana' ).show();
 
@@ -610,15 +697,13 @@ $( document ).ready( function () {
     $( '.modal-title' ).text( 'Tambah Urusan dan Bidang Pemerintahan RKPD' );
     $( '.form-horizontal' ).show();
     $( '#id_rkpd_ranwal_urusan' ).val( temp_rkpd_ranwal );
-    $( '#kd_urusan' ).val( -1 ).trigger( 'change' );
-    $( '#kd_bidang' ).val( -1 ).trigger( 'change' );
 
     $( '#ModalUrusan' ).modal( 'show' );
 
     $.ajax( {
 
       type: "GET",
-      url: '../admin/parameter/getUrusan',
+      url: 'getUrusan',
       dataType: "json",
 
       success: function ( data ) {
@@ -712,7 +797,7 @@ $( document ).ready( function () {
     $( '#ur_tolokukur_rkpd' ).val( null );
     $( '#target_indikator_rpjmd' ).val( 0 );
     $( '#target_indikator_rkpd' ).val( 0 );
-    $( '#id_satuan_output' ).val( 0 ).trigger( 'change' );
+    $( '#id_satuan_output' ).val( null ).trigger( 'change' );
 
     document.getElementById( "no_urut_indikator" ).removeAttribute( "disabled" );
     document.getElementById( "ur_tolokukur_rkpd" ).removeAttribute( "disabled" );
@@ -735,11 +820,11 @@ $( document ).ready( function () {
       data: {
         '_token': $( 'input[name=_token]' ).val(),
         'no_urut': $( '#no_urut_indikator' ).val(),
-        'id_anggaran_pemda': $( '#id_rkpd_ranwal_indikator' ).val(),
+        'id_rkpd_ranwal': $( '#id_rkpd_ranwal_indikator' ).val(),
         'kd_indikator': $( '#kd_indikator_rkpd' ).val(),
         'uraian_indikator': $( '#ur_indikator_rkpd' ).val(),
         'tolok_ukur_indikator': $( '#ur_tolokukur_rkpd' ).val(),
-        'target_keuangan': $( '#target_indikator_rkpd' ).val(),
+        'target_rkpd': $( '#target_indikator_rkpd' ).val(),
         'id_satuan_output': $( '#id_satuan_output' ).val(),
       },
       success: function ( data ) {
@@ -864,7 +949,7 @@ $( document ).ready( function () {
   $( document ).on( 'click', '.add-programrkpd', function () {
     $( '.btnProgram' ).removeClass( 'editProgramRKPD' );
     $( '.btnProgram' ).addClass( 'addProgramRkpd' );
-    $( '.modal-title' ).text( 'Tambah Data Program RKPD' );
+    $( '.modal-title' ).text( 'Tambah Data Program RKPD - PPAS' );
     $( '.form-horizontal' ).show();
     $( '#id_rkpd_ranwal_program' ).val( null );
     $( '#no_urut_program' ).val( null );
@@ -939,7 +1024,7 @@ $( document ).ready( function () {
 
     $( '.btnProgram' ).removeClass( 'addProgramRkpd' );
     $( '.btnProgram' ).addClass( 'editProgramRKPD' );
-    $( '.modal-title' ).text( 'Edit dan Reviu Program Musrenbang RKPD' );
+    $( '.modal-title' ).text( 'Edit dan Reviu Program RKPD - PPAS' );
     $( '.idStatusUsulan' ).hide();
     $( '.form-horizontal' ).show();
     $( '#id_rkpd_ranwal_program' ).val( data.id_anggaran_pemda );
@@ -1134,6 +1219,28 @@ $( document ).ready( function () {
       processing: true,
       serverSide: true,
       dom: 'bfrtIp',
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
       "ajax": { "url": "./getRefUnit" },
       "columns": [
         { data: 'no_urut', sClass: "dt-center" },
@@ -1224,7 +1331,7 @@ $( document ).ready( function () {
     $.ajax( {
 
       type: "GET",
-      url: '../admin/parameter/getBidang/' + $( '.kd_urusan' ).val(),
+      url: 'getBidang/' + $( '.kd_urusan' ).val(),
       dataType: "json",
 
       success: function ( data ) {
@@ -1384,7 +1491,7 @@ $( document ).ready( function () {
         var post, i;
 
         $( 'select[name="id_satuan_output"]' ).empty();
-        $( 'select[name="id_satuan_output"]' ).append( '<option value="0">--Pilih Satuan Indikator--</option>' );
+        $( 'select[name="id_satuan_output"]' ).append( '<option value="">--Pilih Satuan Indikator--</option>' );
 
         for ( i = 0; i < j; i++ ) {
           post = data[ i ];

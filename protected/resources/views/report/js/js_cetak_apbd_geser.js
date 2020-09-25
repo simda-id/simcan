@@ -737,6 +737,23 @@ $( document ).ready( function () {
       window.open( '../Lamp2BUbah' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 54 ) {
+      vars = "?token=" + $( 'input[name=_token]' ).val();
+      vars += "&tahun=" + $( '#tahun_prarka' ).val();
+      vars += "&id_dokumen=" + $( '#no_dokumen' ).val();
+      vars += "&id_unit=" + $( '#unit_prarka' ).val();
+      vars += "&id_sub=" + $( '#sub_prarka2' ).val();
+      vars += "&id_program=" + $( '#prog_prarka' ).val();
+      vars += "&id_kegiatan=" + $( '#keg_prarka' ).val();
+      vars += "&kota=" + $( '#nama_kota_lap' ).val();
+      vars += "&tanggal=" + $( '#tgl_laporan_x' ).val();
+      vars += "&uraian_dok=" + $( '#jns_dokumen' ).val();
+      vars += "&uraian_header=" + $( '#jns_dokumen option:selected' ).text();
+      vars += "&ttd=" + check_data;
+      vars += "&hal_mulai=" + $( '#hal_mulai' ).val();
+      window.open( '../Lamp3Ubah' + vars, '_blank' );
+    };
+
     if ( $( '#jns_laporan' ).val() == 57 ) {
       vars = "?token=" + $( 'input[name=_token]' ).val();
       vars += "&tahun=" + $( '#tahun_prarka' ).val();

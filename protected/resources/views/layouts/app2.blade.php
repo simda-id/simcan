@@ -251,11 +251,6 @@ use hoaaah\LaravelMenu\Menu;
                                                         'visible' => $akses->get(732),
                                                         'url' => '/GeserApbd/dokopd',
                                                     ],
-                                                /*     [
-                                                        'label' => 'Pagu Anggaran',
-                                                        'visible' => $akses->get(713),
-                                                        'url' => '/Apbd/sesuai',
-                                                    ] */
                                                 ]
                                             ],
                                             [
@@ -308,6 +303,43 @@ use hoaaah\LaravelMenu\Menu;
                                                         'label' => 'Program RENJA',
                                                         'visible' => $akses->get(732),
                                                         'url' => '/UbahApbd/progopd',
+                                                    ],
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    [ 'label' => 'Pergeseran APBD-P',
+                                        'visible' => $akses->getMulti([730,731,732]),
+                                        'items' => [
+                                            [
+                                            'label' => 'Dokumen APBD-P',
+                                            'visible' => $akses->getMulti([730,732]),
+                                            'items' => [
+                                                    [
+                                                        'label' => 'Dokumen Pergeseran APBD-P',
+                                                        'visible' => $akses->get(730),
+                                                        'url' => '/UbahGeser',
+                                                    ],
+                                                    [
+                                                        'label' => 'Dokumen RKA SKPD',
+                                                        'visible' => $akses->get(732),
+                                                        'url' => '/UbahGeser/dokopd',
+                                                    ],
+                                                ]
+                                            ],
+                                            [
+                                                'label' => 'Penyusunan Pergeseran APBD-P',
+                                                'visible' => $akses->getMulti([731,732]),
+                                                'items' => [
+                                                    [
+                                                        'label' => 'Program RKPD',
+                                                        'visible' => $akses->get(731),
+                                                        'url' => '/UbahGeser/progpemda',
+                                                    ],
+                                                    [
+                                                        'label' => 'Program RENJA',
+                                                        'visible' => $akses->get(732),
+                                                        'url' => '/UbahGeser/progopd',
                                                     ],
                                                 ]
                                             ]

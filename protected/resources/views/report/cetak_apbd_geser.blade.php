@@ -183,8 +183,8 @@ use hoaaah\LaravelMenu\Menu;
               <option value="-1">--Pilih Jenis Dokumen--</option>
               <option value="1">Pergeseran APBD</option>
               <option value="2">Rancangan APBD-P</option>
-              <option value="3">APBD Perubahan </option>
-              <option value="4">Pergeseran APBD-P </option>
+              <option value="2">APBD Perubahan </option>
+              <option value="3">Pergeseran APBD-P </option>
             </select>
           </div>
           <label class="control-label col-sm-2" for="id_perubahan" style="color:#fff; text-align: right;">Pergeseran ke

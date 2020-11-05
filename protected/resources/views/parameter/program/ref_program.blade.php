@@ -194,7 +194,7 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
             <div class="form-group">
               <label for="kd_program" class="col-sm-3" align='left'>Kode Program</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control number" id="kd_program" name="kd_program" maxlength="4"=""
+                <input type="text" class="form-control number" id="kd_program" name="kd_program" maxlength="2"=""
                   required="required">
               </div>
             </div>

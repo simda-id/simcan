@@ -107,6 +107,24 @@ $( document ).ready( function () {
         back2Rek5();
     } );
 
+    $.ajax( {
+        type: "GET",
+        url: '../parameter90/getPmdUbah',
+        dataType: "json",
+        success: function ( data ) {
+            var j = data.length;
+            var post, i;
+
+            $( 'select[name="dasar_hkm6"]' ).empty();
+            $( 'select[name="dasar_hkm6"]' ).append( '<option value="-1">---Pilih Dasar Hukum Penambahan/Perubahan---</option>' );
+
+            for ( i = 0; i < j; i++ ) {
+                post = data[ i ];
+                $( 'select[name="dasar_hkm6"]' ).append( '<option value="' + post.id + '">' + post.uraian + '</option>' );
+            }
+        }
+    } );
+
     rek1_tbl = $( '#tblAkun' ).DataTable( {
         processing: true,
         serverSide: true,
@@ -316,6 +334,7 @@ $( document ).ready( function () {
             },
             "pageLength": 25,
             "columns": [
+                { data: 'action', 'searchable': false, width: "5%", 'orderable': false, sClass: "dt-center" },
                 { data: 'kode_rek5', sClass: "dt-center", width: "15%" },
                 { data: 'nama_kd_rek_5', sClass: "dt-left" },
             ],
@@ -353,6 +372,7 @@ $( document ).ready( function () {
             },
             "pageLength": 25,
             "columns": [
+                { data: 'action', 'searchable': false, width: "5%", 'orderable': false, sClass: "dt-center" },
                 { data: 'kode_rek6', sClass: "dt-center", width: "15%" },
                 { data: 'nama_kd_rek_6', sClass: "dt-left" },
             ],
@@ -392,6 +412,57 @@ $( document ).ready( function () {
         $( '#ur_rincian_rek6' ).text( data.kode_rek5 + ' ' + data.nama_kd_rek_5 );
         $( '.nav-tabs a[href="#tabrek6"]' ).tab( 'show' );
         LoadListRek6( rek5_temp );
+    } );
+
+    function getStatusRek6 () {
+        var xCheck = document.querySelectorAll( 'input[name="rbStatusRek6"]:checked' );
+        var xyz = [];
+        for ( var x = 0, l = xCheck.length; x < l; x++ ) { xyz.push( xCheck[ x ].value ); }
+        var xvalues = xyz.join( '' );
+        return xvalues;
+    }
+
+    $( document ).on( 'click', '#btnRek6', function () {
+        $( '#btnSaveRek6' ).addClass( 'addRek6' );
+        $( '#btnSaveRek6' ).removeClass( 'editRek6' );
+        $( '#nm_akun6' ).text( $( '#ur_akun_rek6' ).text() );
+        $( '#nm_kelompok6' ).text( $( '#ur_gol_rek6' ).text() );
+        $( '#nm_jenis6' ).text( $( '#ur_jenis_rek6' ).text() );
+        $( '#nm_obyek6' ).text( $( '#ur_obyek_rek6' ).text() );
+        $( '#id_rincian6' ).val( rek5_temp );
+        $( '#nm_rincian6' ).text( $( '#ur_rincian_rek6' ).text() );
+        $( '#id_subrinc6' ).val( null );
+        $( '#kd_subrinc6' ).val( 1 );
+        $( '#uraian_subrinc6' ).val( null );
+        $( '#dasar_hkm6' ).val( 50 ).trigger( 'change' );
+        document.frmModalRek6.rbStatusRek6[ 0 ].checked = true;
+        $( '.form-horizontal' ).show();
+        $( '#frmModalRek6' ).modal( 'show' );
+    } );
+
+    $( '.modal-footer' ).on( 'click', '.addRek6', function () {
+        $.ajaxSetup( {
+            headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+        } );
+        $.ajax( {
+            type: 'post',
+            url: './rekening/addRek6',
+            data: {
+                '_token': $( 'input[name=_token]' ).val(),
+                'id_rek_5': rek5_temp,
+                'kd_rek_6': $( '#kd_subrinc6' ).val(),
+                'nama_kd_rek_6': $( '#uraian_subrinc6' ).val(),
+                'id_hkm': $( '#dasar_hkm6' ).val(),
+            },
+            success: function ( data ) {
+                rek6_tbl.ajax.reload( null, false );
+                if ( data.status_pesan == 1 ) {
+                    createPesan( data.pesan, "success" );
+                } else {
+                    createPesan( data.pesan, "danger" );
+                }
+            },
+        } );
     } );
 
 } ); //end file

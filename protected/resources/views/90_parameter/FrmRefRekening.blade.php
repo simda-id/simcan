@@ -194,12 +194,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="DivAddRek5 hidden">
+                                        <button id="btnRek5" type="button"
+                                            class="btnRek5 btn btn-labeled btn-sm btn-primary">
+                                            <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah
+                                            Rekening 5 SIPD</button>
+                                        <label id="ur_bidang_prog" align='left'>*)
+                                            Silahkan tambahkan program yang sesuai dengan data Rekening yang
+                                            terdapat
+                                            di SIPD baik kode maupun nomenklatur</label>
+                                    </div>
                                 </form>
                                 <table id="tblRincian"
                                     class="table table-striped table-bordered table-responsive compact" width="100%"
                                     cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             <th width='15%' style="text-align: center; vertical-align:middle">Kode
                                                 Rincian Obyek</th>
                                             <th style="text-align: center; vertical-align:middle">Nama Rincian Obyek
@@ -256,12 +267,23 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="DivAddRek6 hidden">
+                                        <button id="btnRek6" type="button"
+                                            class="btnRek6 btn btn-labeled btn-sm btn-primary">
+                                            <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah
+                                            Rekening 6 SIPD</button>
+                                        <label id="ur_bidang_prog" align='left'>*)
+                                            Silahkan tambahkan program yang sesuai dengan data Rekening yang
+                                            terdapat
+                                            di SIPD baik kode maupun nomenklatur</label>
+                                    </div>
                                 </form>
                                 <table id="tblSubRincian"
                                     class="table table-striped table-bordered table-responsive compact" width="100%"
                                     cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th width='5%' style="text-align: center; vertical-align:middle">Aksi</th>
                                             <th width='15%' style="text-align: center; vertical-align:middle">Kode Sub
                                                 Rincian</th>
                                             <th style="text-align: center; vertical-align:middle">Nama Sub Rincian Obyek
@@ -291,6 +313,203 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
         <tbody></tbody>
         </table>
     </script>
+
+    <div id="frmModalRek5" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Data Nomenklatur Rekening Level 5 (Rincian Obyek)</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="frmModalRek5" class="form-horizontal" role="form" autocomplete='off' action=""
+                        method="post" onsubmit="return false;">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="nm_akun5" class="col-sm-3" align='left'>Kode 1 (Akun)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_akun5" name="nm_akun5" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_kelompok5" class="col-sm-3" align='left'>Kode 2 (Kelompok)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_kelompok5" name="nm_kelompok5" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_jenis5" class="col-sm-3" align='left'>Kode 3 (Jenis)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_jenis5" name="nm_jenis5" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_obyek5" class="col-sm-3" align='left'>Kode 4 (Obyek)</label>
+                            <div class="col-sm-8">
+                                <input type="hidden" name="id_obyek5" id="id_obyek5">
+                                <label id="nm_obyek5" name="nm_obyek5" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kd_rincian5" class="col-sm-3" align='left'>Kode 5 (Rincian Obyek)</label>
+                            <div class="col-sm-2" align="center">
+                                <input type="hidden" name="id_rincian5" id="id_rincian5">
+                                <input type="text" class="form-control" id="kd_rincian5" name="kd_rincian5"
+                                    maxlength="3"="" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="uraian_rincian5" class="col-sm-3" align='left'>Uraian Rincian Obyek</label>
+                            <div class="col-sm-8">
+                                <textarea type="name" class="form-control" id="uraian_rincian5" name="uraian_rincian5"
+                                    rows="3" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dasar_hkm5" class="col-sm-3 control-label" align='left'>Dasar
+                                Hukum</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2 dasar_hkm5" name="dasar_hkm5"
+                                    id="dasar_hkm5"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divStatusRek5">
+                            <label for="rbStatusRek5" class="col-sm-3 control-label" align='left'>Status Rincian
+                                Obyek</label>
+                            <div class="col-sm-2">
+                                <label>
+                                    <input type="radio" class="rbStatusRek5" name="rbStatusRek5" id="rbStatusRek5"
+                                        value="0"> Aktif
+                                </label>
+                            </div>
+                            <div class="col-sm-5">
+                                <label>
+                                    <input type="radio" class="rbStatusRek5" name="rbStatusRek5" id="rbStatusRek5"
+                                        value="1"> Non Aktif (Tidak Digunakan)
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <div class="ui-group-buttons">
+                            <button id="btnSaveRek5" type="button" class="btn btn-success btn-labeled"
+                                data-dismiss="modal">
+                                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                            <div class="or"></div>
+                            <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal"
+                                aria-hidden="true">
+                                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="frmModalRek6" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Data Nomenklatur Rekening Level 6 (Sub Rincian Obyek)</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="frmModalRek6" class="form-horizontal" role="form" autocomplete='off' action=""
+                        method="post" onsubmit="return false;">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="nm_akun6" class="col-sm-3" align='left'>Kode 1 (Akun)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_akun6" name="nm_akun6" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_kelompok6" class="col-sm-3" align='left'>Kode 2 (Golongan)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_kelompok6" name="nm_kelompok6" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_jenis6" class="col-sm-3" align='left'>Kode 3 (Jenis)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_jenis6" name="nm_jenis6" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_obyek6" class="col-sm-3" align='left'>Kode 4 (Obyek)</label>
+                            <div class="col-sm-8">
+                                <label id="nm_obyek6" name="nm_obyek6" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kd_rincian6" class="col-sm-3" align='left'>Kode 5 (Rincian Obyek)</label>
+                            <div class="col-sm-8">
+                                <input type="hidden" name="id_rincian6" id="id_rincian6">
+                                <label id="nm_rincian6" name="nm_rincian6" align='left'></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kd_subrinc6" class="col-sm-3" align='left'>Kode 6 (Sub Rincian)</label>
+                            <div class="col-sm-2" align="center">
+                                <input type="hidden" name="id_subrinc6" id="id_subrinc6">
+                                <input type="text" class="form-control" id="kd_subrinc6" name="kd_subrinc6"
+                                    maxlength="3"="" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="uraian_subrinc6" class="col-sm-3" align='left'>Uraian Sub Rincian</label>
+                            <div class="col-sm-8">
+                                <textarea type="name" class="form-control" id="uraian_subrinc6" name="uraian_subrinc6"
+                                    rows="3" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dasar_hkm6" class="col-sm-3 control-label" align='left'>Dasar
+                                Hukum</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2 dasar_hkm6" name="dasar_hkm6"
+                                    id="dasar_hkm5"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divStatusRek6">
+                            <label for="rbStatusRek6" class="col-sm-3 control-label" align='left'>Status Sub
+                                Rincian</label>
+                            <div class="col-sm-2">
+                                <label>
+                                    <input type="radio" class="rbStatusRek6" name="rbStatusRek6" id="rbStatusRek6"
+                                        value="0"> Aktif
+                                </label>
+                            </div>
+                            <div class="col-sm-5">
+                                <label>
+                                    <input type="radio" class="rbStatusRek6" name="rbStatusRek6" id="rbStatusRek6"
+                                        value="1"> Non Aktif (Tidak Digunakan)
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-2 text-left">
+                    </div>
+                    <div class="col-sm-10 text-right">
+                        <div class="ui-group-buttons">
+                            <button id="btnSaveRek6" type="button" class="btn btn-success btn-labeled"
+                                data-dismiss="modal">
+                                <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                            <div class="or"></div>
+                            <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal"
+                                aria-hidden="true">
+                                <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @endsection
 
     @section('scripts')

@@ -1989,6 +1989,7 @@ $( document ).ready( function () {
       "columns": [
         { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
         { data: 'no_urut', sClass: "dt-center" },
+        { data: 'nm_rekening_display' },
         { data: 'uraian_tarif_ssh' },
         {
           data: 'volume_1', sClass: "dt-right",

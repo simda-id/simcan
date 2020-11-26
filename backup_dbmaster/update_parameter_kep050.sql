@@ -1,6 +1,53 @@
 -- /* UPDATE PARAMETER SESUAI KEPMENDAGRI 050/2002 per tgl 20/11/2020 */
 SET FOREIGN_KEY_CHECKS = 0;
 
+ALTER TABLE `90_ref_unit` DROP INDEX `idx_ref_unit`,
+ADD INDEX `idx_ref_unit`(`id_bidang`, `id_bidang2`, `id_bidang3`, `kd_unit`, `status_data`, `jns_pemda`, `id_bidang_utama`, `id_hkm`) USING BTREE;
+
+ALTER TABLE `90_ref_program` DROP INDEX `idx_ref_program`,
+ADD UNIQUE INDEX `idx_ref_program`(`id_bidang`, `kd_program`, `jns_pemda`, `status_data`, `id_hkm`) USING BTREE;
+
+ALTER TABLE `90_ref_kegiatan` DROP INDEX `idx_ref_program`,
+ADD UNIQUE INDEX `idx_ref_program`(`id_program`, `kd_kegiatan`, `jns_pemda`, `status_data`, `id_hkm`) USING BTREE;
+
+ALTER TABLE `90_ref_sub_kegiatan` DROP INDEX `idx_ref_program`,
+ADD UNIQUE INDEX `idx_ref_program`(`id_kegiatan`, `kd_sub_kegiatan`, `status_data`, `jns_pemda`, `id_hkm`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_1` DROP INDEX `kd_rek_1`, 
+ADD UNIQUE INDEX `kd_rek_1`(`kd_rek_1`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_2` DROP INDEX `kd_rek_1`,
+ADD UNIQUE INDEX `kd_rek_1`(`kd_rek_1`, `kd_rek_2`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_3` DROP INDEX `kd_rek_1`,
+ADD UNIQUE INDEX `kd_rek_1`(`id_rek_2`, `kd_rek_3`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_4` DROP INDEX `kd_rek_1`,
+ADD UNIQUE INDEX `kd_rek_1`(`id_rek_3`, `kd_rek_4`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_5` DROP INDEX `kd_rek_1`,
+ADD UNIQUE INDEX `kd_rek_1`(`id_rek_4`, `kd_rek_5`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_rek_6` DROP INDEX `kd_rek_1`,
+ADD UNIQUE INDEX `kd_rek_1`(`id_rek_5`, `kd_rek_6`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_1` ADD UNIQUE INDEX `kd_sd_1`(`kd_sd_1`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_2` DROP INDEX `id_sd_1`,
+ADD UNIQUE INDEX `id_sd_1`(`id_sd_1`, `kd_sd_2`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_3` DROP INDEX `id_sd_2`,
+ADD UNIQUE INDEX `id_sd_2`(`id_sd_2`, `kd_sd_3`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_4` DROP INDEX `id_sd_3`, 
+ADD UNIQUE INDEX `id_sd_3`(`id_sd_3`, `kd_sd_4`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_5` DROP INDEX `id_sd_4`,
+ADD UNIQUE INDEX `id_sd_4`(`id_sd_4`, `kd_sd_5`, `id_hkm`, `status_data`) USING BTREE;
+
+ALTER TABLE `90_ref_sd_6` DROP INDEX `id_sd_5`,
+ADD UNIQUE INDEX `id_sd_5`(`id_sd_5`, `kd_sd_6`, `id_hkm`, `status_data`) USING BTREE;
+
 -- /*!40000 ALTER TABLE `90_ref_bidang` DISABLE KEYS */;
 REPLACE INTO `90_ref_bidang` (`id_bidang`, `id_hkm`, `jns_pemda`, `kd_urusan`, `kd_bidang`, `nm_bidang`, `kd_fungsi`, `created_at`, `updated_at`) VALUES
 	(1, 90, 1, 1, 'XX', 'PROGRAM PENUNJANG URUSAN PEMERINTAHAN DAERAH', 0, '2020-02-07 10:54:58', '2020-02-07 10:54:58'),

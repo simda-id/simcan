@@ -347,6 +347,17 @@ $( document ).ready( function () {
     if ( $( '#jns_laporan' ).val() == 100 ) {
       window.open( './90Bab5Nota' + vars, '_blank' );
     };
+    if ( $( '#jns_laporan' ).val() == 200 ) {
+      window.open( './UpdateRek50' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 201 ) {
+      window.open( './UpdateRek50p' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 202 ) {
+      window.open( './SubKegUpdate50' + vars, '_blank' );
+    };
 
   } ); // end function
 

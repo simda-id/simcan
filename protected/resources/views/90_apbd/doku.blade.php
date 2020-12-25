@@ -44,6 +44,10 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
               <li class="active"><a href="#dokumen" aria-controls="dokumen" role="tab" data-toggle="tab">Dokumen
                   APBD</a></li>
               <li><a href="#rekap" aria-controls="rekap" role="tab-kv" data-toggle="tab">Rekapitulasi APBD</a></li>
+              <li><a href="#tapd" aria-controls="tapd" role="tab-kv" data-toggle="tab">Daftar TAPD</a>
+              </li>
+              <li class="disabled"><a href="#tapd_unit" aria-controls="tapd_unit" role="tab-kv" data-toggle="tab">Unit
+                  TAPD</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="dokumen">
@@ -101,6 +105,57 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
                     </tr>
                   </thead>
                   <tbody style="font-size: 11px;">
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="tapd">
+                <br>
+                <button type="button" class="btn btn-success btn-labeled btnTambahTim" id='btnTambahTim'
+                  data-dismiss="modal" aria-hidden="true">
+                  <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah TAPD</button>
+                <table id="tblTAPD" class="table table-striped table-bordered table-responsive" cellspacing="0"
+                  width="100%">
+                  <thead>
+                    <tr>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No</th>
+                      <th width="15%" style="text-align: center; vertical-align:middle">NIP</th>
+                      <th style="text-align: center; vertical-align:middle">Nama Pejabat</th>
+                      <th width="25%" style="text-align: center; vertical-align:middle">Jabatan</th>
+                      <th width="15%" style="text-align: center; vertical-align:middle">Peran Tim</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="tapd_unit">
+                <br>
+                <div class="form-group">
+                  <a id="btnBackTapd" class="btn btn-warning" title="Kembali ke Daftar Anggota TAPD"><i
+                      class="fa fa-arrow-left fa-fw fa-lg"></i></a>
+                  <label for="nip_tapd" class="col-sm-3 control-label" align='left'>Organisasi Perangkat Daerah
+                    :</label>
+                  <div class="col-sm-6">
+                    <select type="text" class="select2 form-control id_unit_ref col-sm-12" id="id_unit_ref"
+                      name="id_unit_ref"></select>
+                  </div>
+                  <input type="hidden" class="form-control" id="id_tapd_unit" name="id_tapd_unit">
+                  <button type="button" id="btnTambahUnit" class="btn btn-success btn-labeled btnTambahUnit"
+                    data-dismiss="modal" aria-hidden="true">
+                    <span class="btn-label"><i class="fa fa-plus fa-fw fa-lg"></i></span>Tambah Unit</button>
+                </div>
+                <table id="tblUnitTAPD" class="table table-striped table-bordered table-responsive" cellspacing="0"
+                  width="100%">
+                  <thead>
+                    <tr>
+                      <th width="5%" style="text-align: center; vertical-align:middle">No</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Kode Unit</th>
+                      <th style="text-align: center; vertical-align:middle">Uraian Unit</th>
+                      <th width="10%" style="text-align: center; vertical-align:middle">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   </tbody>
                 </table>
               </div>
@@ -235,6 +290,111 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
     </div>
   </div>
 
+  <div id="TambahTapd" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" autocomplete='off' action="" method="post" onsubmit="return false;">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id_dokumen_keu_tapd" id="id_dokumen_keu_tapd">
+            <input type="hidden" name="id_tapd" id="id_tapd">
+            <div class="form-group">
+              <label for="nip_tapd" class="col-sm-3 control-label" align='left'>NIP :</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control nip" id="nip_tapd_display" name="nip_tapd_display" maxlength="18"
+                  style="text-align: center;" disabled>
+              </div>
+              <input type="hidden" class="form-control" id="nip_tapd" name="nip_tapd">
+              <input type="hidden" class="form-control" id="id_pegawai_tapd" name="id_pegawai_tapd">
+              <input type="hidden" class="form-control" id="id_unit_pegawai_tapd" name="id_unit_pegawai_tapd">
+              <span class="btn btn-sm btn-primary btnPegawai" id="btnPegawai" name="btnPegawai"><i
+                  class="fa fa-search fa-fw fa-lg"></i></span>
+            </div>
+            <div class="form-group">
+              <label for="nama_tapd" class="col-sm-3 control-label" align='left'>Nama Pejabat :</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="nama_tapd" name="nama_tapd" required="required" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="jabatan_tapd" class="col-sm-3 control-label" align='left'>Jabatan :</label>
+              <div class="col-sm-9">
+                <textarea type="text" class="form-control" id="jabatan_tapd" name="jabatan_tapd" required="required"
+                  rows="3" disabled></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="peran_tapd" class="col-sm-3 control-label" align='left'>Peran dalam TAPD :</label>
+              <div class="col-sm-9">
+                <textarea type="text" class="form-control" id="peran_tapd" name="peran_tapd" rows="3"
+                  required="required"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="flag_tim_rinci" class="col-sm-3 control-label" align='left'>Status Keanggotan :</label>
+              <div class="col-sm-4">
+                <div id="radioBtn" class="btn-group">
+                  <a class="btn btn-primary btn-sm active" id="flag_tim_rinci_1" data-toggle="flag_tim_rinci"
+                    data-title="1">Aktif</a>
+                  <a class="btn btn-primary btn-sm notActive" id="flag_tim_rinci_0" data-toggle="flag_tim_rinci"
+                    data-title="0">Non Aktif</a>
+                </div>
+                <input type="hidden" class="form-control" id="flag_tim_rinci" name="flag_tim_rinci">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-sm-2 text-left">
+            </div>
+            <div class="col-sm-10 text-right">
+              <div class="ui-group-buttons">
+                <button id="btnSimpanTapd" type="button" class="btn btn-success btn-labeled" data-dismiss="modal">
+                  <span class="btn-label"><i class="fa fa-floppy-o fa-fw fa-lg"></i></span>Simpan</button>
+                <div class="or"></div>
+                <button type="button" class="btn btn-warning btn-labeled" data-dismiss="modal" aria-hidden="true">
+                  <span class="btn-label"><i class="fa fa-sign-out fa-fw fa-lg"></i></span>Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="HapusTapd" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Hapus Keanggotaan TAPD</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="id_tapd_hapus" name="id_tapd_hapus">
+          <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle fa-3x fa-pull-left fa-border text-danger" aria-hidden="true"></i>
+            Yakin akan menghapus Keanggotaan : <strong><span class="nama_pegawai_del"></span></strong> dari <strong>Tim
+              Anggaran Pemerintah Daerah tahun {{Session::get('tahun')}}</strong>?
+            <br>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="ui-group-buttons">
+            <button type="button" id="btnDelTimTapd" class="btn btn-labeled btn-danger" data-dismiss="modal"><span
+                class="btn-label"><i class="fa fa-trash-o fa-lg fa-fw"></i></span> Hapus</button>
+            <div class="or"></div>
+            <button type="button" class="btn btn-labeled btn-warning" data-dismiss="modal" aria-hidden="true"><span
+                class="btn-label"><i class="fa fa-sign-out fa-lg fa-fw"></i></span> Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="cariReload" class="modal fade" role="dialog" tabindex="-1" data-focus-on="input:first"
     data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -334,6 +494,9 @@ use hoaaah\LaravelBreadcrumb\Breadcrumb as Breadcrumb;
       </div>
     </div>
   </div>
+
+  @include('bebas.FrmCariPegawai')
+
   @endsection
 
   @section('scripts')

@@ -44,11 +44,11 @@ $( document ).ready( function () {
 
   function buatNip ( string ) {
     return string.replace( /(\d{8})(\d{6})(\d{1})(\d{3})/, "$1 $2 $3 $4" );
-  }
+  };
 
   function nilaiNip ( string ) {
     return string.replace( /\D/g, '' ).substring( 0, 20 );
-  }
+  };
 
   var angkaNip = document.getElementsByClassName( 'nip' );
 
@@ -56,12 +56,17 @@ $( document ).ready( function () {
     if ( !( ( e.keyCode > 95 && e.keyCode < 106 )
       || ( e.keyCode > 47 && e.keyCode < 58 )
     ) ) { return false; }
-  }
+  };
 
   $( "input[name='nip_tandatangan_display']" ).on( "keyup", function () {
     $( "input[name='nip_tandatangan']" ).val( nilaiNip( this.value ) );
     this.value = buatNip( $( "input[name='nip_tandatangan']" ).val() );
-  } )
+  } );
+
+  $( "input[name='nip_tapd_display']" ).on( "keyup", function () {
+    $( "input[name='nip_tapd']" ).val( nilaiNip( this.value ) );
+    this.value = buatNip( $( "input[name='nip_tapd']" ).val() );
+  } );
 
   var thn_session = $( '#tahun_rkpd' ).val();
   vars = "?tahun=" + thn_session;
@@ -80,6 +85,26 @@ $( document ).ready( function () {
       for ( i = 0; i < j; i++ ) {
         post = data[ i ];
         $( 'select[name="id_dokumen_ref"]' ).append( '<option value="' + post.id_dokumen_keu + '">' + post.nomor_display + '</option>' );
+      }
+    }
+  } );
+
+
+  $.ajax( {
+    type: "GET",
+    url: '90Apbd/getUnit',
+    dataType: "json",
+    success: function ( data ) {
+
+      var j = data.length;
+      var post, i;
+
+      $( 'select[name="id_unit_ref"]' ).empty();
+      $( 'select[name="id_unit_ref"]' ).append( '<option value="0">---Pilih Organisasi Perangkat Daerah---</option>' );
+
+      for ( i = 0; i < j; i++ ) {
+        post = data[ i ];
+        $( 'select[name="id_unit_ref"]' ).append( '<option value="' + post.id_unit + '">' + post.nm_unit + '</option>' );
       }
     }
   } );
@@ -209,6 +234,137 @@ $( document ).ready( function () {
     } );
   };
 
+  var TblTAPD;
+  function loadTblTAPD ( id_dokumen_keu ) {
+    vars = "?id_dokumen_keu=" + id_dokumen_keu;
+    TblTAPD = $( '#tblTAPD' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 25,
+      "lengthMenu": [ [ 25, 50, -1 ], [ 25, 50, "All" ] ],
+      "bDestroy": true,
+      dom: 'BfRtip',
+      "ajax": { "url": "./90Apbd/getDataTapd" + vars },
+      "columns": [
+        { data: 'no_urut', sClass: "dt-center" },
+        {
+          data: "nip_pegawai", sClass: "dt-center", render: function ( toFormat ) {
+            return toFormat.toString().replace( /(\d{8})(\d{6})(\d{1})(\d{3})/, "$1 $2 $3 $4" );
+          }
+        },
+        { data: 'nama_pegawai', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'nama_jabatan', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'peran_tim', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+    } );
+  };
+
+  var TblTAPDUnit;
+  function loadTblTAPDUnit ( id_tapd ) {
+    vars = "?id_tapd=" + id_tapd;
+    TblTAPDUnit = $( '#tblUnitTAPD' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 25,
+      "lengthMenu": [ [ 25, 50, -1 ], [ 25, 50, "All" ] ],
+      "bDestroy": true,
+      dom: 'BfRtip',
+      "ajax": { "url": "./90Apbd/getDataTapdUnit" + vars },
+      "columns": [
+        { data: 'no_urut', sClass: "dt-center" },
+        { data: 'kode_unit', 'searchable': true, 'orderable': true, sClass: "dt-center" },
+        { data: 'nm_unit', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" }
+      ],
+      "order": [ [ 0, 'asc' ] ],
+    } );
+  };
+
+  var tblPegawai;
+  function loadTblPegawai () {
+    tblPegawai = $( '#tblCariPegawai' ).DataTable( {
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      language: {
+        "decimal": ",",
+        "thousands": ".",
+        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
+        "sProcessing": "Sedang memproses...",
+        "sLengthMenu": "Tampilkan _MENU_ entri",
+        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+        "sInfoPostFix": "",
+        "sSearch": "Cari:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "Pertama",
+          "sPrevious": "Sebelumnya",
+          "sNext": "Selanjutnya",
+          "sLast": "Terakhir"
+        }
+      },
+      "pageLength": 10,
+      "lengthMenu": [ [ 10, 25, 50, -1 ], [ 10, 25, 50, "All" ] ],
+      "bDestroy": true,
+      dom: 'BfRtip',
+      "ajax": { "url": "./admin/parameter/getDataPegawai" },
+      "columns": [
+        { data: 'no_urut', sClass: "dt-center" },
+        { data: 'nip_pegawai', 'searchable': true, 'orderable': true, sClass: "dt-center" },
+        { data: 'nama_pegawai', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'nama_jabatan', 'searchable': true, 'orderable': true, sClass: "dt-left" },
+        { data: 'action', 'searchable': false, 'orderable': false, sClass: "dt-center" },
+      ],
+    } );
+  };
+
   $( document ).on( 'click', '#btnUnload', function () {
     var data = TblRekapPPAS.row( $( this ).parents( 'tr' ) ).data();
     $.ajaxSetup( {
@@ -299,6 +455,27 @@ $( document ).ready( function () {
     var data = dokumen_tbl.row( $( this ).parents( 'tr' ) ).data();
     loadTblRekapPPAS( data.id_dokumen_keu );
     $( '.nav-tabs a[href="#rekap"]' ).tab( 'show' );
+  } );
+
+  $( document ).on( 'click', '#btnTAPD', function () {
+    var data = dokumen_tbl.row( $( this ).parents( 'tr' ) ).data();
+    loadTblTAPD( data.id_dokumen_keu );
+    id_dokumen_temp = data.id_dokumen_keu;
+    $( '.nav-tabs a[href="#tapd"]' ).tab( 'show' );
+  } );
+
+  $( document ).on( 'click', '#btnBackTapd', function () {
+    loadTblTAPD( id_dokumen_temp );
+    $( '.nav-tabs a[href="#tapd"]' ).tab( 'show' );
+  } );
+
+  $( '#tblTAPD tbody' ).on( 'dblclick', 'tr', function () {
+    var data = TblTAPD.row( this ).data();
+    id_tapd_temp = data.id_tapd;
+
+    loadTblTAPDUnit( data.id_tapd );
+    $( '.nav-tabs a[href="#tapd_unit"]' ).tab( 'show' );
+
   } );
 
   $( document ).on( 'click', '#btnAddDokumen', function () {
@@ -640,6 +817,237 @@ $( document ).ready( function () {
       } );
     } );
     e.preventDefault();
+  } );
+
+  $( document ).on( 'click', '#btnPegawai', function () {
+    $( '#cariPegawai' ).modal( 'show' );
+    loadTblPegawai();
+  } );
+
+  $( '#tblCariPegawai tbody' ).on( 'dblclick', 'tr', function () {
+    var data = tblPegawai.row( this ).data();
+
+    document.getElementById( "nip_tapd" ).value = data.nip_pegawai;
+    document.getElementById( "nama_tapd" ).value = data.nama_pegawai;
+    document.getElementById( "jabatan_tapd" ).value = data.nama_jabatan;
+    document.getElementById( "id_pegawai_tapd" ).value = data.id_pegawai;
+    document.getElementById( "id_unit_pegawai_tapd" ).value = data.id_unit_pegawai;
+    if ( data.nip_pegawai == null ) {
+      $( '#nip_tapd_display' ).val( null );
+    } else {
+      $( '#nip_tapd_display' ).val( buatNip( data.nip_pegawai ) );
+    };
+
+    $( '#cariPegawai' ).modal( 'hide' );
+  } );
+
+  $( document ).on( 'click', '#btnPilihPegawai', function () {
+    var data = tblPegawai.row( $( this ).parents( 'tr' ) ).data();
+
+    document.getElementById( "nip_tapd" ).value = data.nip_pegawai;
+    document.getElementById( "nama_tapd" ).value = data.nama_pegawai;
+    document.getElementById( "jabatan_tapd" ).value = data.nama_jabatan;
+    document.getElementById( "id_pegawai_tapd" ).value = data.id_pegawai;
+    document.getElementById( "id_unit_pegawai_tapd" ).value = data.id_unit_pegawai;
+    if ( data.nip_pegawai == null ) {
+      $( '#nip_tapd_display' ).val( null );
+    } else {
+      $( '#nip_tapd_display' ).val( buatNip( data.nip_pegawai ) );
+    };
+
+    $( '#cariPegawai' ).modal( 'hide' );
+  } );
+
+  $( document ).on( 'click', '#btnTambahTim', function () {
+    $( '#btnSimpanTapd' ).removeClass( 'editTimTapd' );
+    $( '#btnSimpanTapd' ).addClass( 'addTimTapd' );
+    $( '.modal-title' ).text( 'Tambah Tim Anggaran Pemerintah Daerah' );
+    $( '.form-horizontal' ).show();
+    $( '#id_dokumen_keu_tapd' ).val( id_dokumen_temp );
+    $( '#id_tapd' ).val( null );
+    $( '#nip_tapd_display' ).val( null );
+    $( '#nip_tapd' ).val( null );
+    $( '#id_pegawai_tapd' ).val( null );
+    $( '#id_unit_pegawai_tapd' ).val( null );
+    $( '#nama_tapd' ).val( null );
+    $( '#jabatan_tapd' ).val( null );
+    $( '#peran_tapd' ).val( null );
+    $( '#flag_tim_rinci' ).val( 0 );
+    if ( $( '#flag_tim_rinci' ).val() == 0 ) {
+      $( '#flag_tim_rinci_1' ).removeClass( 'active' ).addClass( 'notActive' );
+      $( '#flag_tim_rinci_0' ).addClass( 'active' ).removeClass( 'notActive' );
+    } else {
+      $( '#flag_tim_rinci_0' ).removeClass( 'active' ).addClass( 'notActive' );
+      $( '#flag_tim_rinci_1' ).addClass( 'active' ).removeClass( 'notActive' );
+    }
+    $( '#btnSimpanTapd' ).show();
+    $( '#TambahTapd' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.addTimTapd', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: '90Apbd/addTapd',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_dokumen_keu': $( '#id_dokumen_keu_tapd' ).val(),
+        'id_pegawai': $( '#id_pegawai_tapd' ).val(),
+        'id_unit_pegawai': $( '#id_unit_pegawai_tapd' ).val(),
+        'peran_tim': $( '#peran_tapd' ).val(),
+        'status_tim': $( '#flag_tim_rinci' ).val(),
+      },
+      success: function ( data ) {
+        TblTAPD.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnEditTim', function () {
+    var data = TblTAPD.row( $( this ).parents( 'tr' ) ).data();
+    $( '#btnSimpanTapd' ).addClass( 'editTimTapd' );
+    $( '#btnSimpanTapd' ).removeClass( 'addTimTapd' );
+    $( '.modal-title' ).text( 'Data Tim Anggaran Pemerintah Daerah' );
+    $( '.form-horizontal' ).show();
+    $( '#id_dokumen_keu_tapd' ).val( data.id_dokumen_keu );
+    $( '#id_tapd' ).val( data.id_tapd );
+    $( '#nip_tapd_display' ).val( buatNip( data.nip_pegawai ) );
+    $( '#nip_tapd' ).val( data.nip_pegawai );
+    $( '#id_pegawai_tapd' ).val( data.id_pegawai );
+    $( '#id_unit_pegawai_tapd' ).val( data.id_unit_pegawai );
+    $( '#nama_tapd' ).val( data.nama_pegawai );
+    $( '#jabatan_tapd' ).val( data.nama_jabatan );
+    $( '#peran_tapd' ).val( data.peran_tim );
+    $( '#flag_tim_rinci' ).val( data.status_tim );
+    if ( data.status_tim == 0 ) {
+      $( '#flag_tim_rinci_1' ).removeClass( 'active' ).addClass( 'notActive' );
+      $( '#flag_tim_rinci_0' ).addClass( 'active' ).removeClass( 'notActive' );
+    } else {
+      $( '#flag_tim_rinci_0' ).removeClass( 'active' ).addClass( 'notActive' );
+      $( '#flag_tim_rinci_1' ).addClass( 'active' ).removeClass( 'notActive' );
+    }
+    $( '#btnSimpanTapd' ).show();
+    $( '#TambahTapd' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.editTimTapd', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: '90Apbd/editTapd',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_tapd': $( '#id_tapd' ).val(),
+        'id_dokumen_keu': $( '#id_dokumen_keu_tapd' ).val(),
+        'id_pegawai': $( '#id_pegawai_tapd' ).val(),
+        'id_unit_pegawai': $( '#id_unit_pegawai_tapd' ).val(),
+        'peran_tim': $( '#peran_tapd' ).val(),
+        'status_tim': $( '#flag_tim_rinci' ).val(),
+      },
+      success: function ( data ) {
+        TblTAPD.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnHapusTim', function () {
+    var data = TblTAPD.row( $( this ).parents( 'tr' ) ).data();
+    $( '#btnDelTimTapd' ).removeClass( 'delTapd' );
+    $( '#btnDelTimTapd' ).addClass( 'delTapd' );
+    $( '.form-horizontal' ).show();
+
+    $( '#id_tapd_hapus' ).val( data.id_tapd );
+    $( '.nama_pegawai_del' ).html( data.nama_pegawai );
+
+    $( '#HapusTapd' ).modal( 'show' );
+  } );
+
+  $( '.modal-footer' ).on( 'click', '.delTapd', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: '90Apbd/hapusTapd',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_tapd': $( '#id_tapd_hapus' ).val(),
+      },
+      success: function ( data ) {
+        TblTAPD.ajax.reload( null, false );
+        $( '#HapusTapd' ).modal( 'hide' );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnTambahUnit', function () {
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: '90Apbd/addTapdUnit',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_tapd': id_tapd_temp,
+        'id_unit': $( '#id_unit_ref' ).val(),
+      },
+      success: function ( data ) {
+        TblTAPDUnit.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
+  } );
+
+  $( document ).on( 'click', '#btnHapusUnitTim', function () {
+    var data = TblTAPDUnit.row( $( this ).parents( 'tr' ) ).data();
+    $.ajaxSetup( {
+      headers: { 'X-CSRF-Token': $( 'meta[name=_token]' ).attr( 'content' ) }
+    } );
+
+    $.ajax( {
+      type: 'post',
+      url: '90Apbd/hapusTapdUnit',
+      data: {
+        '_token': $( 'input[name=_token]' ).val(),
+        'id_unit_tapd': data.id_unit_tapd,
+      },
+      success: function ( data ) {
+        TblTAPDUnit.ajax.reload( null, false );
+        if ( data.status_pesan == 1 ) {
+          createPesan( data.pesan, "success" );
+        } else {
+          createPesan( data.pesan, "danger" );
+        }
+      }
+    } );
   } );
 
 } );

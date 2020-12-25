@@ -406,6 +406,7 @@ $( document ).ready( function () {
     id_dokumen_temp = data.id_dokumen_keu;
     $( '.nav-tabs a[href="#tapd"]' ).tab( 'show' );
   } );
+  
   $( document ).on( 'click', '#btnBackTapd', function () {
     loadTblTAPD( id_dokumen_temp );
     $( '.nav-tabs a[href="#tapd"]' ).tab( 'show' );

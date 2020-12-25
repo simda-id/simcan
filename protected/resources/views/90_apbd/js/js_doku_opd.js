@@ -91,7 +91,7 @@ $( document ).ready( function () {
 
   $.ajax( {
     type: "GET",
-    url: '../admin/parameter/getUnitUser',
+    url: 'getUnit',
     dataType: "json",
     success: function ( data ) {
 

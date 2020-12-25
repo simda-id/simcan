@@ -124,14 +124,16 @@ use hoaaah\LaravelMenu\Menu;
                                             [   'label' => 'Sinkronisasi Parameter', 
                                                 'visible' => $akses->get(890),
                                                 'items' => [
-                                                   ['label' => 'Sinkronisasi Urusan-Bidang', 'url' => '/transfer/sinkUrusan'],
-                                                   ['label' => 'Sinkronisasi Unit OPD', 'url' => '/transfer/sinkOpd'],
-                                                   ['label' => 'Sinkronisasi Program-Kegiatan', 'url' => '/transfer/sinkProgram'],
-                                                   ['label' => 'Sinkronisasi Rekening Anggaran', 'url' => '/transfer/sinkRekening'],
-                                                //    ['label' => 'Sinkronisasi Tim Anggaran', 'url' => '/transfer/sinkTAPD'],
+                                                    ['label' => 'Sinkronisasi Urusan-Bidang 13', 'url' => '/transfer/sinkUrusan'],
+                                                    ['label' => 'Sinkronisasi Program-Kegiatan 13', 'url' => '/transfer/sinkProgram'],
+                                                    ['label' => 'Sinkronisasi Rekening Anggaran 13', 'url' => '/transfer/sinkRekening'],
+                                                    ['label' => 'Sinkronisasi Unit OPD 13', 'url' => '/transfer/sinkOpd'],
+                                                    ['label' => 'Sinkronisasi Sumber Dana', 'url' => '/transfer/sinkSumberDana'],
+                                                    ['label' => 'Sinkronisasi Mapping Keuangan 90', 'url' => '/transfer/sinkMappingKeu'],
                                                 ]
                                             ],
-                                            ['label' => 'Sinkronisasi APBD', 'url' => '/transfer/transsimda', 'visible' => $akses->get(890)],
+                                            ['label' => 'Sinkronisasi APBD-13', 'url' => '/transfer/transsimda', 'visible' => $akses->get(890)],
+                                            ['label' => 'Sinkronisasi APBD-90', 'url' => '/transfer/transsimda90', 'visible' => $akses->get(890)],
                                         ]
                                         
                                     ],

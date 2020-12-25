@@ -292,8 +292,16 @@ $( document ).ready( function () {
       window.open( './90JabarRaperkada1' + vars, '_blank' );
     };
 
+    if ( $( '#jns_laporan' ).val() == 601 ) {
+      window.open( './90JabarRaperkada1a' + vars, '_blank' );
+    };
+
     if ( $( '#jns_laporan' ).val() == 61 ) {
       window.open( './90JabarRaperkada2' + vars, '_blank' );
+    };
+
+    if ( $( '#jns_laporan' ).val() == 611 ) {
+      window.open( './90JabarRaperkada2a' + vars, '_blank' );
     };
 
     if ( $( '#jns_laporan' ).val() == 620 ) {
